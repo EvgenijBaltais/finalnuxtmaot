@@ -1,0 +1,71 @@
+.hot-deal-item {
+	display: flex;
+	align-items: center;
+	width: calc(25% - 15px);
+	margin-right: 20px;
+	margin-bottom: 20px;
+	height: 120px;
+	padding: 0 12px;
+	border-radius: 10px;
+	-webkit-box-shadow: var(--main-shadow);
+	-moz-box-shadow: var(--main-shadow);
+	box-shadow: var(--main-shadow);
+	cursor: pointer;
+}
+
+.hot-deal-item:nth-child(4n) {
+	margin-right: 0;
+}
+
+.hot-deal-pic {
+	width: 105px;
+	height: 95px;
+	border-radius: 10px;
+	background: #ccc;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.hot-deal-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	height: 95px;
+	padding-left: 12px;
+}
+
+.hot-deal-title {
+	font-size: 14px;
+	font-family: 'FontInterBold';
+}
+
+.hot-deal-text {
+	font-size: 12px;
+}
+
+.hot-deal-rating {
+	padding: 3px 0;
+}
+
+.hot-deal-price {
+	height: 24px;
+	font-size: 12px;
+	line-height: 24px;
+}
+
+.hot-deal-number {
+	color: rgb(254,75,43);
+	font-size: 16px;
+	line-height: 24px;
+	font-family: 'FontInterBold';
+}
+
+.hot-deal-rating {
+	display: flex;
+}
+
+.hot-deal-star {
+	display: block;
+	width: 9px;
+	margin-right: 3px;
+}

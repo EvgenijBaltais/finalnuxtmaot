@@ -1,0 +1,9 @@
+.hot-deals {
+	padding-top: 100px;
+}
+
+.hot-deals-section {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 20px 0;
+}

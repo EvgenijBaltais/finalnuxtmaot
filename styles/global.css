@@ -1,0 +1,400 @@
+@font-face {
+  font-family: 'FontInter';
+  src: url('../assets/fonts/Inter/Inter-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FontInterSemiBold';
+  src: url('../assets/fonts/Inter/Inter-SemiBold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FontInterBold';
+  src: url('../assets/fonts/Inter/Inter-Bold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FontInterExtraBold';
+  src: url('../assets/fonts/Inter/Inter-ExtraBold.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'FontInterLight';
+  src: url('../assets/fonts/Inter/Inter-Light.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'FontInter';
+	box-sizing: border-box;
+	color: #333
+}
+
+body {
+	--red-linear-gradient: linear-gradient(45deg, rgba(255,74,43,1) 0%, rgba(255,68,87,1) 45%, rgba(255,68,87,1) 60%, rgba(255,74,43,1) 100%);
+	--main-shadow: 0 3px 8px 0 rgb(34 60 80 / 20%);
+}
+
+.wrapper {
+	max-width: 1240px;
+	margin: 20px auto;
+}
+
+.section-title {
+	padding-left: 40px;
+	font-family: 'FontInterBold';
+	color: rgb(51,51,51);
+	font-size: 22px;
+	line-height: 24px;
+}
+
+
+.section-title-sub {
+	font-family: 'FontInterBold';
+	color: rgb(51,51,51);
+	font-size: 22px;
+	line-height: 24px;
+}
+
+.block-subtitle {
+	padding-left: 40px;
+	font-size: 22px;
+	line-height: 30px;
+	font-family: 'FontInterBold';
+	padding-bottom: 10px
+}
+
+.subtitle-bold {
+	font-family: 'FontInterBold';
+	padding: 10px 0
+}
+
+.block-span {
+	font-size: 16px;
+	line-height: 26px;
+}
+
+.bold-span {
+	font-family: 'FontInterBold';
+}
+
+.aside-block-title {
+	color: rgb(50,50,50);
+	font-size: 20px;
+	line-height: 26px;
+	padding-bottom: 15px;
+	padding-right: 90px;
+}
+
+.info-text {
+	font-size: 15px;
+	line-height: 24px;
+	padding-bottom: 5px;
+}
+
+/* Стилизация чекбокса */
+
+input[type="checkbox"].stylized:checked, 
+input[type="checkbox"].stylized:not(:checked)
+{
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="checkbox"].stylized:checked + label, 
+input[type="checkbox"].stylized:not(:checked) + label {
+    display: inline-block;
+    position: relative;
+    padding-left: 32px;
+    line-height: 20px;
+    cursor: pointer;
+	user-select: none;
+	color: rgb(51,51,51)
+}
+
+input[type="checkbox"].stylized:checked + label:before, 
+input[type="checkbox"].stylized:not(:checked) + label:before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgb(254,45,50);
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+input[type="checkbox"]:checked + label:after, 
+input[type="checkbox"]:not(:checked) + label:after {
+    content: "";
+    position: absolute;
+	left: 4px;
+    top: 5px;
+    width: 10px;
+    height: 5px;
+    border-radius: 1px;
+    border-left: 4px solid #e145a3;
+    border-bottom: 4px solid #e145a3;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+input[type="checkbox"].stylized:not(:checked) + label:after {
+    opacity: 0;
+}
+
+input[type="checkbox"].stylized:checked + label:after {
+    opacity: 1;
+}
+
+/* Стилизация чекбокса, конец */
+
+
+/* Стилизация чекбокса в форме подписки */
+
+.subscribe-agree {
+	padding: 15px 0 0 0
+}
+
+input[type="checkbox"].stylized:checked, 
+input[type="checkbox"].stylized:not(:checked)
+{
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="checkbox"].stylized:checked + label, 
+input[type="checkbox"].stylized:not(:checked) + label {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+	font-size: 12px;
+    line-height: 20px;
+    cursor: pointer;
+	user-select: none;
+	color: rgb(51,51,51)
+}
+
+input[type="checkbox"].stylized:checked + label:before, 
+input[type="checkbox"].stylized:not(:checked) + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 14px;
+    height: 14px;
+    border: 2px solid #057DDE;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+input[type="checkbox"]:checked + label:after, 
+input[type="checkbox"]:not(:checked) + label:after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 8px;
+    height: 5px;
+    border-radius: 1px;
+    border-left: 3px solid #057DDE;
+    border-bottom: 3px solid #057DDE;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+input[type="checkbox"].stylized:not(:checked) + label:after {
+    opacity: 0;
+}
+
+input[type="checkbox"].stylized:checked + label:after {
+    opacity: 1;
+}
+
+
+/* Заголовок главной */
+
+@keyframes gradient {
+    0% {
+        background-position: 80% 0%;
+    }
+    50% {
+        background-position: 20% 100%;
+    }
+    100% {
+        background-position: 80% 0%;
+    }
+}
+
+.main-h1 {
+	width: 100%;
+	padding: 100px 0;
+	display: inline-block;
+	font-family: FontInterExtraBold;
+	font-size: 70px;
+	color: transparent;
+    background: var(--red-linear-gradient);
+    animation: gradient 3s infinite linear;
+    background-size: 400%;
+    -webkit-background-clip: text;
+	text-align: center;
+}
+
+/* Заголовок главной, конец */
+
+
+/* Footer */
+
+.footer {
+	position: relative;
+	display: flex;
+	padding: 55px 0 20px 0;
+	margin-top: 75px;
+}
+
+.footer:before {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	content: '';
+	display: block;
+	height: 7px;
+	background: rgb(242,242,242);
+	border-radius: 8px;
+}
+
+.footer-title {
+	font-family: 'FontInterSemiBold';
+	color: rgb(51,51,51);
+	font-size: 16px;
+	line-height: 24px;
+	margin-bottom: 15px;
+}
+
+.footer-col-title {
+	font-family: 'FontInterSemiBold';
+	color: rgb(51,51,51);
+	font-size: 16px;
+	line-height: 24px;
+	margin-bottom: 15px;
+}
+
+.footer-title-small {
+	font-family: 'FontInterSemiBold';
+	color: rgb(51,51,51);
+	font-size: 15px;
+	line-height: 24px;
+}
+
+.footer-col-1 {
+	width: 32.2%;
+	padding-right: 10px;
+}
+
+.footer-col-2 {
+	width: 21.7%;
+	padding-right: 10px;
+}
+
+.footer-col-3 {
+	width: 29.8%;
+	padding-right: 10px;
+}
+
+.footer-col-4 {
+	width: 16.3%;
+}
+
+.footer-phones__item {
+	margin-bottom: 10px;
+	font-size: 16px;
+	line-height: 16px;
+}
+
+.footer-phones__item:last-child {
+	margin-bottom: 0
+}
+
+.footer-phones {
+	margin-bottom: 20px;
+}
+
+.footer-phone {
+	font-size: 16px;
+	line-height: 16px;
+	color: rgb(51,51,51)!important;
+	text-decoration: none;
+}
+
+.footer-phone-info {
+	font-style: italic;
+	font-size: 12px;
+	color: rgb(51,51,51);
+	font-family: 'FontInterLight';
+}
+
+.footer-title-p {
+	font-size: 15px;
+	line-height: 20px;
+	font-family: 'FontInterLight';
+}
+
+.working-time {
+	margin-bottom: 20px
+}
+
+.footer-place-item {
+	display: block;
+	color:rgb(0, 0, 0);
+	font-size: 15px;
+	line-height: 15px;
+	text-decoration: underline;
+	margin-bottom: 15px;
+}
+
+.footer-social-item {
+	display: flex;
+	align-items: flex-start;
+	height: 25px;
+	margin-bottom: 10px;
+	padding-left: 35px;
+	font-size: 15px;
+	line-height: 20px;
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: center left;
+	background-size: 25px;
+	color: rgb(51,51,51);
+
+}
+
+/* Footer, конец */
+
+
+/* Footer copyright */
+
+.footer-copyright {
+	text-align: center;
+}
+
+/* Footer copyright, конец */
