@@ -1,6 +1,7 @@
 import MainForm from "../components/MainForm"
 import HotOffers from "../components/HotOffers"
 import PopularSections from "../components/PopularSections"
+import SpecialOffers from "../components/SpecialOffers"
 
 const Index = () => {
 
@@ -11,6 +12,7 @@ const Index = () => {
             <MainForm />
             <HotOffers />
             <PopularSections />
+            <SpecialOffers />
         </>
     )
 }

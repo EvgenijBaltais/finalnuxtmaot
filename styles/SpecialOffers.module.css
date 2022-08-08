@@ -1,0 +1,37 @@
+.special-offers {
+	padding-top: 100px;
+}
+
+.sales-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.sales-item__pic {
+	display: block;
+	background: #ccc;
+	width: 175px;
+	height: 175px;
+	border-radius: 10px;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.sales-item__content {
+	width: calc(100% - 190px);
+}
+
+.sales-item__title {
+	font-size: 18px;
+	line-height: 24px;
+	font-family: 'FontInterBold';
+	margin-bottom: 5px;
+}
+
+.sales-item__text {
+	font-size: 16px;
+	line-height: 20px;
+	font-family: 'FontInterLight';
+}
