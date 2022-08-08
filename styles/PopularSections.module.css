@@ -1,0 +1,75 @@
+.popular-sections {
+	display: flex;
+	justify-content: space-between;
+}
+
+.popular-hotels {
+	width: calc(50% - 10px);
+}
+
+.popular-ways {
+	width: calc(50% - 10px);
+}
+
+.popular-item__name {
+	padding-right: 10px;
+	color: rgb(36,134,233);
+	font-size: 16px;
+	line-height: 24px;
+	text-decoration: underline;
+	background-color: #fff;
+	transition: .2s color;
+}
+
+.popular-item:hover .popular-item__name {
+	transition: .2s color;
+	color: rgb(255,74,43);
+}
+
+.popular-item__price {
+	padding-left: 10px;
+	color: rgb(130,130,130);
+	font-size: 16px;
+	line-height: 24px;
+	background-color: #fff;
+}
+
+.popular-item:hover .popular-item__price {
+	transition: .2s color;
+	color: rgb(255,74,43);
+}
+
+.popular-items {
+	padding: 15px 0;
+}
+
+.popular-item {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.popular-item:last-child {
+	margin-bottom: 0
+}
+
+.popular-item:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	background-image: url('../assets/images/grey-dotted.jpg');
+	background-position: 0 70%;
+	background-repeat: repeat-x;
+	z-index: -1;
+	transition: .2s background-image;
+}
+
+.popular-item:hover:after {
+	transition: .2s background-image;
+	background-image: url('../assets/images/red-dotted.jpg');
+}
