@@ -1,6 +1,6 @@
-import styles from "../styles/ContactsForms.module.css"
+import styles from "../styles/ContactForm.module.css"
 
-const ContactsForms = () => {
+const ContactForms = () => {
 
     return (
 		<section className = {styles["contacts-form"]}>
@@ -54,4 +54,4 @@ const ContactsForms = () => {
     )
 }
 
-export default ContactsForms
+export default ContactForms

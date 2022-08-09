@@ -32,7 +32,7 @@ const MainNav = () => {
                         </Link>
                     </li>
                     <li className = {styles["nav-item"]}>
-                        <Link href="/contacts">
+                        <Link href="/contact">
                             <a className = {styles["nav-link"]}>Контакты</a>
                         </Link>
                     </li>
