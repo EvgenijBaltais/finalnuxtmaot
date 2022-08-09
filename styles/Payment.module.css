@@ -1,0 +1,148 @@
+.pay-content {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 100px
+}
+
+.pay-left {
+	width: 400px;
+}
+
+.pay-right {
+	width: 800px;
+}
+
+.single-block-title {
+	color: rgb(51, 51, 51);
+	font-family: 'FontInterBold';
+    font-size: 22px;
+    line-height: 30px;
+    text-decoration: none;
+    margin-right: 30px;
+	margin-bottom: 25px;
+}
+
+.left-block-bedroom {
+	background-image: url('../assets/images/left-nav.svg');
+	background-size: 25px;
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding-left: 38px;
+}
+
+/* Блок навигации */
+
+.left-nav-block {
+	padding: 15px;
+    -webkit-box-shadow: var(--main-shadow);
+    -moz-box-shadow: var(--main-shadow);
+    box-shadow: var(--main-shadow);
+	border-radius: 10px;
+	margin-bottom: 40px
+}
+
+.left-nav-list {
+	list-style-type: none;
+}
+
+.left-nav-item {
+	padding-bottom:5px
+}
+
+.left-nav-item:last-child {
+	padding-bottom:0
+}
+
+.left-nav-link {
+	font-size: 15px;
+	line-height: 30px;
+	text-decoration: underline;
+}
+
+.left-nav-list__sub {
+	list-style-type: disc;
+	padding-left: 25px
+}
+
+/* Блок навигации, конец */
+
+
+/* Блок Супер цены */
+
+.super-prices-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+	padding-bottom: 10px
+}
+
+.super-prices-item:last-child {
+	padding-bottom: 0
+}
+
+.super-prices-item__link {
+	color: #2486E9;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.super-prices-item__dotted {
+	height: 20px;
+	content: '';
+	display: block;
+	flex: 1 1;
+	background-image: url('');
+}
+
+.super-prices-item__number {
+	color: #828282;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.super-prices-item__number span {
+	color: #828282;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+/* Блок Супер цены, конец */
+
+/* Оплата - контент страницы */
+
+.pay-page-content {
+
+}
+
+.law-info {
+	padding-top: 50px
+}
+
+.pay-page-content__text {
+	font-size: 15px;
+	line-height: 24px;
+	margin-bottom: 30px
+}
+
+.pay-page-content__text-bold {
+	font-family: 'FontInterBold';
+}
+
+.pay-icons {
+	display: flex;
+	justify-content: space-between;
+	padding: 50px 0;
+}
+
+.pay-card-list {
+	list-style-type: disc;
+	padding-left: 20px;
+	margin-bottom: 30px
+}
+
+.pay-card-item {
+	color: #0574E7;
+    font-size: 15px;
+    line-height: 24px;
+}

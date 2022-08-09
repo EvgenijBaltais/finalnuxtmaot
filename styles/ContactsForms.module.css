@@ -1,0 +1,245 @@
+.contacts-form {
+	display: flex;
+	justify-content: space-between;
+	padding: 50px 0 100px 0
+}
+
+.contacts-callback {
+	width: calc(50% - 10px);
+	padding: 30px 12px;
+    -webkit-box-shadow: var(--main-shadow);
+    -moz-box-shadow: var(--main-shadow);
+    box-shadow: var(--main-shadow);
+	border-radius: 10px;
+}
+
+.contacts-callback__title {
+	padding-bottom: 20px;
+    font-family: 'FontInterBold';
+    color: rgb(51,51,51);
+    font-size: 22px;
+    line-height: 24px;
+}
+
+.contacts-form-w {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.contacts-form__input {
+	display: block;
+	width: calc(50% - 10px);
+	padding-left: 15px;
+	height: 60px;
+	margin-bottom: 25px;
+	border-radius: 10px;
+	border: 2px solid #FF1F01!important;
+	outline: 0!important;
+}
+
+.contacts-form__textarea {
+	display: block;
+	width: 100%;
+	height: 110px;
+	border-radius: 10px;
+	border: 2px solid #FF1F01!important;
+	outline: 0!important;
+	padding: 15px;
+	margin-bottom: 25px;
+}
+
+.contacts-form__input::-webkit-input-placeholder {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
+.contacts-form__input::-moz-placeholder          {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
+.contacts-form__input:-moz-placeholder           {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
+.contacts-form__input:-ms-input-placeholder      {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
+
+.contacts-form__textarea::-webkit-input-placeholder {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
+.contacts-form__textarea::-moz-placeholder          {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
+.contacts-form__textarea:-moz-placeholder           {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
+.contacts-form__textarea:-ms-input-placeholder      {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
+
+.contacts-btn-area {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.contacts-agree {
+	width: calc(100% - 170px);
+}
+
+.contacts-send-btn {
+	display: block;
+	width: 170px;
+	height: 50px;
+	background: rgb(255,75,43);
+	background: linear-gradient(45deg, rgba(255,75,43,1) 0%, rgba(255,75,43,1) 39%, rgba(255,65,108,1) 75%, rgba(255,65,108,1) 100%);
+	border-radius: 5px;
+	color: #fff;
+	font-family: 'FontInterBold';
+	border: 0!important;
+	outline: 0!important;
+	font-size: 18px;
+	line-height: 100%;
+	cursor: pointer;
+}
+
+.contacts-subscribe {
+	width: calc(50% - 10px);
+	padding: 30px 12px;
+    -webkit-box-shadow: var(--main-shadow);
+    -moz-box-shadow: var(--main-shadow);
+    box-shadow: var(--main-shadow);
+	border-radius: 10px;
+}
+
+.contacts-subscribe-section {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 120px;
+	padding: 30px 35px;
+	border-radius: 10px;
+	-webkit-box-shadow: var(--main-shadow);
+	-moz-box-shadow: var(--main-shadow);
+	box-shadow: var(--main-shadow);
+}
+
+.contacts-subscribe-form-w {
+	width: calc(50% - 10px);
+}
+
+.contacts-subscribe-social {
+	width: calc(50% - 10px);
+}
+
+.contacts-subscribe-form {
+	width: 100%;
+	height: 60px;
+	position: relative;
+	background: rgb(49,140,216);
+	border-radius: 10px;
+}
+
+.contacts-subscribe-form-inside {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: calc(100% - 4px);
+	height: 56px;
+	padding: 4px 4px 4px 15px;
+	background: #fff;
+	position: absolute;
+	top: 2px;
+	bottom: 2px;
+	left: 2px;
+	right: 2px;
+	margin: auto;
+	border-radius: 8px;
+}
+
+.get-contacts-subscribe {
+	display: block;
+	width: calc(100% - 200px);
+
+	border: 0!important;
+	outline: 0!important;
+	background: #fff;
+	color: rgb(103,103,103);
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.get-contacts-suscribe-btn {
+	width: 180px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.get-contacts-suscribe__submit {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 8px;
+	border: 0!important;
+	outline: 0!important;
+	font-size: 18px;
+	line-height: 20px;
+	color: #fff;
+	font-family: 'FontInterBold';
+	cursor: pointer;
+	background: rgb(2,196,144);
+}
+
+.get-contacts-subscribe::-webkit-input-placeholder {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
+.get-contacts-subscribe::-moz-placeholder          {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
+.get-contacts-subscribe:-moz-placeholder           {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
+.get-contacts-subscribe:-ms-input-placeholder      {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
+
+.contacts-subscribe-social-block {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 30px;
+}
+
+.contacts-s-w {
+	padding-bottom: 30px
+}
+
+.contacts-social-tg-rus {
+	display: block;
+	width: 100%;
+	height: 32px;
+	margin-bottom: 22px;
+	padding-left: 40px;
+	font-size: 18px;
+	line-height: 30px;
+	color: rgb(67,151,237);
+	font-family: 'FontInter';
+	text-decoration: underline;
+	background-image: url('../assets/icons/telegram.svg');
+	background-repeat: no-repeat;
+	background-size: 32px;
+	background-position: left center;
+}
+
+.contacts-social-tg-pdmsk {
+	display: block;
+	width: 100%;
+	height: 32px;
+	margin-bottom: 22px;
+	padding-left: 40px;
+	font-size: 18px;
+	line-height: 30px;
+	color: rgb(67,151,237);
+	font-family: 'FontInter';
+	text-decoration: underline;
+	background-image: url('../assets/icons/telegram.svg');
+	background-repeat: no-repeat;
+	background-size: 32px;
+	background-position: left center;
+}
+
+.contacts-social-vk {
+	display: block;
+	width: 100%;
+	height: 32px;
+	padding-left: 40px;
+	font-size: 18px;
+	line-height: 30px;
+	color: rgb(67,151,237);
+	font-family: 'FontInter';
+	text-decoration: underline;
+	background-image: url('../assets/icons/vk.svg');
+	background-repeat: no-repeat;
+	background-size: 32px;
+	background-position: left center;
+}
+
+.contacts-copyright {
+	font-size: 12px;
+	line-height: 24px;
+}

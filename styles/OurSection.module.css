@@ -1,0 +1,17 @@
+.our-reviews {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	margin: 100px auto;
+}
+
+.our-reviews .section-title {
+	display: inline-block;
+}
+
+.reviews-slider {
+	width: 100%;
+	height: 100px;
+	margin-top: 50px;
+	background: #ccc;
+}

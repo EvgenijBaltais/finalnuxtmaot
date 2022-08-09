@@ -1,0 +1,49 @@
+.vacancy-banner {
+	display: flex;
+	justify-content: space-between;
+    padding: 25px 30px;
+	border-radius: 10px;
+	background: rgb(255,75,43);
+	background: linear-gradient(45deg, rgba(255,75,43,1) 0%, rgba(255,75,43,1) 39%, rgba(255,65,108,1) 75%, rgba(255,65,108,1) 100%);
+	cursor: pointer;
+}
+
+.vacancy-title {
+	font-size: 30px;
+	line-height: 40px;
+	color: #fff;
+	font-family: 'FontInter';
+	padding-bottom: 10px
+}
+
+.vacancy-subtitle {
+	font-size: 20px;
+	line-height: 30px;
+	color: #fff
+}
+
+.vacancy-banner__p {
+	border-radius: 5px;
+	background-color: #fff;
+	color: #0575E6;
+	font-size: 20px;
+	line-height: 20px;
+	padding: 10px 15px;
+	font-family: "FontInter";
+	text-align: center;
+	margin-bottom: -5px;
+}
+
+.vacancy-banner__btn {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-end;
+}
+
+.vacancy-banner__info {
+	width: calc(100% - 550px);
+}
+
+.vacancy-banner__btn {
+	width: 540px;
+}

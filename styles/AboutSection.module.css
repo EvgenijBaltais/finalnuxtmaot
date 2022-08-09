@@ -1,0 +1,46 @@
+.about-section {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 100px;
+}
+
+.about-company {
+	width: calc(50% - 10px);
+}
+
+.working-for-you {
+	width: calc(50% - 10px);
+}
+
+.about-company__info {
+	padding: 20px 0;
+	font-size: 16px;
+	line-height: 24px;
+	font-family: 'FontInterLight';
+}
+
+.about-company__working {
+	padding: 20px 0;
+}
+
+.about-company__subtitle {
+	font-family: 'FontInterSemiBold';
+	color: rgb(51,51,51);
+	font-size: 16px;
+	line-height: 24px;
+}
+
+.about-company__item {
+	margin-bottom: 15px;
+}
+
+.about-company__item span {
+	font-size: 16px;
+	line-height: 24px;
+	font-family: 'FontInterLight';
+}
+
+.about-company__link {
+		color: rgb(5, 117, 229);
+    font-size: 16px;
+}

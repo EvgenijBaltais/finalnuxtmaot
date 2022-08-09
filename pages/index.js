@@ -2,6 +2,9 @@ import MainForm from "../components/MainForm"
 import HotOffers from "../components/HotOffers"
 import PopularSections from "../components/PopularSections"
 import SpecialOffers from "../components/SpecialOffers"
+import SubscribeSection from "../components/SubscribeSection"
+import AboutSection from "../components/AboutSection"
+import OurSection from "../components/OurSection"
 
 const Index = () => {
 
@@ -13,6 +16,9 @@ const Index = () => {
             <HotOffers />
             <PopularSections />
             <SpecialOffers />
+            <SubscribeSection />
+            <AboutSection />
+            <OurSection />
         </>
     )
 }
