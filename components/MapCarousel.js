@@ -1,7 +1,6 @@
-import Image from 'next/image'
-import YMap from '/public/images/y-map.jpg'
-
 import styles from "../styles/MapCarousel.module.css"
+
+import { YMaps, Map, FullscreenControl, GeoObject } from "react-yandex-maps"
 
 const MapCarousel = () => {
 
@@ -65,7 +64,9 @@ const MapCarousel = () => {
                     </div>
                 </div>
                 <div className = {styles["map-block"]}>
-                    <Image src = {YMap} className = {styles["y-map"]} alt="" />
+                    <YMaps>
+                        <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }} />
+                    </YMaps>
                 </div>
             </div>
         </section>
