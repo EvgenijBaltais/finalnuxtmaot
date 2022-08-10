@@ -92,7 +92,6 @@
 	content: '';
 	display: block;
 	flex: 1 1;
-	background-image: url('');
 }
 
 .super-prices-item__number {

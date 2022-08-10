@@ -2,13 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+
+  experimental: {
+    images: {
+      unoptimized: true,
+    },
+  }
 }
 
-const withImages = require('next-images')
-module.exports = withImages({
-  webpack(config, options) {
-    return config
-  }
-})
 
 module.exports = nextConfig

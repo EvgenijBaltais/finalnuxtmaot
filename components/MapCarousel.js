@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import YMap from '../assets/images/y-map.jpg'
+import YMap from '/public/images/y-map.jpg'
 
 import styles from "../styles/MapCarousel.module.css"
 

@@ -4,9 +4,9 @@ import MainForm from "../components/MainForm"
 
 import Image from "next/image"
 
-import Pay1 from '../assets/images/pay-1.jpg'
-import Pay2 from '../assets/images/pay-2.jpg'
-import Pay3 from '../assets/images/pay-3.jpg'
+import Pay1 from '/public/images/pay-1.jpg'
+import Pay2 from '/public/images/pay-2.jpg'
+import Pay3 from '/public/images/pay-3.jpg'
 
 const Payment = () => {
 

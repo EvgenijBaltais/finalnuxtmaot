@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import styles from "../styles/HotOffersItem.module.css"
 
-import GoldStarImg from '../assets/images/star.svg'
-import GreyStarImg from '../assets/images/grey-star.svg'
+import GoldStarImg from '/public/images/star.svg'
+import GreyStarImg from '/public/images/grey-star.svg'
 
 const HotOfferItem = () => {
 
