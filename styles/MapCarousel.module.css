@@ -51,7 +51,7 @@
 	margin:auto;
 	width: 125px;
 	height: 20px;
-	background-image: url('../assets/images/long-arrow-left.svg');
+	background-image: url('/images/long-arrow-left.svg');
 	background-repeat: no-repeat;
 	background-size: 30%;
 	background-position: center left;
@@ -66,7 +66,7 @@
 	margin:auto;
 	width: 125px;
 	height: 20px;
-	background-image: url('../assets/images/long-arrow-right.svg');
+	background-image: url('/images/long-arrow-right.svg');
 	background-repeat: no-repeat;
 	background-size: 30%;
 	background-position: center right;
@@ -89,6 +89,7 @@
 
 .contact-info-block {
 	margin-bottom:20px;
+	margin-top: 20px;
 }
 
 .contacts-phone {

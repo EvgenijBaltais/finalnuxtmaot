@@ -14,11 +14,11 @@ const HotOfferItem = () => {
                     <p className = {styles["hot-deal-title"]}>Heliopark thalasso</p>
                     <p className = {styles["hot-deal-text"]}>Новорижское шоссе, 7 км</p>
                     <div className = {styles["hot-deal-rating"]}>
-                        <Image src={GoldStarImg} className = {styles["hot-deal-star"]} />
-                        <Image src={GoldStarImg} className = {styles["hot-deal-star"]} />
-                        <Image src={GoldStarImg} className = {styles["hot-deal-star"]} />
-                        <Image src={GoldStarImg} className = {styles["hot-deal-star"]} />
-                        <Image src={GoldStarImg} className = {styles["hot-deal-star"]} />
+                        <div className = {`${styles["hot-deal-star"]} ${styles["hot-deal-star-gold"]}`}></div>
+                        <div className = {`${styles["hot-deal-star"]} ${styles["hot-deal-star-gold"]}`}></div>
+                        <div className = {`${styles["hot-deal-star"]} ${styles["hot-deal-star-gold"]}`}></div>
+                        <div className = {`${styles["hot-deal-star"]} ${styles["hot-deal-star-gold"]}`}></div>
+                        <div className = {`${styles["hot-deal-star"]} ${styles["hot-deal-star-grey"]}`}></div>
                     </div>
                 </div>
                 <div className = {styles["hot-deal-price"]}>

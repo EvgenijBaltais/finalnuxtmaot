@@ -57,11 +57,11 @@
 }
 
 .hotel-rate__item-yellow {
-	background-image: url('../assets/images/star.svg');
+	background-image: url('/images/star.svg');
 }
 
 .hotel-rate__item-grey {
-	background-image: url('../assets/images/grey-star.svg');
+	background-image: url('/images/grey-star.svg');
 }
 
 .hotel-rate__reviews {
@@ -84,7 +84,7 @@
 	line-height: 26px;
 	padding-left: 30px;
 	text-decoration: underline;
-	background-image: url('../assets/images/heart.svg');
+	background-image: url('/images/heart.svg');
 	background-size: 26px;
 	background-repeat: no-repeat;
 	background-position: left center;

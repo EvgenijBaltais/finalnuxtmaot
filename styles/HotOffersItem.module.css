@@ -67,5 +67,16 @@
 .hot-deal-star {
 	display: block;
 	width: 9px;
+	height: 9px;
 	margin-right: 3px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.hot-deal-star-grey {
+	background-image: url('/images/grey-star.svg');
+}
+
+.hot-deal-star-gold {
+	background-image: url('/images/star.svg');
 }

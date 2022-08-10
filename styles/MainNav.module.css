@@ -55,7 +55,7 @@
         margin-right: 0;
         margin-left: auto;
         cursor: pointer;
-        background-image: url('../assets/images/close_nav.svg');
+        background-image: url('/images/close_nav.svg');
         background-size: cover;
         background-repeat: repeat;
         z-index: 5;
@@ -122,7 +122,7 @@
         content: '';
         width: 20px;
         height: 25px;
-        background-image: url('../assets/images/nav-down.svg');
+        background-image: url('/images/nav-down.svg');
         background-repeat: no-repeat;
         background-size: 15px;
         background-position: center;
@@ -188,11 +188,11 @@
     }
 
     .moblie-social-tg {
-        background-image: url('../assets/icons/telegram.svg');
+        background-image: url('/icons/telegram.svg');
     }
 
     .moblie-social-vk {
-        background-image: url('../assets/icons/vk.svg');
+        background-image: url('/icons/vk.svg');
         line-height: 20px;
     }
 

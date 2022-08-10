@@ -23,7 +23,7 @@
 }
 
 .left-block-bedroom {
-	background-image: url('../assets/images/left-nav.svg');
+	background-image: url('/images/left-nav.svg');
 	background-size: 25px;
 	background-position: left center;
 	background-repeat: no-repeat;

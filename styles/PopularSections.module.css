@@ -62,7 +62,7 @@
 	right: 0;
 	bottom: 0;
 	margin: auto;
-	background-image: url('../assets/images/grey-dotted.jpg');
+	background-image: url('/images/grey-dotted.jpg');
 	background-position: 0 70%;
 	background-repeat: repeat-x;
 	z-index: -1;
@@ -71,5 +71,5 @@
 
 .popular-item:hover:after {
 	transition: .2s background-image;
-	background-image: url('../assets/images/red-dotted.jpg');
+	background-image: url('/images/red-dotted.jpg');
 }

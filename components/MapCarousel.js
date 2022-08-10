@@ -39,7 +39,7 @@ const MapCarousel = () => {
 
             <div className = {styles["map-section"]}>
                 <div className = {styles["map-info"]}>
-                    <p className = "block-subtitle">Как к нам добраться</p>
+                    <h2 className = "section-title icon-item icon-item-direction">Как к нам добраться</h2>
                     <div className = {styles["contact-info-block"]}>
                         <p className = "subtitle-bold">Адрес</p>
                         <span className = "block-span">г. Москва, ул. Бауманская д.6с2. Бизнес-центр Виктория Плаза, 8 этаж, 804 офис</span>

@@ -5,7 +5,7 @@ const PopularSections = () => {
     return (
 		<section className = {styles["popular-sections"]}>
 			<div className = {styles["popular-hotels"]}>
-				<h2 className = {styles["section-title"]}>Популярные отели России</h2>
+				<h2 className = "section-title icon-item icon-item-hotel">Популярные отели России</h2>
 				<div className = {styles["popular-items"]}>
                     <div className = {styles["popular-item"]}>
 						<a href="" className = {styles["popular-item__name"]}>Bridge Resort (Сочи)</a>
@@ -31,7 +31,7 @@ const PopularSections = () => {
 				</div>
 			</div>
 			<div className = {styles["popular-ways"]}>
-				<h2 className = {styles["section-title"]}>Популярные направления</h2>
+				<h2 className = "section-title icon-item icon-item-direction">Популярные направления</h2>
 
 				<div className = {styles["popular-items"]}>
                     <div className = {styles["popular-item"]}>

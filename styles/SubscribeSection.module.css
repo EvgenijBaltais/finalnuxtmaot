@@ -100,7 +100,7 @@
 	color: rgb(67,151,237);
 	font-family: 'FontInter';
 	text-decoration: underline;
-	background-image: url('../assets/icons/telegram.svg');
+	background-image: url('/icons/telegram.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
 	background-position: left center;
@@ -117,7 +117,7 @@
 	color: rgb(67,151,237);
 	font-family: 'FontInter';
 	text-decoration: underline;
-	background-image: url('../assets/icons/telegram.svg');
+	background-image: url('/icons/telegram.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
 	background-position: left center;
@@ -133,7 +133,7 @@
 	color: rgb(67,151,237);
 	font-family: 'FontInter';
 	text-decoration: underline;
-	background-image: url('../assets/icons/vk.svg');
+	background-image: url('/icons/vk.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
 	background-position: left center;

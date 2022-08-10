@@ -5,7 +5,7 @@ const specialOffers = () => {
     return (
 
         <section className = {styles["special-offers"]}>
-            <h2 className = {styles["section-title"]}>Акции и спецпредложения</h2>
+            <h2 className = "section-title icon-item icon-item-sales">Акции и спецпредложения</h2>
             <div className = {styles["sales-wrapper"]}>
                 <div className={styles["sales-item"]}>
                     <div className={styles["sales-item__pic"]}></div>

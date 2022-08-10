@@ -73,7 +73,6 @@ body {
 	font-size: 22px;
 	line-height: 30px;
 	font-family: 'FontInterBold';
-	padding-bottom: 10px
 }
 
 .subtitle-bold {
@@ -259,6 +258,44 @@ input[type="checkbox"].stylized:checked + label:after {
 	text-align: center;
 }
 
+.icon-item {
+	line-height: 26px;
+	background-repeat: no-repeat;
+	background-size: 26px;
+	background-position: left center;
+}
+
+.icon-item-flame {
+	background-image: url('/icons/bonfire.png');
+}
+
+.icon-item-hotel {
+	background-image: url('/icons/hotel.png');
+}
+
+.icon-item-direction {
+	background-image: url('/icons/planet.png');
+}
+
+.icon-item-sales {
+	background-image: url('/icons/sales.png');
+}
+
+.icon-item-business {
+	background-image: url('/icons/business.png');
+}
+.icon-item-people {
+	background-image: url('/icons/people.png');
+}
+
+.icon-item-reviews {
+	background-image: url('/icons/reviews.png');
+}
+
+.icon-item-direction {
+	background-image: url('/icons/location.png');
+}
+
 /* Заголовок главной, конец */
 
 .secondary-h1 {
@@ -328,7 +365,7 @@ input[type="checkbox"].stylized:checked + label:after {
 
 .footer-col-3 {
 	width: 29.8%;
-	padding-right: 10px;
+	padding-right: 30px;
 }
 
 .footer-col-4 {
@@ -399,15 +436,50 @@ input[type="checkbox"].stylized:checked + label:after {
 }
 
 .footer-social-item:first-child {
-	background-image: url('../assets/icons/telegram.svg');
+	background-image: url('/icons/telegram.svg');
 }
 
 .footer-social-item:nth-child(2) {
-	background-image: url('../assets/icons/telegram.svg');
+	background-image: url('/icons/telegram.svg');
 }
 
 .footer-social-item:nth-child(3) {
-	background-image: url('../assets/icons/vk.svg');
+	background-image: url('/icons/vk.svg');
+}
+
+.payment-methods {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.payment-method {
+	display: flex;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.payment-method-visa {
+	width: 100%;
+	height: 25px;
+	margin-bottom: 15px;
+	background-image: url('/icons/pay-1.png');
+}
+
+.payment-method-vmp {
+	width: 100%;
+	height: 25px;
+	margin-bottom: 15px;
+	background-image: url('/icons/pay-2.png');
+}
+
+.payment-method-prom {
+	width: 100%;
+	height: 28px;
+	margin-bottom: 15px;
+	background-image: url('/icons/pay-3.png');
 }
 
 /* Footer, конец */

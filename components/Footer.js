@@ -44,6 +44,12 @@ const Footer = () => {
 			</div>
 			<div className = "footer-col footer-col-4">
 				<h3 className = "footer-col-title">Оплата</h3>
+
+				<div className = "payment-methods">
+					<div className = "payment-method payment-method-visa"></div>
+					<div className = "payment-method payment-method-vmp"></div>
+					<div className = "payment-method payment-method-prom"></div>
+				</div>
 			</div>
 		</footer>
     )
