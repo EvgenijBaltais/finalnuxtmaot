@@ -1,39 +1,10 @@
-.map-slider-items {
-	display: flex;
-	justify-content: space-between;
-	list-style-type: none;
-	font-size: 0;
-	line-height: 0;
-	letter-spacing: 0;
-}
-
-.map-slider-item {
-	display: inline-flex;
-	align-items: center;
-	font-size: 16px;
-	line-height: 24px;
-	letter-spacing: normal;	
-}
-
-.map-slider-link {
-	color: #848484;
-	font-size: 20px;
-	line-height: 20px;
-	text-decoration: none;
-}
-
-.map-slider-link.active {
-	color:#FE4B2B;
-	font-size: 28px;
-	line-height: 28px;
-}
-
 .map-slider-nav {
 	position: relative;
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 	justify-content: space-around;
-	padding: 20px 0;
+	padding: 10px 0;
+	min-height: 50px;
 }
 
 .our-offices-info {
@@ -53,7 +24,7 @@
 	height: 20px;
 	background-image: url('/images/long-arrow-left.svg');
 	background-repeat: no-repeat;
-	background-size: 30%;
+	background-size: 100%;
 	background-position: center left;
 	cursor: pointer;
 }
@@ -68,7 +39,7 @@
 	height: 20px;
 	background-image: url('/images/long-arrow-right.svg');
 	background-repeat: no-repeat;
-	background-size: 30%;
+	background-size: 100%;
 	background-position: center right;
 	cursor: pointer;
 }
@@ -86,6 +57,7 @@
 .map-block {
 	width: calc(100% - 400px);
 }
+
 
 .contact-info-block {
 	margin-bottom:20px;

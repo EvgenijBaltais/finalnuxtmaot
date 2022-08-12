@@ -1,7 +1,7 @@
 import styles from '../styles/MainNav.module.css'
 import Link from 'next/link'
 import Image from 'next/image'
-import Logo from '/public/images/logo-maot.svg'
+import Logo from '/public/images/logo-maot.png'
 
 const MainNav = () => {
 

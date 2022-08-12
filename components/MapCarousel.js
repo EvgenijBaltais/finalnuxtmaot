@@ -1,35 +1,49 @@
+import React, { useRef, useState } from "react";
+import { YMaps, Map, Placemark, FullscreenControl, TrafficControl } from "react-yandex-maps"
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+
+import 'swiper/css';
 import styles from "../styles/MapCarousel.module.css"
 
-import { YMaps, Map, FullscreenControl, GeoObject } from "react-yandex-maps"
+
+const moscow = {
+    coordinates: [55.776234, 37.675361],
+    adress: 'ул. Бауманская д.6с2. Бизнес-центр Виктория Плаза. 8 этаж. 804 офис'
+}
+
+const cities = ["Москва", "Санкт-Петербург", "Ростов-на-Дону", "Краснодар", "Тула"]
+
+const mapState = { center: [55.76, 37.64], zoom: 12, controls: [] };
 
 const MapCarousel = () => {
+
+    function handleSubmit(e) {
+        e.preventDefault()
+      }
 
     return (
 
         <section className = {styles["map"]}>
 
-            <div className = {styles["map-slider-wrapper"]}>
-                <ul className = {styles["map-slider-items"]}>
-                    <li className={styles["map-slider-item"]}>
-                        <a href = "" className = {styles["map-slider-link"]}>Ростов-на-Дону</a>
-                    </li>
-                    <li className={styles["map-slider-item"]}>
-                        <a href = "" className = {styles["map-slider-link"]}>Краснодар</a>
-                    </li>
-                    <li className={styles["map-slider-item"]}>
-                        <a href = "" className = {styles["map-slider-link"]}>Тула</a>
-                    </li>
-                    <li className={`${styles["map-slider-item"]} ${styles["active"]}`}>
-                        <a href = "" className = {`${styles["map-slider-link"]} ${styles["active"]}`}>Москва</a>
-                    </li>
-                    <li className={styles["map-slider-item"]}>
-                        <a href = "" className = {styles["map-slider-link"]}>Санкт-Петербург</a>
-                    </li>
-                    <li className={styles["map-slider-item"]}>
-                        <a href = "" className = {styles["map-slider-link"]}>Ростов-на-Дону</a>
-                    </li>
-                </ul>
-            </div>
+            <Swiper
+                    slidesPerView={5}
+                    centeredSlides={true}
+                    loop = {true}
+                    speed= {400}
+                    onSlideChange={(e) => console.log(e.$el[0].swiper.realIndex)}
+                    onSlideChangeTransitionEnd={(e) => console.log('end ' + e.$el[0].swiper.realIndex)}
+                >
+                
+                {cities.map((slideContent, index) => (
+                    <SwiperSlide key={slideContent} item = "index">
+                        {slideContent}
+                    </SwiperSlide>
+                ))}
+
+            </Swiper>
+
             <div className = {styles["map-slider-nav"]}>
                 <div className = {styles["our-offices-left"]}></div>
                 <div className = {styles["our-offices-info"]}>Наши офисы расположены по всей России</div>
@@ -46,11 +60,11 @@ const MapCarousel = () => {
                     <div className = {styles["contact-info-block"]}>
                         <p className = "subtitle-bold">Телефоны</p>
                         <div className = {styles["contact-info__phone"]}>
-                            <a href="tel:+74956486711" className = {`${styles["contacts-phone"]} ${styles["contacts-chast"]}`}>+7 495 648 67 11</a>
+                            <a href="tel:+74956486711" className = {`${styles["contacts-phone"]} ${styles["contacts-chast"]}`}>+7 495 648 67 11</a>&nbsp;
                             <span className = {styles["contacts-phone-info"]}>Для частных лиц</span>
                         </div>
                         <div className = {styles["contact-info__phone"]}>
-                            <a href="tel:+74956624928" className = {`${styles["contacts-phone"]} ${styles["contacts-corp"]}`}>+7 495 662 49 28</a>
+                            <a href="tel:+74956624928" className = {`${styles["contacts-phone"]} ${styles["contacts-corp"]}`}>+7 495 662 49 28</a>&nbsp;
                             <span className = {styles["contacts-phone-info"]}>Корпоративный отдел</span>
                         </div>
                     </div>
@@ -65,7 +79,25 @@ const MapCarousel = () => {
                 </div>
                 <div className = {styles["map-block"]}>
                     <YMaps>
-                        <Map defaultState={{ center: [55.75, 37.57], zoom: 9 }} />
+                        <Map 
+                            className = "contacts-y-map"
+                            defaultState = {{ 
+                                center: moscow.coordinates,
+                                zoom: 12
+                            }}
+                        >
+                            <Placemark 
+                                geometry={moscow.coordinates}
+                                properties = {{
+                                    balloonContent: moscow.adress
+                                }}
+                                modules = {
+                                    ['geoObject.addon.balloon']
+                                }
+                            />
+                            <FullscreenControl />
+                            <TrafficControl />
+                        </Map>
                     </YMaps>
                 </div>
             </div>

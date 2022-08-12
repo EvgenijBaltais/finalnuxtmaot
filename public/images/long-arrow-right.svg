@@ -1,1 +1,8 @@
-<?xml version="1.0" ?><svg fill = "#333" style="enable-background:new 0 0 50 50;" version="1.1" viewBox="0 0 50 50" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Layer_1_1_"><polygon points="1,26 44.586,26 38.293,32.293 39.707,33.707 48.414,25 39.707,16.293 38.293,17.707 44.586,24 1,24  "/></g></svg>
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121 8" width="121" height="8">
+	<title>long-arrow-left-svg</title>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { fill: #828282 } 
+	</style>
+	<path id="Layer" class="shp0" d="M117.17 7.54C116.98 7.73 116.66 7.73 116.46 7.54C116.27 7.34 116.27 7.02 116.46 6.83L119.29 4L116.46 1.17C116.27 0.98 116.27 0.66 116.46 0.46C116.66 0.27 116.98 0.27 117.17 0.46L120.35 3.65C120.55 3.84 120.55 4.16 120.35 4.35L117.17 7.54ZM0 3.5L120 3.5L120 4.5L0 4.5L0 3.5Z" />
+</svg>
