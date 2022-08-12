@@ -1,11 +1,21 @@
-
-import InputMask from "react-input-mask"
-
+import React from "react"
 import styles from "../styles/ContactForm.module.css"
 
-const ContactForms = () => {
+var Inputmask = require('inputmask');
 
-    return (
+console.log()
+
+class ContactForms extends React.Component {
+
+	handleClick = () => {
+		console.log('значение this:', this);
+
+		let im = new Inputmask("+7 (999) 999-99-99")
+			im.mask(document.querySelectorAll('input[name = "contacts-phone"]'))
+	}
+
+	render() {
+		return (
 		<section className = {styles["contacts-form"]}>
 			<div className = {styles["contacts-callback"]}>
 				<h2 className = {styles["contacts-callback__title"]}>Свяжитесь с нами</h2>
@@ -14,12 +24,7 @@ const ContactForms = () => {
 						<input type="text" name = "contacts-name" className = {`${styles["contacts-form__input"]} ${styles["contacts-form__name"]}`} placeholder="Имя" />
 						<input type="text" name = "contacts-company" className = {`${styles["contacts-form__input"]} ${styles["contacts-form__company"]}`} placeholder="Название компании" />
 						<input type="text" name = "contacts-email" className = {`${styles["contacts-form__input"]} ${styles["contacts-form__email"]}`} placeholder="Email" />
-						<input type="text" name = "contacts-phone" className = {`${styles["contacts-form__input"]} ${styles["contacts-form__phone"]}`} placeholder="Телефон" />
-						<InputMask mask="+7 (111) 111-11-11"
-									name = "contacts-phone"
-									className = {`${styles["contacts-form__input"]} ${styles["contacts-form__phone"]}`}
-									placeholder="Телефон"
-						/>
+						<input-mask data-inputmask="'mask': '99-9999999'" name = "contacts-phone" className = {`${styles["contacts-form__input"]} ${styles["contacts-form__phone"]}`} placeholder="Телефон" ></input-mask>
 						<textarea name="contacts-textarea" className = {styles["contacts-form__textarea"]} placeholder="Сообщение"></textarea>
 						<div className = {styles["contacts-btn-area"]}>
 							<div className = {styles["contacts-agree"]}>
@@ -57,7 +62,8 @@ const ContactForms = () => {
 				<span className = {styles["contacts-copyright"]}>&#169; 2004-2022. Магазин Отдыха - продажа горящих путевок</span>
 			</div>
 		</section>
-	)
+		)
+	}
 }
 
 export default ContactForms
