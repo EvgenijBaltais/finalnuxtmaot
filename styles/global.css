@@ -44,12 +44,30 @@
 
 body {
 	--red-linear-gradient: linear-gradient(45deg, rgba(255,74,43,1) 0%, rgba(255,68,87,1) 45%, rgba(255,68,87,1) 60%, rgba(255,74,43,1) 100%);
+	--green-linear-gradient: radial-gradient(circle, hsla(162, 100%, 91%, 1) 11%, hsla(163, 100%, 95%, 1) 44%, hsla(0, 0%, 100%, 1) 67%);
 	--main-shadow: 0 3px 8px 0 rgb(34 60 80 / 20%);
 }
 
 .wrapper {
+	position: relative;
 	max-width: 1240px;
 	margin: 20px auto;
+}
+
+.main-page:after {
+	width: 750px;
+	height: 750px;
+	content: '';
+	position: absolute;
+	top: 25px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background: var(--green-linear-gradient);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	z-index: -1;
 }
 
 .section-title {

@@ -1,3 +1,4 @@
+import React from "react"
 import MainForm from "../components/MainForm"
 import HotOffers from "../components/HotOffers"
 import PopularSections from "../components/PopularSections"
@@ -6,21 +7,32 @@ import SubscribeSection from "../components/SubscribeSection"
 import AboutSection from "../components/AboutSection"
 import OurSection from "../components/OurSection"
 
-const Index = ({popularHotels, popularWays}) => {
+class Index extends React.Component {
 
-    return (
-        <>
-            <h1 className = "main-h1">Путешествуйте по всей России!</h1>
+    constructor(props) {
+        super(props)
+    }
 
-            <MainForm />
-            <HotOffers />
-            <PopularSections popularHotels = {popularHotels} popularWays = {popularWays} />
-            <SpecialOffers items = "popularWays" />
-            <SubscribeSection />
-            <AboutSection />
-            <OurSection />
-        </>
-    )
+    componentDidMount(){
+        document.querySelector('.wrapper').classList.add('main-page')
+    }
+
+    render() {
+
+        return (
+            <>
+                <h1 className = "main-h1">Путешествуйте по всей России!</h1>
+
+                <MainForm />
+                <HotOffers />
+                <PopularSections popularHotels = {this.props.popularHotels} popularWays = {this.props.popularWays} />
+                <SpecialOffers items = "popularWays" />
+                <SubscribeSection />
+                <AboutSection />
+                <OurSection />
+            </>
+        )
+    }
 }
 
 export async function getStaticProps(context) {

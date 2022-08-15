@@ -11,6 +11,9 @@
 	-moz-box-shadow: var(--main-shadow);
 	box-shadow: var(--main-shadow);
 	cursor: pointer;
+	text-decoration: none;
+	z-index: 1;
+	background: #fff;
 }
 
 .hot-deal-item:nth-child(4n) {
