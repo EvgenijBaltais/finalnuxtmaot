@@ -322,7 +322,7 @@ const Payment = () => {
 
                             <div className = {styles["between-populars-items"]}>
 
-                                <h2 className = {`${styles["section-title"]} ${styles["left-block-bedroom"]}`}>Популярные отели России</h2>
+                                <h2 className = {`section-title ${styles["left-block-bedroom"]}`}>Популярные отели России</h2>
                                 <div className = {styles["popular-items"]}>
                                     <div className = {styles["popular-item"]}>
                                         <a href="" className = {styles["popular-item__name"]}>Bridge Resort (Сочи)</a>

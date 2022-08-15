@@ -36,6 +36,8 @@
 	border-radius: 10px;
 	border: 2px solid #FF1F01!important;
 	outline: 0!important;
+	font-size: 18px;
+	line-height: 18px;
 }
 
 .contacts-form__textarea {
@@ -49,15 +51,15 @@
 	margin-bottom: 25px;
 }
 
-.contacts-form__input::-webkit-input-placeholder {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
-.contacts-form__input::-moz-placeholder          {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
-.contacts-form__input:-moz-placeholder           {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
-.contacts-form__input:-ms-input-placeholder      {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
+.contacts-form__input::-webkit-input-placeholder {color: rgb(122,122,122); font-size: 18px;line-height: 18px;}
+.contacts-form__input::-moz-placeholder          {color: rgb(122,122,122); font-size: 18px;line-height: 18px;}
+.contacts-form__input:-moz-placeholder           {color: rgb(122,122,122); font-size: 18px;line-height: 18px;}
+.contacts-form__input:-ms-input-placeholder      {color: rgb(122,122,122); font-size: 18px;line-height: 18px;}
 
-.contacts-form__textarea::-webkit-input-placeholder {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
-.contacts-form__textarea::-moz-placeholder          {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
-.contacts-form__textarea:-moz-placeholder           {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
-.contacts-form__textarea:-ms-input-placeholder      {color: rgb(122,122,122); font-size: 16px;line-height: 16px;}
+.contacts-form__textarea::-webkit-input-placeholder {color: rgb(122,122,122); font-size: 18px;line-height: 18px;}
+.contacts-form__textarea::-moz-placeholder          {color: rgb(122,122,122); font-size: 18px;line-height: 18px;}
+.contacts-form__textarea:-moz-placeholder           {color: rgb(122,122,122); font-size: 18px;line-height: 18px;}
+.contacts-form__textarea:-ms-input-placeholder      {color: rgb(122,122,122); font-size: 18px;line-height: 18px;}
 
 .contacts-btn-area {
 	width: 100%;

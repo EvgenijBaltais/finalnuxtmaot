@@ -6,7 +6,7 @@ import SubscribeSection from "../components/SubscribeSection"
 import AboutSection from "../components/AboutSection"
 import OurSection from "../components/OurSection"
 
-const Index = () => {
+const Index = ({popularHotels, popularWays}) => {
 
     return (
         <>
@@ -14,13 +14,27 @@ const Index = () => {
 
             <MainForm />
             <HotOffers />
-            <PopularSections />
-            <SpecialOffers />
+            <PopularSections popularHotels = {popularHotels} popularWays = {popularWays} />
+            <SpecialOffers items = "popularWays" />
             <SubscribeSection />
             <AboutSection />
             <OurSection />
         </>
     )
+}
+
+export async function getStaticProps(context) {
+
+	const response = await fetch('https://jsonplaceholder.typicode.com/users')
+	const popularHotels = await response.json()
+    const popularWays = popularHotels
+  
+    return {
+        props: {
+            popularHotels,
+            popularWays
+        },
+    }
 }
 
 export default Index

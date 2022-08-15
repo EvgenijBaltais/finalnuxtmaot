@@ -17,23 +17,33 @@ const cities = ["Москва", "Санкт-Петербург", "Ростов-�
 
 const mapState = { center: [55.76, 37.64], zoom: 12, controls: [] };
 
-const MapCarousel = () => {
+class MapCarousel extends React.Component {
 
-    function handleSubmit(e) {
-        e.preventDefault()
-      }
+	componentDidMount() {
 
-    return (
 
+	}
+  
+	componentWillUnmount() {
+
+	}
+
+    changeMap() {
+
+        console.log(122133)
+    }
+
+    render() {
+        return (
         <section className = {styles["map"]}>
 
             <Swiper
                     slidesPerView={5}
                     centeredSlides={true}
+                    slideToClickedSlide = {true}
                     loop = {true}
                     speed= {400}
                     onSlideChange={(e) => console.log(e.$el[0].swiper.realIndex)}
-                    onSlideChangeTransitionEnd={(e) => console.log('end ' + e.$el[0].swiper.realIndex)}
                 >
                 
                 {cities.map((slideContent, index) => (
@@ -102,7 +112,8 @@ const MapCarousel = () => {
                 </div>
             </div>
         </section>
-    )
+        )
+    }
 }
 
 export default MapCarousel

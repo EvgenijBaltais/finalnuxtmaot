@@ -12,6 +12,11 @@
 	width: 800px;
 }
 
+.between-populars-items {
+	width: 620px;
+	margin: 80px auto;
+}
+
 .single-block-title {
 	color: rgb(51, 51, 51);
 	font-family: 'FontInterBold';
@@ -110,9 +115,6 @@
 
 /* Оплата - контент страницы */
 
-.pay-page-content {
-
-}
 
 .law-info {
 	padding-top: 50px
@@ -145,3 +147,248 @@
     font-size: 15px;
     line-height: 24px;
 }
+
+.content-subscribe {
+	max-width: 620px;
+	padding: 25px 18px;
+	margin: 80px auto;
+    -webkit-box-shadow: var(--main-shadow);
+    -moz-box-shadow: var(--main-shadow);
+    box-shadow: var(--main-shadow);
+	border-radius: 10px;
+}
+
+.content-subscribe-section {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 120px;
+	padding: 30px 35px;
+	border-radius: 10px;
+	-webkit-box-shadow: var(--main-shadow);
+	-moz-box-shadow: var(--main-shadow);
+	box-shadow: var(--main-shadow);
+}
+
+.content-subscribe-form-w {
+	width: calc(50% - 10px);
+}
+
+.content-subscribe-social {
+	width: calc(50% - 10px);
+}
+
+.content-subscribe-form {
+	width: 100%;
+	height: 60px;
+	position: relative;
+	background: rgb(49,140,216);
+	border-radius: 10px;
+}
+
+.content-subscribe-form-inside {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: calc(100% - 4px);
+	height: 56px;
+	padding: 4px 4px 4px 15px;
+	background: #fff;
+	position: absolute;
+	top: 2px;
+	bottom: 2px;
+	left: 2px;
+	right: 2px;
+	margin: auto;
+	border-radius: 8px;
+}
+
+.get-content-subscribe {
+	display: block;
+	width: calc(100% - 200px);
+
+	border: 0!important;
+	outline: 0!important;
+	background: #fff;
+	color: rgb(103,103,103);
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.get-content-suscribe-btn {
+	width: 180px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.get-content-suscribe__submit {
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 8px;
+	border: 0!important;
+	outline: 0!important;
+	font-size: 18px;
+	line-height: 20px;
+	color: #fff;
+	font-family: 'FontInterBold';
+	cursor: pointer;
+	background: rgb(2,196,144);
+}
+
+.get-content-subscribe::-webkit-input-placeholder {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
+.get-content-subscribe::-moz-placeholder          {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
+.get-content-subscribe:-moz-placeholder           {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
+.get-content-subscribe:-ms-input-placeholder      {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
+
+.content-subscribe-social-block {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 30px;
+}
+
+.content-s-w {
+	padding-bottom: 30px
+}
+
+.content-subscribe-socials {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.content-social-tg-rus {
+	display: block;
+	width: 45%;
+	height: 32px;
+	margin-bottom: 22px;
+	padding-left: 40px;
+	font-size: 18px;
+	line-height: 30px;
+	color: rgb(67,151,237);
+	font-family: 'FontInter';
+	text-decoration: underline;
+	background-image: url('/icons/telegram.svg');
+	background-repeat: no-repeat;
+	background-size: 32px;
+	background-position: left center;
+}
+
+.content-social-tg-pdmsk {
+	display: block;
+	width: 55%;
+	height: 32px;
+	margin-bottom: 22px;
+	padding-left: 40px;
+	font-size: 18px;
+	line-height: 30px;
+	color: rgb(67,151,237);
+	font-family: 'FontInter';
+	text-decoration: underline;
+	background-image: url('/icons/telegram.svg');
+	background-repeat: no-repeat;
+	background-size: 32px;
+	background-position: left center;
+}
+
+.content-social-vk {
+	display: block;
+	width: 100%;
+	height: 32px;
+	padding-left: 40px;
+	font-size: 18px;
+	line-height: 30px;
+	color: rgb(67,151,237);
+	font-family: 'FontInter';
+	text-decoration: underline;
+	background-image: url('/icons/vk.svg');
+	background-repeat: no-repeat;
+	background-size: 32px;
+	background-position: left center;
+}
+
+.content-copyright {
+	font-size: 12px;
+	line-height: 24px;
+}
+
+/* Популярные предложения */
+
+.popular-sections {
+	display: flex;
+	justify-content: space-between;
+}
+
+.popular-hotels {
+	width: calc(50% - 10px);
+}
+
+.popular-ways {
+	width: calc(50% - 10px);
+}
+
+.popular-item__name {
+	padding-right: 10px;
+	color: rgb(36,134,233);
+	font-size: 16px;
+	line-height: 24px;
+	text-decoration: underline;
+	background-color: #fff;
+	transition: .2s color;
+}
+
+.popular-item:hover .popular-item__name {
+	transition: .2s color;
+	color: rgb(255,74,43);
+}
+
+.popular-item__price {
+	padding-left: 10px;
+	color: rgb(130,130,130);
+	font-size: 16px;
+	line-height: 24px;
+	background-color: #fff;
+}
+
+.popular-item:hover .popular-item__price {
+	transition: .2s color;
+	color: rgb(255,74,43);
+}
+
+.popular-items {
+	padding: 15px 0;
+}
+
+.popular-item {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+}
+
+.popular-item:last-child {
+	margin-bottom: 0
+}
+
+.popular-item:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	background-image: url('/images/grey-dotted.jpg');
+	background-position: 0 70%;
+	background-repeat: repeat-x;
+	z-index: -1;
+	transition: .2s background-image;
+}
+
+.popular-item:hover:after {
+	transition: .2s background-image;
+	background-image: url('/images/red-dotted.jpg');
+}
+
+/* Популярные предложения, конец */

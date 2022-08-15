@@ -1,17 +1,18 @@
 import React from "react"
 import styles from "../styles/ContactForm.module.css"
-
-var Inputmask = require('inputmask');
-
-console.log()
+import Inputmask from "inputmask";
 
 class ContactForms extends React.Component {
 
-	handleClick = () => {
-		console.log('значение this:', this);
+	componentDidMount() {
+
 
 		let im = new Inputmask("+7 (999) 999-99-99")
-			im.mask(document.querySelectorAll('input[name = "contacts-phone"]'))
+			im.mask(document.querySelector('input[name = "contacts-phone"]'))
+
+	}
+  
+	componentWillUnmount() {
 	}
 
 	render() {
@@ -24,7 +25,7 @@ class ContactForms extends React.Component {
 						<input type="text" name = "contacts-name" className = {`${styles["contacts-form__input"]} ${styles["contacts-form__name"]}`} placeholder="Имя" />
 						<input type="text" name = "contacts-company" className = {`${styles["contacts-form__input"]} ${styles["contacts-form__company"]}`} placeholder="Название компании" />
 						<input type="text" name = "contacts-email" className = {`${styles["contacts-form__input"]} ${styles["contacts-form__email"]}`} placeholder="Email" />
-						<input-mask data-inputmask="'mask': '99-9999999'" name = "contacts-phone" className = {`${styles["contacts-form__input"]} ${styles["contacts-form__phone"]}`} placeholder="Телефон" ></input-mask>
+						<input type="text" name = "contacts-phone" className = {`${styles["contacts-form__input"]} ${styles["contacts-form__phone"]}`} placeholder="Телефон" />
 						<textarea name="contacts-textarea" className = {styles["contacts-form__textarea"]} placeholder="Сообщение"></textarea>
 						<div className = {styles["contacts-btn-area"]}>
 							<div className = {styles["contacts-agree"]}>
