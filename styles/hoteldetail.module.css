@@ -6,11 +6,17 @@
 }
 
 .hotel-adress {
-	padding: 20px 0 25px 0;
+	padding: 0 0 25px 0;
+	margin-top: 20px;
 	font-size: 16px;
 	line-height: 24px;
 	color: #4F4F4F;
 	text-indent: 25px;
+
+	background-image: url('/icons/vector.png');
+	background-repeat: no-repeat;
+    background-size: 15px;
+    background-position: left top;
 }
 
 .title-block {
@@ -230,13 +236,13 @@
 	font-family: 'FontInterLight';
 }
 
+.select-dates-link-active {
+	color: #FF4B2A;
+}
+
 .select-dates-link:hover {
 	color: #FF4B2A;
 	transition: .2s color;
-}
-
-.select-dates-link.active {
-	color: #FF4B2A;
 }
 
 .select-dates-link:after {
@@ -253,6 +259,10 @@
     -webkit-transform: rotate(135deg);
 	font-family: 'FontInterLight';
 	transition: .2s border-color;
+}
+
+.select-dates-link-active:after {
+	border-color: #FF4B2A;
 }
 
 .select-dates-link:hover:after {

@@ -54,12 +54,13 @@ body {
 	margin: 20px auto;
 }
 
-.main-page:after {
+.main-page:after,
+.contact-page:after {
 	width: 750px;
 	height: 750px;
 	content: '';
 	position: absolute;
-	top: 25px;
+	top: 0;
 	left: 0;
 	right: 0;
 	margin: auto;

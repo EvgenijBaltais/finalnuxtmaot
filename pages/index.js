@@ -17,6 +17,10 @@ class Index extends React.Component {
         document.querySelector('.wrapper').classList.add('main-page')
     }
 
+    componentWillUnmount() {
+        document.querySelector('.wrapper').classList.remove('main-page')
+    }
+
     render() {
 
         return (

@@ -1,5 +1,6 @@
 import styles from "../styles/routes.module.css"
 
+import Link from "next/link"
 const Routes = () => {
 
     return (
@@ -69,7 +70,9 @@ const Routes = () => {
                     <div className={styles["search-item"]}>
                         <div className = {styles["search-item-pic"]}></div>
                         <div className = {styles["search-item__content"]}>
-                            <a className = {styles["search-item__title"]}>Отель Солнечный Park Hotel</a>
+                            <Link href={"/hoteldetail"}>
+                                <a className = {styles["search-item__title"]}>Отель Солнечный Park Hotel</a>
+                            </Link>
                             <div className = {styles["search-item__rate"]}>
                                 <ul className={styles["search-rate__list"]}>
                                     <li className={`${styles["search-rate__item"]} ${styles["search-rate__item-yellow"]}`}></li>
@@ -112,7 +115,9 @@ const Routes = () => {
                     <div className={styles["search-item"]}>
                         <div className = {styles["search-item-pic"]}></div>
                         <div className = {styles["search-item__content"]}>
-                            <a className = {styles["search-item__title"]}>Отель Солнечный Park Hotel</a>
+                            <Link href={"/hoteldetail"}>
+                                <a className = {styles["search-item__title"]}>Отель Солнечный Park Hotel</a>
+                            </Link>
                             <div className = {styles["search-item__rate"]}>
                                 <ul className={styles["search-rate__list"]}>
                                     <li className={`${styles["search-rate__item"]} ${styles["search-rate__item-yellow"]}`}></li>
@@ -155,7 +160,9 @@ const Routes = () => {
                     <div className={styles["search-item"]}>
                         <div className = {styles["search-item-pic"]}></div>
                         <div className = {styles["search-item__content"]}>
-                            <a className = {styles["search-item__title"]}>Отель Фореста Парк с очень длинным названием</a>
+                            <Link href={"/hoteldetail"}>
+                                <a className = {styles["search-item__title"]}>Отель Фореста Парк с очень длинным названием</a>
+                            </Link>
                             <div className = {styles["search-item__rate"]}>
                                 <ul className={styles["search-rate__list"]}>
                                     <li className={`${styles["search-rate__item"]} ${styles["search-rate__item-yellow"]}`}></li>
