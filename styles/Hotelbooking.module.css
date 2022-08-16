@@ -236,6 +236,7 @@
 	border: 2px solid #FF1F01!important;
 	outline: 0!important;
 	padding: 15px;
+    resize: vertical;
 }
 
 .book-bron-form__input::-webkit-input-placeholder {color: rgb(122,122,122); font-size: 18px;line-height: 18px;}
