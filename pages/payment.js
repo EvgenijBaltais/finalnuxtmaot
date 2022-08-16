@@ -19,7 +19,7 @@ const Payment = () => {
             <section className = {styles["pay-content"]}>
                 <div className = {styles["pay-left"]}>
                     <div className = {styles["pay-left-nav"]}>
-                        <h2 className={`${styles["single-block-title"]} ${styles["left-block-bedroom"]}`}>
+                        <h2 className={`single-block-title ${styles["left-block-bedroom"]}`}>
                             Навигация
                         </h2>
                         <div className = {styles["left-nav-block"]}>
@@ -70,7 +70,7 @@ const Payment = () => {
                                 </li>
                             </ul>
                         </div>
-                        <h2 className={`${styles["single-block-title"]} ${styles["left-block-bedroom"]}`}>
+                        <h2 className={`single-block-title ${styles["left-block-bedroom"]}`}>
                             Супер цена!
                         </h2>
                         <div className = "left-nav-block super-prices">
@@ -128,7 +128,7 @@ const Payment = () => {
                     </div>
                 </div>
                 <div className = {styles["pay-right"]}>
-                    <h2 className={styles["single-block-title"]}>
+                    <h2 className="single-block-title">
                         Введение
                     </h2>
                     <div className = {styles["pay-page-content"]}>
@@ -153,7 +153,7 @@ const Payment = () => {
                             международным сертификатом безопасности PCI DSS.
                         </p>
 
-                        <h2 className={styles["single-block-title"]}>
+                        <h2 className="single-block-title">
                             Платежи. Оплата банковской картой онлайн.
                         </h2>
                         <p className = {styles["pay-page-content__text"]}>Наш сайт подключен к интернет-эквайрингу, и Вы можете оплатить Товар банковской картой Visa или Mastercard. 
@@ -164,7 +164,7 @@ const Payment = () => {
                             Информацию о правилах и методах дополнительной идентификации уточняйте в Банке, выдавшем Вам банковскую карту.
                         </p>
 
-                        <h2 className={styles["single-block-title"]}>
+                        <h2 className="single-block-title">
                             Гарантии Безопасности.
                         </h2>
                         <p className = {styles["pay-page-content__text"]}>Процессинговые центры CloudPayments и ПАО "Промсвязьбанк" защищают и обрабатывают данные Вашей банковской карты по
@@ -176,7 +176,7 @@ const Payment = () => {
                             Вы можете обратиться в службу поддержки клиентов по электронной почте support@cloudpayments.ru или support@paykeeper.ru.
                         </p>
 
-                        <h2 className={styles["single-block-title"]}>
+                        <h2 className="single-block-title">
                             Безопасность Онлайн Платежей.
                         </h2>
                         <p className = {styles["pay-page-content__text"]}>Предоставляемая Вами персональная информация (имя, адрес, телефон, e-mail, номер кредитной карты) 
@@ -187,7 +187,7 @@ const Payment = () => {
                             карточных онлайн-платежей, обработка данных ведется на безопасном высокотехнологичном сервере процессинговой компании.
                         </p>
 
-                        <h2 className={styles["single-block-title"]}>
+                        <h2 className="single-block-title">
                             Возврат Товаров
                         </h2>
                         <p className = {styles["pay-page-content__text"]}>Постановление Правительства РФ от 19 января 1998 г. В случае обнаружения недостатков товара,
@@ -199,7 +199,7 @@ const Payment = () => {
                                 полученный товар ненадлежащего качества.
                         </p>
 
-                        <h2 className={styles["single-block-title"]}>
+                        <h2 className="single-block-title">
                             Конфиденциальность
                         </h2>
                         <p className = {styles["pay-page-content__text-bold"]}>Определения</p>
@@ -242,7 +242,7 @@ const Payment = () => {
                         <p className = {styles["pay-page-content__text"]}>По вопросам, касающимся настоящей политики, просьба обращаться по телефону 8 (800) 555-33-75</p>
 
                         <div className = {styles["content-subscribe"]}>
-                            <h2 className = {styles["single-block-title"]}>Подпишитесь на лучшие предложения</h2>
+                            <h2 className = "single-block-title">Подпишитесь на лучшие предложения</h2>
                             <div className = {styles["content-s-w"]}>
                                 <form action="" name = {styles["content-subscribe-form"]}>
                                     <div className = {styles["content-subscribe-form"]}>
@@ -259,7 +259,7 @@ const Payment = () => {
                                     </div>
                                 </form>
                             </div>
-                            <h2 className = {styles["single-block-title"]}>Подпишитесь на наши соц. сети</h2>
+                            <h2 className = "single-block-title">Подпишитесь на наши соц. сети</h2>
                             <div className={styles["content-subscribe-socials"]}>
                                 <a className = {styles["content-social-tg-rus"]}>Лучшие отели России</a>
                                 <a className = {styles["content-social-tg-pdmsk"]}>Лучшие отели Подмосковья</a>
@@ -267,7 +267,7 @@ const Payment = () => {
                             </div>
                         </div>
 
-                        <h2 className={styles["single-block-title"]}>
+                        <h2 className="single-block-title">
                             Проведение операции оплаты товаров/услуг в сети интернет
                         </h2>
                         <p className = {styles["pay-page-content__text"]}>Держатель карты обращается на сайт Интернет-магазина и формирует заказ на оплату товара/услуг,
@@ -351,7 +351,7 @@ const Payment = () => {
                                 </div>
                             </div>
 
-                        <h2 className={styles["single-block-title"]}>
+                        <h2 className="single-block-title">
                             Отмена операции оплаты товаров/услуг в интернете
                         </h2>
 
@@ -366,7 +366,7 @@ const Payment = () => {
                             «Заявку на отмену операции» по форме Приложения №5 к настоящему
                             Договору и предоставить ее в Банк.</p>
 
-                        <h2 className={styles["single-block-title"]}>
+                        <h2 className="single-block-title">
                             Операция возврата товара (отказа от услуг), оплаченных картой в сети интернет.
                         </h2>
 
@@ -379,7 +379,7 @@ const Payment = () => {
 
                         <div className = {styles["law-info"]}>
 
-                            <h2 className={styles["single-block-title"]}>
+                            <h2 className="single-block-title">
                                 Юридическое лицо
                             </h2>
                             <p className = "info-text">

@@ -92,6 +92,16 @@ body {
 	line-height: 24px;
 }
 
+.single-block-title {
+	color: rgb(51, 51, 51);
+	font-family: 'FontInterBold';
+    font-size: 22px;
+    line-height: 30px;
+    text-decoration: none;
+    margin-right: 30px;
+	margin-bottom: 25px;
+}
+
 .block-subtitle {
 	padding-left: 40px;
 	font-size: 22px;

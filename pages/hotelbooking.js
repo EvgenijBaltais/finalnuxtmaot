@@ -2,7 +2,6 @@ import React from "react"
 
 import styles from "../styles/Hotelbooking.module.css"
 
-
 class Hotelbooking extends React.Component {
 
     constructor(props) {
@@ -59,6 +58,49 @@ class Hotelbooking extends React.Component {
                                 2 ночи
                             </div>
                         </div>
+                </div>
+
+
+                <div className = {styles["hotel-book-bron"]}>
+                    <h2 className="single-block-title">Ваши личные данные</h2>
+                    <form action="" className = {styles["hotel-book-form"]}>
+                        <div className = {styles["book-bron-l"]}>
+						    <input 
+                                type="text" 
+                                name = "book-bron-name" 
+                                className = {`${styles["book-bron-form__input"]} ${styles["book-bron-form__name"]}`} 
+                                placeholder="Имя"
+                            />
+						    <input
+                                type="text"
+                                name = "book-bron-company"
+                                className = {`${styles["book-bron-form__input"]} ${styles["book-bron-form__company"]}`}
+                                placeholder="Название компании"
+                            />
+						    <input
+                                type="text"
+                                name = "book-bron-email"
+                                className = {`${styles["book-bron-form__input"]} ${styles["book-bron-form__email"]}`}
+                                placeholder="Email"
+                            />
+						    <input
+                                type="text"
+                                name = "book-bron-phone"
+                                className = {`${styles["book-bron-form__input"]} ${styles["book-bron-form__phone"]}`}
+                                placeholder="Телефон"
+                            />
+                        </div>
+                        <div className = {styles["book-bron-r"]}>
+                            <textarea name="book-bron-textarea" className = {styles["book-bron__textarea"]} placeholder="Комментарий"></textarea>
+                        </div>
+                        <div className = {styles["hotel-book-btn-area"]}>
+                            <div className = "subscribe-agree">
+                                <input type="checkbox" id="subscribe-checkbox-1" className = "stylized" checked /> <label htmlFor="subscribe-checkbox-1">
+                                Соглашаюсь с политикой конфиденциальности</label>
+                            </div>
+							<button className = {styles["book-bron-send-btn"]}>Далее</button>
+						</div>
+                    </form>
                 </div>
             </>
         )
