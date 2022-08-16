@@ -19,7 +19,7 @@ const Payment = () => {
             <section className = {styles["pay-content"]}>
                 <div className = {styles["pay-left"]}>
                     <div className = {styles["pay-left-nav"]}>
-                        <h2 className={`single-block-title ${styles["left-block-bedroom"]}`}>
+                        <h2 className="single-block-title left-block-bedroom">
                             Навигация
                         </h2>
                         <div className = {styles["left-nav-block"]}>
@@ -70,7 +70,7 @@ const Payment = () => {
                                 </li>
                             </ul>
                         </div>
-                        <h2 className={`single-block-title ${styles["left-block-bedroom"]}`}>
+                        <h2 className="single-block-title left-block-bedroom">
                             Супер цена!
                         </h2>
                         <div className = "left-nav-block super-prices">
@@ -322,7 +322,7 @@ const Payment = () => {
 
                             <div className = {styles["between-populars-items"]}>
 
-                                <h2 className = {`section-title ${styles["left-block-bedroom"]}`}>Популярные отели России</h2>
+                                <h2 className = "section-title left-block-bedroom">Популярные отели России</h2>
                                 <div className = {styles["popular-items"]}>
                                     <div className = {styles["popular-item"]}>
                                         <a href="" className = {styles["popular-item__name"]}>Bridge Resort (Сочи)</a>

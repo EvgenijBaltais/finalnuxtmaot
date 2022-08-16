@@ -58,7 +58,8 @@ body {
 
 .main-page:after,
 .contact-page:after,
-.hotel-bron-page:after {
+.hotel-bron-page:after,
+.articles-page:after {
 	width: 750px;
 	height: 750px;
 	content: '';
@@ -84,6 +85,13 @@ body {
 	line-height: 24px;
 }
 
+.success-title {
+	font-size: 22px;
+	line-height: 24px;
+	font-family: 'FontInterExtraBold';
+	color: #00CB50;
+	text-align: center;
+}
 
 .section-title-sub {
 	font-family: 'FontInterBold';
@@ -604,3 +612,16 @@ input[type="checkbox"].stylized:checked + label:after {
 }
 
 /* Swiper, конец */
+
+
+/* Общие стили для разных компонентов */
+
+.left-block-bedroom {
+	background-image: url('/images/hotel.png');
+	background-size: 25px;
+	background-position: left center;
+	background-repeat: no-repeat;
+	padding-left: 38px;
+}
+
+/* Общие стили для разных компонентов, конец */

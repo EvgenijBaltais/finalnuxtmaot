@@ -1,0 +1,27 @@
+.success-status {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 620px;
+    margin: 130px auto 200px auto
+}
+
+.success-status__block {
+    width: 50%;
+    margin-bottom: 30px
+}
+
+.success-status__full {
+    width: 100%;
+}
+
+.success-status__bold {
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'FontInterBold';
+}
+
+.success-status__p {
+    font-size: 16px;
+    line-height: 24px;
+}

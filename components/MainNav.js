@@ -1,14 +1,25 @@
-import styles from '../styles/MainNav.module.css'
+import React from 'react'
 import Link from 'next/link'
+import { useRouter } from "next/router"
 import Image from 'next/image'
 import Logo from '/public/images/logo-maot.png'
+import styles from '../styles/MainNav.module.css'
 
 const MainNav = () => {
 
+    const router = useRouter()
+
+    const navLinks = [
+        { title: 'Лучшие направления', path: '/routes' },
+        { title: 'Статьи', path: '/articles' },
+        { title: 'Способы оплаты', path: '/payment' },
+        { title: 'Контакты', path: '/contact' }
+    ]
+    
     return (
         <header className = {styles["header"]}>
             <div className={styles["main-logo"]}>
-                <Link href = "/">
+                <Link href = "/" activeClassName="active">
                     <a>
                         <Image src={Logo} alt="Компания Магазин отдыха"/>
                     </a>
@@ -16,26 +27,15 @@ const MainNav = () => {
             </div>
             <nav className = {styles["main-nav"]}>
                 <ul className = {styles["nav-list"]}>
-                    <li className = {styles["nav-item"]}>
-                        <Link href="/routes">
-                            <a className = {styles["nav-link"]}>Лучшие направления</a>
-                        </Link>
-                    </li>
-                    <li className = {styles["nav-item"]}>
-                        <Link href="/articles">
-                            <a className = {styles["nav-link"]}>Статьи</a>
-                        </Link>
-                    </li>
-                    <li className = {styles["nav-item"]}>
-                        <Link href="/payment">
-                            <a className = {styles["nav-link"]}>Способы оплаты</a>
-                        </Link>
-                    </li>
-                    <li className = {styles["nav-item"]}>
-                        <Link href="/contact">
-                            <a className = {styles["nav-link"]}>Контакты</a>
-                        </Link>
-                    </li>
+                    {navLinks.map((item, index) => {
+                        return (
+                            <li className = {styles["nav-item"]} key = {index}>
+                                <Link href = {`${item.path}`}>
+                                    <a className = {`${styles["nav-link"]} ${styles[router.pathname == `${item.path}` ? "active" : ""]}`}>{item.title}</a>
+                                </Link>
+                            </li>
+                        )
+                    })}
                 </ul>
             </nav>
             <div className={styles["phones"]}>

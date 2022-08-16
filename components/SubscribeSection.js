@@ -17,7 +17,7 @@ const SubscribeSection = () => {
                         </div>
                     </div>
                     <div className = "subscribe-agree">
-                        <input type="checkbox" id="subscribe-checkbox-1" className = "stylized" /> <label htmlFor="subscribe-checkbox-1">
+                        <input type="checkbox" id="subscribe-checkbox-1" className = "stylized" defaultChecked /> <label htmlFor="subscribe-checkbox-1">
                         Хочу получать акции и спецпредложения для своих путешествий</label>
                     </div>
                 </form>

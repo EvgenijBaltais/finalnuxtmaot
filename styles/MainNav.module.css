@@ -9,6 +9,10 @@
     font-size: 16px;
 }
 
+.nav-link.active {
+    color: #FF4B2C
+}
+
 .nav-list {
     display: flex;
     list-style-type: none;
