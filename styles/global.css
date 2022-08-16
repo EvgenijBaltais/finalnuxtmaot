@@ -54,8 +54,11 @@ body {
 	margin: 20px auto;
 }
 
+/* Зеленый градиент на страницах сверху. На разных страницах в разных местах */
+
 .main-page:after,
-.contact-page:after {
+.contact-page:after,
+.hotel-bron-page:after {
 	width: 750px;
 	height: 750px;
 	content: '';
@@ -70,6 +73,8 @@ body {
 	background-position: center;
 	z-index: -1;
 }
+
+/* Зеленый градиент на страницах сверху. На разных страницах в разных местах, конец */
 
 .section-title {
 	padding-left: 40px;

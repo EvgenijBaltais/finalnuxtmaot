@@ -1,5 +1,6 @@
 
-import styles from "../../styles/hoteldetail.module.css"
+import Link from "next/link"
+import styles from "../../styles/Hoteldetail.module.css"
 
 const Hotel_card = ({props}) => {
 
@@ -45,7 +46,9 @@ const Hotel_card = ({props}) => {
                     <span className = {styles["select-results-nights"]}>1</span>&nbsp;
                     <span>ночь</span>
                 </div>
-                <button className = {styles["select-results-bron"]}>Забронировать</button>
+                <Link href = {"/hotelbooking"}>
+                    <a className = {styles["select-results-bron"]}>Забронировать</a>
+                </Link>
             </div>
             <div className={styles["select-results__item-text"]}>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati dolor accusantium maiores molestiae, 

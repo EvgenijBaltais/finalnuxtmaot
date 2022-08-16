@@ -3,14 +3,26 @@ import React from "react"
 import Hotel_search_result from "../components/hotel_details/Hotel_search_result"
 import Rooms_info from "../components/hotel_details/Rooms_info"
 import Hotel_rooms_all from "../components/hotel_details/Hotel_rooms_all"  
-import styles from "../styles/hoteldetail.module.css"
+import styles from "../styles/Hoteldetail.module.css"
 
 class Hoteldetail extends React.Component {
 
+    state = {
+        active_block: 1
+    }
+
+    clickHandler = (value) => {
+        this.state.active_block = value
+    }
+
+    changeBlock = (e) => {
+
+        e.preventDefault()
+
+        this.setState({ active_block: e.target.getAttribute('data-value') })
+    }
 
     render () {
-
-        const blockVisibility = 2
 
         return (
             <>
@@ -94,30 +106,66 @@ class Hoteldetail extends React.Component {
                         </form>
 
 
-                        {blockVisibility == 1 ? <Hotel_search_result /> : ''}
-                        {blockVisibility == 2 ? <Rooms_info /> : ''}
-                        {blockVisibility == 3 ? <Hotel_rooms_all /> : ''}
+                        {this.state.active_block == 1 ? <Hotel_search_result /> : ''}
+                        {this.state.active_block == 2 ? <Rooms_info /> : ''}
+                        {this.state.active_block == 3 ? <Hotel_rooms_all /> : ''}
 
                     </div>
 
                     <div className = {styles["select-dates-nav"]}>
                         <div className = {styles["select-dates-item"]}>
-                            <a href="" className = {`${styles["select-dates-link"]} ${styles["select-dates-link-active"]}`}>Поиск номеров</a>
+                            <a href="" 
+                                data-value = "1" 
+                                onClick={this.changeBlock} 
+                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 1 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Поиск номеров
+                            </a>
                         </div>
                         <div className = {styles["select-dates-item"]}>
-                            <a href="" className = {styles["select-dates-link"]}>Описание отеля</a>
+                            <a href="" 
+                                data-value = "2" 
+                                onClick={this.changeBlock} 
+                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 2 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Описание отеля
+                            </a>
                         </div>
                         <div className = {styles["select-dates-item"]}>
-                            <a href="" className = {styles["select-dates-link"]}>Номера</a>
+                            <a href="" 
+                                data-value = "3" 
+                                onClick={this.changeBlock} 
+                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 3 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Номера
+                            </a>
                         </div>
                         <div className = {styles["select-dates-item"]}>
-                            <a href="" className = {styles["select-dates-link"]}>Инфраструктура</a>
+                            <a href=""
+                                data-value = "4"
+                                onClick={this.changeBlock}
+                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 4 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Инфраструктура
+                            </a>
                         </div>
                         <div className = {styles["select-dates-item"]}>
-                            <a href="" className = {styles["select-dates-link"]}>Развлечения</a>
+                            <a href=""
+                                data-value = "5"
+                                onClick={this.changeBlock}
+                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 5 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Развлечения
+                            </a>
                         </div>
                         <div className = {styles["select-dates-item"]}>
-                            <a href="" className = {styles["select-dates-link"]}>Контакты</a>
+                            <a href=""
+                                data-value = "6"
+                                onClick={this.changeBlock}
+                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 6 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Контакты
+                            </a>
                         </div>
                     </div>
                 </section>

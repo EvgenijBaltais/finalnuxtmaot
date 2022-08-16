@@ -1,9 +1,9 @@
-import styles from "../../styles/hoteldetail.module.css"
+import styles from "../../styles/Hoteldetail.module.css"
 
 const Hotel_rooms_all = () => {
 
     return (
-        <>
+        <div className={styles["result-rooms__items"]}>
             <div className={styles["result-rooms__item"]}>
                 <div className={styles["result-rooms__item-pic"]}>
                     <div className={styles["result-rooms-details"]}>
@@ -22,7 +22,7 @@ const Hotel_rooms_all = () => {
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo in delectus excepturi porro natus dicta cumque alias perferendis, 
                 consectetur impedit mollitia recusandae quo nam distinctio quibusdam, ratione corporis sint minima!</p>
             </div>
-        </>
+            </div>
     )
 }
 

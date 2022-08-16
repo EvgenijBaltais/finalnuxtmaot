@@ -1,4 +1,4 @@
-import styles from "../../styles/hoteldetail.module.css"
+import styles from "../../styles/Hoteldetail.module.css"
 
 const Rooms_info = () => {
 

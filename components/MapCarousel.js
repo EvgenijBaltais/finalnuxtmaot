@@ -30,7 +30,6 @@ class MapCarousel extends React.Component {
 
     changeMap() {
 
-        console.log(122133)
     }
 
     render() {

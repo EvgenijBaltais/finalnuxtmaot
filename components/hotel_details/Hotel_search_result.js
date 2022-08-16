@@ -1,5 +1,5 @@
 import Hotel_card from "./Hotel_card"
-import styles from "../../styles/hoteldetail.module.css"
+import styles from "../../styles/Hoteldetail.module.css"
 
 const Hotel_search_result = ({ items }) => {
 
