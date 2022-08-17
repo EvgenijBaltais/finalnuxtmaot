@@ -21,7 +21,6 @@ class MapCarousel extends React.Component {
 
 	componentDidMount() {
 
-
 	}
   
 	componentWillUnmount() {
@@ -43,6 +42,7 @@ class MapCarousel extends React.Component {
                     loop = {true}
                     speed= {400}
                     onSlideChange={(e) => console.log(e.$el[0].swiper.realIndex)}
+                    className="map-swiper"
                 >
                 
                 {cities.map((slideContent, index) => (

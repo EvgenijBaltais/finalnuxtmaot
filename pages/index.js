@@ -5,7 +5,7 @@ import PopularSections from "../components/PopularSections"
 import SpecialOffers from "../components/SpecialOffers"
 import SubscribeSection from "../components/SubscribeSection"
 import AboutSection from "../components/AboutSection"
-import OurSection from "../components/OurSection"
+import Reviews from "../components/Reviews"
 
 class Index extends React.Component {
 
@@ -33,13 +33,15 @@ class Index extends React.Component {
                 <SpecialOffers items = "popularWays" />
                 <SubscribeSection />
                 <AboutSection />
-                <OurSection />
+                <Reviews />
             </>
         )
     }
 }
 
 export async function getStaticProps(context) {
+
+    //http://hotelsystem.local/api/load?id=56
 
 	const response = await fetch('https://jsonplaceholder.typicode.com/users')
 	const popularHotels = await response.json()

@@ -535,6 +535,10 @@ input[type="checkbox"].stylized:checked + label:after {
 
 /* Footer copyright, конец */
 
+
+
+/* Стили для всяких плагинов */
+
 /* Карта в контактах */
 
 .contacts-y-map {
@@ -546,18 +550,18 @@ input[type="checkbox"].stylized:checked + label:after {
 /* Карта в контактах, конец */
 
 
-/* Swiper */
+/* Swiper в разделе Контакты*/
 
-.mySwiper {
+.map-swiper {
 	overflow: hidden;
 }
 
-.swiper-wrapper {
+.map-swiper .swiper-wrapper {
 	display: flex;
 	align-items: baseline;
 }
 
-.map-slider-items {
+.map-swiper .map-slider-items {
 	display: flex;
 	justify-content: space-between;
 	list-style-type: none;
@@ -566,7 +570,7 @@ input[type="checkbox"].stylized:checked + label:after {
 	letter-spacing: 0;
 }
 
-.map-slider-item {
+.map-swiper .map-slider-item {
 	display: inline-flex;
 	align-items: center;
 	font-size: 16px;
@@ -574,7 +578,7 @@ input[type="checkbox"].stylized:checked + label:after {
 	letter-spacing: normal;	
 }
 
-.map-slider-link {
+.map-swiper .map-slider-link {
 	color: #848484;
 	font-size: 20px;
 	line-height: 28px;
@@ -583,14 +587,14 @@ input[type="checkbox"].stylized:checked + label:after {
 	user-select: none;
 }
 
-.swiper-slide-active .map-slider-link {
+.map-swiper .swiper-slide-active .map-slider-link {
 	color:#FE4B2B;
 	font-size: 32px;
 	line-height: 28px;
 	transition: font-size .2s;
 }
 
-.swiper-slide {
+.map-swiper .swiper-slide {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -605,14 +609,78 @@ input[type="checkbox"].stylized:checked + label:after {
 	cursor: pointer;
 }
 
-.swiper-slide-active {
+.map-swiper .swiper-slide-active {
 	color:#FE4B2B;
 	transform: scale(1.3);
 	transition: transform .2s;
 }
 
-/* Swiper, конец */
+/* Swiper в разделе Контакты, конец */
 
+
+/* Swiper с отзывами */
+
+.reviews-slider .swiper-button-prev {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	margin: auto;
+	display: block;
+	width: 50px;
+	height: 50px;
+	background-image: url('/images/thin-left.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 24px;
+	cursor: pointer;
+	z-index: 2;
+}
+
+.reviews-slider .swiper-button-next {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	display: block;
+	width: 50px;
+	height: 50px;
+	background-image: url('/images/thin-right.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 24px;
+	cursor: pointer;
+	z-index: 2;
+}
+
+.reviews-slider .swiper-wrapper {
+	
+}
+
+.reviews-slider .swiper-pagination {
+	display: inline-flex;
+	justify-content: center;
+	margin-top: 50px
+}
+
+.reviews-slider .reviews-pagination-bullet {
+	display: block;
+	width: 6px;
+	height: 6px;
+	background-color: #D9D9D9;
+	border-radius: 50%;
+	margin: 0 1px;
+	cursor: pointer;
+}
+
+.reviews-slider .swiper-pagination-bullet-active {
+	background: #FF4B2A;
+}
+
+/* Swiper с отзывами, конец */
+
+/* Стили для всяких плагинов, конец */
 
 /* Общие стили для разных компонентов */
 
