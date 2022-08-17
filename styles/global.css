@@ -689,3 +689,25 @@ input[type="checkbox"].stylized:checked + label:after {
 }
 
 /* Общие стили для разных компонентов, конец */
+
+
+@media screen and (max-width: 640px) {
+
+    .wrapper {
+        padding: 0 1rem;
+        overflow: hidden;
+    }
+
+    .main-h1 {
+        font-size: 2rem;
+    }
+
+    .single-block-title {
+        margin-right: 5px;
+    }
+    .left-block-bedroom{
+        background-size: 22px;
+        padding-left: 30px;
+    }
+
+}
