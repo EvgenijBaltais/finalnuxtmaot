@@ -11,19 +11,19 @@ const Hotel_card = ({props}) => {
                 <a href=""className={styles["select-item-title"]}>4 местный 23-24 коттедж</a>
                 <div className = {styles["select-item-info"]}>
                     <div className = {`${styles["select-item__block"]} ${styles["select-item__in"]}`}>
-                        <span className = {styles["select-item__text"]}>Заезд:</span>
+                        <span className = {styles["select-item__text"]}>Заезд:</span>&nbsp;
                         <span className = {`${styles["select-item__value"]} ${styles["select-item__in"]}`}>16.07.2022</span>
                     </div>
                     <div className = {`${styles["select-item__block"]} ${styles["select-item__adults"]}`}>
-                        <span className = {styles["select-item__text"]}>Взрослых:</span>
+                        <span className = {styles["select-item__text"]}>Взрослых:</span>&nbsp;
                         <span className = {`${styles["select-item__value"]} ${styles["select-item__adults"]}`}>2</span>
                     </div>
                     <div className = {`${styles["select-item__block"]} ${styles["select-item__out"]}`}>
-                        <span className = {styles["select-item__text"]}>Выезд:</span>
+                        <span className = {styles["select-item__text"]}>Выезд:</span>&nbsp;
                         <span className = {`${styles["select-item__value"]} ${styles["select-item__out"]}`}>18.07.2022</span>
                     </div>
                     <div className = {`${styles["select-item__block"]} ${styles["select-item__children"]}`}>
-                        <span className = {styles["select-item__text"]}>Детей:</span>
+                        <span className = {styles["select-item__text"]}>Детей:</span>&nbsp;
                         <span className = {`${styles["select-item__value"]} ${styles["select-item__children"]}`}>1</span>
                     </div>
                 </div>
