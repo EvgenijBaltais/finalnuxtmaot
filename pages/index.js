@@ -41,12 +41,19 @@ class Index extends React.Component {
 
 export async function getStaticProps(context) {
 
-    //http://hotelsystem.local/api/load?id=56
+    // Демо данные
 
 	const response = await fetch('https://jsonplaceholder.typicode.com/users')
 	const popularHotels = await response.json()
     const popularWays = popularHotels
   
+    // Отзывы
+
+	const getReviews = await fetch('http://hotelsystem.local/api/load?id=6713')
+	const reviews = await getReviews.json()
+
+    console.log(reviews)
+
     return {
         props: {
             popularHotels,

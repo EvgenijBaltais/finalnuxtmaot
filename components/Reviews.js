@@ -47,6 +47,11 @@ const Reviews = () => {
 						<div className={styles["reviews-slider-description"]}>
 							Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea eos exercitationem amet animi saepe,
 							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
+							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
+							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
+							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
+							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
+							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
 						</div>
 					</SwiperSlide>
 				</Swiper>
