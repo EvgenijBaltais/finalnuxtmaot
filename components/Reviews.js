@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 
 import { Pagination, Navigation } from "swiper";
 
-const Reviews = () => {
+const Reviews = (props) => {
 
     return (
 
@@ -28,35 +28,18 @@ const Reviews = () => {
 					modules={[Pagination, Navigation]}
 					className={`reviews-slider ${styles["reviews-slider"]}`}
 				>
-					<SwiperSlide className={styles["reviews-slider-item"]}>
-						<p className={styles["reviews-slider-name"]}>Александр</p>
-						<div className={styles["reviews-slider-description"]}>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea eos exercitationem amet animi saepe,
-							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles["reviews-slider-item"]}>
-						<p className={styles["reviews-slider-name"]}>Николай</p>
-						<div className={styles["reviews-slider-description"]}>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea eos exercitationem amet animi saepe,
-							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
-						</div>
-					</SwiperSlide>
-					<SwiperSlide className={styles["reviews-slider-item"]}>
-						<p className={styles["reviews-slider-name"]}>Елена Ивановна Сидорова</p>
-						<div className={styles["reviews-slider-description"]}>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea eos exercitationem amet animi saepe,
-							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
-							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
-							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
-							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
-							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
-							earum excepturi distinctio. Dignissimos ut, ab natus unde aliquam odio veritatis inventore maxime rem esse itaque.
-						</div>
-					</SwiperSlide>
+					{props.reviews.map((item, index) => {
+						return (
+							<SwiperSlide className={styles["reviews-slider-item"]} key = {index}>
+								<p className={styles["reviews-slider-name"]}>{item.author}</p>
+								<div className={styles["reviews-slider-description"]}>
+									{item.content}
+								</div>
+							</SwiperSlide>
+						)
+					})}
 				</Swiper>
 			</div>
-
 		</section>
     )
 }
