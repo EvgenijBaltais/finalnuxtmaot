@@ -8,9 +8,9 @@ const PopularSections = ({popularHotels, popularWays}) => {
 				<h2 className = "section-title icon-item icon-item-hotel">Популярные отели России</h2>
 				<div className = {styles["popular-items"]}>
 
-					{popularHotels.map((index, item) => 
-						<div className = {styles["popular-item"]} key = {item}>
-							<a href="" className = {styles["popular-item__name"]}>{index.name}</a>
+					{popularHotels.map((item, index) => 
+						<div className = {styles["popular-item"]} key = {index}>
+							<a href="" className = {styles["popular-item__name"]}>{item.name}</a>
 							<span className = {styles["popular-item__price"]}>от 4 500 &#8381;</span>
 						</div>
 					)}
