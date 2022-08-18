@@ -691,7 +691,7 @@ input[type="checkbox"].stylized:checked + label:after {
 /* Общие стили для разных компонентов, конец */
 
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 650px) {
 
     .wrapper {
         padding: 0 1rem;
@@ -710,4 +710,71 @@ input[type="checkbox"].stylized:checked + label:after {
         padding-left: 30px;
     }
 
+    .footer {
+		padding-top: 45px;
+    	flex-wrap: wrap;
+    	justify-content: space-between;
+    }
+
+    .footer:before {
+    	z-index: -1;
+    }
+
+    .footer-col-1 {
+    	width: 60%;
+    }
+    .footer-col-2 {
+    	width: 30%;
+    	padding-right: 0;
+    }
+    .footer-col-3 {
+    	width: 58%;
+    }
+    .footer-col-4 {
+    	width: 38%;
+    }
+
+    .footer-col-3, .footer-col-4 {
+    	margin-top: 2rem;
+    	padding-right: 0;
+    }
+
+    .footer-phone-info {
+    	font-size: 10px;
+    }
+
+    .payment-method-prom {
+    	height: 26px;
+    }
+    .payment-method-visa {
+		height: 23px;
+	}
+
+    .payment-method {
+    	background-size: contain;
+    	background-position: left;
+    }
+
+    .footer-social-item {
+    	font-size: 14px;
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+
+	.footer {
+		padding-top: 0;
+	}
+
+
+	.single-block-title {
+		font-size: 16px;
+		line-height: 20px;
+	}
+
+	.footer-col-1, .footer-col-2, .footer-col-3, .footer-col-4 {
+    	width: 100%;
+    	margin-top: 45px;
+    }
 }

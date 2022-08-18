@@ -1,3 +1,6 @@
+import React from 'react'
+import MediaQuery from 'react-responsive'
+
 import styles from "../styles/Payment.module.css"
 
 import MainForm from "../components/MainForm"
@@ -249,7 +252,12 @@ const Payment = () => {
                                         <div className={styles["content-subscribe-form-inside"]}>
                                             <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свою электронную почту" />
                                             <div className = {styles["get-content-suscribe-btn"]}>
-                                                <button className = {styles["get-content-suscribe__submit"]}>Подписаться</button>
+                                                <button className = {styles["get-content-suscribe__submit"]}>
+                                                    <MediaQuery minWidth={381}>Подписаться</MediaQuery>
+                                                    <MediaQuery maxWidth={380}>
+                                                        <div className={styles["icon-subscribe-inside"]}></div>
+                                                    </MediaQuery>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>

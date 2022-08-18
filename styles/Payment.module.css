@@ -164,7 +164,7 @@
 	width: 100%;
 	height: 60px;
 	position: relative;
-	background: rgb(49,140,216);
+	background: linear-gradient(90deg,#00f260,#0575E6);
 	border-radius: 10px;
 }
 
@@ -216,7 +216,12 @@
 	color: #fff;
 	font-family: 'FontInterBold';
 	cursor: pointer;
-	background: rgb(2,196,144);
+	background: linear-gradient(90deg,#00f260,#0575E6);
+}
+
+.get-content-suscribe__submit span {
+	color: inherit;
+	font-family: inherit;
 }
 
 .get-content-subscribe::-webkit-input-placeholder {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
@@ -375,3 +380,130 @@
 }
 
 /* Популярные предложения, конец */
+
+@media screen and (max-width: 650px) {
+
+	.pay-content {
+		flex-direction: column;
+	}
+
+
+	.pay-left-nav {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: baseline;
+	}
+
+	.left-nav-block {
+		width: 62%;
+	}
+
+	.pay-left, .pay-right {
+		width: auto;
+	}
+
+	.left-nav-block {
+		padding: 14px;
+	    -webkit-box-shadow: var(--main-shadow);
+	    -moz-box-shadow: var(--main-shadow);
+	    box-shadow: var(--main-shadow);
+		border-radius: 10px;
+		margin-bottom: 40px
+	}
+
+	.left-nav-item {
+		display: none;
+	}
+
+	.left-nav-item:first-child {
+		display: block;
+		padding-bottom: 0;
+	}
+
+	.left-nav-link {
+		font-size: 12px;
+		line-height: 20px;
+	}
+
+	.pay-style-elem {
+		margin: 3rem auto;
+		background-color: #fe2820;
+		height: 2px;
+		width: 98px;
+	}
+
+	.content-subscribe {
+		padding: 25px 16px;
+		margin: 50px auto;
+	}
+
+	.content-social-tg-rus, .content-social-tg-pdmsk, .content-social-vk {
+		font-size: 14px;
+	}
+
+	.get-content-suscribe-btn {
+		width: auto;
+	}
+
+	.get-content-suscribe__submit {
+		padding: 0 28px;
+	}
+
+	.subscribe-agree label {
+		font-size: 10px;
+	}
+
+	.between-populars-items {
+		width: auto;
+		margin: 50px auto;
+	}
+	.get-content-subscribe {
+		width: calc(100% - 180px);
+	}
+}
+
+@media screen and (max-width: 380px) {
+
+	.content-subscribe {
+		padding: 15px 10px;
+	}
+
+	.content-subscribe-socials {
+		padding-top: 10px;
+	}
+
+	.content-subscribe h2 {
+		margin-bottom: 10px;
+	}
+
+	.content-subscribe-socials {
+		flex-direction: column;
+	}
+
+	.content-social-tg-rus, .content-social-tg-pdmsk {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+ 
+	.content-social-vk {
+		line-height: 1rem;
+	}
+
+	.icon-subscribe-inside {
+		height: 28px;
+		width: 35px;
+		background-image: url('/icons/subscribe.svg');
+		background-repeat: no-repeat;
+		background-size: 32px;
+	}
+
+	.get-content-suscribe__submit {
+		padding: 0 10px 0 12px;
+	}
+
+	.get-content-subscribe {
+		width: calc(100% - 60px);
+	}
+}
