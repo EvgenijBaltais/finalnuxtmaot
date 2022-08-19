@@ -549,8 +549,75 @@ input[type="checkbox"].stylized:checked + label:after {
 
 /* Карта в контактах, конец */
 
-
 /* Swiper в разделе Контакты*/
+
+.map-swiper {
+	overflow: hidden;
+}
+
+.map-swiper .swiper-wrapper {
+	display: flex;
+	align-items: baseline;
+}
+
+.map-swiper .map-slider-items {
+	display: flex;
+	justify-content: space-between;
+	list-style-type: none;
+	font-size: 0;
+	line-height: 0;
+	letter-spacing: 0;
+}
+
+.map-swiper .map-slider-item {
+	display: inline-flex;
+	align-items: center;
+	font-size: 16px;
+	line-height: 24px;
+	letter-spacing: normal;	
+}
+
+.map-swiper .map-slider-link {
+	color: #848484;
+	font-size: 20px;
+	line-height: 28px;
+	text-decoration: none;
+	white-space: nowrap;
+	user-select: none;
+}
+
+.map-swiper .swiper-slide-active .map-slider-link {
+	color:#FE4B2B;
+	font-size: 32px;
+	line-height: 28px;
+	transition: font-size .2s;
+}
+
+.map-swiper .swiper-slide {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50px!important;
+	text-align: center;
+	padding: 0 20px!important;
+	color: #848484;
+	font-size: 20px;
+	line-height: 28px;
+	transform: scale(1);
+	transition: transform .2s;
+	cursor: pointer;
+}
+
+.map-swiper .swiper-slide-active {
+	color:#FE4B2B;
+	transform: scale(1.3);
+	transition: transform .2s;
+}
+
+/* Swiper в разделе Контакты, конец */
+
+
+/* Swiper в разделе hoteldetail */
 
 .hoteldetail-swiper {
 	overflow: hidden;
@@ -600,6 +667,7 @@ input[type="checkbox"].stylized:checked + label:after {
 }
 
 /* Swiper в разделе hoteldetail, конец */
+
 
 
 /* Swiper с отзывами */
