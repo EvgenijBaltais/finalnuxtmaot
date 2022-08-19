@@ -646,3 +646,18 @@
     cursor: pointer;
 	text-decoration: none;
 }
+
+@media screen and (max-width: 650px) {
+
+	.titles-top {
+		flex-direction: column;
+		justify-content: space-between;
+
+	}
+
+	.title-block, .hotel-rate-info {
+		width: 100%;
+		padding: 0;
+		margin: 0 0 20px 0;
+	}
+}
