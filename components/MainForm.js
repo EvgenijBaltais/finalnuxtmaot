@@ -1,6 +1,17 @@
+import { useState, useEffect} from 'react'
+
+import Link from 'next/link'
+
 import styles from "../styles/MainForm.module.css"
 
 const MainForm = () => {
+
+
+    const getSearchData = e => {
+
+            console.log(1111)
+
+    }
 
     return (
         <section className = {styles["main-form"]}>
@@ -14,7 +25,69 @@ const MainForm = () => {
                     <div className = {styles["direction-form-w"]}>
                         <div className = {styles["direction-form__inside"]}>
                             <div className = {`${styles["direction-form-block"]} ${styles["direction-form-way"]}`}>
-                                <input type="text" name="choose-way" className = {styles["form-way-input"]} placeholder="Выберите направление" />
+                                <input type="text"
+                                        name="choose-way"
+                                        className = {styles["form-way-input"]}
+                                        placeholder="Выберите направление"
+                                        onClick = {getSearchData}
+                                        onChange = {getSearchData}
+                                />
+                                <div className={styles["search-results-w"]}>
+                                    <div className={styles["search-results__header"]}>
+                                        Выберите из списка или начните вводить название для поиска
+                                    </div>
+                                    <div className={styles["search-results__body"]}>
+                                        <div className={styles["search-results__item"]}>
+                                            <Link href = "">
+                                                <a className={styles["search-results__link"]}>
+                                                    Подмосковье
+                                                </a>
+                                            </Link>
+                                        </div>
+                                        <div className={styles["search-results__item"]}>
+                                            <Link href = "">
+                                                <a className={styles["search-results__link"]}>
+                                                    Сочи
+                                                </a>
+                                            </Link>
+                                        </div>
+                                        <div className={styles["search-results__item"]}>
+                                            <Link href = "">
+                                                <a className={styles["search-results__link"]}>
+                                                    Крым
+                                                </a>
+                                            </Link>
+                                        </div>
+                                        <div className={styles["search-results__item"]}>
+                                            <Link href = "">
+                                                <a className={styles["search-results__link"]}>
+                                                    Абхазия
+                                                </a>
+                                            </Link>
+                                        </div>
+                                        <div className={styles["search-results__item"]}>
+                                            <Link href = "">
+                                                <a className={styles["search-results__link"]}>
+                                                    Анапа
+                                                </a>
+                                            </Link>
+                                        </div>
+                                        <div className={styles["search-results__item"]}>
+                                            <Link href = "">
+                                                <a className={styles["search-results__link"]}>
+                                                    Беларусь
+                                                </a>
+                                            </Link>
+                                        </div>
+                                        <div className={styles["search-results__item"]}>
+                                            <Link href = "">
+                                                <a className={styles["search-results__link"]}>
+                                                    Геленджик
+                                                </a>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div className = {`${styles["direction-form-block"]} ${styles["direction-form-in"]}`}>
                                 <input type="text" name="choose-in" className = {styles["form-way-input"]} placeholder="Заезд" />
