@@ -12,8 +12,6 @@ class Hotelbooking extends React.Component {
         }
     }
 
-
-
     componentDidMount(){
         document.querySelector('.wrapper').classList.add('hotel-bron-page')
     }
@@ -27,7 +25,6 @@ class Hotelbooking extends React.Component {
         return (
             <>
                 <h1 className = "secondary-h1">Бронирование</h1>
-
                 {this.state.progress_step == 0 ? <Hotel_preview /> : <Hotel_success />}
             </>
         )

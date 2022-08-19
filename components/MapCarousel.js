@@ -1,10 +1,9 @@
 import React, { useRef, useState } from "react";
 import { YMaps, Map, Placemark, FullscreenControl, TrafficControl } from "react-yandex-maps"
 
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-
-import 'swiper/css';
+import 'swiper/css'
 import styles from "../styles/MapCarousel.module.css"
 
 
