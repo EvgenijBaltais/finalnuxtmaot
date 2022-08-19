@@ -6,7 +6,6 @@ class ContactForms extends React.Component {
 
 	componentDidMount() {
 
-
 		let im = new Inputmask("+7 (999) 999-99-99")
 			im.mask(document.querySelector('input[name = "contacts-phone"]'))
 
