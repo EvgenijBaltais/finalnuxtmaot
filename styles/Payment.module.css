@@ -164,7 +164,7 @@
 	width: 100%;
 	height: 60px;
 	position: relative;
-	background: linear-gradient(90deg,#00f260,#0575E6);
+	background: linear-gradient(45deg,#00f260,#0575E6);
 	border-radius: 10px;
 }
 
@@ -216,7 +216,12 @@
 	color: #fff;
 	font-family: 'FontInterBold';
 	cursor: pointer;
-	background: linear-gradient(90deg,#00f260,#0575E6);
+	background: linear-gradient(45deg,#00f260,#0575E6);
+}
+
+.get-content-suscribe__submit:hover {
+
+	background: linear-gradient(45deg,#00CA50,#0057AF);
 }
 
 .get-content-suscribe__submit span {
@@ -497,10 +502,6 @@
 		background-image: url('/icons/subscribe.svg');
 		background-repeat: no-repeat;
 		background-size: 32px;
-	}
-
-	.get-content-suscribe__submit {
-		padding: 0 10px 0 12px;
 	}
 
 	.get-content-subscribe {

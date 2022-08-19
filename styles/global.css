@@ -691,6 +691,42 @@ input[type="checkbox"].stylized:checked + label:after {
 /* Общие стили для разных компонентов, конец */
 
 
+.anim-blick__submit-bg {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	right: 0;
+	bottom: 0;
+
+    animation-duration: 3s;
+    animation-name: blick-animation;
+  	animation-iteration-count: infinite;
+}
+
+.anim-blick__submit-obj {
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #ffffff;
+    background: linear-gradient(90deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .4));
+    width: 50px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 30px;
+    transform: skewX(-35deg);
+}
+
+@keyframes blick-animation {
+	0 {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(100%);
+	}
+}
+
 @media screen and (max-width: 650px) {
 
     .wrapper {
@@ -757,6 +793,10 @@ input[type="checkbox"].stylized:checked + label:after {
 
     .footer-social-item {
     	font-size: 14px;
+    }
+
+    .anim-blick__submit-bg {
+    	left: 0;
     }
 
 }

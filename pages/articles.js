@@ -160,6 +160,9 @@ class Articles extends React.Component {
                                                         <div className={styles["icon-subscribe-inside"]}></div>
                                                     </MediaQuery>
                                                 </button>
+                                                <div className = "anim-blick__submit-bg">
+                                                    <div className ="anim-blick__submit-obj"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
