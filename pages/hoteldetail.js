@@ -1,50 +1,53 @@
-import React from "react"
+
+import { useState, useEffect} from 'react'
+import { Router } from 'next/router'
+
+import Head from 'next/head'
 
 import Hotel_search_result from "../components/hotel_details/Hotel_search_result"
 import Rooms_info from "../components/hotel_details/Rooms_info"
 import Hotel_rooms_all from "../components/hotel_details/Hotel_rooms_all"  
 import styles from "../styles/Hoteldetail.module.css"
 
-class Hoteldetail extends React.Component {
+function Hoteldetail (props) {
 
-    state = {
-        active_block: 1
-    }
+   // const [post, setPost] = useState(serverPost)
 
-    clickHandler = (value) => {
-        this.state.active_block = value
-    }
+    const hotel = useState(props.hotel)
+    const hotelData = hotel[0].data
 
-    changeBlock = (e) => {
+    const [active_block, setActive_block] = useState(1)
+
+    const changeBlock = e => {
 
         e.preventDefault()
-
-        this.setState({ active_block: e.target.getAttribute('data-value') })
+        setActive_block(e.target.getAttribute('data-value'))
     }
-
-    render () {
 
         return (
             <>
+                <Head>
+                    <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.rus_name} - Магазин отдыха</title>
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                </Head>
                 <section className = {styles["single-hotel"]}>
-                    <div className = {styles["title-block"]}>
-                        <h1 className = "hotel-title">Курорт-парк Союз (МИД)</h1>
-                        <p className = {styles["hotel-adress"]}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestiae,
-                            veniam facere dolores fugit cumque illo? Enim laborum consequuntur, 
-                            ullam voluptas consectetur quis? Aliquid eius quis, consectetur molestiae ipsam id vero?
-                        </p>
-                    </div>
-                    <div className = {styles["hotel-rate-info"]}>
-                        <ul className = {styles["hotel-rate__list"]}>
-                            <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
-                            <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
-                            <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
-                            <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
-                            <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-grey"]}`}></li>
-                        </ul>
-                        <span className = {styles["hotel-rate__reviews"]}>18 отзывов</span>
-                        <div className={styles["add-to-favorite"]}>
-                            <a href="" className={styles["add-to-favorite__link"]}>добавить в избранное</a>
+                    <div className={styles["titles-top"]}>
+                        <div className = {styles["title-block"]}>
+                            {hotelData.rus_name ? <h1 className = "hotel-title">{hotelData.rus_name}</h1> : ''}
+                            {hotelData.adress ? <p className = {styles["hotel-adress"]}>{hotelData.adress}</p> : ''}
+                        </div>
+                        <div className = {styles["hotel-rate-info"]}>
+                            <ul className = {styles["hotel-rate__list"]}>
+                                <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
+                                <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
+                                <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
+                                <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
+                                <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-grey"]}`}></li>
+                            </ul>
+                            <span className = {styles["hotel-rate__reviews"]}>{hotelData.reviews.length} отзывов</span>
+                            <div className={styles["add-to-favorite"]}>
+                                <a className={styles["add-to-favorite__link"]}>добавить в избранное</a>
+                            </div>
                         </div>
                     </div>
 
@@ -62,10 +65,12 @@ class Hoteldetail extends React.Component {
                             </div>
                         </div>
                         <div className = {styles["hotel-map"]}>
-                            <div className = {styles["hotel-map__place"]}>
-                                <span>Координаты: </span>
-                                <a href="" className = {styles["hotel-map__coordinates"]}>55.922899, 38.129345</a>
-                            </div>
+                            {hotelData.latitude && hotelData.longitude ?
+                                <div className = {styles["hotel-map__place"]}>
+                                    <span>Координаты: </span>
+                                    <a className = {styles["hotel-map__coordinates"]}>{hotelData.latitude}, {hotelData.longitude}</a>
+                                </div> : ''
+                            }
                         </div>
                     </div>
                 </section>
@@ -88,7 +93,13 @@ class Hoteldetail extends React.Component {
                                 <div className = {styles["select-dates-form__form"]}>
                                     <div className = {styles["select-form-items"]}>
                                         <div className = {styles["select-form-input-w"]}>
-                                            <input type="text" name = "select-form-name" className = {`${styles["select-form-input"]} ${styles["select-form-name"]}`} placeholder="Курорт-парк Союз(МИД)" />
+                                            <input 
+                                                type="text"
+                                                name = "select-form-name"
+                                                className = {`${styles["select-form-input"]} ${styles["select-form-name"]}`}
+                                                placeholder={hotelData.rus_name}
+                                                defaultValue={hotelData.rus_name}
+                                            />
                                         </div>
                                         <div className = {styles["select-form-input-w"]}>
                                             <input type="text" name = "select-form-in" className = {`${styles["select-form-input"]} ${styles["select-form-in"]}`} placeholder="16 июля" />
@@ -106,9 +117,9 @@ class Hoteldetail extends React.Component {
                         </form>
 
 
-                        {this.state.active_block == 1 ? <Hotel_search_result /> : ''}
-                        {this.state.active_block == 2 ? <Rooms_info /> : ''}
-                        {this.state.active_block == 3 ? <Hotel_rooms_all /> : ''}
+                        {active_block == 1 ? <Hotel_search_result /> : ''}
+                        {active_block == 2 ? <Rooms_info /> : ''}
+                        {active_block == 3 ? <Hotel_rooms_all /> : ''}
 
                     </div>
 
@@ -116,8 +127,8 @@ class Hoteldetail extends React.Component {
                         <div className = {styles["select-dates-item"]}>
                             <a href="" 
                                 data-value = "1" 
-                                onClick={this.changeBlock} 
-                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 1 ? styles["select-dates-link-active"] : ''}`}
+                                onClick={changeBlock} 
+                                className = {`${styles["select-dates-link"]} ${active_block == 1 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Поиск номеров
                             </a>
@@ -125,8 +136,8 @@ class Hoteldetail extends React.Component {
                         <div className = {styles["select-dates-item"]}>
                             <a href="" 
                                 data-value = "2" 
-                                onClick={this.changeBlock} 
-                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 2 ? styles["select-dates-link-active"] : ''}`}
+                                onClick={changeBlock} 
+                                className = {`${styles["select-dates-link"]} ${active_block == 2 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Описание отеля
                             </a>
@@ -134,8 +145,8 @@ class Hoteldetail extends React.Component {
                         <div className = {styles["select-dates-item"]}>
                             <a href="" 
                                 data-value = "3" 
-                                onClick={this.changeBlock} 
-                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 3 ? styles["select-dates-link-active"] : ''}`}
+                                onClick={changeBlock} 
+                                className = {`${styles["select-dates-link"]} ${active_block == 3 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Номера
                             </a>
@@ -143,8 +154,8 @@ class Hoteldetail extends React.Component {
                         <div className = {styles["select-dates-item"]}>
                             <a href=""
                                 data-value = "4"
-                                onClick={this.changeBlock}
-                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 4 ? styles["select-dates-link-active"] : ''}`}
+                                onClick={changeBlock}
+                                className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Инфраструктура
                             </a>
@@ -152,8 +163,8 @@ class Hoteldetail extends React.Component {
                         <div className = {styles["select-dates-item"]}>
                             <a href=""
                                 data-value = "5"
-                                onClick={this.changeBlock}
-                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 5 ? styles["select-dates-link-active"] : ''}`}
+                                onClick={changeBlock}
+                                className = {`${styles["select-dates-link"]} ${active_block == 5 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Развлечения
                             </a>
@@ -161,16 +172,33 @@ class Hoteldetail extends React.Component {
                         <div className = {styles["select-dates-item"]}>
                             <a href=""
                                 data-value = "6"
-                                onClick={this.changeBlock}
-                                className = {`${styles["select-dates-link"]} ${this.state.active_block == 6 ? styles["select-dates-link-active"] : ''}`}
+                                onClick={changeBlock}
+                                className = {`${styles["select-dates-link"]} ${active_block == 6 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Контакты
                             </a>
                         </div>
                     </div>
-                </section>
+                        </section>
             </>
         )
+}
+
+export const getServerSideProps = async ({ query, req }) => {
+
+    if (!req) {
+        return {
+            hotel: null
+        }
+    }
+
+    const response = await fetch(`http://hotelsystem.local/api/load?id=${ query['hotel-id'] }`)
+    const hotel = await response.json()
+
+    return {
+        props: {
+            hotel
+        },
     }
 }
 

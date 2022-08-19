@@ -30,7 +30,7 @@ class Index extends React.Component {
                 <MainForm />
                 <HotOffers />
                 <PopularSections popularHotels = {this.props.popularHotels} popularWays = {this.props.popularWays} />
-                <SpecialOffers items = "popularWays" />
+                <SpecialOffers />
                 <SubscribeSection />
                 <AboutSection />
                 <Reviews reviews = {this.props.reviews} />
@@ -41,11 +41,16 @@ class Index extends React.Component {
 
 export async function getStaticProps(context) {
 
-    // Демо данные
+    // Популярные отели
 
-	const response = await fetch('https://jsonplaceholder.typicode.com/users')
-	const popularHotels = await response.json()
-    const popularWays = popularHotels
+	const getHotels = await fetch('http://hotelsystem.local/api/hotels/top')
+	const popularHotels = await getHotels.json()
+
+    // Популярные направления
+
+	const getWays = await fetch('http://hotelsystem.local/api/regions/top')
+	const popularWays = await getWays.json()
+
   
     // Отзывы
 
