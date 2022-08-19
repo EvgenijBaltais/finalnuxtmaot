@@ -199,7 +199,6 @@
 }
 
 .hotel-map {
-	height: 490px;
 	position: relative;
 	display: flex;
 	justify-content: space-around;
