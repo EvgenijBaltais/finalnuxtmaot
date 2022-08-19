@@ -801,7 +801,7 @@ input[type="checkbox"].stylized:checked + label:after {
 
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 420px) {
 
 	.footer {
 		padding-top: 0;
@@ -811,10 +811,16 @@ input[type="checkbox"].stylized:checked + label:after {
 	.single-block-title {
 		font-size: 16px;
 		line-height: 20px;
+		font-family: 'FontInter';
+		letter-spacing: 0;
 	}
 
 	.footer-col-1, .footer-col-2, .footer-col-3, .footer-col-4 {
     	width: 100%;
     	margin-top: 45px;
+    }
+
+    .subscribe-agree label {
+    	font-size: 10px;
     }
 }

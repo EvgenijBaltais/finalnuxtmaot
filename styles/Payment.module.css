@@ -195,6 +195,7 @@
 	color: rgb(103,103,103);
 	font-size: 16px;
 	line-height: 20px;
+	z-index: 2;
 }
 
 .get-content-suscribe-btn {
@@ -202,6 +203,7 @@
 	height: 100%;
 	display: flex;
 	align-items: center;
+	z-index: 1;
 }
 
 .get-content-suscribe__submit {
@@ -469,7 +471,7 @@
 	}
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 420px) {
 
 	.content-subscribe {
 		padding: 15px 10px;
@@ -497,6 +499,7 @@
 	}
 
 	.icon-subscribe-inside {
+		display: inline-block;
 		height: 28px;
 		width: 35px;
 		background-image: url('/icons/subscribe.svg');
@@ -507,4 +510,12 @@
 	.get-content-subscribe {
 		width: calc(100% - 60px);
 	}
+
+	.get-content-suscribe__submit {
+		padding: 0 10px 0 12px;
+	}
+.get-content-subscribe::-webkit-input-placeholder {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+.get-content-subscribe::-moz-placeholder          {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+.get-content-subscribe:-moz-placeholder           {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+.get-content-subscribe:-ms-input-placeholder      {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
 }
