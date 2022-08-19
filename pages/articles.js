@@ -1,9 +1,15 @@
 import React from 'react'
+import MediaQuery from 'react-responsive'
 import MainForm from "../components/MainForm"
 import styles from "../styles/Articles.module.css"
 
-class Articles extends React.Component {
+import Image from "next/image"
 
+import Article1 from '/public/images/article-1.jpg'
+import Article2 from '/public/images/article-2.jpg'
+
+
+class Articles extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -15,6 +21,8 @@ class Articles extends React.Component {
     componentWillUnmount() {
         document.querySelector('.wrapper').classList.remove('articles-page')
     }
+
+
     
     render() {
 
@@ -110,6 +118,34 @@ class Articles extends React.Component {
                         Также особенное удовольствие доставит Вам правильно приготовленный зеленый чай.
                         </p>
 
+                        <div className = {styles["article-style-elem"]}></div>
+
+                        <Image src = {Article1} className = {styles["article-icons__items"]} alt="" />
+
+                        <p className = {styles["article-page-content__text"]}>
+                        Чтобы эффект сауны на состоянии кожи был более действенным, косметологи рекомендуют перед тем как попариться, 
+                        сделать маску для лица. Тогда поры кожи лица расширятся, что усилит потоотделение. Дома отдыха Подмосковья 
+                        предлагают своим гостям самые разные виды саун, бань, парилок. Например, не так давно в парк-отеле «Тропикана» 
+                        построили Инфракрасную сауну, которая уже пользуется огромным успехом у любителей горячего пара. Такой вариант 
+                        парной издревле используются в Японии, и вот теперь европейцы оценили по достоинству его преимущества. Инфракрасное 
+                        излучение лучше всего воздействует на организм человека, проникая на 5 см в тело. В такой сауне интенсивно потеешь, 
+                        следовательно, избавляешься от избыточного веса и шлаков, а ИК-излучения убивают микробы, которые могут вызвать 
+                        различные заболевания.
+                        </p>
+
+                        <div className = {styles["article-style-elem"]}></div>
+
+                        <Image src = {Article2} className = {styles["article-icons__items"]} alt="" />
+
+                        <p className = {styles["article-page-content__text"]}>
+                        Банный комплекс подмосковного отеля «ГЕЛИОПАРК Талассо» включает финскую сауну, римскую баню и инфракрасную сауну. 
+                        В римской бане воздух прогревается до температуры не выше 45 градусов, что создает высокую влажность. Традиционно 
+                        в воду, которая потом превращается в пар, добавляются целебные травы, которые распространяя приятный запах, создают 
+                        эффект фитотерапии. Кроме того, отличие римской бани от других в том, что стены построены из специальных камней, 
+                        а не из дерева, как мы привыкли. Камни эти обладают целебными свойствами.
+                        </p>
+
+
                         <div className = {styles["content-subscribe"]}>
                             <h2 className = "single-block-title">Подпишитесь на лучшие предложения</h2>
                             <div className = {styles["content-s-w"]}>
@@ -118,7 +154,15 @@ class Articles extends React.Component {
                                         <div className={styles["content-subscribe-form-inside"]}>
                                             <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свою электронную почту" />
                                             <div className = {styles["get-content-suscribe-btn"]}>
-                                                <button className = {styles["get-content-suscribe__submit"]}>Подписаться</button>
+                                                <button className = {styles["get-content-suscribe__submit"]}>
+                                                    <MediaQuery minWidth={380}>Подписаться</MediaQuery>
+                                                    <MediaQuery maxWidth={380}>
+                                                        <div className={styles["icon-subscribe-inside"]}></div>
+                                                    </MediaQuery>
+                                                </button>
+                                                <div className = "anim-blick__submit-bg">
+                                                    <div className ="anim-blick__submit-obj"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
