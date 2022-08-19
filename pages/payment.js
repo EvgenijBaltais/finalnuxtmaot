@@ -254,7 +254,13 @@ const Payment = () => {
                                             <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свою электронную почту"/>
                                             <div className = {styles["get-content-suscribe-btn"]}>
                                                 <button className = {styles["get-content-suscribe__submit"]}>
-                                                    Подписаться
+                                                    <MediaQuery maxWidth={420}>
+                                                        {(matches) =>
+                                                            matches
+                                                              ? <span className={styles["icon-subscribe-inside"]}></span>
+                                                              : <span>Подписаться</span>
+                                                          }
+                                                    </MediaQuery>
                                                 </button>
                                                 <div className = "anim-blick__submit-bg">
                                                     <div className ="anim-blick__submit-obj"></div>

@@ -155,9 +155,12 @@ class Articles extends React.Component {
                                             <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свою электронную почту" />
                                             <div className = {styles["get-content-suscribe-btn"]}>
                                                 <button className = {styles["get-content-suscribe__submit"]}>
-                                                    <MediaQuery minWidth={380}>Подписаться</MediaQuery>
-                                                    <MediaQuery maxWidth={380}>
-                                                        <div className={styles["icon-subscribe-inside"]}></div>
+                                                    <MediaQuery maxWidth={420}>
+                                                        {(matches) =>
+                                                            matches
+                                                              ? <span className={styles["icon-subscribe-inside"]}></span>
+                                                              : <span>Подписаться</span>
+                                                          }
                                                     </MediaQuery>
                                                 </button>
                                                 <div className = "anim-blick__submit-bg">

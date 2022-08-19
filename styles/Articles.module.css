@@ -195,6 +195,7 @@
 	color: rgb(103,103,103);
 	font-size: 16px;
 	line-height: 20px;
+	z-index: 2;
 }
 
 .get-content-suscribe-btn {
@@ -203,6 +204,7 @@
 	display: flex;
 	align-items: center;
 	overflow: hidden;
+	z-index: 1;
 }
 
 .get-content-suscribe__submit {
@@ -218,6 +220,10 @@
 	font-family: 'FontInterBold';
 	cursor: pointer;
 	background: linear-gradient(45deg,#00f260,#0575E6);
+}
+
+.get-content-suscribe__submit span {
+	color: #fff;
 }
 
 .get-content-suscribe__submit:hover {
@@ -458,7 +464,7 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
 
 }
 
-@media screen and (max-width: 380px) {
+@media screen and (max-width: 420px) {
 
 	.content-subscribe {
 		padding: 15px 10px;
@@ -486,6 +492,7 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
 	}
 
 	.icon-subscribe-inside {
+		display: inline-block;
 		height: 28px;
 		width: 35px;
 		background-image: url('/icons/subscribe.svg');
@@ -500,4 +507,12 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
 	.get-content-subscribe {
 		width: calc(100% - 60px);
 	}
+    .subscribe-agree label {
+    	font-size: 10px;
+    }
+.get-content-subscribe::-webkit-input-placeholder {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+.get-content-subscribe::-moz-placeholder          {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+.get-content-subscribe:-moz-placeholder           {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+.get-content-subscribe:-ms-input-placeholder      {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+
 }
