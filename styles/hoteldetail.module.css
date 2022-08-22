@@ -634,7 +634,7 @@
 	height: 38px;
 	margin: 0 auto;
 	display: block;
-	background-color: #00EC64;
+	background: linear-gradient(45deg,#00f260,#0575E6);
 	color: #fff;
 	text-align: center;
 	border-radius: 8px;
@@ -645,6 +645,11 @@
     line-height: 38px;
     cursor: pointer;
 	text-decoration: none;
+}
+
+.select-results-bron:hover {
+
+	background: linear-gradient(45deg,#00CA50,#0057AF);
 }
 
 @media screen and (max-width: 650px) {
@@ -659,5 +664,81 @@
 		width: 100%;
 		padding: 0;
 		margin: 0 0 20px 0;
+	}
+
+	.select-dates-content {
+		flex-direction: column;
+	}
+
+	.select-dates-form-block, .select-dates-form, .hotel-slider {
+		width: 100%;
+	}
+
+	.select-dates-nav {
+
+	}
+
+	.hotel-slider__main {
+		height: 365px;
+	}
+
+	.hotel-slider__w {
+		height: 70px;
+		width: 115px;
+		background-color: #f0f0f0;
+		border-radius: 8px;
+	}
+
+	.select-results__item {
+		padding: 14px;
+	}
+
+	.select-results__item-pic {
+		width: 100%;
+		height: 400px;
+		order: 1;
+	}
+
+	.select-results-bron {
+		width: auto;
+		padding: 0 2rem;
+		margin: 0;
+		margin-top: -40px;
+		height: 60px;
+		line-height: 60px;
+	}
+	.select-results__item-price {
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+		padding: 0;
+		text-align: left;		
+		margin-top: 20px;
+		justify-content: space-between;
+		order: 4;
+	}
+
+	.select-results__item-content {
+		margin-top: 20px;
+		width: 100%;
+		padding: 0;
+		order: 2;
+	}
+
+	.select-results-from-info {
+		padding: 0;
+		width: 60%;
+	}
+
+	.select-results-from {
+		width: 60%;
+	}
+	.select-results-price-info {
+		width: 60%;
+		justify-content: left;
+	}
+
+	.select-results__item-text {
+		order: 3;
 	}
 }
