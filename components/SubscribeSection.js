@@ -3,7 +3,6 @@ import styles from "../styles/SubscribeSection.module.css"
 const SubscribeSection = () => {
 
     return (
-
         <section className = {styles["subscribe-section"]}>
             <div className = {styles["subscribe-form-w"]}>
                 <h2 className = {styles["section-subtitle"]}>Подпишитесь на лучшие предложения</h2>
