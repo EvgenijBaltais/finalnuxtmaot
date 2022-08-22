@@ -1,29 +1,5 @@
 /* Форма подбора */
 
-.form-titles {
-	display: flex;
-	padding-bottom: 18px;
-}
-
-.form-titles__item {
-	color: rgb(51, 51, 51);
-	font-family: 'FontInter';
-	font-size: 22px;
-	line-height: 22px;
-	text-decoration: none;
-	margin-right: 30px;
-}
-
-.form-titles__item:last-child {
-	margin-right: 0;
-}
-
-.form-titles__item.active {
-	font-family: 'FontInterBold';
-}
-
-/* Форма подбора направления */
-
 .direction-form-w {
 	position: relative;
 	max-width: 1240px;
@@ -118,14 +94,46 @@
 	width: 120px;
 }
 
-.direction-form-in:before {
+.direction-form-way:after {
 	position: absolute;
-	left: 0;
+	right: 0;
 	content: '';
 	width: 2px;
 	height: 100%;
 	background: var(--red-linear-gradient);
 	z-index: 2;
+}
+
+.direction-form-in-active {
+	display: block;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: -15px;
+	margin: auto;
+	left: -3px;
+	color: #fff;
+	font-size: 20px;
+	line-height: 82px;
+	width: calc(100% + 3px);
+	height: calc(100% + 30px);
+	background: var(--red-linear-gradient);
+	z-index: 2;
+}
+
+.direction-form-in-active::after {
+	content: '';
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	bottom: 5px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background-image: url('/icons/down-arrow.svg');
+	background-position: bottom center;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .direction-form-in:after {
@@ -152,18 +160,72 @@
 	z-index: 2;
 }
 
+.direction-form-out-active {
+	display: block;
+	position: absolute;
+	right: 0;
+	top: -15px;
+	margin: auto;
+	left: -3px;
+	content: 'Заезд';
+	color: #fff;
+	font-size: 20px;
+	line-height: 82px;
+	width: calc(100% + 3px);
+	height: calc(100% + 30px);
+	background: var(--red-linear-gradient);
+	z-index: 2;
+}
+
+.direction-form-out-active::after {
+	content: '';
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	bottom: 5px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background-image: url('/icons/down-arrow.svg');
+	background-position: bottom center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
 .direction-form-people {
 	width: 170px;
 }
 
-.direction-form-people:after {
+.direction-form-people-active {
+	display: block;
 	position: absolute;
 	right: 0;
-	content: '';
-	width: 2px;
-	height: 100%;
+	top: -15px;
+	margin: auto;
+	left: -3px;
+	content: 'Заезд';
+	color: #fff;
+	font-size: 20px;
+	line-height: 82px;
+	width: calc(100% + 3px);
+	height: calc(100% + 30px);
 	background: var(--red-linear-gradient);
 	z-index: 2;
+}
+
+.direction-form-people-active::after {
+	content: '';
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	bottom: 5px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background-image: url('/icons/down-arrow.svg');
+	background-position: bottom center;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .direction-form-submit {
@@ -183,65 +245,5 @@
 	border-radius: 10px;
 	cursor: pointer;
 }
-
-.search-results-w {
-	position: absolute;
-	top: 80px;
-	left: -18px;
-	right: 0;
-	border-radius: 10px;
-	overflow: hidden;
-	width: calc(100% + 18px);
-	z-index: 2;
-    -webkit-box-shadow: var(--main-shadow);
-    -moz-box-shadow: var(--main-shadow);
-    box-shadow: var(--main-shadow);
-}
-
-.search-results__header {
-	display: flex;
-	align-items: center;
-	font-size: 16px;
-	line-height: 24px;
-	color: #fff;
-	height: 40px;
-	padding: 10px;
-	background: var(--red-linear-gradient);
-}
-
-.search-results__body {
-	padding: 10px;
-	background-color: #fff;
-}
-
-.search-results__item {
-	text-align: left;
-	border-bottom: 1px solid #F2F2F2;
-	background-color: #fff;
-	cursor: pointer;
-	transition: background-color .2s;
-}
-
-.search-results__link {
-	display: block;
-	padding: 12px 0;
-	transition: padding-left .2s;
-}
-
-.search-results__item:hover .search-results__link {
-	transition: padding-left .2s;
-	padding-left: 10px;
-}
-
-.search-results__item:hover {
-	background-color: #F2F2F2;
-	transition: background-color .2s;
-}
-
-.search-results__item:last-child {
-	border-bottom: 0
-}
-
-/* Форма подбора направления, конец */
 
 /* Форма подбора, конец */
