@@ -1,3 +1,6 @@
+import React from 'react'
+import MediaQuery from 'react-responsive'
+
 import styles from "../styles/Payment.module.css"
 
 import MainForm from "../components/MainForm"
@@ -7,6 +10,7 @@ import Image from "next/image"
 import Pay1 from '/public/images/pay-1.jpg'
 import Pay2 from '/public/images/pay-2.jpg'
 import Pay3 from '/public/images/pay-3.jpg'
+import Subscribe1 from '/public/icons/subscribe.svg'
 
 const Payment = () => {
 
@@ -247,9 +251,20 @@ const Payment = () => {
                                 <form action="" name = {styles["content-subscribe-form"]}>
                                     <div className = {styles["content-subscribe-form"]}>
                                         <div className={styles["content-subscribe-form-inside"]}>
-                                            <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свою электронную почту" />
+                                            <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свою электронную почту"/>
                                             <div className = {styles["get-content-suscribe-btn"]}>
-                                                <button className = {styles["get-content-suscribe__submit"]}>Подписаться</button>
+                                                <button className = {styles["get-content-suscribe__submit"]}>
+                                                    <MediaQuery maxWidth={420}>
+                                                        {(matches) =>
+                                                            matches
+                                                              ? <span className={styles["icon-subscribe-inside"]}></span>
+                                                              : <span>Подписаться</span>
+                                                          }
+                                                    </MediaQuery>
+                                                </button>
+                                                <div className = "anim-blick__submit-bg">
+                                                    <div className ="anim-blick__submit-obj"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
