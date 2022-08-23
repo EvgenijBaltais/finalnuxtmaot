@@ -7,7 +7,7 @@ const VacancyBanner = () => {
 		<section className = {styles["vacancy-banner"]}>
 			<div className = {styles["vacancy-banner__info"]}>
 				<h2 className = {styles["vacancy-title"]}>Работа в сфере туризма!</h2>
-				<p className = {styles["vacancy-subtitle"]}>Мы ищем менеджера по продажам во внутреннем туризме.</p>
+				<p className = {styles["vacancy-subtitle"]}>Мы ищем менеджера по продажам во&nbsp;внутреннем туризме.</p>
 			</div>
 			<div className = {styles["vacancy-banner__btn"]}>
 				<p className = {styles["vacancy-banner__p"]}>Никаких холодных звонков, клиенты звонят сами!</p>

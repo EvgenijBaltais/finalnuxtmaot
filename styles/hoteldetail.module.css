@@ -727,18 +727,29 @@
 
 	.select-results-from-info {
 		padding: 0;
-		width: 60%;
+		width: calc(100% - 175px);
 	}
 
 	.select-results-from {
-		width: 60%;
+		width: calc(100% - 175px);
 	}
 	.select-results-price-info {
-		width: 60%;
+		width: calc(100% - 175px);
 		justify-content: left;
 	}
 
 	.select-results__item-text {
 		order: 3;
+	}
+}
+
+@media screen and (max-width: 420px) {
+
+	.select-dates-form__form {
+		width: calc(100% - 180px);
+	}
+	
+	.select-dates-form__btn {
+		width: 170px;
 	}
 }
