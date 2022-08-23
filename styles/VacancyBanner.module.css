@@ -47,3 +47,77 @@
 .vacancy-banner__btn {
 	width: 540px;
 }
+
+@media screen and (max-width: 1240px) {
+	
+	.vacancy-banner {
+		margin:  0 1rem;
+	}
+
+	.vacancy-banner__info {
+		width: 80%;
+	}
+
+	.vacancy-banner__btn {
+		width: auto;
+		margin-left: 1rem;
+	}
+}
+
+@media screen and (max-width: 650px) {
+
+	.vacancy-banner {
+		padding: 20px 28px;
+		margin:  0;
+		flex-direction: column;
+	}
+
+	.vacancy-banner__info {
+		width: 80%;
+	}
+
+	.vacancy-title {
+		font-size: 24px;
+		line-height: 30px;
+		padding-bottom: 15px;
+	}
+
+	.vacancy-subtitle {
+		font-size: 18px;
+		line-height: 26px;
+	}
+
+	.vacancy-banner__btn {
+		margin: 25px 0 0 0;
+		justify-content: flex-start;
+	}
+
+	.vacancy-banner__p {
+		font-size: 16px;
+		font-family: 'FontInterBold';
+	}
+	
+}
+
+@media screen and (max-width: 420px) {
+
+	.vacancy-banner  {
+		padding: 15px 12px;
+	}
+
+	.vacancy-banner__info {
+		width: 100%;
+	}
+
+	.vacancy-banner__btn {
+		margin: 15px 0 0 0;
+	}
+
+	.vacancy-title {
+		padding-bottom: 5px;
+	}
+
+	.vacancy-banner__p {
+		font-size: 12px;
+	}
+}
