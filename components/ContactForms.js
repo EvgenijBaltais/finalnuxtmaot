@@ -28,7 +28,10 @@ class ContactForms extends React.Component {
 							<textarea name="contacts-textarea" className = {styles["contacts-form__textarea"]} placeholder="Сообщение"></textarea>
 							<div className = {styles["contacts-btn-area"]}>
 								<div className = {styles["contacts-agree"]}>
+									<input type="checkbox" id="subscribe-checkbox-2" className = {styles["konfstylized"]} /> 
+									<label htmlFor="subscribe-checkbox-2">
 									Я соглашаюсь с политикой конфиденциальности
+									</label>
 								</div>
 								<button className = {styles["contacts-send-btn"]}>Отправить</button>
 							</div>
@@ -44,11 +47,15 @@ class ContactForms extends React.Component {
 									<input type="text" name = "get-contacts-subscribe" id = "get-contacts-subscribe" className = {styles["get-contacts-subscribe"]} placeholder = "Укажите свою электронную почту" />
 									<div className = {styles["get-contacts-suscribe-btn"]}>
 										<button className = {styles["get-contacts-suscribe__submit"]}>Подписаться</button>
+                                        <div className = "anim-blick__submit-bg">
+                                            <div className ="anim-blick__submit-obj"></div>
+                                        </div>
 									</div>
 								</div>
 							</div>
 							<div className = "subscribe-agree">
-								<input type="checkbox" id="subscribe-checkbox-1" className = "stylized" /> <label htmlFor="subscribe-checkbox-1">
+								<input type="checkbox" id="subscribe-checkbox-1" className = "stylized" /> 
+								<label htmlFor="subscribe-checkbox-1">
 								Хочу получать акции и спецпредложения для своих путешествий</label>
 							</div>
 						</form>
@@ -57,7 +64,7 @@ class ContactForms extends React.Component {
 					<div className={styles["contacts-s-w"]}>
 						<a className = {styles["contacts-social-tg-rus"]}>Лучшие отели России</a>
 						<a className = {styles["contacts-social-tg-pdmsk"]}>Лучшие отели Подмосковья</a>
-						<a className = {styles["contacts-social-vk"]}>Все о качественном и доступном отдыхе в Подмосковье</a>
+						<a className = {styles["contacts-social-vk"]}>Все о качественном и доступном отдыхе в&nbsp;Подмосковье</a>
 					</div>
 					<span className = {styles["contacts-copyright"]}>&#169; 2004-2022. Магазин Отдыха - продажа горящих путевок</span>
 				</div>

@@ -78,7 +78,7 @@
 	height: 50px;
 	background: rgb(255,75,43);
 	background: linear-gradient(45deg, rgba(255,75,43,1) 0%, rgba(255,75,43,1) 39%, rgba(255,65,108,1) 75%, rgba(255,65,108,1) 100%);
-	border-radius: 5px;
+	border-radius: 8px;
 	color: #fff;
 	font-family: 'FontInterBold';
 	border: 0!important;
@@ -151,6 +151,7 @@
 	color: rgb(103,103,103);
 	font-size: 16px;
 	line-height: 20px;
+	z-index: 1;
 }
 
 .get-contacts-suscribe-btn {
@@ -250,25 +251,155 @@
 	line-height: 24px;
 }
 
+.contacts-konf-checkbox {
+
+}
+/* Стилизация чекбокса */
+
+input[type="checkbox"].konfstylized:checked, 
+input[type="checkbox"].konfstylized:not(:checked)
+{
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="checkbox"].konfstylized:checked + label, 
+input[type="checkbox"].konfstylized:not(:checked) + label {
+    display: inline-block;
+    position: relative;
+    padding-left: 28px;
+    line-height: 24px;
+    font-size: 12px;
+    cursor: pointer;
+	user-select: none;
+	color: rgb(51,51,51)
+}
+
+input[type="checkbox"].konfstylized:checked + label:before, 
+input[type="checkbox"].konfstylized:not(:checked) + label:before {
+    content: "";
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgb(254,45,50);
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"].konfstylized:not(:checked) + label:after {
+    opacity: 0;
+}
+
+input[type="checkbox"].konfstylized:checked + label:after {
+    opacity: 1;
+}
+
+input[type="checkbox"].konfstylized:checked + label:after, 
+input[type="checkbox"].konfstylized:not(:checked) + label:after {
+	content: "";
+    position: absolute;
+    left: 4px;
+    top: 3px;
+    width: 9px;
+    height: 5px;
+    border-radius: 1px;
+    border-left: 3px solid #fe2925;
+    border-bottom: 3px solid #fe2925;
+    transform: rotate(-45deg);
+}
+
+/* Стилизация чекбокса, конец */
+
+
 @media screen and (max-width: 650px) {
 
 	.contacts-form {
 		flex-direction: column;
 		padding: 40px 0 35px;
+		margin: 0 1rem;
 	}
 
 	.contacts-callback {
 		width: 100%;
-		padding: 27px 16px;
+		padding: 25px 14px;
 	}
 
 	.contacts-subscribe {
 		margin-top: 22px;
 		width: 100%;
-		padding: 27px 16px;
+		padding: 25px 14px;
+	} 
+	.contacts-social-vk {
+		height: auto;
+		min-height: 32px;
+		line-height: 1.2;
+		padding-top: 5px;
+		background-position: left top;
 	}
 }
 
 @media screen and (max-width: 420px) {
+
+	input[type="checkbox"].konfstylized:checked + label, 
+	input[type="checkbox"].konfstylized:not(:checked) + label  {
+		font-size: 10px;
+		line-height: 20px;
+	}
+
+	.contacts-btn-area {
+		flex-direction: column;
+		align-items: flex-end;
+	}
+
+	.contacts-agree {
+		width: 100%;
+	}
+	.contacts-callback {
+		width: 100%;
+		padding: 25px 12px;
+	}
+
+	.contacts-subscribe {
+		margin-top: 30px;
+		padding: 15px 12px;
+	} 
+
+	.contacts-send-btn {
+		width: 185px;
+		margin-top: 18px;
+	}
+
+	.contacts-form__input {
+		width: 100%;
+		font-size: 16px;
+		line-height: 1;
+		margin-bottom: 20px;
+	}
+
+	.contacts-form__textarea {
+		font-size: 16px;
+		margin-bottom: 5px;
+		line-height: 18px;
+	}
+
+	.contacts-callback__title {
+		font-size: 16px;
+	}
+
+	.contacts-social-tg-rus, .contacts-social-tg-pdmsk, .contacts-social-vk {
+		font-size: 16px;
+	}
+	
+	.contacts-copyright {
+		font-size: 10px;
+		line-height: 1;
+	}
+
+	.contacts-s-w {
+		padding-bottom: 20px;
+	}
 
 }

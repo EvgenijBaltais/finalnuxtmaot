@@ -238,21 +238,25 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
     position: absolute;
     left: 0;
     top: 0;
-    width: 14px;
-    height: 14px;
-    border: 2px solid #057DDE;
-    background-color: #ffffff;
+    width: 18px;
+    height: 18px;
+    border: none;
+    background:
+            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 6px) calc(100% - 6px) no-repeat,
+            linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 16px) calc(100% - 12px) no-repeat,
+            linear-gradient(45deg, #00f260,#0575E6);
     border-radius: 5px;
 }
 
-input[type="checkbox"]:checked + label:after, 
-input[type="checkbox"]:not(:checked) + label:after {
+input[type="checkbox"].stylized:checked + label:after, 
+input[type="checkbox"].stylized:not(:checked) + label:after {
     content: "";
     position: absolute;
     left: 4px;
-    top: 4px;
-    width: 8px;
+    top: 3px;
+    width: 9px;
     height: 5px;
+    border:  none;
     border-radius: 1px;
     border-left: 3px solid #057DDE;
     border-bottom: 3px solid #057DDE;
@@ -269,6 +273,7 @@ input[type="checkbox"].stylized:not(:checked) + label:after {
 
 input[type="checkbox"].stylized:checked + label:after {
     opacity: 1;
+    content: "";
 }
 
 
@@ -786,6 +791,28 @@ input[type="checkbox"].stylized:checked + label:after {
         overflow: hidden;
     }
 
+    .contact-page {
+    	padding: 0 !important;
+    }
+
+    .contact-page .section-title {
+    	width: 100%;
+    }
+
+    .contacts-y-map {
+    	width: 100%;
+    	height: 320px;
+    }
+
+    .map-swiper .swiper-slide {
+    	font-size: 22px;
+    }
+
+    .map-swiper .swiper-slide-active {
+    	width: 100%;
+    	transform: scale(1.8);
+    }
+
     .main-h1 {
         font-size: 2rem;
     }
@@ -802,6 +829,10 @@ input[type="checkbox"].stylized:checked + label:after {
 		padding-top: 45px;
     	flex-wrap: wrap;
     	justify-content: space-between;
+    }
+
+    .contact-page .footer {
+    	margin: 0 1rem;
     }
 
     .footer:before {

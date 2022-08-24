@@ -96,9 +96,41 @@
 
 	.map-section {
 		flex-direction: column;
+		padding: 70px 0 40px;
 	}
 	
 	.map-info, .map-block {
 		width: 100%;
+	}
+
+	.map-info {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		margin: 0 1rem;
+	}
+
+	.contact-info-time {
+		margin-bottom: 0;
+		width: 50%;
+		order: 2;
+	}
+
+	.contact-info-phone {
+		margin-bottom: 0;
+		width: 50%;
+		order: 3;
+	}
+
+	.contact-info-adress{
+		margin: 10px 0 30px;
+		width: 100%;
+		order: 4;
+	}
+
+	.map-block { 
+	    -webkit-box-shadow: var(--main-shadow);
+	    -moz-box-shadow: var(--main-shadow);
+	    box-shadow: var(--main-shadow);
 	}
 }
