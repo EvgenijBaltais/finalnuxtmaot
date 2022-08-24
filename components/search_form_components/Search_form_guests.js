@@ -1,17 +1,27 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Search_guests from './Search_guests'
 
 export default function Search_form_guests() {
 
-    // Гости
     const [visibleGuests, setVisibleGuests] = useState(0)
-
+    const [adults, setAdults] = useState(2)
+    const [children, setChildren] = useState([])
 
     const [guests, setGuests] = useState(2)
 
     function getGuests(value) {
         let g = returnGuests(value)
         setGuests(g)
+    }
+
+    function getAdults(value) {
+        let g = value
+        setAdults(g)
+    }
+
+    function getChildren(value) {
+        let g = value
+        setChildren(g)
     }
 
     function returnGuests (num) {
@@ -36,17 +46,30 @@ export default function Search_form_guests() {
         return num + text
     }
 
+    // Обновление общего количества гостей
+
+    useEffect(() => {
+        getGuests(adults + children.length)
+    }, [children, adults])
+
     return (
-        <div className = "direction-form-block direction-form-people" onClick = { () => setVisibleGuests(visibleGuests => !visibleGuests) }>
-            {visibleGuests ? <div className = "direction-form-people-active">{returnGuests(guests)}</div> : ''}
+        <div className = "direction-form-block direction-form-people">
+
+            {visibleGuests ?
+                <div className = "direction-form-in-active" onClick = { () => setVisibleGuests(visibleGuests => !visibleGuests) }>
+                    {returnGuests(guests)}
+                </div> : ''
+            }
+
             <input
                 type="text"
                 name="choose-people"
                 className = "form-way-input form-guests-input"
                 defaultValue={returnGuests(guests)}
                 readOnly = "readonly"
+                onClick = { () => setVisibleGuests(visibleGuests => !visibleGuests) }
             />
-            { visibleGuests ? <Search_guests getGuests = {getGuests} /> : '' }
+            { visibleGuests ? <Search_guests adults = {adults} children = {children} getAdults = {getAdults} getChildren = {getChildren} getGuests = {getGuests} /> : '' }
         </div>
     )
 }
