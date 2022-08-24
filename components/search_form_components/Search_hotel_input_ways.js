@@ -25,27 +25,6 @@ function clickHandler(event) {
                             </a>
                         </Link>
                     </div>
-                    <div className="search-results__item">
-                        <Link href = "">
-                            <a className="search-results__link" onClick = {clickHandler}>
-                                Сочи
-                            </a>
-                        </Link>
-                    </div>
-                    <div className="search-results__item">
-                        <Link href = "">
-                            <a className="search-results__link" onClick = {clickHandler}>
-                                Крым
-                            </a>
-                        </Link>
-                    </div>
-                    <div className="search-results__item">
-                        <Link href = "">
-                            <a className="search-results__link" onClick = {clickHandler}>
-                                Абхазия
-                            </a>
-                        </Link>
-                    </div>
                 </div>
             </div>
             <div className = "search-results__ways">
@@ -57,34 +36,6 @@ function clickHandler(event) {
                         <Link href = "">
                             <a className="search-results__link" onClick = {clickHandler}>
                                 Солнечный
-                            </a>
-                        </Link>
-                    </div>
-                    <div className="search-results__item">
-                        <Link href = "">
-                            <a className="search-results__link" onClick = {clickHandler}>
-                                Лес арт резорт
-                            </a>
-                        </Link>
-                    </div>
-                    <div className="search-results__item">
-                        <Link href = "">
-                            <a className="search-results__link" onClick = {clickHandler}>
-                                Кантри Резорт
-                            </a>
-                        </Link>
-                    </div>
-                    <div className="search-results__item">
-                        <Link href = "">
-                            <a className="search-results__link" onClick = {clickHandler}>
-                                Ялта Интурист
-                            </a>
-                        </Link>
-                    </div>
-                    <div className="search-results__item">
-                        <Link href = "">
-                            <a className="search-results__link" onClick = {clickHandler}>
-                                Заря
                             </a>
                         </Link>
                     </div>

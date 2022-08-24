@@ -1,5 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Search_guests from './Search_guests'
+
+function useOutsideAlerter(ref, func) {
+    useEffect(() => {
+
+        function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target)) {
+                func(0)
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [ref])
+}
 
 export default function Search_form_guests() {
 
@@ -52,8 +68,16 @@ export default function Search_form_guests() {
         getGuests(adults + children.length)
     }, [children, adults])
 
+
+    // Клик по ссылке вне
+
+    const wrapperRef = useRef(null)
+    useOutsideAlerter(wrapperRef, setVisibleGuests)
+
+    // Клик по ссылке вне, конец
+
     return (
-        <div className = "direction-form-block direction-form-people">
+        <div className = "direction-form-block direction-form-people" ref={wrapperRef}>
 
             {visibleGuests ?
                 <div className = "direction-form-in-active" onClick = { () => setVisibleGuests(visibleGuests => !visibleGuests) }>

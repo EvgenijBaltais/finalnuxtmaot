@@ -916,6 +916,7 @@ input[type="checkbox"].stylized:checked + label:after {
 	text-decoration: underline;
 	font-size: 16px;
 	line-height: 16px;
+	cursor: pointer;
 }
 
 .direction-way:hover {
@@ -930,6 +931,7 @@ input[type="checkbox"].stylized:checked + label:after {
 	text-align: right;
 	flex: 1 1 auto;
 	color: rgb(146,146,146);
+	padding-right: 0
 }
 
 .direction-form-block {

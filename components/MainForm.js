@@ -1,4 +1,3 @@
-import { useState}  from 'react'
 import Link from 'next/link'
 
 import Search_hotel_input from './search_form_components/Search_hotel_input'
@@ -8,7 +7,6 @@ import Search_form_dateout from './search_form_components/Search_form_dateout'
 import Search_form_guests from './search_form_components/Search_form_guests'
 
 const MainForm = () => {
-
 
     return (
         <section className = "main-form">
@@ -29,11 +27,13 @@ const MainForm = () => {
                             </div>
                         </div>
                         <div className = "direction-ways">
-                            <a className = "direction-way" href="">Подмосковье</a>
-                            <a className = "direction-way" href="">Сочи</a>
-                            <a className = "direction-way" href="">Крым</a>
-                            <a className = "direction-way" href="">Абхазия</a>
-                            <a className = "direction-way dont-know-way" href="">Я не знаю, куда хочу поехать</a>
+                            <a className = "direction-way">Подмосковье</a>
+                            <a className = "direction-way">Сочи</a>
+                            <a className = "direction-way">Крым</a>
+                            <a className = "direction-way">Абхазия</a>
+                            <span className = "direction-way dont-know-way">
+                                <a>Я не знаю, куда хочу поехать</a>
+                            </span>
                         </div>
                     </form>
                 </div>
