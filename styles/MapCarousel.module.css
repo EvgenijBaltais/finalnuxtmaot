@@ -91,3 +91,14 @@
 	background-size: 18px;
 	background-position: left center;
 }
+
+@media screen and (max-width: 650px) {
+
+	.map-section {
+		flex-direction: column;
+	}
+	
+	.map-info, .map-block {
+		width: 100%;
+	}
+}
