@@ -18,7 +18,7 @@ const MainForm = () => {
 
                                 <Search_hotel_input />
                                 <Search_form_datein />
-                                <Search_form_dateout />
+                                {/*<Search_form_dateout />*/}
                                 <Search_form_guests />
 
                                 <div className = "direction-form-block direction-form-submit">

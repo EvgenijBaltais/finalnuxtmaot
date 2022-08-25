@@ -6,7 +6,7 @@ function useOutsideAlerter(ref, func) {
 
         function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target)) {
-                func(0)
+                func(false)
             }
         }
 
@@ -64,6 +64,16 @@ export default function Search_form_guests() {
 
     // Обновление общего количества гостей
 
+    function makeActive (val) {
+
+        console.log(val)
+
+        val ? document.querySelector('.form-guests-input-out').classList.add('direction-form-in-active') :
+        document.querySelector('.form-guests-input-out').classList.remove('direction-form-in-active')
+
+        setVisibleGuests(val)
+    }
+
     useEffect(() => {
         getGuests(adults + children.length)
     }, [children, adults])
@@ -72,26 +82,20 @@ export default function Search_form_guests() {
     // Клик по ссылке вне
 
     const wrapperRef = useRef(null)
-    useOutsideAlerter(wrapperRef, setVisibleGuests)
+    useOutsideAlerter(wrapperRef, makeActive)
 
     // Клик по ссылке вне, конец
 
     return (
         <div className = "direction-form-block direction-form-people" ref={wrapperRef}>
 
-            {visibleGuests ?
-                <div className = "direction-form-in-active" onClick = { () => setVisibleGuests(visibleGuests => !visibleGuests) }>
-                    {returnGuests(guests)}
-                </div> : ''
-            }
-
             <input
                 type="text"
                 name="choose-people"
-                className = "form-way-input form-guests-input"
+                className = "form-way-input form-guests-input form-guests-input-out"
                 defaultValue={returnGuests(guests)}
                 readOnly = "readonly"
-                onClick = { () => setVisibleGuests(visibleGuests => !visibleGuests) }
+                onClick={ () => makeActive(true) }
             />
             { visibleGuests ? <Search_guests adults = {adults} children = {children} getAdults = {getAdults} getChildren = {getChildren} getGuests = {getGuests} /> : '' }
         </div>

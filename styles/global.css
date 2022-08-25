@@ -999,7 +999,6 @@ input[type="checkbox"].stylized:checked + label:after {
 	position: absolute;
 	left: 0;
 	right: 0;
-	top: -15px;
 	margin: auto;
 	left: -3px;
 	color: #fff;
@@ -1012,12 +1011,17 @@ input[type="checkbox"].stylized:checked + label:after {
 	cursor: pointer;
 }
 
-.direction-form-in-active::after {
+.direction-form-in-active::-webkit-input-placeholder {color: #fff;}
+.direction-form-in-active::-moz-placeholder          {color: #fff;}
+.direction-form-in-active:-moz-placeholder           {color: #fff;}
+.direction-form-in-active:-ms-input-placeholder      {color: #fff;}
+
+.direction-form-in::before {
 	content: '';
 	position: absolute;
 	width: 14px;
 	height: 14px;
-	bottom: 5px;
+	bottom: -10px;
 	left: 0;
 	right: 0;
 	margin: auto;
@@ -1026,6 +1030,7 @@ input[type="checkbox"].stylized:checked + label:after {
 	background-size: cover;
 	background-repeat: no-repeat;
 	cursor: pointer;
+	z-index: 5;
 }
 
 .direction-form-in:after {
@@ -1070,12 +1075,12 @@ input[type="checkbox"].stylized:checked + label:after {
 	cursor: pointer;
 }
 
-.direction-form-out-active::after {
+.direction-form-out::before {
 	content: '';
 	position: absolute;
 	width: 14px;
 	height: 14px;
-	bottom: 5px;
+	bottom: -10px;
 	left: 0;
 	right: 0;
 	margin: auto;
@@ -1083,6 +1088,7 @@ input[type="checkbox"].stylized:checked + label:after {
 	background-position: bottom center;
 	background-size: cover;
 	background-repeat: no-repeat;
+	z-index: 5;
 }
 
 .direction-form-people {
@@ -1483,5 +1489,185 @@ input[type="checkbox"].stylized:checked + label:after {
     border-radius: 3px;
     border: 3px solid #fff;
 }
+
+/* Календарь, стилизация */
+
+.react-datepicker-wrapper {
+	height: 100%;
+}
+
+.react-datepicker__input-container {
+	width: 100%;
+	height: 100%;
+}
+
+.direction-form-in .form-way-input {
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.direction-form-out .form-way-input {
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.react-datepicker-popper {
+	z-index: 3!important;
+	padding-top: 30px!important;
+}
+
+.react-datepicker {
+	position: relative;
+	width: 415px;
+	height: 470px;
+	border-radius: 10px;
+    -webkit-box-shadow: var(--main-shadow);
+    -moz-box-shadow: var(--main-shadow);
+    box-shadow: var(--main-shadow);
+	overflow: hidden;
+	background: #fff
+}
+
+.react-datepicker__triangle {
+	position: relative;
+	width: 100%;
+	height: 42px;
+	background: var(--red-linear-gradient);
+}
+
+.react-datepicker__triangle:before {
+	position: absolute;
+	left: 15px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	content: 'Месяц';
+	display: inline-flex;
+	align-items: center;
+	color: #fff;
+	font-family: "FontInterSemiBold";
+}
+
+.react-datepicker__day-names {
+	position: absolute;
+	display: flex;
+}
+
+.react-datepicker__day-names {
+	width: 270px;
+	position: absolute;
+	top: 10px;
+	left: 120px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.react-datepicker__month-container .react-datepicker__day-names {
+	display: none;
+}
+
+.react-datepicker__navigation + .react-datepicker__month-container .react-datepicker__day-names {
+	display: flex;
+}
+
+.react-datepicker__day-name {
+	color: #fff;
+	font-family: 'FontInterLight';
+	font-size: 15px;
+}
+
+.react-datepicker__day-name:nth-child(6n) {
+	font-family: "FontInterSemiBold";
+}
+
+.react-datepicker__day-name:nth-child(7n) {
+	font-family: "FontInterSemiBold";
+}
+
+.react-datepicker__month-container {
+	width: 305px;
+	margin-left: auto;
+	margin-top: 30px;
+	padding-right: 10px;
+}
+
+.react-datepicker__week {
+	display: flex;
+	justify-content: space-between;
+}
+
+.react-datepicker__day {
+	width: 30px;
+	height: 30px;
+    display: flex;
+    align-items: center;
+	justify-content: center;
+	color: #000;
+	font-family: "FontInter";
+	cursor: pointer;
+	margin: 5px 0;
+	border-radius: 50%;
+}
+
+.react-datepicker__day--disabled {
+	opacity: .2;
+}
+
+.react-datepicker__day--weekend {
+	color: #FE0000;
+	font-family: "FontInterBold";
+}
+
+.react-datepicker__day--today {
+	background: #ccc;
+	color: #fff
+}
+
+.react-datepicker__day--selected:not(.react-datepicker__day--outside-month) {
+	background: var(--red-linear-gradient);
+	color: #fff
+}
+
+.react-datepicker__current-month {
+	text-align: left;
+	font-family: "FontInterSemiBold";
+}
+
+.datepicker-month-list {
+	position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    left: 0;
+    top: 42px;
+    height: calc(100% - 42px);
+    border-right: 1px solid #E0E0E0;
+	padding: 10px 0;
+}
+
+.datepicker-month-list__item {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	height: 32px;
+	padding: 10px;
+	color: #000;
+	cursor: pointer;
+}
+
+.datepicker-month-list__item:first-child {
+	background: var(--red-linear-gradient);
+	color: #fff;
+	font-family: "FontInterSemiBold";
+}
+
+.datepicker-month-list__item:hover {
+	background: var(--red-linear-gradient);
+	color: #fff;
+	font-family: "FontInterSemiBold";
+}
+
+/* Календарь, стилизация, конец */
 
 /* Форма подбора, конец */

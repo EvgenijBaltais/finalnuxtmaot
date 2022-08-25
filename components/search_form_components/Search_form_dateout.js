@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
 
-
 function useOutsideAlerter(ref, func) {
     useEffect(() => {
 
@@ -33,10 +32,9 @@ export default function Search_form_dateout() {
 
     return (
         <div className = "direction-form-block direction-form-out" ref={wrapperRef}>
-            {visibleDateOut ? <div className = "direction-form-out-active">{visibleDateOutValue}</div> : ''}
             <input type="text"
                     name="choose-out"
-                    className = "form-way-input"
+                    className = {visibleDateOut ? "form-way-input direction-form-in-active" : "form-way-input"}
                     placeholder = {visibleDateOutValue}
                     onClick = { () => setVisibleDateOut({ data: 1}) }
                     readOnly = "readonly"
