@@ -1,0 +1,39 @@
+.direction-form-block {
+	position: relative;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: space-around;
+	user-select: none;
+}
+
+.direction-form-way {
+	position: relative;
+	flex: 1 1 auto;
+	justify-content: flex-start;
+}
+
+.form-way-input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	display: block;
+	outline: 0!important;
+	border: 0!important;
+	font-size: 20px;
+	line-height: 20px;
+	text-align: center;
+}
+
+.direction-form-way .form-way-input {
+	text-align: left;
+	text-indent: 10px;
+}
+
+.form-way-input::-webkit-input-placeholder {color: rgb(103,103,103);}
+.form-way-input::-moz-placeholder          {color: rgb(103,103,103);}
+.form-way-input:-moz-placeholder           {color: rgb(103,103,103);}
+.form-way-input:-ms-input-placeholder      {color: rgb(103,103,103);}

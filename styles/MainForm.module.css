@@ -57,6 +57,7 @@
 	align-items: center;
 	text-align: center;
 	justify-content: space-around;
+	user-select: none;
 }
 
 .direction-form-way {
@@ -89,6 +90,10 @@
 .form-way-input::-moz-placeholder          {color: rgb(103,103,103);}
 .form-way-input:-moz-placeholder           {color: rgb(103,103,103);}
 .form-way-input:-ms-input-placeholder      {color: rgb(103,103,103);}
+
+.form-guests-input {
+	cursor: pointer;
+}
 
 .direction-form-in {
 	width: 120px;
@@ -194,6 +199,7 @@
 
 .direction-form-people {
 	width: 170px;
+	cursor: pointer;
 }
 
 .direction-form-people-active {
@@ -211,6 +217,8 @@
 	height: calc(100% + 30px);
 	background: var(--red-linear-gradient);
 	z-index: 2;
+	cursor: pointer;
+	user-select: none;
 }
 
 .direction-form-people-active::after {
@@ -226,6 +234,8 @@
 	background-position: bottom center;
 	background-size: cover;
 	background-repeat: no-repeat;
+	cursor: pointer;
+	user-select: none;
 }
 
 .direction-form-submit {
