@@ -45,7 +45,7 @@
     font-size: 12px;
 }
 
-/*@media only screen and (max-width: 1280px) {*/
+/**/@media only screen and (max-width: 1280px) {
 
     .close-nav-w {
         position: relative;
@@ -199,5 +199,5 @@
         background-image: url('/icons/vk.svg');
         line-height: 20px;
     }
-
+}
 /*}*/

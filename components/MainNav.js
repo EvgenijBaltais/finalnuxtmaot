@@ -48,6 +48,11 @@ const MainNav = () => {
                     <p className = {styles["top-phone-info"]}>Корпоративный отдел</p>
                 </div>
             </div>
+
+            <div className={styles["mob-burger"]}>
+                <span></span>
+                <span></span>
+            </div>
         </header>
     )
 }

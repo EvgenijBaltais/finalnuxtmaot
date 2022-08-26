@@ -213,15 +213,15 @@ input[type="checkbox"].stylized:checked + label:after {
 	padding: 15px 0 0 0
 }
 
-input[type="checkbox"].stylized:checked, 
-input[type="checkbox"].stylized:not(:checked)
+input[type="checkbox"].substylized:checked, 
+input[type="checkbox"].substylized:not(:checked)
 {
     position: absolute;
     left: -9999px;
 }
 
-input[type="checkbox"].stylized:checked + label, 
-input[type="checkbox"].stylized:not(:checked) + label {
+input[type="checkbox"].substylized:checked + label, 
+input[type="checkbox"].substylized:not(:checked) + label {
     display: inline-block;
     position: relative;
     padding-left: 25px;
@@ -232,8 +232,8 @@ input[type="checkbox"].stylized:not(:checked) + label {
 	color: rgb(51,51,51)
 }
 
-input[type="checkbox"].stylized:checked + label:before, 
-input[type="checkbox"].stylized:not(:checked) + label:before {
+input[type="checkbox"].substylized:checked + label:before, 
+input[type="checkbox"].substylized:not(:checked) + label:before {
     content: "";
     position: absolute;
     left: 0;
@@ -248,8 +248,8 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
     border-radius: 5px;
 }
 
-input[type="checkbox"].stylized:checked + label:after, 
-input[type="checkbox"].stylized:not(:checked) + label:after {
+input[type="checkbox"].substylized:checked + label:after, 
+input[type="checkbox"].substylized:not(:checked) + label:after {
     content: "";
     position: absolute;
     left: 4px;
@@ -267,11 +267,11 @@ input[type="checkbox"].stylized:not(:checked) + label:after {
     transform: rotate(-45deg);
 }
 
-input[type="checkbox"].stylized:not(:checked) + label:after {
+input[type="checkbox"].substylized:not(:checked) + label:after {
     opacity: 0;
 }
 
-input[type="checkbox"].stylized:checked + label:after {
+input[type="checkbox"].substylized:checked + label:after {
     opacity: 1;
     content: "";
 }
@@ -782,6 +782,11 @@ input[type="checkbox"].stylized:checked + label:after {
 	100% {
 		transform: translateX(100%);
 	}
+}
+
+.second-anim {
+	animation-duration: 4s;
+	animation-timing-function: ease;
 }
 
 @media screen and (max-width: 650px) {

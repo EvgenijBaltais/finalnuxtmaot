@@ -62,6 +62,7 @@
 .contacts-form__textarea:-ms-input-placeholder      {color: rgb(122,122,122); font-size: 18px;line-height: 18px;}
 
 .contacts-btn-area {
+	position: relative;
 	width: 100%;
 	display: flex;
 	align-items: center;
@@ -70,6 +71,7 @@
 
 .contacts-agree {
 	width: calc(100% - 170px);
+	z-index: 2;
 }
 
 .contacts-send-btn {
@@ -86,6 +88,10 @@
 	font-size: 18px;
 	line-height: 100%;
 	cursor: pointer;
+}
+
+.contacts-btn-area .anim-blick__submit-bg {
+	animation-duration: 1.5s !important;
 }
 
 .contacts-subscribe {

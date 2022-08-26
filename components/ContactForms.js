@@ -34,6 +34,9 @@ class ContactForms extends React.Component {
 									</label>
 								</div>
 								<button className = {styles["contacts-send-btn"]}>Отправить</button>
+								<div className = "anim-blick__submit-bg second-anim">
+                                    <div className ="anim-blick__submit-obj"></div>
+                                </div>
 							</div>
 						</div>
 					</form>
@@ -54,7 +57,7 @@ class ContactForms extends React.Component {
 								</div>
 							</div>
 							<div className = "subscribe-agree">
-								<input type="checkbox" id="subscribe-checkbox-1" className = "stylized" /> 
+								<input type="checkbox" id="subscribe-checkbox-1" className = "substylized" /> 
 								<label htmlFor="subscribe-checkbox-1">
 								Хочу получать акции и спецпредложения для своих путешествий</label>
 							</div>

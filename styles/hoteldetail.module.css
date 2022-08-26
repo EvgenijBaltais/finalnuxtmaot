@@ -26,7 +26,7 @@
 }
 
 .title-block {
-	width: calc(100% - 200px);
+	width: calc(100% - 400px);
 	padding-right: 20px;
 }
 
@@ -650,6 +650,11 @@
 .select-results-bron:hover {
 
 	background: linear-gradient(45deg,#00CA50,#0057AF);
+}
+
+@media screen and (max-width: 1280px) {
+
+
 }
 
 @media screen and (max-width: 650px) {
