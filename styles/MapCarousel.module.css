@@ -133,4 +133,8 @@
 	    -moz-box-shadow: var(--main-shadow);
 	    box-shadow: var(--main-shadow);
 	}
+
+	.map-slider-nav {
+		display: none;
+	}
 }

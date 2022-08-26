@@ -1,6 +1,4 @@
 import React, { useRef, useState } from "react";
-import MediaQuery from "react-responsive"
-
 import { YMaps, Map, Placemark, FullscreenControl, TrafficControl } from "react-yandex-maps"
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -54,13 +52,11 @@ class MapCarousel extends React.Component {
 
             </Swiper>
 
-            <MediaQuery minWidth={650}>
                 <div className = {styles["map-slider-nav"]}>
                     <div className = {styles["our-offices-left"]}></div>
                     <div className = {styles["our-offices-info"]}>Наши офисы расположены по всей России</div>
                     <div className = {styles["our-offices-right"]}></div>
                 </div>
-            </MediaQuery>
 
             <div className = {styles["map-section"]}>
                 <div className = {styles["map-info"]}>

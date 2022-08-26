@@ -792,9 +792,14 @@ input[type="checkbox"].substylized:checked + label:after {
 @media screen and (max-width: 650px) {
 
     .wrapper {
+    	margin: 0 auto;
         padding: 0 1rem;
         overflow: hidden;
     }
+
+    .header {
+        margin: 10px 15px;
+    } 
 
     .contact-page {
     	padding: 0 !important;
@@ -836,7 +841,7 @@ input[type="checkbox"].substylized:checked + label:after {
     	justify-content: space-between;
     }
 
-    .contact-page .footer {
+    .contact-page .footer, .contact-page .header {
     	margin: 0 1rem;
     }
 
@@ -1707,3 +1712,103 @@ input[type="checkbox"].substylized:checked + label:after {
 /* Календарь, стилизация, конец */
 
 /* Форма подбора, конец */
+
+
+    .mob-burger {
+    	display: none !important;
+    	position: relative;
+    	right: 0;
+		width: 0;
+		height: 30px;
+		text-align: center;
+		flex-direction: column;
+		font-size: 10px;
+		line-height: 1;
+		z-index: 2;
+    }
+
+    .mob-burger span {
+        height: 4px;
+        border-radius: 3px;
+        width: 100%;
+        margin-bottom: 6px;
+        box-sizing: border-box;
+        background: linear-gradient(45deg, rgba(255,75,43,1) 0%, rgba(255,75,43,1) 39%, rgba(255,65,108,1) 75%, rgba(255,65,108,1) 100%);
+    } 
+    .mob-burger span:nth-child(1), .mob-burger span:nth-child(2) {
+
+        transition: 0.4s;
+    }
+
+@media screen and (max-width: 650px) {
+
+.mob-burger {
+    	display: flex !important;
+    	width: 40px;
+    }
+    .main-nav {
+        display: none;
+    }
+
+    .top-phone-corp {
+        display: none;
+    }
+
+    .main-logo {
+        height: 30px;
+    }
+
+    .main-logo-img {
+        height: 30px !important;
+        width: 100%;
+    }
+
+    .mob-menu-active {
+    	position: absolute;
+    	top: 0;
+    	right: 10px;
+    	width: 90%;
+    	border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        padding: 10px 8px 10px 28px;
+        z-index: 5;
+        background-color: #fff;
+        box-shadow: var(--main-shadow);;
+    }
+/*
+    .mob-menu-active > .mob-bg {
+        display: block;
+    }
+
+    .mob-bg {
+        display: none;
+    }*/
+
+    .mob-menu-active > .nav-list-mob {
+        flex-direction: column;
+    }
+
+    .mob-menu-active > .mob-burger span:nth-child(1) {
+    	position: absolute;
+    	top: 10px;
+    	transform: rotate(35deg);
+    	transition: 0.4s;
+    }
+
+    .mob-menu-active > .mob-burger span:nth-child(2) {
+    	position: absolute;
+    	top: 10px;
+    	transform: rotate(-35deg);
+    	transition: 0.4s;
+    }
+
+    .mob-menu-active >  .mob-burger {
+    	position: absolute;
+    	right: 10px;
+		width: 40px;
+		height: 36px;
+    	justify-content: flex-end;
+	}
+
+}
