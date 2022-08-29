@@ -1490,6 +1490,7 @@ input[type="checkbox"].stylized:checked + label:after {
     border: 3px solid #fff;
 }
 
+
 /* Календарь, стилизация */
 /*
 .react-datepicker-wrapper {
@@ -1692,7 +1693,9 @@ input[type="checkbox"].stylized:checked + label:after {
   }*/
 
   .datepicker-w {
-	position: absolute;
+    position: absolute;
+    top: 80px;
+    left: 0;
 	width: 415px;
 	height: 470px;
 	border-radius: 10px;
@@ -1732,15 +1735,20 @@ input[type="checkbox"].stylized:checked + label:after {
 	color: #fff;
 }
 
+.form-way-input-period {
+	font-size: 16px;
+	line-height: 16px;
+}
+
 .days-list {
 	width: calc(100% - 110px);
 	list-style-type: none;
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
 }
 
 .days-list__item {
+	width: 41px;
 	color: #fff;
 	font-size: 16px;
 	line-height: 16px;
@@ -1760,7 +1768,6 @@ input[type="checkbox"].stylized:checked + label:after {
 	left: 110px;
 	margin: auto;
 	overflow: auto;
-	padding: 10px;
 }
 
 .month-aside {
@@ -1774,45 +1781,106 @@ input[type="checkbox"].stylized:checked + label:after {
 	flex-direction: column;
 	justify-content: space-around;
 	border-right: 1px solid#E0E0E0;
-	padding: 10px;
+	padding: 10px 0;
 }
 
-.month-aside__item {
+.month-aside__link {
 	width: 100%;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.month-aside__link-active {
+	background-color: red;
+	color: #fff
+}
+
+.month-aside__link:hover {
+	background-color: red;
+	color: #fff
+}
+
+.month-calendar {
+	padding-top: 20px;
 }
 
 .month-name {
+    display: block;
+    text-align: left;
 	font-family: 'FontInterSemiBold';
+	padding-left: 15px
 }
 
-.days{
-    margin: 0;
-    padding: 1rem 0;
-    background-color: #fff;
+.days {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
     align-content: flex-start;
-    height: 14rem;
+	margin: 10px 0
 }
 
-.days li{
-    padding: 0.5rem;
-    list-style: none;
-    display: inline-block;
-    flex: 0 0 calc(100% / 7);
-    text-align: center;
-    color: #999;
-    font-size: 0.9rem;
-    line-height: 1rem;
+.date-li {
+	display: flex;
+	justify-content: space-around;
+	list-style-type: none;
+	width: 40px;
+	height: 35px;
+	margin-bottom:10px
 }
 
-.days li.date-now{
-    color: #000;
+.date-link {
+	display: flex;
+	justify-content: space-around;
+	list-style-type: none;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	line-height: 35px;
+	text-align: center;
+	margin-bottom:10px;
+	margin-right: 3px;
+	margin-left: 3px
+}
+
+.date-link {
+	cursor: pointer;
+}
+
+.date-link:hover {
+	background-color: #ccc;
+}
+
+.date-disable {
+	color: #ccc;
+	cursor: default;
+}
+
+.date-disable:hover {
+	background-color: transparent;
+}
+
+.date-now {
+    color: red;
     font-weight: 700;
 }
 
+.datepicker-body::-webkit-scrollbar {
+	width: 12px;
+}
+  
+.datepicker-body::-webkit-scrollbar-track {
+	background: #fff;
+}
+  
+.datepicker-body::-webkit-scrollbar-thumb {
+	background: var(--red-linear-gradient);
+	border-radius: 20px;
+	border: 3px solid #fff;
+}
 
 /* Календарь, стилизация, конец */
 

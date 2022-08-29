@@ -39,24 +39,24 @@ export default function Search_hotel_input () {
 
     let visible = ''
 
-/*
+
     useEffect(() => {
 
 
         function showSearch () {
             visible = visibleSearch
             visibleSearch == 0 ? setVisibleSearch(1) : ''
-            /*
+            
                 if (isLoading) {
                     return <p>Loading....</p>
                 }
                 if (!toDos) {
                     return <p>No List to show</p>
                 }
-            */
+            
     
 
-/*
+
         setIsLoading(true)
         fetch(`http://hotelsystem.local/api/search-object?str=моск`)
             .then(response => response.json())
@@ -68,7 +68,7 @@ export default function Search_hotel_input () {
 
         }
 
-    }, [])*/
+    }, [])
 
     // Клик по ссылке вне
 
@@ -85,7 +85,6 @@ export default function Search_hotel_input () {
                 className = "form-way-input"
                 placeholder="Выберите направление"
                 defaultValue={searchValue}
-                onChange={console.log(1)}
                 key={searchValue}
                 onClick={() => setVisibleSearch({data: 1})}
             />
