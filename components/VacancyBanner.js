@@ -10,7 +10,7 @@ const VacancyBanner = () => {
 				<p className = {styles["vacancy-subtitle"]}>Мы ищем менеджера по продажам во&nbsp;внутреннем туризме.</p>
 			</div>
 			<div className = {styles["vacancy-banner__btn"]}>
-				<p className = {styles["vacancy-banner__p"]}>Никаких холодных звонков, клиенты звонят сами!</p>
+				<p className = {styles["vacancy-banner__p"]}>Никаких холодных звонков, клиенты&nbsp;звонят&nbsp;сами!</p>
 			</div>
 		</section>
     )

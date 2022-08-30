@@ -21,7 +21,7 @@ const Footer = () => {
 				</div>
 				<div className = "footer-address">
 					<h3 className = "footer-title-small">Адрес</h3>
-					<p className="footer-title-p">г. Москва, ул. Бауманская д.6с2. Бизнес-центр Виктория Плаза, 8 этаж, 804 офис</p>
+					<p className="footer-title-p">г.&nbsp;Москва, ул.&nbsp;Бауманская д.6с2. Бизнес-центр Виктория Плаза, 8&nbsp;этаж, 804&nbsp;офис</p>
 				</div>
 			</div>
 			<div className = "footer-col footer-col-2">
@@ -39,7 +39,7 @@ const Footer = () => {
 				<div className = "footer-social-items">
 					<a href="" className = "footer-social-item">Лучшие отели России</a>
 					<a href="" className = "footer-social-item">Лучшие отели Подмосковья</a>
-					<a href="" className = "footer-social-item">Все о качественном и доступном отдыхе в Подмосковье</a>
+					<a href="" className = "footer-social-item">Все о качественном и доступном отдыхе в&nbsp;Подмосковье</a>
 				</div>
 			</div>
 			<div className = "footer-col footer-col-4">
