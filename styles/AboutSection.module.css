@@ -44,3 +44,32 @@
 		color: rgb(5, 117, 229);
     font-size: 16px;
 }
+
+@media screen and (max-width: 650px) {
+
+	.about-section {
+		width: 100%;
+		flex-direction: column;
+	}
+
+	.about-company {
+		width: 100%;
+	}
+
+	.working-for-you {
+		width: 100%;
+		margin-top: 100px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+
+	.working-for-you {
+		margin-top: 80px;
+	}
+
+	.about-company__item {
+		margin-bottom: 30px;
+	}
+
+}
