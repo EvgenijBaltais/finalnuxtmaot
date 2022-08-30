@@ -11,3 +11,17 @@
 .hoteldetail-y-map {
 	
 }
+
+@media screen and (max-width: 650px) {
+
+	.hot-deals-section {
+		justify-content: space-between;
+	}
+}
+
+@media screen and (max-width: 480px) {
+
+	.hot-deals-section {
+		flex-direction: column;
+	}
+}

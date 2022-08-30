@@ -12,11 +12,14 @@ const SubscribeSection = () => {
                             <input type="text" name = "get-subscribe" id = "get-subscribe" className = {styles["get-subscribe"]} placeholder = "Укажите свою электронную почту" />
                             <div className = {styles["get-suscribe-btn"]}>
                                 <button className = {styles["get-suscribe__submit"]}>Подписаться</button>
+                                <div className = "anim-blick__submit-bg">
+                                    <div className ="anim-blick__submit-obj"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div className = "subscribe-agree">
-                        <input type="checkbox" id="subscribe-checkbox-1" className = "stylized" defaultChecked /> <label htmlFor="subscribe-checkbox-1">
+                        <input type="checkbox" id="subscribe-checkbox-1" className = "substylized" defaultChecked /> <label htmlFor="subscribe-checkbox-1">
                         Хочу получать акции и спецпредложения для своих путешествий</label>
                     </div>
                 </form>
@@ -26,7 +29,7 @@ const SubscribeSection = () => {
                 <div className = {styles["subscribe-social-block"]}>
                     <a className = {styles["social-tg-rus"]}>Лучшие отели России</a>
                     <a className = {styles["social-tg-pdmsk"]}>Лучшие отели Подмосковья</a>
-                    <a className = {styles["social-vk"]}>Все о качественном и доступном отдыхе в Подмосковье</a>
+                    <a className = {styles["social-vk"]}>Все о качественном и доступном&nbsp;отдыхе&nbsp;в&nbsp;Подмосковье</a>
                 </div>
             </div>
         </section>
