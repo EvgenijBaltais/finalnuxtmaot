@@ -31,7 +31,7 @@ class Index extends React.Component {
                     <title>Отдых по России и Подмосковью</title>
                 </Head>
                 <h1 className = "main-h1">Путешествуйте по&nbsp;всей&nbsp;России!</h1>
-
+                <SaleInfo />
                 <MainForm popularHotels = {this.props.popularHotels.data} popularWays = {this.props.popularWays.data} />
                 <HotOffers />
                 <PopularSections popularHotels = {this.props.popularHotels} popularWays = {this.props.popularWays} />

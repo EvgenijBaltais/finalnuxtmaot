@@ -3,7 +3,7 @@ import { useState }  from 'react'
 const SaleInfo = () => {
     const [ Active ] = useState(0)
 
-    if (Active == 0) {
+    if (Active == 1) {
         return <p></p>
     }
 
