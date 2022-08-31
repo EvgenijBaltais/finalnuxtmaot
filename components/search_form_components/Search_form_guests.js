@@ -66,8 +66,6 @@ export default function Search_form_guests() {
 
     function makeActive (val) {
 
-        console.log(val)
-
         val ? document.querySelector('.form-guests-input-out').classList.add('direction-form-in-active') :
         document.querySelector('.form-guests-input-out').classList.remove('direction-form-in-active')
 
