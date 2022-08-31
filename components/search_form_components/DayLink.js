@@ -6,6 +6,8 @@ export default function DayLink (props) {
 
     function sendDate(event) {
 
+        if (props.prefix) return false
+
         formatedDate = addNullToDate(parseInt(event.target.innerText)) + '/' + 
             addNullToDate(parseInt(event.target.getAttribute('data-month')) + 1) + '/'
             + event.target.getAttribute('data-year')
@@ -19,6 +21,8 @@ export default function DayLink (props) {
         return num < 10 ? '0' + num : num
     }
 
+    let date = new Date()
+
     return (
         <a onClick = {event => sendDate(event)}
             data-month = {props.month}
@@ -28,6 +32,10 @@ export default function DayLink (props) {
                     props.item < props.dayNumber && props.month == 0 ? ' date-disable' : ''
                 }${
                     props.item == props.dayNumber && props.month == 0 ? ' date-now' : ''
+                }${
+                    props.prefix ? ' date-prefix' : ''
+                }${
+                    props.item == date.getDate() && props.month == date.getMonth() ? ' date-today' : ''
                 }`
             }>
             {props.item}

@@ -4,35 +4,54 @@ import DayLink from './DayLink'
 
 export default function Month (value) {
 
-	let date = new Date(),
-        monthName = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
 
-        date.setMonth(date.getMonth() + value.month)
-
-
-    let dayNumber = date.getDate(),
-	    month = date.getMonth(),
+    let date = new Date(),
+        dayNumber = date.getDate(),
+	    month = date.getMonth() + value.monthId,
 	    year = date.getFullYear(),
-        monthDays = new Date(year, month + 1, 0).getDate(),
         days = [],
-        monthPrefix = new Date(year, month, 0).getDay()
+        prefixDays = []
 
+        let getMonthDays = (index) => {
+                
+            let lastDay = new Date(year, month + 1, 0).getDate()
 
-        if (monthPrefix > 0) {
-            for (let i = 1 ; i <= monthPrefix; i++){
-                days.push('')
-            }
+                for (let i = 1; i <= lastDay; i++) {
+                    days.push(i)
+                }
+
+            return days
         }
 
-        for (let i = 1; i <= monthDays; i++) {
-            days.push(i)
+        let getprefixDays = (index) => {
+
+            let lastmonthLastday = new Date(year, month, 0).getDate(),  // Последний день предыдущего месяца
+                monthPrefix = new Date(year, month, 0).getDay()        // Номер дня недели, с которого начинается этот месяц
+
+                for (let i = 0; i < monthPrefix; i++) {
+                    let u = lastmonthLastday - monthPrefix + (i + 1)
+                    prefixDays.push(u)
+                }
+            return prefixDays
         }
+
+        prefixDays = getprefixDays(value.monthId)
+        days = getMonthDays(value.monthId)
 
     return (
 
-        <div id={`month-calendar-${value.month}`} className = "month-calendar">
-            <a className="month-name">{monthName[month]}</a>
+        <div id={`month-calendar-${value.monthId}`} className = "month-calendar">
+            <a className="month-name">{value.monthName}</a>
             <div className="days">
+                {prefixDays.map((item, index) => {
+                    return (
+                        <DayLink
+                            prefix = {1}
+                            key = {index}
+                            item = {item}
+                        />
+                    )
+                })}
                 {days.map((item, index) => {
                     return (
                         <DayLink
@@ -40,10 +59,9 @@ export default function Month (value) {
                             closeFuncdateOut = {value.closeFuncdateOut}
                             key = {index}
                             item = {item}
-                            dayNumber = {dayNumber}
                             month = {month}
                             year = {year}
-                            ></DayLink>
+                        />
                     )
                 })}
             </div>

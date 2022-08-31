@@ -949,6 +949,11 @@ input[type="checkbox"].stylized:checked + label:after {
 	justify-content: flex-start;
 }
 
+.search-dates {
+	display: flex;
+	width: 242px;
+}
+
 .form-way-input {
 	position: absolute;
 	top: 0;
@@ -1095,6 +1100,22 @@ input[type="checkbox"].stylized:checked + label:after {
 	width: 170px;
 	cursor: pointer;
 	user-select: none;
+}
+
+.direction-form-people::before {
+	content: '';
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	bottom: -10px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background-image: url('/icons/down-arrow.svg');
+	background-position: bottom center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	z-index: 5;
 }
 
 .direction-form-people-active {
@@ -1425,6 +1446,10 @@ input[type="checkbox"].stylized:checked + label:after {
 }
 
 .search-results-add__item {
+	font-family: 'FontInterBold';
+}
+
+.search-results-add__item {
     position: relative;
     padding: 6px 0;
     text-align: left;
@@ -1432,6 +1457,8 @@ input[type="checkbox"].stylized:checked + label:after {
     font-family: 'FontInterLight';
     cursor: pointer;
     user-select: none;
+	font-size: 16px;
+	line-height: 16px;
 }
 
 .search-results-add__item:first-child {
@@ -1439,14 +1466,11 @@ input[type="checkbox"].stylized:checked + label:after {
 }
 
 .search-results-add__item:hover {
-    font-family: 'FontInterBold';
+    font-family: 'FontInterSemiBold';
+	font-size: 16px;
+	line-height: 16px;
 }
 
-.search-results-add__item-active {
-    font-family: 'FontInterBold';
-}
-
-.search-results-add__item-active:after,
 .search-results-add__item:hover:after
  {
     width: 10px;
@@ -1462,6 +1486,8 @@ input[type="checkbox"].stylized:checked + label:after {
     background-position: left center;
     background-repeat: no-repeat;
     background-size: 8px;
+	font-size: 16px;
+	line-height: 16px;
 }
 
 .search-results-add__block {
@@ -1794,12 +1820,12 @@ input[type="checkbox"].stylized:checked + label:after {
 }
 
 .month-aside__link-active {
-	background-color: red;
+	background: var(--red-linear-gradient);
 	color: #fff
 }
 
 .month-aside__link:hover {
-	background-color: red;
+	background: var(--red-linear-gradient);
 	color: #fff
 }
 
@@ -1843,15 +1869,16 @@ input[type="checkbox"].stylized:checked + label:after {
 	text-align: center;
 	margin-bottom:10px;
 	margin-right: 3px;
-	margin-left: 3px
+	margin-left: 3px;
 }
 
-.date-link {
+.date-link:not(.date-prefix) {
 	cursor: pointer;
 }
 
-.date-link:hover {
-	background-color: #ccc;
+.date-link:not(.date-prefix):hover {
+	background: var(--red-linear-gradient);
+	color: #fff
 }
 
 .date-disable {
@@ -1882,69 +1909,15 @@ input[type="checkbox"].stylized:checked + label:after {
 	border: 3px solid #fff;
 }
 
+.date-prefix {
+	color: #ccc
+}
+
+.date-today {
+	background: var(--red-linear-gradient);
+	color: #fff
+}
+
 /* Календарь, стилизация, конец */
 
 /* Форма подбора, конец */
-
-
-
-/* месяцы и годы */
-#month-calendar{
-    width: 100%;
-}
-
-.month{
-    margin: 0;
-    padding: 3rem 2rem 2rem;
-    background: #555555;
-    text-align: center;
-    width: 100%;
-    color: #ffffff;
-    list-style: none;
-}
-
-.month li{
-    padding: 0;
-    margin: 0;
-    font-size: 1.5rem;
-    line-height: 1.4;
-    letter-spacing: 0.1rem;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.month li.prev,
-.month li.next{
-    cursor: pointer;
-}
-
-.month li.prev{
-    float: left;
-}
-
-.month li.next{
-    float: right;
-}
-
-.month li.year-name{
-    font-size: 1.2rem;
-    font-weight: 400;
-}
-
-/* дни недели */
-.weekdays{
-    margin: 0;
-    padding: 1rem 0;
-    background-color: #dddddd;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: left;
-}
-
-.weekdays li{
-    display: inline-block;
-    flex: 0 0 calc(100% / 7);
-    text-align: center;
-}

@@ -8,6 +8,12 @@ import Search_form_guests from './search_form_components/Search_form_guests'
 
 const MainForm = () => {
 
+    const searchByClick = (event) => {
+        event.preventDefault()
+
+        event.target.parentElement.parentElement.querySelector('.form-way-input').value = event.target.innerText
+    } 
+
     return (
         <section className = "main-form">
             <div className = "selection-forms">
@@ -18,7 +24,6 @@ const MainForm = () => {
 
                                 <Search_hotel_input />
                                 <Search_form_datein />
-                                {/*<Search_form_dateout />*/}
                                 <Search_form_guests />
 
                                 <div className = "direction-form-block direction-form-submit">
@@ -27,10 +32,10 @@ const MainForm = () => {
                             </div>
                         </div>
                         <div className = "direction-ways">
-                            <a className = "direction-way">Подмосковье</a>
-                            <a className = "direction-way">Сочи</a>
-                            <a className = "direction-way">Крым</a>
-                            <a className = "direction-way">Абхазия</a>
+                            <a className = "direction-way" onClick = {searchByClick}>Подмосковье</a>
+                            <a className = "direction-way" onClick = {searchByClick}>Сочи</a>
+                            <a className = "direction-way" onClick = {searchByClick}>Крым</a>
+                            <a className = "direction-way" onClick = {searchByClick}>Абхазия</a>
                             <span className = "direction-way dont-know-way">
                                 <a>Я не знаю, куда хочу поехать</a>
                             </span>

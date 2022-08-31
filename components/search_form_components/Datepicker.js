@@ -12,6 +12,7 @@ export default function Datepicker (value) {
         let date = new Date(),
             month = date.getMonth()
 
+        // Массив с названием следующих 12 месяцев
         let monthArray = getNextMonths(monthName, month)
 
         function getNextMonths (monthNameArray, month) {
@@ -23,7 +24,6 @@ export default function Datepicker (value) {
               res.push((q-1) % 12)
             }
 
-
             for (let i = 0; i < res.length; i++) {
                 arr.push(monthNameArray[res[i]])
             }
@@ -33,11 +33,9 @@ export default function Datepicker (value) {
         // Активный класс
 
         function setActiveItem (event) {
-
             event.target.parentElement.querySelector('.month-aside__link-active').classList.remove('month-aside__link-active')
             event.target.classList.add('month-aside__link-active')
         }
-
 
         useEffect(() => {
 
@@ -65,7 +63,6 @@ export default function Datepicker (value) {
 
     return (
         <div className="datepicker-w">
-
             <div className="datepicker-header">
                 <div className="datepicker-header__title">Месяц</div>
                 <ul className="days-list">
@@ -95,7 +92,8 @@ export default function Datepicker (value) {
                 {monthArray.map((item, index) => {
                     return(
                         <Month 
-                            month = {index}
+                            monthId = {index}
+                            monthName = {item}
                             key = {index}
                             closeFuncdateIn = {value.closeFuncdateIn}
                             closeFuncdateOut = {value.closeFuncdateOut}
