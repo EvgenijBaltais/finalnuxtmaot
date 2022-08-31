@@ -29,16 +29,16 @@ export default function Search_form_datein() {
     function setToday () {
 
         let today = new Date();
-        today.setTime(today.getTime());
+            today.setTime(today.getTime());
 
-        return addNullToDate(today.getDate()) + "/" + addNullToDate((today.getMonth() + 1)) + "/" + today.getFullYear()
+        return addNullToDate(today.getDate()) + "." + addNullToDate((today.getMonth() + 1)) + "." + today.getFullYear()
     }
 
     function setTomorrow () {
         var tomorrow = new Date()
             tomorrow.setTime(tomorrow.getTime() + 24 * 60 * 60 * 1000)
 
-            return addNullToDate(tomorrow.getDate()) + "/" + addNullToDate((tomorrow.getMonth() + 1)) + "/" + tomorrow.getFullYear()
+            return addNullToDate(tomorrow.getDate()) + "." + addNullToDate((tomorrow.getMonth() + 1)) + "." + tomorrow.getFullYear()
     }
 
     function closeDateIn (value, date) {
@@ -51,7 +51,7 @@ export default function Search_form_datein() {
         setDateOut(date)
     }
 
-    function checkOpenClose (event) {console.log(111)
+    function checkOpenClose (event) {
         if (event.target.classList.contains('form-way-input-in')) {
             setDateOutOpened(0)
             setDateInOpened(1)
@@ -85,12 +85,10 @@ export default function Search_form_datein() {
                         value = {dateIn}
                         onClick = { checkOpenClose }
                 />
-
                 {dateInOpened ? <Datepicker closeFuncdateIn = {closeDateIn} /> : ""}
             </div>
 
             <div className = "direction-form-block direction-form-out" >
-
                 <input type="text"
                         readOnly = "readonly" 
                         className = {`form-way-input form-way-input-period form-way-input-out${

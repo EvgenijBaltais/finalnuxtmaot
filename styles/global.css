@@ -1940,24 +1940,17 @@ input[type="checkbox"].substylized:checked + label:after {
 	margin-bottom:10px;
 	margin-right: 3px;
 	margin-left: 3px;
+	font-family: 'FontInterSemiBold';
 }
 
-.date-link:not(.date-prefix) {
+.date-link:not(.date-prefix):not(.date-disable):hover {
+	background: var(--red-linear-gradient);
+	color: #fff;
 	cursor: pointer;
 }
 
-.date-link:not(.date-prefix):hover {
-	background: var(--red-linear-gradient);
-	color: #fff
-}
-
 .date-disable {
-	color: #ccc;
-	cursor: default;
-}
-
-.date-disable:hover {
-	background-color: transparent;
+	opacity: .3;
 }
 
 .date-now {
@@ -1986,6 +1979,10 @@ input[type="checkbox"].substylized:checked + label:after {
 .date-today {
 	background: var(--red-linear-gradient);
 	color: #fff
+}
+
+.date-weekend {
+	color: #FF0101
 }
 
 /* Календарь, стилизация, конец */
