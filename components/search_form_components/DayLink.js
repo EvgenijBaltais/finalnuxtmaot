@@ -1,17 +1,26 @@
 
 export default function DayLink (props) {
 
-    let date = new Date()
+    const date = new Date()
     const [day, month, year] = props.item.split('.')
-    const today = new Date(year, month, day)
+    const actualDate = new Date(year, month, day)
+    
+
+    function getActualTextData(day, month, year) {
+        return day + '.' + addNullToDate(parseInt(month) + 1) + '.' + year
+    }
+
+    function addNullToDate(num) {
+        return num < 10 ? '0' + num : num
+    }
 
     function sendDate(event) {
 
         if (props.prefix) return false
         if (event.target.classList.contains('date-disable')) return false
 
-        props.closeFuncdateIn ? props.closeFuncdateIn(0, props.item) : ''
-        props.closeFuncdateOut ? props.closeFuncdateOut(0, props.item) : ''
+        props.closeFuncdateIn ? props.closeFuncdateIn(0, getActualTextData(day, actualDate.getMonth(), actualDate.getFullYear())) : ''
+        props.closeFuncdateOut ? props.closeFuncdateOut(0, getActualTextData(day, actualDate.getMonth(), actualDate.getFullYear())) : ''
     }
 
     return (
@@ -24,7 +33,7 @@ export default function DayLink (props) {
                 }${
                     day == date.getDate() && month == date.getMonth() ? ' date-today' : ''
                 }${
-                    !props.prefix && (today.getDay() == 0 || today.getDay() == 6) ? ' date-weekend' : '' 
+                    !props.prefix && (actualDate.getDay() == 0 || actualDate.getDay() == 6) ? ' date-weekend' : '' 
                 }`
             }>
             {day}

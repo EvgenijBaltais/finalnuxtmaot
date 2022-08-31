@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import DayLink from './DayLink'
 
 export default function Month (value) {
