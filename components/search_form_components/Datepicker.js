@@ -1,20 +1,19 @@
 import Month from "./Month";
+import MonthAsideLink from "./MonthAsideLink"
 import { useEffect } from "react";
 import smoothscroll from 'smoothscroll-polyfill';
 
 export default function Datepicker (value) {
 
     let monthName = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
-        daysName = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']
-
-        // Определить следующие 12 месяцев
-
-        let date = new Date(),
-            month = date.getMonth()
+        daysName = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
+        date = new Date(),
+        month = date.getMonth()
 
         // Массив с названием следующих 12 месяцев
         let monthArray = getNextMonths(monthName, month)
 
+        // Определить следующие 12 месяцев
         function getNextMonths (monthNameArray, month) {
             let res = [],
                 arr = []
@@ -28,13 +27,6 @@ export default function Datepicker (value) {
                 arr.push(monthNameArray[res[i]])
             }
             return arr
-        }
-
-        // Активный класс
-
-        function setActiveItem (event) {
-            event.target.parentElement.querySelector('.month-aside__link-active').classList.remove('month-aside__link-active')
-            event.target.classList.add('month-aside__link-active')
         }
 
         useEffect(() => {
@@ -58,7 +50,7 @@ export default function Datepicker (value) {
                 for (let i = 0; i < links.length; i++) {
                     links[i].removeEventListener('click', () => addLinkEvents(event, i))
                 }
-              };
+            }
         })
 
     return (
@@ -78,13 +70,7 @@ export default function Datepicker (value) {
             <div className="month-aside">
                 {monthArray.map((item, index) => {
                     return (
-                        <a className={
-                            `month-aside__link${
-                                index == 0 ? ' month-aside__link-active' : ''
-                            }`
-                        } key = {index}
-                        onClick = {setActiveItem}
-                        >{item}</a>
+                        <MonthAsideLink key = {index} index = {index} item = {item} />
                     )
                 })}  
             </div>

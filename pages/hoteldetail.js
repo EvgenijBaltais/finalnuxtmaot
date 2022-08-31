@@ -1,7 +1,5 @@
 
 import { useState, useEffect} from 'react'
-import { Router } from 'next/router'
-
 import Head from 'next/head'
 
 import { YMaps, Map, Placemark } from "react-yandex-maps"
@@ -230,7 +228,8 @@ export const getServerSideProps = async ({ query, req }) => {
         }
     }
 
-    const response = await fetch(`http://hotelsystem.local/api/load?id=${ query['hotel-id'] }`)
+    //const response = await fetch(`http://hotelsystem.local/api/load?id=${ query['hotel-id'] }`)
+    const response = await fetch(`http://hotelsystem.local/api/load?id=6578`)
     const hotel = await response.json()
 
     return {

@@ -1,44 +1,42 @@
 
 export default function DayLink (props) {
 
+    const date = new Date()
+    const [day, month, year] = props.item.split('.')
+    const actualDate = new Date(year, month, day)
+    
 
-    let formatedDate = ''
-
-    function sendDate(event) {
-
-        if (props.prefix) return false
-
-        formatedDate = addNullToDate(parseInt(event.target.innerText)) + '/' + 
-            addNullToDate(parseInt(event.target.getAttribute('data-month')) + 1) + '/'
-            + event.target.getAttribute('data-year')
-
-        props.closeFuncdateIn ? props.closeFuncdateIn(0, formatedDate) : ''
-        props.closeFuncdateOut ? props.closeFuncdateOut(0, formatedDate) : ''
-        
+    function getActualTextData(day, month, year) {
+        return day + '.' + addNullToDate(parseInt(month) + 1) + '.' + year
     }
 
     function addNullToDate(num) {
         return num < 10 ? '0' + num : num
     }
 
-    let date = new Date()
+    function sendDate(event) {
+
+        if (props.prefix) return false
+        if (event.target.classList.contains('date-disable')) return false
+
+        props.closeFuncdateIn ? props.closeFuncdateIn(0, getActualTextData(day, actualDate.getMonth(), actualDate.getFullYear())) : ''
+        props.closeFuncdateOut ? props.closeFuncdateOut(0, getActualTextData(day, actualDate.getMonth(), actualDate.getFullYear())) : ''
+    }
 
     return (
-        <a onClick = {event => sendDate(event)}
-            data-month = {props.month}
-            data-year = {props.year}
+        <a onClick = {sendDate}
             className = {
                 `date-link${
-                    props.item < props.dayNumber && props.month == 0 ? ' date-disable' : ''
-                }${
-                    props.item == props.dayNumber && props.month == 0 ? ' date-now' : ''
+                    day < date.getDate() && month == date.getMonth() ? ' date-disable' : ''
                 }${
                     props.prefix ? ' date-prefix' : ''
                 }${
-                    props.item == date.getDate() && props.month == date.getMonth() ? ' date-today' : ''
+                    day == date.getDate() && month == date.getMonth() ? ' date-today' : ''
+                }${
+                    !props.prefix && (actualDate.getDay() == 0 || actualDate.getDay() == 6) ? ' date-weekend' : '' 
                 }`
             }>
-            {props.item}
+            {day}
         </a>
     )
 }

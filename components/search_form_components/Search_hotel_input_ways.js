@@ -1,15 +1,10 @@
-import { useState } from 'react'
 import Link from 'next/link'
 
 export default function Search_hotel_ways (props) {
 
-const [active_block, setActive_block] = useState(1)
-
 const searchByClick = (event) => {
     event.preventDefault()
     findParent (event.target, 'direction-form-way').querySelector('.form-way-input').value = event.target.innerText
-    
-    
     props.visibleSearch()
 }
 

@@ -1,12 +1,8 @@
-import { useEffect } from 'react'
-
 import DayLink from './DayLink'
 
 export default function Month (value) {
 
-
     let date = new Date(),
-        dayNumber = date.getDate(),
 	    month = date.getMonth() + value.monthId,
 	    year = date.getFullYear(),
         days = [],
@@ -17,7 +13,7 @@ export default function Month (value) {
             let lastDay = new Date(year, month + 1, 0).getDate()
 
                 for (let i = 1; i <= lastDay; i++) {
-                    days.push(i)
+                    days.push(addNullToDate(i) + '.' + '' + addNullToDate(month) + '.' + addNullToDate(year))
                 }
 
             return days
@@ -29,10 +25,14 @@ export default function Month (value) {
                 monthPrefix = new Date(year, month, 0).getDay()        // Номер дня недели, с которого начинается этот месяц
 
                 for (let i = 0; i < monthPrefix; i++) {
-                    let u = lastmonthLastday - monthPrefix + (i + 1)
-                    prefixDays.push(u)
+                    prefixDays.push(addNullToDate(lastmonthLastday - monthPrefix + (i + 1)) + '.' + addNullToDate(month) + '.' + addNullToDate(year))
                 }
+
             return prefixDays
+        }
+
+        function addNullToDate(num) {
+            return num < 10 ? '0' + num : num
         }
 
         prefixDays = getprefixDays(value.monthId)
@@ -59,8 +59,6 @@ export default function Month (value) {
                             closeFuncdateOut = {value.closeFuncdateOut}
                             key = {index}
                             item = {item}
-                            month = {month}
-                            year = {year}
                         />
                     )
                 })}

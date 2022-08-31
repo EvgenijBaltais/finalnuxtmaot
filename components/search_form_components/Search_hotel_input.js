@@ -18,7 +18,7 @@ function useOutsideAlerter(ref, func) {
     }, [ref])
 }
 
-export default function Search_hotel_input () {
+export default function Search_hotel_input (props) {
 
     const setValue = event => {
         setSearchValue(event.target.value)
@@ -26,20 +26,10 @@ export default function Search_hotel_input () {
         event.target.value == '' ? setVisibleSearch(0) : setVisibleSearch(1)
     }
 
-    const setTextData = text => {
-        setSearchValue(text)
-        setVisibleSearch(0)
-    }
-
-
-    const [searchData, setSearchData] = useState([])
-
-    const [regions, setRegions] = useState([{name: 'Подмосковье'}, {name: 'Сочи'}, {name: 'Крым'}, {name: 'Абхазия'}, {name: 'Анапа'}, {name: 'Армения'}, {name: 'Беларусь'}, {name: 'Геленджик'}, {name: 'Грузия'}, {name: 'Кавказские Минеральные Воды'}, {name: 'Калининградская область'}, {name: 'Карелия'}])
-
-    const [hotels, setHotels] = useState([{name: 'Bridge Resort (Сочи)'}, {name: 'COUNTRY RESORT'}, {name: 'Mriya resort'}, {name: 'Radisson Blu Paradise'}, {name: 'Respect Hall'}, {name: 'Ribera Resort & SPA'}, {name: 'Yalta-Intourist'}, {name: 'Ай-Даниль'}, {name: 'АкваЛоо'}, {name: 'Аквамарин(Севастополь)'}, {name: 'Актер'}, {name: 'Артурс СПА Отель'}, {name: 'Атлас Парк-Отель'}, {name: 'Беларусь'}, {name: 'Бор'}])
+    const [regions, setRegions] = useState(props.popularWays)
+    const [hotels, setHotels] = useState(props.popularHotels)
 
     const [visibleSearch, setVisibleSearch] = useState(0)
-    const [err, setErr] = useState('')
 
     function changeVisibleSearch () {
         setVisibleSearch(visibleSearch => !visibleSearch)
@@ -48,9 +38,11 @@ export default function Search_hotel_input () {
     const searchHotels = async (value) => {
 
         if (value.length < 3) {
-        
-            setRegions([])
-            setHotels([])
+            
+            if (value.length == 0) {
+                setRegions(props.popularWays)
+                setHotels(props.popularHotels)
+            }
             return false
         }
 
@@ -65,7 +57,6 @@ export default function Search_hotel_input () {
                 throw new Error(`Error! status: ${response.status}`);
             }
             
-
             for (let key in result.data) {
                 if (result.data.hasOwnProperty(key)) {
                     if (key == 'region') {
@@ -77,10 +68,8 @@ export default function Search_hotel_input () {
                 }
             }
 
-            setSearchData(result)
-
         } catch (err) {
-            setErr(err.message);
+            console.log(err.message)
         } finally {
             //setIsLoading(false);
         }
