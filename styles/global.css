@@ -1019,6 +1019,11 @@ input[type="checkbox"].substylized:checked + label:after {
 	justify-content: flex-start;
 }
 
+.search-dates {
+	display: flex;
+	width: 242px;
+}
+
 .form-way-input {
 	position: absolute;
 	top: 0;
@@ -1165,6 +1170,22 @@ input[type="checkbox"].substylized:checked + label:after {
 	width: 170px;
 	cursor: pointer;
 	user-select: none;
+}
+
+.direction-form-people::before {
+	content: '';
+	position: absolute;
+	width: 14px;
+	height: 14px;
+	bottom: -10px;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background-image: url('/icons/down-arrow.svg');
+	background-position: bottom center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	z-index: 5;
 }
 
 .direction-form-people-active {
@@ -1495,6 +1516,10 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .search-results-add__item {
+	font-family: 'FontInterBold';
+}
+
+.search-results-add__item {
     position: relative;
     padding: 6px 0;
     text-align: left;
@@ -1502,6 +1527,8 @@ input[type="checkbox"].substylized:checked + label:after {
     font-family: 'FontInterLight';
     cursor: pointer;
     user-select: none;
+	font-size: 16px;
+	line-height: 16px;
 }
 
 .search-results-add__item:first-child {
@@ -1509,14 +1536,11 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .search-results-add__item:hover {
-    font-family: 'FontInterBold';
+    font-family: 'FontInterSemiBold';
+	font-size: 16px;
+	line-height: 16px;
 }
 
-.search-results-add__item-active {
-    font-family: 'FontInterBold';
-}
-
-.search-results-add__item-active:after,
 .search-results-add__item:hover:after
  {
     width: 10px;
@@ -1532,6 +1556,8 @@ input[type="checkbox"].substylized:checked + label:after {
     background-position: left center;
     background-repeat: no-repeat;
     background-size: 8px;
+	font-size: 16px;
+	line-height: 16px;
 }
 
 .search-results-add__block {
@@ -1560,8 +1586,9 @@ input[type="checkbox"].substylized:checked + label:after {
     border: 3px solid #fff;
 }
 
-/* Календарь, стилизация */
 
+/* Календарь, стилизация */
+/*
 .react-datepicker-wrapper {
 	height: 100%;
 }
@@ -1594,15 +1621,16 @@ input[type="checkbox"].substylized:checked + label:after {
     -webkit-box-shadow: var(--main-shadow);
     -moz-box-shadow: var(--main-shadow);
     box-shadow: var(--main-shadow);
-	overflow: hidden;
+	overflow: auto;
 	background: #fff
 }
 
 .react-datepicker__triangle {
-	position: relative;
+	position: fixed!important;
 	width: 100%;
 	height: 42px;
 	background: var(--red-linear-gradient);
+	border-radius: 10px 10px 0 0;
 }
 
 .react-datepicker__triangle:before {
@@ -1660,6 +1688,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	margin-left: auto;
 	margin-top: 30px;
 	padding-right: 10px;
+	padding-left: 10px;
 }
 
 .react-datepicker__week {
@@ -1705,13 +1734,13 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .datepicker-month-list {
-	position: absolute;
+	position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     left: 0;
-    top: 42px;
-    height: calc(100% - 42px);
+	top: 72px;
+    height: 428px;
     border-right: 1px solid #E0E0E0;
 	padding: 10px 0;
 }
@@ -1736,6 +1765,227 @@ input[type="checkbox"].substylized:checked + label:after {
 	background: var(--red-linear-gradient);
 	color: #fff;
 	font-family: "FontInterSemiBold";
+}
+
+/* Работает в Firefox */
+/*.react-datepicker {
+	scrollbar-width: thin;
+	scrollbar-color: blue orange;
+  }
+  
+  /* Работает в Chrome, Edge и Safari */
+ /*  .react-datepicker::-webkit-scrollbar {
+	width: 12px;
+  }
+  
+  .react-datepicker::-webkit-scrollbar-track {
+	background: #fff;
+  }
+  
+  .react-datepicker::-webkit-scrollbar-thumb {
+	background: var(--red-linear-gradient);
+	border-radius: 20px;
+	border: 3px solid #fff;
+  }*/
+
+  .datepicker-w {
+    position: absolute;
+    top: 80px;
+    left: 0;
+	width: 415px;
+	height: 470px;
+	border-radius: 10px;
+    -webkit-box-shadow: var(--main-shadow);
+    -moz-box-shadow: var(--main-shadow);
+    box-shadow: var(--main-shadow);
+	overflow: auto;
+	background: #fff;
+	z-index: 5;
+	overflow: hidden;
+}
+
+.datepicker-header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	display: flex;
+	align-items: center;
+	color: #fff;
+	width: 100%;
+	height: 42px;
+	background: var(--red-linear-gradient);
+	border-radius: 10px 10px 0 0;
+}
+
+.datepicker-header__title {
+	width: 110px;
+	padding: 0 10px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	font-family: 'FontInterSemiBold';
+	font-size: 16px;
+	line-height: 16px;
+	color: #fff;
+}
+
+.form-way-input-period {
+	font-size: 16px;
+	line-height: 16px;
+}
+
+.days-list {
+	width: calc(100% - 110px);
+	list-style-type: none;
+	display: flex;
+	align-items: center;
+}
+
+.days-list__item {
+	width: 41px;
+	color: #fff;
+	font-size: 16px;
+	line-height: 16px;
+	padding: 0 10px;
+	font-family: 'FontInterLight';
+}
+
+.days-list__weekend {
+	font-family: 'FontInterSemiBold';
+}
+
+.datepicker-body {
+	width: calc(100% - 110px);
+	height: calc(100% - 42px);
+	position: absolute;
+	top: 42px;
+	left: 110px;
+	margin: auto;
+	overflow: auto;
+}
+
+.month-aside {
+	position: absolute;
+	top: 42px;
+	left: 0;
+	width: 110px;
+	height: calc(100% - 42px);
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: space-around;
+	border-right: 1px solid#E0E0E0;
+	padding: 10px 0;
+}
+
+.month-aside__link {
+	width: 100%;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.month-aside__link-active {
+	background: var(--red-linear-gradient);
+	color: #fff
+}
+
+.month-aside__link:hover {
+	background: var(--red-linear-gradient);
+	color: #fff
+}
+
+.month-calendar {
+	padding-top: 20px;
+}
+
+.month-name {
+    display: block;
+    text-align: left;
+	font-family: 'FontInterSemiBold';
+	padding-left: 15px
+}
+
+.days {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-content: flex-start;
+	margin: 10px 0
+}
+
+.date-li {
+	display: flex;
+	justify-content: space-around;
+	list-style-type: none;
+	width: 40px;
+	height: 35px;
+	margin-bottom:10px
+}
+
+.date-link {
+	display: flex;
+	justify-content: space-around;
+	list-style-type: none;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	line-height: 35px;
+	text-align: center;
+	margin-bottom:10px;
+	margin-right: 3px;
+	margin-left: 3px;
+}
+
+.date-link:not(.date-prefix) {
+	cursor: pointer;
+}
+
+.date-link:not(.date-prefix):hover {
+	background: var(--red-linear-gradient);
+	color: #fff
+}
+
+.date-disable {
+	color: #ccc;
+	cursor: default;
+}
+
+.date-disable:hover {
+	background-color: transparent;
+}
+
+.date-now {
+    color: red;
+    font-weight: 700;
+}
+
+.datepicker-body::-webkit-scrollbar {
+	width: 12px;
+}
+  
+.datepicker-body::-webkit-scrollbar-track {
+	background: #fff;
+}
+  
+.datepicker-body::-webkit-scrollbar-thumb {
+	background: var(--red-linear-gradient);
+	border-radius: 20px;
+	border: 3px solid #fff;
+}
+
+.date-prefix {
+	color: #ccc
+}
+
+.date-today {
+	background: var(--red-linear-gradient);
+	color: #fff
 }
 
 /* Календарь, стилизация, конец */

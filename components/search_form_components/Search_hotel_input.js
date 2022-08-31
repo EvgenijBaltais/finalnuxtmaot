@@ -20,12 +20,6 @@ function useOutsideAlerter(ref, func) {
 
 export default function Search_hotel_input () {
 
-    const [searchValue, setSearchValue] = useState('')
-    const [visibleSearch, setVisibleSearch] = useState(0)
-
-    const [ toDos, setToDos ] = useState()
-    const [isLoading, setIsLoading] = useState(false)
-
     const setValue = event => {
         setSearchValue(event.target.value)
         setVisibleSearch(1)
@@ -37,38 +31,60 @@ export default function Search_hotel_input () {
         setVisibleSearch(0)
     }
 
-    let visible = ''
 
-/*
-    useEffect(() => {
+    const [searchData, setSearchData] = useState([])
 
+    const [regions, setRegions] = useState([{name: 'Подмосковье'}, {name: 'Сочи'}, {name: 'Крым'}, {name: 'Абхазия'}, {name: 'Анапа'}, {name: 'Армения'}, {name: 'Беларусь'}, {name: 'Геленджик'}, {name: 'Грузия'}, {name: 'Кавказские Минеральные Воды'}, {name: 'Калининградская область'}, {name: 'Карелия'}])
 
-        function showSearch () {
-            visible = visibleSearch
-            visibleSearch == 0 ? setVisibleSearch(1) : ''
-            /*
-                if (isLoading) {
-                    return <p>Loading....</p>
-                }
-                if (!toDos) {
-                    return <p>No List to show</p>
-                }
-            */
-    
+    const [hotels, setHotels] = useState([{name: 'Bridge Resort (Сочи)'}, {name: 'COUNTRY RESORT'}, {name: 'Mriya resort'}, {name: 'Radisson Blu Paradise'}, {name: 'Respect Hall'}, {name: 'Ribera Resort & SPA'}, {name: 'Yalta-Intourist'}, {name: 'Ай-Даниль'}, {name: 'АкваЛоо'}, {name: 'Аквамарин(Севастополь)'}, {name: 'Актер'}, {name: 'Артурс СПА Отель'}, {name: 'Атлас Парк-Отель'}, {name: 'Беларусь'}, {name: 'Бор'}])
 
-/*
-        setIsLoading(true)
-        fetch(`http://hotelsystem.local/api/search-object?str=моск`)
-            .then(response => response.json())
-            .then(data => {
-                setToDos(data)
-                setIsLoading(false)
-                console.log(data)
-            })
+    const [visibleSearch, setVisibleSearch] = useState(0)
+    const [err, setErr] = useState('')
 
+    function changeVisibleSearch () {
+        setVisibleSearch(visibleSearch => !visibleSearch)
+    }
+
+    const searchHotels = async (value) => {
+
+        if (value.length < 3) {
+        
+            setRegions([])
+            setHotels([])
+            return false
         }
 
-    }, [])*/
+        setVisibleSearch(1)
+
+        try {
+
+            const response = await fetch(`http://hotelsystem.local/api/search-object?str=${value}`)
+            const result = await response.json()
+
+            if (!response.ok) {
+                throw new Error(`Error! status: ${response.status}`);
+            }
+            
+
+            for (let key in result.data) {
+                if (result.data.hasOwnProperty(key)) {
+                    if (key == 'region') {
+                        setRegions(result.data[key].slice(0, 15))
+                    }
+                    if (key == 'hotel') {
+                        setHotels(result.data[key].slice(0, 15))
+                    }
+                }
+            }
+
+            setSearchData(result)
+
+        } catch (err) {
+            setErr(err.message);
+        } finally {
+            //setIsLoading(false);
+        }
+    }
 
     // Клик по ссылке вне
 
@@ -84,12 +100,10 @@ export default function Search_hotel_input () {
                 name="choose-way"
                 className = "form-way-input"
                 placeholder="Выберите направление"
-                defaultValue={searchValue}
-                onChange={console.log(1)}
-                key={searchValue}
-                onClick={() => setVisibleSearch({data: 1})}
+                onClick={() => setVisibleSearch(1)}
+                onChange={event => searchHotels(event.target.value)}
             />
-            { visibleSearch ? <Search_hotel_input_ways setTextData = {setTextData} /> : '' }
+            { visibleSearch ? <Search_hotel_input_ways hotels = {hotels} regions = {regions} visibleSearch = {changeVisibleSearch} /> : '' }
         </div>
     )
 }
