@@ -314,7 +314,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .main-h1 {
 	width: 100%;
-	padding: 100px 0;
+	padding: 100px 0 50px;
 	display: inline-block;
 	font-family: FontInterExtraBold;
 	font-size: 70px;
@@ -324,6 +324,10 @@ input[type="checkbox"].substylized:checked + label:after {
     background-size: 400%;
     -webkit-background-clip: text;
 	text-align: center;
+}
+
+.main-form {
+	margin-top: 50px;
 }
 
 .icon-item {
@@ -2019,6 +2023,35 @@ input[type="checkbox"].substylized:checked + label:after {
         transition: 0.4s;
     }
 
+/*  Кешбэк */
+
+.cashback-info {
+	margin: 0 auto;
+	width: 70%;
+}
+
+.cashback-block-mobile {
+	display: none;
+}
+
+.cashback-link {
+	display: inline-block;
+	padding: 8px 10px;
+	font-weight: 600;
+	text-decoration: underline;
+	line-height: 1.2;
+	color: #fff;
+	background-color: #0575e5;
+	border-radius: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+
+	.cashback-info {
+		width: 80%;
+	}
+}
+
 @media screen and (max-width: 650px) {
 
 .mob-burger {
@@ -2090,4 +2123,45 @@ input[type="checkbox"].substylized:checked + label:after {
     	justify-content: flex-end;
 	}
 
+	.cashback-info {
+		text-align: center;
+		line-height: 2;
+	}
+
+}
+
+@media screen and (max-width: 450px) {
+
+	.cashback-info {
+		width: 100%;
+		font-size: 14px;
+	}
+
+	.cashback-block-mobile {
+		display: block;
+	}
+
+	.cashback-link-desktop {
+		display: none;
+	}
+
+	.cashback-link-mobile {
+		margin: 5px 0;
+	}
+
+}
+
+.hh-bg {
+	display: none;
+}
+
+.hhbg-fix {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 11;
+	background-color: rgba(0, 0, 0, 0.4);
 }
