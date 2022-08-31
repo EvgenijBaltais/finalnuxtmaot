@@ -7,14 +7,6 @@ export default function DayLink (props) {
     const [minDay, minMonth, minYear] = props.mindate.split('.')
     const minDate = new Date(minYear, minMonth - 1, minDay)
 
-    function isDeactivated (prefix) {
-
-        if (prefix) return false
-        console.log(minDate > actualDate)
-    }
-
-    isDeactivated(props.prefix)
-
     function getActualTextData(day, month, year) {
         return day + '.' + addNullToDate(parseInt(month) + 1) + '.' + year
     }
