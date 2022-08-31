@@ -4,7 +4,7 @@ import Search_hotel_input from './search_form_components/Search_hotel_input'
 import Search_form_datein from './search_form_components/Search_form_datein'
 import Search_form_guests from './search_form_components/Search_form_guests'
 
-const MainForm = () => {
+const MainForm = (props) => {
 
     const searchByClick = (event) => {
         event.preventDefault()
@@ -18,7 +18,7 @@ const MainForm = () => {
                     <form action="" name = "direction-form" className = "selection-form direction-form" id = "direction-form">
                         <div className = "direction-form-w">
                             <div className = "direction-form__inside">
-                                <Search_hotel_input />
+                                <Search_hotel_input popularHotels = {props.popularHotels} popularWays = {props.popularWays} />
                                 <Search_form_datein />
                                 <Search_form_guests />
                                 <div className = "direction-form-block direction-form-submit">

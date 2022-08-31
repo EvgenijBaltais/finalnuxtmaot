@@ -1,7 +1,5 @@
 
 import { useState, useEffect} from 'react'
-import { Router } from 'next/router'
-
 import Head from 'next/head'
 
 import { YMaps, Map, Placemark } from "react-yandex-maps"

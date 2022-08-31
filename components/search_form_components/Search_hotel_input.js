@@ -18,7 +18,7 @@ function useOutsideAlerter(ref, func) {
     }, [ref])
 }
 
-export default function Search_hotel_input () {
+export default function Search_hotel_input (props) {
 
     const setValue = event => {
         setSearchValue(event.target.value)
@@ -26,11 +26,8 @@ export default function Search_hotel_input () {
         event.target.value == '' ? setVisibleSearch(0) : setVisibleSearch(1)
     }
 
-    const defaultRegions = [{name: 'Подмосковье'}, {name: 'Сочи'}, {name: 'Крым'}, {name: 'Абхазия'}, {name: 'Анапа'}, {name: 'Армения'}, {name: 'Беларусь'}, {name: 'Геленджик'}, {name: 'Грузия'}, {name: 'Кавказские Минеральные Воды'}, {name: 'Калининградская область'}, {name: 'Карелия'}]
-    const defaultHotels = [{name: 'Bridge Resort (Сочи)'}, {name: 'COUNTRY RESORT'}, {name: 'Mriya resort'}, {name: 'Radisson Blu Paradise'}, {name: 'Respect Hall'}, {name: 'Ribera Resort & SPA'}, {name: 'Yalta-Intourist'}, {name: 'Ай-Даниль'}, {name: 'АкваЛоо'}, {name: 'Аквамарин(Севастополь)'}, {name: 'Актер'}, {name: 'Артурс СПА Отель'}, {name: 'Атлас Парк-Отель'}, {name: 'Беларусь'}, {name: 'Бор'}]
-
-    const [regions, setRegions] = useState(defaultRegions)
-    const [hotels, setHotels] = useState(defaultHotels)
+    const [regions, setRegions] = useState(props.popularWays)
+    const [hotels, setHotels] = useState(props.popularHotels)
 
     const [visibleSearch, setVisibleSearch] = useState(0)
 
@@ -43,8 +40,8 @@ export default function Search_hotel_input () {
         if (value.length < 3) {
             
             if (value.length == 0) {
-                setRegions(defaultRegions)
-                setHotels(defaultHotels)
+                setRegions(props.popularWays)
+                setHotels(props.popularHotels)
             }
             return false
         }
