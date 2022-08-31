@@ -230,7 +230,8 @@ export const getServerSideProps = async ({ query, req }) => {
         }
     }
 
-    const response = await fetch(`http://hotelsystem.local/api/load?id=${ query['hotel-id'] }`)
+    //const response = await fetch(`http://hotelsystem.local/api/load?id=${ query['hotel-id'] }`)
+    const response = await fetch(`http://hotelsystem.local/api/load?id=6173`)
     const hotel = await response.json()
 
     return {
