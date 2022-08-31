@@ -1,7 +1,7 @@
-import Month from "./Month";
+import Month from "./Month"
 import MonthAsideLink from "./MonthAsideLink"
-import { useEffect } from "react";
-import smoothscroll from 'smoothscroll-polyfill';
+import { useEffect } from "react"
+import smoothscroll from 'smoothscroll-polyfill'
 
 export default function Datepicker (value) {
 
@@ -83,6 +83,7 @@ export default function Datepicker (value) {
                             key = {index}
                             closeFuncdateIn = {value.closeFuncdateIn}
                             closeFuncdateOut = {value.closeFuncdateOut}
+                            mindate = {value.mindate}
                         />
                     )
                 })}  

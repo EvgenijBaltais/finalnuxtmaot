@@ -49,6 +49,7 @@ export default function Month (value) {
                             prefix = {1}
                             key = {index}
                             item = {item}
+                            mindate = {value.mindate}
                         />
                     )
                 })}
@@ -59,6 +60,7 @@ export default function Month (value) {
                             closeFuncdateOut = {value.closeFuncdateOut}
                             key = {index}
                             item = {item}
+                            mindate = {value.mindate}
                         />
                     )
                 })}

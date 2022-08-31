@@ -4,7 +4,16 @@ export default function DayLink (props) {
     const date = new Date()
     const [day, month, year] = props.item.split('.')
     const actualDate = new Date(year, month, day)
-    
+    const [minDay, minMonth, minYear] = props.mindate.split('.')
+    const minDate = new Date(minYear, minMonth - 1, minDay)
+
+    function isDeactivated (prefix) {
+
+        if (prefix) return false
+        console.log(minDate > actualDate)
+    }
+
+    isDeactivated(props.prefix)
 
     function getActualTextData(day, month, year) {
         return day + '.' + addNullToDate(parseInt(month) + 1) + '.' + year
@@ -34,6 +43,8 @@ export default function DayLink (props) {
                     day == date.getDate() && month == date.getMonth() ? ' date-today' : ''
                 }${
                     !props.prefix && (actualDate.getDay() == 0 || actualDate.getDay() == 6) ? ' date-weekend' : '' 
+                }${
+                    minDate > actualDate ? ' date-deactivated' : '' 
                 }`
             }>
             {day}

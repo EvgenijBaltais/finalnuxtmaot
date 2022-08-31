@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import Datepicker from './Datepicker';
+import Datepicker from './Datepicker'
 
 function useOutsideAlerterIn(ref, func1, func2) {
     useEffect(() => {
@@ -44,6 +44,7 @@ export default function Search_form_datein() {
     function closeDateIn (value, date) {
         setDateInOpened(value)
         setDateIn(date)
+        setDateOut(nextDay(date))
     }
 
     function closeDateOut (value, date) {
@@ -60,6 +61,15 @@ export default function Search_form_datein() {
 
         setDateOutOpened(1)
         setDateInOpened(0) 
+    }
+
+    function nextDay (str) {
+        const [day, month, year] = str.split('.')
+        const date = new Date(year, parseInt(month) - 1, day)
+        const next = new Date(date)
+        next.setDate(date.getDate() + 1)
+
+        return addNullToDate(next.getDate()) + "." + addNullToDate(next.getMonth() + 1) + "." + next.getFullYear()
     }
 
     function addNullToDate(num) {
@@ -85,7 +95,7 @@ export default function Search_form_datein() {
                         value = {dateIn}
                         onClick = { checkOpenClose }
                 />
-                {dateInOpened ? <Datepicker closeFuncdateIn = {closeDateIn} /> : ""}
+                {dateInOpened ? <Datepicker closeFuncdateIn = {closeDateIn} mindate = {dateIn} /> : ""}
             </div>
 
             <div className = "direction-form-block direction-form-out" >
@@ -97,7 +107,7 @@ export default function Search_form_datein() {
                         value = {dateOut}
                         onClick = { checkOpenClose }
                 />
-                {dateOutOpened ? <Datepicker closeFuncdateOut = {closeDateOut} /> : ""}
+                {dateOutOpened ? <Datepicker closeFuncdateOut = {closeDateOut} mindate = {dateIn} /> : ""}
             </div>
         </div>
     )
