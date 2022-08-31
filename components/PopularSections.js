@@ -9,22 +9,29 @@ const PopularSections = ({popularHotels, popularWays}) => {
 				<h2 className = "section-title icon-item icon-item-hotel">Популярные отели России</h2>
 				<div className = {styles["popular-items"]}>
 					{popularHotels.data.map((item, index) => 
-						<div className = {styles["popular-item"]} key = {index}>
+						
+                	<div className = {styles["popular-item"]} key = {index}>
+                		<div className = {styles["popular-item-pic"]}></div>
+                		<div className = {styles["popular-item-content"]}>
 							<Link href = {{ pathname: 'hoteldetail', query: {'hotel-id': item.id}}}>
 								<a className = {styles["popular-item__name"]}>{item.name}</a>
 							</Link>
-							<span className = {styles["popular-item__price"]}>от {item.price} &#8381;</span>
+							<p className = {styles["popular-item__adress"]}>от Республика Крым, г. Ялта, пгт. Отрадное, ул. М. Тореза, 8 Б.{item.adress}</p>
 						</div>
+					</div>
 					)}
 				</div>
 			</div>
 			<div className = {styles["popular-ways"]}>
 				<h2 className = "section-title icon-item icon-item-direction">Популярные направления</h2>
-				<div className = {styles["popular-items"]}>
+				<div className = {styles["popular-way-items"]}>
 					{popularWays.data.map((item, index) => 
-						<div className = {styles["popular-item"]} key = {index}>
-							<a href="" className = {styles["popular-item__name"]}>{item.name}</a>
-							<span className = {styles["popular-item__price"]}>от {item.price} &#8381;</span>
+						<div className = {styles["popular-way-item"]} key = {index}>
+
+                			<div className = {styles["popular-way-pic"]}></div>
+                			<div className = {styles["popular-way-content"]}>
+								<a href="" className = {styles["popular-item__name"]}>{item.name}</a>
+							</div>
 						</div>
 					)}
 				</div>

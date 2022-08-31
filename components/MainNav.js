@@ -21,6 +21,9 @@ const MainNav = () => {
     
     return (
         <header className = {styles["header"]} >
+
+            <div className =  {visibleMenu ? "hh-bg hhbg-fix" : "hh-bg "}></div>
+
             <div className={styles["main-logo"]}>
                 <Link href = "/" activeClassName="active">
                     <a>
