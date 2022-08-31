@@ -52,20 +52,20 @@ class MapCarousel extends React.Component {
 
             </Swiper>
 
-            <div className = {styles["map-slider-nav"]}>
-                <div className = {styles["our-offices-left"]}></div>
-                <div className = {styles["our-offices-info"]}>Наши офисы расположены по всей России</div>
-                <div className = {styles["our-offices-right"]}></div>
-            </div>
+                <div className = {styles["map-slider-nav"]}>
+                    <div className = {styles["our-offices-left"]}></div>
+                    <div className = {styles["our-offices-info"]}>Наши офисы расположены по всей России</div>
+                    <div className = {styles["our-offices-right"]}></div>
+                </div>
 
             <div className = {styles["map-section"]}>
                 <div className = {styles["map-info"]}>
                     <h2 className = "section-title icon-item icon-item-direction">Как к нам добраться</h2>
-                    <div className = {styles["contact-info-block"]}>
+                    <div className = {`${styles["contact-info-block"]} ${styles["contact-info-adress"]}`}>
                         <p className = "subtitle-bold">Адрес</p>
-                        <span className = "block-span">г. Москва, ул. Бауманская д.6с2. Бизнес-центр Виктория Плаза, 8 этаж, 804 офис</span>
+                        <span className = "block-span">г.&nbsp;Москва, ул.&nbsp;Бауманская д.6с2. Бизнес-центр Виктория Плаза, 8&nbsp;этаж, 804&nbsp;офис</span>
                     </div>
-                    <div className = {styles["contact-info-block"]}>
+                    <div className = {`${styles["contact-info-block"]} ${styles["contact-info-phone"]}`}>
                         <p className = "subtitle-bold">Телефоны</p>
                         <div className = {styles["contact-info__phone"]}>
                             <a href="tel:+74956486711" className = {`${styles["contacts-phone"]} ${styles["contacts-chast"]}`}>+7 495 648 67 11</a>&nbsp;
@@ -76,7 +76,7 @@ class MapCarousel extends React.Component {
                             <span className = {styles["contacts-phone-info"]}>Корпоративный отдел</span>
                         </div>
                     </div>
-                    <div className = {styles["contact-info-block"]}>
+                    <div className = {`${styles["contact-info-block"]} ${styles["contact-info-time"]}`}>
                         <p className = "subtitle-bold">Мы работаем</p>
                         <span className = "block-span">по будням с 9:00 до 21:00,<br/>по выходным с 11:00 до 18:00</span>
                         <div className = {styles["metro-block"]}>

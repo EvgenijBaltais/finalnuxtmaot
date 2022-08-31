@@ -67,8 +67,8 @@
 @media screen and (max-width: 650px) {
 
 	.vacancy-banner {
-		padding: 20px 28px;
-		margin:  0;
+		padding: 20px 14px;
+		margin: 0 1rem;
 		flex-direction: column;
 	}
 

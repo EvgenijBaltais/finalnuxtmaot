@@ -35,3 +35,40 @@
 	line-height: 20px;
 	font-family: 'FontInterLight';
 }
+
+@media screen and (max-width: 650px) {
+
+	.sales-item {
+		margin-top: 40px;
+	}
+
+	.sales-item:first-child {
+		margin-top: 20px;
+	}
+
+	.sales-item__pic {
+		width: 134px;
+		height: 134px;
+	}
+
+	.sales-item__content {
+		width: calc(100% - 155px);
+	}
+}
+
+@media screen and (max-width: 420px) {
+
+	.sales-item {
+		flex-direction: column;
+		align-items: flex-start;
+		margin-top: 30px;
+	}
+
+	.sales-item__pic {
+		margin-bottom: 20px;
+	}
+
+	.sales-item__content {
+		width: 100%;
+	}
+}

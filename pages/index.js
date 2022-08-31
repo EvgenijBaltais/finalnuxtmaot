@@ -25,7 +25,7 @@ class Index extends React.Component {
 
         return (
             <>
-                <h1 className = "main-h1">Путешествуйте по всей России!</h1>
+                <h1 className = "main-h1">Путешествуйте по&nbsp;всей&nbsp;России!</h1>
 
                 <MainForm />
                 <HotOffers />

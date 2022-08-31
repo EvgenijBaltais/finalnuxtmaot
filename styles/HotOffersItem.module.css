@@ -83,3 +83,28 @@
 .hot-deal-star-gold {
 	background-image: url('/images/star.svg');
 }
+
+@media screen and (max-width: 650px) {
+
+	.hot-deal-item {
+		width: calc(50% - 10px);
+		margin: 0 0 20px 0;
+		padding: 12px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+
+	.hot-deal-item {
+		width: 100%;
+		margin: 0 0 20px 0;
+		padding: 16px;
+		height: 140px;
+	}
+
+	.hot-deal-pic {
+		width: 120px;
+		height: 110px;
+	}
+
+}
