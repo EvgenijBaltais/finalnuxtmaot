@@ -1985,7 +1985,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	color: #fff
 }
 
-.date-weekend {
+.date-weekend:not(.date-today) {
 	color: #FF0101
 }
 

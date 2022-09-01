@@ -18,13 +18,13 @@ function useOutsideAlerterIn(ref, func1, func2) {
     }, [ref])
 }
 
-
 export default function Search_form_datein() {
 
     let [dateIn, setDateIn] = useState(setToday()),
         [dateOut, setDateOut] = useState(setTomorrow()),
         [dateInOpened, setDateInOpened] = useState(0),
         [dateOutOpened, setDateOutOpened] = useState(0)
+        
 
     function setToday () {
 
@@ -107,7 +107,7 @@ export default function Search_form_datein() {
                         value = {dateOut}
                         onClick = { checkOpenClose }
                 />
-                {dateOutOpened ? <Datepicker closeFuncdateOut = {closeDateOut} mindate = {dateIn} /> : ""}
+                {dateOutOpened ? <Datepicker closeFuncdateOut = {closeDateOut} mindate = {dateOut} /> : ""}
             </div>
         </div>
     )

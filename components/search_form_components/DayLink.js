@@ -17,6 +17,8 @@ export default function DayLink (props) {
 
     function sendDate(event) {
 
+        event.preventDefault()
+
         if (props.prefix) return false
         if (event.target.classList.contains('date-disable')) return false
 
@@ -28,15 +30,15 @@ export default function DayLink (props) {
         <a onClick = {sendDate}
             className = {
                 `date-link${
-                    day < date.getDate() && month == date.getMonth() ? ' date-disable' : ''
+                    day < date.getDate() && month == parseInt(actualDate.getMonth()) + 1 ? ' date-disable' : ''
                 }${
                     props.prefix ? ' date-prefix' : ''
                 }${
-                    day == date.getDate() && month == date.getMonth() ? ' date-today' : ''
+                    minDay == day && minMonth == parseInt(actualDate.getMonth()) + 1 && !props.prefix ? ' date-today' : ''
                 }${
                     !props.prefix && (actualDate.getDay() == 0 || actualDate.getDay() == 6) ? ' date-weekend' : '' 
                 }${
-                    minDate > actualDate ? ' date-deactivated' : '' 
+                    props.closeFuncdateOut && minDay > day && minMonth >= parseInt(actualDate.getMonth()) + 1 && !props.prefix  ? ' date-disable' : '' 
                 }`
             }>
             {day}
