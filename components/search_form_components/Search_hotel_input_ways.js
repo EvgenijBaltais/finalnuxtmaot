@@ -3,14 +3,18 @@ import Link from 'next/link'
 export default function Search_hotel_ways (props) {
 
 const searchByClick = (event) => {
-    event.preventDefault()
-    findParent (event.target, 'direction-form-way').querySelector('.form-way-input').value = event.target.innerText
-    props.visibleSearch()
-}
 
-function findParent (el, cls) {
-	while ((el = el.parentElement) && !el.classList.contains(cls));
-	return el;
+    event.preventDefault()
+
+    props.visibleSearch()
+
+    let obj = {
+        name: event.target.innerText,
+        hotel: event.target.getAttribute('data-info') == 'hotel',
+        region: event.target.getAttribute('data-info') == 'region'
+    }
+
+    props.changeSearchResult(obj)
 }
 
     return (
@@ -26,7 +30,7 @@ function findParent (el, cls) {
                             return (
                                 <div className="search-results__item" key = {index}>
                                     <Link href = "">
-                                        <a className="search-results__link" onClick = {searchByClick}>
+                                        <a className="search-results__link" onClick = {searchByClick} data-info = "region">
                                             {item.name}
                                         </a>
                                     </Link>
@@ -46,8 +50,8 @@ function findParent (el, cls) {
                         return (
                             <div className="search-results__item" key = {index}>
                                 <Link href = "">
-                                    <a className="search-results__link" onClick = {searchByClick}>
-                                    {item.name}
+                                    <a className="search-results__link" onClick = {searchByClick} data-info = "hotel">
+                                        {item.name}
                                     </a>
                                 </Link>
                             </div>

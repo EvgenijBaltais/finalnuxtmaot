@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef} from 'react'
 import Search_hotel_input_ways from './Search_hotel_input_ways'
 
-
 function useOutsideAlerter(ref, func) {
     useEffect(() => {
 
@@ -20,15 +19,8 @@ function useOutsideAlerter(ref, func) {
 
 export default function Search_hotel_input (props) {
 
-    const setValue = event => {
-        setSearchValue(event.target.value)
-        setVisibleSearch(1)
-        event.target.value == '' ? setVisibleSearch(0) : setVisibleSearch(1)
-    }
-
     const [regions, setRegions] = useState(props.popularWays)
     const [hotels, setHotels] = useState(props.popularHotels)
-
     const [visibleSearch, setVisibleSearch] = useState(0)
 
     function changeVisibleSearch () {
@@ -71,7 +63,6 @@ export default function Search_hotel_input (props) {
         } catch (err) {
             console.log(err.message)
         } finally {
-            //setIsLoading(false);
         }
     }
 
@@ -88,11 +79,20 @@ export default function Search_hotel_input (props) {
         <input type="text"
                 name="choose-way"
                 className = "form-way-input"
+                value = {props.searchResult.name}
                 placeholder="Выберите направление"
                 onClick={() => setVisibleSearch(1)}
                 onChange={event => searchHotels(event.target.value)}
             />
-            { visibleSearch ? <Search_hotel_input_ways hotels = {hotels} regions = {regions} visibleSearch = {changeVisibleSearch} /> : '' }
+            { visibleSearch ? 
+            <Search_hotel_input_ways 
+                hotels = {hotels}
+                regions = {regions}
+                visibleSearch = {changeVisibleSearch}
+                changeSearchResult = {props.changeSearchResult}
+                searchResult = {props.searchResult}
+            />
+            : '' }
         </div>
     )
 }
