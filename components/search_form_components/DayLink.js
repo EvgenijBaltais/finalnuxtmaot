@@ -4,7 +4,8 @@ export default function DayLink (props) {
     const date = new Date()
     const [day, month, year] = props.item.split('.')
     const actualDate = new Date(year, month, day)
-    
+    const [minDay, minMonth, minYear] = props.mindate.split('.')
+    const minDate = new Date(minYear, minMonth - 1, minDay)
 
     function getActualTextData(day, month, year) {
         return day + '.' + addNullToDate(parseInt(month) + 1) + '.' + year
@@ -15,6 +16,8 @@ export default function DayLink (props) {
     }
 
     function sendDate(event) {
+
+        event.preventDefault()
 
         if (props.prefix) return false
         if (event.target.classList.contains('date-disable')) return false
@@ -27,13 +30,15 @@ export default function DayLink (props) {
         <a onClick = {sendDate}
             className = {
                 `date-link${
-                    day < date.getDate() && month == date.getMonth() ? ' date-disable' : ''
+                    day < date.getDate() && month == parseInt(actualDate.getMonth()) + 1 ? ' date-disable' : ''
                 }${
                     props.prefix ? ' date-prefix' : ''
                 }${
-                    day == date.getDate() && month == date.getMonth() ? ' date-today' : ''
+                    minDay == day && minMonth == parseInt(actualDate.getMonth()) + 1 && !props.prefix ? ' date-today' : ''
                 }${
                     !props.prefix && (actualDate.getDay() == 0 || actualDate.getDay() == 6) ? ' date-weekend' : '' 
+                }${
+                    props.closeFuncdateOut && minDay > day && minMonth >= parseInt(actualDate.getMonth()) + 1 && !props.prefix  ? ' date-disable' : '' 
                 }`
             }>
             {day}
