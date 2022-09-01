@@ -2,12 +2,16 @@
 
 export default function MonthAsideLink (props) {
 
+    const date = new Date()
+
     // Активный класс
 
     function setActiveItem (event) {
         event.target.parentElement.querySelector('.month-aside__link-active').classList.remove('month-aside__link-active')
         event.target.classList.add('month-aside__link-active')
     }
+
+    console.log(props.item == 'Январь')
 
     return (
         <a onClick = {setActiveItem}
@@ -16,6 +20,10 @@ export default function MonthAsideLink (props) {
                 props.index == 0 ? ' month-aside__link-active' : ''
             }`
         }
-        >{props.item}</a>
+        >
+        {props.item == 'Январь' ? 
+            <span className="month-aside__link-year">{date.getFullYear() + 1}</span> : ''
+        }
+            {props.item}</a>
     )
 }

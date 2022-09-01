@@ -90,10 +90,10 @@ export default function Search_form_guests() {
             <input
                 type="text"
                 name="choose-people"
-                className = "form-way-input form-guests-input form-guests-input-out"
+                className = {`form-way-input form-guests-input form-guests-input-out${visibleGuests ? ' direction-form-in-active' : ''}`}
                 defaultValue={returnGuests(guests)}
                 readOnly = "readonly"
-                onClick={ () => makeActive(true) }
+                onClick={ () => setVisibleGuests(visibleGuests => !visibleGuests)}
             />
             { visibleGuests ? <Search_guests adults = {adults} children = {children} getAdults = {getAdults} getChildren = {getChildren} getGuests = {getGuests} /> : '' }
         </div>
