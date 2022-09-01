@@ -1,6 +1,5 @@
 import React from "react"
 import Head from 'next/head'
-import Script from 'next/script'
 
 import MapCarousel from '../components/MapCarousel'
 import VacancyBanner from '../components/VacancyBanner'
