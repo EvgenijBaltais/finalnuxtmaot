@@ -345,6 +345,10 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-image: url('/icons/hotel.png');
 }
 
+.icon-item-hotel-w {
+	background-image: url('/icons/hotel-w.png');
+}
+
 .icon-item-direction {
 	background-image: url('/icons/planet.png');
 }
@@ -362,6 +366,14 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .icon-item-reviews {
 	background-image: url('/icons/reviews.png');
+}
+
+.icon-item-serv {
+	background-image: url('/icons/bell-boy.png');
+}
+
+.icon-item-contact {
+	background-image: url('/icons/phonebook.png');
 }
 
 .icon-item-direction {
@@ -2042,6 +2054,42 @@ input[type="checkbox"].substylized:checked + label:after {
 	border-radius: 5px;
 }
 
+/* Блок навигации */
+
+.left-nav-block {
+	padding: 15px;
+    -webkit-box-shadow: var(--main-shadow);
+    -moz-box-shadow: var(--main-shadow);
+    box-shadow: var(--main-shadow);
+	border-radius: 10px;
+	margin-bottom: 40px
+}
+
+.left-nav-list {
+	list-style-type: none;
+}
+
+.left-nav-item {
+	padding-bottom:5px
+}
+
+.left-nav-item:last-child {
+	padding-bottom:0
+}
+
+.left-nav-link {
+	font-size: 15px;
+	line-height: 30px;
+	text-decoration: underline;
+}
+
+.left-nav-list__sub {
+	list-style-type: disc;
+	padding-left: 25px
+}
+
+/* Блок навигации, конец */
+
 @media screen and (max-width: 1200px) {
 
 	.cashback-info {
@@ -2051,7 +2099,17 @@ input[type="checkbox"].substylized:checked + label:after {
 
 @media screen and (max-width: 650px) {
 
-.mob-burger {
+	.wrapper-fix {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 11;
+		background-color: rgba(0, 0, 0, 0.4);
+	}
+
+	.mob-burger {
     	display: flex !important;
     	width: 40px;
     }
@@ -2124,6 +2182,61 @@ input[type="checkbox"].substylized:checked + label:after {
 		text-align: center;
 		line-height: 2;
 	}
+
+
+	.left-nav-block {
+		position: relative;
+		padding: 14px;
+	    -webkit-box-shadow: var(--main-shadow);
+	    -moz-box-shadow: var(--main-shadow);
+	    box-shadow: var(--main-shadow);
+		border-radius: 10px;
+		margin-bottom: 40px;
+		background-color: #fff;
+	}
+
+	.active-list > .left-nav-list:before {
+		transform: rotate(180deg);
+		transition: 0.2s;
+	} 
+
+	.left-nav-item {
+		display: none;
+	}
+
+	.left-nav-item:first-child {
+		display: block;
+		padding-bottom: 0;
+	}
+
+	.active-list > .left-nav-item {
+		display: block !important;
+	}
+
+	.left-nav-list {
+		position: relative;
+		padding-right: 20px;
+	}
+
+	.left-nav-list:before {
+		content: '';
+		position: absolute;
+		top: 4px;
+		right: 0;    
+		width: 17px;
+	    height: 16px;
+	    background-image: url(/images/arr-blc.svg);
+	    background-size: contain;
+	    background-repeat: no-repeat;
+		transition: 0.2s;
+		z-index: 10;
+	}
+
+	.active-list > .left-nav-list:before {
+		transform: rotate(180deg);
+		transition: 0.2s;
+	}
+
 
 }
 
