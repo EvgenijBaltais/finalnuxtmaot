@@ -6,6 +6,7 @@ import { YMaps, Map, Placemark } from "react-yandex-maps"
 
 import Hotel_search_result from "../components/hotel_details/Hotel_search_result"
 import Rooms_info from "../components/hotel_details/Rooms_info"
+import Hotel_service from "../components/hotel_details/Hotel_service"
 import Hotel_rooms_all from "../components/hotel_details/Hotel_rooms_all"
 import styles from "../styles/Hoteldetail.module.css"
 
@@ -157,6 +158,7 @@ function Hoteldetail ({hotel}) {
                     {active_block == 1 ? <Hotel_search_result /> : ''}
                     {active_block == 2 ? <Rooms_info /> : ''}
                     {active_block == 3 ? <Hotel_rooms_all /> : ''}
+                    {active_block == 4 ? <Hotel_service /> : ''}
                 </div>
 
                 <div className = {styles["select-dates-nav"]}>
@@ -175,7 +177,7 @@ function Hoteldetail ({hotel}) {
                             onClick={changeBlock} 
                             className = {`${styles["select-dates-link"]} ${active_block == 2 ? styles["select-dates-link-active"] : ''}`}
                         >
-                            Описание отеля
+                            Об отеле
                         </a>
                     </div>
                     <div className = {styles["select-dates-item"]}>
