@@ -18,38 +18,21 @@ function useOutsideAlerterIn(ref, func1, func2) {
     }, [ref])
 }
 
-export default function Search_form_datein() {
+export default function Search_form_datein(props) {
 
-    let [dateIn, setDateIn] = useState(setToday()),
-        [dateOut, setDateOut] = useState(setTomorrow()),
-        [dateInOpened, setDateInOpened] = useState(0),
+    let [dateInOpened, setDateInOpened] = useState(0),
         [dateOutOpened, setDateOutOpened] = useState(0)
-        
 
-    function setToday () {
-
-        let today = new Date();
-            today.setTime(today.getTime());
-
-        return addNullToDate(today.getDate()) + "." + addNullToDate((today.getMonth() + 1)) + "." + today.getFullYear()
-    }
-
-    function setTomorrow () {
-        var tomorrow = new Date()
-            tomorrow.setTime(tomorrow.getTime() + 24 * 60 * 60 * 1000)
-
-            return addNullToDate(tomorrow.getDate()) + "." + addNullToDate((tomorrow.getMonth() + 1)) + "." + tomorrow.getFullYear()
-    }
 
     function closeDateIn (value, date) {
         setDateInOpened(value)
-        setDateIn(date)
-        setDateOut(nextDay(date))
+        props.changeDateIn(date)
+        props.changeDateOut(nextDay(date))
     }
 
     function closeDateOut (value, date) {
         setDateOutOpened(value)
-        setDateOut(date)
+        props.changeDateOut(date)
     }
 
     function checkOpenClose (event) {
@@ -92,10 +75,10 @@ export default function Search_form_datein() {
                         className = {`form-way-input form-way-input-period form-way-input-in${
                             dateInOpened == 1 ? ' direction-form-in-active' : ''
                         }`}
-                        value = {dateIn}
+                        value = {props.dateIn}
                         onClick = { checkOpenClose }
                 />
-                {dateInOpened ? <Datepicker closeFuncdateIn = {closeDateIn} mindate = {dateIn} /> : ""}
+                {dateInOpened ? <Datepicker closeFuncdateIn = {closeDateIn} mindate = {props.dateIn} /> : ""}
             </div>
 
             <div className = "direction-form-block direction-form-out" >
@@ -104,10 +87,10 @@ export default function Search_form_datein() {
                         className = {`form-way-input form-way-input-period form-way-input-out${
                             dateOutOpened == 1 ? ' direction-form-in-active' : ''
                         }`}
-                        value = {dateOut}
+                        value = {props.dateOut}
                         onClick = { checkOpenClose }
                 />
-                {dateOutOpened ? <Datepicker closeFuncdateOut = {closeDateOut} mindate = {dateOut} /> : ""}
+                {dateOutOpened ? <Datepicker closeFuncdateOut = {closeDateOut} mindate = {props.dateOut} /> : ""}
             </div>
         </div>
     )
