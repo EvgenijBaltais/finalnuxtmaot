@@ -6,14 +6,14 @@ const PopularSections = ({popularHotels, popularWays}) => {
 
     const [ toDos, setToDos ] = useState()
     const [isLoading, setIsLoading] = useState(false)
-
+/*
     if (isLoading) {
         return <p>Loading....</p>
     }
     if (!toDos) {
         return <p>No List to show</p>
     }
-
+*/
     return (
 		<section className = {styles["popular-sections"]}>
 			<div className = {styles["popular-hotels"]}>

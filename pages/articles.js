@@ -13,14 +13,16 @@ import Article2 from '/public/images/article-2.jpg'
 class Articles extends React.Component {
     constructor(props) {
         super(props)
+
     }
 
     componentDidMount(){
-        document.querySelector('.wrapper').classList.add('articles-page')
+        document.querySelector('.wrapper').classList.add('articles-page')   
     }
 
     componentWillUnmount() {
         document.querySelector('.wrapper').classList.remove('articles-page')
+
     } 
 
     render() {
@@ -38,7 +40,7 @@ class Articles extends React.Component {
                                 Навигация
                             </h2>
                             <div className = " left-nav-block">
-                                <ul className = "left-nav-list" >
+                                <ul className = "left-nav-list">
                                     <li className = "left-nav-item">
                                         <a className = {styles["left-nav-link"]} href="">Платежи. Оплата банковской картой онлайн</a>
                                     </li>
