@@ -1,3 +1,4 @@
+import React from "react"
 import MediaQuery from 'react-responsive'
 
 import styles from "../styles/Payment.module.css"
@@ -9,9 +10,22 @@ import Image from "next/image"
 import Pay1 from '/public/images/pay-1.jpg'
 import Pay2 from '/public/images/pay-2.jpg'
 import Pay3 from '/public/images/pay-3.jpg'
-import Subscribe1 from '/public/icons/subscribe.svg'
 
-const Payment = () => {
+class Payment extends React.Component {
+
+    constructor(props) {
+        super(props)
+    }
+
+    componentDidMount(){
+        document.querySelector('.wrapper').classList.add('payment-page')
+    }
+
+    componentWillUnmount() {
+        document.querySelector('.wrapper').classList.remove('payment-page')
+    }
+
+render() {
 
     return (
         <>
@@ -414,6 +428,7 @@ const Payment = () => {
 		    </section>
         </>
     )
+}
 }
 
 export default Payment

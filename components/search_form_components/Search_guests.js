@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function Search_guests ({getGuests, adults, children, getAdults, getChildren}) {
+export default function Search_guests (props) {
 
     const childAges = ['до 1 года', '1 год', '2 года', '3 года', '4 года', '5 лет', '6 лет', '7 лет', '8 лет', '9 лет', '10 лет', '11 лет', '12 лет',
                         '13 лет', '14 лет', '15 лет', '16 лет', '17 лет']
@@ -8,32 +8,32 @@ export default function Search_guests ({getGuests, adults, children, getAdults, 
     const [visibleChildren, setVisibleChildren] = useState(0)    // Раскрытие блока с детьми
 
     const plusAdults = () => {
-        let ads = adults
+        let ads = props.adults
 
         if (ads > 29) return false
             ads++
-            getAdults(ads)
+            props.changeAdults(ads)
     }
 
     const minusAdults = () => {
-        let ads = adults
+        let ads = props.adults
 
         if (ads <= 1) return false
             ads--
-            getAdults(ads)
+            props.changeAdults(ads)
     }
 
     function removeChildAge (index) {
 
-        let array = [...children]
+        let array = [...props.childrenAges]
 
             array.splice(index, 1);
-            getChildren(array)
+            props.changeChildrenAges(array)
     }
 
     function addChildAge(item) {
 
-        getChildren(current => [...current, item])
+        props.changeChildrenAges(current => [...current, item])
         setVisibleChildren(visibleChildren => !visibleChildren)
     }
 
@@ -51,13 +51,13 @@ export default function Search_guests ({getGuests, adults, children, getAdults, 
                     </div>
                     <div className = "search-results__right">
                         <div className = "search-results__minus" onClick = {minusAdults}>—</div>
-                        <div className = "search-results__value">{adults}</div>
+                        <div className = "search-results__value">{props.adults}</div>
                         <div className = "search-results__plus" onClick = {plusAdults}>+</div>
                     </div>
                 </div>
 
                 <div className = "search-results-children">
-                    {(children || []).map((item, index) => {
+                    {(props.childrenAges || []).map((item, index) => {
                         return (
                             <div className = "search-results-children__item" key = {index}>
                                 <div className = "search-results__left">

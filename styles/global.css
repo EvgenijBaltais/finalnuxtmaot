@@ -54,12 +54,17 @@ body {
 	margin: 20px auto;
 }
 
+.search-page.wrapper {
+	max-width: calc(100% - 40px);
+}
+
 /* Зеленый градиент на страницах сверху. На разных страницах в разных местах */
 
 .main-page:after,
 .contact-page:after,
 .hotel-bron-page:after,
-.articles-page:after {
+.articles-page:after,
+.payment-page:after {
 	width: 750px;
 	height: 750px;
 	content: '';
@@ -2105,7 +2110,7 @@ input[type="checkbox"].substylized:checked + label:after {
         padding: 10px 8px 10px 28px;
         z-index: 15;
         background-color: #fff;
-        box-shadow: var(--main-shadow);;
+        box-shadow: var(--main-shadow);
     }
 /*
     .mob-menu-active > .mob-bg {
@@ -2183,4 +2188,11 @@ input[type="checkbox"].substylized:checked + label:after {
 	bottom: 0;
 	z-index: 11;
 	background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+.map {
+	width: 400px;
+	height: 400px;
+	outline: 1px solid blue
 }
