@@ -2207,7 +2207,24 @@ input[type="checkbox"].substylized:checked + label:after {
 
 
 	.left-nav-block {
+		width: calc(100% - 170px);
 		position: relative;
+		box-shadow: none;
+	}
+
+	.left-nav-list::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	.left-nav-list:-moz-scrollbar{
+		width: 6px;
+	}
+
+	.left-nav-list {
+		position: absolute !important;
+		top: 0;
+	    right: 0;
+	    left: 0;
 		padding: 14px;
 	    -webkit-box-shadow: var(--main-shadow);
 	    -moz-box-shadow: var(--main-shadow);
@@ -2215,6 +2232,21 @@ input[type="checkbox"].substylized:checked + label:after {
 		border-radius: 10px;
 		margin-bottom: 40px;
 		background-color: #fff;
+		z-index: 8;
+		max-height: 60vh;
+    	overflow-y: scroll;
+	}
+
+	.left-nav-list::-webkit-scrollbar-thumb{
+		background-color: linear-gradient(45deg, rgba(255,75,43,1) 0%, rgba(255,75,43,1) 39%, rgba(255,65,108,1) 75%, rgba(255,65,108,1) 100%);
+		border-radius: 8px;
+		border: 5px solid #ff395c;
+	} 
+
+	.left-nav-list:-moz-scrollbar-thumb {
+		background-color: linear-gradient(45deg, rgba(255,75,43,1) 0%, rgba(255,75,43,1) 39%, rgba(255,65,108,1) 75%, rgba(255,65,108,1) 100%);
+		border-radius: 8px;
+		border: 5px solid #ff395c;
 	}
 
 	.active-list > .left-nav-list:before {
@@ -2231,7 +2263,7 @@ input[type="checkbox"].substylized:checked + label:after {
 		padding-bottom: 0;
 	}
 
-	.active-list > .left-nav-item {
+	.active-list .left-nav-item {
 		display: block !important;
 	}
 
@@ -2243,8 +2275,8 @@ input[type="checkbox"].substylized:checked + label:after {
 	.left-nav-list:before {
 		content: '';
 		position: absolute;
-		top: 4px;
-		right: 0;    
+		top: 1rem;
+		right: 1rem;    
 		width: 17px;
 	    height: 16px;
 	    background-image: url(/images/arr-blc.svg);
@@ -2279,6 +2311,22 @@ input[type="checkbox"].substylized:checked + label:after {
 
 	.cashback-link-mobile {
 		margin: 5px 0;
+	}
+	
+}
+
+@media screen and (max-width: 420px) {
+
+	.left-nav-block {
+		width: calc(100% - 135px);
+	}
+
+	.left-nav-list:before {
+		right: 5px;
+	}
+
+	.single-block-title:first-child {
+		margin-bottom: 45px;
 	}
 
 }
