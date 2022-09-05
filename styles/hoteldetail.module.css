@@ -411,64 +411,12 @@
 }
 
 .hotel-title-section {
-	margin-top: 30px;
-	padding: 30px 24px;
-	margin-bottom: 50px;
-	border-radius: 10px;
-	box-shadow: var(--main-shadow);
+	padding: 10px 0 0 0;
+	margin-bottom: -20px;
 }
 
 .hotel-title-section p {
 	margin-bottom: 25px;
-}
-
-.serv-type-section {
-	width: 45%;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	margin-bottom: 30px;
-}
-
-.serv-type-section h3 {
-	font-size: 16px;
-	line-height: 1;
-	padding-bottom: 10px;
-	color: #4f4f4f;
-}
-
-
-.hotel-serv-descr {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-}
-
-.serv-list {
-	list-style: none;
-	font-size: 14px;
-	line-height: 1.5;
-}
-
-.serv-list li {
-	padding-left: 10px;
-}
-
-.serv-list i {
-	font-weight: 500;
-	font-size: 12px;
-}
-
-.serv-list li:before {
-	content: '';
-	padding-left: 12px;
-	margin-right: 6px;
-	width: 12px;
-	height: 9px;
-    background-image: url('/icons/serv.svg');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
 }
 
 /* Подраздел Номера */
@@ -704,6 +652,11 @@
 	background: linear-gradient(45deg,#00CA50,#0057AF);
 }
 
+@media screen and (max-width: 1280px) {
+
+
+}
+
 @media screen and (max-width: 650px) {
 
 	.titles-top {
@@ -726,12 +679,18 @@
 		width: 100%;
 	}
 
+	.select-dates-nav {
+
+	}
+
 	.hotel-slider__main {
 		height: 365px;
 	}
 
 	.hotel-slider__w {
 		height: 70px;
+		width: 115px;
+		background-color: #f0f0f0;
 		border-radius: 8px;
 	}
 
@@ -741,7 +700,7 @@
 
 	.select-results__item-pic {
 		width: 100%;
-		height: 200px;
+		height: 400px;
 		order: 1;
 	}
 
@@ -786,10 +745,6 @@
 
 	.select-results__item-text {
 		order: 3;
-	}
-
-	.select-dates-nav {
-		width: 100%;
 	}
 }
 

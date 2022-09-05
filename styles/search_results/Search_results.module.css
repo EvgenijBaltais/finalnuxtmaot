@@ -1,0 +1,203 @@
+.search-result-title {
+	padding-left: 40px;
+	font-size: 20px;
+	line-height: 30px;
+	font-family: 'FontInterBold';
+	padding-top: 15px;
+    margin-top: 35px;
+	padding-bottom: 15px;
+    background-image: url('/icons/ok.png');
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: center left;
+}
+
+.search-result-w {
+	display: flex;
+	justify-content: space-between;
+}
+
+.search-result-left {
+	width: 400px;
+	overflow: auto;
+	box-shadow: var(--main-shadow);
+	padding: 20px 25px;
+	border-radius: 10px;
+	background-color: #fff;
+}
+
+.search-result-left-w {
+	background: #fff;
+	border-radius: 10px;
+}
+
+.direction-aside-form {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-bottom: 45px
+}
+
+.aside-checkbox {
+	margin-bottom: 15px
+}
+
+.aside-checkbox:last-child {
+	margin-bottom: 0
+}
+
+.aside-block {
+	position: relative;
+	padding-bottom: 50px
+}
+
+.aside-close {
+	position: absolute;
+	top: 5px;
+	right: 0;
+	display: inline-block;
+	padding: 5px 10px;
+	cursor: pointer;
+	text-decoration: underline;
+	color: rgb(194,194,194);
+	font-size: 12px;
+	line-height: 12px;
+	z-index: 2;
+}
+
+.search-result-right {
+	width: 790px;
+}
+
+@media screen and (max-width: 650px) {
+	.search-result-w {
+		flex-direction: column;
+	}
+	.search-result-left, .search-result-right {
+		width: auto;
+	}
+
+	.search-result-right {
+		margin-top: 55px;
+	}
+
+	.search-item-pic {
+		width: 25%;
+		max-width: 119px;
+		height: 115px;
+	}
+
+	.search-item__content {
+		padding: 0 10px 0 15px;
+	}
+
+	.search-item__title {
+		font-size: 18px;
+	}
+
+	.search-item__broninfo {
+		width: 30%;
+	}
+	.search-item__bron {
+		width: auto;
+		padding: 0 20px;
+	}
+
+	.search-item__price-number {
+		font-size: 24px;
+		line-height: 24px;
+		padding: 0 3px;
+	}
+
+	.search-item__price-currency {
+		font-size: 24px;
+		line-height: 24px;
+	}
+
+	.search-item__price-from {
+		line-height: 24px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+
+	.search-item {
+		flex-direction: column;
+		margin-bottom: 30px;
+		padding: 10px;
+	}
+
+	.search-item-pic {
+		margin-bottom: 10px;
+		width: 100%;
+		max-width: 100%;
+		height: 210px;
+		background-color: #f0f0f0;
+	}
+
+	.search-item__content {
+		width: 100%;
+		padding: 0;
+	}
+
+	.search-item__broninfo  {
+		width: 100%;
+		border-left: none;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+	.search-item__price, .search-item__nights {
+		width: 50%;
+		text-align: left;
+	}
+
+	.search-item__nights {
+		padding: 0;
+		margin-top: -15px;
+		order: 3;
+	}
+
+	.search-item__list {
+		padding-top: 15px;
+	}
+
+	.search-item__bron {
+		margin: 25px 0 0;
+		order: 2;
+		height: 46px;
+		font-size: 16px;
+		padding: 0 2rem;
+	}
+
+	.search-rate__reviews {
+		padding-right: 1rem;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.search-item__bron {
+		margin-top: 25px;
+		order: 2;
+		height: 46px;
+		font-size: 16px;
+		padding: 0 1.3rem;
+	}
+
+	.search-item__rate {
+		flex-wrap: wrap;
+	}
+
+	.search-rate__foodtype {
+		padding-top: 5px;
+	}
+
+	.search-item__price, .search-item__nights {
+		width: 52%;
+	}
+	.search-item__price-number, .search-item__price-currency {
+		font-size: 20px;
+		line-height: 20px;
+	}
+}

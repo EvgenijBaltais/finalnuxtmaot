@@ -17,28 +17,9 @@ function useOutsideAlerter(ref, func) {
     }, [ref])
 }
 
-export default function Search_form_guests() {
+export default function Search_form_guests(props) {
 
     const [visibleGuests, setVisibleGuests] = useState(0)
-    const [adults, setAdults] = useState(2)
-    const [children, setChildren] = useState([])
-
-    const [guests, setGuests] = useState(2)
-
-    function getGuests(value) {
-        let g = returnGuests(value)
-        setGuests(g)
-    }
-
-    function getAdults(value) {
-        let g = value
-        setAdults(g)
-    }
-
-    function getChildren(value) {
-        let g = value
-        setChildren(g)
-    }
 
     function returnGuests (num) {
 
@@ -72,11 +53,6 @@ export default function Search_form_guests() {
         setVisibleGuests(val)
     }
 
-    useEffect(() => {
-        getGuests(adults + children.length)
-    }, [children, adults])
-
-
     // Клик по ссылке вне
 
     const wrapperRef = useRef(null)
@@ -91,11 +67,16 @@ export default function Search_form_guests() {
                 type="text"
                 name="choose-people"
                 className = {`form-way-input form-guests-input form-guests-input-out${visibleGuests ? ' direction-form-in-active' : ''}`}
-                defaultValue={returnGuests(guests)}
+                defaultValue={returnGuests(props.adults + props.childrenAges.length)}
                 readOnly = "readonly"
                 onClick={ () => setVisibleGuests(visibleGuests => !visibleGuests)}
             />
-            { visibleGuests ? <Search_guests adults = {adults} children = {children} getAdults = {getAdults} getChildren = {getChildren} getGuests = {getGuests} /> : '' }
+            { visibleGuests ? <Search_guests 
+                                    adults = {props.adults}
+                                    childrenAges = {props.childrenAges}
+                                    changeAdults = {props.changeAdults}
+                                    changeChildrenAges = {props.changeChildrenAges}
+                                /> : '' }
         </div>
     )
 }

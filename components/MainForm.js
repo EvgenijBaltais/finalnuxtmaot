@@ -1,6 +1,5 @@
-import Link from 'next/link'
-
 import { React, useState } from 'react'
+import { useRouter } from 'next/router'
 
 import Search_hotel_input from './search_form_components/Search_hotel_input'
 import Search_form_datein from './search_form_components/Search_form_datein'
@@ -8,13 +7,15 @@ import Search_form_guests from './search_form_components/Search_form_guests'
 
 const MainForm = (props) => {
 
-    const [searchResult, setSearchResult] = useState({name: '', hotel: false, region: false})
+    const [searchResult, setSearchResult] = useState({id: '', name: '', hotel: false, region: false})
     const [dateIn, setDateIn] = useState(setToday())
     const [dateOut, setDateOut] = useState(setTomorrow())
-    const [guests, setGuests] = useState('')
     const [adults, setAdults] = useState(2)
-    const [children, setChildren] = useState(0)
     const [childrenAges, setChildrenAges] = useState([])
+
+    console.log(searchResult)
+
+    const router = useRouter()
     
     const changeSearchResult = (value) => {
         setSearchResult(value)
@@ -25,14 +26,8 @@ const MainForm = (props) => {
     const changeDateOut = (value) => {
         setDateOut(value)
     }
-    const changeGuests = (value) => {
-        setGuests(value)
-    }
     const changeAdults = (value) => {
         setAdults(value)
-    }
-    const changeChildren = (value) => {
-        setChildren(value)
     }
     const changeChildrenAges = (value) => {
         setChildrenAges(value)
@@ -67,7 +62,37 @@ const MainForm = (props) => {
         }
     
         changeSearchResult(obj)
-    } 
+    }
+
+    function checkForm () {
+
+        let ages = []
+        for (let i = 0; i < childrenAges.length; i++) {
+
+            if (i == 0) {
+                ages.push(0)  // Если до 1 года
+                continue
+            }
+
+            ages.push(parseInt(childrenAges[i]))
+        }
+
+        let obj = {
+            hotel_id: searchResult.id,
+            datein: dateIn,
+            dateout: dateOut,
+            adults: adults,
+            children_ages: ages
+        }
+
+        searchResult.hotel ? obj.hotel = 1 : ''
+        searchResult.region ? obj.region = 1 : ''
+
+        router.push({
+            pathname: '/hotels',
+            query: obj
+        })
+    }
 
     return (
         <section className = "main-form">
@@ -88,14 +113,14 @@ const MainForm = (props) => {
                                     changeDateIn = {changeDateIn}
                                     changeDateOut = {changeDateOut}
                                 />
-                                <Search_form_guests />
+                                <Search_form_guests
+                                    adults = {adults}
+                                    childrenAges = {childrenAges}
+                                    changeAdults = {changeAdults}
+                                    changeChildrenAges = {changeChildrenAges}
+                                />
                                 <div className = "direction-form-block direction-form-submit">
-
-                                {/*<Link href = {{pathname: "/hotels", query: { datein: '12-10-1888', dateout: '18-22-2999', hotel: "Солнечный" }}}>Вперед</Link>*/}
-
-                                    <Link href = "/hotels">
-                                        <button type = "button" className = "direction-form-btn">Найти</button>
-                                    </Link>
+                                    <button type = "button" className = "direction-form-btn" onClick = {checkForm}>Найти</button>
                                 </div>
                             </div>
                         </div>

@@ -42,13 +42,13 @@ export default function Search_hotel_input (props) {
 
         try {
 
-            const response = await fetch(`http://hotelsystem.local/api/search-object?str=${value}`)
+            const response = await fetch(`https://maot-api.bokn.ru/api/search-object?str=${value}`)
             const result = await response.json()
 
             if (!response.ok) {
                 throw new Error(`Error! status: ${response.status}`);
             }
-            
+
             for (let key in result.data) {
                 if (result.data.hasOwnProperty(key)) {
                     if (key == 'region') {
@@ -79,7 +79,6 @@ export default function Search_hotel_input (props) {
         <input type="text"
                 name="choose-way"
                 className = "form-way-input"
-                value = {props.searchResult.name}
                 placeholder="Выберите направление"
                 onClick={() => setVisibleSearch(1)}
                 onChange={event => searchHotels(event.target.value)}
