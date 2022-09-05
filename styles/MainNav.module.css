@@ -323,5 +323,10 @@
         background-position: left center;
     }
 
+    .contact-page .header {
+        margin-right: 1rem;
+        margin-left: 1rem;
+    }
+
 
 }
