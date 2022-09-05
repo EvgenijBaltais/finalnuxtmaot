@@ -368,6 +368,10 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-image: url('/icons/location.png');
 }
 
+.icon-item-menu {
+	background-image: url('/icons/menu.png');
+}
+
 /* Заголовок главной, конец */
 
 .secondary-h1 {
@@ -2100,6 +2104,10 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Блок навигации, конец */
 
+.icon-item-menu {
+	display: none;
+}
+
 @media screen and (max-width: 1200px) {
 
 	.cashback-info {
@@ -2283,6 +2291,10 @@ input[type="checkbox"].substylized:checked + label:after {
         margin-right: 1rem;
         margin-left: 1rem;
     }
+
+    .icon-item-menu {
+		display: block;
+	}
 }
 
 @media screen and (max-width: 450px) {

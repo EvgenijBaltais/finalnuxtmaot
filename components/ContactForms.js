@@ -1,5 +1,5 @@
 import React from "react"
-import MediaQuery from 'react-responsive'
+import MediaQuery from "react-responsive"
 import styles from "../styles/ContactForm.module.css"
 import Inputmask from "inputmask"
 
@@ -50,13 +50,15 @@ class ContactForms extends React.Component {
 								<div className={styles["contacts-subscribe-form-inside"]}>
 									<input type="text" name = "get-contacts-subscribe" id = "get-contacts-subscribe" className = {styles["get-contacts-subscribe"]} placeholder = "Укажите свою электронную почту" />
 									<div className = {styles["get-contacts-suscribe-btn"]}>
-                                                    <MediaQuery maxWidth={420}>
-                                                        {(matches) =>
-                                                            matches
-                                                              ? <span className={styles["icon-subscribe-inside"]}></span>
-                                                              : <span>Подписаться</span>
-                                                          }
-                                                    </MediaQuery>
+										<button className = {styles["get-contacts-suscribe__submit"]}>
+                                            <MediaQuery maxWidth={420}>
+                                                {(matches) =>
+                                                    matches
+                                                      ? <span className={styles["icon-subscribe-inside"]}></span>
+                                                      : <span>Подписаться</span>
+                                                  }
+                                            </MediaQuery>
+                                        </button>
                                         <div className = "anim-blick__submit-bg">
                                             <div className ="anim-blick__submit-obj"></div>
                                         </div>

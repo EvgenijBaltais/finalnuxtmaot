@@ -183,6 +183,10 @@
 	cursor: pointer;
 	background: linear-gradient(45deg,#00f260,#0575E6);
 }
+
+.get-contacts-suscribe__submit span {
+	color: #fff;
+}
 .get-contacts-suscribe__submit:hover {
 
 	background: linear-gradient(45deg,#00CA50,#0057AF);
@@ -347,6 +351,7 @@ input[type="checkbox"].konfstylized:not(:checked) + label:after {
 		padding-top: 5px;
 		background-position: left top;
 	}
+
 }
 
 @media screen and (max-width: 420px) {
@@ -413,6 +418,24 @@ input[type="checkbox"].konfstylized:not(:checked) + label:after {
 		height: 50px;
 	    bottom: 0;
 	    top: revert;
+	}
+	.get-contacts-subscribe {
+		width: calc(100% - 60px);
+	}
+
+	.icon-subscribe-inside {
+		display: inline-block;
+		height: 28px;
+		width: 35px;
+		background-image: url('/icons/subscribe.svg');
+		background-repeat: no-repeat;
+		background-size: 32px;
+	}
+
+	.get-contacts-suscribe-btn {
+		width: 56px;
+		height: 48px;
+
 	}
 
 }

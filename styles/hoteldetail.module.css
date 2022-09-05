@@ -420,6 +420,7 @@
 
 .hotel-title-section p {
 	margin-bottom: 25px;
+	font-size: 14px;
 }
 
 .serv-type-section {
@@ -430,13 +431,17 @@
 	margin-bottom: 30px;
 }
 
-.serv-type-section h3 {
+.hotel-title-section h3 {
 	font-size: 16px;
 	line-height: 1;
 	padding-bottom: 10px;
 	color: #4f4f4f;
 }
 
+.hotel-title-descr {
+	display: flex;
+	flex-direction: row;
+}
 
 .hotel-serv-descr {
 	display: flex;
@@ -448,6 +453,24 @@
 	list-style: none;
 	font-size: 14px;
 	line-height: 1.5;
+}
+
+.hotel-main-descr {
+	width: 75%;
+	margin-right: 24px;
+}
+
+.hotel-fact-section {
+	width: 22%;
+	max-width: 195px;
+}
+
+.hotel-fact-section p {
+	font-size: 14px;
+}
+
+.hotel-fact-section span {
+	font-size: 12px;
 }
 
 .serv-list li {
@@ -704,6 +727,10 @@
 	background: linear-gradient(45deg,#00CA50,#0057AF);
 }
 
+.select-nav-bg {
+	display: block;
+}
+
 @media screen and (max-width: 650px) {
 
 	.titles-top {
@@ -719,11 +746,34 @@
 	}
 
 	.select-dates-content {
+		position: relative;
 		flex-direction: column;
 	}
 
-	.select-dates-form-block, .select-dates-form, .hotel-slider {
+	.hotel-slider {
 		width: 100%;
+	}
+
+	.select-dates-form__form {
+		width: 100%;
+	}
+
+	.select-dates-form {
+		width: 100%;
+	    flex-direction: column;
+	    align-items: flex-end;
+	}
+
+	.select-dates-form-block {
+		margin-top: 20px;
+		width: 100%;
+		order: 2;
+	}
+
+	.select-dates-form__btn {
+		margin-top: 23px;
+		width: 150px;
+		height: 80px;
 	}
 
 	.hotel-slider__main {
@@ -789,7 +839,63 @@
 	}
 
 	.select-dates-nav {
+		position: absolute;
+		margin: 0;
+		top: 126px;
 		width: 100%;
+		order: 1;
+	}
+
+	.select-dates-item {
+		display: none;
+		padding: 15px 0 0 0;
+	}
+
+	.select-dates-item:nth-child(1) {
+		display: block;
+		padding: 0;
+	}
+
+	.active-nav-list > .select-dates-item {
+		display: block;
+	}
+
+	.hotel-title-descr {
+		flex-direction: column;
+	}
+
+	.hotel-main-descr {
+		width: 100%;
+		margin: 0 0 20px 0;
+	}
+
+	.hotel-title-section p {
+		margin-bottom: 10px;
+	}
+
+	.hotel-fact-section {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.select-nav-bg {
+		width: calc(100% - 170px);
+		margin-top: 10px;
+		padding: 18px 15px;
+		border-radius: 10px;
+		box-shadow: var(--main-shadow);
+	}
+
+	.select-dates-link {
+		padding-left: 0;
+		color: #000;
+		font-size: 16px;
+		line-height: 1;
+		text-decoration: none;
+	}
+
+	.select-dates-link:after {
+		content: none;
 	}
 }
 
@@ -801,5 +907,9 @@
 	
 	.select-dates-form__btn {
 		width: 170px;
+	}
+
+	.select-dates-nav {
+		position: relative;
 	}
 }
