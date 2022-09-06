@@ -33,6 +33,12 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'FontInterMedium';
+  src: url('../assets/fonts/Inter/Inter-Medium.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
 
 * {
 	margin: 0;
@@ -79,7 +85,7 @@ body {
 
 .section-title {
 	padding-left: 40px;
-	font-family: 'FontInterBold';
+	font-family: 'FontInterMedium';
 	color: rgb(51,51,51);
 	font-size: 22px;
 	line-height: 24px;
@@ -488,9 +494,10 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .footer-place-item {
 	display: block;
-	color:rgb(0, 0, 0);
+	color:#333;
 	font-size: 15px;
 	line-height: 15px;
+	font-family: 'FontInterLight';
 	text-decoration: underline;
 	margin-bottom: 15px;
 }
@@ -507,7 +514,8 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-repeat: no-repeat;
 	background-position: center left;
 	background-size: 25px;
-	color: rgb(51,51,51);
+	font-family: 'FontInter';
+	color: #333;
 
 }
 
@@ -898,7 +906,7 @@ input[type="checkbox"].substylized:checked + label:after {
     }
 
     .footer-phone-info {
-    	font-size: 10px;
+    	color: #4D4D4D;
     }
 
     .payment-method-prom {
@@ -919,6 +927,10 @@ input[type="checkbox"].substylized:checked + label:after {
 
     .anim-blick__submit-bg {
     	left: 0;
+    }
+
+    .footer-place-item {
+    	font-size: 14px;
     }
 
 }
@@ -2294,6 +2306,18 @@ input[type="checkbox"].substylized:checked + label:after {
 
     .icon-item-menu {
 		display: block;
+	}
+
+	.footer-col-title, .footer-title-small {
+		color: #333;
+		font-family: 'FontInterMedium';
+		line-height: 1.6;
+		font-weight: 500;
+	}
+
+	.footer-phone {
+		font-family: 'FontInter';
+		font-weight: 400;
 	}
 }
 
