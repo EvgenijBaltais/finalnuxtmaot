@@ -2,7 +2,7 @@
 import { useState, useEffect} from 'react'
 import Head from 'next/head'
 
-//import { YMaps, Map, Placemark } from "react-yandex-maps"
+import { YMaps, Map, Placemark } from "react-yandex-maps"
 
 import Hotel_search_result from "../components/hotel_details/Hotel_search_result"
 import Rooms_info from "../components/hotel_details/Rooms_info"
