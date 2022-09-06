@@ -1,14 +1,65 @@
+/*const add = {
+    "type": "FeatureCollection",
+    "features": [
+        {"type": "Feature", "id": 0, "geometry": {"type": "Point", "coordinates": [55.831903, 37.411961]}, "properties": {"balloonContentHeader": "<font size=3><b><a target='_blank' href='https://yandex.ru'>Здесь может быть ваша ссылка</a></b></font>", "balloonContentBody": "<p>Ваше имя: <input name='login'></p><p><em>Телефон в формате 2xxx-xxx:</em>  <input></p><p><input type='submit' value='Отправить'></p>", "balloonContentFooter": "<font size=1>Информация предоставлена: </font> <strong>этим балуном</strong>", "clusterCaption": "<strong><s>Еще</s> одна</strong> метка", "hintContent": "<strong>Текст  <s>подсказки</s></strong>"}},
+        {"type": "Feature", "id": 1, "geometry": {"type": "Point", "coordinates": [55.763338, 37.565466]}, "properties": {"balloonContentHeader": "<font size=3><b><a target='_blank' href='https://yandex.ru'>Здесь может быть ваша ссылка</a></b></font>", "balloonContentBody": "<p>Ваше имя: <input name='login'></p><p><em>Телефон в формате 2xxx-xxx:</em>  <input></p><p><input type='submit' value='Отправить'></p>", "balloonContentFooter": "<font size=1>Информация предоставлена: </font> <strong>этим балуном</strong>", "clusterCaption": "<strong><s>Еще</s> одна</strong> метка", "hintContent": "<strong>Текст  <s>подсказки</s></strong>"}},
+        {"type": "Feature", "id": 2, "geometry": {"type": "Point", "coordinates": [55.763338, 37.565466]}, "properties": {"balloonContentHeader": "<font size=3><b><a target='_blank' href='https://yandex.ru'>Здесь может быть ваша ссылка</a></b></font>", "balloonContentBody": "<p>Ваше имя: <input name='login'></p><p><em>Телефон в формате 2xxx-xxx:</em>  <input></p><p><input type='submit' value='Отправить'></p>", "balloonContentFooter": "<font size=1>Информация предоставлена: </font> <strong>этим балуном</strong>", "clusterCaption": "<strong><s>Еще</s> одна</strong> метка", "hintContent": "<strong>Текст  <s>подсказки</s></strong>"}},
+        {"type": "Feature", "id": 3, "geometry": {"type": "Point", "coordinates": [55.744522, 37.616378]}, "properties": {"balloonContentHeader": "<font size=3><b><a target='_blank' href='https://yandex.ru'>Здесь может быть ваша ссылка</a></b></font>", "balloonContentBody": "<p>Ваше имя: <input name='login'></p><p><em>Телефон в формате 2xxx-xxx:</em>  <input></p><p><input type='submit' value='Отправить'></p>", "balloonContentFooter": "<font size=1>Информация предоставлена: </font> <strong>этим балуном</strong>", "clusterCaption": "<strong><s>Еще</s> одна</strong> метка", "hintContent": "<strong>Текст  <s>подсказки</s></strong>"}},
+        {"type": "Feature", "id": 4, "geometry": {"type": "Point", "coordinates": [55.780898, 37.642889]}, "properties": {"balloonContentHeader": "<font size=3><b><a target='_blank' href='https://yandex.ru'>Здесь может быть ваша ссылка</a></b></font>", "balloonContentBody": "<p>Ваше имя: <input name='login'></p><p><em>Телефон в формате 2xxx-xxx:</em>  <input></p><p><input type='submit' value='Отправить'></p>", "balloonContentFooter": "<font size=1>Информация предоставлена: </font> <strong>этим балуном</strong>", "clusterCaption": "<strong><s>Еще</s> одна</strong> метка", "hintContent": "<strong>Текст  <s>подсказки</s></strong>"}},
+        {"type": "Feature", "id": 5, "geometry": {"type": "Point", "coordinates": [55.793559, 37.435983]}, "properties": {"balloonContentHeader": "<font size=3><b><a target='_blank' href='https://yandex.ru'>Здесь может быть ваша ссылка</a></b></font>", "balloonContentBody": "<p>Ваше имя: <input name='login'></p><p><em>Телефон в формате 2xxx-xxx:</em>  <input></p><p><input type='submit' value='Отправить'></p>", "balloonContentFooter": "<font size=1>Информация предоставлена: </font> <strong>этим балуном</strong>", "clusterCaption": "<strong><s>Еще</s> одна</strong> метка", "hintContent": "<strong>Текст  <s>подсказки</s></strong>"}},
+        {"type": "Feature", "id": 6, "geometry": {"type": "Point", "coordinates": [55.800584, 37.675638]}, "properties": {"balloonContentHeader": "<font size=3><b><a target='_blank' href='https://yandex.ru'>Здесь может быть ваша ссылка</a></b></font>", "balloonContentBody": "<p>Ваше имя: <input name='login'></p><p><em>Телефон в формате 2xxx-xxx:</em>  <input></p><p><input type='submit' value='Отправить'></p>", "balloonContentFooter": "<font size=1>Информация предоставлена: </font> <strong>этим балуном</strong>", "clusterCaption": "<strong><s>Еще</s> одна</strong> метка", "hintContent": "<strong>Текст  <s>подсказки</s></strong>"}},        {"type": "Feature", "id": 49, "geometry": {"type": "Point", "coordinates": [55.858585, 37.48498]}, "properties": {"balloonContentHeader": "<font size=3><b><a target='_blank' href='https://yandex.ru'>Здесь может быть ваша ссылка</a></b></font>", "balloonContentBody": "<p>Ваше имя: <input name='login'></p><p><em>Телефон в формате 2xxx-xxx:</em>  <input></p><p><input type='submit' value='Отправить'></p>", "balloonContentFooter": "<font size=1>Информация предоставлена: </font> <strong>этим балуном</strong>", "clusterCaption": "<strong><s>Еще</s> одна</strong> метка", "hintContent": "<strong>Текст  <s>подсказки</s></strong>"}}
+    ]
+}*/
+
 import React, { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import AsideMainForm from "../components/AsideMainForm"
 
+//import Search_switches from "../components/search_results/Search_switches"
 import Search_hotel_item from "../components/search_results/Search_hotel_item"
+//import Select from "../components/stylized_elements/Select"
 import styles from "../styles/search_results/Search_results.module.css"
 
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
+/*
+
+   // Для карты для добавления позже
+const loadScript = (src, onLoad) => {
+    const script = document.createElement("script")
+  
+    script.src = src
+    script.async = true
+    document.body.appendChild(script)
+    script.onload = onLoad
+  }
+  
+  const init = () => {
+    const myMap = new window.ymaps.Map("map", {
+      center: [55.76, 37.64],
+      zoom: 10
+    }, {
+        searchControlProvider: 'yandex#search'
+    }),
+    
+    objectManager = new window.ymaps.ObjectManager({
+        // Чтобы метки начали кластеризоваться, выставляем опцию.
+        clusterize: true,
+        // ObjectManager принимает те же опции, что и кластеризатор.
+        gridSize: 32,
+        clusterDisableClickZoom: true
+    });
+
+
+    objectManager.objects.options.set('preset', 'islands#greenDotIcon')
+    objectManager.clusters.options.set('preset', 'islands#greenClusterIcons')
+    myMap.geoObjects.add(objectManager)
+
+    objectManager.add(add);
+
+  }*/
 
 export default function Hotels (props) {
 
@@ -17,8 +68,12 @@ export default function Hotels (props) {
     const router = useRouter()
     const { query } = useRouter()
 
-    console.log(router)
 
+        /*React.useEffect(() => {
+          loadScript("https://api-maps.yandex.ru/2.1/?lang=ru_RU", () => {
+            window.ymaps.ready(init)
+          })
+        }, [])*/
 
     useEffect(() => {
 
@@ -62,14 +117,18 @@ export default function Hotels (props) {
                 setLoading(false)
           })
 
+          //https://maot-api.bokn.ru/api/hotels/search?start_date=2022-09-20&end_date=2022-09-25&adults=2&childs[0]=2&id=zolotoy_sazan_
+
+          //https://maot-api.bokn.ru/api/regions/search?start_date=2022-09-20&end_date=2022-09-25&adults=2&childs[0]=2&id=965821422
+
     }, [router.isReady])
 
-    //console.log(loadedItems)
+    console.log(loadedItems)
 
 
     // Слайдер
 
-    const [sliderMin, setSliderMin] = useState(5000)
+    const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(8000)
 
 
@@ -88,8 +147,6 @@ export default function Hotels (props) {
         to = document.querySelector('.aside-slider-to')
     })
 
-    //console.log(query)
-
     return (
         <>
         <Head>
@@ -105,10 +162,7 @@ export default function Hotels (props) {
                     <div className = {styles["search-result-left-w"]}>
                         <div className = {`${styles["aside-block"]} ${styles["direction-aside-form"]}`}>
                             <h3 className = "aside-block-title">Направление</h3>
-                            <AsideMainForm
-                                popularHotels = {props.popularHotels.data}
-                                popularWays = {props.popularWays.data}
-                            />
+                            <AsideMainForm popularHotels = {props.popularHotels.data} popularWays = {props.popularWays.data} />
                         </div>
 
                         <div className = "aside-slider">
@@ -123,8 +177,8 @@ export default function Hotels (props) {
                             <Slider
                                 range
                                 defaultValue={[sliderMin, sliderMax]}
-                                min={0}
-                                max={20000}
+                                min={sliderMin}
+                                max={sliderMax}
                                 onChange={value => renewValues(value)}
                             />
                         </div>
@@ -212,6 +266,17 @@ export default function Hotels (props) {
 
                 </div>
             </section>
+
+
+
+{/*   // Для карты для добавления позже
+                <div className = {`${styles["map-block"]}`}>
+                    <div className = {`${styles["show-filters"]}`}>
+                        <span className = {styles["search-switch-text"]}>Показать все фильтры</span>
+                    </div>
+                    <Search_switches />
+                    <div className="map" id = "map"></div>
+</div>*/}
         </>
     )
 }

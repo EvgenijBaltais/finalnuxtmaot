@@ -31,9 +31,10 @@ export default function Search_guests (props) {
             props.changeChildrenAges(array)
     }
 
-    function addChildAge(item) {
+    function addChildAge(index) {
 
-        props.changeChildrenAges(current => [...current, item])
+        // ключ возраста в массиве
+        props.changeChildrenAges(current => [...current, index])
         setVisibleChildren(visibleChildren => !visibleChildren)
     }
 
@@ -64,7 +65,7 @@ export default function Search_guests (props) {
                                     <p className = "search-results__title">Ребенок</p>
                                 </div>
                                 <div className = "search-results__right search-results__age">
-                                    <div className = "search-age-num">{item}</div>
+                                    <div className = "search-age-num">{childAges[item]}</div>
                                     <div className = "search-age-remove" onClick = {() => removeChildAge(index)}></div>
                                 </div>
                             </div>
@@ -80,7 +81,7 @@ export default function Search_guests (props) {
                         <div className = "search-results-add__block">
                             {childAges.map((item, index) => {
                                 return (
-                                    <div className = "search-results-add__item" key = {index} onClick = {() => {addChildAge(item)}}>
+                                    <div className = "search-results-add__item" key = {index} onClick = {() => {addChildAge(index)}}>
                                         {item}
                                     </div>
                                 )

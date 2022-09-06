@@ -11,7 +11,7 @@ export default function Search_hotel_item (props) {
             <div className = {styles["search-item-pic"]}></div>
             <div className = {styles["search-item__content"]}>
                 <Link href={"/hoteldetail"}>
-                    <a className = {styles["search-item__title"]}>Отель Фореста Парк с очень длинным названием</a>
+                    <a className = {styles["search-item__title"]}>{props.item.name}</a>
                 </Link>
                 <div className = {styles["search-item__rate"]}>
                     <ul className={styles["search-rate__list"]}>
@@ -22,16 +22,16 @@ export default function Search_hotel_item (props) {
                         <li className={`${styles["search-rate__item"]} ${styles["search-rate__item-grey"]}`}></li>
                     </ul>
                     <span className = {styles["search-rate__reviews"]}>18 отзывов</span>
-                    <span className = {styles["search-rate__foodtype"]}>Все включено</span>
+                    {props.item.is_all_inclusive ?
+                        <span className = {styles["search-rate__foodtype"]}>Все включено</span> : ''
+                    }
                 </div>
                 <ul className = {styles["search-item__list"]}>
-                    <li className = {styles["search-item__item"]}>Ресторан</li>
-                    <li className = {styles["search-item__item"]}>SPA</li>
-                    <li className = {styles["search-item__item"]}>Боулинг</li>
-                    <li className = {styles["search-item__item"]}>Бильярд</li>
-                    <li className = {styles["search-item__item"]}>Прокат</li>
-                    <li className = {styles["search-item__item"]}>Бассейн</li>
-                    <li className = {styles["search-item__item"]}>Бар</li>
+                    {props.item.services.map((item, index) => {
+                        return (
+                            <li key = {index} className = {styles["search-item__item"]}>{item.group_name}</li>
+                        )
+                    })}
                 </ul>
                 <div className = {styles["search-item__adress"]}>
                     В 30 км. от МКАД по Симферопольскому шоссе, поворот налево, потом направо, потом налево

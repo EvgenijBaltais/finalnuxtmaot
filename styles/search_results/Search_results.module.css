@@ -13,17 +13,26 @@
 }
 
 .search-result-w {
+	position: relative;
 	display: flex;
 	justify-content: space-between;
 }
 
 .search-result-left {
+	position: absolute;
 	width: 400px;
-	overflow: auto;
 	box-shadow: var(--main-shadow);
 	padding: 20px 25px;
 	border-radius: 10px;
 	background-color: #fff;
+}
+
+.search-result-left:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
 }
 
 .search-result-left-w {
@@ -35,7 +44,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
-	margin-bottom: 45px
 }
 
 .aside-checkbox {
@@ -48,25 +56,38 @@
 
 .aside-block {
 	position: relative;
-	padding-bottom: 50px
-}
-
-.aside-close {
-	position: absolute;
-	top: 5px;
-	right: 0;
-	display: inline-block;
-	padding: 5px 10px;
-	cursor: pointer;
-	text-decoration: underline;
-	color: rgb(194,194,194);
-	font-size: 12px;
-	line-height: 12px;
-	z-index: 2;
+	padding-bottom: 40px
 }
 
 .search-result-right {
 	width: 790px;
+	margin-left: 450px;
+}
+
+.aside-stars-list {
+	display: flex;
+	list-style-type: none;
+}
+
+.aside-stars-label {
+	padding-top: 2px;
+}
+
+.aside-stars-item {
+	width: 17px;
+	height: 17px;
+	margin-right: 4px;
+	background-image: url('/images/grey-star.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.aside-stars-item-grey {
+	background-image: url('/images/grey-star.svg');
+}
+
+.aside-stars-item-gold {
+	background-image: url('/images/star.svg');
 }
 
 @media screen and (max-width: 650px) {

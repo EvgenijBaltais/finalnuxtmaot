@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import Search_guests from './Search_guests'
+import Aside_search_guests from './Aside_search_guests'
 
 function useOutsideAlerter(ref, func) {
     useEffect(() => {
@@ -17,7 +17,7 @@ function useOutsideAlerter(ref, func) {
     }, [ref])
 }
 
-export default function Search_form_guests({adults, childrenAges, changeAdults, changeChildrenAges}) {
+export default function Aside_search_form_guests(props) {
 
     const [visibleGuests, setVisibleGuests] = useState(0)
 
@@ -47,8 +47,8 @@ export default function Search_form_guests({adults, childrenAges, changeAdults, 
 
     function makeActive (val) {
 
-        val ? document.querySelector('.form-guests-input-out').classList.add('direction-form-in-active') :
-        document.querySelector('.form-guests-input-out').classList.remove('direction-form-in-active')
+        val ? document.querySelector('.aside-form-guests-input-out').classList.add('aside-direction-form-in-active') :
+        document.querySelector('.aside-form-guests-input-out').classList.remove('aside-direction-form-in-active')
 
         setVisibleGuests(val)
     }
@@ -61,21 +61,21 @@ export default function Search_form_guests({adults, childrenAges, changeAdults, 
     // Клик по ссылке вне, конец
 
     return (
-        <div className = "direction-form-block direction-form-people" ref={wrapperRef}>
+        <div className = "aside-direction-form-block aside-direction-form-people" ref={wrapperRef}>
 
             <input
                 type="text"
-                name="choose-people"
-                className = {`form-way-input form-guests-input form-guests-input-out${visibleGuests ? ' direction-form-in-active' : ''}`}
-                defaultValue={returnGuests(+adults + +childrenAges.length)}
+                name="aside-choose-people"
+                className = {`aside-form-way-input aside-form-guests-input aside-form-guests-input-out${visibleGuests ? ' aside-direction-form-in-active' : ''}`}
+                defaultValue={returnGuests(+props.adults + +props.childrenAges.length)}
                 readOnly = "readonly"
                 onClick={ () => setVisibleGuests(visibleGuests => !visibleGuests)}
             />
-            { visibleGuests ? <Search_guests 
-                                    adults = {adults}
-                                    childrenAges = {childrenAges}
-                                    changeAdults = {changeAdults}
-                                    changeChildrenAges = {changeChildrenAges}
+            { visibleGuests ? <Aside_search_guests 
+                                    adults = {props.adults}
+                                    childrenAges = {props.childrenAges}
+                                    changeAdults = {props.changeAdults}
+                                    changeChildrenAges = {props.changeChildrenAges}
                                 /> : '' }
         </div>
     )

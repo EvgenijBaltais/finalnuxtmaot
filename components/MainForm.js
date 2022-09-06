@@ -10,10 +10,10 @@ const MainForm = (props) => {
     const [searchResult, setSearchResult] = useState({id: '', name: '', hotel: false, region: false})
     const [dateIn, setDateIn] = useState(setToday())
     const [dateOut, setDateOut] = useState(setTomorrow())
+    const [guests, setGuests] = useState('')
     const [adults, setAdults] = useState(2)
+    const [children, setChildren] = useState(0)
     const [childrenAges, setChildrenAges] = useState([])
-
-    console.log(searchResult)
 
     const router = useRouter()
     
@@ -60,33 +60,32 @@ const MainForm = (props) => {
             hotel: event.target.getAttribute('data-info') == 'hotel',
             region: event.target.getAttribute('data-info') == 'region'
         }
-    
+
         changeSearchResult(obj)
+
+        event.target.parentElement.parentElement.querySelector('.form-way-input').value = event.target.innerText
     }
 
     function checkForm () {
 
         let ages = []
         for (let i = 0; i < childrenAges.length; i++) {
-
-            if (i == 0) {
-                ages.push(0)  // Если до 1 года
-                continue
-            }
-
             ages.push(parseInt(childrenAges[i]))
         }
 
         let obj = {
-            hotel_id: searchResult.id,
             datein: dateIn,
             dateout: dateOut,
             adults: adults,
             children_ages: ages
         }
 
-        searchResult.hotel ? obj.hotel = 1 : ''
-        searchResult.region ? obj.region = 1 : ''
+        console.log(searchResult)
+
+        searchResult.hotel ? obj.hotel_id = searchResult.hotel : ''
+        searchResult.region ? obj.region_id = searchResult.region : ''
+        searchResult.hotel_name ? obj.hotel_name = searchResult.hotel_name : ''
+        searchResult.region_name ? obj.region_name = searchResult.region_name : ''
 
         router.push({
             pathname: '/hotels',
@@ -96,45 +95,43 @@ const MainForm = (props) => {
 
     return (
         <section className = "main-form">
-            <div className = "selection-forms">
-                <div className = "selection-form-item">
-                    <form action="" name = "direction-form" className = "selection-form direction-form" id = "direction-form">
-                        <div className = "direction-form-w">
-                            <div className = "direction-form__inside">
-                                <Search_hotel_input
-                                    popularHotels = {props.popularHotels}
-                                    popularWays = {props.popularWays}
-                                    searchResult = {searchResult}
-                                    changeSearchResult = {changeSearchResult}
-                                />
-                                <Search_form_datein 
-                                    dateIn = {dateIn}
-                                    dateOut = {dateOut}
-                                    changeDateIn = {changeDateIn}
-                                    changeDateOut = {changeDateOut}
-                                />
-                                <Search_form_guests
-                                    adults = {adults}
-                                    childrenAges = {childrenAges}
-                                    changeAdults = {changeAdults}
-                                    changeChildrenAges = {changeChildrenAges}
-                                />
-                                <div className = "direction-form-block direction-form-submit">
-                                    <button type = "button" className = "direction-form-btn" onClick = {checkForm}>Найти</button>
-                                </div>
+            <div className = "selection-form-item">
+                <form action="" name = "direction-form" className = "selection-form direction-form" id = "direction-form">
+                    <div className = "direction-form-w">
+                        <div className = "direction-form__inside">
+                            <Search_hotel_input
+                                popularHotels = {props.popularHotels}
+                                popularWays = {props.popularWays}
+                                searchResult = {searchResult}
+                                changeSearchResult = {changeSearchResult}
+                            />
+                            <Search_form_datein 
+                                dateIn = {dateIn}
+                                dateOut = {dateOut}
+                                changeDateIn = {changeDateIn}
+                                changeDateOut = {changeDateOut}
+                            />
+                            <Search_form_guests
+                                adults = {adults}
+                                childrenAges = {childrenAges}
+                                changeAdults = {changeAdults}
+                                changeChildrenAges = {changeChildrenAges}
+                            />
+                            <div className = "direction-form-block direction-form-submit">
+                                <button type = "button" className = "direction-form-btn" onClick = {checkForm}>Найти</button>
                             </div>
                         </div>
-                        <div className = "direction-ways">
-                            <a className = "direction-way" onClick = {searchByClick} data-info = "region">Подмосковье</a>
-                            <a className = "direction-way" onClick = {searchByClick} data-info = "region">Сочи</a>
-                            <a className = "direction-way" onClick = {searchByClick} data-info = "region">Крым</a>
-                            <a className = "direction-way" onClick = {searchByClick} data-info = "region">Абхазия</a>
-                            <span className = "direction-way dont-know-way">
-                                <a>Я не знаю, куда хочу поехать</a>
-                            </span>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div className = "direction-ways">
+                        <a className = "direction-way" onClick = {searchByClick} data-info = "region">Подмосковье</a>
+                        <a className = "direction-way" onClick = {searchByClick} data-info = "region">Сочи</a>
+                        <a className = "direction-way" onClick = {searchByClick} data-info = "region">Крым</a>
+                        <a className = "direction-way" onClick = {searchByClick} data-info = "region">Абхазия</a>
+                        <span className = "direction-way dont-know-way">
+                            <a>Я не знаю, куда хочу поехать</a>
+                        </span>
+                    </div>
+                </form>
             </div>
         </section>
     )
