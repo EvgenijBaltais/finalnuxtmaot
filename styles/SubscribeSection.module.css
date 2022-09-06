@@ -198,12 +198,12 @@
 @media screen and (max-width: 480px) {
 
 	.subscribe-social {
-		margin-top: 35px;
+		margin-top: 30px;
 	}
 	
 	.subscribe-section {
 		flex-direction: column;
-		padding: 10px;
+		padding: 15px 10px;
 	}
 
 	.subscribe-section h2 {
@@ -234,4 +234,17 @@
 		height: 48px;
 	}
 
+	.subscribe-form {
+		margin-top: 10px;
+	}
+	.subscribe-social-block {
+		margin-top: 20px;
+	}
+	.social-tg-rus, .social-tg-pdmsk {
+		margin-bottom: 15px;
+	}
+
+	.subscribe-agree label {
+		font-size: 10px !important;
+	}
 }

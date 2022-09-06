@@ -47,12 +47,6 @@ const Rooms_info = () => {
 
             </div>
 
-
-            <h2 className = "section-title icon-item icon-item-contact">Контакты</h2>
-
-            <div className = {styles["hotel-title-descr"]}>
-            </div>
-
         </div>
     )
 }

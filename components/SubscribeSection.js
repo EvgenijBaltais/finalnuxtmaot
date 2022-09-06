@@ -10,10 +10,10 @@ const SubscribeSection = () => {
                 <form action="" name = "subscribe-form">
                     <div className = {styles["subscribe-form"]}>
                         <div className={styles["subscribe-form-inside"]}>
-                            <input type="text" name = "get-subscribe" id = "get-subscribe" className = {styles["get-subscribe"]} placeholder = "Укажите свою электронную почту" />
+                            <input type="text" name = "get-subscribe" id = "get-subscribe" className = {styles["get-subscribe"]} placeholder = "Укажите свой Email" />
                             <div className = {styles["get-suscribe-btn"]}>
                                 <button className = {styles["get-suscribe__submit"]}>
-                                    <MediaQuery maxWidth={420}>
+                                    <MediaQuery maxWidth={480}>
                                         {(matches) =>
                                             matches
                                               ? <span className={styles["icon-subscribe-inside"]}></span>
