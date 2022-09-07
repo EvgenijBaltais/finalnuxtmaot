@@ -33,6 +33,12 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'FontInterMedium';
+  src: url('../assets/fonts/Inter/Inter-Medium.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
 
 * {
 	margin: 0;
@@ -274,10 +280,11 @@ input[type="checkbox"].substylized:not(:checked) + label:after {
     position: absolute; 
     top: 1px; 
     left: 3px;
-    width: 10px;
+    width: 14px;
    	border-color: transparent;
-    height: 8px; 
-    background: linear-gradient(90deg, #00f260,#0575E6);
+   	border: 0;
+    height: 12px; 
+    background: linear-gradient(45deg, #00f260,#0575E6);
     -webkit-clip-path: polygon(38% 68%, 86% 12%, 100% 28%, 37% 100%, 0 50%, 10% 32%);
 	clip-path: polygon(38% 68%, 86% 12%, 100% 28%, 37% 100%, 0 50%, 10% 32%);
     -webkit-transition: transform .3s;
@@ -343,6 +350,10 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-image: url('/icons/hotel.png');
 }
 
+.icon-item-hotel-w {
+	background-image: url('/icons/hotel-w.png');
+}
+
 .icon-item-direction {
 	background-image: url('/icons/planet.png');
 }
@@ -362,8 +373,20 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-image: url('/icons/reviews.png');
 }
 
+.icon-item-serv {
+	background-image: url('/icons/bell-boy.png');
+}
+
+.icon-item-contact {
+	background-image: url('/icons/phonebook.png');
+}
+
 .icon-item-direction {
 	background-image: url('/icons/location.png');
+}
+
+.icon-item-menu {
+	background-image: url('/icons/menu.png');
 }
 
 /* Заголовок главной, конец */
@@ -482,9 +505,10 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .footer-place-item {
 	display: block;
-	color:rgb(0, 0, 0);
+	color:#333;
 	font-size: 15px;
 	line-height: 15px;
+	font-family: 'FontInterLight';
 	text-decoration: underline;
 	margin-bottom: 15px;
 }
@@ -501,7 +525,8 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-repeat: no-repeat;
 	background-position: center left;
 	background-size: 25px;
-	color: rgb(51,51,51);
+	font-family: 'FontInter';
+	color: #333;
 
 }
 
@@ -892,7 +917,7 @@ input[type="checkbox"].substylized:checked + label:after {
     }
 
     .footer-phone-info {
-    	font-size: 10px;
+    	color: #4D4D4D;
     }
 
     .payment-method-prom {
@@ -913,6 +938,10 @@ input[type="checkbox"].substylized:checked + label:after {
 
     .anim-blick__submit-bg {
     	left: 0;
+    }
+
+    .footer-place-item {
+    	font-size: 14px;
     }
 
 }
@@ -952,10 +981,6 @@ input[type="checkbox"].substylized:checked + label:after {
 
 
 /* Форма подбора */
-
-.main-form {
-	margin-top: 50px;
-}
 
 .direction-form-w {
 	position: relative;
@@ -1860,6 +1885,46 @@ input[type="checkbox"].substylized:checked + label:after {
 	border-radius: 5px;
 }
 
+/* Блок навигации */
+
+.left-nav-block {
+	padding: 15px;
+    -webkit-box-shadow: var(--main-shadow);
+    -moz-box-shadow: var(--main-shadow);
+    box-shadow: var(--main-shadow);
+	border-radius: 10px;
+	margin-bottom: 40px
+}
+
+.left-nav-list {
+	list-style-type: none;
+}
+
+.left-nav-item {
+	padding-bottom:5px
+}
+
+.left-nav-item:last-child {
+	padding-bottom:0
+}
+
+.left-nav-link {
+	font-size: 15px;
+	line-height: 30px;
+	text-decoration: underline;
+}
+
+.left-nav-list__sub {
+	list-style-type: disc;
+	padding-left: 25px
+}
+
+/* Блок навигации, конец */
+
+.icon-item-menu {
+	display: none;
+}
+
 @media screen and (max-width: 1200px) {
 
 	.cashback-info {
@@ -1869,7 +1934,17 @@ input[type="checkbox"].substylized:checked + label:after {
 
 @media screen and (max-width: 650px) {
 
-.mob-burger {
+	.wrapper-fix {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 11;
+		background-color: rgba(0, 0, 0, 0.4);
+	}
+
+	.mob-burger {
     	display: flex !important;
     	width: 40px;
     }
@@ -1943,13 +2018,19 @@ input[type="checkbox"].substylized:checked + label:after {
 		line-height: 2;
 	}
 
-}
 
-@media screen and (max-width: 450px) {
+	.left-nav-block {
+		width: calc(100% - 170px);
+		position: relative;
+		box-shadow: none;
+	}
 
-	.cashback-info {
-		width: 100%;
-		font-size: 14px;
+	.left-nav-list::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	.left-nav-list:-moz-scrollbar{
+		width: 6px;
 	}
 
 	.cashback-block-mobile {
@@ -2532,87 +2613,9 @@ input[type="checkbox"].substylized:checked + label:after {
 	width: calc(100% + 76px);
 	position: absolute;
 	top: 0;
-	bottom: 0;
-	left: -38px;
+	left: 0;
 	right: 0;
-	margin: auto;
-	display: block;
-	text-decoration: none;
-	color: #fff;
-	z-index: 3;
+	bottom: 0;
+	z-index: 11;
+	background-color: rgba(0, 0, 0, 0.4);
 }
-
-.aside-search-results-add__item {
-	font-family: 'FontInterBold';
-}
-
-.aside-search-results-add__item {
-    position: relative;
-    padding: 6px 0;
-    text-align: left;
-    color: #fff;
-    font-family: 'FontInterLight';
-    cursor: pointer;
-    user-select: none;
-	font-size: 16px;
-	line-height: 16px;
-}
-
-.aside-search-results-add__item:first-child {
-    padding-top: 0;
-}
-
-.aside-search-results-add__item:hover {
-    font-family: 'FontInterSemiBold';
-	font-size: 16px;
-	line-height: 16px;
-}
-
-.aside-search-results-add__item:hover:after
- {
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    left: -20px;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    content: '';
-    display: block;
-    background-image: url('/icons/left-right.svg');
-    background-position: left center;
-    background-repeat: no-repeat;
-    background-size: 8px;
-	font-size: 16px;
-	line-height: 16px;
-}
-
-.aside-search-results-add__block {
-    height: 240px;
-    margin-top: 20px;
-    overflow: auto;
-    margin-left: -20px;
-    padding-left: 20px;
-    scrollbar-width: thin;
-    scrollbar-color: #fff;
-}
-
-.aside-search-results-add__block::-webkit-scrollbar {
-    height: 12px;
-    width: 6px;
-}
-
-.aside-search-results-add__block::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.aside-search-results-add__block::-webkit-scrollbar-thumb {
-    height: 130px;
-    background-color: #fff;
-    border-radius: 3px;
-    border: 3px solid #fff;
-}
-
-
-
-/* Форма подбора, конец */

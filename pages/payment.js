@@ -87,61 +87,6 @@ render() {
                                 </li>
                             </ul>
                         </div>
-                        <h2 className="single-block-title left-block-bedroom">
-                            Супер цена!
-                        </h2>
-                        <div className = "left-nav-block super-prices">
-                            <div className={styles["super-prices-item"]}>
-                                <div className={styles["super-prices-item__name"]}>
-                                    <a href="" className={styles["super-prices-item__link"]}>Bridge Resort(Сочи)</a>
-                                </div>
-                                <div className={styles["super-prices-item__price"]}>
-                                    <p className={styles["super-prices-item__number"]}>
-                                        <span>от 4500</span>&nbsp;&#8381;
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={styles["super-prices-item"]}>
-                                <div className={styles["super-prices-item__name"]}>
-                                    <a href="" className={styles["super-prices-item__link"]}>Country Resort</a>
-                                </div>
-                                <div className={styles["super-prices-item__price"]}>
-                                    <p className={styles["super-prices-item__number"]}>
-                                        <span>от 4500</span>&nbsp;&#8381;
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={styles["super-prices-item"]}>
-                                <div className={styles["super-prices-item__name"]}>
-                                    <a href="" className={styles["super-prices-item__link"]}>Mriya Resort</a>
-                                </div>
-                                <div className={styles["super-prices-item__price"]}>
-                                    <p className={styles["super-prices-item__number"]}>
-                                        <span>от 4500</span>&nbsp;&#8381;
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={styles["super-prices-item"]}>
-                                <div className={styles["super-prices-item__name"]}>
-                                    <a href="" className={styles["super-prices-item__link"]}>Respect Hall</a>
-                                </div>
-                                <div className={styles["super-prices-item__price"]}>
-                                    <p className={styles["super-prices-item__number"]}>
-                                        <span>от 4500</span>&nbsp;&#8381;
-                                    </p>
-                                </div>
-                            </div>
-                            <div className={styles["super-prices-item"]}>
-                                <div className={styles["super-prices-item__name"]}>
-                                    <a href="" className={styles["super-prices-item__link"]}>Атлас Парк Отель</a>
-                                </div>
-                                <div className={styles["super-prices-item__price"]}>
-                                    <p className={styles["super-prices-item__number"]}>
-                                        <span>от 4500</span>&nbsp;&#8381;
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div className = {styles["pay-right"]}>

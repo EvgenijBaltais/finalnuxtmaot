@@ -43,7 +43,6 @@ class MapCarousel extends React.Component {
                     onSlideChange={(e) => console.log(e.$el[0].swiper.realIndex)}
                     className="map-swiper"
                 >
-                
                 {cities.map((slideContent, index) => (
                     <SwiperSlide key={slideContent} item = "index">
                         {slideContent}
@@ -63,7 +62,7 @@ class MapCarousel extends React.Component {
                     <h2 className = "section-title icon-item icon-item-direction">Как к нам добраться</h2>
                     <div className = {`${styles["contact-info-block"]} ${styles["contact-info-adress"]}`}>
                         <p className = "subtitle-bold">Адрес</p>
-                        <span className = "block-span">г.&nbsp;Москва, ул.&nbsp;Бауманская д.6с2. Бизнес-центр Виктория Плаза, 8&nbsp;этаж, 804&nbsp;офис</span>
+                        <span className = "block-span">г.&nbsp;Москва, ул.&nbsp;Бауманская д.6с2. Бизнес-центр Виктория&nbsp;Плаза, 8&nbsp;этаж, 804&nbsp;офис</span>
                     </div>
                     <div className = {`${styles["contact-info-block"]} ${styles["contact-info-phone"]}`}>
                         <p className = "subtitle-bold">Телефоны</p>

@@ -1,11 +1,13 @@
 
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useRef} from 'react'
 import Head from 'next/head'
 
 import { YMaps, Map, Placemark } from "react-yandex-maps"
 
 import Hotel_search_result from "../components/hotel_details/Hotel_search_result"
 import Rooms_info from "../components/hotel_details/Rooms_info"
+import Hotel_service from "../components/hotel_details/Hotel_service"
+import Hotel_contact from "../components/hotel_details/Hotel_contact"
 import Hotel_rooms_all from "../components/hotel_details/Hotel_rooms_all"
 import styles from "../styles/Hoteldetail.module.css"
 
@@ -26,6 +28,18 @@ function Hoteldetail ({hotel}) {
         e.preventDefault()
         setActive_block(e.target.getAttribute('data-value'))
     }
+
+
+    const [visibleNav, setVisibleNav] = useState(0)
+
+    const rootEl = useRef(null)
+
+        useEffect(() => {
+          const onClick = e => rootEl.current.contains(e.target) || setVisibleNav(false)
+
+          document.addEventListener('click', onClick)
+          return () => document.removeEventListener('click', onClick)
+        }, [])
 
     return (
         <>
@@ -156,63 +170,51 @@ function Hoteldetail ({hotel}) {
 
                     {active_block == 1 ? <Hotel_search_result /> : ''}
                     {active_block == 2 ? <Rooms_info /> : ''}
-                    {active_block == 3 ? <Hotel_rooms_all /> : ''}
+                    {active_block == 3 ? <Hotel_service /> : ''}
+                    {active_block == 4 ? <Hotel_contact /> : ''}
                 </div>
 
                 <div className = {styles["select-dates-nav"]}>
-                    <div className = {styles["select-dates-item"]}>
-                        <a href="" 
-                            data-value = "1" 
-                            onClick={changeBlock} 
-                            className = {`${styles["select-dates-link"]} ${active_block == 1 ? styles["select-dates-link-active"] : ''}`}
-                        >
-                            Поиск номеров
-                        </a>
-                    </div>
-                    <div className = {styles["select-dates-item"]}>
-                        <a href="" 
-                            data-value = "2" 
-                            onClick={changeBlock} 
-                            className = {`${styles["select-dates-link"]} ${active_block == 2 ? styles["select-dates-link-active"] : ''}`}
-                        >
-                            Описание отеля
-                        </a>
-                    </div>
-                    <div className = {styles["select-dates-item"]}>
-                        <a href="" 
-                            data-value = "3" 
-                            onClick={changeBlock} 
-                            className = {`${styles["select-dates-link"]} ${active_block == 3 ? styles["select-dates-link-active"] : ''}`}
-                        >
-                            Номера
-                        </a>
-                    </div>
-                    <div className = {styles["select-dates-item"]}>
-                        <a href=""
-                            data-value = "4"
-                            onClick={changeBlock}
-                            className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
-                        >
-                            Инфраструктура
-                        </a>
-                    </div>
-                    <div className = {styles["select-dates-item"]}>
-                        <a href=""
-                            data-value = "5"
-                            onClick={changeBlock}
-                            className = {`${styles["select-dates-link"]} ${active_block == 5 ? styles["select-dates-link-active"] : ''}`}
-                        >
-                            Развлечения
-                        </a>
-                    </div>
-                    <div className = {styles["select-dates-item"]}>
-                        <a href=""
-                            data-value = "6"
-                            onClick={changeBlock}
-                            className = {`${styles["select-dates-link"]} ${active_block == 6 ? styles["select-dates-link-active"] : ''}`}
-                        >
-                            Контакты
-                        </a>
+                    
+                    <h2 className = "section-title icon-item icon-item-menu">Навигация</h2>
+
+                    <div className = {visibleNav ? `${styles["select-nav-bg"]} ${styles["active-nav-list"]}` : styles["select-nav-bg"]} ref={rootEl}>
+                        <div className = {styles["select-dates-item"]} onClick = {() => setVisibleNav(visibleNav => !visibleNav)}>
+                            <a href="" 
+                                data-value = "1" 
+                                onClick={changeBlock} 
+                                className = {`${styles["select-dates-link"]} ${active_block == 1 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Поиск номеров
+                            </a>
+                        </div>
+                        <div className = {styles["select-dates-item"]}>
+                            <a href="" 
+                                data-value = "2" 
+                                onClick={changeBlock} 
+                                className = {`${styles["select-dates-link"]} ${active_block == 2 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Об отеле
+                            </a>
+                        </div>
+                        <div className = {styles["select-dates-item"]}>
+                            <a href="" 
+                                data-value = "3" 
+                                onClick={changeBlock} 
+                                className = {`${styles["select-dates-link"]} ${active_block == 3 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Услуги
+                            </a>
+                        </div>
+                        <div className = {styles["select-dates-item"]}>
+                            <a href=""
+                                data-value = "4"
+                                onClick={changeBlock}
+                                className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Контакты
+                            </a>
+                        </div>
                     </div>
                 </div>
             </section>

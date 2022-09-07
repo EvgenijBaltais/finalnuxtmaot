@@ -1,3 +1,4 @@
+import MediaQuery from 'react-responsive'
 import styles from "../styles/SubscribeSection.module.css"
 
 const SubscribeSection = () => {
@@ -9,9 +10,17 @@ const SubscribeSection = () => {
                 <form action="" name = "subscribe-form">
                     <div className = {styles["subscribe-form"]}>
                         <div className={styles["subscribe-form-inside"]}>
-                            <input type="text" name = "get-subscribe" id = "get-subscribe" className = {styles["get-subscribe"]} placeholder = "Укажите свою электронную почту" />
+                            <input type="text" name = "get-subscribe" id = "get-subscribe" className = {styles["get-subscribe"]} placeholder = "Укажите свой Email" />
                             <div className = {styles["get-suscribe-btn"]}>
-                                <button className = {styles["get-suscribe__submit"]}>Подписаться</button>
+                                <button className = {styles["get-suscribe__submit"]}>
+                                    <MediaQuery maxWidth={480}>
+                                        {(matches) =>
+                                            matches
+                                              ? <span className={styles["icon-subscribe-inside"]}></span>
+                                              : <span>Подписаться</span>
+                                          }
+                                    </MediaQuery>
+                                </button>
                                 <div className = "anim-blick__submit-bg">
                                     <div className ="anim-blick__submit-obj"></div>
                                 </div>

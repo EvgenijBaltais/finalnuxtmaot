@@ -79,6 +79,19 @@
 	background: linear-gradient(45deg,#00f260,#0575E6);
 }
 
+.get-suscribe__submit span {
+	color: #fff;
+}
+
+.icon-subscribe-inside {
+	display: inline-block;
+	height: 28px;
+	width: 35px;
+	background-image: url('/icons/subscribe.svg');
+	background-repeat: no-repeat;
+	background-size: 32px;
+}
+
 .get-subscribe::-webkit-input-placeholder {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
 .get-subscribe::-moz-placeholder          {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
 .get-subscribe:-moz-placeholder           {color: rgb(103,103,103);	font-size: 18px;line-height: 18px;}
@@ -185,12 +198,12 @@
 @media screen and (max-width: 480px) {
 
 	.subscribe-social {
-		margin-top: 35px;
+		margin-top: 30px;
 	}
 	
 	.subscribe-section {
 		flex-direction: column;
-		padding: 10px;
+		padding: 15px 10px;
 	}
 
 	.subscribe-section h2 {
@@ -212,5 +225,26 @@
 	.social-vk {
 		width: 100%;
 	}
+	.get-subscribe {
+		width: calc(100% - 60px);
+	}
 
+	.get-suscribe-btn {
+		width: 56px;
+		height: 48px;
+	}
+
+	.subscribe-form {
+		margin-top: 10px;
+	}
+	.subscribe-social-block {
+		margin-top: 20px;
+	}
+	.social-tg-rus, .social-tg-pdmsk {
+		margin-bottom: 15px;
+	}
+
+	.subscribe-agree label {
+		font-size: 10px !important;
+	}
 }
