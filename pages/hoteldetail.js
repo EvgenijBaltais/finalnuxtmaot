@@ -63,7 +63,7 @@ function Hoteldetail ({hotel}) {
                         </ul>
                         <span className = {styles["hotel-rate__reviews"]}>{hotelData.reviews.length} отзывов</span>
                         <div className={styles["add-to-favorite"]}>
-                            <a className={styles["add-to-favorite__link"]}>добавить в избранное</a>
+                            <a className={styles["add-to-favorite__link"]}>добавить&nbsp;в&nbsp;избранное</a>
                         </div>
                     </div>
                 </div>
