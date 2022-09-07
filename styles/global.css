@@ -270,10 +270,11 @@ input[type="checkbox"].substylized:not(:checked) + label:after {
     position: absolute; 
     top: 1px; 
     left: 3px;
-    width: 10px;
+    width: 14px;
    	border-color: transparent;
-    height: 8px; 
-    background: linear-gradient(90deg, #00f260,#0575E6);
+   	border: 0;
+    height: 12px; 
+    background: linear-gradient(45deg, #00f260,#0575E6);
     -webkit-clip-path: polygon(38% 68%, 86% 12%, 100% 28%, 37% 100%, 0 50%, 10% 32%);
 	clip-path: polygon(38% 68%, 86% 12%, 100% 28%, 37% 100%, 0 50%, 10% 32%);
     -webkit-transition: transform .3s;
