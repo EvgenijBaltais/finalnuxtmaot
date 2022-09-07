@@ -1,7 +1,10 @@
-import styles from "../../styles/search_results/Search_hotel_item.module.css"
-
 import Link from "next/link"
 
+import { Swiper, SwiperSlide } from "swiper/react"
+import { Pagination, Navigation } from "swiper"
+
+import styles from "../../styles/search_results/Search_hotel_item.module.css"
+import "swiper/css"
 
 export default function Search_hotel_item ({item, nights}) {
 
@@ -19,12 +22,45 @@ export default function Search_hotel_item ({item, nights}) {
         return (Math.round(parseInt(price)) * nights).toLocaleString()
     }
 
+    //function addBackgroundImage (event) {
+    //    console.log(`url(${event.el.querySelector('.swiper-slide').getAttribute('data-pic')})`)
+    //    event.el.querySelector('.swiper-slide').style.background = `url('${event.el.querySelector('.swiper-slide').getAttribute('data-pic')}')`
+    //}
+
+
     return (
 
         <div className={styles["search-item"]}>
-            <div className = {styles["search-item-pics"]}>
-                <div className = {styles["search-item-pic"]} style = {{backgroundImage: `url(${item.images[0]})`}}></div>
-            </div>
+
+
+                <Swiper
+                    //onSlideChange = {event => addBackgroundImage(event)}
+                    slidesPerView={1}
+                    spaceBetween={0}
+                    loop={true}
+                    pagination={{
+                        clickable: true,
+                        bulletClass: `reviews-pagination-bullet`
+                    }}
+                    navigation={true}
+                    modules={[Pagination, Navigation]}
+                    className={`search-item-pics ${styles["search-item-pics"]}`}
+                >
+                    {item.images.map((item, index) => {
+                        if (index > 7) return false
+                        return (
+                            <SwiperSlide
+                                className={styles["search-item-pic"]}
+                                key = {index}
+                                //style = {{backgroundImage: `url(${item})`}}
+                                //data-pic = {item}
+                            ></SwiperSlide>
+                        )
+                    })}
+                </Swiper>
+
+                {/*<div className = {styles["search-item-pic"]} style = {{backgroundImage: `url(${item.images[0]})`}}></div>*/}
+
             <div className = {styles["search-item__content"]}>
                 <Link href={"/hoteldetail"}>
                     <a className = {styles["search-item__title"]}>{item.name}</a>

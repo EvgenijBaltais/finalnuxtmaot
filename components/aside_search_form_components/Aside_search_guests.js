@@ -33,7 +33,7 @@ export default function Aside_search_guests (props) {
 
     function addChildAge(index) {
 
-        props.changeChildrenAges(current => [...current, item])
+        props.changeChildrenAges(current => [...current, index])
         setVisibleChildren(visibleChildren => !visibleChildren)
     }
 

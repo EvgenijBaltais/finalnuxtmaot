@@ -602,6 +602,73 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Карта в контактах, конец */
 
+/* Swiper на странице Поиск номеров */ 
+
+.search-item-pics .swiper-button-prev {
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	bottom: 0;
+	left: 10px;
+	top: 0;
+	margin: auto;
+	border-radius: 50%;
+	background-color: rgba(0,0,0,.5);
+	z-index: 5;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 14px;
+	background-image: url('/icons/white-left.svg');
+	cursor: pointer;
+}
+
+.search-item-pics .swiper-button-next {
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	bottom: 0;
+	right: 10px;
+	top: 0;
+	margin: auto;
+	border-radius: 50%;
+	background-color: rgba(0,0,0,.5);
+	z-index: 5;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 14px;
+	background-image: url('/icons/white-right.svg');
+	cursor: pointer;
+}
+
+.search-item-pics .swiper-pagination {
+	position: absolute;
+	width: calc(100% - 20px)!important;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	bottom: 5px!important;
+	left: 10px!important;
+	right: 10px!important;
+	margin: auto;
+	min-height: 20px;
+	z-index: 5;
+}
+
+.search-item-pics .reviews-pagination-bullet {
+	display: inline-flex;
+	width: 5px;
+	height: 5px;
+	margin: 2px;
+	background-color: rgb(223,219,210);
+	border-radius: 100%;
+}
+
+.search-item-pics .swiper-pagination-bullet-active {
+	background-color: rgb(255,74,43);
+}
+
+/* Swiper на странице Поиск номеров, конец */ 
+
 /* Swiper в разделе Контакты*/
 
 .map-swiper {
@@ -2613,9 +2680,87 @@ input[type="checkbox"].substylized:checked + label:after {
 	width: calc(100% + 76px);
 	position: absolute;
 	top: 0;
-	left: 0;
-	right: 0;
 	bottom: 0;
-	z-index: 11;
-	background-color: rgba(0, 0, 0, 0.4);
+	left: -38px;
+	right: 0;
+	margin: auto;
+	display: block;
+	text-decoration: none;
+	color: #fff;
+	z-index: 3;
 }
+
+.aside-search-results-add__item {
+	font-family: 'FontInterBold';
+}
+
+.aside-search-results-add__item {
+    position: relative;
+    padding: 6px 0;
+    text-align: left;
+    color: #fff;
+    font-family: 'FontInterLight';
+    cursor: pointer;
+    user-select: none;
+	font-size: 16px;
+	line-height: 16px;
+}
+
+.aside-search-results-add__item:first-child {
+    padding-top: 0;
+}
+
+.aside-search-results-add__item:hover {
+    font-family: 'FontInterSemiBold';
+	font-size: 16px;
+	line-height: 16px;
+}
+
+.aside-search-results-add__item:hover:after
+ {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    left: -20px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    content: '';
+    display: block;
+    background-image: url('/icons/left-right.svg');
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 8px;
+	font-size: 16px;
+	line-height: 16px;
+}
+
+.aside-search-results-add__block {
+    height: 240px;
+    margin-top: 20px;
+    overflow: auto;
+    margin-left: -20px;
+    padding-left: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: #fff;
+}
+
+.aside-search-results-add__block::-webkit-scrollbar {
+    height: 12px;
+    width: 6px;
+}
+
+.aside-search-results-add__block::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.aside-search-results-add__block::-webkit-scrollbar-thumb {
+    height: 130px;
+    background-color: #fff;
+    border-radius: 3px;
+    border: 3px solid #fff;
+}
+
+
+
+/* Форма подбора, конец */

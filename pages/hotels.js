@@ -37,13 +37,15 @@ export default function Hotels (props) {
             // Определить сколько всего ночей было выбрано
             setNights(calculateNights(dateIn, dateOut))
 
-            query.hotel ? link = 'https://maot-api.bokn.ru/api/hotels/search?'
-                        : link = 'https://maot-api.bokn.ru/api/regions/search?'
+            query.region_id ? link = 'https://maot-api.bokn.ru/api/regions/search?'
+                        : link = 'https://maot-api.bokn.ru/api/hotels/search?'
 
-            link += 'start_date=' + dateIn
+            query.region_id ? link += '&id=' + query.region_id
+                        : link += '&id=' + query.hotel_id
+
+            link += '&start_date=' + dateIn
             link += '&end_date=' + dateOut
             link += '&adults=' + query.adults
-            link += '&id=' + query.hotel_id
             
 
             if (query.children_ages) {
@@ -52,13 +54,7 @@ export default function Hotels (props) {
                 }
             }
 
-            /* Костыль, потом удалить */
-
-            link = 'https://maot-api.bokn.ru/api/regions/search?start_date=2022-09-20&end_date=2022-09-25&adults=2&childs[0]=2&id=965821422'
-
-            /* Костыль, потом удалить. конец */
-  
-          /* console.log(link ) */
+            console.log(link)
 
            fetch(link)
                     .then((res) => res.json())
@@ -71,14 +67,14 @@ export default function Hotels (props) {
                 let nights = calculateNights(dateIn, dateOut)
 
                 for (let i = 0; i < res.data.length; i++) {
-                    if (max < res.data[i].daily_price) max = res.data[i].daily_price
+                    if (max < Math.round(parseInt(res.data[i].daily_price))) max = Math.round(parseInt(res.data[i].daily_price))
                 }
                 for (let i = 0; i < res.data.length; i++) {
-                    if (max > res.data[i].daily_price) min = res.data[i].daily_price
+                    if (max > Math.round(parseInt(res.data[i].daily_price))) min = Math.round(parseInt(res.data[i].daily_price))
                 }
 
-                min = Math.round(parseInt(min) * nights)
-                max = Math.round(parseInt(max) * nights)
+                min *= nights
+                max *= nights
 
                 setSliderMin(min)
                 setSliderMax(max)
@@ -87,16 +83,12 @@ export default function Hotels (props) {
 
     }, [router.isReady])
 
-    //console.log(loadedItems)
 
     // Функция для определения количества ночей для дат в формате гг-мм.дд
 
     function calculateNights (datein, dateout) {
         let begin_date = new Date(datein)
         let end_date = new Date(dateout)
-
-        console.log((end_date - begin_date) / (1000 * 60 * 60 * 24))
-        
         return (end_date - begin_date) / (1000 * 60 * 60 * 24)
     }
 
@@ -119,8 +111,6 @@ export default function Hotels (props) {
         to = document.querySelector('.aside-slider-to')
     })
 
-    //console.log(query)
-
     return (
         <>
         <Head>
@@ -137,6 +127,11 @@ export default function Hotels (props) {
                         <div className = {`${styles["aside-block"]} ${styles["direction-aside-form"]}`}>
                             <h3 className = "aside-block-title">Направление</h3>
                             <AsideMainForm
+                                setNights = {setNights}
+                                setLoadedItems = {setLoadedItems}
+                                setLoading = {setLoading}
+                                setSliderMin = {setSliderMin}
+                                setSliderMax = {setSliderMax}
                                 popularHotels = {props.popularHotels.data}
                                 popularWays = {props.popularWays.data}
                             />
@@ -157,6 +152,7 @@ export default function Hotels (props) {
                             </div>
                             {sliderMax != 0 ?
                                 <Slider
+                                step = {100}
                                     range
                                     defaultValue={[sliderMin, sliderMax]}
                                     min={0}
@@ -241,11 +237,15 @@ export default function Hotels (props) {
                     
                     {isLoading ? 'Загрузка подходящих вариантов...' : ''}
 
-                    {loadedItems.map((item, index) => {
-                        return (
-                            <Search_hotel_item key = {index} item = {item} nights = {nights} />
-                        )
-                    })}
+                    {
+                        loadedItems.length ? (loadedItems.map((item, index) => {
+                            return (
+                                <Search_hotel_item key = {index} item = {item} nights = {nights} />
+                            )
+                        })) : ''
+                    }
+
+                    {!isLoading && !loadedItems.length ? 'Результатов нет' : ''}
 
                 </div>
             </section>

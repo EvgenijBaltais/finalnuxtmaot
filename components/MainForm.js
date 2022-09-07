@@ -80,8 +80,6 @@ const MainForm = (props) => {
             children_ages: ages
         }
 
-        console.log(searchResult)
-
         searchResult.hotel ? obj.hotel_id = searchResult.hotel : ''
         searchResult.region ? obj.region_id = searchResult.region : ''
         searchResult.hotel_name ? obj.hotel_name = searchResult.hotel_name : ''

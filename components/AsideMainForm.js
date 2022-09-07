@@ -1,17 +1,14 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import Aside_search_hotel_input from './aside_search_form_components/Aside_search_hotel_input'
 import Aside_search_form_datein from './aside_search_form_components/Aside_search_form_datein'
 import Aside_search_form_guests from './aside_search_form_components/Aside_search_form_guests'
 
-const AsideMainForm = ({popularHotels, popularWays}) => {
+const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, setSliderMax, setNights, setLoadedItems}) => {
 
     const router = useRouter()
     const { query } = useRouter()
-
-    //console.log(popularHotels)
-
     const [searchResult, setSearchResult] = useState({id: '', name: '', hotel: false, region: false})
     const [dateIn, setDateIn] = useState(query.datein || setToday())
     const [dateOut, setDateOut] = useState(query.dateout || setTomorrow())
@@ -55,6 +52,7 @@ const AsideMainForm = ({popularHotels, popularWays}) => {
         return num < 10 ? '0' + num : num
     }
 
+
     function checkForm () {
 
         let ages = []
@@ -69,17 +67,78 @@ const AsideMainForm = ({popularHotels, popularWays}) => {
             children_ages: ages
         }
 
-        //console.log(searchResult)
-
         searchResult.hotel ? obj.hotel_id = searchResult.hotel : ''
         searchResult.region ? obj.region_id = searchResult.region : ''
         searchResult.hotel_name ? obj.hotel_name = searchResult.hotel_name : ''
         searchResult.region_name ? obj.region_name = searchResult.region_name : ''
 
-        router.push({
-            pathname: '/hotels',
-            query: obj
-        })
+        // Запрос из боковой формы
+            setLoadedItems([])
+            setLoading(true)
+
+            let [dayin, monthIn, yearIn] = dateIn.split('.')
+            let [dayout, monthOut, yearOut] = dateOut.split('.')
+            let datein = yearIn + '-' + monthIn + '-' + dayin
+            let dateout = yearOut + '-' + monthOut + '-' + dayout
+            let link = 'https://maot-api.bokn.ru/api/regions/search?'
+
+            console.log(datein, dateout)
+
+            // Определить сколько всего ночей было выбрано
+            setNights(calculateNights(datein, dateout))
+
+ 
+            searchResult.region ? link += '&id=' + searchResult.region
+                        : link += '&id=' + query.region_id
+
+            link += '&start_date=' + datein
+            link += '&end_date=' + dateout
+            link += '&adults=' + adults
+            
+
+            if (obj.children_ages) {
+                for (let i = 0; i < obj.children_ages.length; i++) {
+                    link += '&children_ages=' + obj.children_ages[i]
+                }
+            }
+
+            console.log(link)
+
+           fetch(link)
+                    .then((res) => res.json())
+                    .then((res) => {
+                        setLoadedItems(res.data)
+                
+                // определить минимум и максимум цен
+
+                let min = 0
+                let max = 0
+                let nights = calculateNights(datein, dateout)
+
+                for (let i = 0; i < res.data.length; i++) {
+                    if (max < Math.round(parseInt(res.data[i].daily_price))) max = Math.round(parseInt(res.data[i].daily_price))
+                }
+                for (let i = 0; i < res.data.length; i++) {
+                    if (max > Math.round(parseInt(res.data[i].daily_price))) min = Math.round(parseInt(res.data[i].daily_price))
+                }
+
+                min *= nights
+                max *= nights
+
+                console.log(min)
+                console.log(max)
+
+                setSliderMin(min)
+                setSliderMax(max)
+                setLoading(false)
+          })
+
+          function calculateNights (datein, dateout) {
+            let begin_date = new Date(datein)
+            let end_date = new Date(dateout)
+            return (end_date - begin_date) / (1000 * 60 * 60 * 24)
+        }
+
     }
 
     return (
