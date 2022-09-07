@@ -2043,6 +2043,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .aside-slider {
 	padding-bottom: 45px;
+	    min-height: 135px;
 }
 
 .aside-slider-val {

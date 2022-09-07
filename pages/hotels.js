@@ -14,11 +14,13 @@ export default function Hotels (props) {
 
     const [loadedItems, setLoadedItems] = useState([])
     const [isLoading, setLoading] = useState(false)
+    const [nights, setNights] = useState(0)
     const router = useRouter()
     const { query } = useRouter()
 
-    console.log(router)
 
+    const [sliderMin, setSliderMin] = useState(0)
+    const [sliderMax, setSliderMax] = useState(0)
 
     useEffect(() => {
 
@@ -31,6 +33,9 @@ export default function Hotels (props) {
             let dateIn = yearIn + '-' + monthIn + '-' + dayIn
             let dateOut = yearOut + '-' + monthOut + '-' + dayOut
             let link = ''
+
+            // Определить сколько всего ночей было выбрано
+            setNights(calculateNights(dateIn, dateOut))
 
             query.hotel ? link = 'https://maot-api.bokn.ru/api/hotels/search?'
                         : link = 'https://maot-api.bokn.ru/api/regions/search?'
@@ -59,6 +64,24 @@ export default function Hotels (props) {
                     .then((res) => res.json())
                     .then((res) => {
                         setLoadedItems(res.data)
+                
+                // определить минимум и максимум цен
+                let min = 0
+                let max = 0
+                let nights = calculateNights(dateIn, dateOut)
+
+                for (let i = 0; i < res.data.length; i++) {
+                    if (max < res.data[i].daily_price) max = res.data[i].daily_price
+                }
+                for (let i = 0; i < res.data.length; i++) {
+                    if (max > res.data[i].daily_price) min = res.data[i].daily_price
+                }
+
+                min = Math.round(parseInt(min) * nights)
+                max = Math.round(parseInt(max) * nights)
+
+                setSliderMin(min)
+                setSliderMax(max)
                 setLoading(false)
           })
 
@@ -66,11 +89,19 @@ export default function Hotels (props) {
 
     //console.log(loadedItems)
 
+    // Функция для определения количества ночей для дат в формате гг-мм.дд
+
+    function calculateNights (datein, dateout) {
+        let begin_date = new Date(datein)
+        let end_date = new Date(dateout)
+
+        console.log((end_date - begin_date) / (1000 * 60 * 60 * 24))
+        
+        return (end_date - begin_date) / (1000 * 60 * 60 * 24)
+    }
+
 
     // Слайдер
-
-    const [sliderMin, setSliderMin] = useState(5000)
-    const [sliderMax, setSliderMax] = useState(8000)
 
 
     let from = ''
@@ -112,21 +143,27 @@ export default function Hotels (props) {
                         </div>
 
                         <div className = "aside-slider">
-                                <div className="slider-values">
-                                    <div className="aside-slider-val aside-slider-left">
+                            <div className="slider-values">
+                                <div className="aside-slider-val aside-slider-left">
+                                    {sliderMin != 0 ?
                                         <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
+                                    : ''}
                                     </div>
-                                    <div className="aside-slider-val aside-slider-right">
+                                <div className="aside-slider-val aside-slider-right">
+                                    {sliderMax != 0 ?
                                         <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
-                                    </div>
+                                    : ''}
                                 </div>
-                            <Slider
-                                range
-                                defaultValue={[sliderMin, sliderMax]}
-                                min={0}
-                                max={20000}
-                                onChange={value => renewValues(value)}
-                            />
+                            </div>
+                            {sliderMax != 0 ?
+                                <Slider
+                                    range
+                                    defaultValue={[sliderMin, sliderMax]}
+                                    min={0}
+                                    max={(sliderMax + 10000)}
+                                    onChange={value => renewValues(value)}
+                                /> : ''
+                            }
                         </div>
 
                         <div className = {styles["aside-block"]}>
@@ -206,7 +243,7 @@ export default function Hotels (props) {
 
                     {loadedItems.map((item, index) => {
                         return (
-                            <Search_hotel_item key = {index} item = {item} />
+                            <Search_hotel_item key = {index} item = {item} nights = {nights} />
                         )
                     })}
 
