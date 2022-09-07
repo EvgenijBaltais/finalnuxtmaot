@@ -2320,6 +2320,12 @@ input[type="checkbox"].substylized:checked + label:after {
 		font-family: 'FontInter';
 		font-weight: 400;
 	}
+
+
+	.hoteldetail-swiper .hotel-slider__item {
+		height: 70px;
+		width: 115px;
+	}
 }
 
 @media screen and (max-width: 450px) {
@@ -2355,6 +2361,11 @@ input[type="checkbox"].substylized:checked + label:after {
 
 	.single-block-title:first-child {
 		margin-bottom: 45px;
+	}
+
+	.hoteldetail-swiper .hotel-slider__item {
+		height: 40px;
+		width: 65px;
 	}
 
 }
