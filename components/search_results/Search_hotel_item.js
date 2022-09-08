@@ -22,10 +22,9 @@ export default function Search_hotel_item ({item, nights}) {
         return (Math.round(parseInt(price)) * nights).toLocaleString()
     }
 
-    //function addBackgroundImage (event) {
-    //    console.log(`url(${event.el.querySelector('.swiper-slide').getAttribute('data-pic')})`)
-    //    event.el.querySelector('.swiper-slide').style.background = `url('${event.el.querySelector('.swiper-slide').getAttribute('data-pic')}')`
-    //}
+    function addBackgroundImage (slider) {
+        slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
+    }
 
 
     return (
@@ -34,7 +33,7 @@ export default function Search_hotel_item ({item, nights}) {
 
 
                 <Swiper
-                    //onSlideChange = {event => addBackgroundImage(event)}
+                    onSlideChange = {slider => addBackgroundImage(slider)}
                     slidesPerView={1}
                     spaceBetween={0}
                     loop={true}
@@ -52,14 +51,11 @@ export default function Search_hotel_item ({item, nights}) {
                             <SwiperSlide
                                 className={styles["search-item-pic"]}
                                 key = {index}
-                                //style = {{backgroundImage: `url(${item})`}}
-                                //data-pic = {item}
+                                data-pic = {item}
                             ></SwiperSlide>
                         )
                     })}
                 </Swiper>
-
-                {/*<div className = {styles["search-item-pic"]} style = {{backgroundImage: `url(${item.images[0]})`}}></div>*/}
 
             <div className = {styles["search-item__content"]}>
                 <Link href={"/hoteldetail"}>

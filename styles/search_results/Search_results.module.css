@@ -60,7 +60,9 @@
 }
 
 .search-result-right {
+	position: relative;
 	width: 790px;
+	min-height: 100vh;
 	margin-left: 450px;
 }
 

@@ -10,7 +10,6 @@ const MainForm = (props) => {
     const [searchResult, setSearchResult] = useState({id: '', name: '', hotel: false, region: false})
     const [dateIn, setDateIn] = useState(setToday())
     const [dateOut, setDateOut] = useState(setTomorrow())
-    const [guests, setGuests] = useState('')
     const [adults, setAdults] = useState(2)
     const [children, setChildren] = useState(0)
     const [childrenAges, setChildrenAges] = useState([])
@@ -56,9 +55,8 @@ const MainForm = (props) => {
         event.preventDefault()
 
         let obj = {
-            name: event.target.innerText,
-            hotel: event.target.getAttribute('data-info') == 'hotel',
-            region: event.target.getAttribute('data-info') == 'region'
+            region_name: event.target.innerText,
+            region: event.target.getAttribute('data-id')
         }
 
         changeSearchResult(obj)
@@ -80,9 +78,7 @@ const MainForm = (props) => {
             children_ages: ages
         }
 
-        searchResult.hotel ? obj.hotel_id = searchResult.hotel : ''
         searchResult.region ? obj.region_id = searchResult.region : ''
-        searchResult.hotel_name ? obj.hotel_name = searchResult.hotel_name : ''
         searchResult.region_name ? obj.region_name = searchResult.region_name : ''
 
         router.push({
@@ -121,10 +117,10 @@ const MainForm = (props) => {
                         </div>
                     </div>
                     <div className = "direction-ways">
-                        <a className = "direction-way" onClick = {searchByClick} data-info = "region">Подмосковье</a>
-                        <a className = "direction-way" onClick = {searchByClick} data-info = "region">Сочи</a>
-                        <a className = "direction-way" onClick = {searchByClick} data-info = "region">Крым</a>
-                        <a className = "direction-way" onClick = {searchByClick} data-info = "region">Абхазия</a>
+                        <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="965825039">Подмосковье</a>
+                        <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="1913">Краснодар</a>
+                        <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="6057828">Крым</a>
+                        <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="180352">Ялта</a>
                         <span className = "direction-way dont-know-way">
                             <a>Я не знаю, куда хочу поехать</a>
                         </span>

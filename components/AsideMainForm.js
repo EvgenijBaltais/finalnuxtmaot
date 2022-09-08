@@ -5,18 +5,31 @@ import Aside_search_hotel_input from './aside_search_form_components/Aside_searc
 import Aside_search_form_datein from './aside_search_form_components/Aside_search_form_datein'
 import Aside_search_form_guests from './aside_search_form_components/Aside_search_form_guests'
 
-const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, setSliderMax, setNights, setLoadedItems}) => {
+const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, setSliderMax, setNights, setLoadedItems, setFilteredItems, setIsResearch}) => {
 
     const router = useRouter()
     const { query } = useRouter()
     const [searchResult, setSearchResult] = useState({id: '', name: '', hotel: false, region: false})
     const [dateIn, setDateIn] = useState(query.datein || setToday())
     const [dateOut, setDateOut] = useState(query.dateout || setTomorrow())
-    const [guests, setGuests] = useState('')
     const [adults, setAdults] = useState(query.adults || 2)
     const [children, setChildren] = useState(query.children_ages ? query.children_ages.length : 0)
     const [childrenAges, setChildrenAges] = useState(query.children_ages || [])
-    
+
+
+    // Обновить данные по мере загрузки Router
+    useEffect(() => {
+
+        if (!router.isReady) return
+
+        setDateIn(query.datein || setToday())
+        setDateOut(query.dateout || setTomorrow())
+        setAdults(query.adults || 2)
+        setChildren(query.children_ages ? query.children_ages.length : 0)
+        Number.isInteger(+query.children_ages) ? setChildrenAges([query.children_ages]) : setChildrenAges(query.children_ages || [])
+    }, [])
+
+
     const changeSearchResult = (value) => {
         setSearchResult(value)
     }
@@ -55,22 +68,39 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, se
 
     function checkForm () {
 
+        // Обнулить фильтры
+
+        setIsResearch(0)
+        setFilteredItems([])
+
         let ages = []
         for (let i = 0; i < childrenAges.length; i++) {
             ages.push(parseInt(childrenAges[i]))
         }
 
+        console.log(ages)
+
         let obj = {
             datein: dateIn,
             dateout: dateOut,
             adults: adults,
-            children_ages: ages
+            children_ages: ages,
+            region_id: query.region_id,
+            region_name: query.region_name
         }
 
-        searchResult.hotel ? obj.hotel_id = searchResult.hotel : ''
         searchResult.region ? obj.region_id = searchResult.region : ''
-        searchResult.hotel_name ? obj.hotel_name = searchResult.hotel_name : ''
         searchResult.region_name ? obj.region_name = searchResult.region_name : ''
+
+        setLoading(1)
+        setLoadedItems([])
+
+        router.push({
+            pathname: '/hotels',
+            query: obj
+        })
+
+        return false
 
         // Запрос из боковой формы
             setLoadedItems([])
@@ -81,8 +111,6 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, se
             let datein = yearIn + '-' + monthIn + '-' + dayin
             let dateout = yearOut + '-' + monthOut + '-' + dayout
             let link = 'https://maot-api.bokn.ru/api/regions/search?'
-
-            console.log(datein, dateout)
 
             // Определить сколько всего ночей было выбрано
             setNights(calculateNights(datein, dateout))
@@ -102,8 +130,6 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, se
                 }
             }
 
-            console.log(link)
-
            fetch(link)
                     .then((res) => res.json())
                     .then((res) => {
@@ -111,25 +137,15 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, se
                 
                 // определить минимум и максимум цен
 
-                let min = 0
-                let max = 0
+                let prices = []
                 let nights = calculateNights(datein, dateout)
 
                 for (let i = 0; i < res.data.length; i++) {
-                    if (max < Math.round(parseInt(res.data[i].daily_price))) max = Math.round(parseInt(res.data[i].daily_price))
-                }
-                for (let i = 0; i < res.data.length; i++) {
-                    if (max > Math.round(parseInt(res.data[i].daily_price))) min = Math.round(parseInt(res.data[i].daily_price))
+                    prices.push(parseInt(res.data[i].daily_price))
                 }
 
-                min *= nights
-                max *= nights
-
-                console.log(min)
-                console.log(max)
-
-                setSliderMin(min)
-                setSliderMax(max)
+                setSliderMin(Math.min.apply(null, prices) * nights)
+                setSliderMax(Math.max.apply(null, prices) * nights)
                 setLoading(false)
           })
 

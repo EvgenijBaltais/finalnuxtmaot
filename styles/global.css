@@ -2316,13 +2316,14 @@ input[type="checkbox"].substylized:checked + label:after {
 .aside-direction-form-in-active {
 	display: block;
 	position: absolute;
-	left: -2px;
+	left: 0;
 	right: 0;
 	margin: auto;
 	color: #fff;
 	font-size: 16px;
 	line-height: 62px;
 	width: calc(100% + 4px);
+	height: 62px;
 	background: var(--red-linear-gradient);
 	z-index: 2;
 	cursor: pointer;
@@ -2761,6 +2762,21 @@ input[type="checkbox"].substylized:checked + label:after {
     border: 3px solid #fff;
 }
 
+.waiting-fon {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+	z-index: 5;
+	background-color: rgba(255,255,255,.8);
+	border-radius: 10px;
+}
+
+.no-result {
+	padding: 20px;
+}
 
 
 /* Форма подбора, конец */
