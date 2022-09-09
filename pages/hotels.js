@@ -17,7 +17,7 @@ export default function Hotels (props) {
 
     const [loadedItems, setLoadedItems] = useState([])
     const [filteredItems, setFilteredItems] = useState([])
-    const [isLoading, setLoading] = useState(false)
+    const [isLoading, setLoading] = useState(true)
     const [isResearch, setIsResearch] = useState(false)
     const [nights, setNights] = useState(0)
 
@@ -28,6 +28,10 @@ export default function Hotels (props) {
 
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
+    
+
+    console.log('go')
+
 
     useEffect(() => {
 
@@ -41,6 +45,8 @@ export default function Hotels (props) {
                 console.log('недостаточно данных' + query.region_id, query.adults, query.datein, query.dateout)
                 return () => {}
             }
+
+            console.log(query)
 
             let [dayIn, monthIn, yearIn] = query.datein.split('.')
             let [dayOut, monthOut, yearOut] = query.dateout.split('.')
@@ -68,6 +74,8 @@ export default function Hotels (props) {
                 }
             }
 
+            console.log(link)
+
            fetch(link)
                     .then((res) => res.json())
                     .then((res) => {
@@ -82,12 +90,15 @@ export default function Hotels (props) {
                     prices.push(parseInt(res.data[i].daily_price))
                 }
 
+                console.log(Math.min.apply(null, prices) * nights)
+                console.log(Math.max.apply(null, prices) * nights)
+
                 setSliderMin(Math.min.apply(null, prices) * nights)
                 setSliderMax(Math.max.apply(null, prices) * nights)
                 setLoading(false)
           })
 
-    }, [])
+    }, [query])
 
 
     // Функция для определения количества ночей для дат в формате гг-мм.дд
@@ -165,7 +176,6 @@ export default function Hotels (props) {
         fetch('https://maot-api.bokn.ru/api/hotels/top')
         .then((res) => res.json())
         .then((res) => {
-            console.log(res.data)
             setPopularHotels(res.data)
         })
     }, [])
@@ -177,7 +187,6 @@ export default function Hotels (props) {
         fetch('https://maot-api.bokn.ru/api/regions/top')
         .then((res) => res.json())
         .then((res) => {
-            console.log(res.data)
             setPopularWays(res.data)
         })
     }, [])
@@ -203,8 +212,6 @@ export default function Hotels (props) {
                                 setNights = {setNights}
                                 setLoadedItems = {setLoadedItems}
                                 setLoading = {setLoading}
-                                setSliderMin = {setSliderMin}
-                                setSliderMax = {setSliderMax}
                                 popularHotels = {popularHotels}
                                 popularWays = {popularWays}
                             />
@@ -214,12 +221,12 @@ export default function Hotels (props) {
                             <div className="slider-values">
                                 <div className="aside-slider-val aside-slider-left">
                                     {sliderMin != 0 ?
-                                        <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
+                                        <input type="text" value = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
                                     : ''}
                                     </div>
                                 <div className="aside-slider-val aside-slider-right">
                                     {sliderMax != 0 ?
-                                        <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
+                                        <input type="text" value = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
                                     : ''}
                                 </div>
                             </div>
@@ -232,14 +239,7 @@ export default function Hotels (props) {
                                     max={(sliderMax + 10000)}
                                     onChange={value => renewValues(value)}
                                     onAfterChange = {() => showVariants()}
-                                /> :
-                                <Slider
-                                step = {1}
-                                    range
-                                    defaultValue={[0, 0]}
-                                    min={0}
-                                    max={0}
-                                />
+                                /> :  ''
                             }
                         </div>
 
@@ -320,9 +320,7 @@ export default function Hotels (props) {
                     </div>
                 </div>
                 <div className = {styles["search-result-right"]}>
-               {isResearch ?
-                    <div className="waiting-fon"></div>
-                : ''}
+               {isResearch ? <div className="waiting-fon"></div>: ''}
                     
                     {isLoading ? <p className = "no-result">Загрузка подходящих вариантов...</p> : ''}
                     {!isLoading && !loadedItems.length ? <p className = "no-result">Результатов нет</p> : ''}

@@ -92,7 +92,7 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, se
         searchResult.region ? obj.region_id = searchResult.region : ''
         searchResult.region_name ? obj.region_name = searchResult.region_name : ''
 
-        setLoading(1)
+        setLoading(true)
         setLoadedItems([])
 
         router.push({
@@ -100,7 +100,7 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, se
             query: obj
         })
 
-        return false
+        {/*
 
         // Запрос из боковой формы
             setLoadedItems([])
@@ -148,14 +148,14 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, se
                 setSliderMax(Math.max.apply(null, prices) * nights)
                 setLoading(false)
           })
-
-          function calculateNights (datein, dateout) {
-            let begin_date = new Date(datein)
-            let end_date = new Date(dateout)
-            return (end_date - begin_date) / (1000 * 60 * 60 * 24)
-        }
-
+        */}
     }
+    {/*}
+    function calculateNights (datein, dateout) {
+        let begin_date = new Date(datein)
+        let end_date = new Date(dateout)
+        return (end_date - begin_date) / (1000 * 60 * 60 * 24)
+    }*/}
 
     return (
         <section className = "aside-main-form">
