@@ -6,11 +6,11 @@ import AsideMainForm from "../components/AsideMainForm"
 import Search_hotel_item from "../components/search_results/Search_hotel_item"
 import styles from "../styles/search_results/Search_results.module.css"
 
-import Slider, { Range } from 'rc-slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 
-export default function Hotels (props) {
+export default function Hotels () {
 
     const router = useRouter()
     const { query } = useRouter()
@@ -132,6 +132,7 @@ export default function Hotels (props) {
         let min = parseInt(document.querySelector('.aside-slider-from').value.match(/\d+/))
         let max = parseInt(document.querySelector('.aside-slider-to').value.match(/\d+/))
         let food = []
+        let stars = []
 
         // Выбранные типы питания
 
@@ -140,26 +141,48 @@ export default function Hotels (props) {
             food.push(document.querySelectorAll('.food-checkbox')[i].nextElementSibling.innerText) : ''
         }
 
-        let newArr = []        
+        // Выбранные типы звездности
+
+        for (let i = 0; i < document.querySelectorAll('.stars-checkbox').length; i++) {
+            document.querySelectorAll('.stars-checkbox')[i].checked ? 
+            stars.push(i + 1) : ''
+        }
+
+        let newArr = []
+        let starsAllow = false
 
         // Проверка на все фильтры
 
         for (let i = 0; i < arr.length; i++) {
+            starsAllow = 0
             // Диапазон цен
             if (parseInt(arr[i].daily_price) * nights >= min && (parseInt(arr[i].daily_price) * nights) <= max) {
+
                 // Проверка на тип питания
                 if (food.includes('Все включено')) {
-                    arr[i].is_all_inclusive == true ? newArr.push(arr[i]) : ''
-                    continue
+                    if (!arr[i].is_all_inclusive) continue
                 }
+
+                // Проверка на Звездность
+                if (stars.length != 0) {
+                    for (let k = 0; k < stars.length; k++) {
+                        console.log(stars[k] + ' *')
+                        if (arr[i].star_rating == stars[k]) {
+                            starsAllow = true
+                            break
+                        }
+                    }
+                    if (!starsAllow) continue
+                }
+
                 newArr.push(arr[i])
+                console.log(newArr)
             }
         }
         return newArr
     }
 
     useEffect(() => {
-
         from = document.querySelector('.aside-slider-from')
         to = document.querySelector('.aside-slider-to')
     }, [])
@@ -191,11 +214,9 @@ export default function Hotels (props) {
         <Head>
             <title>Результаты поиска</title>
         </Head>
-
-        <section className = {styles["search-result-title"]}>
+            <section className = {styles["search-result-title"]}>
                 Результаты поиска
             </section>
-
             <section className = {styles["search-result-w"]}>
                 <div className = {styles["search-result-left"]}>
                     <div className = {styles["search-result-left-w"]}>
@@ -211,7 +232,6 @@ export default function Hotels (props) {
                                 popularWays = {popularWays}
                             />
                         </div>
-
                         <div className = "aside-slider">
                             <div className="slider-values">
                                 <div className="aside-slider-val aside-slider-left">
@@ -227,7 +247,7 @@ export default function Hotels (props) {
                             </div>
                             {sliderMax != 0 ?
                                 <Slider
-                                step = {1}
+                                    step = {1}
                                     range
                                     defaultValue={[sliderMin, sliderMax]}
                                     min={0}
@@ -237,7 +257,6 @@ export default function Hotels (props) {
                                 /> :  ''
                             }
                         </div>
-
                         <div className = {styles["aside-block"]}>
                             <h3 className = "aside-block-title">Типы питания</h3>
                             <div className = {styles["aside-checkbox"]}>
@@ -263,54 +282,29 @@ export default function Hotels (props) {
                         </div>
                         <div className = {styles["aside-block"]}>
                             <h3 className = "aside-block-title">Звездность</h3>
-                            <div className = {styles["aside-checkbox"]}>
-                                <input type="checkbox" id="checkbox-21" className = "stylized" />
-                                <label className = {styles["aside-stars-label"]} htmlFor="checkbox-21">
-                                    <ul className = {styles["aside-stars-list"]}>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
-                                    </ul>
-                                </label>
-                            </div>
-                            <div className = {styles["aside-checkbox"]}>
-                                <input type="checkbox" id="checkbox-22" className = "stylized" />
-                                <label className = {styles["aside-stars-label"]} htmlFor="checkbox-22">
-                                    <ul className = {styles["aside-stars-list"]}>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
-                                    </ul>
-                                </label>
-                            </div>
-                            <div className = {styles["aside-checkbox"]}>
-                                <input type="checkbox" id="checkbox-23" className = "stylized" />
-                                <label className = {styles["aside-stars-label"]} htmlFor="checkbox-23">
-                                    <ul className = {styles["aside-stars-list"]}>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
-                                    </ul>
-                                </label>
-                            </div>
-                            <div className = {styles["aside-checkbox"]}>
-                                <input type="checkbox" id="checkbox-24" className = "stylized" />
-                                <label className = {styles["aside-stars-label"]} htmlFor="checkbox-24">
-                                    <ul className = {styles["aside-stars-list"]}>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                        <li className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                    </ul>
-                                </label>
-                            </div>
+                            {
+                                [...Array(5)].map((e, i) => {
+                                    return (
+                                        <div key = {i} className = {styles["aside-checkbox"]}>
+                                            <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={() => showVariants()} />
+                                            <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-2${i + 1}`}>
+                                                <ul className = {styles["aside-stars-list"]}>
+                                                    {[...Array(i + 1)].map((el, ind) => {
+                                                        return (
+                                                            <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
+                                                        )
+                                                    })}
+                                                    {[...Array(5 - (i + 1))].map((el, ind) => {
+                                                        return (
+                                                            <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
+                                                        )
+                                                    })}
+                                                </ul>
+                                            </label>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>
@@ -344,7 +338,6 @@ export default function Hotels (props) {
                     {
                         filtersOn && filteredItems.length == 0 && !isLoading ? <p className = "no-result">Не удалось найти отели с заданными параметрами поиска</p> : ''
                     }
-
                 </div>
             </section>
         </>
