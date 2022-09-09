@@ -81,7 +81,7 @@ const MainForm = (props) => {
         obj.datein = dateIn
         obj.dateout = dateOut
         obj.adults = adults
-        obj.hildren_ages = ages
+        obj.children_ages = ages
 
 
         searchResult.region ? obj.region_id = searchResult.region : ''
