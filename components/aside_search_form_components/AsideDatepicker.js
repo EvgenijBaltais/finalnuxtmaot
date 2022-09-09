@@ -1,9 +1,9 @@
-import Month from "./Month"
-import MonthAsideLink from "./MonthAsideLink"
+import AsideMonth from "./AsideMonth"
+import AsideMonthLink from "./AsideMonthLink"
 import { useEffect } from "react"
 import smoothscroll from 'smoothscroll-polyfill'
 
-export default function Datepicker (value) {
+export default function AsideDatepicker (value) {
 
     let monthName = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
         daysName = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'],
@@ -70,14 +70,14 @@ export default function Datepicker (value) {
             <div className="month-aside">
                 {monthArray.map((item, index) => {
                     return (
-                        <MonthAsideLink key = {index} index = {index} item = {item} />
+                        <AsideMonthLink key = {index} index = {index} item = {item} />
                     )
                 })}  
             </div>
             <div className="datepicker-body">
                 {monthArray.map((item, index) => {
                     return(
-                        <Month 
+                        <AsideMonth 
                             monthId = {index}
                             monthName = {item}
                             key = {index}

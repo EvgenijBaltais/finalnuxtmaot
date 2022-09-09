@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState, useEffect, useRef} from 'react'
 import MediaQuery from 'react-responsive'
 import MainForm from "../components/MainForm"
 import styles from "../styles/Articles.module.css"
@@ -13,18 +12,18 @@ import Article2 from '/public/images/article-2.jpg'
 class Articles extends React.Component {
     constructor(props) {
         super(props)
-
     }
 
     componentDidMount(){
-        document.querySelector('.wrapper').classList.add('articles-page')   
+        document.querySelector('.wrapper').classList.add('articles-page')
     }
 
     componentWillUnmount() {
         document.querySelector('.wrapper').classList.remove('articles-page')
+    }
 
-    } 
 
+    
     render() {
 
         return (
@@ -39,50 +38,50 @@ class Articles extends React.Component {
                             <h2 className="single-block-title left-block-bedroom">
                                 Навигация
                             </h2>
-                            <div className = " left-nav-block">
-                                <ul className = "left-nav-list">
-                                    <li className = "left-nav-item">
+                            <div className = {styles["left-nav-block"]}>
+                                <ul className = {styles["left-nav-list"]}>
+                                    <li className = {styles["left-nav-item"]}>
                                         <a className = {styles["left-nav-link"]} href="">Платежи. Оплата банковской картой онлайн</a>
                                     </li>
-                                    <li className = "left-nav-item">
+                                    <li className = {styles["left-nav-item"]}>
                                         <a className = {styles["left-nav-link"]} href="">Гарантии Безопасности</a>
                                     </li>
-                                    <li className = "left-nav-item">
+                                    <li className = {styles["left-nav-item"]}>
                                         <a className = {styles["left-nav-link"]} href="">Безопасность Онлайн Платежей</a>
                                     </li>
-                                    <li className = "left-nav-item">
+                                    <li className = {styles["left-nav-item"]}>
                                         <a className = {styles["left-nav-link"]} href="">Возврат Товаров</a>
                                     </li>
-                                    <li className = "left-nav-item">
+                                    <li className = {styles["left-nav-item"]}>
                                         <a className = {styles["left-nav-link"]} href="">Конфиденциальность</a>
                                         <ul className={styles["left-nav-list__sub"]}>
-                                            <li className = "left-nav-item">
+                                            <li className = {styles["left-nav-item"]}>
                                                 <a href="" className = {styles["left-nav-link"]}>Определения</a>
                                             </li>
-                                            <li className = "left-nav-item">
+                                            <li className = {styles["left-nav-item"]}>
                                                 <a href="" className = {styles["left-nav-link"]}>Использование информации</a>
                                             </li>
-                                            <li className = "left-nav-item">
+                                            <li className = {styles["left-nav-item"]}>
                                                 <a href="" className = {styles["left-nav-link"]}>Ссылки</a>
                                             </li>
-                                            <li className = "left-nav-item">
+                                            <li className = {styles["left-nav-item"]}>
                                                 <a href="" className = {styles["left-nav-link"]}>Ограничение ответственности</a>
                                             </li>
-                                            <li className = "left-nav-item">
+                                            <li className = {styles["left-nav-item"]}>
                                                 <a href="" className = {styles["left-nav-link"]}>Контакты</a>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li className = "left-nav-item">
+                                    <li className = {styles["left-nav-item"]}>
                                         <a className = {styles["left-nav-link"]} href="">Проведение операции оплаты товаров/услуг в сети интернет</a>
                                     </li>
-                                    <li className = "left-nav-item">
+                                    <li className = {styles["left-nav-item"]}>
                                         <a className = {styles["left-nav-link"]} href="">Отмена операции оплаты товаров/услуг в интернете</a>
                                     </li>
-                                    <li className = "left-nav-item">
+                                    <li className = {styles["left-nav-item"]}>
                                         <a className = {styles["left-nav-link"]} href="">Операция возврата товара (отказа от услуг), оплаченных картой в сети интернет.</a>
                                     </li>
-                                    <li className = "left-nav-item">
+                                    <li className = {styles["left-nav-item"]}>
                                         <a className = {styles["left-nav-link"]} href="">Юридическое лицо</a>
                                     </li>
                                 </ul>

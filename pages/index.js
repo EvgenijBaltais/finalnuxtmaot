@@ -48,18 +48,18 @@ export async function getStaticProps(context) {
 
     // Популярные отели
 
-	const getHotels = await fetch('http://hotelsystem.local/api/hotels/top')
+	const getHotels = await fetch('https://maot-api.bokn.ru/api/hotels/top')
 	const popularHotels = await getHotels.json()
 
     // Популярные направления
 
-	const getWays = await fetch('http://hotelsystem.local/api/regions/top')
+	const getWays = await fetch('https://maot-api.bokn.ru/api/regions/top')
 	const popularWays = await getWays.json()
 
   
     // Отзывы
 
-	const getReviews = await fetch('http://hotelsystem.local/api/load?id=6713')
+	const getReviews = await fetch('https://maot-api.bokn.ru/api/load?id=6713')
 	let reviews = await getReviews.json()
         reviews = reviews.data.reviews
 
