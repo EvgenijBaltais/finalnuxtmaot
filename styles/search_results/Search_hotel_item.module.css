@@ -7,15 +7,6 @@
     background-color: #fff;
 }
 
-.search-item-pics {
-	position: relative;
-	width: 200px;
-	height: 170px;
-	border-radius: 8px;
-    background-color: #ccc;
-	overflow: hidden;
-}
-
 .search-item-pic {
 	width: 200px;
 	height: 170px;

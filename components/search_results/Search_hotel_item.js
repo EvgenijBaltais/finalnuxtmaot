@@ -24,6 +24,7 @@ export default function Search_hotel_item ({item, nights}) {
 
     function addBackgroundImage (slider) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
+        slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
     }
 
     return (
@@ -34,14 +35,13 @@ export default function Search_hotel_item ({item, nights}) {
                     onSlideChange = {slider => addBackgroundImage(slider)}
                     slidesPerView={1}
                     spaceBetween={0}
-                    loop={true}
                     pagination={{
                         clickable: true,
                         bulletClass: `reviews-pagination-bullet`
                     }}
                     navigation={true}
                     modules={[Pagination, Navigation]}
-                    className={`search-item-pics ${styles["search-item-pics"]}`}
+                    className='search-item-pics'
                 >
                     {item.images.map((item, index) => {
                         if (index > 7) return false
@@ -50,6 +50,7 @@ export default function Search_hotel_item ({item, nights}) {
                                 className={styles["search-item-pic"]}
                                 key = {index}
                                 data-pic = {item}
+                                style = {index == 0 ? {backgroundImage: `url(${item})`} : {}}
                             ></SwiperSlide>
                         )
                     })}

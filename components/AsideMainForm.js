@@ -5,7 +5,7 @@ import Aside_search_hotel_input from './aside_search_form_components/Aside_searc
 import Aside_search_form_datein from './aside_search_form_components/Aside_search_form_datein'
 import Aside_search_form_guests from './aside_search_form_components/Aside_search_form_guests'
 
-const AsideMainForm = ({popularHotels, popularWays, setLoading, setNodataText, setSliderMin, setSliderMax, setNights, setLoadedItems, setFilteredItems, setIsResearch}) => {
+const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItems, setFilteredItems, setIsResearch}) => {
 
     const router = useRouter()
     const { query } = useRouter()
@@ -70,7 +70,7 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setNodataText, s
 
         // Обнулить фильтры
 
-        setIsResearch(0)
+        setIsResearch(false)
         setFilteredItems([])
 
         setNodataText('Загрузка подходящих вариантов...')
@@ -92,7 +92,6 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setNodataText, s
         searchResult.region ? obj.region_id = searchResult.region : ''
         searchResult.region_name ? obj.region_name = searchResult.region_name : ''
 
-        setLoading(true)
         setLoadedItems([])
 
         router.push({

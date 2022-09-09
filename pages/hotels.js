@@ -17,7 +17,6 @@ export default function Hotels () {
 
     const [loadedItems, setLoadedItems] = useState([])
     const [filteredItems, setFilteredItems] = useState([])
-    const [isLoading, setLoading] = useState(true)
     const [isResearch, setIsResearch] = useState(false)
     const [nights, setNights] = useState(0)
 
@@ -31,13 +30,13 @@ export default function Hotels () {
 
     const [nodataText, setNodataText] = useState('')
 
+    const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
+
     useEffect(() => {
 
             // Поиск контента через API
 
             if (!router.isReady) return
-
-            setLoading(true)
 
             if (!query.region_id || !query.region_name || query.region_id == '' || query.region_name == '') {
                 setNodataText('Некорректные данные отеля для поиска')
@@ -45,10 +44,6 @@ export default function Hotels () {
             }
 
             setNodataText('Загрузка подходящих вариантов...')
-
-           //|| !query.adults || !query.datein || !query.dateout
-
-            console.log(query)
 
             let [dayIn, monthIn, yearIn] = query.datein.split('.')
             let [dayOut, monthOut, yearOut] = query.dateout.split('.')
@@ -94,11 +89,8 @@ export default function Hotels () {
                     prices.push(parseInt(res.data[i].daily_price))
                 }
 
-                console.log(Math.max.apply(null, prices) * nights)
-
                 setSliderMin(Number.isInteger(Math.min.apply(null, prices) * nights) ? Math.min.apply(null, prices) * nights : 0)
                 setSliderMax(Number.isInteger(Math.max.apply(null, prices) * nights) ? Math.max.apply(null, prices) * nights : 0)
-                setLoading(false)
                 res.data.length == 0 ? setNodataText('Нет подходящих вариантов') : setNodataText('')
           })
 
@@ -127,8 +119,15 @@ export default function Hotels () {
     }
 
     const showVariants = () => {
+
+        setNodataText('')
+        let res = applyFilters(loadedItems)
+
+        res.length == 0 ? setNodataText('Не удалось ничего найти. Попробуйте изменить условия поиска') : ''
+
+        setIsResearch(true)
         setFiltersOn(true)
-        setFilteredItems(applyFilters(loadedItems))
+        setFilteredItems(res)
         setIsResearch(false)
     }
 
@@ -175,7 +174,6 @@ export default function Hotels () {
                 // Проверка на Звездность
                 if (stars.length != 0) {
                     for (let k = 0; k < stars.length; k++) {
-                        console.log(stars[k] + ' *')
                         if (arr[i].star_rating == stars[k]) {
                             starsAllow = true
                             break
@@ -185,7 +183,6 @@ export default function Hotels () {
                 }
 
                 newArr.push(arr[i])
-                console.log(newArr)
             }
         }
         return newArr
@@ -235,9 +232,7 @@ export default function Hotels () {
                                 setNodataText = {setNodataText}
                                 setFilteredItems = {setFilteredItems}
                                 setIsResearch = {setIsResearch}
-                                setNights = {setNights}
                                 setLoadedItems = {setLoadedItems}
-                                setLoading = {setLoading}
                                 popularHotels = {popularHotels}
                                 popularWays = {popularWays}
                             />
@@ -269,26 +264,14 @@ export default function Hotels () {
                         </div>
                         <div className = {styles["aside-block"]}>
                             <h3 className = "aside-block-title">Типы питания</h3>
-                            <div className = {styles["aside-checkbox"]}>
-                                <input type="checkbox" id="checkbox-11" className = "stylized food-checkbox" onChange={() => console.log(11)} /> 
-                                <label htmlFor="checkbox-11">Завтрак</label>
-                            </div>
-                            <div className = {styles["aside-checkbox"]}>
-                                <input type="checkbox" id="checkbox-12" className = "stylized food-checkbox" onChange={() => showVariants()} /> 
-                                <label htmlFor="checkbox-12">Завтрак и обед</label>
-                            </div>
-                            <div className = {styles["aside-checkbox"]}>
-                                <input type="checkbox" id="checkbox-13" className = "stylized food-checkbox" onChange={() => showVariants()} /> 
-                                <label htmlFor="checkbox-13">Полный пансион</label>
-                            </div>
-                            <div className = {styles["aside-checkbox"]}>
-                                <input type="checkbox" id="checkbox-14" className = "stylized food-checkbox" onChange={() => showVariants()} /> 
-                                <label htmlFor="checkbox-14">Все включено</label>
-                            </div>
-                            <div className = {styles["aside-checkbox"]}>
-                                <input type="checkbox" id="checkbox-15" className = "stylized food-checkbox" onChange={() => showVariants()} /> 
-                                <label htmlFor="checkbox-15">Частичный All inclusive</label>
-                            </div>
+                            {foodTypes.map((item, index) => {
+                              return (
+                                <div key = {index} className = {styles["aside-checkbox"]}>
+                                    <input type="checkbox" id={`checkbox-1${index + 1}`} className = "stylized food-checkbox" onChange={() => showVariants()} /> 
+                                    <label htmlFor={`checkbox-1${index + 1}`}>{item}</label>
+                                </div>
+                              )  
+                            })}
                         </div>
                         <div className = {styles["aside-block"]}>
                             <h3 className = "aside-block-title">Звездность</h3>
