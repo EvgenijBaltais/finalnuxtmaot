@@ -77,9 +77,7 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, se
         for (let i = 0; i < childrenAges.length; i++) {
             ages.push(parseInt(childrenAges[i]))
         }
-
-        console.log(ages)
-
+        
         let obj = {
             datein: dateIn,
             dateout: dateOut,

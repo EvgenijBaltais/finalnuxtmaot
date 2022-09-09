@@ -11,7 +11,6 @@ const MainForm = (props) => {
     const [dateIn, setDateIn] = useState(setToday())
     const [dateOut, setDateOut] = useState(setTomorrow())
     const [adults, setAdults] = useState(2)
-    const [children, setChildren] = useState(0)
     const [childrenAges, setChildrenAges] = useState([])
 
     const router = useRouter()

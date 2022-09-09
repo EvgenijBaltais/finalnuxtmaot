@@ -28,10 +28,6 @@ export default function Hotels (props) {
 
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
-    
-
-    console.log('go')
-
 
     useEffect(() => {
 

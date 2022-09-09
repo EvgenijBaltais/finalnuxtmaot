@@ -89,8 +89,8 @@ export default function Aside_search_hotel_input (props) {
             />
             { visibleSearch ? 
             <Aside_search_hotel_ways 
-                hotels = {hotels}
-                regions = {regions}
+                hotels = {props.popularHotels}
+                regions = {props.popularWays}
                 visibleSearch = {changeVisibleSearch}
                 changeSearchResult = {props.changeSearchResult}
                 searchResult = {props.searchResult}

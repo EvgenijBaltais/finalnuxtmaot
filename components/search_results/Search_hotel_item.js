@@ -26,7 +26,6 @@ export default function Search_hotel_item ({item, nights}) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
     }
 
-
     return (
 
         <div className={styles["search-item"]}>
