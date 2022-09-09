@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper"
 
@@ -57,9 +55,7 @@ export default function Search_hotel_item ({item, nights}) {
                 </Swiper>
 
             <div className = {styles["search-item__content"]}>
-                <Link href={"/hoteldetail"}>
-                    <a className = {styles["search-item__title"]}>{item.name}</a>
-                </Link>
+                <a href={"/hoteldetail"} className = {styles["search-item__title"]}>{item.name}</a>
                 <div className = {styles["search-item__rate"]}>
                     <ul className={styles["search-rate__list"]}>
                         {

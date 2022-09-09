@@ -241,12 +241,12 @@ export default function Hotels () {
                             <div className="slider-values">
                                 <div className="aside-slider-val aside-slider-left">
                                     {sliderMin != 0 ?
-                                        <input type="text" value = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
+                                        <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
                                     : ''}
                                     </div>
                                 <div className="aside-slider-val aside-slider-right">
                                     {sliderMax != 0 ?
-                                        <input type="text" value = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
+                                        <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
                                     : ''}
                                 </div>
                             </div>
