@@ -66,21 +66,23 @@ const MainForm = (props) => {
     function checkForm () {
 
         let ages = []
+        let obj = {}
         for (let i = 0; i < childrenAges.length; i++) {
             ages.push(parseInt(childrenAges[i]))
         }
 
+        // Если не введены данные по направлению
         if (document.querySelector('.form-way-input').value == '') {
-            console.log('Не выбрано направление')
-            return false
+            obj.region_id = '965825039'
+            obj.region_name = 'Подмосковье'
+            console.log('***')
         }
 
-        let obj = {
-            datein: dateIn,
-            dateout: dateOut,
-            adults: adults,
-            children_ages: ages
-        }
+        obj.datein = dateIn
+        obj.dateout = dateOut
+        obj.adults = adults
+        obj.hildren_ages = ages
+
 
         searchResult.region ? obj.region_id = searchResult.region : ''
         searchResult.region_name ? obj.region_name = searchResult.region_name : ''

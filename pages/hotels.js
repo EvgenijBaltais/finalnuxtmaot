@@ -29,6 +29,8 @@ export default function Hotels () {
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
 
+    const [nodataText, setNodataText] = useState('')
+
     useEffect(() => {
 
             // Поиск контента через API
@@ -37,10 +39,14 @@ export default function Hotels () {
 
             setLoading(true)
 
-            if (!query.region_id || !query.adults || !query.datein || !query.dateout) {
-                console.log('недостаточно данных ' + query.region_id, query.adults, query.datein, query.dateout)
+            if (!query.region_id || !query.region_name || query.region_id == '' || query.region_name == '') {
+                setNodataText('Некорректные данные отеля для поиска')
                 return () => {}
             }
+
+            setNodataText('Загрузка подходящих вариантов...')
+
+           //|| !query.adults || !query.datein || !query.dateout
 
             console.log(query)
 
@@ -88,9 +94,12 @@ export default function Hotels () {
                     prices.push(parseInt(res.data[i].daily_price))
                 }
 
-                setSliderMin(Math.min.apply(null, prices) * nights)
-                setSliderMax(Math.max.apply(null, prices) * nights)
+                console.log(Math.max.apply(null, prices) * nights)
+
+                setSliderMin(Number.isInteger(Math.min.apply(null, prices) * nights) ? Math.min.apply(null, prices) * nights : 0)
+                setSliderMax(Number.isInteger(Math.max.apply(null, prices) * nights) ? Math.max.apply(null, prices) * nights : 0)
                 setLoading(false)
+                res.data.length == 0 ? setNodataText('Нет подходящих вариантов') : setNodataText('')
           })
 
     }, [query])
@@ -223,6 +232,7 @@ export default function Hotels () {
                         <div className = {`${styles["aside-block"]} ${styles["direction-aside-form"]}`}>
                             <h3 className = "aside-block-title">Направление</h3>
                             <AsideMainForm
+                                setNodataText = {setNodataText}
                                 setFilteredItems = {setFilteredItems}
                                 setIsResearch = {setIsResearch}
                                 setNights = {setNights}
@@ -309,10 +319,13 @@ export default function Hotels () {
                     </div>
                 </div>
                 <div className = {styles["search-result-right"]}>
+
+                {nodataText ? <p className = "no-result">{nodataText}</p> : ''}
+
                {isResearch ? <div className="waiting-fon"></div>: ''}
                     
-                    {isLoading ? <p className = "no-result">Загрузка подходящих вариантов...</p> : ''}
-                    {!isLoading && !loadedItems.length ? <p className = "no-result">Результатов нет</p> : ''}
+                    {/*isLoading ? <p className = "no-result">Загрузка подходящих вариантов...</p> : ''*/}
+                    {/*!isLoading && !loadedItems.length ? <p className = "no-result">Результатов нет</p> : ''*/}
 
                     {/* Вывод по поиску */}
                     {
