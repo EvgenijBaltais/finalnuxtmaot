@@ -2189,46 +2189,6 @@ input[type="checkbox"].substylized:checked + label:after {
 	    background-size: contain;
 	    background-repeat: no-repeat;
 		transition: 0.2s;
-
-/* Ползунок */
-
-.rc-slider-handle-1 {
-	border-color:  #FF416C!important;
-	background-color: #FF416C!important;
-}
-
-.rc-slider-handle-2 {
-	border-color: #FF4B2B!important;
-	background-color: #FF4B2B!important;
-}
-
-.rc-slider-handle {
-	width: 22px!important;
-	height: 22px!important;
-	margin-top: -8px!important;
-	opacity: 1!important;
-}
-
-.rc-slider-handle-1:focus {
-	box-shadow: 0 0 0 5px rgb(255 65 108 / 12%)!important;
-}
-
-.rc-slider-handle:focus {
-	box-shadow: 0 0 0 5px rgb(255 75 43 / 12%)!important;
-}
-
-.rc-slider-track {
-	height: 6px!important;
-}
-
-.rc-slider-rail {
-	height: 6px!important;
-}
-
-.rc-slider-step {
-	height: 6px!important;
-}
-
 		z-index: 10;
 	}
 
@@ -2398,7 +2358,44 @@ input[type="checkbox"].substylized:checked + label:after {
 	font-size: 16px;
 	line-height: 16px;
 }
+/* Ползунок */
 
+.rc-slider-handle-1 {
+	border-color:  #FF416C!important;
+	background-color: #FF416C!important;
+}
+
+.rc-slider-handle-2 {
+	border-color: #FF4B2B!important;
+	background-color: #FF4B2B!important;
+}
+
+.rc-slider-handle {
+	width: 22px!important;
+	height: 22px!important;
+	margin-top: -8px!important;
+	opacity: 1!important;
+}
+
+.rc-slider-handle-1:focus {
+	box-shadow: 0 0 0 5px rgb(255 65 108 / 12%)!important;
+}
+
+.rc-slider-handle:focus {
+	box-shadow: 0 0 0 5px rgb(255 75 43 / 12%)!important;
+}
+
+.rc-slider-track {
+	height: 6px!important;
+}
+
+.rc-slider-rail {
+	height: 6px!important;
+}
+
+.rc-slider-step {
+	height: 6px!important;
+}
 /* Ползунок, конец */
 
 
@@ -2961,3 +2958,49 @@ input[type="checkbox"].substylized:checked + label:after {
 
 
 /* Форма подбора, конец */
+
+
+/* адаптив главной формы */
+
+@media screen and (max-width: 650px) {
+
+	.direction-form {
+		position: relative;
+		height: 170px;
+	}
+
+	.direction-form-submit {
+		position: absolute;
+		top: 105px;
+		right: 0;
+	}
+
+	.direction-ways {
+		width: calc(100% - 230px);
+		flex-wrap: wrap;
+	}
+
+	.dont-know-way {
+		text-align: left;
+		color: rgb(35,135,233);
+		margin-top: 20px;
+	}
+
+	.dont-know-way a {
+		color: rgb(35,135,233);
+	}
+
+	.direction-form-way {
+		width: 100%;
+	}
+
+	.form-way-input {
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+
+}
+
+/* адаптив главной формы, конец */
