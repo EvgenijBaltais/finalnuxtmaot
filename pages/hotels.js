@@ -321,12 +321,8 @@ export default function Hotels () {
                 <div className = {styles["search-result-right"]}>
 
                 {nodataText ? <p className = "no-result">{nodataText}</p> : ''}
-
-               {isResearch ? <div className="waiting-fon"></div>: ''}
+                {isResearch ? <div className="waiting-fon"></div>: ''}
                     
-                    {/*isLoading ? <p className = "no-result">Загрузка подходящих вариантов...</p> : ''*/}
-                    {/*!isLoading && !loadedItems.length ? <p className = "no-result">Результатов нет</p> : ''*/}
-
                     {/* Вывод по поиску */}
                     {
                         loadedItems.length && !filtersOn ? (loadedItems.map((item, index) => {
@@ -345,11 +341,6 @@ export default function Hotels () {
                                 <Search_hotel_item key = {index} item = {item} nights = {nights} />
                             )
                         })) : ''
-                    }
-
-                    {/* Если выбраны фильтры и ничего нет и загрузка не происходит */}
-                    {
-                        filtersOn && filteredItems.length == 0 && !isLoading ? <p className = "no-result">Не удалось найти отели с заданными параметрами поиска</p> : ''
                     }
                 </div>
             </section>

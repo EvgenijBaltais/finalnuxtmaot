@@ -9,12 +9,12 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setNodataText, s
 
     const router = useRouter()
     const { query } = useRouter()
-    const [searchResult, setSearchResult] = useState({id: '', name: '', hotel: false, region: false})
-    const [dateIn, setDateIn] = useState(query.datein || setToday())
-    const [dateOut, setDateOut] = useState(query.dateout || setTomorrow())
-    const [adults, setAdults] = useState(query.adults || 2)
-    const [children, setChildren] = useState(query.children_ages ? query.children_ages.length : 0)
-    const [childrenAges, setChildrenAges] = useState(query.children_ages || [])
+    const [searchResult, setSearchResult] = useState({})
+    const [dateIn, setDateIn] = useState('')
+    const [dateOut, setDateOut] = useState('')
+    const [adults, setAdults] = useState('')
+    const [children, setChildren] = useState('')
+    const [childrenAges, setChildrenAges] = useState([])
 
 
     // Обновить данные по мере загрузки Router
@@ -27,7 +27,7 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setNodataText, s
         setAdults(query.adults || 2)
         setChildren(query.children_ages ? query.children_ages.length : 0)
         Number.isInteger(+query.children_ages) ? setChildrenAges([query.children_ages]) : setChildrenAges(query.children_ages || [])
-    }, [])
+    }, [query])
 
 
     const changeSearchResult = (value) => {
