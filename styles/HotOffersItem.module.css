@@ -16,6 +16,11 @@
 	background: #fff;
 }
 
+.hot-deal-item:hover {
+	transition: .2s box-shadow;
+    box-shadow: 0 3px 8px 0 rgb(255 97 68 / 20%);
+}
+
 .hot-deal-item:nth-child(4n) {
 	margin-right: 0;
 }
@@ -84,7 +89,16 @@
 	background-image: url('/images/star.svg');
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 1100px) {
+
+	.hot-deal-item {
+		width: 32%;
+		margin-right: 0;
+	}
+
+}
+
+@media screen and (max-width: 800px) {
 
 	.hot-deal-item {
 		width: calc(50% - 10px);

@@ -16,7 +16,8 @@ const MainNav = () => {
         { title: 'Лучшие направления', path: '/routes' },
         { title: 'Статьи', path: '/articles' },
         { title: 'Способы оплаты', path: '/payment' },
-        { title: 'Контакты', path: '/contact' }
+        { title: 'Контакты', path: '/contact' },
+        { title: 'Избранное', path: '/hotels' }
     ]
 
 

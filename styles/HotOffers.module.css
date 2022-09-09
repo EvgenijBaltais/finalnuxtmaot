@@ -12,7 +12,24 @@
 	
 }
 
+@media screen and (max-width: 1260px) {
+
+	.hot-deals {
+		margin: 0 1rem;
+	}
+}
+
+@media screen and (max-width: 1100px) {
+	.hot-deals-section {
+		justify-content: space-between;
+	}
+}
+
 @media screen and (max-width: 650px) {
+
+	.hot-deals {
+		margin: 0;
+	}
 
 	.hot-deals-section {
 		justify-content: space-between;
