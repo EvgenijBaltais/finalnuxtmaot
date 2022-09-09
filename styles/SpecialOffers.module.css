@@ -36,7 +36,17 @@
 	font-family: 'FontInterLight';
 }
 
+@media screen and (max-width: 1260px) {
+	.special-offers {
+		margin: 0 1rem;
+	}
+}
+
 @media screen and (max-width: 650px) {
+
+	.special-offers {
+		margin: 0;
+	}
 
 	.sales-item {
 		margin-top: 40px;

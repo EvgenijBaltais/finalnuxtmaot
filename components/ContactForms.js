@@ -48,7 +48,7 @@ class ContactForms extends React.Component {
 						<form action="" name = "contacts-subscribe-form">
 							<div className = {styles["contacts-subscribe-form"]}>
 								<div className={styles["contacts-subscribe-form-inside"]}>
-									<input type="text" name = "get-contacts-subscribe" id = "get-contacts-subscribe" className = {styles["get-contacts-subscribe"]} placeholder = "Укажите свою электронную почту" />
+									<input type="text" name = "get-contacts-subscribe" id = "get-contacts-subscribe" className = {styles["get-contacts-subscribe"]} placeholder = "Укажите свой Email" />
 									<div className = {styles["get-contacts-suscribe-btn"]}>
 										<button className = {styles["get-contacts-suscribe__submit"]}>
                                             <MediaQuery maxWidth={420}>

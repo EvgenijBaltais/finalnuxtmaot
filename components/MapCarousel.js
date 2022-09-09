@@ -52,9 +52,9 @@ class MapCarousel extends React.Component {
             </Swiper>
 
                 <div className = {styles["map-slider-nav"]}>
-                    <div className = {styles["our-offices-left"]}></div>
+                    <div className = {styles["our-offices-left"]}><span></span></div>
                     <div className = {styles["our-offices-info"]}>Наши офисы расположены по всей России</div>
-                    <div className = {styles["our-offices-right"]}></div>
+                    <div className = {styles["our-offices-right"]}><span></span></div>
                 </div>
 
             <div className = {styles["map-section"]}>

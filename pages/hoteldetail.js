@@ -3,6 +3,7 @@ import { useState, useEffect, useRef} from 'react'
 import Head from 'next/head'
 
 import { YMaps, Map, Placemark } from "react-yandex-maps"
+import { useMediaQuery } from 'react-responsive'
 
 import Hotel_search_result from "../components/hotel_details/Hotel_search_result"
 import Rooms_info from "../components/hotel_details/Rooms_info"
@@ -32,6 +33,9 @@ function Hoteldetail ({hotel}) {
 
     const [visibleNav, setVisibleNav] = useState(0)
 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 480px)' })
+    const isBigScreen = useMediaQuery({ query: '(min-width: 480px)' })
+
     const rootEl = useRef(null)
 
         useEffect(() => {
@@ -53,19 +57,11 @@ function Hoteldetail ({hotel}) {
                         {hotelData.rus_name ? <h1 className = "hotel-title">{hotelData.rus_name}</h1> : ''}
                         {hotelData.other.adress ? <p className = {styles["hotel-adress"]}>{hotelData.other.adress}</p> : ''}
                     </div>
-                    <div className = {styles["hotel-rate-info"]}>
-                        <ul className = {styles["hotel-rate__list"]}>
-                            <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
-                            <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
-                            <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
-                            <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-yellow"]}`}></li>
-                            <li className={`${styles["hotel-rate__item"]} ${styles["hotel-rate__item-grey"]}`}></li>
-                        </ul>
-                        <span className = {styles["hotel-rate__reviews"]}>{hotelData.reviews.length} отзывов</span>
-                        <div className={styles["add-to-favorite"]}>
-                            <a className={styles["add-to-favorite__link"]}>добавить в избранное</a>
-                        </div>
+                    <div className={styles["add-to-favorite"]}>
+                        {isBigScreen && <a className={styles["add-to-favorite__link"]}>добавить&nbsp;в&nbsp;избранное</a>}
+                        {isTabletOrMobile && <a className={styles["add-to-favorite__link"]}>в&nbsp;избранное</a>}
                     </div>
+
                 </div>
 
                 <div className = {styles["map-slider"]}>
@@ -172,13 +168,15 @@ function Hoteldetail ({hotel}) {
                     {active_block == 2 ? <Rooms_info /> : ''}
                     {active_block == 3 ? <Hotel_service /> : ''}
                     {active_block == 4 ? <Hotel_contact /> : ''}
+                    {active_block == 5 ? <Hotel_rooms_all /> : ''}
                 </div>
 
                 <div className = {styles["select-dates-nav"]}>
-                    
-                    <h2 className = "section-title icon-item icon-item-menu">Навигация</h2>
 
                     <div className = {visibleNav ? `${styles["select-nav-bg"]} ${styles["active-nav-list"]}` : styles["select-nav-bg"]} ref={rootEl}>
+
+                        <div className = {styles["icon-item-menu"]}>Навигация по странице</div>
+
                         <div className = {styles["select-dates-item"]} onClick = {() => setVisibleNav(visibleNav => !visibleNav)}>
                             <a href="" 
                                 data-value = "1" 
@@ -213,6 +211,15 @@ function Hoteldetail ({hotel}) {
                                 className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Контакты
+                            </a>
+                        </div>
+                        <div className = {styles["select-dates-item"]}>
+                            <a href=""
+                                data-value = "5"
+                                onClick={changeBlock}
+                                className = {`${styles["select-dates-link"]} ${active_block == 5 ? styles["select-dates-link-active"] : ''}`}
+                            >
+                                Отели рядом
                             </a>
                         </div>
                     </div>

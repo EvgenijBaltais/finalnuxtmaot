@@ -45,11 +45,17 @@
 	font-size: 15px;
 	line-height: 30px;
 	text-decoration: underline;
+	transition: 0.2s color;
 }
 
 .left-nav-list__sub {
 	list-style-type: disc;
 	padding-left: 25px
+}
+
+.left-nav-link:hover {
+	color: rgba(255,74,43,1);
+	transition: 0.2s color;
 }
 
 /* Блок навигации, конец */
