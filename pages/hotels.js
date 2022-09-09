@@ -233,6 +233,7 @@ export default function Hotels () {
                                 setFilteredItems = {setFilteredItems}
                                 setIsResearch = {setIsResearch}
                                 setLoadedItems = {setLoadedItems}
+                                setFiltersOn = {setFiltersOn}
                                 popularHotels = {popularHotels}
                                 popularWays = {popularWays}
                             />
