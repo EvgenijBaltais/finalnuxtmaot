@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect, useRef} from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from "next/router"
 import Image from 'next/image'
@@ -19,25 +19,9 @@ const MainNav = () => {
         { title: 'Контакты', path: '/contact' },
         { title: 'Избранное', path: '/hotels' }
     ]
-
-
-    const rootEl = useRef(null)
-
-
-    function WindowOutClick() {
-        useEffect(() => {
-          const onClick = e => rootEl.current.contains(e.target) || setVisibleMenu(false)
-
-          document.addEventListener('click', onClick)
-          return () => document.removeEventListener('click', onClick)
-        }, [])
-    }
-
-
-    WindowOutClick()
-
+    
     return (
-        <header className = {styles["header"]}>
+        <header className = {styles["header"]} >
 
             <div className =  {visibleMenu ? "hh-bg hhbg-fix" : "hh-bg "}></div>
 
@@ -72,7 +56,7 @@ const MainNav = () => {
                 </div>
 
 
-                <div className = {visibleMenu ? "mob-menu mob-menu-active" : " mob-menu"} ref={rootEl}>
+                <div className = {visibleMenu ? "mob-menu mob-menu-active" : " mob-menu"}>
 
                     <div className= "mob-burger" onClick = {() => setVisibleMenu(visibleMenu => !visibleMenu)}>
                         <span></span>

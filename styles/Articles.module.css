@@ -444,10 +444,6 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
 		padding-bottom: 0;
 	}
 
-	.active-list .left-nav-item {
-		display: block;
-	}
-
 	.left-nav-link {
 		font-size: 12px;
 	}

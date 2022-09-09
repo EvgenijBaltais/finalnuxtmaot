@@ -1,0 +1,22 @@
+
+
+.s-select-w {
+    display: flex;
+    justify-content: space-between;
+}
+
+.s-select {
+    position: relative;
+    width: calc(33.33333% - 16.6px);
+    -webkit-box-shadow: var(--main-shadow);
+    -moz-box-shadow: var(--main-shadow);
+    box-shadow: var(--main-shadow);
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.s-select-item {
+    position: absolute;
+    font-size: 14px;
+    line-height: 14px;
+}

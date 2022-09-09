@@ -1,4 +1,4 @@
-export default function MonthAsideLink (props) {
+export default function AsideMonthLink (props) {
 
     const date = new Date()
 

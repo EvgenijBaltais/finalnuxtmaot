@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef} from 'react'
-import Search_hotel_input_ways from './Search_hotel_input_ways'
+import Aside_search_hotel_ways from './Aside_search_hotel_ways'
+import { useRouter } from 'next/router'
 
 function useOutsideAlerter(ref, func) {
     useEffect(() => {
@@ -17,11 +18,13 @@ function useOutsideAlerter(ref, func) {
     }, [ref])
 }
 
-export default function Search_hotel_input (props) {
+export default function Aside_search_hotel_input (props) {
 
     const [regions, setRegions] = useState(props.popularWays)
     const [hotels, setHotels] = useState(props.popularHotels)
     const [visibleSearch, setVisibleSearch] = useState(0)
+    const router = useRouter()
+    const { query } = useRouter()
 
     function changeVisibleSearch () {
         setVisibleSearch(visibleSearch => !visibleSearch)
@@ -44,6 +47,8 @@ export default function Search_hotel_input (props) {
 
             const response = await fetch(`https://maot-api.bokn.ru/api/search-object?str=${value}`)
             const result = await response.json()
+
+            console.log(result)
 
             if (!response.ok) {
                 throw new Error(`Error! status: ${response.status}`);
@@ -75,16 +80,17 @@ export default function Search_hotel_input (props) {
 
     return (
 
-        <div className = "direction-form-block direction-form-way" ref={wrapperRef}>
+        <div className = "aside-direction-form-block aside-direction-form-way" ref={wrapperRef}>
         <input type="text"
-                name="choose-way"
-                className = "form-way-input"
+                name="aside-choose-way"
+                className = "aside-form-way-input"
                 placeholder="Выберите направление"
+                defaultValue={query.region_name || query.hotel_name || ''}
                 onClick={() => setVisibleSearch(1)}
                 onChange={event => searchHotels(event.target.value)}
             />
             { visibleSearch ? 
-            <Search_hotel_input_ways 
+            <Aside_search_hotel_ways 
                 hotels = {hotels}
                 regions = {regions}
                 visibleSearch = {changeVisibleSearch}
