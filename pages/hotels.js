@@ -42,7 +42,7 @@ export default function Hotels (props) {
             setLoading(true)
 
             if (!query.region_id || !query.adults || !query.datein || !query.dateout) {
-                console.log('недостаточно данных' + query.region_id, query.adults, query.datein, query.dateout)
+                console.log('недостаточно данных ' + query.region_id, query.adults, query.datein, query.dateout)
                 return () => {}
             }
 
@@ -80,6 +80,8 @@ export default function Hotels (props) {
                     .then((res) => res.json())
                     .then((res) => {
                         setLoadedItems(res.data)
+
+                console.log(res.data)
                 
                 // определить минимум и максимум цен
 
@@ -89,9 +91,6 @@ export default function Hotels (props) {
                 for (let i = 0; i < res.data.length; i++) {
                     prices.push(parseInt(res.data[i].daily_price))
                 }
-
-                console.log(Math.min.apply(null, prices) * nights)
-                console.log(Math.max.apply(null, prices) * nights)
 
                 setSliderMin(Math.min.apply(null, prices) * nights)
                 setSliderMax(Math.max.apply(null, prices) * nights)

@@ -51,7 +51,7 @@ export default function AsideDatepicker (value) {
                     links[i].removeEventListener('click', () => addLinkEvents(event, i))
                 }
             }
-        })
+        }, [])
 
     return (
         <div className="datepicker-w">

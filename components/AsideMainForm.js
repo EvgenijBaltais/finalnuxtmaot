@@ -100,62 +100,7 @@ const AsideMainForm = ({popularHotels, popularWays, setLoading, setSliderMin, se
             query: obj
         })
 
-        {/*
-
-        // Запрос из боковой формы
-            setLoadedItems([])
-            setLoading(true)
-
-            let [dayin, monthIn, yearIn] = dateIn.split('.')
-            let [dayout, monthOut, yearOut] = dateOut.split('.')
-            let datein = yearIn + '-' + monthIn + '-' + dayin
-            let dateout = yearOut + '-' + monthOut + '-' + dayout
-            let link = 'https://maot-api.bokn.ru/api/regions/search?'
-
-            // Определить сколько всего ночей было выбрано
-            setNights(calculateNights(datein, dateout))
-
- 
-            searchResult.region ? link += '&id=' + searchResult.region
-                        : link += '&id=' + query.region_id
-
-            link += '&start_date=' + datein
-            link += '&end_date=' + dateout
-            link += '&adults=' + adults
-            
-
-            if (obj.children_ages) {
-                for (let i = 0; i < obj.children_ages.length; i++) {
-                    link += '&children_ages=' + obj.children_ages[i]
-                }
-            }
-
-           fetch(link)
-                    .then((res) => res.json())
-                    .then((res) => {
-                        setLoadedItems(res.data)
-                
-                // определить минимум и максимум цен
-
-                let prices = []
-                let nights = calculateNights(datein, dateout)
-
-                for (let i = 0; i < res.data.length; i++) {
-                    prices.push(parseInt(res.data[i].daily_price))
-                }
-
-                setSliderMin(Math.min.apply(null, prices) * nights)
-                setSliderMax(Math.max.apply(null, prices) * nights)
-                setLoading(false)
-          })
-        */}
     }
-    {/*}
-    function calculateNights (datein, dateout) {
-        let begin_date = new Date(datein)
-        let end_date = new Date(dateout)
-        return (end_date - begin_date) / (1000 * 60 * 60 * 24)
-    }*/}
 
     return (
         <section className = "aside-main-form">

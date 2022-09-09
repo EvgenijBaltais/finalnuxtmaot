@@ -31,7 +31,6 @@ export default function Search_hotel_item ({item, nights}) {
 
         <div className={styles["search-item"]}>
 
-
                 <Swiper
                     onSlideChange = {slider => addBackgroundImage(slider)}
                     slidesPerView={1}
@@ -63,11 +62,12 @@ export default function Search_hotel_item ({item, nights}) {
                 </Link>
                 <div className = {styles["search-item__rate"]}>
                     <ul className={styles["search-rate__list"]}>
-                        <li className={`${styles["search-rate__item"]} ${styles["search-rate__item-yellow"]}`}></li>
-                        <li className={`${styles["search-rate__item"]} ${styles["search-rate__item-yellow"]}`}></li>
-                        <li className={`${styles["search-rate__item"]} ${styles["search-rate__item-yellow"]}`}></li>
-                        <li className={`${styles["search-rate__item"]} ${styles["search-rate__item-yellow"]}`}></li>
-                        <li className={`${styles["search-rate__item"]} ${styles["search-rate__item-grey"]}`}></li>
+                        {
+                            [...Array(item.star_rating)].map((e, i) => <li key = {i} className={`${styles["search-rate__item"]} ${styles["search-rate__item-yellow"]}`}></li>)
+                        }
+                        {
+                            [...Array(5 - item.star_rating)].map((e, i) => <li key = {i} className={`${styles["search-rate__item"]} ${styles["search-rate__item-grey"]}`}></li>)
+                        }
                     </ul>
                     <span className = {styles["search-rate__reviews"]}>18 отзывов</span>
                     {item.is_all_inclusive ?

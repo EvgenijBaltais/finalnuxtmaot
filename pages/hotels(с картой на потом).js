@@ -145,7 +145,7 @@ export default function Hotels (props) {
 
         from = document.querySelector('.aside-slider-from')
         to = document.querySelector('.aside-slider-to')
-    })
+    }, [])
 
     return (
         <>
