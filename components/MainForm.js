@@ -70,6 +70,11 @@ const MainForm = (props) => {
             ages.push(parseInt(childrenAges[i]))
         }
 
+        if (document.querySelector('.form-way-input').value == '') {
+            console.log('Не выбрано направление')
+            return false
+        }
+
         let obj = {
             datein: dateIn,
             dateout: dateOut,
