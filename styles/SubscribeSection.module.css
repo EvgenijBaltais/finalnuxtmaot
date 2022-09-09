@@ -154,6 +154,13 @@
 	background-position: left center;
 }
 
+@media screen and (max-width: 1260px) {
+	.subscribe-section {
+		margin-right: 1rem;
+		margin-left: 1rem;
+	}
+}
+
 @media screen and (max-width: 650px) {
 
 	.subscribe-section {

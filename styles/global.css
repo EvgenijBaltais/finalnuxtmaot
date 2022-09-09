@@ -312,7 +312,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	padding: 100px 0 50px;
 	display: inline-block;
 	font-family: FontInterExtraBold;
-	font-size: 70px;
+	font-size: 4.5rem;
 	color: transparent;
     background: var(--red-linear-gradient);
     animation: gradient 3s infinite linear;
@@ -588,6 +588,8 @@ input[type="checkbox"].substylized:checked + label:after {
 	display: block;
 	width: 100%;
 	height: 480px;
+	border-radius: 8px;
+	overflow: hidden;
 }
 
 /* Карта в контактах, конец */
@@ -827,6 +829,18 @@ input[type="checkbox"].substylized:checked + label:after {
 	animation-timing-function: ease;
 }
 
+
+@media screen and (max-width: 1260px) {
+
+	.cashback-info {
+		width: 80%;
+	}
+
+	.footer {
+		margin: 0 1rem;
+	}
+}
+
 @media screen and (max-width: 650px) {
 
     .wrapper {
@@ -874,6 +888,7 @@ input[type="checkbox"].substylized:checked + label:after {
     }
 
     .footer {
+    	margin: 0;
 		padding-top: 45px;
     	flex-wrap: wrap;
     	justify-content: space-between;
@@ -2121,14 +2136,11 @@ input[type="checkbox"].substylized:checked + label:after {
 	display: none;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1140px) {
 
-	.cashback-info {
-		width: 80%;
+	.wrapper {
+		overflow: hidden;
 	}
-}
-
-@media screen and (max-width: 650px) {
 
 	.wrapper-fix {
 		position: fixed;
@@ -2144,11 +2156,8 @@ input[type="checkbox"].substylized:checked + label:after {
     	display: flex !important;
     	width: 40px;
     }
-    .main-nav {
-        display: none;
-    }
 
-    .top-phone-corp {
+    .main-nav {
         display: none;
     }
 
@@ -2161,11 +2170,16 @@ input[type="checkbox"].substylized:checked + label:after {
         width: 100%;
     }
 
+    .mob-menu {
+    	margin-left: 30px;
+    }
+
     .mob-menu-active {
     	position: absolute;
     	top: 0;
     	right: 10px;
     	width: 90%;
+    	max-width: 400px;
     	border-radius: 8px;
         display: flex;
         flex-direction: column;
@@ -2174,14 +2188,6 @@ input[type="checkbox"].substylized:checked + label:after {
         background-color: #fff;
         box-shadow: var(--main-shadow);;
     }
-/*
-    .mob-menu-active > .mob-bg {
-        display: block;
-    }
-
-    .mob-bg {
-        display: none;
-    }*/
 
     .mob-menu-active > .nav-list-mob {
         flex-direction: column;
@@ -2208,6 +2214,23 @@ input[type="checkbox"].substylized:checked + label:after {
 		height: 36px;
     	justify-content: flex-end;
 	}
+}
+
+@media screen and (max-width: 650px) {
+
+    .top-phone-corp {
+        display: none;
+    }
+
+/*
+    .mob-menu-active > .mob-bg {
+        display: block;
+    }
+
+    .mob-bg {
+        display: none;
+    }*/
+
 
 	.cashback-info {
 		text-align: center;
@@ -2321,10 +2344,13 @@ input[type="checkbox"].substylized:checked + label:after {
 		font-weight: 400;
 	}
 
-
 	.hoteldetail-swiper .hotel-slider__item {
 		height: 70px;
 		width: 115px;
+	}
+
+	.mob-menu {
+		margin-left: 0;
 	}
 }
 
