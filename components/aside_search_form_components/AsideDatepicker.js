@@ -1,5 +1,4 @@
 import AsideMonth from "./AsideMonth"
-import AsideMonthLink from "./AsideMonthLink"
 import { useEffect } from "react"
 import smoothscroll from 'smoothscroll-polyfill'
 
