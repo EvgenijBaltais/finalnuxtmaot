@@ -1,4 +1,3 @@
-import Link from 'next/link'
 export default function Search_hotel_ways (props) {
 
 const searchByClick = (event) => {
@@ -36,11 +35,9 @@ function findParent (el, cls) {
                         {props.regions.map((item, index) => {
                             return (
                                 <div className="search-results__item" key = {index}>
-                                    <Link href = "">
-                                        <a className="search-results__link" onClick = {searchByClick} data-info = "region" data-id = {item.id}>
-                                            {item.name}
-                                        </a>
-                                    </Link>
+                                    <a className="search-results__link" onClick = {searchByClick} data-info = "region" data-id = {item.id}>
+                                        {item.name}
+                                    </a>
                                 </div>
                             )
                         })}
@@ -56,11 +53,9 @@ function findParent (el, cls) {
                     {props.hotels.map((item, index) => {
                         return (
                             <div className="search-results__item" key = {index}>
-                                <Link href = "">
-                                    <a className="search-results__link" onClick = {searchByClick} data-info = "hotel" data-id = {item.id}>
-                                        {item.name}
-                                    </a>
-                                </Link>
+                                <a className="search-results__link" onClick = {searchByClick} data-info = "hotel" data-id = {item.id}>
+                                    {item.name}
+                                </a>
                             </div>
                         )
                     })}

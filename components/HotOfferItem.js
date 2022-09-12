@@ -1,14 +1,10 @@
 import Link from "next/link"
-import Image from 'next/image'
 import styles from "../styles/HotOffersItem.module.css"
-
-import GoldStarImg from '/public/images/star.svg'
-import GreyStarImg from '/public/images/grey-star.svg'
 
 const HotOfferItem = () => {
 
     return (
-        <Link href = {"/hoteldetail"}>
+        <Link href = {`/hoteldetail?hotel-id={item.id}`}>
             <a className = {styles["hot-deal-item"]}>
                 <div className = {styles["hot-deal-pic"]}></div>
                 <div className = {styles["hot-deal-content"]}>

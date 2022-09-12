@@ -67,6 +67,7 @@ const MainForm = (props) => {
 
         let ages = []
         let obj = {}
+        let link = ''
         for (let i = 0; i < childrenAges.length; i++) {
             ages.push(parseInt(childrenAges[i]))
         }
@@ -75,7 +76,6 @@ const MainForm = (props) => {
         if (document.querySelector('.form-way-input').value == '') {
             obj.region_id = '965825039'
             obj.region_name = 'Подмосковье'
-            console.log('***')
         }
 
         obj.datein = dateIn
@@ -86,9 +86,13 @@ const MainForm = (props) => {
 
         searchResult.region ? obj.region_id = searchResult.region : ''
         searchResult.region_name ? obj.region_name = searchResult.region_name : ''
+        searchResult.hotel ? obj.hotel_id = searchResult.hotel : ''
+
+        searchResult.hotel ? link = '/hoteldetail' : '' // Если отель то на страницу отеля, если регион то на страницу подбора
+        searchResult.region ? link = '/hotels' : ''
 
         router.push({
-            pathname: '/hotels',
+            pathname: link,
             query: obj
         })
     }
