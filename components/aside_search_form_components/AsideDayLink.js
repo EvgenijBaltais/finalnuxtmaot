@@ -38,7 +38,7 @@ export default function AsideDayLink (props) {
                 }${
                     !props.prefix && (actualDate.getDay() == 0 || actualDate.getDay() == 6) ? ' date-weekend' : '' 
                 }${
-                    props.closeFuncdateOut && minDay > day && minMonth >= parseInt(actualDate.getMonth()) + 1 && !props.prefix  ? ' date-disable' : '' 
+                    props.closeFuncdateOut && minDay > day && minMonth >= parseInt(actualDate.getMonth()) + 1 && minYear >= parseInt(actualDate.getFullYear()) && !props.prefix  ? ' date-disable' : '' 
                 }`
             }>
             {day}
