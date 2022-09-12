@@ -1,9 +1,8 @@
-
-import { useState, useEffect, useRef} from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
 
-import { YMaps, Map, Placemark } from "react-yandex-maps"
 import { useMediaQuery } from 'react-responsive'
+import { useRouter } from 'next/router'
 
 import Hotel_search_result from "../components/hotel_details/Hotel_search_result"
 import Rooms_info from "../components/hotel_details/Rooms_info"
@@ -19,17 +18,18 @@ import { Keyboard } from "swiper";
 
 function Hoteldetail ({hotel}) {
 
-    let hotelData = useState(hotel)
-        hotelData = hotelData[0].data
-
+    const router = useRouter()
+    const { query } = useRouter()
+    const [hotelData, setHotelData] = useState(hotel)
     const [active_block, setActive_block] = useState(1)
+    let myMap = ''
+    let objectManager = ''
 
-    const changeBlock = e => {
+    const changeBlock = event => {
 
-        e.preventDefault()
+        event.preventDefault()
         setActive_block(e.target.getAttribute('data-value'))
     }
-
 
     const [visibleNav, setVisibleNav] = useState(0)
 
@@ -45,6 +45,72 @@ function Hoteldetail ({hotel}) {
           return () => document.removeEventListener('click', onClick)
         }, [])
 
+
+// Яндекс карта
+const loadScript = (src, onLoad) => {
+    const script = document.createElement("script")
+  
+    script.src = src
+    script.async = true
+    document.body.appendChild(script)
+    script.onload = onLoad
+}
+  
+const init = () => {
+    myMap = new window.ymaps.Map("map", {
+      center: [hotelData.latitude, hotelData.longitude],
+      zoom: 12
+    }, {
+        searchControlProvider: 'yandex#search'
+    }),
+    
+    objectManager = new window.ymaps.ObjectManager({
+        // Чтобы метки начали кластеризоваться, выставляем опцию.
+        clusterize: true,
+        // ObjectManager принимает те же опции, что и кластеризатор.
+        gridSize: 32,
+        clusterDisableClickZoom: true
+    })
+
+    const add = {
+        "type": "FeatureCollection",
+        "features": [
+            {"type": "Feature", "id": 0, "geometry": {"type": "Point", "coordinates": [hotelData.latitude, hotelData.longitude]}, "properties": {"balloonContentHeader": "<font size=3><b><a target='_blank' href='https://yandex.ru'>Здесь может быть ваша ссылка</a></b></font>", "balloonContentBody": "<p>Ваше имя: <input name='login'></p><p><em>Телефон в формате 2xxx-xxx:</em>  <input></p><p><input type='submit' value='Отправить'></p>", "balloonContentFooter": "<font size=1>Информация предоставлена: </font> <strong>этим балуном</strong>", "clusterCaption": "<strong><s>Еще</s> одна</strong> метка", "hintContent": "<strong>Текст  <s>подсказки</s></strong>"}}    ]
+    }
+
+    objectManager.objects.options.set('preset', 'islands#greenDotIcon')
+    objectManager.clusters.options.set('preset', 'islands#greenClusterIcons')
+    myMap.geoObjects.add(objectManager)
+
+    objectManager.add(add);
+}
+// Яндекс карта, конец
+
+useEffect(() => {
+
+    if (!router.isReady) return
+
+    fetch(`https://maot-api.bokn.ru/api/load?id=${ query['hotel_id'] }`)
+    .then((res) => res.json())
+    .then((res) => {
+        setHotelData(res.data)
+
+        // Подгрузка карты
+        loadScript("https://api-maps.yandex.ru/2.1/?lang=ru_RU", () => {
+            window.ymaps.ready(init)
+        })
+    })
+
+    return () => {
+        document.scripts[0].remove()
+        myMap.destroy()
+    }
+}, [query])
+
+    if (!hotelData) {
+        return <></>
+    }
+
     return (
         <>
             <Head>
@@ -55,18 +121,18 @@ function Hoteldetail ({hotel}) {
                 <div className={styles["titles-top"]}>
                     <div className = {styles["title-block"]}>
                         {hotelData.rus_name ? <h1 className = "hotel-title">{hotelData.rus_name}</h1> : ''}
-                        {hotelData.other.adress ? <p className = {styles["hotel-adress"]}>{hotelData.other.adress}</p> : ''}
+                        {hotelData.contact.content ? <p className = {styles["hotel-adress"]}>{hotelData.contact.content}</p> : ''}
                     </div>
                     <div className={styles["add-to-favorite"]}>
-                        {isBigScreen && <a className={styles["add-to-favorite__link"]}>добавить&nbsp;в&nbsp;избранное</a>}
-                        {isTabletOrMobile && <a className={styles["add-to-favorite__link"]}>в&nbsp;избранное</a>}
+                        {/*isBigScreen && <a className={styles["add-to-favorite__link"]}>добавить&nbsp;в&nbsp;избранное</a>*/}
+                        {/*isTabletOrMobile && <a className={styles["add-to-favorite__link"]}>в&nbsp;избранное</a>*/}
                     </div>
 
                 </div>
 
                 <div className = {styles["map-slider"]}>
                     <div className={styles["hotel-slider"]}>
-                        <div className = {styles["hotel-slider__main"]}>
+                        <div className = {styles["hotel-slider__main"]} style = {hotelData.images[0] ? {backgroundImage: `url(https://zarya-tour.ru${hotelData.images[0].url})`} : {}}>
                             <div className = {styles["arrow-left"]}></div>
                             <div className = {styles["arrow-right"]}></div>
                         </div>
@@ -87,38 +153,21 @@ function Hoteldetail ({hotel}) {
                             >
                                 {hotelData.images.map((item, index) => (
                                     index == 0 ? '' :
-                                    <SwiperSlide key={index} className = "hotel-slider__item"></SwiperSlide>
+                                    <SwiperSlide key={index} className = "hotel-slider__item" style = {item ? {backgroundImage: `url(https://zarya-tour.ru${item.url})`} : {}}></SwiperSlide>
                                 ))}
                             </Swiper>
                             </div>
                         </div>
                     </div>
-                    <div className = {styles["hotel-map"]}>
-                        <YMaps>
-                            <Map 
-                                className = {styles["hoteldetail-y-map"]}
-                                defaultState = {{ 
-                                    center: [hotelData.latitude, hotelData.longitude],
-                                    zoom: 12
-                                }}
-                            >
-                                <Placemark 
-                                    geometry={[hotelData.latitude, hotelData.longitude]}
-                                    properties = {{
-                                        balloonContent: hotelData.other.adress
-                                    }}
-                                    modules = {
-                                        ['geoObject.addon.balloon']
-                                    }
-                                />
-                            </Map>
-                        </YMaps>
-                        {hotelData.latitude && hotelData.longitude ?
-                            <div className = {styles["hotel-map__place"]}>
-                                <span>Координаты: </span>
-                                <a className = {styles["hotel-map__coordinates"]}>{hotelData.latitude}, {hotelData.longitude}</a>
-                            </div> : ''
-                        }
+                    <div className = {styles["hotel-map"]} id = "map">
+                        <div className = {styles["hoteldetail-y-map"]}>
+                            {hotelData.latitude && hotelData.longitude ?
+                                <div className = {styles["hotel-map__place"]}>
+                                    <span>Координаты: </span>
+                                    <a className = {styles["hotel-map__coordinates"]}>{hotelData.latitude}, {hotelData.longitude}</a>
+                                </div> : ''
+                            }
+                        </div>
                     </div>
                 </div>
             </section>
@@ -180,7 +229,7 @@ function Hoteldetail ({hotel}) {
                         <div className = {styles["select-dates-item"]} onClick = {() => setVisibleNav(visibleNav => !visibleNav)}>
                             <a href="" 
                                 data-value = "1" 
-                                onClick={changeBlock} 
+                                onClick={event => changeBlock(event)} 
                                 className = {`${styles["select-dates-link"]} ${active_block == 1 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Поиск номеров
@@ -189,7 +238,7 @@ function Hoteldetail ({hotel}) {
                         <div className = {styles["select-dates-item"]}>
                             <a href="" 
                                 data-value = "2" 
-                                onClick={changeBlock} 
+                                onClick={event => changeBlock(event)} 
                                 className = {`${styles["select-dates-link"]} ${active_block == 2 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Об отеле
@@ -198,7 +247,7 @@ function Hoteldetail ({hotel}) {
                         <div className = {styles["select-dates-item"]}>
                             <a href="" 
                                 data-value = "3" 
-                                onClick={changeBlock} 
+                                onClick={event => changeBlock(event)} 
                                 className = {`${styles["select-dates-link"]} ${active_block == 3 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Услуги
@@ -207,7 +256,7 @@ function Hoteldetail ({hotel}) {
                         <div className = {styles["select-dates-item"]}>
                             <a href=""
                                 data-value = "4"
-                                onClick={changeBlock}
+                                onClick={event => changeBlock(event)}
                                 className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Контакты
@@ -216,7 +265,7 @@ function Hoteldetail ({hotel}) {
                         <div className = {styles["select-dates-item"]}>
                             <a href=""
                                 data-value = "5"
-                                onClick={changeBlock}
+                                onClick={event => changeBlock(event)}
                                 className = {`${styles["select-dates-link"]} ${active_block == 5 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Отели рядом
@@ -224,11 +273,27 @@ function Hoteldetail ({hotel}) {
                         </div>
                     </div>
                 </div>
-            </section>
+                    </section>
         </>
     )
 }
 
+Hoteldetail.getInitialProps = async ({ query, req }) => {
+
+    if (!req) {
+        return {
+            hotel: null
+        }
+    }
+
+    const res = await fetch(`https://maot-api.bokn.ru/api/load?id=${ query['hotel_id'] }`)
+    const hotel = await res.json()
+    return { 
+        hotel: hotel.data
+    }
+  }
+
+/*
 export const getServerSideProps = async ({ query, req }) => {
 
     if (!req) {
@@ -247,5 +312,5 @@ export const getServerSideProps = async ({ query, req }) => {
         },
     }
 }
-
+*/
 export default Hoteldetail

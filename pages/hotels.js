@@ -78,8 +78,6 @@ export default function Hotels () {
                     .then((res) => {
                         setLoadedItems(res.data)
 
-                console.log(res.data)
-                
                 // определить минимум и максимум цен
 
                 let prices = []

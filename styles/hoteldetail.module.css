@@ -122,7 +122,8 @@
 	height: 490px;
 	border-radius: 10px;
 	margin-bottom: 12px;
-	background-color: #ccc;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .hotel-slider__main .arrow-left {

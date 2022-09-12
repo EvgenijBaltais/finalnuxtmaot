@@ -777,6 +777,8 @@ input[type="checkbox"].substylized:checked + label:after {
 	letter-spacing: normal;	
 	background-color: #ccc;
 	cursor: pointer;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .hoteldetail-swiper .swiper-slide-active:after {
