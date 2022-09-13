@@ -914,6 +914,11 @@ input[type="checkbox"].substylized:checked + label:after {
 
 @media screen and (max-width: 1260px) {
 
+	.main-form {
+		margin-left: 1rem;
+		margin-right: 1rem;
+	}
+
 	.cashback-info {
 		width: 80%;
 	}
@@ -1097,10 +1102,11 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .direction-ways {
 	display: flex;
-	padding-top: 20px;
+	margin-top: 20px;
 }
 
 .direction-way {
+	font-family: 'FontInterMedium';
 	color: rgb(35,135,233);
 	padding-right: 20px;
 	text-decoration: underline;
@@ -1120,8 +1126,21 @@ input[type="checkbox"].substylized:checked + label:after {
 .dont-know-way {
 	text-align: right;
 	flex: 1 1 auto;
-	color: rgb(146,146,146);
-	padding-right: 0
+	padding-right: 0;
+}
+
+.dont-know-way a {
+	color: rgb(35,135,233);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.dont-know-way a:hover {
+	color: transparent;
+	background-image: var(--red-linear-gradient);
+	background-size: 100%;
+	-webkit-background-clip: text;
+	text-decoration: underline;
 }
 
 .direction-form-block {
@@ -1155,6 +1174,7 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .direction-form-way .form-way-input {
+	width: 100%;
 	text-align: left;
 	text-indent: 10px;
 }
@@ -1165,6 +1185,7 @@ input[type="checkbox"].substylized:checked + label:after {
 .form-way-input:-ms-input-placeholder      {color: rgb(103,103,103);}
 
 .form-guests-input {
+	width: 100%;
 	cursor: pointer;
 	user-select: none;
 }
@@ -1746,6 +1767,7 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .form-way-input-period {
+	width: 100%;
 	font-size: 16px;
 	line-height: 16px;
 }
@@ -2357,6 +2379,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	text-align: center;
 	font-size: 16px;
 	line-height: 16px;
+	width: 100%;
 }
 /* Ползунок */
 
@@ -2452,6 +2475,8 @@ input[type="checkbox"].substylized:checked + label:after {
 	cursor: pointer;
 	text-indent: 20px;
 	border-radius: 9px;
+	width: 100%;
+	height: 98%;
 }
 .aside-form-way-input-in {
 	background-image: url('/icons/calendar.png');
@@ -2921,7 +2946,7 @@ input[type="checkbox"].substylized:checked + label:after {
     margin-left: -20px;
     padding-left: 20px;
     scrollbar-width: thin;
-    scrollbar-color: #fff;
+    scrollbar-color: #fff transparent;
 }
 
 .aside-search-results-add__block::-webkit-scrollbar {
@@ -2961,8 +2986,26 @@ input[type="checkbox"].substylized:checked + label:after {
 
 
 /* адаптив главной формы */
+@media screen and (max-width: 960px) {
 
-@media screen and (max-width: 650px) {
+	.direction-form-people {
+		width: 135px;
+	}
+
+	.direction-form-submit {
+		width: 170px;
+	}
+
+	.direction-form-btn {
+		width: 160px;
+	}
+
+	.search-dates {
+		width: 220px;
+	}
+}
+
+@media screen and (max-width: 860px) {
 
 	.direction-form {
 		position: relative;
@@ -2973,25 +3016,37 @@ input[type="checkbox"].substylized:checked + label:after {
 		position: absolute;
 		top: 105px;
 		right: 0;
+		width: 32%;
 	}
 
 	.direction-ways {
-		width: calc(100% - 230px);
+		width: 65%;
+		height: 64px;
 		flex-wrap: wrap;
 	}
 
-	.dont-know-way {
-		text-align: left;
-		color: rgb(35,135,233);
-		margin-top: 20px;
+	.direction-form-btn {
+		width: 100%;
+		height: 64px;
 	}
 
-	.dont-know-way a {
-		color: rgb(35,135,233);
+	.direction-way:nth-child(4) {
+		padding-right: 0;
+	}
+
+	.dont-know-way {
+		width: 100%;
+		text-align: left;
+		margin-top: 10px;
+	}
+
+	.direction-way {
+		padding-right: 1rem;
+		line-height: 24px;
 	}
 
 	.direction-form-way {
-		width: 100%;
+		width: 60%;
 	}
 
 	.form-way-input {
@@ -2999,8 +3054,173 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 }
 
+@media screen and (max-width: 650px) {
+	.main-form {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+
 @media screen and (max-width: 480px) {
 
+	.direction-form {
+		height: auto;
+	}
+
+	.direction-form__inside {
+		position: relative;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+		flex-direction: column;
+		background-color: transparent;
+		padding: 0;
+	}
+
+	.direction-form-block {
+		position: relative;
+		margin-bottom: 15px;
+		width: 100%;
+		height: 64px;
+		background: var(--red-linear-gradient);
+		border-radius: 10px;
+	}
+
+	.direction-form-w {
+		background: transparent;
+		height: auto;
+	}
+
+	.search-dates {
+		width: 100%;
+		justify-content: space-between;
+	}
+
+	.form-way-input {
+		display: flex;
+		position: absolute;
+		top: 2px;
+		bottom: 2px;
+		right: 2px;
+		left: 2px;
+		margin: auto;
+		border-radius: 8px;
+		width: calc(100% - 4px) !important;
+		height: 60px;
+		text-align: left;
+		background: #fff;
+		padding: 0 20px;
+	}
+
+	.direction-ways {
+		width: 100%;
+	}
+
+	.direction-form-way::after {
+		content: none;
+	}
+
+	.direction-form-in, .direction-form-out {
+		width: 47%;
+	}
+
+	.direction-form-in::after, .direction-form-out::after {
+		content: none;
+	}
+
+	.direction-form-submit {
+		top: 0;
+		margin-bottom: 0;
+	}
+
+	.direction-form-btn {
+		width: 100%;
+	}
+
+	.direction-form-in:before {
+		width: 22px;
+		height: 22px;
+		right: 10px;
+		bottom: auto;
+		left: auto;
+		background-image: url('/icons/calendar.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	.direction-form-out:before {
+		width: 22px;
+		height: 22px;
+		right: 10px;
+		bottom: auto;
+		left: auto;
+		background-image: url('/icons/calendar.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	.direction-ways {
+		display: none;
+	}
+
+	.search-results-w {
+		top: 78px;
+		left: 0;
+		width: 100%;
+		z-index: 6;
+	}
+
+	.direction-form-in > .datepicker-w  {
+		left: 0;
+	}
+
+	.datepicker-w {
+		width: 213%;
+		right: 0;
+		left: auto;
+	}
+
+	.guests-block-w {
+		width: 100%;
+		top: 78px;
+	}
+
+	.main-h1 {
+		font-size: 3.3rem;
+	}
+
+	.datepicker-header__title {
+		display: none;
+	}
+
+	.days-list {
+		width: 100%;
+		max-width: 320px;
+		margin: 0 auto;
+	}
+
+	.month-aside {
+		display: none;
+	}
+	.datepicker-body {
+		padding: 0 1rem;
+		width: 100%;
+		left: 0;
+	}
+
+	.direction-form-in-active {
+		background-color: var(--red-linear-gradient);
+	}
+
+	.month-calendar {
+		max-width: 320px;
+		margin: 0 auto;
+	}
 }
 
 /* адаптив главной формы, конец */

@@ -127,7 +127,7 @@ const MainForm = (props) => {
                         <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="1913">Краснодар</a>
                         <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="6057828">Крым</a>
                         <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="180352">Ялта</a>
-                        <span className = "direction-way dont-know-way">
+                        <span className = "dont-know-way">
                             <a>Я не знаю, куда хочу поехать</a>
                         </span>
                     </div>
