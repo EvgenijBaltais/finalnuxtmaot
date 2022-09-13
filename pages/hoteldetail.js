@@ -24,8 +24,7 @@ function Hoteldetail ({hotel}) {
     const { query } = useRouter()
     const [hotelData, setHotelData] = useState(hotel)
     const [active_block, setActive_block] = useState(1)
-    let myMap = ''
-    let objectManager = ''
+    let myMap, myPlacemark
 
     const changeBlock = event => {
 
@@ -48,34 +47,9 @@ function Hoteldetail ({hotel}) {
         }, [])
   
 
-    function init(koordinats) {
-        myMap = new ymaps.Map("map", {
-            center: koordinats,
-            zoom: 11
-        });
-    
-        myPlacemark = new ymaps.Placemark(koordinats, {
-            hintContent: 'МАОТ',
-            balloonContent: 'ул. Бауманская д.6с2. Бизнес-центр Виктория Плаза. 8 этаж. 804 офис'
-        });
-        myMap.geoObjects.add(myPlacemark);
-        myMap.setType('yandex#map');
-        myMap.behaviors.disable('scrollZoom');
-    }
-
-    function setMainSlide (e) {
-
-       // console.log(e.$el[0].parentElement.parentElement.parentElement)
-        
-        document.querySelector('.hotel-slider__main').style.backgroundImage = 'url(1.jpg)'
-        //e.$el[0].swiper.realIndex
-    }
-
     function addBackgroundImage (slider) {
         document.querySelector('.hotel-slider__main').style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
     }
-    
-// Яндекс карта, конец
 
 useEffect(() => {
 
@@ -85,25 +59,10 @@ useEffect(() => {
     .then((res) => res.json())
     .then((res) => {
         setHotelData(res.data)
-
-        /*const koordinats = [res.data.coordinates.latitude, res.data.coordinates.longitude]*/
-        const koordinats = [55.775555, 37.674597]
-        
-        //console.log(latitude + ' ' + longitude)
-
-        // Подгрузка карты
-        //loadScript("https://api-maps.yandex.ru/2.1/?lang=ru_RU", () => {
-           // window.ymaps.ready(init)
-        //})
     })
 
-    return () => {
-       // document.scripts[0].remove()
-       // myMap.destroy()
-    }
 }, [query])
 
-console.log(hotelData)
 
     if (!hotelData) {
         return <></>
@@ -112,10 +71,30 @@ console.log(hotelData)
     return (
         <>
             <Head>
-                <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.rus_name} - Магазин отдыха</title>
+                <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.name} - Магазин отдыха</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <Script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="beforeInteractive" />
+            <Script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onLoad={() => {
+
+                const koordinats = [hotelData.coordinates.latitude, hotelData.coordinates.longitude]
+
+                function init() {
+                    const myMap = new ymaps.Map("map", {
+                        center: koordinats,
+                        zoom: 11
+                    });
+                
+                    myPlacemark = new ymaps.Placemark(koordinats, {
+                        hintContent: hotelData.name,
+                        balloonContent: hotelData.address
+                    });
+                    myMap.geoObjects.add(myPlacemark);
+                    myMap.setType('yandex#map');
+                    myMap.behaviors.disable('scrollZoom');
+                }
+
+                ymaps.ready(init)
+            }} />
 
             <section className = {styles["single-hotel"]}>
                 <div className={styles["titles-top"]}>

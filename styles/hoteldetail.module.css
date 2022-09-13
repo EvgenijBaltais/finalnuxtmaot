@@ -152,6 +152,8 @@
 }
 
 .hotel-map__place {
+	position: absolute;
+	bottom: 10px;
 	display: inline-block;
 	margin-bottom: 20px;
 	border-radius: 5px;

@@ -851,6 +851,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	cursor: pointer;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-position: center;
 }
 
 .hoteldetail-swiper .swiper-slide-active:after {
