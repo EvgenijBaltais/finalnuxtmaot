@@ -54,7 +54,7 @@ function findParent (el, cls) {
                         return (
                             <div className="search-results__item" key = {index}>
                                 <a className="search-results__link" onClick = {searchByClick} data-info = "hotel" data-id = {item.id}>
-                                    {item.name}, {item.region_name}
+                                    {item.name}
                                 </a>
                             </div>
                         )

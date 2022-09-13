@@ -5,11 +5,11 @@ import Script from 'next/script'
 import { useMediaQuery } from 'react-responsive'
 import { useRouter } from 'next/router'
 
+import Hoteldetail_form from '../components/Hoteldetail_form'
 import Hotel_search_result from "../components/hotel_details/Hotel_search_result"
 import Rooms_info from "../components/hotel_details/Rooms_info"
 import Hotel_service from "../components/hotel_details/Hotel_service"
 import Hotel_contact from "../components/hotel_details/Hotel_contact"
-import Hotel_rooms_all from "../components/hotel_details/Hotel_rooms_all"
 import styles from "../styles/Hoteldetail.module.css"
 
 
@@ -24,7 +24,7 @@ function Hoteldetail ({hotel}) {
     const { query } = useRouter()
     const [hotelData, setHotelData] = useState(hotel)
     const [active_block, setActive_block] = useState(1)
-    let myMap, myPlacemark
+    const [koordinates, setKoordinates] = useState([1,2])
 
     const changeBlock = event => {
 
@@ -59,9 +59,17 @@ useEffect(() => {
     .then((res) => res.json())
     .then((res) => {
         setHotelData(res.data)
+        setKoordinates([res.data.coordinates.latitude, res.data.coordinates.longitude])
     })
 
 }, [query])
+
+// Удалить яндекс карты
+useEffect(() => {
+    return () => {
+        document.getElementById('y-maps') ? document.getElementById('y-maps').remove() : ''
+    }
+}, [])
 
 
     if (!hotelData) {
@@ -74,17 +82,15 @@ useEffect(() => {
                 <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.name} - Магазин отдыха</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <Script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onLoad={() => {
-
-                const koordinats = [hotelData.coordinates.latitude, hotelData.coordinates.longitude]
+            <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onReady={() => {
 
                 function init() {
                     const myMap = new ymaps.Map("map", {
-                        center: koordinats,
-                        zoom: 11
+                        center: koordinates,
+                        zoom: 13
                     });
                 
-                    myPlacemark = new ymaps.Placemark(koordinats, {
+                    const myPlacemark = new ymaps.Placemark(koordinates, {
                         hintContent: hotelData.name,
                         balloonContent: hotelData.address
                     });
@@ -162,39 +168,14 @@ useEffect(() => {
                         <span className = {styles["select-dates-children"]}>ребенка</span>&nbsp;
                     </h2>
 
-                    <form action="">
-                        <div className = {styles["select-dates-form"]}>
-                            <div className = {styles["select-dates-form__form"]}>
-                                <div className = {styles["select-form-items"]}>
-                                    <div className = {styles["select-form-input-w"]}>
-                                        <input 
-                                            type="text"
-                                            name = "select-form-name"
-                                            className = {`${styles["select-form-input"]} ${styles["select-form-name"]}`}
-                                            placeholder={hotelData.rus_name}
-                                            defaultValue={hotelData.rus_name}
-                                        />
-                                    </div>
-                                    <div className = {styles["select-form-input-w"]}>
-                                        <input type="text" name = "select-form-in" className = {`${styles["select-form-input"]} ${styles["select-form-in"]}`} placeholder="16 июля" />
-                                    </div>
-                                    <div className = {styles["select-form-input-w"]}>
-                                        <input type="text" name = "select-form-out" className = {`${styles["select-form-input"]} ${styles["select-form-out"]}`} placeholder="18 июля"/>
-                                    </div>
-                                    <div className = {styles["select-form-input-w"]}>
-                                        <input type="text" name = "select-form-guests" className = {`${styles["select-form-input"]} ${styles["select-form-guests"]}`} placeholder="3 гостя" />
-                                    </div>
-                                </div>
-                            </div>
-                            <button type = "button" className = {styles["select-dates-form__btn"]}>Найти</button>
-                        </div>
-                    </form>
+                    <Hoteldetail_form />
+
 
                     {active_block == 1 ? <Hotel_search_result /> : ''}
                     {active_block == 2 ? <Rooms_info /> : ''}
                     {active_block == 3 ? <Hotel_service /> : ''}
-                    {active_block == 4 ? <Hotel_contact /> : ''}
-                    {active_block == 5 ? <Hotel_rooms_all /> : ''}
+                    {active_block == 4 ? <Hotel_contact hotelData = {hotelData} koordinates = {koordinates} /> : '' }
+
                 </div>
 
                 <div className = {styles["select-dates-nav"]}>
