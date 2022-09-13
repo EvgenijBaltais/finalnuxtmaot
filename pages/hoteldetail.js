@@ -30,7 +30,7 @@ function Hoteldetail ({hotel}) {
     const changeBlock = event => {
 
         event.preventDefault()
-        setActive_block(e.target.getAttribute('data-value'))
+        setActive_block(event.target.getAttribute('data-value'))
     }
 
     const [visibleNav, setVisibleNav] = useState(0)
@@ -103,6 +103,8 @@ useEffect(() => {
     }
 }, [query])
 
+console.log(hotelData)
+
     if (!hotelData) {
         return <></>
     }
@@ -157,13 +159,13 @@ useEffect(() => {
                     </div>
                     <div className = {styles["hotel-map"]} id = "map">
                         <div className = {styles["hoteldetail-y-map"]}>
-                            {hotelData.latitude && hotelData.longitude ?
+                        </div>
+                        {hotelData.coordinates.latitude && hotelData.coordinates.longitude ?
                                 <div className = {styles["hotel-map__place"]}>
                                     <span>Координаты: </span>
-                                    <a className = {styles["hotel-map__coordinates"]}>{hotelData.coordinates.latitude}, {hotelData.coordinates.longitude}</a>
+                                    <a className = {styles["hotel-map__coordinates"]}>{hotelData.coordinates.latitude.toFixed(6)}, {hotelData.coordinates.longitude.toFixed(6)}</a>
                                 </div> : ''
                             }
-                        </div>
                     </div>
                 </div>
             </section>
@@ -256,15 +258,6 @@ useEffect(() => {
                                 className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Контакты
-                            </a>
-                        </div>
-                        <div className = {styles["select-dates-item"]}>
-                            <a href=""
-                                data-value = "5"
-                                onClick={event => changeBlock(event)}
-                                className = {`${styles["select-dates-link"]} ${active_block == 5 ? styles["select-dates-link-active"] : ''}`}
-                            >
-                                Отели рядом
                             </a>
                         </div>
                     </div>
