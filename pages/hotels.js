@@ -309,7 +309,7 @@ export default function Hotels () {
                     {
                         loadedItems.length && !filtersOn ? (loadedItems.map((item, index) => {
                             return (
-                                <Search_hotel_item key = {index} item = {item} nights = {nights} />
+                                <Search_hotel_item key = {index} item = {item} nights = {nights} query = {query} />
                             )
                         })) : ''
                     }

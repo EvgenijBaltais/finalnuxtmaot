@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
+import Script from 'next/script'
 
 import { useMediaQuery } from 'react-responsive'
 import { useRouter } from 'next/router'
@@ -14,7 +15,8 @@ import styles from "../styles/Hoteldetail.module.css"
 
 import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Keyboard } from "swiper";
+import { Keyboard, Navigation } from "swiper"
+
 
 function Hoteldetail ({hotel}) {
 
@@ -44,66 +46,60 @@ function Hoteldetail ({hotel}) {
           document.addEventListener('click', onClick)
           return () => document.removeEventListener('click', onClick)
         }, [])
-
-
-// Яндекс карта
-const loadScript = (src, onLoad) => {
-    const script = document.createElement("script")
   
-    script.src = src
-    script.async = true
-    document.body.appendChild(script)
-    script.onload = onLoad
-}
-  
-const init = () => {
-    myMap = new window.ymaps.Map("map", {
-      center: [hotelData.latitude, hotelData.longitude],
-      zoom: 12
-    }, {
-        searchControlProvider: 'yandex#search'
-    }),
+
+    function init(koordinats) {
+        myMap = new ymaps.Map("map", {
+            center: koordinats,
+            zoom: 11
+        });
     
-    objectManager = new window.ymaps.ObjectManager({
-        // Чтобы метки начали кластеризоваться, выставляем опцию.
-        clusterize: true,
-        // ObjectManager принимает те же опции, что и кластеризатор.
-        gridSize: 32,
-        clusterDisableClickZoom: true
-    })
-
-    const add = {
-        "type": "FeatureCollection",
-        "features": [
-            {"type": "Feature", "id": 0, "geometry": {"type": "Point", "coordinates": [hotelData.latitude, hotelData.longitude]}, "properties": {"balloonContentHeader": "<font size=3><b><a target='_blank' href='https://yandex.ru'>Здесь может быть ваша ссылка</a></b></font>", "balloonContentBody": "<p>Ваше имя: <input name='login'></p><p><em>Телефон в формате 2xxx-xxx:</em>  <input></p><p><input type='submit' value='Отправить'></p>", "balloonContentFooter": "<font size=1>Информация предоставлена: </font> <strong>этим балуном</strong>", "clusterCaption": "<strong><s>Еще</s> одна</strong> метка", "hintContent": "<strong>Текст  <s>подсказки</s></strong>"}}    ]
+        myPlacemark = new ymaps.Placemark(koordinats, {
+            hintContent: 'МАОТ',
+            balloonContent: 'ул. Бауманская д.6с2. Бизнес-центр Виктория Плаза. 8 этаж. 804 офис'
+        });
+        myMap.geoObjects.add(myPlacemark);
+        myMap.setType('yandex#map');
+        myMap.behaviors.disable('scrollZoom');
     }
 
-    objectManager.objects.options.set('preset', 'islands#greenDotIcon')
-    objectManager.clusters.options.set('preset', 'islands#greenClusterIcons')
-    myMap.geoObjects.add(objectManager)
+    function setMainSlide (e) {
 
-    objectManager.add(add);
-}
+       // console.log(e.$el[0].parentElement.parentElement.parentElement)
+        
+        document.querySelector('.hotel-slider__main').style.backgroundImage = 'url(1.jpg)'
+        //e.$el[0].swiper.realIndex
+    }
+
+    function addBackgroundImage (slider) {
+        document.querySelector('.hotel-slider__main').style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
+    }
+    
 // Яндекс карта, конец
 
 useEffect(() => {
 
     if (!router.isReady) return
 
-    fetch(`https://maot-api.bokn.ru/api/load?id=${ query['hotel_id'] }`)
+    fetch(`https://maot-api.bokn.ru/api/hotels/get?id=${ query['hotel_id'] }`)
     .then((res) => res.json())
     .then((res) => {
         setHotelData(res.data)
 
+        /*const koordinats = [res.data.coordinates.latitude, res.data.coordinates.longitude]*/
+        const koordinats = [55.775555, 37.674597]
+        
+        //console.log(latitude + ' ' + longitude)
+
         // Подгрузка карты
-        loadScript("https://api-maps.yandex.ru/2.1/?lang=ru_RU", () => {
-            window.ymaps.ready(init)
-        })
+        //loadScript("https://api-maps.yandex.ru/2.1/?lang=ru_RU", () => {
+           // window.ymaps.ready(init)
+        //})
     })
 
     return () => {
-        document.scripts[0].remove()
-        myMap.destroy()
+       // document.scripts[0].remove()
+       // myMap.destroy()
     }
 }, [query])
 
@@ -117,11 +113,13 @@ useEffect(() => {
                 <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.rus_name} - Магазин отдыха</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
+            <Script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="beforeInteractive" />
+
             <section className = {styles["single-hotel"]}>
                 <div className={styles["titles-top"]}>
                     <div className = {styles["title-block"]}>
-                        {hotelData.rus_name ? <h1 className = "hotel-title">{hotelData.rus_name}</h1> : ''}
-                        {hotelData.contact.content ? <p className = {styles["hotel-adress"]}>{hotelData.contact.content}</p> : ''}
+                        {hotelData.name ? <h1 className = "hotel-title">{hotelData.name}</h1> : ''}
+                        {hotelData.address ? <p className = {styles["hotel-adress"]}>{hotelData.address}</p> : ''}
                     </div>
                     <div className={styles["add-to-favorite"]}>
                         {/*isBigScreen && <a className={styles["add-to-favorite__link"]}>добавить&nbsp;в&nbsp;избранное</a>*/}
@@ -131,29 +129,27 @@ useEffect(() => {
                 </div>
 
                 <div className = {styles["map-slider"]}>
-                    <div className={styles["hotel-slider"]}>
-                        <div className = {styles["hotel-slider__main"]} style = {hotelData.images[0] ? {backgroundImage: `url(https://zarya-tour.ru${hotelData.images[0].url})`} : {}}>
-                            <div className = {styles["arrow-left"]}></div>
-                            <div className = {styles["arrow-right"]}></div>
-                        </div>
+                    <div className={`hotel-slider ${styles["hotel-slider"]}`}>
+                        <div className = {`hotel-slider__main ${styles["hotel-slider__main"]}`} style = {hotelData.images[0] ? {backgroundImage: `url(${hotelData.images[0]})`} : {}}></div>
                         <div className = "hotel-slider__items">
                             <div className = {styles["hotel-slider__w"]}>
                             <Swiper
+                                onSlideChange = {slider => addBackgroundImage(slider)}
                                 slidesPerView={5}
                                 spaceBetween={10}
+                                navigation={true}
                                 keyboard={{
                                     enabled: true,
                                 }}
                                 loop = {true}
                                 slideToClickedSlide = {true}
                                 speed= {400}
-                                onSlideChange={(e) => console.log(e.$el[0].swiper.realIndex)}
-                                modules={[Keyboard]}
+                                modules={[Keyboard, Navigation]}
                                 className="hoteldetail-swiper"
                             >
                                 {hotelData.images.map((item, index) => (
                                     index == 0 ? '' :
-                                    <SwiperSlide key={index} className = "hotel-slider__item" style = {item ? {backgroundImage: `url(https://zarya-tour.ru${item.url})`} : {}}></SwiperSlide>
+                                    <SwiperSlide key={index} data-pic = {item} className = "hotel-slider__item" style = {item ? {backgroundImage: `url(${item})`} : {}}></SwiperSlide>
                                 ))}
                             </Swiper>
                             </div>
@@ -164,7 +160,7 @@ useEffect(() => {
                             {hotelData.latitude && hotelData.longitude ?
                                 <div className = {styles["hotel-map__place"]}>
                                     <span>Координаты: </span>
-                                    <a className = {styles["hotel-map__coordinates"]}>{hotelData.latitude}, {hotelData.longitude}</a>
+                                    <a className = {styles["hotel-map__coordinates"]}>{hotelData.coordinates.latitude}, {hotelData.coordinates.longitude}</a>
                                 </div> : ''
                             }
                         </div>

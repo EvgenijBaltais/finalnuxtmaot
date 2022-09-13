@@ -76,21 +76,21 @@ export default function Search_hotel_input (props) {
     return (
 
         <div className = "direction-form-block direction-form-way" ref={wrapperRef}>
-        <input type="text"
-                name="choose-way"
-                className = "form-way-input"
-                placeholder="Выберите направление"
-                onClick={() => setVisibleSearch(1)}
-                onChange={event => searchHotels(event.target.value)}
-            />
-            { visibleSearch ? 
-            <Search_hotel_input_ways 
-                hotels = {hotels}
-                regions = {regions}
-                visibleSearch = {changeVisibleSearch}
-                changeSearchResult = {props.changeSearchResult}
-                searchResult = {props.searchResult}
-            />
+            <input type="text"
+                    name="choose-way"
+                    className = "form-way-input"
+                    placeholder="Выберите направление"
+                    onClick={() => setVisibleSearch(1)}
+                    onChange={event => searchHotels(event.target.value)}
+                />
+                { visibleSearch ? 
+                <Search_hotel_input_ways 
+                    hotels = {hotels}
+                    regions = {regions}
+                    visibleSearch = {changeVisibleSearch}
+                    changeSearchResult = {props.changeSearchResult}
+                    searchResult = {props.searchResult}
+                />
             : '' }
         </div>
     )

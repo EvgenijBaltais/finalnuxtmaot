@@ -72,12 +72,6 @@ const MainForm = (props) => {
             ages.push(parseInt(childrenAges[i]))
         }
 
-        // Если не введены данные по направлению
-        if (document.querySelector('.form-way-input').value == '') {
-            obj.region_id = '965825039'
-            obj.region_name = 'Подмосковье'
-        }
-
         obj.datein = dateIn
         obj.dateout = dateOut
         obj.adults = adults
@@ -90,6 +84,13 @@ const MainForm = (props) => {
 
         searchResult.hotel ? link = '/hoteldetail' : '' // Если отель то на страницу отеля, если регион то на страницу подбора
         searchResult.region ? link = '/hotels' : ''
+
+        // Если не введены данные по направлению
+        if (document.querySelector('.form-way-input').value == '') {
+            obj.region_id = '965825039'
+            obj.region_name = 'Подмосковье'
+            link = '/hotels'
+        }
 
         router.push({
             pathname: link,

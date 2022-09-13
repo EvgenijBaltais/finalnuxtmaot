@@ -676,6 +676,78 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Swiper на странице Поиск номеров, конец */ 
 
+/* Swiper на странице Номер отеля */ 
+
+.hotel-slider {
+	position: relative;
+}
+
+.hotel-slider__items .swiper-button-prev {
+    position: absolute;
+    top: 227px;
+    left: 15px;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(0,0,0,.5);
+    border-radius: 50%;
+    cursor: pointer;
+	z-index: 5;
+}
+
+.hotel-slider__items .swiper-button-next {
+	position: absolute;
+    top: 227px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(0,0,0,.5);
+    border-radius: 50%;
+    cursor: pointer;
+	z-index: 5;
+}
+
+.hotel-slider__items .swiper-button-prev:before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-image: url(/images/left-nav-arrow.svg);
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: center;
+    cursor: pointer;
+}
+
+.hotel-slider__items .swiper-button-next:before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-image: url(/images/right-nav-arrow.svg);
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: center;
+    cursor: pointer;
+}
+
+.hotel-slider__items .swiper {
+	position: static;
+}
+
+/* Swiper на странице Номер отеля, конец */ 
+
 /* Swiper в разделе Контакты*/
 
 .map-swiper {
@@ -2191,7 +2263,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	    background-size: contain;
 	    background-repeat: no-repeat;
 		transition: 0.2s;
-
+	}
 /* Ползунок */
 
 .rc-slider-handle-1 {
@@ -2231,8 +2303,10 @@ input[type="checkbox"].substylized:checked + label:after {
 	height: 6px!important;
 }
 
-		z-index: 10;
-	}
+.rc-slider-track {
+	background: var(--red-linear-gradient);
+}
+
 
 	.active-list > .left-nav-list:before {
 		transform: rotate(180deg);
