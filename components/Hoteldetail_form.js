@@ -79,18 +79,14 @@ const Hoteldetail_form = (props) => {
             link = '/hotels'
         }
 
-        router.push({
-            pathname: link,
-            query: obj
-        })
     }
 
     return (
-        <section className = "main-form">
+        <section className = "hoteldetail-form">
             <div className = "selection-form-item">
-                <form action="" name = "direction-form" className = "selection-form direction-form" id = "direction-form">
-                    <div className = "direction-form-w">
-                        <div className = "direction-form__inside">
+                <form action="" name = "hoteldetail-direction-form" className = "selection-form hoteldetail-direction-form" id = "hoteldetail-direction-form">
+                    <div className = "hoteldetail-direction-form-w">
+                        <div className = "hoteldetail-direction-form__inside">
                             <Search_hotel_input
                                 popularHotels = {props.popularHotels}
                                 popularWays = {props.popularWays}
@@ -109,8 +105,8 @@ const Hoteldetail_form = (props) => {
                                 changeAdults = {changeAdults}
                                 changeChildrenAges = {changeChildrenAges}
                             />
-                            <div className = "direction-form-block direction-form-submit">
-                                <button type = "button" className = "direction-form-btn" onClick = {checkForm}>Найти</button>
+                            <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-submit">
+                                <button type = "button" className = "hoteldetail-direction-form-btn" onClick = {checkForm}>Найти</button>
                             </div>
                         </div>
                     </div>

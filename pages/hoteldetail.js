@@ -26,6 +26,8 @@ function Hoteldetail ({hotel}) {
     const [active_block, setActive_block] = useState(1)
     const [koordinates, setKoordinates] = useState([1,2])
 
+    const [datesText, setDatesText] = useState('')
+
     const changeBlock = event => {
 
         event.preventDefault()
@@ -51,25 +53,69 @@ function Hoteldetail ({hotel}) {
         document.querySelector('.hotel-slider__main').style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
     }
 
-useEffect(() => {
+    // Все что касается дат
 
-    if (!router.isReady) return
+    function setToday () {
 
-    fetch(`https://maot-api.bokn.ru/api/hotels/get?id=${ query['hotel_id'] }`)
-    .then((res) => res.json())
-    .then((res) => {
-        setHotelData(res.data)
-        setKoordinates([res.data.coordinates.latitude, res.data.coordinates.longitude])
-    })
+        let today = new Date();
+            today.setTime(today.getTime());
 
-}, [query])
-
-// Удалить яндекс карты
-useEffect(() => {
-    return () => {
-        document.getElementById('y-maps') ? document.getElementById('y-maps').remove() : ''
+        return addNullToDate(today.getDate()) + "." + addNullToDate((today.getMonth() + 1)) + "." + today.getFullYear()
     }
-}, [])
+
+    function setTomorrow () {
+        var tomorrow = new Date()
+            tomorrow.setTime(tomorrow.getTime() + 24 * 60 * 60 * 1000)
+
+            return addNullToDate(tomorrow.getDate()) + "." + addNullToDate((tomorrow.getMonth() + 1)) + "." + tomorrow.getFullYear()
+    }
+
+    function addNullToDate(num) {
+        return num < 10 ? '0' + num : num
+    }
+
+    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+
+    useEffect(() => {
+
+        let text = ''
+
+        if (query.datein && query.dateout) {
+
+
+            parseInt(query.datein.slice(3, 5)) == parseInt(query.dateout.slice(3, 5)) ? 
+            text = `Номера на ${query.datein.slice(0, 2)} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых и ребенка` :
+            text = `Номера на ${query.datein.slice(0, 2)} ${months[(parseInt(query.datein.slice(3, 5)) - 1)]} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых и ребенка`
+            setDatesText(text)
+        }
+
+        //text = `Номера на ${query.datein.slice(0, 2)} - ${query.dateout.slice(0, 2)} июля  для  2  взрослых и ребенка`
+
+        console.log(text)
+
+    }, [query])
+    // Все что касается дат, конец
+
+    // Данные по отелю
+
+    useEffect(() => {
+
+        if (!router.isReady) return
+
+        fetch(`https://maot-api.bokn.ru/api/hotels/get?id=${ query['hotel_id'] }`)
+        .then((res) => res.json())
+        .then((res) => {
+            setHotelData(res.data)
+            setKoordinates([res.data.coordinates.latitude, res.data.coordinates.longitude])
+        })
+    }, [query])
+
+    // Удалить яндекс карты
+    useEffect(() => {
+        return () => {
+            document.getElementById('y-maps') ? document.getElementById('y-maps').remove() : ''
+        }
+    }, [])
 
 
     if (!hotelData) {
@@ -157,15 +203,8 @@ useEffect(() => {
 
                 <section className = {styles["select-dates-content"]}>
                 <div className = {styles["select-dates-form-block"]}>
-                    <h2 className = {styles["hotel-title-h2"]}>Номера на&nbsp;
-                        <span className = {styles["select-dates-in"]}>16</span>&nbsp;
-                        -&nbsp;
-                        <span className = {styles["select-dates-in"]}>18</span>&nbsp;
-                        <span className = {styles["select-dates-month"]}>июля</span>&nbsp;
-                        для &nbsp;
-                        <span className = {styles["select-dates-adults"]}>2</span>&nbsp;
-                        взрослых и&nbsp;
-                        <span className = {styles["select-dates-children"]}>ребенка</span>&nbsp;
+                    <h2 className = {styles["hotel-title-h2"]}>
+                        {datesText}
                     </h2>
 
                     <Hoteldetail_form />
@@ -181,9 +220,7 @@ useEffect(() => {
                 <div className = {styles["select-dates-nav"]}>
 
                     <div className = {visibleNav ? `${styles["select-nav-bg"]} ${styles["active-nav-list"]}` : styles["select-nav-bg"]} ref={rootEl}>
-
                         <div className = {styles["icon-item-menu"]}>Навигация по странице</div>
-
                         <div className = {styles["select-dates-item"]} onClick = {() => setVisibleNav(visibleNav => !visibleNav)}>
                             <a href="" 
                                 data-value = "1" 
@@ -222,7 +259,7 @@ useEffect(() => {
                         </div>
                     </div>
                 </div>
-                    </section>
+            </section>
         </>
     )
 }
@@ -242,24 +279,4 @@ Hoteldetail.getInitialProps = async ({ query, req }) => {
     }
   }
 
-/*
-export const getServerSideProps = async ({ query, req }) => {
-
-    if (!req) {
-        return {
-            hotel: null
-        }
-    }
-
-    //const response = await fetch(`http://hotelsystem.local/api/load?id=${ query['hotel-id'] }`)
-    const response = await fetch(`http://hotelsystem.local/api/load?id=6578`)
-    const hotel = await response.json()
-
-    return {
-        props: {
-            hotel
-        },
-    }
-}
-*/
 export default Hoteldetail

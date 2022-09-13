@@ -47,8 +47,8 @@ export default function Search_form_guests({adults, childrenAges, changeAdults, 
 
     function makeActive (val) {
 
-        val ? document.querySelector('.form-guests-input-out').classList.add('direction-form-in-active') :
-        document.querySelector('.form-guests-input-out').classList.remove('direction-form-in-active')
+        val ? document.querySelector('.hoteldetail-form-guests-input-out').classList.add('hoteldetail-direction-form-in-active') :
+        document.querySelector('.hoteldetail-form-guests-input-out').classList.remove('hoteldetail-direction-form-in-active')
 
         setVisibleGuests(val)
     }
@@ -61,12 +61,12 @@ export default function Search_form_guests({adults, childrenAges, changeAdults, 
     // Клик по ссылке вне, конец
 
     return (
-        <div className = "direction-form-block direction-form-people" ref={wrapperRef}>
+        <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-people" ref={wrapperRef}>
 
             <input
                 type="text"
-                name="choose-people"
-                className = {`form-way-input form-guests-input form-guests-input-out${visibleGuests ? ' direction-form-in-active' : ''}`}
+                name="hoteldetail-choose-people"
+                className = {`hoteldetail-form-way-input hoteldetail-form-guests-input hoteldetail-form-guests-input-out${visibleGuests ? ' hoteldetail-direction-form-in-active' : ''}`}
                 defaultValue={returnGuests(+adults + +childrenAges.length)}
                 readOnly = "readonly"
                 onClick={ () => setVisibleGuests(visibleGuests => !visibleGuests)}

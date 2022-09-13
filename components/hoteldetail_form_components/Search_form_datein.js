@@ -66,14 +66,14 @@ export default function Search_form_datein(props) {
     // Клик по ссылке вне, конец
 
     return (
-        <div className = "search-dates" ref={wrapperRef}>
+        <div className = "hoteldetail-search-dates" ref={wrapperRef}>
 
-            <div className = "direction-form-block direction-form-in" >
+            <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-in" >
 
                 <input type="text" 
                         readOnly = "readonly"
-                        className = {`form-way-input form-way-input-period form-way-input-in${
-                            dateInOpened == 1 ? ' direction-form-in-active' : ''
+                        className = {`hoteldetail-form-way-input hoteldetail-form-way-input-period hoteldetail-form-way-input-in${
+                            dateInOpened == 1 ? ' hoteldetail-direction-form-in-active' : ''
                         }`}
                         value = {props.dateIn}
                         onClick = { checkOpenClose }
@@ -81,11 +81,11 @@ export default function Search_form_datein(props) {
                 {dateInOpened ? <Datepicker closeFuncdateIn = {closeDateIn} mindate = {props.dateIn} /> : ""}
             </div>
 
-            <div className = "direction-form-block direction-form-out" >
+            <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-out" >
                 <input type="text"
                         readOnly = "readonly" 
-                        className = {`form-way-input form-way-input-period form-way-input-out${
-                            dateOutOpened == 1 ? ' direction-form-in-active' : ''
+                        className = {`hoteldetail-form-way-input hoteldetail-form-way-input-period hoteldetail-form-way-input-out${
+                            dateOutOpened == 1 ? ' hoteldetail-direction-form-in-active' : ''
                         }`}
                         value = {props.dateOut}
                         onClick = { checkOpenClose }
