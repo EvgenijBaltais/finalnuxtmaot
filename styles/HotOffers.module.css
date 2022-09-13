@@ -38,6 +38,10 @@
 
 @media screen and (max-width: 480px) {
 
+	.hot-deals {
+		padding-top: 80px;
+	}
+
 	.hot-deals-section {
 		flex-direction: column;
 	}
