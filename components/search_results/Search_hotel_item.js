@@ -1,10 +1,15 @@
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper"
+import Link from "next/link"
+
+import { useRouter } from "next/router"
 
 import styles from "../../styles/search_results/Search_hotel_item.module.css"
 import "swiper/css"
 
 export default function Search_hotel_item ({item, nights}) {
+
+    const { query } = useRouter()
 
     function nightsRightText (nights) {
 
@@ -23,6 +28,23 @@ export default function Search_hotel_item ({item, nights}) {
     function addBackgroundImage (slider) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
+    }
+
+    // Ссылка на отель
+
+    let obj = {
+        datein: query.datein || 0,
+        dateout: query.dateout || 0,
+        adults: query.adults || 0,
+        hotel_id: item.id
+    }
+
+    query.children_ages ? obj.children_ages = query.children_ages : ''
+
+    let url = '/hoteldetail?'
+
+    for (let key in obj) {
+        url += ('&' + key + "=" + obj[key])
     }
 
     return (
@@ -77,7 +99,9 @@ export default function Search_hotel_item ({item, nights}) {
                     <span className = {styles["search-item__price-currency"]}>&#8381;</span>
                 </div>
                 <p className = {styles["search-item__nights"]}>цена за <span className = {styles["search-item__nights-number"]}>{nightsRightText(nights)}</span></p>
-                <button className = {styles["search-item__bron"]}>Выбрать</button>
+                <Link href = {url}>
+                    <a className = {styles["search-item__bron"]}>Выбрать</a>
+                </Link>
             </div>
         </div>
     )

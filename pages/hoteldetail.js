@@ -1,35 +1,39 @@
-
-import { useState, useEffect, useRef} from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
+import Script from 'next/script'
 
-import { YMaps, Map, Placemark } from "react-yandex-maps"
 import { useMediaQuery } from 'react-responsive'
+import { useRouter } from 'next/router'
 
+import Hoteldetail_form from '../components/Hoteldetail_form'
 import Hotel_search_result from "../components/hotel_details/Hotel_search_result"
 import Rooms_info from "../components/hotel_details/Rooms_info"
 import Hotel_service from "../components/hotel_details/Hotel_service"
 import Hotel_contact from "../components/hotel_details/Hotel_contact"
-import Hotel_rooms_all from "../components/hotel_details/Hotel_rooms_all"
 import styles from "../styles/Hoteldetail.module.css"
 
 
 import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Keyboard } from "swiper";
+import { Keyboard, Navigation } from "swiper"
 
-function Hoteldetail ({hotel}) {
 
-    let hotelData = useState(hotel)
-        hotelData = hotelData[0].data
+function Hoteldetail ({hotel, popularHotels, popularWays}) {
 
+    const router = useRouter()
+    const { query } = useRouter()
+    const [hotelData, setHotelData] = useState(hotel)
+    const [roomsData, setRoomsData] = useState(false)
     const [active_block, setActive_block] = useState(1)
+    const [koordinates, setKoordinates] = useState([1,2])
 
-    const changeBlock = e => {
+    const [datesText, setDatesText] = useState('')
 
-        e.preventDefault()
-        setActive_block(e.target.getAttribute('data-value'))
+    const changeBlock = event => {
+
+        event.preventDefault()
+        setActive_block(event.target.getAttribute('data-value'))
     }
-
 
     const [visibleNav, setVisibleNav] = useState(0)
 
@@ -44,143 +48,195 @@ function Hoteldetail ({hotel}) {
           document.addEventListener('click', onClick)
           return () => document.removeEventListener('click', onClick)
         }, [])
+  
+
+    function addBackgroundImage (slider) {
+        document.querySelector('.hotel-slider__main').style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
+    }
+
+    // Все что касается дат
+
+    function addNullToDate(num) {
+        return num < 10 ? '0' + num : num
+    }
+
+    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+
+    useEffect(() => {
+
+        let text = ''
+
+        if (query.datein && query.dateout) {
+
+            parseInt(query.datein.slice(3, 5)) == parseInt(query.dateout.slice(3, 5)) ? 
+            text = `Номера на ${query.datein.slice(0, 2)} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых и ребенка` :
+            text = `Номера на ${query.datein.slice(0, 2)} ${months[(parseInt(query.datein.slice(3, 5)) - 1)]} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых и ребенка`
+            setDatesText(text)
+        }
+
+    }, [query])
+    // Все что касается дат, конец
+
+    // Данные по отелю
+
+    useEffect(() => {
+
+        if (!router.isReady) return
+
+        fetch(`https://maot-api.bokn.ru/api/hotels/get?id=${ query['hotel_id'] }`)
+        .then((res) => res.json())
+        .then((res) => {
+            setHotelData(res.data)
+            setKoordinates([res.data.coordinates.latitude, res.data.coordinates.longitude])
+
+            // Запрос доступных номеров
+
+            let datein = query.datein.slice(6, 10) + '-' + query.datein.slice(3, 5) + '-' + query.datein.slice(0, 2)
+            let dateout = query.dateout.slice(6, 10) + '-' + query.dateout.slice(3, 5) + '-' + query.dateout.slice(0, 2)
+            let adults = query.adults || 2
+            let link = 'https://maot-api.bokn.ru/api/hotels/search-rooms?'
+
+            link += 'start_date=' + datein
+            link += '&end_date=' + dateout
+            link += '&adults=' + adults
+            
+            if (query.children_ages) {
+                for (let i = 0; i < query.children_ages.length; i++) {
+                    link += `&childs[${i}]=` + query.children_ages[i]
+                }
+            }
+
+            link += '&id=' + res.data.id
+
+            fetch(link)
+            .then((result) => result.json())
+            .then((result) => {
+                console.log(link)
+                setRoomsData(result.data)
+            })
+        })
+    }, [query])
+
+    // Удалить яндекс карты
+    useEffect(() => {
+        return () => {
+            document.getElementById('y-maps') ? document.getElementById('y-maps').remove() : ''
+        }
+    }, [])
+
+    if (!hotelData) {
+        return <></>
+    }
 
     return (
         <>
             <Head>
-                <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.rus_name} - Магазин отдыха</title>
+                <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.name} - Магазин отдыха</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
+            <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onLoad={() => {
+
+                function init() {
+                    const myMap = new ymaps.Map("map", {
+                        center: koordinates,
+                        zoom: 13
+                    });
+                
+                    const myPlacemark = new ymaps.Placemark(koordinates, {
+                        hintContent: hotelData.name,
+                        balloonContent: hotelData.address
+                    });
+                    myMap.geoObjects.add(myPlacemark);
+                    myMap.setType('yandex#map');
+                    myMap.behaviors.disable('scrollZoom');
+                }
+
+                ymaps.ready(init)
+            }} />
+
             <section className = {styles["single-hotel"]}>
                 <div className={styles["titles-top"]}>
                     <div className = {styles["title-block"]}>
-                        {hotelData.rus_name ? <h1 className = "hotel-title">{hotelData.rus_name}</h1> : ''}
-                        {hotelData.other.adress ? <p className = {styles["hotel-adress"]}>{hotelData.other.adress}</p> : ''}
+                        {hotelData.name ? <h1 className = "hotel-title">{hotelData.name}</h1> : ''}
+                        {hotelData.address ? <p className = {styles["hotel-adress"]}>{hotelData.address}</p> : ''}
                     </div>
                     <div className={styles["add-to-favorite"]}>
-                        {isBigScreen && <a className={styles["add-to-favorite__link"]}>добавить&nbsp;в&nbsp;избранное</a>}
-                        {isTabletOrMobile && <a className={styles["add-to-favorite__link"]}>в&nbsp;избранное</a>}
+                        {/*isBigScreen && <a className={styles["add-to-favorite__link"]}>добавить&nbsp;в&nbsp;избранное</a>*/}
+                        {/*isTabletOrMobile && <a className={styles["add-to-favorite__link"]}>в&nbsp;избранное</a>*/}
                     </div>
 
                 </div>
 
                 <div className = {styles["map-slider"]}>
-                    <div className={styles["hotel-slider"]}>
-                        <div className = {styles["hotel-slider__main"]}>
-                            <div className = {styles["arrow-left"]}></div>
-                            <div className = {styles["arrow-right"]}></div>
-                        </div>
+                    <div className={`hotel-slider ${styles["hotel-slider"]}`}>
+                        <div className = {`hotel-slider__main ${styles["hotel-slider__main"]}`} style = {hotelData.images[0] ? {backgroundImage: `url(${hotelData.images[0]})`} : {}}></div>
                         <div className = "hotel-slider__items">
                             <div className = {styles["hotel-slider__w"]}>
                             <Swiper
+                                onSlideChange = {slider => addBackgroundImage(slider)}
                                 slidesPerView={5}
                                 spaceBetween={10}
+                                navigation={true}
                                 keyboard={{
                                     enabled: true,
                                 }}
                                 loop = {true}
                                 slideToClickedSlide = {true}
                                 speed= {400}
-                                onSlideChange={(e) => console.log(e.$el[0].swiper.realIndex)}
-                                modules={[Keyboard]}
+                                modules={[Keyboard, Navigation]}
                                 className="hoteldetail-swiper"
                             >
                                 {hotelData.images.map((item, index) => (
                                     index == 0 ? '' :
-                                    <SwiperSlide key={index} className = "hotel-slider__item"></SwiperSlide>
+                                    <SwiperSlide key={index} data-pic = {item} className = "hotel-slider__item" style = {item ? {backgroundImage: `url(${item})`} : {}}></SwiperSlide>
                                 ))}
                             </Swiper>
                             </div>
                         </div>
                     </div>
-                    <div className = {styles["hotel-map"]}>
-                        <YMaps>
-                            <Map 
-                                className = {styles["hoteldetail-y-map"]}
-                                defaultState = {{ 
-                                    center: [hotelData.latitude, hotelData.longitude],
-                                    zoom: 12
-                                }}
-                            >
-                                <Placemark 
-                                    geometry={[hotelData.latitude, hotelData.longitude]}
-                                    properties = {{
-                                        balloonContent: hotelData.other.adress
-                                    }}
-                                    modules = {
-                                        ['geoObject.addon.balloon']
-                                    }
-                                />
-                            </Map>
-                        </YMaps>
-                        {hotelData.latitude && hotelData.longitude ?
-                            <div className = {styles["hotel-map__place"]}>
-                                <span>Координаты: </span>
-                                <a className = {styles["hotel-map__coordinates"]}>{hotelData.latitude}, {hotelData.longitude}</a>
-                            </div> : ''
-                        }
+                    <div className = {styles["hotel-map"]} id = "map">
+                        <div className = {styles["hoteldetail-y-map"]}>
+                        </div>
+                        {hotelData.coordinates.latitude && hotelData.coordinates.longitude ?
+                                <div className = {styles["hotel-map__place"]}>
+                                    <span>Координаты: </span>
+                                    <a className = {styles["hotel-map__coordinates"]}>
+                                        {hotelData.coordinates.latitude.toFixed(5)}, {hotelData.coordinates.longitude.toFixed(5)}
+                                    </a>
+                                </div> : ''
+                            }
                     </div>
                 </div>
             </section>
 
                 <section className = {styles["select-dates-content"]}>
                 <div className = {styles["select-dates-form-block"]}>
-                    <h2 className = {styles["hotel-title-h2"]}>Номера на&nbsp;
-                        <span className = {styles["select-dates-in"]}>16</span>&nbsp;
-                        -&nbsp;
-                        <span className = {styles["select-dates-in"]}>18</span>&nbsp;
-                        <span className = {styles["select-dates-month"]}>июля</span>&nbsp;
-                        для &nbsp;
-                        <span className = {styles["select-dates-adults"]}>2</span>&nbsp;
-                        взрослых и&nbsp;
-                        <span className = {styles["select-dates-children"]}>ребенка</span>&nbsp;
+                    <h2 className = {styles["hotel-title-h2"]}>
+                        {datesText}
                     </h2>
 
-                    <form action="">
-                        <div className = {styles["select-dates-form"]}>
-                            <div className = {styles["select-dates-form__form"]}>
-                                <div className = {styles["select-form-items"]}>
-                                    <div className = {styles["select-form-input-w"]}>
-                                        <input 
-                                            type="text"
-                                            name = "select-form-name"
-                                            className = {`${styles["select-form-input"]} ${styles["select-form-name"]}`}
-                                            placeholder={hotelData.rus_name}
-                                            defaultValue={hotelData.rus_name}
-                                        />
-                                    </div>
-                                    <div className = {styles["select-form-input-w"]}>
-                                        <input type="text" name = "select-form-in" className = {`${styles["select-form-input"]} ${styles["select-form-in"]}`} placeholder="16 июля" />
-                                    </div>
-                                    <div className = {styles["select-form-input-w"]}>
-                                        <input type="text" name = "select-form-out" className = {`${styles["select-form-input"]} ${styles["select-form-out"]}`} placeholder="18 июля"/>
-                                    </div>
-                                    <div className = {styles["select-form-input-w"]}>
-                                        <input type="text" name = "select-form-guests" className = {`${styles["select-form-input"]} ${styles["select-form-guests"]}`} placeholder="3 гостя" />
-                                    </div>
-                                </div>
-                            </div>
-                            <button type = "button" className = {styles["select-dates-form__btn"]}>Найти</button>
-                        </div>
-                    </form>
+                    <Hoteldetail_form
+                        hotelName = {hotelData.name}
+                        popularHotels = {popularHotels.data}
+                        popularWays = {popularWays.data}
+                    />
 
-                    {active_block == 1 ? <Hotel_search_result /> : ''}
+
+                    {active_block == 1 ? <Hotel_search_result items = {roomsData} /> : ''}
                     {active_block == 2 ? <Rooms_info /> : ''}
                     {active_block == 3 ? <Hotel_service /> : ''}
-                    {active_block == 4 ? <Hotel_contact /> : ''}
-                    {active_block == 5 ? <Hotel_rooms_all /> : ''}
+                    {active_block == 4 ? <Hotel_contact hotelData = {hotelData} koordinates = {koordinates} /> : '' }
+
                 </div>
 
                 <div className = {styles["select-dates-nav"]}>
 
                     <div className = {visibleNav ? `${styles["select-nav-bg"]} ${styles["active-nav-list"]}` : styles["select-nav-bg"]} ref={rootEl}>
-
                         <div className = {styles["icon-item-menu"]}>Навигация по странице</div>
-
                         <div className = {styles["select-dates-item"]} onClick = {() => setVisibleNav(visibleNav => !visibleNav)}>
                             <a href="" 
                                 data-value = "1" 
-                                onClick={changeBlock} 
+                                onClick={event => changeBlock(event)} 
                                 className = {`${styles["select-dates-link"]} ${active_block == 1 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Поиск номеров
@@ -189,7 +245,7 @@ function Hoteldetail ({hotel}) {
                         <div className = {styles["select-dates-item"]}>
                             <a href="" 
                                 data-value = "2" 
-                                onClick={changeBlock} 
+                                onClick={event => changeBlock(event)} 
                                 className = {`${styles["select-dates-link"]} ${active_block == 2 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Об отеле
@@ -198,7 +254,7 @@ function Hoteldetail ({hotel}) {
                         <div className = {styles["select-dates-item"]}>
                             <a href="" 
                                 data-value = "3" 
-                                onClick={changeBlock} 
+                                onClick={event => changeBlock(event)} 
                                 className = {`${styles["select-dates-link"]} ${active_block == 3 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Услуги
@@ -207,19 +263,10 @@ function Hoteldetail ({hotel}) {
                         <div className = {styles["select-dates-item"]}>
                             <a href=""
                                 data-value = "4"
-                                onClick={changeBlock}
+                                onClick={event => changeBlock(event)}
                                 className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Контакты
-                            </a>
-                        </div>
-                        <div className = {styles["select-dates-item"]}>
-                            <a href=""
-                                data-value = "5"
-                                onClick={changeBlock}
-                                className = {`${styles["select-dates-link"]} ${active_block == 5 ? styles["select-dates-link-active"] : ''}`}
-                            >
-                                Отели рядом
                             </a>
                         </div>
                     </div>
@@ -229,21 +276,23 @@ function Hoteldetail ({hotel}) {
     )
 }
 
-export const getServerSideProps = async ({ query, req }) => {
+  export async function getStaticProps(context) {
 
-    if (!req) {
-        return {
-            hotel: null
-        }
-    }
+    // Популярные отели
 
-    //const response = await fetch(`http://hotelsystem.local/api/load?id=${ query['hotel-id'] }`)
-    const response = await fetch(`http://hotelsystem.local/api/load?id=6578`)
-    const hotel = await response.json()
+	const getHotels = await fetch('https://maot-api.bokn.ru/api/hotels/top')
+	const popularHotels = await getHotels.json()
+
+    // Популярные направления
+
+	const getWays = await fetch('https://maot-api.bokn.ru/api/regions/top')
+	const popularWays = await getWays.json()
+
 
     return {
         props: {
-            hotel
+            popularHotels,
+            popularWays
         },
     }
 }

@@ -3,7 +3,7 @@ export default function Search_hotel_ways (props) {
 const searchByClick = (event) => {
 
     event.preventDefault()
-    findParent (event.target, 'direction-form-way').querySelector('.form-way-input').value = event.target.innerText
+    findParent (event.target, 'hoteldetail-direction-form-way').querySelector('.hoteldetail-form-way-input').value = event.target.innerText
 
     props.visibleSearch()
 
@@ -24,18 +24,17 @@ function findParent (el, cls) {
 }
 
     return (
-        <div className="search-results-w">
-
+        <div className="hoteldetail-search-results-w">
             {props.regions.length ?
-                <div className = "search-results__hotels">
+                <div className = "hoteldetail-search-results__hotels">
                     <div className="search-results__header">
                         Направления
                     </div>
                     <div className="search-results__body">
                         {props.regions.map((item, index) => {
                             return (
-                                <div className="search-results__item" key = {index}>
-                                    <a className="search-results__link" onClick = {searchByClick} data-info = "region" data-id = {item.id}>
+                                <div className="hoteldetail-search-results__item" key = {index}>
+                                    <a className="hoteldetail-search-results__link" onClick = {searchByClick} data-info = "region" data-id = {item.id}>
                                         {item.name}
                                     </a>
                                 </div>
@@ -45,16 +44,16 @@ function findParent (el, cls) {
                 </div> : ''
             }
             {props.hotels.length ?
-            <div className = "search-results__ways">
-                <div className="search-results__header">
+            <div className = "hoteldetail-search-results__ways">
+                <div className="hoteldetail-search-results__header">
                     Отели
                 </div>
-                <div className="search-results__body">
+                <div className="hoteldetail-search-results__body">
                     {props.hotels.map((item, index) => {
                         return (
-                            <div className="search-results__item" key = {index}>
-                                <a className="search-results__link" onClick = {searchByClick} data-info = "hotel" data-id = {item.id}>
-                                    {item.name}, {item.region_name}
+                            <div className="hoteldetail-search-results__item" key = {index}>
+                                <a className="hoteldetail-search-results__link" onClick = {searchByClick} data-info = "hotel" data-id = {item.id}>
+                                    {item.name}
                                 </a>
                             </div>
                         )

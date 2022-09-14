@@ -73,12 +73,16 @@ export default function Search_hotel_input (props) {
 
     // Клик по ссылке вне, конец
 
+    useEffect(() => {
+        document.querySelector('.hoteldetail-form-way-input').value = props.name
+    }, [])
+
     return (
 
-        <div className = "direction-form-block direction-form-way" ref={wrapperRef}>
+        <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-way" ref={wrapperRef}>
             <input type="text"
-                    name="choose-way"
-                    className = "form-way-input"
+                    name="hoteldetail-choose-way"
+                    className = "hoteldetail-form-way-input"
                     placeholder="Выберите направление"
                     onClick={() => setVisibleSearch(1)}
                     onChange={event => searchHotels(event.target.value)}
