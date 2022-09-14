@@ -56,20 +56,7 @@ export default function Search_hotel_item ({item, nights}) {
 
             <div className = {styles["search-item__content"]}>
                 <a href={"/hoteldetail"} className = {styles["search-item__title"]}>{item.name}</a>
-                <div className = {styles["search-item__rate"]}>
-                    <ul className={styles["search-rate__list"]}>
-                        {
-                            [...Array(item.star_rating)].map((e, i) => <li key = {i} className={`${styles["search-rate__item"]} ${styles["search-rate__item-yellow"]}`}></li>)
-                        }
-                        {
-                            [...Array(5 - item.star_rating)].map((e, i) => <li key = {i} className={`${styles["search-rate__item"]} ${styles["search-rate__item-grey"]}`}></li>)
-                        }
-                    </ul>
-                    <span className = {styles["search-rate__reviews"]}>18 отзывов</span>
-                    {item.is_all_inclusive ?
-                        <span className = {styles["search-rate__foodtype"]}>Все включено</span> : ''
-                    }
-                </div>
+                
                 <ul className = {styles["search-item__list"]}>
                     {item.services.map((item, index) => {
                         return (

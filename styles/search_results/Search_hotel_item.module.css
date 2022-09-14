@@ -24,23 +24,31 @@
 }
 
 .search-item__title {
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 24px;
 	font-family: 'FontInterSemiBold';
+	font-weight: 500;
 	color: rgb(5, 117, 229);
 	text-decoration: underline;
 	cursor: pointer;
 }
 
 .search-item__list {
+	padding-top: 10px;
 	list-style-type: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 4;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
 }
 
 .search-item__item {
 	position: relative;
 	display: inline-block;
 	font-family: 'FontInterLight';
-	font-size: 14px;
+	font-weight: 100;
+	font-size: 12px;
 	line-height: 14px;
 	padding: 0 5px 0 10px;
 	margin-bottom: 5px;
@@ -136,6 +144,12 @@
 	font-size: 14px;
 	line-height: 14px;
 	padding: 10px 0;
+	font-family: 'FontInterLight';
+}
+
+.search-item__nights span {
+	
+	font-family: 'FontInterLight';
 }
 
 .search-item__bron {
@@ -162,13 +176,13 @@
 	position: relative;
 	padding-left: 20px;
     font-family: 'FontInterLight';
-    font-size: 14px;
+    font-size: 12px;
     line-height: 20px;
     margin-top: 20px;
     padding: 0 0 0 20px;
     margin-bottom: 5px;
-    background-image: url('/icons/cursor.svg');
-    background-position: left top;
+    background-image: url('/icons/pin.svg');
+    background-position: left top 2px;
     background-repeat: no-repeat;
     background-size: 15px;
     
@@ -184,4 +198,100 @@
 	width: 100%;
 	height: 1px;
 	background-color: rgb(204,247,228);
+}
+
+@media screen and (max-width: 860px) {
+
+	.search-item {
+		justify-content: space-between;
+	}
+	
+	.search-item__broninfo {
+		padding: 0 10px;
+		width: 26%;
+		box-sizing: border-box;
+	}
+
+	.search-item__content {
+		width: 52%;
+		height: 170px;
+		overflow: hidden;
+	}
+
+	.search-item-pic {
+		width: 30%;
+	}
+
+	.search-item-pics {
+		margin: 0 !important;
+	}
+
+
+}
+
+@media screen and (max-width: 650px) {
+	.search-item-pic {
+		width: 116px;
+		line-height: 116px;
+	}
+
+	.search-item__bron {
+		width: 100%;
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 480px) {
+
+	.search-item {
+		flex-direction: column;
+		padding: 10px;
+	}
+
+	.search-item-pic {
+		width: 100%;
+	}
+	.search-item__content {
+		width: 100%;
+		height: auto;
+		padding: 0;
+		margin-top: 10px;
+	}
+
+	.search-item__broninfo {
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		padding: 0;
+		margin-top: 10px;
+		width: 100%;
+		border: none;
+	}
+
+	.search-item__price {
+		width: 55%;
+		text-align: left;
+		order: 1;
+	}
+
+	.search-item__nights {
+		padding: 0;
+		width: 55%;
+		text-align: left;
+		order: 3;
+	}
+
+	.search-item__bron {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: 43%;
+		margin: 0;
+		line-height: 48px;
+		height: 48px;
+		order: 2;
+	}
+	.search-item__list {
+		-webkit-line-clamp: 3;
+	}
 }

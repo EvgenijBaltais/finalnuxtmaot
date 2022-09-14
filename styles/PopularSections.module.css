@@ -94,11 +94,11 @@
 	display: flex;
 	flex-direction: column;
 	width: calc(100% - 105px);
-	height: 85px;
+	height: 100%;
 }
 
 .popular-item__adress {
-	margin-top: 14px;
+	margin-top: 7px;
 	font-size: 12px;
 	line-height: 1.2;
 }
