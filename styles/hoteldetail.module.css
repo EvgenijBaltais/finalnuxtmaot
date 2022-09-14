@@ -122,8 +122,67 @@
 	height: 490px;
 	border-radius: 10px;
 	margin-bottom: 12px;
+	background-color: #ccc;
+}
+
+.hotel-slider__main .arrow-left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 15px;
+    margin: auto;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(0,0,0,.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.hotel-slider__main .arrow-left:before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-image: url('/images/left-nav-arrow.svg');
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: 12px;
+	background-position: center;
+    cursor: pointer;
+}
+
+.hotel-slider__main .arrow-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 15px;
+    margin: auto;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(0,0,0,.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.hotel-slider__main .arrow-right:before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-image: url('/images/right-nav-arrow.svg');
+	background-repeat: no-repeat;
+	background-size: 12px;
 	background-position: center;
 }
 
@@ -189,6 +248,12 @@
 
 .select-dates-form-block {
 	width: 820px;
+}
+
+.select-dates-form {
+	width: 820px;
+	display: flex;
+	justify-content: space-between;
 }
 
 .select-dates-nav {
@@ -830,13 +895,6 @@
 		height: 365px;
 	}
 
-	.hotel-slider__w {
-		height: 70px;
-		width: 115px;
-		background-color: #f0f0f0;
-		border-radius: 8px;
-	}
-
 	.select-results__item {
 		padding: 14px;
 	}
@@ -1022,6 +1080,24 @@
 
 @media screen and (max-width: 480px) {
 
+	.select-dates-form {
+		position: relative;
+		margin-bottom: 80px;
+	}
+
+	.select-dates-form__form {
+		width: 100%;
+		height: auto;
+		background: transparent;
+	}
+	
+	.select-dates-form__btn {
+		position: absolute;
+		bottom: 0;
+		width: calc(50% - 10px);
+		height: 64px;
+	}
+
 	.select-dates-nav {
 		top: 163px;
 	}
@@ -1032,6 +1108,61 @@
 
 	.select-nav-bg {
 		width: 100%;
+	}
+
+	.select-form-items {
+		width: 100%;
+		height: auto;
+		flex-wrap: wrap;
+		border-radius: 0;
+		margin: 0;
+		justify-content: space-between;
+	}
+
+	.select-form-input-w:first-child {
+		display: none;
+		width: 100%;
+		height: 64px;
+		border-radius: 8px;
+		border: 2px solid rgba(255,75,43,1);
+	}
+
+	.select-form-input-w:nth-child(2) {
+		width: calc(50% - 10px);
+		height: 64px;
+		border-radius: 8px;
+		border: 2px solid rgba(255,75,43,1);
+	}
+
+	.select-form-in, .select-form-out {
+
+		background-image: url(/icons/calendar.png);
+		background-size: 23px;
+		background-repeat: no-repeat;
+		background-position: center right 10px;
+	}
+
+	.select-form-input-w:nth-child(3) {
+		width: calc(50% - 10px);
+		height: 64px;
+		border-radius: 8px;
+		border: 2px solid rgba(255,75,43,1);
+	}
+	.select-form-input-w:nth-child(4) {
+		margin-top: 15px;
+		width: calc(50% - 10px);
+		height: 64px;
+		border-radius: 8px;
+		border: 2px solid rgba(255,75,43,1);
+	}
+
+	.select-form-input {
+		border-radius: 8px;
+	}
+
+	.select-form-guests, .select-form-in, .select-form-out {
+		text-align: left;
+		text-indent: 20px;
 	}
 
 	.hotel-serv-descr {

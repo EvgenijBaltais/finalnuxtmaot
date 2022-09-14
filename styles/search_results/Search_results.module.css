@@ -92,16 +92,24 @@
 	background-image: url('/images/star.svg');
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 860px) {
+
 	.search-result-w {
 		flex-direction: column;
 	}
+
 	.search-result-left, .search-result-right {
-		width: auto;
+		width: 100%;
+	}
+
+	.search-result-left {
+		position: relative;
 	}
 
 	.search-result-right {
 		margin-top: 55px;
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.search-item-pic {
@@ -140,6 +148,7 @@
 	.search-item__price-from {
 		line-height: 24px;
 	}
+
 }
 
 @media screen and (max-width: 480px) {

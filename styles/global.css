@@ -95,10 +95,11 @@ body {
 
 .section-title {
 	padding-left: 40px;
-	font-family: 'FontInterBold';
+	font-family: 'FontInterSemiBold';
 	color: rgb(51,51,51);
 	font-size: 22px;
 	line-height: 24px;
+	font-weight: 500;
 }
 
 .success-title {
@@ -110,10 +111,11 @@ body {
 }
 
 .section-title-sub {
-	font-family: 'FontInterBold';
+	font-family: 'FontInterSemiBold';
 	color: rgb(51,51,51);
 	font-size: 22px;
 	line-height: 24px;
+	font-weight: 500;
 }
 
 .single-block-title {
@@ -242,8 +244,9 @@ input[type="checkbox"].substylized:not(:checked) + label {
     position: relative;
     padding-left: 25px;
 	font-size: 12px;
-    line-height: 20px;
+    line-height: 1.6;
     cursor: pointer;
+    font-family: 'FontInterLight';
 	user-select: none;
 	color: rgb(51,51,51)
 }
@@ -405,6 +408,16 @@ input[type="checkbox"].substylized:checked + label:after {
 	display: flex;
 	padding: 55px 0 20px 0;
 	margin-top: 120px;
+	flex-wrap: wrap;
+}
+
+.footer-copyright {
+	margin-top: 2rem;
+	width: 100%;
+	font-size: 14px;
+	line-height: 1;
+	font-family: "FontInterLight";
+	text-align: center;
 }
 
 .footer:before {
@@ -421,6 +434,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .footer-title {
 	font-family: 'FontInterSemiBold';
+	font-weight: 500;
 	color: rgb(51,51,51);
 	font-size: 16px;
 	line-height: 24px;
@@ -429,6 +443,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .footer-col-title {
 	font-family: 'FontInterSemiBold';
+	font-weight: 500;
 	color: rgb(51,51,51);
 	font-size: 16px;
 	line-height: 24px;
@@ -437,6 +452,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .footer-title-small {
 	font-family: 'FontInterSemiBold';
+	font-weight: 500;
 	color: rgb(51,51,51);
 	font-size: 15px;
 	line-height: 24px;
@@ -501,10 +517,11 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .footer-place-item {
 	display: block;
-	color:#333;
-	font-size: 15px;
-	line-height: 15px;
+	color: rgb(5, 117, 229);
+	font-size: 16px;
+	line-height: 16px;
 	font-family: 'FontInterLight';
+	font-weight: 300;
 	text-decoration: underline;
 	margin-bottom: 15px;
 }
@@ -512,17 +529,18 @@ input[type="checkbox"].substylized:checked + label:after {
 .footer-social-item {
 	display: flex;
 	align-items: flex-start;
-	height: 25px;
+	min-height: 25px;
 	margin-bottom: 10px;
 	padding-left: 35px;
-	font-size: 15px;
+	font-size: 16px;
 	line-height: 20px;
 	text-decoration: underline;
 	background-repeat: no-repeat;
-	background-position: center left;
+	background-position: top left;
 	background-size: 25px;
 	font-family: 'FontInter';
-	color: #333;
+	font-weight: 400;
+	color: rgb(5, 117, 229);
 
 }
 
@@ -547,7 +565,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .payment-method {
 	display: flex;
-	background-size: cover;
+	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
 }
@@ -764,11 +782,11 @@ input[type="checkbox"].substylized:checked + label:after {
 	z-index: 5;
 	cursor: pointer;
 }
-
+/*
 .search-item-pics {
 	width: 100%;
 	height: 100%;
-}
+}*/
 
 .search-item-pics .swiper-slide {
 	background-repeat: no-repeat;
@@ -1036,51 +1054,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 }
 
-@media screen and (max-width: 650px) {
-
-    .wrapper {
-    	margin: 0 auto;
-        padding: 0 1rem;
-        overflow: hidden;
-    }
-
-    .header {
-        margin: 10px 15px;
-    } 
-
-    .contact-page {
-    	padding: 0 !important;
-    }
-
-    .contact-page .section-title {
-    	width: 100%;
-    }
-
-    .contacts-y-map {
-    	width: 100%;
-    	height: 320px;
-    }
-
-    .map-swiper .swiper-slide {
-    	font-size: 22px;
-    }
-
-    .map-swiper .swiper-slide-active {
-    	width: 100%;
-    	transform: scale(1.8);
-    }
-
-    .main-h1 {
-        font-size: 4rem;
-    }
-
-    .single-block-title {
-        margin-right: 5px;
-    }
-    .left-block-bedroom{
-        background-size: 22px;
-        padding-left: 30px;
-    }
+@media screen and (max-width: 860px) {
 
     .footer {
 		padding-top: 45px;
@@ -1097,7 +1071,7 @@ input[type="checkbox"].substylized:checked + label:after {
     }
 
     .footer-col-1 {
-    	width: 60%;
+    	width: 65%;
     }
     .footer-col-2 {
     	width: 30%;
@@ -1169,12 +1143,11 @@ input[type="checkbox"].substylized:checked + label:after {
     	font-size: 10px;
     }
 
-    .section-title {
-    	font-size: 20px;
-    }
-
     .main-h1 {
     	font-size: 2.5rem;
+    }
+    input[type="checkbox"].substylized:checked + label, input[type="checkbox"].substylized:not(:checked) + label {
+    	font-size: 10px;
     }
 }
 
@@ -2220,6 +2193,49 @@ input[type="checkbox"].substylized:checked + label:after {
 
 @media screen and (max-width: 650px) {
 
+    .wrapper {
+    	margin: 0 auto;
+        padding: 0 1rem;
+        overflow: hidden;
+    }
+
+    .header {
+        margin: 10px 15px;
+    } 
+
+    .contact-page {
+    	padding: 0 !important;
+    }
+
+    .contact-page .section-title {
+    	width: 100%;
+    }
+
+    .contacts-y-map {
+    	width: 100%;
+    	height: 320px;
+    }
+
+    .map-swiper .swiper-slide {
+    	font-size: 22px;
+    }
+
+    .map-swiper .swiper-slide-active {
+    	width: 100%;
+    	transform: scale(1.8);
+    }
+
+    .main-h1 {
+        font-size: 4rem;
+    }
+
+    .single-block-title {
+        margin-right: 5px;
+    }
+    .left-block-bedroom{
+        background-size: 22px;
+        padding-left: 30px;
+    }
     .top-phone-corp {
         display: none;
     }
@@ -2414,27 +2430,6 @@ input[type="checkbox"].substylized:checked + label:after {
 		margin: 5px 0;
 	}
 	
-}
-
-@media screen and (max-width: 420px) {
-
-	.left-nav-block {
-		width: calc(100% - 135px);
-	}
-
-	.left-nav-list:before {
-		right: 5px;
-	}
-
-	.single-block-title:first-child {
-		margin-bottom: 45px;
-	}
-
-	.hoteldetail-swiper .hotel-slider__item {
-		height: 40px;
-		width: 65px;
-	}
-
 }
 
 .hh-bg {
@@ -3256,6 +3251,10 @@ input[type="checkbox"].substylized:checked + label:after {
 
 @media screen and (max-width: 860px) {
 
+	.search-page-main {
+		margin: 0 1rem;
+	}
+
 	.direction-form {
 		position: relative;
 		height: 170px;
@@ -3303,11 +3302,130 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 }
 
+@media (min-width: 480px) and (max-width: 860px) {
+
+	.aside-selection-form {
+		position: relative;
+		width: 100%;
+		height: 88px;
+		background: var(--red-linear-gradient);
+		border-radius: 10px;
+	}
+	.aside-direction-form__inside {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		position: absolute;
+		top: 3px;
+		bottom: 3px;
+		right: 3px;
+		left: 3px;
+		margin: auto;
+		border-radius: 8px;
+		width: calc(100% - 6px);
+		height: 82px;
+		background: #fff;
+		padding: 15px;
+	}
+
+	.aside-direction-form-way {
+		margin: 0;
+		height: auto;
+		border: 0;
+	}
+
+	.aside-main-form {
+		position: relative;
+		height: 170px;
+	}
+
+	.aside-form-way-input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		display: block;
+		outline: 0 !important;
+		border: 0 !important;
+		font-size: 16px;
+		line-height: 16px;
+		text-align: center;
+		text-indent: 0;
+		cursor: pointer;
+	}
+
+	.aside-search-dates {
+		display: flex;
+		width: 242px;
+	}
+
+	.aside-direction-form-in, .aside-direction-form-out {
+		width: 120px;
+		height: auto;
+		border: 0;
+		margin-bottom: 0;
+	}
+	.aside-form-way-input-out, .aside-form-way-input-in {
+		background-image: none;
+	}
+
+	.aside-direction-form-submit {
+		position: absolute;
+		top: 105px;
+		right: 0;
+		width: 32%;	
+	}
+
+	.aside-direction-form-people {
+		width: 170px;
+		height: auto;
+		border: none;
+		margin-bottom: 0;
+	}
+
+	.aside-direction-form-in::after, 
+	.aside-direction-form-out::after,
+	.aside-direction-form-way::after {
+	  position: absolute;
+	  right: 0;
+	  content: '';
+	  width: 2px;
+	  height: 100%;
+	  background: var(--red-linear-gradient);
+	  z-index: 2;
+	}
+
+	.aside-direction-form-in-active {
+		display: block;
+		position: absolute;
+		right: 0;
+		margin: auto;
+		left: -3px;
+		color: #fff;
+		font-size: 16px;
+		line-height: 82px;
+		width: calc(100% + 3px);
+		height: calc(100% + 30px);
+		background: var(--red-linear-gradient);
+		z-index: 2;
+		border-radius: 0;
+		cursor: pointer;
+	}
+
+	.aside-slider {
+		display: none;
+	}
+}
+
 @media screen and (max-width: 650px) {
-	.main-form {
+
+	.main-form, .search-page-main, .footer {
 		margin-left: 0;
 		margin-right: 0;
 	}
+
 }
 
 @media screen and (max-width: 480px) {
@@ -3470,6 +3588,41 @@ input[type="checkbox"].substylized:checked + label:after {
 		max-width: 320px;
 		margin: 0 auto;
 	}
+
+	.aside-direction-form-in, .aside-direction-form-out {
+		width: calc(50% - 10px);
+	}
+
+	.search-item-pics {
+		width: 100%;
+		height: 210px;
+	}
 }
 
 /* адаптив главной формы, конец */
+
+
+@media screen and (max-width: 420px) {
+
+	.left-nav-block {
+		width: calc(100% - 135px);
+	}
+
+	.left-nav-list:before {
+		right: 5px;
+	}
+
+	.single-block-title:first-child {
+		margin-bottom: 45px;
+	}
+
+	.hoteldetail-swiper .hotel-slider__item {
+		height: 40px;
+		width: 65px;
+	}
+
+	.main-h1 {
+		font-size: 2.5rem;
+	}
+
+}

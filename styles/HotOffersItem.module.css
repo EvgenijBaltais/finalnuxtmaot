@@ -48,7 +48,9 @@
 }
 
 .hot-deal-text {
-	font-size: 12px;
+	margin-top: 3px;
+	font-size: 11px;
+	font-family: 'FontInterLight';
 }
 
 .hot-deal-rating {
