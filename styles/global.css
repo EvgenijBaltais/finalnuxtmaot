@@ -676,6 +676,109 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Swiper на странице Поиск номеров, конец */ 
 
+/* Swiper на странице Номер отеля */ 
+
+.hotel-slider {
+	position: relative;
+}
+
+.hotel-slider__items .swiper-button-prev {
+    position: absolute;
+    top: 227px;
+    left: 15px;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(0,0,0,.5);
+    border-radius: 50%;
+    cursor: pointer;
+	z-index: 5;
+}
+
+.hotel-slider__items .swiper-button-next {
+	position: absolute;
+    top: 227px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(0,0,0,.5);
+    border-radius: 50%;
+    cursor: pointer;
+	z-index: 5;
+}
+
+.hotel-slider__items .swiper-button-prev:before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-image: url(/images/left-nav-arrow.svg);
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: center;
+    cursor: pointer;
+}
+
+.hotel-slider__items .swiper-button-next:before {
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-image: url('/images/right-nav-arrow.svg');
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: center;
+    cursor: pointer;
+}
+
+.hotel-slider__items .swiper {
+	position: static;
+}
+
+/* Swiper на странице Номер отеля, конец */ 
+
+
+/* Swiper на странице Номер отеля в подборке номеров */ 
+
+.slider-show-hide {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	background-image: url('/icons/increase.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	z-index: 5;
+	cursor: pointer;
+}
+
+.search-item-pics {
+	width: 100%;
+	height: 100%;
+}
+
+.search-item-pics .swiper-slide {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+/* Swiper на странице Номер отеля в подборке номеров конец */ 
+
+
 /* Swiper в разделе Контакты*/
 
 .map-swiper {
@@ -777,6 +880,9 @@ input[type="checkbox"].substylized:checked + label:after {
 	letter-spacing: normal;	
 	background-color: #ccc;
 	cursor: pointer;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
 }
 
 .hoteldetail-swiper .swiper-slide-active:after {
@@ -2213,6 +2319,49 @@ input[type="checkbox"].substylized:checked + label:after {
 		transition: 0.2s;
 		z-index: 10;
 	}
+/* Ползунок */
+
+.rc-slider-handle-1 {
+	border-color:  #FF416C!important;
+	background-color: #FF416C!important;
+}
+
+.rc-slider-handle-2 {
+	border-color: #FF4B2B!important;
+	background-color: #FF4B2B!important;
+}
+
+.rc-slider-handle {
+	width: 22px!important;
+	height: 22px!important;
+	margin-top: -8px!important;
+	opacity: 1!important;
+}
+
+.rc-slider-handle-1:focus {
+	box-shadow: 0 0 0 5px rgb(255 65 108 / 12%)!important;
+}
+
+.rc-slider-handle:focus {
+	box-shadow: 0 0 0 5px rgb(255 75 43 / 12%)!important;
+}
+
+.rc-slider-track {
+	height: 6px!important;
+}
+
+.rc-slider-rail {
+	height: 6px!important;
+}
+
+.rc-slider-step {
+	height: 6px!important;
+}
+
+.rc-slider-track {
+	background: var(--red-linear-gradient);
+}
+
 
 	.active-list > .left-nav-list:before {
 		transform: rotate(180deg);
@@ -2984,6 +3133,106 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Форма подбора, конец */
 
+/* Форма подбора на странице отеля */
+
+.hoteldetail-main-form {
+	width: 100%;
+}
+
+.hoteldetail-direction-form__inside {
+	width: calc(100% - 210px);
+	height: 52px;
+	display: flex;
+	border: 3px solid rgb(255,70,72);
+	border-radius: 10px;
+}
+
+.hoteldetail-direction-form-block {
+	position: relative;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: space-around;
+	user-select: none;
+}
+
+.hoteldetail-direction-form-w {
+	display: flex;
+	justify-content: space-between;
+}
+
+.hoteldetail-direction-form-way {
+	width: 290px;
+	height: 100%;
+	position: relative;
+	justify-content: flex-start;
+	border-right: 2px solid rgb(255,161,175);
+    border-radius: 10px 0 0 10px;
+}
+
+.hoteldetail-search-dates {
+	display: flex;
+	justify-content: space-between;
+	width: 190px
+}
+
+.hoteldetail-form-way-input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	display: block;
+	outline: 0!important;
+	border: 0!important;
+	font-size: 14px;
+	line-height: 100%;
+	cursor: pointer;
+	text-align: center;
+	font-weight: 700;
+}
+
+
+.hoteldetail-direction-form-way .hoteldetail-form-way-input {
+	text-align: left;
+	text-indent: 20px;
+	font-size: 15px;
+	border-radius: 10px 0 0 10px;
+}
+
+.hoteldetail-form-way-input::-webkit-input-placeholder {color: rgb(0,0,0);}
+.hoteldetail-form-way-input::-moz-placeholder          {color: rgb(0,0,0);}
+.hoteldetail-form-way-input:-moz-placeholder           {color: rgb(0,0,0);}
+.hoteldetail-form-way-input:-ms-input-placeholder      {color: rgb(0,0,0);}
+
+.hoteldetail-form-guests-input {
+	cursor: pointer;
+	user-select: none;
+	border-radius: 0 7px 7px 0;
+}
+
+.hoteldetail-direction-form-in {
+	width: 50%;
+	height: 100%;
+	border-right: 2px solid rgb(255,161,175)
+}
+
+.hoteldetail-direction-form-in-active {
+	display: block;
+	position: absolute;
+	left: -2px;
+	right: 0;
+	margin: auto;
+	color: #fff;
+	font-size: 16px;
+	line-height: 100%;
+	width: calc(100% + 4px);
+	height: 100%;
+	background: var(--red-linear-gradient);
+	z-index: 2;
+	cursor: pointer;
+}
 
 /* адаптив главной формы */
 @media screen and (max-width: 960px) {

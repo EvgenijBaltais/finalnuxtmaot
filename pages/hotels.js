@@ -32,6 +32,8 @@ export default function Hotels () {
 
     const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
 
+    console.log(loadedItems)
+
     useEffect(() => {
 
             // Поиск контента через API
@@ -57,7 +59,7 @@ export default function Hotels () {
             query.region_id ? link = 'https://maot-api.bokn.ru/api/regions/search?'
                         : link = 'https://maot-api.bokn.ru/api/hotels/search?'
 
-            query.region_id ? link += '&id=' + query.region_id
+            query.region_id ? link += 'id=' + query.region_id
                         : link += '&id=' + query.hotel_id
 
             link += '&start_date=' + dateIn
@@ -78,8 +80,6 @@ export default function Hotels () {
                     .then((res) => {
                         setLoadedItems(res.data)
 
-                console.log(res.data)
-                
                 // определить минимум и максимум цен
 
                 let prices = []
@@ -311,7 +311,7 @@ export default function Hotels () {
                     {
                         loadedItems.length && !filtersOn ? (loadedItems.map((item, index) => {
                             return (
-                                <Search_hotel_item key = {index} item = {item} nights = {nights} />
+                                <Search_hotel_item key = {index} item = {item} nights = {nights} query = {query} />
                             )
                         })) : ''
                     }

@@ -1,11 +1,11 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import Search_hotel_input from './search_form_components/Search_hotel_input'
-import Search_form_datein from './search_form_components/Search_form_datein'
-import Search_form_guests from './search_form_components/Search_form_guests'
+import Search_hotel_input from './hoteldetail_form_components/Search_hotel_input'
+import Search_form_datein from './hoteldetail_form_components/Search_form_datein'
+import Search_form_guests from './hoteldetail_form_components/Search_form_guests'
 
-const MainForm = (props) => {
+const Hoteldetail_form = ({popularHotels, popularWays, hotelName}) => {
 
     const [searchResult, setSearchResult] = useState({id: '', name: '', hotel: false, region: false})
     const [dateIn, setDateIn] = useState(setToday())
@@ -13,8 +13,6 @@ const MainForm = (props) => {
     const [adults, setAdults] = useState(2)
     const [childrenAges, setChildrenAges] = useState([])
 
-    const router = useRouter()
-    
     const changeSearchResult = (value) => {
         setSearchResult(value)
     }
@@ -50,19 +48,6 @@ const MainForm = (props) => {
         return num < 10 ? '0' + num : num
     }
 
-    const searchByClick = (event) => {
-        event.preventDefault()
-
-        let obj = {
-            region_name: event.target.innerText,
-            region: event.target.getAttribute('data-id')
-        }
-
-        changeSearchResult(obj)
-
-        event.target.parentElement.parentElement.querySelector('.form-way-input').value = event.target.innerText
-    }
-
     function checkForm () {
 
         let ages = []
@@ -86,29 +71,25 @@ const MainForm = (props) => {
         searchResult.region ? link = '/hotels' : ''
 
         // Если не введены данные по направлению
-        if (document.querySelector('.form-way-input').value == '') {
+        if (document.querySelector('.hoteldetail-form-way-input').value == '') {
             obj.region_id = '965825039'
             obj.region_name = 'Подмосковье'
             link = '/hotels'
         }
-
-        router.push({
-            pathname: link,
-            query: obj
-        })
     }
 
     return (
-        <section className = "main-form">
+        <section className = "hoteldetail-form">
             <div className = "selection-form-item">
-                <form action="" name = "direction-form" className = "selection-form direction-form" id = "direction-form">
-                    <div className = "direction-form-w">
-                        <div className = "direction-form__inside">
+                <form action="" name = "hoteldetail-direction-form" className = "selection-form hoteldetail-direction-form" id = "hoteldetail-direction-form">
+                    <div className = "hoteldetail-direction-form-w">
+                        <div className = "hoteldetail-direction-form__inside">
                             <Search_hotel_input
-                                popularHotels = {props.popularHotels}
-                                popularWays = {props.popularWays}
+                                popularHotels = {popularHotels}
+                                popularWays = {popularWays}
                                 searchResult = {searchResult}
                                 changeSearchResult = {changeSearchResult}
+                                name = {hotelName}
                             />
                             <Search_form_datein 
                                 dateIn = {dateIn}
@@ -122,19 +103,10 @@ const MainForm = (props) => {
                                 changeAdults = {changeAdults}
                                 changeChildrenAges = {changeChildrenAges}
                             />
-                            <div className = "direction-form-block direction-form-submit">
-                                <button type = "button" className = "direction-form-btn" onClick = {checkForm}>Найти</button>
-                            </div>
                         </div>
-                    </div>
-                    <div className = "direction-ways">
-                        <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="965825039">Подмосковье</a>
-                        <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="1913">Краснодар</a>
-                        <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="6057828">Крым</a>
-                        <a className = "direction-way" onClick = {searchByClick} data-info = "region" data-id="180352">Ялта</a>
-                        <span className = "dont-know-way">
-                            <a>Я не знаю, куда хочу поехать</a>
-                        </span>
+                        <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-submit">
+                            <button type = "button" className = "hoteldetail-direction-form-btn" onClick = {checkForm}>Найти</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -142,4 +114,4 @@ const MainForm = (props) => {
     )
 }
 
-export default MainForm 
+export default Hoteldetail_form

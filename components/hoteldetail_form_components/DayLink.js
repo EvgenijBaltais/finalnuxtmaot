@@ -1,5 +1,5 @@
 
-export default function AsideDayLink (props) {
+export default function DayLink (props) {
 
     const date = new Date()
     const [day, month, year] = props.item.split('.')
