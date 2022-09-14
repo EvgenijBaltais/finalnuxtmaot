@@ -19,7 +19,6 @@ function useOutsideAlerter(ref, func) {
 
 export default function Search_hotel_input (props) {
 
-    const [regions, setRegions] = useState(props.popularWays)
     const [hotels, setHotels] = useState(props.popularHotels)
     const [visibleSearch, setVisibleSearch] = useState(0)
 
@@ -32,7 +31,6 @@ export default function Search_hotel_input (props) {
         if (value.length < 3) {
             
             if (value.length == 0) {
-                setRegions(props.popularWays)
                 setHotels(props.popularHotels)
             }
             return false
@@ -90,7 +88,6 @@ export default function Search_hotel_input (props) {
                 { visibleSearch ? 
                 <Search_hotel_input_ways 
                     hotels = {hotels}
-                    regions = {regions}
                     visibleSearch = {changeVisibleSearch}
                     changeSearchResult = {props.changeSearchResult}
                     searchResult = {props.searchResult}

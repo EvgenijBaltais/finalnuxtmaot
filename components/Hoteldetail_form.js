@@ -5,13 +5,22 @@ import Search_hotel_input from './hoteldetail_form_components/Search_hotel_input
 import Search_form_datein from './hoteldetail_form_components/Search_form_datein'
 import Search_form_guests from './hoteldetail_form_components/Search_form_guests'
 
-const Hoteldetail_form = ({popularHotels, popularWays, hotelName}) => {
+const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) => {
 
-    const [searchResult, setSearchResult] = useState({id: '', name: '', hotel: false, region: false})
-    const [dateIn, setDateIn] = useState(setToday())
-    const [dateOut, setDateOut] = useState(setTomorrow())
+    const [searchResult, setSearchResult] = useState({id: hotel_id, hotel_name: hotel_name, hotel: true})
+    const [dateIn, setDateIn] = useState('')
+    const [dateOut, setDateOut] = useState('')
     const [adults, setAdults] = useState(2)
     const [childrenAges, setChildrenAges] = useState([])
+    const { query } = useRouter()
+
+    useEffect(() => {
+
+        setDateIn(query.datein)
+        setDateOut(query.dateout)
+        setAdults(query.adults)
+        setChildrenAges(query.children_age || [])
+    }, [query])
 
     const changeSearchResult = (value) => {
         setSearchResult(value)
@@ -48,34 +57,32 @@ const Hoteldetail_form = ({popularHotels, popularWays, hotelName}) => {
         return num < 10 ? '0' + num : num
     }
 
-    function checkForm () {
+    function checkForm (event) {
 
-        let ages = []
-        let obj = {}
-        let link = ''
-        for (let i = 0; i < childrenAges.length; i++) {
-            ages.push(parseInt(childrenAges[i]))
+        // Запрос доступных номеров
+
+        let datein = dateIn.slice(6, 10) + '-' + dateIn.slice(3, 5) + '-' + dateIn.slice(0, 2)
+        let dateout = dateOut.slice(6, 10) + '-' + dateOut.slice(3, 5) + '-' + dateOut.slice(0, 2)
+        let link = 'https://maot-api.bokn.ru/api/hotels/search-rooms?'
+
+        link += 'start_date=' + datein
+        link += '&end_date=' + dateout
+        link += '&adults=' + adults
+        
+        if (childrenAges.length > 0) {
+            for (let i = 0; i < childrenAges.length; i++) {
+                link += `&childs[${i}]=` + childrenAges[i]
+            }
         }
 
-        obj.datein = dateIn
-        obj.dateout = dateOut
-        obj.adults = adults
-        obj.children_ages = ages
+        link += '&id=' + searchResult.id
 
-
-        searchResult.region ? obj.region_id = searchResult.region : ''
-        searchResult.region_name ? obj.region_name = searchResult.region_name : ''
-        searchResult.hotel ? obj.hotel_id = searchResult.hotel : ''
-
-        searchResult.hotel ? link = '/hoteldetail' : '' // Если отель то на страницу отеля, если регион то на страницу подбора
-        searchResult.region ? link = '/hotels' : ''
-
-        // Если не введены данные по направлению
-        if (document.querySelector('.hoteldetail-form-way-input').value == '') {
-            obj.region_id = '965825039'
-            obj.region_name = 'Подмосковье'
-            link = '/hotels'
-        }
+        fetch(link)
+        .then((result) => result.json())
+        .then((result) => {
+            console.log(link)
+            setRoomsData(result.data)
+        })
     }
 
     return (
@@ -86,10 +93,9 @@ const Hoteldetail_form = ({popularHotels, popularWays, hotelName}) => {
                         <div className = "hoteldetail-direction-form__inside">
                             <Search_hotel_input
                                 popularHotels = {popularHotels}
-                                popularWays = {popularWays}
                                 searchResult = {searchResult}
                                 changeSearchResult = {changeSearchResult}
-                                name = {hotelName}
+                                name = {hotel_name}
                             />
                             <Search_form_datein 
                                 dateIn = {dateIn}
@@ -105,7 +111,7 @@ const Hoteldetail_form = ({popularHotels, popularWays, hotelName}) => {
                             />
                         </div>
                         <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-submit">
-                            <button type = "button" className = "hoteldetail-direction-form-btn" onClick = {checkForm}>Найти</button>
+                            <button type = "button" className = "hoteldetail-direction-form-btn" onClick = {event => checkForm(event)}>Найти</button>
                         </div>
                     </div>
                 </form>

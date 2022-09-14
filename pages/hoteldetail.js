@@ -18,11 +18,11 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Keyboard, Navigation } from "swiper"
 
 
-function Hoteldetail ({hotel, popularHotels, popularWays}) {
+function Hoteldetail ({popularHotels, popularWays}) {
 
     const router = useRouter()
     const { query } = useRouter()
-    const [hotelData, setHotelData] = useState(hotel)
+    const [hotelData, setHotelData] = useState()
     const [roomsData, setRoomsData] = useState(false)
     const [active_block, setActive_block] = useState(1)
     const [koordinates, setKoordinates] = useState([1,2])
@@ -60,6 +60,18 @@ function Hoteldetail ({hotel, popularHotels, popularWays}) {
         return num < 10 ? '0' + num : num
     }
 
+    function returnChildren (num) {
+
+        let text = ' детей',
+            a = [1, 21, 31, 41, 51, 61, 71, 81, 91, 101]
+
+        a.forEach(element => {
+            num == element ? text = ' ребенка' : ''
+        })
+
+        return num + text
+    }
+
     const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 
     useEffect(() => {
@@ -69,8 +81,11 @@ function Hoteldetail ({hotel, popularHotels, popularWays}) {
         if (query.datein && query.dateout) {
 
             parseInt(query.datein.slice(3, 5)) == parseInt(query.dateout.slice(3, 5)) ? 
-            text = `Номера на ${query.datein.slice(0, 2)} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых и ребенка` :
-            text = `Номера на ${query.datein.slice(0, 2)} ${months[(parseInt(query.datein.slice(3, 5)) - 1)]} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых и ребенка`
+            text = `Номера на ${query.datein.slice(0, 2)} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых` :
+            text = `Номера на ${query.datein.slice(0, 2)} ${months[(parseInt(query.datein.slice(3, 5)) - 1)]} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых`
+            
+            query.children_ages ? text += ' и ' + returnChildren(query.children_ages.length) : ''
+
             setDatesText(text)
         }
 
@@ -87,7 +102,11 @@ function Hoteldetail ({hotel, popularHotels, popularWays}) {
         .then((res) => res.json())
         .then((res) => {
             setHotelData(res.data)
-            setKoordinates([res.data.coordinates.latitude, res.data.coordinates.longitude])
+
+            let lat = ('' + res.data.coordinates.latitude).length > 10 ? res.data.coordinates.latitude.toFixed(5) : res.data.coordinates.latitude
+            let long = ('' + res.data.coordinates.longitude).length > 10 ? res.data.coordinates.longitude.toFixed(5) : res.data.coordinates.longitude
+
+            setKoordinates([lat, long])
 
             // Запрос доступных номеров
 
@@ -201,7 +220,7 @@ function Hoteldetail ({hotel, popularHotels, popularWays}) {
                                 <div className = {styles["hotel-map__place"]}>
                                     <span>Координаты: </span>
                                     <a className = {styles["hotel-map__coordinates"]}>
-                                        {hotelData.coordinates.latitude.toFixed(5)}, {hotelData.coordinates.longitude.toFixed(5)}
+                                        {koordinates[0]}, {koordinates[1]}
                                     </a>
                                 </div> : ''
                             }
@@ -216,9 +235,10 @@ function Hoteldetail ({hotel, popularHotels, popularWays}) {
                     </h2>
 
                     <Hoteldetail_form
-                        hotelName = {hotelData.name}
+                        hotel_id = {hotelData.id}
+                        hotel_name = {hotelData.name}
                         popularHotels = {popularHotels.data}
-                        popularWays = {popularWays.data}
+                        setRoomsData = {setRoomsData}
                     />
 
 

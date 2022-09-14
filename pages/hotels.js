@@ -19,20 +19,13 @@ export default function Hotels () {
     const [filteredItems, setFilteredItems] = useState([])
     const [isResearch, setIsResearch] = useState(false)
     const [nights, setNights] = useState(0)
-
     const [popularHotels, setPopularHotels] = useState([])
     const [popularWays, setPopularWays] = useState([])
-
     const [filtersOn, setFiltersOn] = useState(0)
-
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
-
     const [nodataText, setNodataText] = useState('')
-
     const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
-
-    console.log(loadedItems)
 
     useEffect(() => {
 
