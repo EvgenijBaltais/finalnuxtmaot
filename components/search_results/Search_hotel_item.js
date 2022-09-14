@@ -77,8 +77,9 @@ export default function Search_hotel_item ({item, nights}) {
                 </Swiper>
 
             <div className = {styles["search-item__content"]}>
-                <a href={"/hoteldetail"} className = {styles["search-item__title"]}>{item.name}</a>
-                
+                <Link href = {url}>
+                    <a className = {styles["search-item__title"]}>{item.name}</a>
+                </Link>
                 <ul className = {styles["search-item__list"]}>
                     {item.services.map((item, index) => {
                         return (
