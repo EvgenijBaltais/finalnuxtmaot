@@ -73,6 +73,10 @@ export default function Search_hotel_input (props) {
 
     // Клик по ссылке вне, конец
 
+    useEffect(() => {
+        document.querySelector('.hoteldetail-form-way-input').value = props.name
+    }, [])
+
     return (
 
         <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-way" ref={wrapperRef}>

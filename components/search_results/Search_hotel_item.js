@@ -9,7 +9,6 @@ import "swiper/css"
 
 export default function Search_hotel_item ({item, nights}) {
 
-    const router = useRouter()
     const { query } = useRouter()
 
     function nightsRightText (nights) {

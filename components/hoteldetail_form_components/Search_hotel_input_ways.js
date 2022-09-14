@@ -3,7 +3,7 @@ export default function Search_hotel_ways (props) {
 const searchByClick = (event) => {
 
     event.preventDefault()
-    findParent (event.target, 'direction-form-way').querySelector('.form-way-input').value = event.target.innerText
+    findParent (event.target, 'hoteldetail-direction-form-way').querySelector('.hoteldetail-form-way-input').value = event.target.innerText
 
     props.visibleSearch()
 

@@ -1,11 +1,11 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import Search_hotel_input from './hoteldetail_form_components/Search_hotel_input'
 import Search_form_datein from './hoteldetail_form_components/Search_form_datein'
 import Search_form_guests from './hoteldetail_form_components/Search_form_guests'
 
-const Hoteldetail_form = (props) => {
+const Hoteldetail_form = ({popularHotels, popularWays, hotelName}) => {
 
     const [searchResult, setSearchResult] = useState({id: '', name: '', hotel: false, region: false})
     const [dateIn, setDateIn] = useState(setToday())
@@ -13,8 +13,6 @@ const Hoteldetail_form = (props) => {
     const [adults, setAdults] = useState(2)
     const [childrenAges, setChildrenAges] = useState([])
 
-    const router = useRouter()
-    
     const changeSearchResult = (value) => {
         setSearchResult(value)
     }
@@ -73,12 +71,11 @@ const Hoteldetail_form = (props) => {
         searchResult.region ? link = '/hotels' : ''
 
         // Если не введены данные по направлению
-        if (document.querySelector('.form-way-input').value == '') {
+        if (document.querySelector('.hoteldetail-form-way-input').value == '') {
             obj.region_id = '965825039'
             obj.region_name = 'Подмосковье'
             link = '/hotels'
         }
-
     }
 
     return (
@@ -88,10 +85,11 @@ const Hoteldetail_form = (props) => {
                     <div className = "hoteldetail-direction-form-w">
                         <div className = "hoteldetail-direction-form__inside">
                             <Search_hotel_input
-                                popularHotels = {props.popularHotels}
-                                popularWays = {props.popularWays}
+                                popularHotels = {popularHotels}
+                                popularWays = {popularWays}
                                 searchResult = {searchResult}
                                 changeSearchResult = {changeSearchResult}
+                                name = {hotelName}
                             />
                             <Search_form_datein 
                                 dateIn = {dateIn}
@@ -105,9 +103,9 @@ const Hoteldetail_form = (props) => {
                                 changeAdults = {changeAdults}
                                 changeChildrenAges = {changeChildrenAges}
                             />
-                            <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-submit">
-                                <button type = "button" className = "hoteldetail-direction-form-btn" onClick = {checkForm}>Найти</button>
-                            </div>
+                        </div>
+                        <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-submit">
+                            <button type = "button" className = "hoteldetail-direction-form-btn" onClick = {checkForm}>Найти</button>
                         </div>
                     </div>
                 </form>

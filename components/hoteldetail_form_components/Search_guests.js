@@ -40,48 +40,48 @@ export default function Search_guests (props) {
 
     return (
 
-        <div className = "guests-block-w">
-            <div className="search-results-guests__header">
+        <div className = "hoteldetail-guests-block-w">
+            <div className="hoteldetail-search-results-guests__header">
                 Укажите количество гостей
             </div>
-            <div className="search-results-guests__body">
-                <div className = "search-results-adults">
-                    <div className = "search-results__left">
-                        <p className = "search-results__title">Взрослые</p>
-                        <span className="search-results__subtitle">от 18 лет</span>
+            <div className="hoteldetail-search-results-guests__body">
+                <div className = "hoteldetail-search-results-adults">
+                    <div className = "hoteldetail-search-results__left">
+                        <p className = "hoteldetail-search-results__title">Взрослые</p>
+                        <span className="hoteldetail-search-results__subtitle">от 18 лет</span>
                     </div>
-                    <div className = "search-results__right">
-                        <div className = "search-results__minus" onClick = {minusAdults}>—</div>
-                        <div className = "search-results__value">{props.adults}</div>
-                        <div className = "search-results__plus" onClick = {plusAdults}>+</div>
+                    <div className = "hoteldetail-search-results__right">
+                        <div className = "hoteldetail-search-results__minus" onClick = {minusAdults}>—</div>
+                        <div className = "hoteldetail-search-results__value">{props.adults}</div>
+                        <div className = "hoteldetail-search-results__plus" onClick = {plusAdults}>+</div>
                     </div>
                 </div>
 
-                <div className = "search-results-children">
+                <div className = "hoteldetail-search-results-children">
                     {(props.childrenAges || []).map((item, index) => {
                         return (
-                            <div className = "search-results-children__item" key = {index}>
-                                <div className = "search-results__left">
-                                    <p className = "search-results__title">Ребенок</p>
+                            <div className = "hoteldetail-search-results-children__item" key = {index}>
+                                <div className = "hoteldetail-search-results__left">
+                                    <p className = "hoteldetail-search-results__title">Ребенок</p>
                                 </div>
-                                <div className = "search-results__right search-results__age">
-                                    <div className = "search-age-num">{childAges[item]}</div>
-                                    <div className = "search-age-remove" onClick = {() => removeChildAge(index)}></div>
+                                <div className = "hoteldetail-search-results__right hoteldetail-search-results__age">
+                                    <div className = "hoteldetail-search-age-num">{childAges[item]}</div>
+                                    <div className = "hoteldetail-search-age-remove" onClick = {() => removeChildAge(index)}></div>
                                 </div>
                             </div>
                         )
                     })}
                 </div>
 
-                <div className = {visibleChildren ? "search-results-add-child" : "search-results-add-child search-results-add-child-closed"}>
-                    <p className = "search-results-add__title">
-                        <a className="search-results-add__link" onClick = {() => setVisibleChildren(visibleChildren => !visibleChildren)}>Добавить ребенка</a>
+                <div className = {visibleChildren ? "hoteldetail-search-results-add-child" : "hoteldetail-search-results-add-child hoteldetail-search-results-add-child-closed"}>
+                    <p className = "hoteldetail-search-results-add__title">
+                        <a className="hoteldetail-search-results-add__link" onClick = {() => setVisibleChildren(visibleChildren => !visibleChildren)}>Добавить ребенка</a>
                     </p>
                     {visibleChildren ? 
-                        <div className = "search-results-add__block">
+                        <div className = "hoteldetail-search-results-add__block">
                             {childAges.map((item, index) => {
                                 return (
-                                    <div className = "search-results-add__item" key = {index} onClick = {() => {addChildAge(index)}}>
+                                    <div className = "hoteldetail-search-results-add__item" key = {index} onClick = {() => {addChildAge(index)}}>
                                         {item}
                                     </div>
                                 )

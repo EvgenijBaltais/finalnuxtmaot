@@ -1,10 +1,12 @@
 import Link from "next/link"
 import styles from "../styles/HotOffersItem.module.css"
 
-const HotOfferItem = () => {
+const HotOfferItem = ({item}) => {
+
+    console.log(item)
 
     return (
-        <Link href = {`/hoteldetail?hotel-id={item.id}`}>
+        <Link href = {`/hoteldetail?hotel-id=${item.id}`}>
             <a className = {styles["hot-deal-item"]}>
                 <div className = {styles["hot-deal-pic"]}></div>
                 <div className = {styles["hot-deal-content"]}>

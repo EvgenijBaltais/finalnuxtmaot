@@ -36,7 +36,7 @@ export default function Search_form_datein(props) {
     }
 
     function checkOpenClose (event) {
-        if (event.target.classList.contains('form-way-input-in')) {
+        if (event.target.classList.contains('hoteldetail-form-way-input-in')) {
             setDateOutOpened(0)
             setDateInOpened(1)
             return false
@@ -67,9 +67,7 @@ export default function Search_form_datein(props) {
 
     return (
         <div className = "hoteldetail-search-dates" ref={wrapperRef}>
-
             <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-in" >
-
                 <input type="text" 
                         readOnly = "readonly"
                         className = {`hoteldetail-form-way-input hoteldetail-form-way-input-period hoteldetail-form-way-input-in${
@@ -80,7 +78,6 @@ export default function Search_form_datein(props) {
                 />
                 {dateInOpened ? <Datepicker closeFuncdateIn = {closeDateIn} mindate = {props.dateIn} /> : ""}
             </div>
-
             <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-out" >
                 <input type="text"
                         readOnly = "readonly" 

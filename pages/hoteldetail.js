@@ -18,11 +18,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Keyboard, Navigation } from "swiper"
 
 
-function Hoteldetail ({hotel}) {
+function Hoteldetail ({hotel, popularHotels, popularWays}) {
 
     const router = useRouter()
     const { query } = useRouter()
     const [hotelData, setHotelData] = useState(hotel)
+    const [roomsData, setRoomsData] = useState(false)
     const [active_block, setActive_block] = useState(1)
     const [koordinates, setKoordinates] = useState([1,2])
 
@@ -55,21 +56,6 @@ function Hoteldetail ({hotel}) {
 
     // Все что касается дат
 
-    function setToday () {
-
-        let today = new Date();
-            today.setTime(today.getTime());
-
-        return addNullToDate(today.getDate()) + "." + addNullToDate((today.getMonth() + 1)) + "." + today.getFullYear()
-    }
-
-    function setTomorrow () {
-        var tomorrow = new Date()
-            tomorrow.setTime(tomorrow.getTime() + 24 * 60 * 60 * 1000)
-
-            return addNullToDate(tomorrow.getDate()) + "." + addNullToDate((tomorrow.getMonth() + 1)) + "." + tomorrow.getFullYear()
-    }
-
     function addNullToDate(num) {
         return num < 10 ? '0' + num : num
     }
@@ -82,16 +68,11 @@ function Hoteldetail ({hotel}) {
 
         if (query.datein && query.dateout) {
 
-
             parseInt(query.datein.slice(3, 5)) == parseInt(query.dateout.slice(3, 5)) ? 
             text = `Номера на ${query.datein.slice(0, 2)} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых и ребенка` :
             text = `Номера на ${query.datein.slice(0, 2)} ${months[(parseInt(query.datein.slice(3, 5)) - 1)]} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых и ребенка`
             setDatesText(text)
         }
-
-        //text = `Номера на ${query.datein.slice(0, 2)} - ${query.dateout.slice(0, 2)} июля  для  2  взрослых и ребенка`
-
-        console.log(text)
 
     }, [query])
     // Все что касается дат, конец
@@ -107,6 +88,32 @@ function Hoteldetail ({hotel}) {
         .then((res) => {
             setHotelData(res.data)
             setKoordinates([res.data.coordinates.latitude, res.data.coordinates.longitude])
+
+            // Запрос доступных номеров
+
+            let datein = query.datein.slice(6, 10) + '-' + query.datein.slice(3, 5) + '-' + query.datein.slice(0, 2)
+            let dateout = query.dateout.slice(6, 10) + '-' + query.dateout.slice(3, 5) + '-' + query.dateout.slice(0, 2)
+            let adults = query.adults || 2
+            let link = 'https://maot-api.bokn.ru/api/hotels/search-rooms?'
+
+            link += 'start_date=' + datein
+            link += '&end_date=' + dateout
+            link += '&adults=' + adults
+            
+            if (query.children_ages) {
+                for (let i = 0; i < query.children_ages.length; i++) {
+                    link += `&childs[${i}]=` + query.children_ages[i]
+                }
+            }
+
+            link += '&id=' + res.data.id
+
+            fetch(link)
+            .then((result) => result.json())
+            .then((result) => {
+                console.log(link)
+                setRoomsData(result.data)
+            })
         })
     }, [query])
 
@@ -116,7 +123,6 @@ function Hoteldetail ({hotel}) {
             document.getElementById('y-maps') ? document.getElementById('y-maps').remove() : ''
         }
     }, [])
-
 
     if (!hotelData) {
         return <></>
@@ -128,7 +134,7 @@ function Hoteldetail ({hotel}) {
                 <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.name} - Магазин отдыха</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onReady={() => {
+            <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onLoad={() => {
 
                 function init() {
                     const myMap = new ymaps.Map("map", {
@@ -194,7 +200,9 @@ function Hoteldetail ({hotel}) {
                         {hotelData.coordinates.latitude && hotelData.coordinates.longitude ?
                                 <div className = {styles["hotel-map__place"]}>
                                     <span>Координаты: </span>
-                                    <a className = {styles["hotel-map__coordinates"]}>{hotelData.coordinates.latitude.toFixed(6)}, {hotelData.coordinates.longitude.toFixed(6)}</a>
+                                    <a className = {styles["hotel-map__coordinates"]}>
+                                        {hotelData.coordinates.latitude.toFixed(5)}, {hotelData.coordinates.longitude.toFixed(5)}
+                                    </a>
                                 </div> : ''
                             }
                     </div>
@@ -207,10 +215,14 @@ function Hoteldetail ({hotel}) {
                         {datesText}
                     </h2>
 
-                    <Hoteldetail_form />
+                    <Hoteldetail_form
+                        hotelName = {hotelData.name}
+                        popularHotels = {popularHotels.data}
+                        popularWays = {popularWays.data}
+                    />
 
 
-                    {active_block == 1 ? <Hotel_search_result /> : ''}
+                    {active_block == 1 ? <Hotel_search_result items = {roomsData} /> : ''}
                     {active_block == 2 ? <Rooms_info /> : ''}
                     {active_block == 3 ? <Hotel_service /> : ''}
                     {active_block == 4 ? <Hotel_contact hotelData = {hotelData} koordinates = {koordinates} /> : '' }
@@ -264,19 +276,25 @@ function Hoteldetail ({hotel}) {
     )
 }
 
-Hoteldetail.getInitialProps = async ({ query, req }) => {
+  export async function getStaticProps(context) {
 
-    if (!req) {
-        return {
-            hotel: null
-        }
-    }
+    // Популярные отели
 
-    const res = await fetch(`https://maot-api.bokn.ru/api/load?id=${ query['hotel_id'] }`)
-    const hotel = await res.json()
-    return { 
-        hotel: hotel.data
+	const getHotels = await fetch('https://maot-api.bokn.ru/api/hotels/top')
+	const popularHotels = await getHotels.json()
+
+    // Популярные направления
+
+	const getWays = await fetch('https://maot-api.bokn.ru/api/regions/top')
+	const popularWays = await getWays.json()
+
+
+    return {
+        props: {
+            popularHotels,
+            popularWays
+        },
     }
-  }
+}
 
 export default Hoteldetail
