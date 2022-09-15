@@ -89,8 +89,6 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
         })
     }
 
-    console.log(childrenAges)
-
     return (
         <section className = "hoteldetail-form">
             <div className = "selection-form-item">

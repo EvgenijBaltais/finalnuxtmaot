@@ -1,4 +1,3 @@
-
 export default function DayLink (props) {
 
     const date = new Date()

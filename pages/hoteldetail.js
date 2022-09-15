@@ -10,6 +10,7 @@ import Hotel_search_result from "../components/hotel_details/Hotel_search_result
 import Rooms_info from "../components/hotel_details/Rooms_info"
 import Hotel_service from "../components/hotel_details/Hotel_service"
 import Hotel_contact from "../components/hotel_details/Hotel_contact"
+import Hotel_map from "../components/Hotel_map"
 import styles from "../styles/Hoteldetail.module.css"
 
 
@@ -26,7 +27,8 @@ function Hoteldetail () {
     const [popularHotels, setPopularHotels] = useState([])
     const [roomsData, setRoomsData] = useState(false)
     const [active_block, setActive_block] = useState(1)
-    const [koordinates, setKoordinates] = useState([1,2])
+
+    const [mapReady, setMapReady] = useState(0)
 
     const [datesText, setDatesText] = useState('')
 
@@ -102,13 +104,9 @@ function Hoteldetail () {
         fetch(`https://maot-api.bokn.ru/api/hotels/get?id=${ query['hotel_id'] }`)
         .then((res) => res.json())
         .then((res) => {
+            
             setHotelData(res.data)
-
-            let lat = ('' + res.data.coordinates.latitude).length > 10 ? res.data.coordinates.latitude.toFixed(5) : res.data.coordinates.latitude
-            let long = ('' + res.data.coordinates.longitude).length > 10 ? res.data.coordinates.longitude.toFixed(5) : res.data.coordinates.longitude
-
-            setKoordinates([lat, long])
-
+            
             // Запрос доступных номеров
 
             let datein = query.datein.slice(6, 10) + '-' + query.datein.slice(3, 5) + '-' + query.datein.slice(0, 2)
@@ -165,25 +163,11 @@ function Hoteldetail () {
                 <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.name} - Магазин отдыха</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onLoad={() => {
-                
-                    function init() {
-                        const myMap = new ymaps.Map("map", {
-                            center: koordinates,
-                            zoom: 13
-                        });
-                    
-                        const myPlacemark = new ymaps.Placemark(koordinates, {
-                            hintContent: hotelData.name,
-                            balloonContent: hotelData.address
-                        });
-                        myMap.geoObjects.add(myPlacemark);
-                        myMap.setType('yandex#map');
-                        myMap.behaviors.disable('scrollZoom');
-                    }
 
-                    hotelData.coordinates ? ymaps.ready(init) : ''
-            }} />
+            <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onReady={() => {
+                setMapReady(1)
+            }
+            } />
 
             <section className = {styles["single-hotel"]}>
                 <div className={styles["titles-top"]}>
@@ -225,18 +209,9 @@ function Hoteldetail () {
                             </div>
                         </div>
                     </div>
-                    <div className = {styles["hotel-map"]} id = "map">
-                        <div className = {styles["hoteldetail-y-map"]}>
-                        </div>
-                        {hotelData.coordinates.latitude && hotelData.coordinates.longitude ?
-                                <div className = {styles["hotel-map__place"]}>
-                                    <span>Координаты: </span>
-                                    <a className = {styles["hotel-map__coordinates"]}>
-                                        {koordinates[0]}, {koordinates[1]}
-                                    </a>
-                                </div> : ''
-                            }
-                    </div>
+
+                    <Hotel_map hotelData = {hotelData} mapReady = {mapReady} />
+
                 </div>
             </section>
 
@@ -256,12 +231,10 @@ function Hoteldetail () {
                     {active_block == 1 ? <Hotel_search_result items = {roomsData} /> : ''}
                     {active_block == 2 ? <Rooms_info hotelData = {hotelData}/> : ''}
                     {active_block == 3 ? <Hotel_service services = {hotelData.services} /> : ''}
-                    {active_block == 4 ? <Hotel_contact hotelData = {hotelData} koordinates = {koordinates} /> : '' }
-
+                    {active_block == 4 ? <Hotel_contact hotelData = {hotelData} /> : '' }
                 </div>
 
                 <div className = {styles["select-dates-nav"]}>
-
                     <div className = {visibleNav ? `${styles["select-nav-bg"]} ${styles["active-nav-list"]}` : styles["select-nav-bg"]} ref={rootEl}>
                         <div className = {styles["icon-item-menu"]}>Навигация по странице</div>
                         <div className = {styles["select-dates-item"]} onClick = {() => setVisibleNav(visibleNav => !visibleNav)}>

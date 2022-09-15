@@ -1,7 +1,11 @@
 import { useEffect } from 'react'
 import styles from "../../styles/Hoteldetail.module.css"
 
-const Hotel_contact = ({koordinates, hotelData}) => {
+const Hotel_contact = ({hotelData}) => {
+
+    let lat = ('' + hotelData.coordinates.latitude).length > 10 ? hotelData.coordinates.latitude.toFixed(5) : hotelData.coordinates.latitude
+    let long = ('' + hotelData.coordinates.longitude).length > 10 ? hotelData.coordinates.longitude.toFixed(5) : hotelData.coordinates.longitude
+    const koordinates = [lat, long]
 
     useEffect(() => {
 
