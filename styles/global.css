@@ -1851,7 +1851,6 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .form-way-input-period {
-	width: 100%;
 	font-size: 16px;
 	line-height: 16px;
 }

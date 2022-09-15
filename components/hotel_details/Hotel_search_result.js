@@ -6,8 +6,6 @@ const Hotel_search_result = ({ items }) => {
 
     const { query } = useRouter()
     
-    console.log(items)
-
     let datein = new Date(query.datein.slice(6, 10), query.datein.slice(3, 5), query.datein.slice(0, 2))
     let dateout = new Date(query.dateout.slice(6, 10), query.dateout.slice(3, 5), query.dateout.slice(0, 2))
     let nights = (dateout - datein) / (60 * 60 * 24 * 1000)

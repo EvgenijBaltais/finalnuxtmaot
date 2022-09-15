@@ -44,7 +44,7 @@ export default function Search_hotel_item ({item, nights}) {
     let url = '/hoteldetail?'
 
     for (let key in obj) {
-        url += ('&' + key + "=" + obj[key])
+        key == "datein" ? url += (key + "=" + obj[key]) : url += ('&' + key + "=" + obj[key])
     }
 
     return (

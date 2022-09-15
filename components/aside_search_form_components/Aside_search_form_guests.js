@@ -67,7 +67,7 @@ export default function Aside_search_form_guests(props) {
                 type="text"
                 name="aside-choose-people"
                 className = {`aside-form-way-input aside-form-guests-input aside-form-guests-input-out${visibleGuests ? ' aside-direction-form-in-active' : ''}`}
-                defaultValue={returnGuests(+props.adults + +props.childrenAges.length)}
+                value={returnGuests(+props.adults + +props.childrenAges.length)}
                 readOnly = "readonly"
                 onClick={ () => setVisibleGuests(visibleGuests => !visibleGuests)}
             />
