@@ -49,9 +49,6 @@ export default function Search_hotel_input (props) {
 
             for (let key in result.data) {
                 if (result.data.hasOwnProperty(key)) {
-                    if (key == 'region') {
-                        setRegions(result.data[key].slice(0, 15))
-                    }
                     if (key == 'hotel') {
                         setHotels(result.data[key].slice(0, 15))
                     }

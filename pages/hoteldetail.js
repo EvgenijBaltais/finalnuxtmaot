@@ -148,6 +148,8 @@ function Hoteldetail () {
         })
     }, [])
 
+    console.log(popularHotels)
+
     // Удалить яндекс карты
     useEffect(() => {
         return () => {
@@ -249,7 +251,7 @@ function Hoteldetail () {
                     <Hoteldetail_form
                         hotel_id = {hotelData.id}
                         hotel_name = {hotelData.name}
-                        popularHotels = {popularHotels.data}
+                        popularHotels = {popularHotels}
                         setRoomsData = {setRoomsData}
                     />
 
