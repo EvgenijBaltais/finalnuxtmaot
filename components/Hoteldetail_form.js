@@ -19,7 +19,7 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
         setDateIn(query.datein)
         setDateOut(query.dateout)
         setAdults(query.adults)
-        setChildrenAges(query.children_age || [])
+        setChildrenAges(query.children_ages || [])
     }, [query])
 
     const changeSearchResult = (value) => {

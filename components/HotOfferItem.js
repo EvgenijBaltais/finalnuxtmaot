@@ -3,8 +3,6 @@ import styles from "../styles/HotOffersItem.module.css"
 
 const HotOfferItem = ({item}) => {
 
-    console.log(item)
-
     return (
         <Link href = {`/hoteldetail?hotel-id=${item.id}`}>
             <a className = {styles["hot-deal-item"]}>

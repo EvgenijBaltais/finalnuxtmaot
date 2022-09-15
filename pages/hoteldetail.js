@@ -18,11 +18,12 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Keyboard, Navigation } from "swiper"
 
 
-function Hoteldetail ({popularHotels, popularWays}) {
+function Hoteldetail () {
 
     const router = useRouter()
     const { query } = useRouter()
     const [hotelData, setHotelData] = useState()
+    const [popularHotels, setPopularHotels] = useState([])
     const [roomsData, setRoomsData] = useState(false)
     const [active_block, setActive_block] = useState(1)
     const [koordinates, setKoordinates] = useState([1,2])
@@ -136,6 +137,17 @@ function Hoteldetail ({popularHotels, popularWays}) {
         })
     }, [query])
 
+    useEffect(() => {
+
+        // Популярные отели
+
+        fetch('https://maot-api.bokn.ru/api/hotels/top')
+        .then((res) => res.json())
+        .then((res) => {
+            setPopularHotels(res.data)
+        })
+    }, [])
+
     // Удалить яндекс карты
     useEffect(() => {
         return () => {
@@ -241,7 +253,6 @@ function Hoteldetail ({popularHotels, popularWays}) {
                         setRoomsData = {setRoomsData}
                     />
 
-
                     {active_block == 1 ? <Hotel_search_result items = {roomsData} /> : ''}
                     {active_block == 2 ? <Rooms_info /> : ''}
                     {active_block == 3 ? <Hotel_service /> : ''}
@@ -294,27 +305,6 @@ function Hoteldetail ({popularHotels, popularWays}) {
             </section>
         </>
     )
-}
-
-  export async function getStaticProps(context) {
-
-    // Популярные отели
-
-	const getHotels = await fetch('https://maot-api.bokn.ru/api/hotels/top')
-	const popularHotels = await getHotels.json()
-
-    // Популярные направления
-
-	const getWays = await fetch('https://maot-api.bokn.ru/api/regions/top')
-	const popularWays = await getWays.json()
-
-
-    return {
-        props: {
-            popularHotels,
-            popularWays
-        },
-    }
 }
 
 export default Hoteldetail
