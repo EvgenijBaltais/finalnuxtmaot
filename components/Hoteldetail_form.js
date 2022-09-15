@@ -19,7 +19,8 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
         setDateIn(query.datein)
         setDateOut(query.dateout)
         setAdults(query.adults)
-        setChildrenAges(query.children_ages || [])
+        // Если одно значение, то приходит не массив, а число. Поэтому создаем массив
+        query.children_ages != [] ? setChildrenAges([query.children_ages]) : setChildrenAges(query.children_ages || [])
     }, [query])
 
     const changeSearchResult = (value) => {
@@ -84,6 +85,8 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
             setRoomsData(result.data)
         })
     }
+
+    console.log(childrenAges)
 
     return (
         <section className = "hoteldetail-form">
