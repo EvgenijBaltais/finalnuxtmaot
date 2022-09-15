@@ -78,6 +78,8 @@ const Hotel_card = ({item, adults, children, nights}) => {
         return text
     }
 
+    console.log(item)
+
     return (
         <div className={styles[`select-results__item`]}>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
@@ -111,10 +113,14 @@ const Hotel_card = ({item, adults, children, nights}) => {
                 <a className={styles["select-item-title"]}>{item.name}</a>
                 <div className = {styles["select-item-info"]}>
                     <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
-                        {item.services.map((item, index) => {
-                            if (index > 4) return false
-                            if (index > 3) {
-                                return <span className = {styles["serv-item__more-services"]}>еще {returnServices(item.services.length - index)}...</span>
+
+                        {item.services.map((item, index, arr) => {
+
+                            if (!view) {
+                                if (index > 4) return false
+                                if (index > 3) {
+                                    return <span key = {index} className = {styles["serv-item__more-services"]}>еще {returnServices(arr.length - index)}...</span>
+                                }
                             }
                             return (
                                 <span key = {index}>{item}</span>
