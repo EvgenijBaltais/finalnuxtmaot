@@ -148,8 +148,6 @@ function Hoteldetail () {
         })
     }, [])
 
-    console.log(popularHotels)
-
     // Удалить яндекс карты
     useEffect(() => {
         return () => {
@@ -168,23 +166,23 @@ function Hoteldetail () {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onLoad={() => {
-
-                function init() {
-                    const myMap = new ymaps.Map("map", {
-                        center: koordinates,
-                        zoom: 13
-                    });
                 
-                    const myPlacemark = new ymaps.Placemark(koordinates, {
-                        hintContent: hotelData.name,
-                        balloonContent: hotelData.address
-                    });
-                    myMap.geoObjects.add(myPlacemark);
-                    myMap.setType('yandex#map');
-                    myMap.behaviors.disable('scrollZoom');
-                }
+                    function init() {
+                        const myMap = new ymaps.Map("map", {
+                            center: koordinates,
+                            zoom: 13
+                        });
+                    
+                        const myPlacemark = new ymaps.Placemark(koordinates, {
+                            hintContent: hotelData.name,
+                            balloonContent: hotelData.address
+                        });
+                        myMap.geoObjects.add(myPlacemark);
+                        myMap.setType('yandex#map');
+                        myMap.behaviors.disable('scrollZoom');
+                    }
 
-                ymaps.ready(init)
+                    hotelData.coordinates ? ymaps.ready(init) : ''
             }} />
 
             <section className = {styles["single-hotel"]}>
@@ -256,8 +254,8 @@ function Hoteldetail () {
                     />
 
                     {active_block == 1 ? <Hotel_search_result items = {roomsData} /> : ''}
-                    {active_block == 2 ? <Rooms_info /> : ''}
-                    {active_block == 3 ? <Hotel_service /> : ''}
+                    {active_block == 2 ? <Rooms_info hotelData = {hotelData}/> : ''}
+                    {active_block == 3 ? <Hotel_service services = {hotelData.services} /> : ''}
                     {active_block == 4 ? <Hotel_contact hotelData = {hotelData} koordinates = {koordinates} /> : '' }
 
                 </div>
