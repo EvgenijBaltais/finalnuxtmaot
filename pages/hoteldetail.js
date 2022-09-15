@@ -253,7 +253,6 @@ function Hoteldetail () {
                         setRoomsData = {setRoomsData}
                     />
 
-
                     {active_block == 1 ? <Hotel_search_result items = {roomsData} /> : ''}
                     {active_block == 2 ? <Rooms_info /> : ''}
                     {active_block == 3 ? <Hotel_service /> : ''}

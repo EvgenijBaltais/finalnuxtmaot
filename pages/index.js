@@ -24,7 +24,7 @@ class Index extends React.Component {
     }
 
     render() {
-
+        console.log(this.props.popularHotels, this.props.popularWays)
         return (
             <>
                 <Head>
@@ -45,6 +45,7 @@ class Index extends React.Component {
 }
 
 export async function getStaticProps(context) {
+    
 
     // Популярные отели
 
