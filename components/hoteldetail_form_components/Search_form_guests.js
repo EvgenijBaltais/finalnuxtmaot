@@ -20,6 +20,7 @@ function useOutsideAlerter(ref, func) {
 export default function Search_form_guests({adults, childrenAges, changeAdults, changeChildrenAges}) {
 
     const [visibleGuests, setVisibleGuests] = useState(0)
+    const [guests, setGuests] = useState('')
 
     function returnGuests (num) {
 
@@ -53,6 +54,10 @@ export default function Search_form_guests({adults, childrenAges, changeAdults, 
         setVisibleGuests(val)
     }
 
+    useEffect(() => {
+        setGuests(returnGuests(+adults + +childrenAges.length))
+    }, [])
+
     // Клик по ссылке вне
 
     const wrapperRef = useRef(null)
@@ -67,7 +72,7 @@ export default function Search_form_guests({adults, childrenAges, changeAdults, 
                 type="text"
                 name="hoteldetail-choose-people"
                 className = {`hoteldetail-form-way-input hoteldetail-form-guests-input hoteldetail-form-guests-input-out${visibleGuests ? ' hoteldetail-direction-form-in-active' : ''}`}
-                defaultValue={returnGuests(+adults + +childrenAges.length)}
+                value={guests}
                 readOnly = "readonly"
                 onClick={ () => setVisibleGuests(visibleGuests => !visibleGuests)}
             />

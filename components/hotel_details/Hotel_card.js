@@ -94,7 +94,7 @@ const Hotel_card = ({item, adults, children, nights}) => {
                     }}
                     navigation={true}
                     modules={[Pagination, Navigation]}
-                    className='search-item-pics'
+                    className='select-search-item-pics'
                 >
                     {item.images.map((item, index) => {
                         if (index > 7) return false
