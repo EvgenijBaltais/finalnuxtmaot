@@ -59,10 +59,6 @@ function Hoteldetail () {
 
     // Все что касается дат
 
-    function addNullToDate(num) {
-        return num < 10 ? '0' + num : num
-    }
-
     function returnChildren (num) {
 
         let text = ' детей',

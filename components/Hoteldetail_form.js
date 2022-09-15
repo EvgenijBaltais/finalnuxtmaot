@@ -81,6 +81,8 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
 
         link += '&id=' + searchResult.id
 
+        setRoomsData(0)
+
         fetch(link)
         .then((result) => result.json())
         .then((result) => {
