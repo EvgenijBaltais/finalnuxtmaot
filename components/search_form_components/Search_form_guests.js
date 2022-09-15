@@ -67,7 +67,7 @@ export default function Search_form_guests({adults, childrenAges, changeAdults, 
                 type="text"
                 name="choose-people"
                 className = {`form-way-input form-guests-input form-guests-input-out${visibleGuests ? ' direction-form-in-active' : ''}`}
-                defaultValue={returnGuests(+adults + +childrenAges.length)}
+                value={returnGuests(+adults + +childrenAges.length)}
                 readOnly = "readonly"
                 onClick={ () => setVisibleGuests(visibleGuests => !visibleGuests)}
             />
