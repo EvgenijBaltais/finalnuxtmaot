@@ -78,8 +78,6 @@ const Hotel_card = ({item, adults, children, nights}) => {
         return text
     }
 
-    console.log(view)
-
     return (
         <div className={styles[`select-results__item`]}>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
