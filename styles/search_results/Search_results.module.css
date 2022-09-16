@@ -56,7 +56,7 @@
 
 .aside-block {
 	position: relative;
-	padding-bottom: 40px
+	padding-bottom: 40px;
 }
 
 .search-result-right {
@@ -102,8 +102,17 @@
 		width: 100%;
 	}
 
+	.search-result-left-w {
+		background: transparent;
+		position: relative;
+	}
+
 	.search-result-left {
 		position: relative;
+		padding: 0;
+		background: transparent;
+		border-radius: 0;
+		box-shadow: none;
 	}
 
 	.search-result-right {
@@ -147,6 +156,10 @@
 
 	.search-item__price-from {
 		line-height: 24px;
+	}
+
+	.aside-block {
+		padding-bottom: 0;
 	}
 
 }
@@ -206,6 +219,7 @@
 	.search-rate__reviews {
 		padding-right: 1rem;
 	}
+
 }
 
 @media screen and (max-width: 320px) {

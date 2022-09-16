@@ -8,9 +8,9 @@ import PaymentNav from "../components/PaymentNav"
 
 import Image from "next/image"
 
-import Pay1 from '/public/images/pay-1.jpg'
-import Pay2 from '/public/images/pay-2.jpg'
-import Pay3 from '/public/images/pay-3.jpg'
+import Pay1 from '/public/images/pay-1.png'
+import Pay2 from '/public/images/pay-2.png'
+import Pay3 from '/public/images/pay-3.png'
 
 class Payment extends React.Component {
 
@@ -158,10 +158,10 @@ render() {
                                 <form action="" name = {styles["content-subscribe-form"]}>
                                     <div className = {styles["content-subscribe-form"]}>
                                         <div className={styles["content-subscribe-form-inside"]}>
-                                            <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свою электронную почту"/>
+                                            <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свой Email"/>
                                             <div className = {styles["get-content-suscribe-btn"]}>
                                                 <button className = {styles["get-content-suscribe__submit"]}>
-                                                    <MediaQuery maxWidth={420}>
+                                                    <MediaQuery maxWidth={460}>
                                                         {(matches) =>
                                                             matches
                                                               ? <span className={styles["icon-subscribe-inside"]}></span>

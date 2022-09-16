@@ -435,7 +435,7 @@
     .mob-social-vk {
         display: block;
         width: 100%;
-        height: 24px;
+        min-height: 24px;
         padding-left: 32px;
         font-size: 16px;
         line-height: 24px;
@@ -445,7 +445,7 @@
         background-image: url('/icons/vk.svg');
         background-repeat: no-repeat;
         background-size: 24px;
-        background-position: left center;
+        background-position: left top;
     }
 
 

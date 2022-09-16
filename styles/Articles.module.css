@@ -458,8 +458,12 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
 		margin: 0;
 	}
 
+	.article-left {
+		margin-bottom: 40px;
+	}
+
 	.left-nav-block {
-		padding: 25px 40px 10px 14px;
+		padding: 20px 40px 10px 14px;
 	    -webkit-box-shadow: var(--main-shadow);
 	    -moz-box-shadow: var(--main-shadow);
 	    box-shadow: var(--main-shadow);
@@ -479,14 +483,25 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
 		z-index: 9;
 	}
 
+	.left-nav-item:first-child {
+		display: block;
+		padding-bottom: 0;
+	}
+
 	.left-nav-item {
 		display: none;
 	}
 
 	.left-nav-link {
+		display: inline-block;
+		margin: 5px 0;
 		font-size: 16px;
+		line-height: 1.2;
 		text-decoration: none;
 		color: #4398eb;
+	}
+	.left-nav-link:last-child {
+		margin-bottom: 0;
 	}
 
 	.article-left-nav {
@@ -503,7 +518,6 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
 	.left-nav-block {
 		width: 100%;
 		height: auto;
-		min-height: 64px;
 		position: relative;
 		box-shadow: none;
 		margin-bottom: 0;
@@ -579,11 +593,17 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
 		z-index: 10;
 	}
 
-	.active-nav-item {
-		display: inline-block;
-		font-size: 16px;
-		text-decoration: none;
-		color: #4398eb;
+	.left-ul-nav-list:before {
+	    content: "";
+	    text-align: right;
+	    position: absolute;
+	    top: -5px;
+	    right: 0;
+	    left: 0;
+	    height: 1.2em;
+	    background: linear-gradient(to top, rgba(255, 255, 255, 0), white 100%);
+	    pointer-events: none;
+	    z-index: 1;
 	}
 }
 

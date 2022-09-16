@@ -28,7 +28,7 @@ const ArticleNav = () => {
     WindowOutClick()
 
     return (
-        <div className = {styles["article-left-nav"]}>
+        <div className = {styles["article-left-nav"]} onClick = {() => setVisibleList(visibleList => !visibleList)}>
             <h2 className="single-block-title left-block-bedroom">
                 Навигация
             </h2>
@@ -37,16 +37,13 @@ const ArticleNav = () => {
 
                 <span className = {styles["top-nav-title"]}>Выберите статью</span>
 
-                <div className = {styles["active-nav-item"]} onClick = {() => setVisibleList(visibleList => !visibleList)} >
-                    Платежи. Оплата банковской картой онлайн
-                </div>
 
                 <div className = {styles["left-ul-nav-list"]}>
 
                     <ul className = {styles["left-nav-list"]}>
                     
                         <li className = {styles["left-nav-item"]}>
-                            <a className = {styles["left-nav-link"]} href="">Платежи. Оплата банковской картой онлайн</a>
+                            <span className = {styles["left-nav-link"]} href="">Платежи. Оплата банковской картой онлайн</span>
                         </li>
                         <li className = {styles["left-nav-item"]}>
                             <a className = {styles["left-nav-link"]} href="">Гарантии Безопасности</a>

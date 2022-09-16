@@ -231,67 +231,71 @@ export default function Hotels () {
                                 popularWays = {popularWays}
                             />
                         </div>
-                        <div className = "aside-slider">
-                            <div className="slider-values">
-                                <div className="aside-slider-val aside-slider-left">
-                                    {sliderMin != 0 ?
-                                        <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
-                                    : ''}
-                                    </div>
-                                <div className="aside-slider-val aside-slider-right">
-                                    {sliderMax != 0 ?
-                                        <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
-                                    : ''}
-                                </div>
-                            </div>
-                            {sliderMax != 0 ?
-                                <Slider
-                                    step = {1}
-                                    range
-                                    defaultValue={[sliderMin, sliderMax]}
-                                    min={0}
-                                    max={(sliderMax + 10000)}
-                                    onChange={value => renewValues(value)}
-                                    onAfterChange = {() => showVariants()}
-                                /> :  ''
-                            }
-                        </div>
-                        <div className = {styles["aside-block"]}>
-                            <h3 className = "aside-block-title">Типы питания</h3>
-                            {foodTypes.map((item, index) => {
-                              return (
-                                <div key = {index} className = {styles["aside-checkbox"]}>
-                                    <input type="checkbox" id={`checkbox-1${index + 1}`} className = "stylized food-checkbox" onChange={() => showVariants()} /> 
-                                    <label htmlFor={`checkbox-1${index + 1}`}>{item}</label>
-                                </div>
-                              )  
-                            })}
-                        </div>
-                        <div className = {styles["aside-block"]}>
-                            <h3 className = "aside-block-title">Звездность</h3>
-                            {
-                                [...Array(5)].map((e, i) => {
-                                    return (
-                                        <div key = {i} className = {styles["aside-checkbox"]}>
-                                            <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={() => showVariants()} />
-                                            <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-2${i + 1}`}>
-                                                <ul className = {styles["aside-stars-list"]}>
-                                                    {[...Array(i + 1)].map((el, ind) => {
-                                                        return (
-                                                            <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                                        )
-                                                    })}
-                                                    {[...Array(5 - (i + 1))].map((el, ind) => {
-                                                        return (
-                                                            <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
-                                                        )
-                                                    })}
-                                                </ul>
-                                            </label>
+                        <div className = "aside-filter-btn">Показать&nbsp;фильтры</div>
+
+                        <div className = "aside-filter">
+                            <div className = "aside-slider">
+                                <div className="slider-values">
+                                    <div className="aside-slider-val aside-slider-left">
+                                        {sliderMin != 0 ?
+                                            <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
+                                        : ''}
                                         </div>
-                                    )
-                                })
-                            }
+                                    <div className="aside-slider-val aside-slider-right">
+                                        {sliderMax != 0 ?
+                                            <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
+                                        : ''}
+                                    </div>
+                                </div>
+                                {sliderMax != 0 ?
+                                    <Slider
+                                        step = {1}
+                                        range
+                                        defaultValue={[sliderMin, sliderMax]}
+                                        min={0}
+                                        max={(sliderMax + 10000)}
+                                        onChange={value => renewValues(value)}
+                                        onAfterChange = {() => showVariants()}
+                                    /> :  ''
+                                }
+                            </div>
+                            <div className = {styles["aside-block"]}>
+                                <h3 className = "aside-block-title">Типы питания</h3>
+                                {foodTypes.map((item, index) => {
+                                  return (
+                                    <div key = {index} className = {styles["aside-checkbox"]}>
+                                        <input type="checkbox" id={`checkbox-1${index + 1}`} className = "stylized food-checkbox" onChange={() => showVariants()} /> 
+                                        <label htmlFor={`checkbox-1${index + 1}`}>{item}</label>
+                                    </div>
+                                  )  
+                                })}
+                            </div>
+                            <div className = {styles["aside-block"]}>
+                                <h3 className = "aside-block-title">Звездность</h3>
+                                {
+                                    [...Array(5)].map((e, i) => {
+                                        return (
+                                            <div key = {i} className = {styles["aside-checkbox"]}>
+                                                <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={() => showVariants()} />
+                                                <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-2${i + 1}`}>
+                                                    <ul className = {styles["aside-stars-list"]}>
+                                                        {[...Array(i + 1)].map((el, ind) => {
+                                                            return (
+                                                                <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
+                                                            )
+                                                        })}
+                                                        {[...Array(5 - (i + 1))].map((el, ind) => {
+                                                            return (
+                                                                <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
+                                                            )
+                                                        })}
+                                                    </ul>
+                                                </label>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>

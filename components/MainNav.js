@@ -22,24 +22,21 @@ const MainNav = () => {
     
     const rootEl = useRef(null)
 
-
     function WindowOutClick() {
         useEffect(() => {
-          const onClick = e => rootEl.current.contains(e.target) || setVisibleMenu(false)
 
+          const onClick = e => rootEl.current.contains(e.target) || setVisibleMenu(false)
+          
           document.addEventListener('click', onClick)
           return () => document.removeEventListener('click', onClick)
         }, [])
     }
-
-
+ 
     WindowOutClick()
 
     return (
         <header className = {styles["header"]} >
-
             <div className =  {visibleMenu ? "hh-bg hhbg-fix" : "hh-bg "}></div>
-
             <div className={styles["main-logo"]}>
                 <Link href = "/" activeClassName="active">
                     <a>

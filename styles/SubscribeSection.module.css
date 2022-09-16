@@ -11,7 +11,8 @@
 
 .subscribe-section h2 {
 
-	font-family: 'FontInterMedium';
+	font-size: 22px;
+	font-family: 'FontInterSemiBold';
 	font-weight: 500;
 }
 
@@ -181,7 +182,6 @@
 	}
 
 	.subscribe-section h2 {
-		font-size: 22px;
 	}
 
 	.subscribe-social {
