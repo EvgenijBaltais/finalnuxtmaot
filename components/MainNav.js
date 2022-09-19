@@ -26,17 +26,19 @@ const MainNav = () => {
         useEffect(() => {
 
           const onClick = e => rootEl.current.contains(e.target) || setVisibleMenu(false)
-          
           document.addEventListener('click', onClick)
+          document.body.classList.toggle('bg-fixed', visibleMenu);
           return () => document.removeEventListener('click', onClick)
-        }, [])
+        }, [visibleMenu])
     }
  
     WindowOutClick()
 
     return (
         <header className = {styles["header"]} >
+        
             <div className =  {visibleMenu ? "hh-bg hhbg-fix" : "hh-bg "}></div>
+
             <div className={styles["main-logo"]}>
                 <Link href = "/" activeClassName="active">
                     <a>

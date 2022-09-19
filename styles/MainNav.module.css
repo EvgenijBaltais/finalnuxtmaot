@@ -5,12 +5,24 @@
 }
 
 .nav-link {
+    display: inline-block;
     color: rgb(5, 117, 229);
     font-size: 16px;
+    border-bottom: 1px solid;
+    text-decoration: none;
 }
 
 .nav-link.active {
     color: #FF4B2C
+}
+
+.nav-link:hover {
+    color: transparent !important;
+    background-image: var(--red-linear-gradient);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    border-bottom: 1px solid #FF4B2C;
+    transition: 0.2s;
 }
 
 .nav-list {
@@ -24,16 +36,14 @@
 
 .nav-item:last-child .nav-link {
     position: relative;
-    padding-left: 25px;
+    margin-left: 28px;
     color: #929292;
 }
-
-
 
 .nav-item:last-child a:before {
     position: absolute;
     top: 2px;
-    left: 0;
+    left: -22px;
     content: "";
     width: 20px;
     height: 18px;
@@ -259,7 +269,12 @@
     }
 
     .nav-link {
-        font-size: 22px;
+        font-size: 20px;
+        font-weight: 100;
+        font-family: 'FontInterLight';
+        text-decoration: none;
+        display: inline-block;
+        border-bottom: 1px solid;
     }
 
     .mob-decor-line {
@@ -436,6 +451,7 @@
         display: block;
         width: 100%;
         min-height: 24px;
+        height: 100%;
         padding-left: 32px;
         font-size: 16px;
         line-height: 24px;

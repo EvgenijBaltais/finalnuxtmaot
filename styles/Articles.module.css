@@ -34,7 +34,8 @@
 }
 
 .left-nav-item {
-	padding-bottom:5px
+	padding-bottom:5px;
+	color: #0575e6;
 }
 
 .left-nav-item:last-child {
@@ -44,8 +45,10 @@
 .left-nav-link {
 	font-size: 15px;
 	line-height: 30px;
-	text-decoration: underline;
+	color: #0575e6;
+	text-decoration: none;
 	transition: 0.2s color;
+	font-weight: 400;
 }
 
 .left-nav-link:hover {
