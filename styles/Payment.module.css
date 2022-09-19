@@ -34,6 +34,7 @@
 }
 
 .left-nav-item {
+	color: #0575e6;
 	padding-bottom:5px
 }
 
@@ -44,13 +45,15 @@
 .left-nav-link {
 	font-size: 15px;
 	line-height: 30px;
-	text-decoration: underline;
+	color: #0575e6;
+	text-decoration: none;
 	transition: 0.2s color;
+	font-weight: 400;
 }
 
 .left-nav-list__sub {
 	list-style-type: disc;
-	padding-left: 25px
+	padding-left: 25px;
 }
 
 .left-nav-link:hover {
@@ -122,7 +125,7 @@
 .pay-icons {
 	display: flex;
 	justify-content: space-between;
-	padding: 50px 0;
+	padding: 0 0 50px 0;
 }
 
 .pay-card-list {
@@ -262,7 +265,7 @@
 .content-social-tg-rus {
 	display: block;
 	width: 45%;
-	height: 32px;
+	min-height: 32px;
 	margin-bottom: 22px;
 	padding-left: 40px;
 	font-size: 18px;
@@ -273,13 +276,13 @@
 	background-image: url('/icons/telegram.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
-	background-position: left center;
+	background-position: left top;
 }
 
 .content-social-tg-pdmsk {
 	display: block;
 	width: 55%;
-	height: 32px;
+	min-height: 32px;
 	margin-bottom: 22px;
 	padding-left: 40px;
 	font-size: 18px;
@@ -290,13 +293,13 @@
 	background-image: url('/icons/telegram.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
-	background-position: left center;
+	background-position: left top;
 }
 
 .content-social-vk {
 	display: block;
 	width: 100%;
-	height: 32px;
+	min-height: 32px;
 	padding-left: 40px;
 	font-size: 18px;
 	line-height: 30px;
@@ -306,7 +309,7 @@
 	background-image: url('/icons/vk.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
-	background-position: left center;
+	background-position: left top;
 }
 
 .content-copyright {
@@ -436,8 +439,12 @@
 		margin: 0;
 	}
 
+	.pay-left {
+		margin-bottom: 40px;
+	}
+
 	.left-nav-block {
-		padding: 25px 40px 10px 14px;
+		padding: 20px 40px 10px 14px;
 	    -webkit-box-shadow: var(--main-shadow);
 	    -moz-box-shadow: var(--main-shadow);
 	    box-shadow: var(--main-shadow);
@@ -457,12 +464,19 @@
 		z-index: 9;
 	}
 
+	.left-nav-item:first-child {
+		display: block;
+	}
+
 	.left-nav-item {
 		display: none;
 	}
 
 	.left-nav-link {
+		display: inline-block;
 		font-size: 16px;
+		line-height: 1.2;
+		margin: 5px 0;
 		text-decoration: none;
 		color: #4398eb;
 	}
@@ -481,9 +495,12 @@
 	.left-nav-block {
 		width: 100%;
 		height: auto;
-		min-height: 64px;
 		position: relative;
 		box-shadow: none;
+		margin-bottom: 0;
+	}
+
+	.left-nav-item:last-child {
 		margin-bottom: 0;
 	}
 
@@ -496,7 +513,7 @@
 		top: calc(100% - 10px);
 	    right: 0;
 	    left: 0;
-		padding: 0 14px 14px;
+		padding: 0 14px;
 	    box-shadow: 0 10px 8px 0 rgb(34 60 80 / 10%);
 		border-radius: 0 0 10px 10px;
 		background-color: #fff;
@@ -557,11 +574,17 @@
 		z-index: 10;
 	}
 
-	.active-nav-item {
-		display: inline-block;
-		font-size: 16px;
-		text-decoration: none;
-		color: #4398eb;
+	.left-ul-nav-list:before {
+	    content: "";
+	    text-align: right;
+	    position: absolute;
+	    top: -5px;
+	    right: 0;
+	    left: 0;
+	    height: 1.2em;
+	    background: linear-gradient(to top, rgba(255, 255, 255, 0), white 100%);
+	    pointer-events: none;
+	    z-index: 1;
 	}
 }
 
@@ -570,6 +593,7 @@
 	.pay-content {
 		margin-right: 0;
 		margin-left: 0;
+		padding-top: 80px;
 	}
 
 	.left-nav-item {
@@ -613,7 +637,7 @@
 	}
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 480px) {
 
 	.content-subscribe {
 		padding: 15px 10px;
@@ -656,8 +680,13 @@
 	.get-content-suscribe__submit {
 		padding: 0 10px 0 12px;
 	}
-.get-content-subscribe::-webkit-input-placeholder {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
-.get-content-subscribe::-moz-placeholder          {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
-.get-content-subscribe:-moz-placeholder           {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
-.get-content-subscribe:-ms-input-placeholder      {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+
+	.get-content-subscribe::-webkit-input-placeholder {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+	.get-content-subscribe::-moz-placeholder          {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+	.get-content-subscribe:-moz-placeholder           {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+	.get-content-subscribe:-ms-input-placeholder      {color: rgb(103,103,103);	font-size: 16px;line-height: 18px;}
+
+	.pay-icons {
+		padding-bottom: 30px;
+	}
 }

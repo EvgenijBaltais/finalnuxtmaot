@@ -29,21 +29,16 @@ const PaymentNav = () => {
 
     return (
 
-        <div className = {styles["pay-left-nav"]}>
+        <div className = {styles["pay-left-nav"]} onClick = {() => setVisibleList(visibleList => !visibleList)} >
             <h2 className="single-block-title left-block-bedroom">
                 Навигация
             </h2>
             <div className = {visibleList ? `${styles["left-nav-block"]} ${styles["active-list"]}` : styles["left-nav-block"]} ref={rootEl}>
                 <span className = {styles["top-nav-title"]}>Выберите статью</span>
-
-                    <div className = {styles["active-nav-item"]} onClick = {() => setVisibleList(visibleList => !visibleList)} >
-                        Платежи. Оплата банковской картой онлайн
-                    </div>
-
                     <div className = {styles["left-ul-nav-list"]}>
                     <ul className = {styles["left-nav-list"]}>
                         <li className = {styles["left-nav-item"]}>
-                            <a className = {styles["left-nav-link"]} href="">Платежи. Оплата банковской картой онлайн</a>
+                            <span className = {styles["left-nav-link"]} href="">Платежи. Оплата банковской картой онлайн</span>
                         </li>
                         <li className = {styles["left-nav-item"]}>
                             <a className = {styles["left-nav-link"]} href="">Гарантии Безопасности</a>
