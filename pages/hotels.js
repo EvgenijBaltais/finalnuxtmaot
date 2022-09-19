@@ -9,6 +9,8 @@ import styles from "../styles/search_results/Search_results.module.css"
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
+import Paginator from 'react-hooks-paginator';
+
 
 export default function Hotels () {
 
@@ -26,6 +28,11 @@ export default function Hotels () {
     const [sliderMax, setSliderMax] = useState(0)
     const [nodataText, setNodataText] = useState('')
     const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
+
+    const [itemsPerPage, setItemsPerPage] = useState(3)
+    
+    const [currentPage, setCurrentPage] = useState(1)
+    const [offset, setOffset] = useState(0)
 
     useEffect(() => {
 
@@ -71,7 +78,24 @@ export default function Hotels () {
            fetch(link)
                     .then((res) => res.json())
                     .then((res) => {
-                        setLoadedItems(res.data)
+
+                        let arr = []
+                        let page = []
+
+                        for (let i = 0; i < res.data.length; i++) {
+                            page.push(res.data[i])
+
+                            if (i % itemsPerPage == 0 && i != 0) {
+                                arr.push(page)
+                                page = []
+                            }
+
+                            if (i == res.data.length - 1) {
+                                arr.push(page)
+                            }
+                        }
+
+                        setLoadedItems(arr)
 
                 // определить минимум и максимум цен
 
@@ -180,6 +204,44 @@ export default function Hotels () {
         }
         return newArr
     }
+
+    function changePage (event) {
+        let change = setActivePage(+event.target.innerText - 1)
+    }
+
+    function prevPage (event) {
+        if (activePage == 0) return false
+        let val = activePage
+        setActivePage(val - 1)
+    }   
+
+    function nextPage (event) {
+        if (activePage == loadedItems.length - 1) return false
+        let val = activePage
+        setActivePage(val + 1)
+    }
+
+function body_lock() {
+
+	let body = document.body;
+	if (!body.classList.contains('scroll-locked')) {
+		let bodyScrollTop = (typeof window.pageYOffset !== 'undefined') ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+		body.classList.add('scroll-locked');
+		body.style.top = "-" + bodyScrollTop + "px";
+		body.setAttribute("data-popup-scrolltop", bodyScrollTop)
+	}
+}
+
+function body_unlock() {
+	let body = document.body;
+	if (body.classList.contains('scroll-locked')) {
+		let bodyScrollTop = document.body.getAttribute("data-popup-scrolltop");
+		body.classList.remove('scroll-locked');
+		body.style.top = "";
+		body.removeAttribute("data-popup-scrolltop")
+		window.scrollTo(0, bodyScrollTop)
+	}
+}
 
     useEffect(() => {
         from = document.querySelector('.aside-slider-from')
@@ -300,9 +362,10 @@ export default function Hotels () {
                 {nodataText ? <p className = "no-result">{nodataText}</p> : ''}
                 {isResearch ? <div className="waiting-fon"></div>: ''}
                     
+
                     {/* Вывод по поиску */}
                     {
-                        loadedItems.length && !filtersOn ? (loadedItems.map((item, index) => {
+                        loadedItems.length && !filtersOn ? (loadedItems[currentPage].map((item, index) => {
                             return (
                                 <Search_hotel_item key = {index} item = {item} nights = {nights} query = {query} />
                             )
@@ -310,7 +373,7 @@ export default function Hotels () {
                     }
                     
                     {/* Если выбраны фильтры */}
-                    {
+                    {/*
                         filtersOn && filteredItems.length ? (
 
                             filteredItems.map((item, index) => {
@@ -318,7 +381,20 @@ export default function Hotels () {
                                 <Search_hotel_item key = {index} item = {item} nights = {nights} />
                             )
                         })) : ''
-                    }
+                    */}
+
+                    <div className="search-pages-list">
+                        <Paginator
+                            totalRecords={loadedItems.length}
+                            pageLimit={9}
+                            pageNeighbours={3}
+                            setOffset={setOffset}
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                            pagePrevText = {'« Пред'}
+                            pageNextText = {'След »'}
+                        />
+                    </div>
                 </div>
             </section>
         </>
