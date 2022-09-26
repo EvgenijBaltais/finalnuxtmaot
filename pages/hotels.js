@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import AsideMainForm from "../components/AsideMainForm"
+import smoothscroll from 'smoothscroll-polyfill'
 
 import Search_hotel_item from "../components/search_results/Search_hotel_item"
 import styles from "../styles/search_results/Search_results.module.css"
@@ -9,7 +10,7 @@ import styles from "../styles/search_results/Search_results.module.css"
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-import Paginator from 'react-hooks-paginator';
+import ReactPaginate from 'react-paginate';
 
 
 export default function Hotels () {
@@ -29,10 +30,8 @@ export default function Hotels () {
     const [nodataText, setNodataText] = useState('')
     const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
 
-    const [itemsPerPage, setItemsPerPage] = useState(3)
-    
-    const [currentPage, setCurrentPage] = useState(1)
-    const [offset, setOffset] = useState(0)
+    const [itemsPerPage, setItemsPerPage] = useState(20)
+    const [currentPage, setCurrentPage] = useState(0)
 
     useEffect(() => {
 
@@ -205,22 +204,6 @@ export default function Hotels () {
         return newArr
     }
 
-    function changePage (event) {
-        let change = setActivePage(+event.target.innerText - 1)
-    }
-
-    function prevPage (event) {
-        if (activePage == 0) return false
-        let val = activePage
-        setActivePage(val - 1)
-    }   
-
-    function nextPage (event) {
-        if (activePage == loadedItems.length - 1) return false
-        let val = activePage
-        setActivePage(val + 1)
-    }
-
 function body_lock() {
 
 	let body = document.body;
@@ -242,6 +225,29 @@ function body_unlock() {
 		window.scrollTo(0, bodyScrollTop)
 	}
 }
+
+function findParent (el, cls) {
+	while ((el = el.parentElement) && !el.classList.contains(cls));
+	return el;
+}
+
+const handlePageClick = (event) => {
+
+    window.scrollTo({top: 0, behavior: 'smooth'})
+
+    setCurrentPage(event.selected)
+}
+
+function pageClick (event) {
+   // if (event.event.target.parentElement.classList.contains('selected')) {
+    //    window.scrollTo({top: 0, behavior: 'smooth'})
+    //}
+
+    let parent = findParent(event.event.target, 'search-result-right')
+
+    parent.style.height = parent.offsetHeight + 'px'
+}
+
 
     useEffect(() => {
         from = document.querySelector('.aside-slider-from')
@@ -357,7 +363,7 @@ function body_unlock() {
                         </div>
                     </div>
                 </div>
-                <div className = {styles["search-result-right"]}>
+                <div className = {`${styles["search-result-right"]} search-result-right`}>
 
                 {nodataText ? <p className = "no-result">{nodataText}</p> : ''}
                 {isResearch ? <div className="waiting-fon"></div>: ''}
@@ -373,7 +379,7 @@ function body_unlock() {
                     }
                     
                     {/* Если выбраны фильтры */}
-                    {/*
+                    {
                         filtersOn && filteredItems.length ? (
 
                             filteredItems.map((item, index) => {
@@ -381,19 +387,36 @@ function body_unlock() {
                                 <Search_hotel_item key = {index} item = {item} nights = {nights} />
                             )
                         })) : ''
-                    */}
+                    }
 
                     <div className="search-pages-list">
-                        <Paginator
-                            totalRecords={loadedItems.length}
-                            pageLimit={9}
-                            pageNeighbours={3}
-                            setOffset={setOffset}
-                            currentPage={currentPage}
-                            setCurrentPage={setCurrentPage}
-                            pagePrevText = {'« Пред'}
-                            pageNextText = {'След »'}
-                        />
+                    {loadedItems.length && !filtersOn ? 
+                        <ReactPaginate
+                            breakLabel="..."
+                            previousLabel="< Назад"
+                            nextLabel="Вперед >"
+                            onPageChange={event => handlePageClick(event)}
+                            selectedPageRel = {null}
+                            pageRangeDisplayed={5}
+                            pageCount={loadedItems.length}
+                            renderOnZeroPageCount={null}
+                            onClick = {event => pageClick(event)}
+                        /> : ''
+                    }
+
+                    {filtersOn && filteredItems.length ? 
+                        <ReactPaginate
+                            breakLabel="..."
+                            previousLabel="< Назад"
+                            nextLabel="Вперед >"
+                            onPageChange={event => handlePageClick(event)}
+                            selectedPageRel = {null}
+                            pageRangeDisplayed={5}
+                            pageCount={filteredItems.length}
+                            renderOnZeroPageCount={null}
+                            onClick = {event => pageClick(event)}
+                        /> : ''
+                    }
                     </div>
                 </div>
             </section>

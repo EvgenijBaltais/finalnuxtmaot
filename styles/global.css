@@ -1091,12 +1091,52 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Пагинация */
 
-.page-link {
-	cursor: pointer;
+.search-pages-list {
+	margin-top: 50px
 }
 
-.react-hooks-paginator {
-	margin-top: 50px!important
+.search-pages-list ul {
+	list-style-type: none;
+	display: flex;
+}
+
+.search-pages-list li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.search-pages-list li a {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	user-select: none;
+}
+
+.search-pages-list .selected {
+	background-color: #ccc;
+	border-radius: 50%;
+}
+
+.search-pages-list .previous a {
+	width: auto;
+	height: 30px;
+	display: inline-flex;
+	justify-content: space-around;
+	align-items: center;
+	margin-right: 10px;
+}
+
+.search-pages-list .next a {
+	width: auto;
+	height: 30px;
+	display: inline-flex;
+	justify-content: space-around;
+	align-items: center;
+	margin-left: 10px;
 }
 
 /* Пагинация, конец */
