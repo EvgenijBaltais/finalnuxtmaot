@@ -231,21 +231,22 @@ function findParent (el, cls) {
 	return el;
 }
 
-const handlePageClick = (event) => {
+const handlePageClick = (event, el) => {
+    
+    console.log(el)
 
     window.scrollTo({top: 0, behavior: 'smooth'})
-
     setCurrentPage(event.selected)
 }
 
-function pageClick (event) {
+function pageClick (event) {console.log(8888)
    // if (event.event.target.parentElement.classList.contains('selected')) {
     //    window.scrollTo({top: 0, behavior: 'smooth'})
     //}
 
-    let parent = findParent(event.event.target, 'search-result-right')
+    //let parent = findParent(event.event.target, 'search-result-right')
 
-    parent.style.height = parent.offsetHeight + 'px'
+    //parent.style.height = parent.offsetHeight + 'px'
 }
 
 
