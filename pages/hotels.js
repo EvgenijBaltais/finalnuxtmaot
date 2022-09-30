@@ -302,16 +302,16 @@ function pageClick (event) {console.log(8888)
                         </div>
                         <div className = "aside-slider">
                             <div className="slider-values">
-                                <div className="aside-slider-val aside-slider-left">
-                                    {sliderMin != 0 ?
+                                {sliderMin != 0 ?
+                                    <div className="aside-slider-val aside-slider-left">
                                         <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
-                                    : ''}
                                     </div>
-                                <div className="aside-slider-val aside-slider-right">
-                                    {sliderMax != 0 ?
+                                : ''}
+                                {sliderMax != 0 ?
+                                    <div className="aside-slider-val aside-slider-right">
                                         <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
-                                    : ''}
-                                </div>
+                                    </div>
+                                : ''}
                             </div>
                             {sliderMax != 0 ?
                                 <Slider
