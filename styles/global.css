@@ -107,6 +107,7 @@ body {
 	color: rgb(51,51,51);
 	font-size: 22px;
 	line-height: 24px;
+	font-weight: 500;
 }
 
 .success-title {
@@ -122,6 +123,7 @@ body {
 	color: rgb(51,51,51);
 	font-size: 22px;
 	line-height: 24px;
+	font-weight: 500;
 }
 
 .single-block-title {
@@ -130,6 +132,7 @@ body {
     font-size: 22px;
     line-height: 30px;
     text-decoration: none;
+    font-weight: 500;
     margin-right: 30px;
 	margin-bottom: 25px;
 }
@@ -252,6 +255,7 @@ input[type="checkbox"].substylized:not(:checked) + label {
 	font-size: 12px;
     line-height: 20px;
     cursor: pointer;
+    font-family: 'FontInterLight';
 	user-select: none;
 	color: rgb(51,51,51)
 }
@@ -413,6 +417,16 @@ input[type="checkbox"].substylized:checked + label:after {
 	display: flex;
 	padding: 55px 0 20px 0;
 	margin-top: 120px;
+	flex-wrap: wrap;
+}
+
+.footer-copyright {
+	margin-top: 2rem;
+	width: 100%;
+	font-size: 14px;
+	line-height: 1;
+	font-family: "FontInterLight";
+	text-align: center;
 }
 
 .footer:before {
@@ -429,6 +443,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .footer-title {
 	font-family: 'FontInterSemiBold';
+	font-weight: 500;
 	color: rgb(51,51,51);
 	font-size: 16px;
 	line-height: 24px;
@@ -437,6 +452,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .footer-col-title {
 	font-family: 'FontInterSemiBold';
+	font-weight: 500;
 	color: rgb(51,51,51);
 	font-size: 16px;
 	line-height: 24px;
@@ -445,6 +461,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .footer-title-small {
 	font-family: 'FontInterSemiBold';
+	font-weight: 500;
 	color: rgb(51,51,51);
 	font-size: 15px;
 	line-height: 24px;
@@ -513,6 +530,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	font-size: 15px;
 	line-height: 15px;
 	font-family: 'FontInterLight';
+	font-weight: 300;
 	text-decoration: underline;
 	margin-bottom: 15px;
 }
@@ -1220,7 +1238,7 @@ input[type="checkbox"].substylized:checked + label:after {
     }
 
     .footer-col-1 {
-    	width: 60%;
+    	width: 65%;
     }
     .footer-col-2 {
     	width: 30%;
@@ -1266,6 +1284,10 @@ input[type="checkbox"].substylized:checked + label:after {
     	font-size: 14px;
     }
 
+    .single-block-title {
+    	font-size: 18px;
+    }
+
 }
 
 @media screen and (max-width: 420px) {
@@ -1298,6 +1320,9 @@ input[type="checkbox"].substylized:checked + label:after {
 
     .main-h1 {
     	font-size: 2.5rem;
+    }
+    input[type="checkbox"].substylized:checked + label, input[type="checkbox"].substylized:not(:checked) + label {
+    	font-size: 10px;
     }
 }
 
@@ -1359,6 +1384,8 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .dont-know-way a {
+	font-family: 'FontInterLight';
+	font-weight: 100;
 	color: rgb(35,135,233);
 	text-decoration: underline;
 	cursor: pointer;
@@ -1400,6 +1427,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	line-height: 20px;
 	text-align: center;
 	cursor: pointer;
+	width: 100%;/*на firefox инпут растягивается без ширины*/
 }
 
 .direction-form-way .form-way-input {
@@ -2320,14 +2348,14 @@ input[type="checkbox"].substylized:checked + label:after {
     .mob-menu-active > .mob-burger span:nth-child(1) {
     	position: absolute;
     	top: 10px;
-    	transform: rotate(35deg);
+    	transform: rotate(45deg);
     	transition: 0.4s;
     }
 
     .mob-menu-active > .mob-burger span:nth-child(2) {
     	position: absolute;
     	top: 10px;
-    	transform: rotate(-35deg);
+    	transform: rotate(-45deg);
     	transition: 0.4s;
     }
 
@@ -2335,13 +2363,56 @@ input[type="checkbox"].substylized:checked + label:after {
     	position: absolute;
     	right: 10px;
 		width: 40px;
-		height: 36px;
+		height: 40px;
     	justify-content: flex-end;
 	}
 }
 
 @media screen and (max-width: 650px) {
 
+    .wrapper {
+    	margin: 0 auto;
+        padding: 0 1rem;
+        overflow: hidden;
+    }
+
+    .header {
+        margin: 10px 15px;
+    } 
+
+    .contact-page {
+    	padding: 0 !important;
+    }
+
+    .contact-page .section-title {
+    	width: 100%;
+    }
+
+    .contacts-y-map {
+    	width: 100%;
+    	height: 320px;
+    }
+
+    .map-swiper .swiper-slide {
+    	font-size: 22px;
+    }
+
+    .map-swiper .swiper-slide-active {
+    	width: 100%;
+    	transform: scale(1.8);
+    }
+
+    .main-h1 {
+        font-size: 4rem;
+    }
+
+    .single-block-title {
+        margin-right: 5px;
+    }
+    .left-block-bedroom{
+        background-size: 22px;
+        padding-left: 30px;
+    }
     .top-phone-corp {
         display: none;
     }
@@ -2561,6 +2632,16 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .hh-bg {
 	display: none;
+}
+
+.bg-fixed {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
 }
 
 .hhbg-fix {
@@ -3790,6 +3871,11 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 /* Форма подбора на странице отеля, конец */
+
+.aside-filter-btn {
+	display: none;
+}
+
 /* адаптив главной формы */
 @media screen and (max-width: 960px) {
 
@@ -3811,6 +3897,10 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 @media screen and (max-width: 860px) {
+
+	.search-page-main {
+		margin: 0 1rem;
+	}
 
 	.direction-form {
 		position: relative;
@@ -3857,13 +3947,183 @@ input[type="checkbox"].substylized:checked + label:after {
 	.form-way-input {
 		font-size: 16px;
 	}
+
+	.aside-block-title {
+		display: none;
+	}
+
+	.aside-filter-btn {
+		position: absolute;
+		display: block;
+		bottom: 0;
+		height: 62px;
+		line-height: 62px;
+		border-radius: 10px;
+		color: rgba(255,74,43,1);
+		padding: 0 10px 0 20px;
+		background-color: #fff;
+		box-shadow: var(--main-shadow);
+		cursor: pointer;
+	}
+
+	.aside-filter-btn:before {
+		content: "";
+		width: 30px;
+		height: 30px;
+		padding-top: 3px;
+		padding-bottom: 3px;
+		padding-right: 30px;
+		margin-right: 5px;
+		background: url(/images/filter.svg);
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+
+	.aside-filter {
+		display: none;
+	}
+}
+
+@media (min-width: 480px) and (max-width: 860px) {
+
+	.aside-selection-form {
+		position: relative;
+		width: 100%;
+		height: 88px;
+		background: var(--red-linear-gradient);
+		border-radius: 10px;
+	}
+	.aside-direction-form__inside {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		position: absolute;
+		top: 3px;
+		bottom: 3px;
+		right: 3px;
+		left: 3px;
+		margin: auto;
+		border-radius: 8px;
+		width: calc(100% - 6px);
+		height: 82px;
+		background: #fff;
+		padding: 15px;
+	}
+
+	.aside-direction-form-way {
+		margin: 0;
+		height: auto;
+		border: 0;
+	}
+
+	.aside-main-form {
+		position: relative;
+		height: 170px;
+	}
+
+	.aside-form-way-input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		margin: auto;
+		display: block;
+		outline: 0 !important;
+		border: 0 !important;
+		font-size: 16px;
+		line-height: 16px;
+		text-align: center;
+		text-indent: 0;
+		cursor: pointer;
+	}
+
+	.aside-search-dates {
+		display: flex;
+		width: 242px;
+	}
+
+	.aside-direction-form-in, .aside-direction-form-out {
+		width: 120px;
+		height: auto;
+		border: 0;
+		margin-bottom: 0;
+	}
+	.aside-form-way-input-out, .aside-form-way-input-in {
+		background-image: none;
+	}
+
+	.aside-direction-form-submit {
+		position: absolute;
+		top: 105px;
+		right: 0;
+		width: 32%;	
+	}
+
+	.aside-direction-form-people {
+		width: 170px;
+		height: auto;
+		border: none;
+		margin-bottom: 0;
+	}
+
+	.aside-direction-form-in::after, 
+	.aside-direction-form-out::after,
+	.aside-direction-form-way::after {
+	  position: absolute;
+	  right: 0;
+	  content: '';
+	  width: 2px;
+	  height: 100%;
+	  background: var(--red-linear-gradient);
+	  z-index: 2;
+	}
+
+	.aside-direction-form-in-active {
+		display: block;
+		position: absolute;
+		right: 0;
+		margin: auto;
+		left: -3px;
+		color: #fff;
+		font-size: 16px;
+		line-height: 82px;
+		width: calc(100% + 3px);
+		height: calc(100% + 30px);
+		background: var(--red-linear-gradient);
+		z-index: 2;
+		border-radius: 0;
+		cursor: pointer;
+	}
+
+	.aside-slider {
+		display: none;
+	}
+
+	.datepicker-w {
+		right: auto;
+		left: auto;
+	}
+
+	.direction-form-out > .datepicker-w  {
+		left: auto;
+		right: 0;
+	}
+
+	.guests-block-w {
+		left: auto;
+		width: calc(100% + 110px);
+	}
 }
 
 @media screen and (max-width: 650px) {
-	.main-form {
+
+	.main-form, .search-page-main, .footer {
 		margin-left: 0;
 		margin-right: 0;
 	}
+
 }
 
 @media screen and (max-width: 480px) {
@@ -3980,13 +4240,18 @@ input[type="checkbox"].substylized:checked + label:after {
 		z-index: 6;
 	}
 
-	.direction-form-in > .datepicker-w  {
-		left: 0;
+	.direction-form-out > .datepicker-w  {
+		left: auto;
 	}
 
 	.datepicker-w {
 		width: 213%;
+		top: 75px;
 		right: 0;
+		left: 0;
+	}
+
+	.aside-direction-form-out > .datepicker-w {
 		left: auto;
 	}
 
@@ -4026,6 +4291,77 @@ input[type="checkbox"].substylized:checked + label:after {
 		max-width: 320px;
 		margin: 0 auto;
 	}
+
+	.aside-direction-form-in, .aside-direction-form-out {
+		width: calc(50% - 10px);
+	}
+
+	.search-item-pics {
+		width: 100%;
+		height: 210px;
+	}
+
+	.aside-filter-btn {
+		position: relative;
+		margin-top: 16px;
+		width: 55%;
+	}
+
+	.aside-filter-btn {
+		padding: 0 20px;
+	}
 }
 
 /* адаптив главной формы, конец */
+
+
+@media screen and (max-width: 420px) {
+
+	.left-nav-block {
+		width: calc(100% - 135px);
+	}
+
+	.left-nav-list:before {
+		right: 5px;
+	}
+
+	.single-block-title:first-child {
+		/*margin-bottom: 45px;*/
+	}
+
+	.hoteldetail-swiper .hotel-slider__item {
+		height: 40px;
+		width: 65px;
+	}
+
+	.main-h1 {
+		font-size: 2.5rem;
+	}
+
+	.datepicker-body {
+		padding: 0 0.5rem;
+	}
+
+	.aside-filter-btn, .aside-direction-form-btn {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 350px) {
+
+	.datepicker-body  {
+		padding: 0;
+	}
+
+	.month-calendar {
+		min-width: 260px;
+	}
+	.days-list__item {
+		width: 36px;
+	}
+	.date-link {
+		width: 30px;
+    height: 30px;
+    line-height: 30px;
+	}
+}

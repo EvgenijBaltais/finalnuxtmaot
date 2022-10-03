@@ -9,6 +9,13 @@
 	box-shadow: var(--main-shadow);
 }
 
+.subscribe-section h2 {
+
+	font-size: 22px;
+	font-family: 'FontInterSemiBold';
+	font-weight: 500;
+}
+
 .subscribe-form-w {
 	width: calc(50% - 10px);
 }
@@ -166,6 +173,8 @@
 	.subscribe-section {
 		flex-direction: column;
 		padding: 16px;
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.subscribe-form-w {
@@ -173,7 +182,6 @@
 	}
 
 	.subscribe-section h2 {
-		font-size: 22px;
 	}
 
 	.subscribe-social {
@@ -189,16 +197,19 @@
 		height: auto;
 		min-height: 32px;
 		font-size: 16px;
+		font-weight: 400;
 		line-height: 1.2;
 		padding-top: 5px;
 		background-position: left top;
 	}
 	.social-tg-rus {
 		font-size: 16px;
+		font-weight: 400;
 	}
 
 	.social-tg-pdmsk {
 		font-size: 16px;
+		font-weight: 400;
 	}
 }
 
@@ -214,7 +225,7 @@
 	}
 
 	.subscribe-section h2 {
-		font-size: 18px;
+		font-size: 16px;
 	}
 
 	.subscribe-social-block  {

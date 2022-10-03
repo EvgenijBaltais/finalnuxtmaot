@@ -94,11 +94,11 @@
 	display: flex;
 	flex-direction: column;
 	width: calc(100% - 105px);
-	height: 85px;
+	height: 80%;
 }
 
 .popular-item__adress {
-	margin-top: 14px;
+	margin-top: 7px;
 	font-size: 12px;
 	line-height: 1.2;
 }
@@ -266,6 +266,7 @@
 
 	.popular-item-content {
 		width: calc(100% - 125px);
+		height: 100%;
 	}
 
 }

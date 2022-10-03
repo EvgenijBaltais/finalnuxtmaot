@@ -56,7 +56,7 @@
 
 .aside-block {
 	position: relative;
-	padding-bottom: 40px
+	padding-bottom: 40px;
 }
 
 .search-result-right {
@@ -92,17 +92,32 @@
 	background-image: url('/images/star.svg');
 }
 
-
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 860px) {
 	.search-result-w {
 		flex-direction: column;
 	}
+
 	.search-result-left, .search-result-right {
 		width: auto;
 	}
 
+	.search-result-left-w {
+		background: transparent;
+		position: relative;
+	}
+
+	.search-result-left {
+		position: relative;
+		padding: 0;
+		background: transparent;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
 	.search-result-right {
 		margin-top: 55px;
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.search-item-pic {
@@ -141,6 +156,11 @@
 	.search-item__price-from {
 		line-height: 24px;
 	}
+
+	.aside-block {
+		padding-bottom: 0;
+	}
+
 }
 
 @media screen and (max-width: 480px) {
@@ -198,6 +218,7 @@
 	.search-rate__reviews {
 		padding-right: 1rem;
 	}
+
 }
 
 @media screen and (max-width: 320px) {

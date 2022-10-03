@@ -7,11 +7,11 @@ const Footer = () => {
 				<div className = "footer-phones">
 					<div className = "footer-phones__item">
 						<a href="+74956486711" className = "footer-phone">+7 495 648 67 11</a>
-						<span className = "footer-phone-info">&nbsp;Для частных лиц</span>
+						<span className = "footer-phone-info"> Для&nbsp;частных&nbsp;лиц</span>
 					</div>
 					<div className = "footer-phones__item">
 						<a href="+74956624928" className = "footer-phone">+7 495 662 49 28</a>
-						<span className = "footer-phone-info">&nbsp;Корпоративный отдел</span>
+						<span className = "footer-phone-info"> Корпоративный&nbsp;отдел</span>
 					</div>
 				</div>
 				<div className = "working-time">
@@ -51,6 +51,8 @@ const Footer = () => {
 					<div className = "payment-method payment-method-prom"></div>
 				</div>
 			</div>
+
+			<div className = "footer-copyright">&#169; 2004-2022 МАОТ</div>
 		</footer>
     )
 }

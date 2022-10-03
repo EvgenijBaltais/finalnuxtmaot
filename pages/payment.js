@@ -4,12 +4,13 @@ import MediaQuery from 'react-responsive'
 import styles from "../styles/Payment.module.css"
 
 import MainForm from "../components/MainForm"
+import PaymentNav from "../components/PaymentNav"
 
 import Image from "next/image"
 
-import Pay1 from '/public/images/pay-1.jpg'
-import Pay2 from '/public/images/pay-2.jpg'
-import Pay3 from '/public/images/pay-3.jpg'
+import Pay1 from '/public/images/pay-1.png'
+import Pay2 from '/public/images/pay-2.png'
+import Pay3 from '/public/images/pay-3.png'
 
 class Payment extends React.Component {
 
@@ -35,59 +36,7 @@ render() {
 
             <section className = {styles["pay-content"]}>
                 <div className = {styles["pay-left"]}>
-                    <div className = {styles["pay-left-nav"]}>
-                        <h2 className="single-block-title left-block-bedroom">
-                            Навигация
-                        </h2>
-                        <div className = {styles["left-nav-block"]}>
-                            <ul className = {styles["left-nav-list"]}>
-                                <li className = {styles["left-nav-item"]}>
-                                    <a className = {styles["left-nav-link"]} href="">Платежи. Оплата банковской картой онлайн</a>
-                                </li>
-                                <li className = {styles["left-nav-item"]}>
-                                    <a className = {styles["left-nav-link"]} href="">Гарантии Безопасности</a>
-                                </li>
-                                <li className = {styles["left-nav-item"]}>
-                                    <a className = {styles["left-nav-link"]} href="">Безопасность Онлайн Платежей</a>
-                                </li>
-                                <li className = {styles["left-nav-item"]}>
-                                    <a className = {styles["left-nav-link"]} href="">Возврат Товаров</a>
-                                </li>
-                                <li className = {styles["left-nav-item"]}>
-                                    <a className = {styles["left-nav-link"]} href="">Конфиденциальность</a>
-                                    <ul className={styles["left-nav-list__sub"]}>
-                                        <li className = {styles["left-nav-item"]}>
-                                            <a href="" className = {styles["left-nav-link"]}>Определения</a>
-                                        </li>
-                                        <li className = {styles["left-nav-item"]}>
-                                            <a href="" className = {styles["left-nav-link"]}>Использование информации</a>
-                                        </li>
-                                        <li className = {styles["left-nav-item"]}>
-                                            <a href="" className = {styles["left-nav-link"]}>Ссылки</a>
-                                        </li>
-                                        <li className = {styles["left-nav-item"]}>
-                                            <a href="" className = {styles["left-nav-link"]}>Ограничение ответственности</a>
-                                        </li>
-                                        <li className = {styles["left-nav-item"]}>
-                                            <a href="" className = {styles["left-nav-link"]}>Контакты</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className = {styles["left-nav-item"]}>
-                                    <a className = {styles["left-nav-link"]} href="">Проведение операции оплаты товаров/услуг в сети интернет</a>
-                                </li>
-                                <li className = {styles["left-nav-item"]}>
-                                    <a className = {styles["left-nav-link"]} href="">Отмена операции оплаты товаров/услуг в интернете</a>
-                                </li>
-                                <li className = {styles["left-nav-item"]}>
-                                    <a className = {styles["left-nav-link"]} href="">Операция возврата товара (отказа от услуг), оплаченных картой в сети интернет.</a>
-                                </li>
-                                <li className = {styles["left-nav-item"]}>
-                                    <a className = {styles["left-nav-link"]} href="">Юридическое лицо</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <PaymentNav />
                 </div>
                 <div className = {styles["pay-right"]}>
                     <h2 className="single-block-title">
@@ -209,10 +158,10 @@ render() {
                                 <form action="" name = {styles["content-subscribe-form"]}>
                                     <div className = {styles["content-subscribe-form"]}>
                                         <div className={styles["content-subscribe-form-inside"]}>
-                                            <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свою электронную почту"/>
+                                            <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свой Email"/>
                                             <div className = {styles["get-content-suscribe-btn"]}>
                                                 <button className = {styles["get-content-suscribe__submit"]}>
-                                                    <MediaQuery maxWidth={420}>
+                                                    <MediaQuery maxWidth={460}>
                                                         {(matches) =>
                                                             matches
                                                               ? <span className={styles["icon-subscribe-inside"]}></span>
@@ -292,37 +241,6 @@ render() {
                         <p className = {styles["pay-page-content__text"]}>Обработка успешно авторизованных операций осуществляется автоматически
                             не позднее следующего рабочего дня за днем совершения операции.</p>
 
-
-                            <div className = {styles["between-populars-items"]}>
-
-                                <h2 className = "section-title left-block-bedroom">Популярные отели России</h2>
-                                <div className = {styles["popular-items"]}>
-                                    <div className = {styles["popular-item"]}>
-                                        <a href="" className = {styles["popular-item__name"]}>Bridge Resort (Сочи)</a>
-                                        <span className = {styles["popular-item__price"]}>от 4 500 &#8381;</span>
-                                    </div>
-                                    <div className = {styles["popular-item"]}>
-                                        <a href="" className = {styles["popular-item__name"]}>Bridge Resort (Сочи)</a>
-                                        <span className = {styles["popular-item__price"]}>от 4 500 &#8381;</span>
-                                    </div>
-                                    <div className = {styles["popular-item"]}>
-                                        <a href="" className = {styles["popular-item__name"]}>Bridge Resort (Сочи)</a>
-                                        <span className = {styles["popular-item__price"]}>от 4 500 &#8381;</span>
-                                    </div>
-                                    <div className = {styles["popular-item"]}>
-                                        <a href="" className = {styles["popular-item__name"]}>Bridge Resort (Сочи)</a>
-                                        <span className = {styles["popular-item__price"]}>от 4 500 &#8381;</span>
-                                    </div>
-                                    <div className = {styles["popular-item"]}>
-                                        <a href="" className = {styles["popular-item__name"]}>Bridge Resort (Сочи)</a>
-                                        <span className = {styles["popular-item__price"]}>от 4 500 &#8381;</span>
-                                    </div>
-                                    <div className = {styles["popular-item"]}>
-                                        <a href="" className = {styles["popular-item__name"]}>Bridge Resort (Сочи)</a>
-                                        <span className = {styles["popular-item__price"]}>от 4 500 &#8381;</span>
-                                    </div>
-                                </div>
-                            </div>
 
                         <h2 className="single-block-title">
                             Отмена операции оплаты товаров/услуг в интернете
