@@ -10,8 +10,7 @@ import styles from "../styles/search_results/Search_results.module.css"
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
-import ReactPaginate from 'react-paginate';
-
+import Pagination from "../components/Pagination"
 
 export default function Hotels () {
 
@@ -28,10 +27,10 @@ export default function Hotels () {
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
     const [nodataText, setNodataText] = useState('')
-    const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
-
-    const [itemsPerPage, setItemsPerPage] = useState(20)
+    const [itemsPerPage, setItemsPerPage] = useState(3)
     const [currentPage, setCurrentPage] = useState(0)
+    const [reload, setReload] = useState(0)
+    const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
 
     useEffect(() => {
 
@@ -78,23 +77,8 @@ export default function Hotels () {
                     .then((res) => res.json())
                     .then((res) => {
 
-                        let arr = []
-                        let page = []
-
-                        for (let i = 0; i < res.data.length; i++) {
-                            page.push(res.data[i])
-
-                            if (i % itemsPerPage == 0 && i != 0) {
-                                arr.push(page)
-                                page = []
-                            }
-
-                            if (i == res.data.length - 1) {
-                                arr.push(page)
-                            }
-                        }
-
-                        setLoadedItems(arr)
+                setLoadedItems(paginateItems(res.data))
+                console.log(paginateItems(res.data))
 
                 // определить минимум и максимум цен
 
@@ -112,6 +96,32 @@ export default function Hotels () {
 
     }, [query])
 
+    // Функция смены страницы
+
+    function changeCurrentPage (value) {
+        setCurrentPage(value)
+    }
+
+    // Функция для разбивки данных на страницы
+    function paginateItems (items) {
+
+        let arr = []
+        let page = []
+
+        for (let i = 0; i < items.length; i++) {
+            page.push(items[i])
+
+            if (i % itemsPerPage == 0) {
+                arr.push(page)
+                page = []
+            }
+
+            if (i == items.length - 1) {
+                arr.push(page)
+            }
+        }
+        return arr
+    }
 
     // Функция для определения количества ночей для дат в формате гг-мм.дд
 
@@ -137,19 +147,26 @@ export default function Hotels () {
     const showVariants = () => {
 
         setNodataText('')
+        setCurrentPage(0)
         let res = applyFilters(loadedItems)
 
         res.length == 0 ? setNodataText('Не удалось ничего найти. Попробуйте изменить условия поиска') : ''
 
         setIsResearch(true)
         setFiltersOn(true)
-        setFilteredItems(res)
+        setFilteredItems(paginateItems(res))
         setIsResearch(false)
     }
 
     function applyFilters(items) {
 
-        const arr = items
+        const arr = []
+
+        for (let i = 0; i < items.length; i++) {
+            for (let k = 0; k < items[i].length; k++) {
+                arr.push(items[i][k])
+            }
+        }
 
         // Минимальная и максимальная цена
 
@@ -201,6 +218,7 @@ export default function Hotels () {
                 newArr.push(arr[i])
             }
         }
+
         return newArr
     }
 
@@ -239,7 +257,7 @@ const handlePageClick = (event, el) => {
     setCurrentPage(event.selected)
 }
 
-function pageClick (event) {console.log(8888)
+function pageClick (event) {
    // if (event.event.target.parentElement.classList.contains('selected')) {
     //    window.scrollTo({top: 0, behavior: 'smooth'})
     //}
@@ -276,6 +294,36 @@ function pageClick (event) {console.log(8888)
             setPopularWays(res.data)
         })
     }, [])
+
+    function pagination(c, m) {
+        var current = c,
+            last = m,
+            delta = 5,
+            left = current - delta,
+            right = current + delta + 1,
+            range = [],
+            rangeWithDots = [],
+            l;
+    
+        for (let i = 1; i <= last; i++) {
+            if (i == 1 || i == last || i >= left && i < right) {
+                range.push(i)
+            }
+        }
+    
+        for (let i of range) {
+            if (l) {
+                if (i - l === 2) {
+                    rangeWithDots.push(l + 1)
+                } else if (i - l !== 1) {
+                    rangeWithDots.push('...')
+                }
+            }
+            rangeWithDots.push(i)
+            l = i
+        }
+        return rangeWithDots
+    }
 
     return (
         <>
@@ -372,7 +420,8 @@ function pageClick (event) {console.log(8888)
 
                     {/* Вывод по поиску */}
                     {
-                        loadedItems.length && !filtersOn ? (loadedItems[currentPage].map((item, index) => {
+                        loadedItems.length && !filtersOn ? (
+                            loadedItems[currentPage].map((item, index) => {
                             return (
                                 <Search_hotel_item key = {index} item = {item} nights = {nights} query = {query} />
                             )
@@ -381,9 +430,8 @@ function pageClick (event) {console.log(8888)
                     
                     {/* Если выбраны фильтры */}
                     {
-                        filtersOn && filteredItems.length ? (
-
-                            filteredItems.map((item, index) => {
+                        filteredItems.length && filtersOn ? (
+                            filteredItems[currentPage].map((item, index) => {
                             return (
                                 <Search_hotel_item key = {index} item = {item} nights = {nights} />
                             )
@@ -391,33 +439,21 @@ function pageClick (event) {console.log(8888)
                     }
 
                     <div className="search-pages-list">
-                    {loadedItems.length && !filtersOn ? 
-                        <ReactPaginate
-                            breakLabel="..."
-                            previousLabel="< Назад"
-                            nextLabel="Вперед >"
-                            onPageChange={event => handlePageClick(event)}
-                            selectedPageRel = {null}
-                            pageRangeDisplayed={5}
-                            pageCount={loadedItems.length}
-                            renderOnZeroPageCount={null}
-                            onClick = {event => pageClick(event)}
-                        /> : ''
-                    }
-
-                    {filtersOn && filteredItems.length ? 
-                        <ReactPaginate
-                            breakLabel="..."
-                            previousLabel="< Назад"
-                            nextLabel="Вперед >"
-                            onPageChange={event => handlePageClick(event)}
-                            selectedPageRel = {null}
-                            pageRangeDisplayed={5}
-                            pageCount={filteredItems.length}
-                            renderOnZeroPageCount={null}
-                            onClick = {event => pageClick(event)}
-                        /> : ''
-                    }
+                        {loadedItems.length && !filtersOn ? 
+                            <Pagination
+                                pages = {pagination(currentPage, loadedItems.length)}
+                                currentPage = {currentPage}
+                                changeCurrentPage = {changeCurrentPage}
+                            />: ''
+                        }
+                        
+                        {filteredItems.length && filtersOn ? 
+                            <Pagination
+                                pages = {pagination(currentPage, loadedItems.length)}
+                                currentPage = {currentPage}
+                                changeCurrentPage = {changeCurrentPage}
+                            />: ''
+                        }
                     </div>
                 </div>
             </section>

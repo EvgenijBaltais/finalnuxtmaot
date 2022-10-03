@@ -1109,8 +1109,54 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Пагинация */
 
+.pagination-w {
+	display: inline-block;
+	position: relative;
+}
+
+.pagination-list-before {
+	width: 30px;
+	height: 30px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	left: -50px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	background-color: #ccc;
+	color: #000;
+	font-size: 20px;
+	line-height: 30px;
+	border-radius: 50%;
+	cursor: pointer;
+	user-select: none;
+}
+
+.pagination-list-after {
+	width: 30px;
+	height: 30px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	right: -50px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	background-color: #ccc;
+	color: #000;
+	font-size: 20px;
+	line-height: 30px;
+	border-radius: 50%;
+	cursor: pointer;
+	user-select: none;
+}
+
 .search-pages-list {
-	margin-top: 50px
+	margin-top: 50px;
+	margin-left: 50px;
 }
 
 .search-pages-list ul {
