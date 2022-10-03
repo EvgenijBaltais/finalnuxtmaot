@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import AsideMainForm from "../components/AsideMainForm"
+import smoothscroll from 'smoothscroll-polyfill'
 
 import Search_hotel_item from "../components/search_results/Search_hotel_item"
 import styles from "../styles/search_results/Search_results.module.css"
 
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
+
+import ReactPaginate from 'react-paginate';
 
 
 export default function Hotels () {
@@ -26,6 +29,9 @@ export default function Hotels () {
     const [sliderMax, setSliderMax] = useState(0)
     const [nodataText, setNodataText] = useState('')
     const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
+
+    const [itemsPerPage, setItemsPerPage] = useState(20)
+    const [currentPage, setCurrentPage] = useState(0)
 
     useEffect(() => {
 
@@ -71,7 +77,24 @@ export default function Hotels () {
            fetch(link)
                     .then((res) => res.json())
                     .then((res) => {
-                        setLoadedItems(res.data)
+
+                        let arr = []
+                        let page = []
+
+                        for (let i = 0; i < res.data.length; i++) {
+                            page.push(res.data[i])
+
+                            if (i % itemsPerPage == 0 && i != 0) {
+                                arr.push(page)
+                                page = []
+                            }
+
+                            if (i == res.data.length - 1) {
+                                arr.push(page)
+                            }
+                        }
+
+                        setLoadedItems(arr)
 
                 // определить минимум и максимум цен
 
@@ -181,6 +204,52 @@ export default function Hotels () {
         return newArr
     }
 
+function body_lock() {
+
+	let body = document.body;
+	if (!body.classList.contains('scroll-locked')) {
+		let bodyScrollTop = (typeof window.pageYOffset !== 'undefined') ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
+		body.classList.add('scroll-locked');
+		body.style.top = "-" + bodyScrollTop + "px";
+		body.setAttribute("data-popup-scrolltop", bodyScrollTop)
+	}
+}
+
+function body_unlock() {
+	let body = document.body;
+	if (body.classList.contains('scroll-locked')) {
+		let bodyScrollTop = document.body.getAttribute("data-popup-scrolltop");
+		body.classList.remove('scroll-locked');
+		body.style.top = "";
+		body.removeAttribute("data-popup-scrolltop")
+		window.scrollTo(0, bodyScrollTop)
+	}
+}
+
+function findParent (el, cls) {
+	while ((el = el.parentElement) && !el.classList.contains(cls));
+	return el;
+}
+
+const handlePageClick = (event, el) => {
+    
+    console.log(el)
+
+    window.scrollTo({top: 0, behavior: 'smooth'})
+    setCurrentPage(event.selected)
+}
+
+function pageClick (event) {console.log(8888)
+   // if (event.event.target.parentElement.classList.contains('selected')) {
+    //    window.scrollTo({top: 0, behavior: 'smooth'})
+    //}
+
+    //let parent = findParent(event.event.target, 'search-result-right')
+
+    //parent.style.height = parent.offsetHeight + 'px'
+}
+
+
     useEffect(() => {
         from = document.querySelector('.aside-slider-from')
         to = document.querySelector('.aside-slider-to')
@@ -231,82 +300,79 @@ export default function Hotels () {
                                 popularWays = {popularWays}
                             />
                         </div>
-                        <div className = "aside-filter-btn">Показать&nbsp;фильтры</div>
-
-                        <div className = "aside-filter">
-                            <div className = "aside-slider">
-                                <div className="slider-values">
+                        <div className = "aside-slider">
+                            <div className="slider-values">
+                                {sliderMin != 0 ?
                                     <div className="aside-slider-val aside-slider-left">
-                                        {sliderMin != 0 ?
-                                            <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
-                                        : ''}
-                                        </div>
-                                    <div className="aside-slider-val aside-slider-right">
-                                        {sliderMax != 0 ?
-                                            <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
-                                        : ''}
+                                        <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
                                     </div>
-                                </div>
+                                : ''}
                                 {sliderMax != 0 ?
-                                    <Slider
-                                        step = {1}
-                                        range
-                                        defaultValue={[sliderMin, sliderMax]}
-                                        min={0}
-                                        max={(sliderMax + 10000)}
-                                        onChange={value => renewValues(value)}
-                                        onAfterChange = {() => showVariants()}
-                                    /> :  ''
-                                }
-                            </div>
-                            <div className = {styles["aside-block"]}>
-                                <h3 className = "aside-block-title">Типы питания</h3>
-                                {foodTypes.map((item, index) => {
-                                  return (
-                                    <div key = {index} className = {styles["aside-checkbox"]}>
-                                        <input type="checkbox" id={`checkbox-1${index + 1}`} className = "stylized food-checkbox" onChange={() => showVariants()} /> 
-                                        <label htmlFor={`checkbox-1${index + 1}`}>{item}</label>
+                                    <div className="aside-slider-val aside-slider-right">
+                                        <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
                                     </div>
-                                  )  
-                                })}
+                                : ''}
                             </div>
-                            <div className = {styles["aside-block"]}>
-                                <h3 className = "aside-block-title">Звездность</h3>
-                                {
-                                    [...Array(5)].map((e, i) => {
-                                        return (
-                                            <div key = {i} className = {styles["aside-checkbox"]}>
-                                                <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={() => showVariants()} />
-                                                <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-2${i + 1}`}>
-                                                    <ul className = {styles["aside-stars-list"]}>
-                                                        {[...Array(i + 1)].map((el, ind) => {
-                                                            return (
-                                                                <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                                            )
-                                                        })}
-                                                        {[...Array(5 - (i + 1))].map((el, ind) => {
-                                                            return (
-                                                                <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
-                                                            )
-                                                        })}
-                                                    </ul>
-                                                </label>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
+                            {sliderMax != 0 ?
+                                <Slider
+                                    step = {1}
+                                    range
+                                    defaultValue={[sliderMin, sliderMax]}
+                                    min={0}
+                                    max={(sliderMax + 10000)}
+                                    onChange={value => renewValues(value)}
+                                    onAfterChange = {() => showVariants()}
+                                /> :  ''
+                            }
+                        </div>
+                        <div className = {styles["aside-block"]}>
+                            <h3 className = "aside-block-title">Типы питания</h3>
+                            {foodTypes.map((item, index) => {
+                              return (
+                                <div key = {index} className = {styles["aside-checkbox"]}>
+                                    <input type="checkbox" id={`checkbox-1${index + 1}`} className = "stylized food-checkbox" onChange={() => showVariants()} /> 
+                                    <label htmlFor={`checkbox-1${index + 1}`}>{item}</label>
+                                </div>
+                              )  
+                            })}
+                        </div>
+                        <div className = {styles["aside-block"]}>
+                            <h3 className = "aside-block-title">Звездность</h3>
+                            {
+                                [...Array(5)].map((e, i) => {
+                                    return (
+                                        <div key = {i} className = {styles["aside-checkbox"]}>
+                                            <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={() => showVariants()} />
+                                            <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-2${i + 1}`}>
+                                                <ul className = {styles["aside-stars-list"]}>
+                                                    {[...Array(i + 1)].map((el, ind) => {
+                                                        return (
+                                                            <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
+                                                        )
+                                                    })}
+                                                    {[...Array(5 - (i + 1))].map((el, ind) => {
+                                                        return (
+                                                            <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
+                                                        )
+                                                    })}
+                                                </ul>
+                                            </label>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>
-                <div className = {styles["search-result-right"]}>
+                <div className = {`${styles["search-result-right"]} search-result-right`}>
 
                 {nodataText ? <p className = "no-result">{nodataText}</p> : ''}
                 {isResearch ? <div className="waiting-fon"></div>: ''}
                     
+
                     {/* Вывод по поиску */}
                     {
-                        loadedItems.length && !filtersOn ? (loadedItems.map((item, index) => {
+                        loadedItems.length && !filtersOn ? (loadedItems[currentPage].map((item, index) => {
                             return (
                                 <Search_hotel_item key = {index} item = {item} nights = {nights} query = {query} />
                             )
@@ -323,6 +389,36 @@ export default function Hotels () {
                             )
                         })) : ''
                     }
+
+                    <div className="search-pages-list">
+                    {loadedItems.length && !filtersOn ? 
+                        <ReactPaginate
+                            breakLabel="..."
+                            previousLabel="< Назад"
+                            nextLabel="Вперед >"
+                            onPageChange={event => handlePageClick(event)}
+                            selectedPageRel = {null}
+                            pageRangeDisplayed={5}
+                            pageCount={loadedItems.length}
+                            renderOnZeroPageCount={null}
+                            onClick = {event => pageClick(event)}
+                        /> : ''
+                    }
+
+                    {filtersOn && filteredItems.length ? 
+                        <ReactPaginate
+                            breakLabel="..."
+                            previousLabel="< Назад"
+                            nextLabel="Вперед >"
+                            onPageChange={event => handlePageClick(event)}
+                            selectedPageRel = {null}
+                            pageRangeDisplayed={5}
+                            pageCount={filteredItems.length}
+                            renderOnZeroPageCount={null}
+                            onClick = {event => pageClick(event)}
+                        /> : ''
+                    }
+                    </div>
                 </div>
             </section>
         </>

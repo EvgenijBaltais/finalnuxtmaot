@@ -93,13 +93,12 @@
 }
 
 @media screen and (max-width: 860px) {
-
 	.search-result-w {
 		flex-direction: column;
 	}
 
 	.search-result-left, .search-result-right {
-		width: 100%;
+		width: auto;
 	}
 
 	.search-result-left-w {

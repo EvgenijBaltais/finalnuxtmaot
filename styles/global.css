@@ -68,6 +68,14 @@ body {
 	min-height: 1100px;
 }
 
+.scroll-locked {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
 /* Зеленый градиент на страницах сверху. На разных страницах в разных местах */
 
 .main-page:after,
@@ -95,7 +103,7 @@ body {
 
 .section-title {
 	padding-left: 40px;
-	font-family: 'FontInterSemiBold';
+	font-family: 'FontInterBold';
 	color: rgb(51,51,51);
 	font-size: 22px;
 	line-height: 24px;
@@ -111,7 +119,7 @@ body {
 }
 
 .section-title-sub {
-	font-family: 'FontInterSemiBold';
+	font-family: 'FontInterBold';
 	color: rgb(51,51,51);
 	font-size: 22px;
 	line-height: 24px;
@@ -120,9 +128,9 @@ body {
 
 .single-block-title {
 	color: rgb(51, 51, 51);
-	font-family: 'FontInterSemiBold';
+	font-family: 'FontInterBold';
     font-size: 22px;
-    line-height: 24px;
+    line-height: 30px;
     text-decoration: none;
     font-weight: 500;
     margin-right: 30px;
@@ -245,7 +253,7 @@ input[type="checkbox"].substylized:not(:checked) + label {
     position: relative;
     padding-left: 25px;
 	font-size: 12px;
-    line-height: 1.6;
+    line-height: 20px;
     cursor: pointer;
     font-family: 'FontInterLight';
 	user-select: none;
@@ -518,9 +526,9 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .footer-place-item {
 	display: block;
-	color: rgb(5, 117, 229);
-	font-size: 16px;
-	line-height: 16px;
+	color:#333;
+	font-size: 15px;
+	line-height: 15px;
 	font-family: 'FontInterLight';
 	font-weight: 300;
 	text-decoration: underline;
@@ -530,18 +538,17 @@ input[type="checkbox"].substylized:checked + label:after {
 .footer-social-item {
 	display: flex;
 	align-items: flex-start;
-	min-height: 25px;
+	height: 25px;
 	margin-bottom: 10px;
 	padding-left: 35px;
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 20px;
 	text-decoration: underline;
 	background-repeat: no-repeat;
-	background-position: top left;
+	background-position: center left;
 	background-size: 25px;
 	font-family: 'FontInter';
-	font-weight: 400;
-	color: rgb(5, 117, 229);
+	color: #333;
 
 }
 
@@ -566,7 +573,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .payment-method {
 	display: flex;
-	background-size: contain;
+	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
 }
@@ -783,16 +790,80 @@ input[type="checkbox"].substylized:checked + label:after {
 	z-index: 5;
 	cursor: pointer;
 }
-/*
-.search-item-pics {
+
+.select-search-item-pics {
 	width: 100%;
 	height: 100%;
-}*/
+	position: relative;
+}
 
-.search-item-pics .swiper-slide {
+.select-search-item-pics .swiper-slide {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
+}
+
+.select-search-item-pics .swiper-button-prev {
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	bottom: 0;
+	left: 10px;
+	top: 0;
+	margin: auto;
+	border-radius: 50%;
+	background-color: rgba(0,0,0,.5);
+	z-index: 5;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 14px;
+	background-image: url('/icons/white-left.svg');
+	cursor: pointer;
+}
+
+.select-search-item-pics .swiper-button-next {
+	width: 35px;
+	height: 35px;
+	position: absolute;
+	bottom: 0;
+	right: 10px;
+	top: 0;
+	margin: auto;
+	border-radius: 50%;
+	background-color: rgba(0,0,0,.5);
+	z-index: 5;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 14px;
+	background-image: url('/icons/white-right.svg');
+	cursor: pointer;
+}
+
+.select-search-item-pics .swiper-pagination {
+	position: absolute;
+	width: calc(100% - 20px)!important;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	bottom: 5px!important;
+	left: 10px!important;
+	right: 10px!important;
+	margin: auto;
+	min-height: 20px;
+	z-index: 5;
+}
+
+.select-search-item-pics .reviews-pagination-bullet {
+	display: inline-flex;
+	width: 5px;
+	height: 5px;
+	margin: 2px;
+	background-color: rgb(223,219,210);
+	border-radius: 100%;
+}
+
+.select-search-item-pics .swiper-pagination-bullet-active {
+	background-color: rgb(255,74,43);
 }
 
 /* Swiper на странице Номер отеля в подборке номеров конец */ 
@@ -1036,6 +1107,57 @@ input[type="checkbox"].substylized:checked + label:after {
 	animation-timing-function: ease;
 }
 
+/* Пагинация */
+
+.search-pages-list {
+	margin-top: 50px
+}
+
+.search-pages-list ul {
+	list-style-type: none;
+	display: flex;
+}
+
+.search-pages-list li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.search-pages-list li a {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	user-select: none;
+}
+
+.search-pages-list .selected {
+	background-color: #ccc;
+	border-radius: 50%;
+}
+
+.search-pages-list .previous a {
+	width: auto;
+	height: 30px;
+	display: inline-flex;
+	justify-content: space-around;
+	align-items: center;
+	margin-right: 10px;
+}
+
+.search-pages-list .next a {
+	width: auto;
+	height: 30px;
+	display: inline-flex;
+	justify-content: space-around;
+	align-items: center;
+	margin-left: 10px;
+}
+
+/* Пагинация, конец */
 
 @media screen and (max-width: 1260px) {
 
@@ -1055,7 +1177,51 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 650px) {
+
+    .wrapper {
+    	margin: 0 auto;
+        padding: 0 1rem;
+        overflow: hidden;
+    }
+
+    .header {
+        margin: 10px 15px;
+    } 
+
+    .contact-page {
+    	padding: 0 !important;
+    }
+
+    .contact-page .section-title {
+    	width: 100%;
+    }
+
+    .contacts-y-map {
+    	width: 100%;
+    	height: 320px;
+    }
+
+    .map-swiper .swiper-slide {
+    	font-size: 22px;
+    }
+
+    .map-swiper .swiper-slide-active {
+    	width: 100%;
+    	transform: scale(1.8);
+    }
+
+    .main-h1 {
+        font-size: 4rem;
+    }
+
+    .single-block-title {
+        margin-right: 5px;
+    }
+    .left-block-bedroom{
+        background-size: 22px;
+        padding-left: 30px;
+    }
 
     .footer {
 		padding-top: 45px;
@@ -1135,7 +1301,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	.single-block-title {
 		font-size: 16px;
 		line-height: 20px;
-		font-family: 'FontInterMedium';
+		font-family: 'FontInter';
 		letter-spacing: 0;
 	}
 
@@ -1146,6 +1312,10 @@ input[type="checkbox"].substylized:checked + label:after {
 
     .subscribe-agree label {
     	font-size: 10px;
+    }
+
+    .section-title {
+    	font-size: 20px;
     }
 
     .main-h1 {
@@ -2039,12 +2209,10 @@ input[type="checkbox"].substylized:checked + label:after {
     	position: relative;
     	right: 0;
 		width: 0;
-		height: 40px;
+		height: 30px;
 		text-align: center;
 		flex-direction: column;
-		font-family: 'FontInterMedium';
-		font-size: 12px;
-		font-weight: 500;
+		font-size: 10px;
 		line-height: 1;
 		z-index: 2;
     }
@@ -2439,10 +2607,27 @@ input[type="checkbox"].substylized:checked + label:after {
 		margin: 5px 0;
 	}
 	
-    .contacts-y-map {
-    	width: 100%;
-    	height: 185px;
-    }
+}
+
+@media screen and (max-width: 420px) {
+
+	.left-nav-block {
+		width: calc(100% - 135px);
+	}
+
+	.left-nav-list:before {
+		right: 5px;
+	}
+
+	.single-block-title:first-child {
+		margin-bottom: 45px;
+	}
+
+	.hoteldetail-swiper .hotel-slider__item {
+		height: 40px;
+		width: 65px;
+	}
+
 }
 
 .hh-bg {
@@ -2466,8 +2651,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 10;
-	pointer-events: all;
+	z-index: 11;
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
