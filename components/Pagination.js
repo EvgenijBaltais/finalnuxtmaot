@@ -24,15 +24,13 @@ const handlePageClick = event => {
     window.scrollTo({top: 0, behavior: 'smooth'})
 }
 
-
-
     return (
         <div className = "pagination-w">
             <a className="pagination-list-before" onClick={event => setPrevious(event)}>‹</a>
                 <ul className="pagination-list">
                     {pages.map((item, index) => {
                         return (
-                            <li key = {index} className = {index == currentPage ? 'selected' : ''}>
+                            <li key = {index} className = {item == (currentPage + 1) ? 'selected' : ''}>
                                 <a onClick={event => handlePageClick(event)}>{item}</a>
                             </li>
                         )
