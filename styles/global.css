@@ -393,10 +393,6 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-image: url('/images/icons/phonebook.png');
 }
 
-.icon-item-direction {
-	background-image: url('/images/icons/location.png');
-}
-
 /* Заголовок главной, конец */
 
 .secondary-h1 {
