@@ -94,7 +94,7 @@
 	display: inline-block;
 	height: 28px;
 	width: 35px;
-	background-image: url('/icons/subscribe.svg');
+	background-image: url('/images/icons/subscribe.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
 }
@@ -122,7 +122,7 @@
 	color: rgb(67,151,237);
 	font-family: 'FontInter';
 	text-decoration: underline;
-	background-image: url('/icons/telegram.svg');
+	background-image: url('/images/icons/telegram.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
 	background-position: left center;
@@ -139,7 +139,7 @@
 	color: rgb(67,151,237);
 	font-family: 'FontInter';
 	text-decoration: underline;
-	background-image: url('/icons/telegram.svg');
+	background-image: url('/images/icons/telegram.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
 	background-position: left center;
@@ -155,7 +155,7 @@
 	color: rgb(67,151,237);
 	font-family: 'FontInter';
 	text-decoration: underline;
-	background-image: url('/icons/vk.svg');
+	background-image: url('/images/icons/vk.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
 	background-position: left center;
