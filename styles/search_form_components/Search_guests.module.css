@@ -140,7 +140,7 @@
     display: block;
     width: 10px;
     height: 10px;
-    background-image: url('/icons/arr-top.svg');
+    background-image: url('/images/icons/arr-top.svg');
     background-repeat: no-repeat;
     background-size: cover;
     transform: rotate(0);
@@ -197,7 +197,7 @@
     margin: auto;
     content: '';
     display: block;
-    background-image: url('/icons/left-right.svg');
+    background-image: url('/images/icons/left-right.svg');
     background-position: left center;
     background-repeat: no-repeat;
     background-size: 8px;

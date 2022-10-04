@@ -355,46 +355,46 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .icon-item-flame {
-	background-image: url('/icons/bonfire.png');
+	background-image: url('/images/icons/bonfire.png');
 }
 
 .icon-item-hotel {
-	background-image: url('/icons/hotel.png');
+	background-image: url('/images/icons/hotel.png');
 }
 
 .icon-item-hotel-w {
-	background-image: url('/icons/hotel-w.png');
+	background-image: url('/images/icons/hotel-w.png');
 }
 
 .icon-item-direction {
-	background-image: url('/icons/planet.png');
+	background-image: url('/images/icons/planet.png');
 }
 
 .icon-item-sales {
-	background-image: url('/icons/sales.png');
+	background-image: url('/images/icons/sales.png');
 }
 
 .icon-item-business {
-	background-image: url('/icons/business.png');
+	background-image: url('/images/icons/business.png');
 }
 .icon-item-people {
-	background-image: url('/icons/people.png');
+	background-image: url('/images/icons/people.png');
 }
 
 .icon-item-reviews {
-	background-image: url('/icons/reviews.png');
+	background-image: url('/images/icons/reviews.png');
 }
 
 .icon-item-serv {
-	background-image: url('/icons/bell-boy.png');
+	background-image: url('/images/icons/bell-boy.png');
 }
 
 .icon-item-contact {
-	background-image: url('/icons/phonebook.png');
+	background-image: url('/images/icons/phonebook.png');
 }
 
 .icon-item-direction {
-	background-image: url('/icons/location.png');
+	background-image: url('/images/icons/location.png');
 }
 
 /* Заголовок главной, конец */
@@ -553,15 +553,15 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .footer-social-item:first-child {
-	background-image: url('/icons/telegram.svg');
+	background-image: url('/images/icons/telegram.svg');
 }
 
 .footer-social-item:nth-child(2) {
-	background-image: url('/icons/telegram.svg');
+	background-image: url('/images/icons/telegram.svg');
 }
 
 .footer-social-item:nth-child(3) {
-	background-image: url('/icons/vk.svg');
+	background-image: url('/images/icons/vk.svg');
 }
 
 .payment-methods {
@@ -582,21 +582,21 @@ input[type="checkbox"].substylized:checked + label:after {
 	width: 100%;
 	height: 25px;
 	margin-bottom: 15px;
-	background-image: url('/icons/pay-1.png');
+	background-image: url('/images/icons/pay-1.png');
 }
 
 .payment-method-vmp {
 	width: 100%;
 	height: 25px;
 	margin-bottom: 15px;
-	background-image: url('/icons/pay-2.png');
+	background-image: url('/images/icons/pay-2.png');
 }
 
 .payment-method-prom {
 	width: 100%;
 	height: 28px;
 	margin-bottom: 15px;
-	background-image: url('/icons/pay-3.png');
+	background-image: url('/images/icons/pay-3.png');
 }
 
 /* Footer, конец */
@@ -651,7 +651,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 14px;
-	background-image: url('/icons/white-left.svg');
+	background-image: url('/images/icons/white-left.svg');
 	cursor: pointer;
 }
 
@@ -669,7 +669,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 14px;
-	background-image: url('/icons/white-right.svg');
+	background-image: url('/images/icons/white-right.svg');
 	cursor: pointer;
 }
 
@@ -783,7 +783,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	position: absolute;
 	bottom: 20px;
 	right: 20px;
-	background-image: url('/icons/increase.svg');
+	background-image: url('/images/icons/increase.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
@@ -817,7 +817,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 14px;
-	background-image: url('/icons/white-left.svg');
+	background-image: url('/images/icons/white-left.svg');
 	cursor: pointer;
 }
 
@@ -835,7 +835,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 14px;
-	background-image: url('/icons/white-right.svg');
+	background-image: url('/images/icons/white-right.svg');
 	cursor: pointer;
 }
 
@@ -1537,7 +1537,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	left: 0;
 	right: 0;
 	margin: auto;
-	background-image: url('/icons/down-arrow.svg');
+	background-image: url('/images/icons/down-arrow.svg');
 	background-position: bottom center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -1596,7 +1596,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	left: 0;
 	right: 0;
 	margin: auto;
-	background-image: url('/icons/down-arrow.svg');
+	background-image: url('/images/icons/down-arrow.svg');
 	background-position: bottom center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -1618,7 +1618,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	left: 0;
 	right: 0;
 	margin: auto;
-	background-image: url('/icons/down-arrow.svg');
+	background-image: url('/images/icons/down-arrow.svg');
 	background-position: bottom center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -1653,7 +1653,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	left: 0;
 	right: 0;
 	margin: auto;
-	background-image: url('/icons/down-arrow.svg');
+	background-image: url('/images/icons/down-arrow.svg');
 	background-position: bottom center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -1810,7 +1810,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	border-radius: 50%;
 	background-color: #D9D9D9;
 	cursor: pointer;
-	background-image: url('/icons/white-close.svg');
+	background-image: url('/images/icons/white-close.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 10px;
@@ -1909,7 +1909,7 @@ input[type="checkbox"].substylized:checked + label:after {
     display: block;
     width: 10px;
     height: 10px;
-    background-image: url('/icons/arr-top.svg');
+    background-image: url('/images/icons/arr-top.svg');
     background-repeat: no-repeat;
     background-size: cover;
     transform: rotate(0);
@@ -1989,7 +1989,7 @@ input[type="checkbox"].substylized:checked + label:after {
     margin: auto;
     content: '';
     display: block;
-    background-image: url('/icons/left-right.svg');
+    background-image: url('/images/icons/left-right.svg');
     background-position: left center;
     background-repeat: no-repeat;
     background-size: 8px;
@@ -2877,14 +2877,14 @@ input[type="checkbox"].substylized:checked + label:after {
 	height: 98%;
 }
 .aside-form-way-input-in {
-	background-image: url('/icons/calendar.png');
+	background-image: url('/images/icons/calendar.png');
 	background-size: 20px;
 	background-repeat: no-repeat;
 	background-position: 95%;
 }
 
 .aside-form-way-input-out {
-	background-image: url('/icons/calendar.png');
+	background-image: url('/images/icons/calendar.png');
 	background-size: 20px;
 	background-repeat: no-repeat;
 	background-position: 95%;
@@ -2999,7 +2999,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	left: 0;
 	right: 0;
 	margin: auto;
-	background-image: url('/icons/down-arrow.svg');
+	background-image: url('/images/icons/down-arrow.svg');
 	background-position: bottom center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -3150,7 +3150,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	border-radius: 50%;
 	background-color: #D9D9D9;
 	cursor: pointer;
-	background-image: url('/icons/white-close.svg');
+	background-image: url('/images/icons/white-close.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 10px;
@@ -3249,7 +3249,7 @@ input[type="checkbox"].substylized:checked + label:after {
     display: block;
     width: 10px;
     height: 10px;
-    background-image: url('/icons/arr-top.svg');
+    background-image: url('/images/icons/arr-top.svg');
     background-repeat: no-repeat;
     background-size: cover;
     transform: rotate(0);
@@ -3329,7 +3329,7 @@ input[type="checkbox"].substylized:checked + label:after {
     margin: auto;
     content: '';
     display: block;
-    background-image: url('/icons/left-right.svg');
+    background-image: url('/images/icons/left-right.svg');
     background-position: left center;
     background-repeat: no-repeat;
     background-size: 8px;
@@ -3548,7 +3548,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	left: 0;
 	right: 0;
 	margin: auto;
-	background-image: url('/icons/down-arrow.svg');
+	background-image: url('/images/icons/down-arrow.svg');
 	background-position: bottom center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -3699,7 +3699,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	border-radius: 50%;
 	background-color: #D9D9D9;
 	cursor: pointer;
-	background-image: url('/icons/white-close.svg');
+	background-image: url('/images/icons/white-close.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 10px;
@@ -3798,7 +3798,7 @@ input[type="checkbox"].substylized:checked + label:after {
     display: block;
     width: 10px;
     height: 10px;
-    background-image: url('/icons/arr-top.svg');
+    background-image: url('/images/icons/arr-top.svg');
     background-repeat: no-repeat;
     background-size: cover;
     transform: rotate(0);
@@ -3878,7 +3878,7 @@ input[type="checkbox"].substylized:checked + label:after {
     margin: auto;
     content: '';
     display: block;
-    background-image: url('/icons/left-right.svg');
+    background-image: url('/images/icons/left-right.svg');
     background-position: left center;
     background-repeat: no-repeat;
     background-size: 8px;
@@ -4257,7 +4257,7 @@ input[type="checkbox"].substylized:checked + label:after {
 		right: 10px;
 		bottom: auto;
 		left: auto;
-		background-image: url('/icons/calendar.png');
+		background-image: url('/images/icons/calendar.png');
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center;
@@ -4269,7 +4269,7 @@ input[type="checkbox"].substylized:checked + label:after {
 		right: 10px;
 		bottom: auto;
 		left: auto;
-		background-image: url('/icons/calendar.png');
+		background-image: url('/images/icons/calendar.png');
 		background-size: contain;
 		background-repeat: no-repeat;
 		background-position: center;

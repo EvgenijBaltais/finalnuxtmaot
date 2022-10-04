@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import AsideMainForm from "../components/AsideMainForm"
-import smoothscroll from 'smoothscroll-polyfill'
 
 import Search_hotel_item from "../components/search_results/Search_hotel_item"
 import styles from "../styles/search_results/Search_results.module.css"
@@ -27,9 +26,9 @@ export default function Hotels () {
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
     const [nodataText, setNodataText] = useState('')
-    const [itemsPerPage, setItemsPerPage] = useState(3)
+    const [itemsPerPage, setItemsPerPage] = useState(15)
     const [currentPage, setCurrentPage] = useState(0)
-    const [reload, setReload] = useState(0)
+    const [paginationOn, setPagination] = useState(0)
     const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
 
     useEffect(() => {
@@ -43,6 +42,8 @@ export default function Hotels () {
                 return () => {}
             }
 
+            setFilteredItems([])
+            setLoadedItems([])
             setNodataText('Загрузка подходящих вариантов...')
 
             let [dayIn, monthIn, yearIn] = query.datein.split('.')
@@ -77,8 +78,12 @@ export default function Hotels () {
                     .then((res) => res.json())
                     .then((res) => {
 
-                setLoadedItems(paginateItems(res.data))
-                console.log(paginateItems(res.data))
+                setLoadedItems(paginateItems(res.data, itemsPerPage))
+
+                console.log(res.data)
+                console.log(paginateItems(res.data, itemsPerPage))
+                
+                setPagination(res.data.length > itemsPerPage)
 
                 // определить минимум и максимум цен
 
@@ -103,17 +108,20 @@ export default function Hotels () {
     }
 
     // Функция для разбивки данных на страницы
-    function paginateItems (items) {
+
+    function paginateItems (items, itemsPerPage) {
 
         let arr = []
         let page = []
 
         for (let i = 0; i < items.length; i++) {
-            page.push(items[i])
 
-            if (i % itemsPerPage == 0) {
+            page.push(items[i])
+            
+            if (page.length == itemsPerPage) {
                 arr.push(page)
                 page = []
+                continue
             }
 
             if (i == items.length - 1) {
@@ -154,7 +162,7 @@ export default function Hotels () {
 
         setIsResearch(true)
         setFiltersOn(true)
-        setFilteredItems(paginateItems(res))
+        setFilteredItems(res)
         setIsResearch(false)
     }
 
@@ -247,24 +255,6 @@ function body_unlock() {
 function findParent (el, cls) {
 	while ((el = el.parentElement) && !el.classList.contains(cls));
 	return el;
-}
-
-const handlePageClick = (event, el) => {
-    
-    console.log(el)
-
-    window.scrollTo({top: 0, behavior: 'smooth'})
-    setCurrentPage(event.selected)
-}
-
-function pageClick (event) {
-   // if (event.event.target.parentElement.classList.contains('selected')) {
-    //    window.scrollTo({top: 0, behavior: 'smooth'})
-    //}
-
-    //let parent = findParent(event.event.target, 'search-result-right')
-
-    //parent.style.height = parent.offsetHeight + 'px'
 }
 
 
@@ -431,30 +421,26 @@ function pageClick (event) {
                     {/* Если выбраны фильтры */}
                     {
                         filteredItems.length && filtersOn ? (
-                            filteredItems[currentPage].map((item, index) => {
+                            filteredItems.map((item, index) => {
                             return (
                                 <Search_hotel_item key = {index} item = {item} nights = {nights} />
                             )
                         })) : ''
                     }
 
-                    <div className="search-pages-list">
-                        {loadedItems.length && !filtersOn ? 
-                            <Pagination
-                                pages = {pagination(currentPage, loadedItems.length)}
-                                currentPage = {currentPage}
-                                changeCurrentPage = {changeCurrentPage}
-                            />: ''
-                        }
-                        
-                        {filteredItems.length && filtersOn ? 
-                            <Pagination
-                                pages = {pagination(currentPage, loadedItems.length)}
-                                currentPage = {currentPage}
-                                changeCurrentPage = {changeCurrentPage}
-                            />: ''
-                        }
-                    </div>
+                    {/* Пагинация */}{console.log(paginationOn)}
+                    {paginationOn && !filtersOn ? (
+                        <div className="search-pages-list">
+                            {loadedItems.length && !filtersOn ? 
+                                <Pagination
+                                    pages = {pagination(currentPage, loadedItems.length)}
+                                    currentPage = {currentPage}
+                                    changeCurrentPage = {changeCurrentPage}
+                                />: ''
+                            }
+                        </div>
+                        ) : ('')
+                    }
                 </div>
             </section>
         </>

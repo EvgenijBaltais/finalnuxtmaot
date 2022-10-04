@@ -1,3 +1,5 @@
+import smoothscroll from 'smoothscroll-polyfill'
+
 const Pagination = ({pages, currentPage, changeCurrentPage}) => {
 
 // Пагинация
@@ -8,8 +10,13 @@ const setPrevious = event => {
 }
 
 const setNext = event => {
-    if (currentPage == pagesList.length - 1) return false
+    if (currentPage == pages.length - 1) return false
     changeCurrentPage(currentPage + 1)
+}
+
+const handlePageClick = () => {
+    smoothscroll.polyfill()
+    window.scrollTo({top: 0, behavior: 'smooth'})
 }
 
     return (
@@ -19,7 +26,7 @@ const setNext = event => {
                     {pages.map((item, index) => {
                         return (
                             <li key = {index} className = {index == currentPage ? 'selected' : ''}>
-                                <a onClick={event => changeCurrentPage(+event.target.innerText - 1)}>{item}</a>
+                                <a onClick={event => {changeCurrentPage(+event.target.innerText - 1); handlePageClick()}}>{item}</a>
                             </li>
                         )
                     })}

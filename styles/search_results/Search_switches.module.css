@@ -45,18 +45,18 @@
     bottom: 0;
     left: 10px;
     margin: auto;
-    background-image: url('/icons/switch_menu.svg');
+    background-image: url('/images/icons/switch_menu.svg');
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
 }
 
 .search-switch:first-child:hover:after {
-    background-image: url('/icons/switch_menu_white.svg');
+    background-image: url('/images/icons/switch_menu_white.svg');
 }
 
 .search-switch.search-switch-active:first-child:after {
-    background-image: url('/icons/switch_menu_white.svg');
+    background-image: url('/images/icons/switch_menu_white.svg');
 }
 
 .search-switch:nth-child(2) {
@@ -74,7 +74,7 @@
     bottom: 0;
     left: 10px;
     margin: auto;
-    background-image: url('/icons/switch_menu.svg');
+    background-image: url('/images/icons/switch_menu.svg');
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
@@ -87,26 +87,26 @@
     height: 20px;
     top: 8px;
     left: 50px;
-    background-image: url('/icons/switch_map.svg');
+    background-image: url('/images/icons/switch_map.svg');
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
 }
 
 .search-switch:nth-child(2):hover:before {
-    background-image: url('/icons/switch_map_white.svg');
+    background-image: url('/images/icons/switch_map_white.svg');
 }
 
 .search-switch:nth-child(2):hover:after {
-    background-image: url('/icons/switch_menu_white.svg');
+    background-image: url('/images/icons/switch_menu_white.svg');
 }
 
 .search-switch:nth-child(2).search-switch-active:before {
-    background-image: url('/icons/switch_map_white.svg');
+    background-image: url('/images/icons/switch_map_white.svg');
 }
 
 .search-switch:nth-child(2).search-switch-active:after {
-    background-image: url('/icons/switch_menu_white.svg');
+    background-image: url('/images/icons/switch_menu_white.svg');
 }
 
 .search-switch:nth-child(2):hover .search-switch-plus {
@@ -144,18 +144,18 @@
     bottom: 0;
     left: 10px;
     margin: auto;
-    background-image: url('/icons/switch_map.svg');
+    background-image: url('/images/icons/switch_map.svg');
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: center;
 }
 
 .search-switch:nth-child(3):hover:after {
-    background-image: url('/icons/switch_map_white.svg');
+    background-image: url('/images/icons/switch_map_white.svg');
 }
 
 .search-switch:nth-child(3).search-switch-active:after {
-    background-image: url('/icons/switch_map_white.svg');
+    background-image: url('/images/icons/switch_map_white.svg');
 }
 
 .search-switch:hover {

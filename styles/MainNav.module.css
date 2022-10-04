@@ -47,7 +47,7 @@
     content: "";
     width: 20px;
     height: 18px;
-    background-image: url(/icons/favorite.svg);
+    background-image: url(/images/icons/favorite.svg);
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
@@ -227,11 +227,11 @@
     }
 
     .moblie-social-tg {
-        background-image: url('/icons/telegram.svg');
+        background-image: url('/images/icons/telegram.svg');
     }
 
     .moblie-social-vk {
-        background-image: url('/icons/vk.svg');
+        background-image: url('/images/icons/vk.svg');
         line-height: 20px;
     }
 
@@ -300,7 +300,7 @@
         color: rgb(67,151,237);
         font-family: 'FontInter';
         text-decoration: underline;
-        background-image: url('/icons/telegram.svg');
+        background-image: url('/images/icons/telegram.svg');
         background-repeat: no-repeat;
         background-size: 24px;
         background-position: left center;
@@ -317,7 +317,7 @@
         color: rgb(67,151,237);
         font-family: 'FontInter';
         text-decoration: underline;
-        background-image: url('/icons/telegram.svg');
+        background-image: url('/images/icons/telegram.svg');
         background-repeat: no-repeat;
         background-size: 24px;
         background-position: left center;
@@ -333,7 +333,7 @@
         color: rgb(67,151,237);
         font-family: 'FontInter';
         text-decoration: underline;
-        background-image: url('/icons/vk.svg');
+        background-image: url('/images/icons/vk.svg');
         background-repeat: no-repeat;
         background-size: 24px;
         background-position: left center;
@@ -424,7 +424,7 @@
         color: rgb(67,151,237);
         font-family: 'FontInter';
         text-decoration: underline;
-        background-image: url('/icons/telegram.svg');
+        background-image: url('/images/icons/telegram.svg');
         background-repeat: no-repeat;
         background-size: 24px;
         background-position: left center;
@@ -441,7 +441,7 @@
         color: rgb(67,151,237);
         font-family: 'FontInter';
         text-decoration: underline;
-        background-image: url('/icons/telegram.svg');
+        background-image: url('/images/icons/telegram.svg');
         background-repeat: no-repeat;
         background-size: 24px;
         background-position: left center;
@@ -458,7 +458,7 @@
         color: rgb(67,151,237);
         font-family: 'FontInter';
         text-decoration: underline;
-        background-image: url('/icons/vk.svg');
+        background-image: url('/images/icons/vk.svg');
         background-repeat: no-repeat;
         background-size: 24px;
         background-position: left top;
