@@ -230,33 +230,6 @@ export default function Hotels () {
         return newArr
     }
 
-function body_lock() {
-
-	let body = document.body;
-	if (!body.classList.contains('scroll-locked')) {
-		let bodyScrollTop = (typeof window.pageYOffset !== 'undefined') ? window.pageYOffset : (document.documentElement || document.body.parentNode || document.body).scrollTop;
-		body.classList.add('scroll-locked');
-		body.style.top = "-" + bodyScrollTop + "px";
-		body.setAttribute("data-popup-scrolltop", bodyScrollTop)
-	}
-}
-
-function body_unlock() {
-	let body = document.body;
-	if (body.classList.contains('scroll-locked')) {
-		let bodyScrollTop = document.body.getAttribute("data-popup-scrolltop");
-		body.classList.remove('scroll-locked');
-		body.style.top = "";
-		body.removeAttribute("data-popup-scrolltop")
-		window.scrollTo(0, bodyScrollTop)
-	}
-}
-
-function findParent (el, cls) {
-	while ((el = el.parentElement) && !el.classList.contains(cls));
-	return el;
-}
-
 
     useEffect(() => {
         from = document.querySelector('.aside-slider-from')

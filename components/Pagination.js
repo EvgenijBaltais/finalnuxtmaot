@@ -14,10 +14,17 @@ const setNext = event => {
     changeCurrentPage(currentPage + 1)
 }
 
-const handlePageClick = () => {
+const handlePageClick = event => {
+
+    if (event.target.innerText == '...') return false
+
+    changeCurrentPage(+event.target.innerText - 1)
+
     smoothscroll.polyfill()
     window.scrollTo({top: 0, behavior: 'smooth'})
 }
+
+
 
     return (
         <div className = "pagination-w">
@@ -26,7 +33,7 @@ const handlePageClick = () => {
                     {pages.map((item, index) => {
                         return (
                             <li key = {index} className = {index == currentPage ? 'selected' : ''}>
-                                <a onClick={event => {changeCurrentPage(+event.target.innerText - 1); handlePageClick()}}>{item}</a>
+                                <a onClick={event => handlePageClick(event)}>{item}</a>
                             </li>
                         )
                     })}
