@@ -42,21 +42,6 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
         setChildrenAges(value)
     }
 
-    function setToday () {
-
-        let today = new Date();
-            today.setTime(today.getTime());
-
-        return addNullToDate(today.getDate()) + "." + addNullToDate((today.getMonth() + 1)) + "." + today.getFullYear()
-    }
-
-    function setTomorrow () {
-        var tomorrow = new Date()
-            tomorrow.setTime(tomorrow.getTime() + 24 * 60 * 60 * 1000)
-
-            return addNullToDate(tomorrow.getDate()) + "." + addNullToDate((tomorrow.getMonth() + 1)) + "." + tomorrow.getFullYear()
-    }
-
     function addNullToDate(num) {
         return num < 10 ? '0' + num : num
     }
@@ -80,6 +65,8 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
         }
 
         link += '&id=' + searchResult.id
+
+        setRoomsData(0)
 
         fetch(link)
         .then((result) => result.json())

@@ -9,8 +9,11 @@ const searchByClick = (event) => {
 
     let obj = {
         hotel: event.target.getAttribute('data-info') == 'hotel' ? event.target.getAttribute('data-id') : '',
-        hotel_name: event.target.getAttribute('data-info') == 'hotel' ? event.target.innerText : ''
+        hotel_name: event.target.getAttribute('data-info') == 'hotel' ? event.target.innerText : '',
+        id: event.target.getAttribute('data-id')
     }
+
+    console.log(obj)
 
     props.changeSearchResult(obj)
 }

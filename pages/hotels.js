@@ -9,6 +9,7 @@ import styles from "../styles/search_results/Search_results.module.css"
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
+import Pagination from "../components/Pagination"
 
 export default function Hotels () {
 
@@ -25,6 +26,9 @@ export default function Hotels () {
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
     const [nodataText, setNodataText] = useState('')
+    const [itemsPerPage, setItemsPerPage] = useState(15)
+    const [currentPage, setCurrentPage] = useState(0)
+    const [paginationOn, setPagination] = useState(0)
     const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
 
     useEffect(() => {
@@ -38,6 +42,8 @@ export default function Hotels () {
                 return () => {}
             }
 
+            setFilteredItems([])
+            setLoadedItems([])
             setNodataText('Загрузка подходящих вариантов...')
 
             let [dayIn, monthIn, yearIn] = query.datein.split('.')
@@ -71,7 +77,10 @@ export default function Hotels () {
            fetch(link)
                     .then((res) => res.json())
                     .then((res) => {
-                        setLoadedItems(res.data)
+
+                setLoadedItems(paginateItems(res.data, itemsPerPage))
+
+                setPagination(res.data.length > itemsPerPage)
 
                 // определить минимум и максимум цен
 
@@ -89,6 +98,35 @@ export default function Hotels () {
 
     }, [query])
 
+    // Функция смены страницы
+
+    function changeCurrentPage (value) {
+        setCurrentPage(value)
+    }
+
+    // Функция для разбивки данных на страницы
+
+    function paginateItems (items, itemsPerPage) {
+
+        let arr = []
+        let page = []
+
+        for (let i = 0; i < items.length; i++) {
+
+            page.push(items[i])
+            
+            if (page.length == itemsPerPage) {
+                arr.push(page)
+                page = []
+                continue
+            }
+
+            if (i == items.length - 1) {
+                arr.push(page)
+            }
+        }
+        return arr
+    }
 
     // Функция для определения количества ночей для дат в формате гг-мм.дд
 
@@ -114,6 +152,7 @@ export default function Hotels () {
     const showVariants = () => {
 
         setNodataText('')
+        setCurrentPage(0)
         let res = applyFilters(loadedItems)
 
         res.length == 0 ? setNodataText('Не удалось ничего найти. Попробуйте изменить условия поиска') : ''
@@ -126,7 +165,13 @@ export default function Hotels () {
 
     function applyFilters(items) {
 
-        const arr = items
+        const arr = []
+
+        for (let i = 0; i < items.length; i++) {
+            for (let k = 0; k < items[i].length; k++) {
+                arr.push(items[i][k])
+            }
+        }
 
         // Минимальная и максимальная цена
 
@@ -178,8 +223,10 @@ export default function Hotels () {
                 newArr.push(arr[i])
             }
         }
+
         return newArr
     }
+
 
     useEffect(() => {
         from = document.querySelector('.aside-slider-from')
@@ -208,6 +255,36 @@ export default function Hotels () {
         })
     }, [])
 
+    function pagination(c, m) {
+        var current = c,
+            last = m,
+            delta = 5,
+            left = current - delta,
+            right = current + delta + 1,
+            range = [],
+            rangeWithDots = [],
+            l;
+    
+        for (let i = 1; i <= last; i++) {
+            if (i == 1 || i == last || i >= left && i < right) {
+                range.push(i)
+            }
+        }
+    
+        for (let i of range) {
+            if (l) {
+                if (i - l === 2) {
+                    rangeWithDots.push(l + 1)
+                } else if (i - l !== 1) {
+                    rangeWithDots.push('...')
+                }
+            }
+            rangeWithDots.push(i)
+            l = i
+        }
+        return rangeWithDots
+    }
+
     return (
         <>
         <Head>
@@ -231,82 +308,80 @@ export default function Hotels () {
                                 popularWays = {popularWays}
                             />
                         </div>
-                        <div className = "aside-filter-btn">Показать&nbsp;фильтры</div>
-
-                        <div className = "aside-filter">
-                            <div className = "aside-slider">
-                                <div className="slider-values">
+                        <div className = "aside-slider">
+                            <div className="slider-values">
+                                {sliderMin != 0 ?
                                     <div className="aside-slider-val aside-slider-left">
-                                        {sliderMin != 0 ?
-                                            <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
-                                        : ''}
-                                        </div>
-                                    <div className="aside-slider-val aside-slider-right">
-                                        {sliderMax != 0 ?
-                                            <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
-                                        : ''}
+                                        <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
                                     </div>
-                                </div>
+                                : ''}
                                 {sliderMax != 0 ?
-                                    <Slider
-                                        step = {1}
-                                        range
-                                        defaultValue={[sliderMin, sliderMax]}
-                                        min={0}
-                                        max={(sliderMax + 10000)}
-                                        onChange={value => renewValues(value)}
-                                        onAfterChange = {() => showVariants()}
-                                    /> :  ''
-                                }
-                            </div>
-                            <div className = {styles["aside-block"]}>
-                                <h3 className = "aside-block-title">Типы питания</h3>
-                                {foodTypes.map((item, index) => {
-                                  return (
-                                    <div key = {index} className = {styles["aside-checkbox"]}>
-                                        <input type="checkbox" id={`checkbox-1${index + 1}`} className = "stylized food-checkbox" onChange={() => showVariants()} /> 
-                                        <label htmlFor={`checkbox-1${index + 1}`}>{item}</label>
+                                    <div className="aside-slider-val aside-slider-right">
+                                        <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
                                     </div>
-                                  )  
-                                })}
+                                : ''}
                             </div>
-                            <div className = {styles["aside-block"]}>
-                                <h3 className = "aside-block-title">Звездность</h3>
-                                {
-                                    [...Array(5)].map((e, i) => {
-                                        return (
-                                            <div key = {i} className = {styles["aside-checkbox"]}>
-                                                <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={() => showVariants()} />
-                                                <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-2${i + 1}`}>
-                                                    <ul className = {styles["aside-stars-list"]}>
-                                                        {[...Array(i + 1)].map((el, ind) => {
-                                                            return (
-                                                                <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
-                                                            )
-                                                        })}
-                                                        {[...Array(5 - (i + 1))].map((el, ind) => {
-                                                            return (
-                                                                <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
-                                                            )
-                                                        })}
-                                                    </ul>
-                                                </label>
-                                            </div>
-                                        )
-                                    })
-                                }
-                            </div>
+                            {sliderMax != 0 ?
+                                <Slider
+                                    step = {1}
+                                    range
+                                    defaultValue={[sliderMin, sliderMax]}
+                                    min={0}
+                                    max={(sliderMax + 10000)}
+                                    onChange={value => renewValues(value)}
+                                    onAfterChange = {() => showVariants()}
+                                /> :  ''
+                            }
+                        </div>
+                        <div className = {styles["aside-block"]}>
+                            <h3 className = "aside-block-title">Типы питания</h3>
+                            {foodTypes.map((item, index) => {
+                              return (
+                                <div key = {index} className = {styles["aside-checkbox"]}>
+                                    <input type="checkbox" id={`checkbox-1${index + 1}`} className = "stylized food-checkbox" onChange={() => showVariants()} /> 
+                                    <label htmlFor={`checkbox-1${index + 1}`}>{item}</label>
+                                </div>
+                              )  
+                            })}
+                        </div>
+                        <div className = {styles["aside-block"]}>
+                            <h3 className = "aside-block-title">Звездность</h3>
+                            {
+                                [...Array(5)].map((e, i) => {
+                                    return (
+                                        <div key = {i} className = {styles["aside-checkbox"]}>
+                                            <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={() => showVariants()} />
+                                            <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-2${i + 1}`}>
+                                                <ul className = {styles["aside-stars-list"]}>
+                                                    {[...Array(i + 1)].map((el, ind) => {
+                                                        return (
+                                                            <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-gold"]}`}></li>
+                                                        )
+                                                    })}
+                                                    {[...Array(5 - (i + 1))].map((el, ind) => {
+                                                        return (
+                                                            <li key = {ind} className = {`${styles["aside-stars-item"]} ${styles["aside-stars-item-grey"]}`}></li>
+                                                        )
+                                                    })}
+                                                </ul>
+                                            </label>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>
-                <div className = {styles["search-result-right"]}>
+                <div className = {`${styles["search-result-right"]} search-result-right`}>
 
                 {nodataText ? <p className = "no-result">{nodataText}</p> : ''}
                 {isResearch ? <div className="waiting-fon"></div>: ''}
                     
+
                     {/* Вывод по поиску */}
                     {
-                        loadedItems.length && !filtersOn ? (loadedItems.map((item, index) => {
+                        loadedItems.length && !filtersOn ? (
+                            loadedItems[currentPage].map((item, index) => {
                             return (
                                 <Search_hotel_item key = {index} item = {item} nights = {nights} query = {query} />
                             )
@@ -315,13 +390,26 @@ export default function Hotels () {
                     
                     {/* Если выбраны фильтры */}
                     {
-                        filtersOn && filteredItems.length ? (
-
+                        filteredItems.length && filtersOn ? (
                             filteredItems.map((item, index) => {
                             return (
                                 <Search_hotel_item key = {index} item = {item} nights = {nights} />
                             )
                         })) : ''
+                    }
+
+                    {/* Пагинация */}{console.log(paginationOn)}
+                    {paginationOn && !filtersOn ? (
+                        <div className="search-pages-list">
+                            {loadedItems.length && !filtersOn ? 
+                                <Pagination
+                                    pages = {pagination(currentPage, loadedItems.length)}
+                                    currentPage = {currentPage}
+                                    changeCurrentPage = {changeCurrentPage}
+                                />: ''
+                            }
+                        </div>
+                        ) : ('')
                     }
                 </div>
             </section>

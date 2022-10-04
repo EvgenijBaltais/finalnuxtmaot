@@ -19,7 +19,7 @@
 	line-height: 24px;
 	color: #4F4F4F;
 	text-indent: 25px;
-	background-image: url('/icons/vector.png');
+	background-image: url('/images/icons/vector.png');
 	background-repeat: no-repeat;
     background-size: 15px;
     background-position: left top;
@@ -407,7 +407,7 @@
 	margin-right: 6px;
 	width: 12px;
 	height: 9px;
-    background-image: url('/icons/serv.svg');
+    background-image: url('/images/icons/serv.svg');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -541,7 +541,7 @@
 	left: 10px;
 	width: 88px;
 	height: 88px;
-	background-image: url(/icons/calendar2.png);
+	background-image: url(/images/icons/calendar2.png);
 	background-repeat: no-repeat;
 	background-size: contain;
 }
@@ -1141,7 +1141,7 @@
 
 	.select-form-in, .select-form-out {
 
-		background-image: url(/icons/calendar.png);
+		background-image: url(/images/icons/calendar.png);
 		background-size: 23px;
 		background-repeat: no-repeat;
 		background-position: center right 10px;

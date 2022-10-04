@@ -1,116 +1,73 @@
-import React, { useRef, useState } from "react";
-import { YMaps, Map, Placemark, FullscreenControl, TrafficControl } from "react-yandex-maps"
+import Head from 'next/head'
+import Script from 'next/script'
+import { useState } from 'react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/css'
 import styles from "../styles/MapCarousel.module.css"
 
+import ContactsMap from "./ContactsMap"
 
-const moscow = {
-    coordinates: [55.776234, 37.675361],
-    adress: 'ул. Бауманская д.6с2. Бизнес-центр Виктория Плаза. 8 этаж. 804 офис'
-}
+export default function MapCarousel () {
 
-const cities = ["Москва", "Санкт-Петербург", "Ростов-на-Дону", "Краснодар", "Тула"]
+    const [mapReady, setMapReady] = useState(0)
+    const [activeCity, setActiveCity] = useState(0)
 
-const mapState = { center: [55.76, 37.64], zoom: 12, controls: [] };
+    const cities = ["Москва", "Санкт-Петербург", "Ростов-на-Дону", "Краснодар", "Тула"]
+    const koordinates = [['55.776858', '37.668871'], ['59.979322', '30.330124'], ['47.235277', '39.713638'], ['45.058765', '38.978511'], ['54.191289', '37.589293']]
+    const addresses = [
+                        'ул. Бауманская д.6с2. Бизнес-центр Виктория Плаза. 8 этаж. 804 офис', 
+                        'Большой Сампсониевский просп., 68, корп. 1, Санкт-Петербург, Россия',
+                        'г. Ростов-на-Дону, Ворошиловский проспект, 82/4',
+                        'г. Краснодар, ул. Офицерская, д. 32',
+                        'г. Тула, ул. Демонстрации, д. 38В'
+                    ]
 
-class MapCarousel extends React.Component {
 
-	componentDidMount() {
-
-	}
-  
-	componentWillUnmount() {
-
-	}
-
-    changeMap() {
-
+    const sliderChange = (e) => {
+        setActiveCity(e.$el[0].swiper.realIndex)
     }
 
-    render() {
-        return (
-        <section className = {styles["map"]}>
+    return (
+        <>
+            <Head>
+                <title>Контакты</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
+            <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onReady={() => {
+                setMapReady(1)
+            }
+            } />
 
-            <Swiper
-                    slidesPerView={5}
-                    centeredSlides={true}
-                    slideToClickedSlide = {true}
-                    loop = {true}
-                    speed= {400}
-                    onSlideChange={(e) => console.log(e.$el[0].swiper.realIndex)}
-                    className="map-swiper"
-                >
-                {cities.map((slideContent, index) => (
-                    <SwiperSlide key={slideContent} item = "index">
-                        {slideContent}
-                    </SwiperSlide>
-                ))}
+            <section className = {styles["map"]}>
 
-            </Swiper>
+                <Swiper
+                        slidesPerView={5}
+                        centeredSlides={true}
+                        slideToClickedSlide = {true}
+                        loop = {true}
+                        speed= {400}
+                        onSlideChange={(e) => sliderChange(e)}
+                        className="map-swiper"
+                    >
+                    {cities.map((slideContent, index) => (
+                        <SwiperSlide key={slideContent} item = "index">
+                            {slideContent}
+                        </SwiperSlide>
+                    ))}
 
-                <div className = {styles["map-slider-nav"]}>
-                    <div className = {styles["our-offices-left"]}><span></span></div>
-                    <div className = {styles["our-offices-info"]}>Наши офисы расположены по всей России</div>
-                    <div className = {styles["our-offices-right"]}><span></span></div>
-                </div>
+                </Swiper>
 
-            <div className = {styles["map-section"]}>
-                <div className = {styles["map-info"]}>
-                    <h2 className = "section-title icon-item icon-item-direction">Как к нам добраться</h2>
-                    <div className = {`${styles["contact-info-block"]} ${styles["contact-info-adress"]}`}>
-                        <p className = "subtitle-bold">Адрес</p>
-                        <span className = "block-span">г.&nbsp;Москва, ул.&nbsp;Бауманская д.6с2. Бизнес-центр Виктория&nbsp;Плаза, 8&nbsp;этаж, 804&nbsp;офис</span>
+                    <div className = {styles["map-slider-nav"]}>
+                        <div className = {styles["our-offices-left"]}><span></span></div>
+                        <div className = {styles["our-offices-info"]}>Наши офисы расположены по всей России</div>
+                        <div className = {styles["our-offices-right"]}><span></span></div>
                     </div>
-                    <div className = {`${styles["contact-info-block"]} ${styles["contact-info-phone"]}`}>
-                        <p className = "subtitle-bold">Телефоны</p>
-                        <div className = {styles["contact-info__phone"]}>
-                            <a href="tel:+74956486711" className = {`${styles["contacts-phone"]} ${styles["contacts-chast"]}`}>+7 495 648 67 11</a>&nbsp;
-                            <span className = {styles["contacts-phone-info"]}>Для частных лиц</span>
-                        </div>
-                        <div className = {styles["contact-info__phone"]}>
-                            <a href="tel:+74956624928" className = {`${styles["contacts-phone"]} ${styles["contacts-corp"]}`}>+7 495 662 49 28</a>&nbsp;
-                            <span className = {styles["contacts-phone-info"]}>Корпоративный отдел</span>
-                        </div>
-                    </div>
-                    <div className = {`${styles["contact-info-block"]} ${styles["contact-info-time"]}`}>
-                        <p className = "subtitle-bold">Мы работаем</p>
-                        <span className = "block-span">по будням с 9:00 до 21:00,<br/>по выходным с 11:00 до 18:00</span>
-                        <div className = {styles["metro-block"]}>
-                            <div className = {styles["metro-item"]}>Бауманская</div>
-                            <div className = {styles["metro-item"]}>Красносельская</div>
-                        </div>
-                    </div>
-                </div>
-                <div className = {styles["map-block"]}>
-                    <YMaps>
-                        <Map 
-                            className = "contacts-y-map"
-                            defaultState = {{ 
-                                center: moscow.coordinates,
-                                zoom: 12
-                            }}
-                        >
-                            <Placemark 
-                                geometry={moscow.coordinates}
-                                properties = {{
-                                    balloonContent: moscow.adress
-                                }}
-                                modules = {
-                                    ['geoObject.addon.balloon']
-                                }
-                            />
-                            <FullscreenControl />
-                            <TrafficControl />
-                        </Map>
-                    </YMaps>
-                </div>
-            </div>
-        </section>
-        )
-    }
+
+                <ContactsMap name = {cities[activeCity]} koordinates = {koordinates[activeCity]} address = {addresses[activeCity]} mapReady = {mapReady} activeCity = {activeCity} />
+
+            </section>
+        </>
+    )
 }
-
-export default MapCarousel
