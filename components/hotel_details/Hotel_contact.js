@@ -7,25 +7,23 @@ const Hotel_contact = ({hotelData}) => {
     let long = ('' + hotelData.coordinates.longitude).length > 10 ? hotelData.coordinates.longitude.toFixed(5) : hotelData.coordinates.longitude
     const koordinates = [lat, long]
 
-    useEffect(() => {
+    const initContacts = () => {
+        const myMap = new ymaps.Map("contactmap", {
+            center: koordinates,
+            zoom: 13
+        });
+    
+        const myPlacemark = new ymaps.Placemark(koordinates, {
+            hintContent: hotelData.name,
+            balloonContent: hotelData.address
+        });
+        myMap.geoObjects.add(myPlacemark);
+        myMap.setType('yandex#map');
+        myMap.behaviors.disable('scrollZoom');
+    }
 
-        function initContacts() {
-            const myMap = new ymaps.Map("contactmap", {
-                center: koordinates,
-                zoom: 13
-            });
-        
-            const myPlacemark = new ymaps.Placemark(koordinates, {
-                hintContent: hotelData.name,
-                balloonContent: hotelData.address
-            });
-            myMap.geoObjects.add(myPlacemark);
-            myMap.setType('yandex#map');
-            myMap.behaviors.disable('scrollZoom');
-        }
-    
+    useEffect(() => {
         ymaps.ready(initContacts)
-    
     }, [])
 
     return (
