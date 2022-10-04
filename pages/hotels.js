@@ -80,9 +80,6 @@ export default function Hotels () {
 
                 setLoadedItems(paginateItems(res.data, itemsPerPage))
 
-                console.log(res.data)
-                console.log(paginateItems(res.data, itemsPerPage))
-                
                 setPagination(res.data.length > itemsPerPage)
 
                 // определить минимум и максимум цен
