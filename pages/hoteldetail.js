@@ -120,7 +120,7 @@ function Hoteldetail () {
                 }
             }
 
-            link += '&id=' + res.data.id
+            link += '&id=' + query['hotel_id']
 
             fetch(link)
             .then((result) => result.json())
@@ -219,7 +219,7 @@ function Hoteldetail () {
                     </h2>
 
                      <Hoteldetail_form
-                        hotel_id = {hotelData.id}
+                        hotel_id = {query['hotel_id']}
                         hotel_name = {hotelData.name}
                         popularHotels = {popularHotels}
                         setRoomsData = {setRoomsData}
