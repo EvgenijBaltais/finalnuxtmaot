@@ -78,8 +78,6 @@ const Hotel_card = ({item, adults, children, nights}) => {
         return text
     }
 
-    console.log(item)
-
     return (
         <div className={styles[`select-results__item`]}>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
@@ -112,10 +110,9 @@ const Hotel_card = ({item, adults, children, nights}) => {
             <div className={styles["select-results__item-content"]}>
                 <a className={styles["select-item-title"]}>{item.name}</a>
                 <div className = {styles["select-item-info"]}>
+
                     <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
-
                         {item.services.map((item, index, arr) => {
-
                             if (!view) {
                                 if (index > 4) return false
                                 if (index > 3) {
@@ -123,10 +120,11 @@ const Hotel_card = ({item, adults, children, nights}) => {
                                 }
                             }
                             return (
-                                <span key = {index}>{item}</span>
+                                <span key = {index}>{item.group_name}</span>
                             )
                         })}
                     </div>
+
                     <div className = {styles["serv-item__btn"]} onClick = {() => changeView(view => !view)}>
                          {view ? <span className = {styles["serv-active-btn"]}>Скрыть подробное&nbsp;описание</span> : 
                          <span className = {styles["serv-passiv-btn"]}>Подробнее&nbsp;о&nbsp;номере</span>}
