@@ -219,14 +219,11 @@ export default function Hotels () {
                     }
                     if (!starsAllow) continue
                 }
-
                 newArr.push(arr[i])
             }
         }
-
         return newArr
     }
-
 
     useEffect(() => {
         from = document.querySelector('.aside-slider-from')
@@ -398,7 +395,7 @@ export default function Hotels () {
                         })) : ''
                     }
 
-                    {/* Пагинация */}{console.log(paginationOn)}
+                    {/* Пагинация */}
                     {paginationOn && !filtersOn ? (
                         <div className="search-pages-list">
                             {loadedItems.length && !filtersOn ? 

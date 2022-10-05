@@ -25,7 +25,7 @@ function Hoteldetail () {
     const { query } = useRouter()
     const [hotelData, setHotelData] = useState()
     const [popularHotels, setPopularHotels] = useState([])
-    const [roomsData, setRoomsData] = useState(false)
+    const [roomsData, setRoomsData] = useState(0)
     const [active_block, setActive_block] = useState(1)
 
     const [mapReady, setMapReady] = useState(0)
@@ -100,15 +100,15 @@ function Hoteldetail () {
         fetch(`https://maot-api.bokn.ru/api/hotels/get?id=${ query['hotel_id'] }`)
         .then((res) => res.json())
         .then((res) => {
-            
+
             setHotelData(res.data)
-            
+
             // Запрос доступных номеров
 
             let datein = query.datein.slice(6, 10) + '-' + query.datein.slice(3, 5) + '-' + query.datein.slice(0, 2)
             let dateout = query.dateout.slice(6, 10) + '-' + query.dateout.slice(3, 5) + '-' + query.dateout.slice(0, 2)
             let adults = query.adults || 2
-            let link = 'https://maot-api.bokn.ru/api/hotels/search-rooms?'
+            let link = 'https://maot-api.bokn.ru/api/hotels/search?'
 
             link += 'start_date=' + datein
             link += '&end_date=' + dateout
@@ -211,13 +211,14 @@ function Hoteldetail () {
                 </div>
             </section>
 
-                <section className = {styles["select-dates-content"]}>
+            <section className = {styles["select-dates-content"]}>
+                
                 <div className = {styles["select-dates-form-block"]}>
                     <h2 className = {styles["hotel-title-h2"]}>
                         {datesText}
                     </h2>
 
-                    <Hoteldetail_form
+                     <Hoteldetail_form
                         hotel_id = {hotelData.id}
                         hotel_name = {hotelData.name}
                         popularHotels = {popularHotels}
@@ -229,6 +230,7 @@ function Hoteldetail () {
                     {active_block == 3 ? <Hotel_service services = {hotelData.services} /> : ''}
                     {active_block == 4 ? <Hotel_contact hotelData = {hotelData} /> : '' }
                 </div>
+                                
 
                 <div className = {styles["select-dates-nav"]}>
                     <div className = {visibleNav ? `${styles["select-nav-bg"]} ${styles["active-nav-list"]}` : styles["select-nav-bg"]} ref={rootEl}>
