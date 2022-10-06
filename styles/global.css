@@ -4352,9 +4352,69 @@ input[type="checkbox"].substylized:checked + label:after {
 	.aside-filter-btn {
 		padding: 0 20px;
 	}
-}
 
 /* адаптив главной формы, конец */
+
+/* адаптив формы внутренней стр отеля, начало */
+
+
+	.hoteldetail-direction-form-w {
+		position: relative;
+		flex-direction: column;
+		margin-bottom: 84px;
+	}
+
+	.hoteldetail-direction-form__inside {
+		width: 100%;
+		height: auto;
+		border: none;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.hoteldetail-direction-form-way {
+		display: none;
+	}
+
+	.hoteldetail-search-dates {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+
+	.hoteldetail-direction-form-in,
+	.hoteldetail-direction-form-out {
+		width: calc(50% - 10px);
+		border-right: none;
+		height: 64px;
+		border: 3px solid rgb(255,70,72);
+		border-radius: 10px;
+	}
+
+	.hoteldetail-direction-form-people {
+		width: calc(50% - 10px);
+		height: 64px;
+		border: 3px solid rgb(255,70,72);
+		border-radius: 10px;
+	}
+
+	.hoteldetail-form-way-input {
+		border-radius: 10px;
+	}
+
+	.hoteldetail-direction-form-submit {
+		width: calc(50% - 10px);
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+
+	.hoteldetail-direction-form-btn {
+		height: 64px;
+	}
+/* адаптив формы внутренней стр отеля, конец */
+
+}
+
 
 
 @media screen and (max-width: 420px) {
