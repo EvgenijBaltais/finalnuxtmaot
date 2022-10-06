@@ -7,6 +7,8 @@ import Search_form_guests from './hoteldetail_form_components/Search_form_guests
 
 const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) => {
 
+    console.log(hotel_id)
+
     const [searchResult, setSearchResult] = useState({id: hotel_id, hotel_name: hotel_name, hotel: true})
     const [dateIn, setDateIn] = useState('')
     const [dateOut, setDateOut] = useState('')
@@ -52,7 +54,7 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
 
         let datein = dateIn.slice(6, 10) + '-' + dateIn.slice(3, 5) + '-' + dateIn.slice(0, 2)
         let dateout = dateOut.slice(6, 10) + '-' + dateOut.slice(3, 5) + '-' + dateOut.slice(0, 2)
-        let link = 'https://maot-api.bokn.ru/api/hotels/search-rooms?'
+        let link = 'https://maot-api.bokn.ru/api/hotels/search?'
 
         link += 'start_date=' + datein
         link += '&end_date=' + dateout
@@ -72,6 +74,7 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
         .then((result) => result.json())
         .then((result) => {
             console.log(link)
+            console.log(result.data)
             setRoomsData(result.data)
         })
     }

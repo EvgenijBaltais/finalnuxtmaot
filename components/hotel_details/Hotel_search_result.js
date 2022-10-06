@@ -10,6 +10,10 @@ const Hotel_search_result = ({ items }) => {
     let dateout = new Date(query.dateout.slice(6, 10), query.dateout.slice(3, 5), query.dateout.slice(0, 2))
     let nights = (dateout - datein) / (60 * 60 * 24 * 1000)
 
+    if (!items) return (
+        <div className = {styles["select-results"]}>Загрузка...</div>
+    )
+
     if (items.length > 0) return (
         <div className = {styles["select-results"]}>
             {items.map((item, index) => (
@@ -17,7 +21,7 @@ const Hotel_search_result = ({ items }) => {
             ))}
         </div>
     )
-
+{
     if (items.length == 0) return (
         <div className={styles["select-noresults__item"]}>
             <h3>К сожалению свободные номера на ваши Даты закончились</h3>
@@ -25,12 +29,7 @@ const Hotel_search_result = ({ items }) => {
             <span>или</span>
             <p>Выбрать другой отель в том же регионе из списка ниже</p>
         </div>
-    )
-
-    if (!items) return (
-        <div className = {styles["select-results"]}>Загрузка...</div>
-    )
-
+    )}
 }
 
 export default Hotel_search_result
