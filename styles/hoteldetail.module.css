@@ -1035,7 +1035,7 @@
 		background-color: #fff;
 		box-shadow: var(--main-shadow);
 		box-sizing: border-box;
-		z-index: 10;
+		z-index: 2;
 	}
 
 	.select-nav-bg:before {
@@ -1048,7 +1048,7 @@
 	    background-size: contain;
 	    background-repeat: no-repeat;
 	    transition: 0.2s;
-	    z-index: 10;
+	    z-index: 2;
 	}
 
 	.active-nav-list.select-nav-bg:before {
