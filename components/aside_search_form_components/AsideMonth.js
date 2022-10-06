@@ -1,4 +1,5 @@
 import AsideDayLink from './AsideDayLink'
+import { useEffect } from 'react'
 
 export default function AsideMonth (value) {
 
@@ -6,7 +7,8 @@ export default function AsideMonth (value) {
 	    month = date.getMonth() + value.monthId,
 	    year = date.getFullYear(),
         days = [],
-        prefixDays = []
+        prefixDays = [],
+        monthName = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
 
         let getMonthDays = (index) => {
                 
@@ -37,6 +39,18 @@ export default function AsideMonth (value) {
 
         prefixDays = getprefixDays(value.monthId)
         days = getMonthDays(value.monthId)
+
+        useEffect(() => {
+
+            // Если календарь на выезд, то при открытии промотка к актуальному месяцу
+
+            let monthNameItem = monthName[parseInt(value.mindate.slice(3,5)) - 1]
+
+            if (value.monthName == monthNameItem) {
+                document.querySelector('.datepicker-body').scrollTo({top: document.querySelector(`#month-calendar-${value.monthId}`).offsetTop})
+            }
+
+        }, [value])
 
     return (
 

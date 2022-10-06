@@ -31,26 +31,7 @@ export default function AsideDatepicker (value) {
 
         useEffect(() => {
 
-            smoothscroll.polyfill()
-            let position = 0
-            let documentCached = document
-            let links = document.querySelectorAll(".month-aside__link")
-
-            const addLinkEvents = (event, i) => {
-                event.preventDefault()
-                position = documentCached.getElementById(`month-calendar-${i}`).offsetTop
-                documentCached.querySelector('.datepicker-body').scrollTo({top: position, behavior: 'smooth'})
-            }
-
-            for (let i = 0; i < links.length; i++) {
-                links[i].addEventListener('click', () => addLinkEvents(event, i))
-            }
-
-            return () => {
-                for (let i = 0; i < links.length; i++) {
-                    links[i].removeEventListener('click', () => addLinkEvents(event, i))
-                }
-            }
+            smoothscroll.polyfill() // для плавной прокрутки на сафари
         }, [])
 
     return (
@@ -70,7 +51,12 @@ export default function AsideDatepicker (value) {
             <div className="month-aside">
                 {monthArray.map((item, index) => {
                     return (
-                        <AsideMonthLink key = {index} index = {index} item = {item} />
+                        <AsideMonthLink 
+                            key = {index}
+                            index = {index}
+                            item = {item}
+                            mindate = {value.mindate}
+                        />
                     )
                 })}  
             </div>

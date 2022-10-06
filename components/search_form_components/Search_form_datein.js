@@ -43,7 +43,7 @@ export default function Search_form_datein(props) {
         }
 
         setDateOutOpened(1)
-        setDateInOpened(0) 
+        setDateInOpened(0)
     }
 
     function nextDay (str) {
