@@ -26,6 +26,7 @@ export default function Search_form_datein(props) {
 
     function closeDateIn (value, date) {
         setDateInOpened(value)
+        setDateOutOpened(1)
         props.changeDateIn(date)
         props.changeDateOut(nextDay(date))
     }
