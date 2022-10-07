@@ -1,6 +1,7 @@
 export default function DayLink (props) {
 
     const date = new Date()
+    const yesterday = new Date(Date.now()-86400000)
     const [day, month, year] = props.item.split('.')
     const actualDate = new Date(year, month, day)
     const [minDay, minMonth, minYear] = props.mindate.split('.')
@@ -29,7 +30,9 @@ export default function DayLink (props) {
         <a onClick = {sendDate}
             className = {
                 `date-link${
-                    actualDate < minDate ? ' date-disable' : '' 
+                    actualDate < yesterday && !props.prefix ? ' date-disable' : ''
+                }${
+                    props.closeFuncdateOut && actualDate < minDate ? ' date-disable' : '' 
                 }${
                     props.prefix ? ' date-prefix' : ''
                 }${
