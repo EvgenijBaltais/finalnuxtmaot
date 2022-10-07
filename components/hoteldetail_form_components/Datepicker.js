@@ -29,9 +29,35 @@ export default function Datepicker (value) {
             return arr
         }
 
+        function leftMonthActivate (element, a, b, arr, monthsAside, i) {
+
+            if (element.scrollTop > a && element.scrollTop < b) {
+
+                if (monthsAside[i].classList.contains('month-aside__link-active')) return false
+
+                document.querySelector('.month-aside__link-active').classList.remove('month-aside__link-active')
+                monthsAside[i].classList.add('month-aside__link-active')
+                return
+            }
+        }
+
         useEffect(() => {
 
             smoothscroll.polyfill() // для плавной прокрутки на сафари
+
+            let monthPlace = []
+            let monthsAside = document.querySelectorAll('.month-aside__link')
+
+            for (let i = 0; i < document.querySelectorAll('.month-calendar').length; i++) {
+                monthPlace.push(document.querySelectorAll('.month-calendar')[i].offsetTop - 100)
+            }
+            monthPlace.push(100000) // последний элемент
+
+            document.querySelector('.datepicker-body').addEventListener("scroll", event => {
+                for (let i = 0; i < monthPlace.length; i++) {
+                    leftMonthActivate (event.target, monthPlace[i], monthPlace[i + 1], monthPlace, monthsAside, i)
+                }
+            })
         }, [])
 
     return (
