@@ -41,22 +41,32 @@ export default function AsideDatepicker (value) {
             }
         }
 
-        useEffect(() => {
-
-            smoothscroll.polyfill() // для плавной прокрутки на сафари
-
+        function scrollAction () {
+                
             let monthPlace = []
             let monthsAside = document.querySelectorAll('.month-aside__link')
 
             for (let i = 0; i < document.querySelectorAll('.month-calendar').length; i++) {
                 monthPlace.push(document.querySelectorAll('.month-calendar')[i].offsetTop - 100)
             }
+
             monthPlace.push(100000) // последний элемент
 
-            document.querySelector('.datepicker-body').addEventListener("wheel", event => {
-                for (let i = 0; i < monthPlace.length; i++) {
-                    leftMonthActivate (event.target, monthPlace[i], monthPlace[i + 1], monthPlace, monthsAside, i)
-                }
+            for (let i = 0; i < monthPlace.length; i++) {
+                leftMonthActivate (event.target, monthPlace[i], monthPlace[i + 1], monthPlace, monthsAside, i)
+            }
+        }
+
+        useEffect(() => {
+
+            smoothscroll.polyfill() // для плавной прокрутки на сафари
+
+            document.querySelector('.datepicker-body').addEventListener('mouseenter', event => {
+                event.target.addEventListener("scroll", scrollAction, true)
+            })
+          
+            document.querySelector('.datepicker-body').addEventListener('mouseleave', event => {
+                event.target.removeEventListener("scroll", scrollAction, true)
             })
         }, [])
 
