@@ -57,12 +57,9 @@ export default function Datepicker (value) {
             }
         }
 
-
         useEffect(() => {
 
             smoothscroll.polyfill() // для плавной прокрутки на сафари
-
-            let el = document.querySelector('.datepicker-body')
 
             document.querySelector('.datepicker-body').addEventListener('mouseenter', event => {
                 event.target.addEventListener("scroll", scrollAction, true)
@@ -71,7 +68,6 @@ export default function Datepicker (value) {
             document.querySelector('.datepicker-body').addEventListener('mouseleave', event => {
                 event.target.removeEventListener("scroll", scrollAction, true)
             })
-
         }, [])
 
     return (
