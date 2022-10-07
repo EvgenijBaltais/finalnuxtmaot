@@ -26,8 +26,15 @@ export default function DayLink (props) {
         props.closeFuncdateOut ? props.closeFuncdateOut(0, getActualTextData(day, actualDate.getMonth(), actualDate.getFullYear())) : ''
     }
 
+    function hoverMode () {
+        if (props.closeFuncdateOut) {
+            console.log(minDate)
+        }
+    }
+
     return (
-        <a onClick = {sendDate}
+        <a onMouseEnter={hoverMode}
+            onClick = {sendDate}
             className = {
                 `date-link${
                     actualDate < yesterday && !props.prefix ? ' date-disable' : ''
