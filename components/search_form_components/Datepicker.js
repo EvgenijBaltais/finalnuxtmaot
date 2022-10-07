@@ -70,6 +70,18 @@ export default function Datepicker (value) {
             })
         }, [])
 
+        function hoverAction () {
+        
+            //let dates = document.querySelectorAll('.date-link')
+    
+            //for (let i = 0; i < document.querySelectorAll('.date-link').length; i++) {
+            //    document.querySelectorAll('.date-link')[i].getDay == 
+            //}
+    
+            //console.log(minDate, actualDate)
+        }
+    
+
     return (
         <div className="datepicker-w">
             <div className="datepicker-header">
