@@ -53,7 +53,7 @@ export default function AsideDatepicker (value) {
             }
             monthPlace.push(100000) // последний элемент
 
-            document.querySelector('.datepicker-body').addEventListener("scroll", event => {
+            document.querySelector('.datepicker-body').addEventListener("wheel", event => {
                 for (let i = 0; i < monthPlace.length; i++) {
                     leftMonthActivate (event.target, monthPlace[i], monthPlace[i + 1], monthPlace, monthsAside, i)
                 }
