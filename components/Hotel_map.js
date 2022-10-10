@@ -29,6 +29,9 @@ export default function Hotel_map ({hotelData, mapReady}) {
         if (!mapReady) {
             return
         }
+        if (!ymaps) {
+            return
+        }
 
         ymaps.ready(init)
     }, [mapReady])

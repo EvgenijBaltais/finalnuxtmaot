@@ -127,6 +127,8 @@ function Hoteldetail () {
             .then((result) => {
                 console.log(link)
                 setRoomsData(result.data)
+
+                console.log(result.data[0])
             })
         })
     }, [query])
@@ -225,7 +227,7 @@ function Hoteldetail () {
                         setRoomsData = {setRoomsData}
                     />
 
-                    {active_block == 1 ? <Hotel_search_result items = {roomsData} /> : ''}
+                    {active_block == 1 ? <Hotel_search_result items = {roomsData[0]} /> : ''}
                     {active_block == 2 ? <Rooms_info hotelData = {hotelData}/> : ''}
                     {active_block == 3 ? <Hotel_service services = {hotelData.services} /> : ''}
                     {active_block == 4 ? <Hotel_contact hotelData = {hotelData} /> : '' }
