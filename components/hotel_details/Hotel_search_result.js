@@ -4,6 +4,7 @@ import styles from "../../styles/Hoteldetail.module.css"
 
 const Hotel_search_result = ({ items }) => {
 
+
     console.log(items)
 
     const { query } = useRouter()
@@ -12,14 +13,14 @@ const Hotel_search_result = ({ items }) => {
     let dateout = new Date(query.dateout.slice(6, 10), query.dateout.slice(3, 5), query.dateout.slice(0, 2))
     let nights = (dateout - datein) / (60 * 60 * 24 * 1000)
 
-    if (!items.rates) return (
+    if (!items) return (
         <div className = {styles["select-results"]}>Загрузка...</div>
     )
 
     if (items.rates.length > 0) return (
         <div className = {styles["select-results"]}>
             {items.rates.map((item, index) => (
-                <Hotel_card key = {index} item = {item} adults = {query.adults || 2} children = {query.children_ages || []} nights = {nights}  />
+                <Hotel_card key = {index} item = {item} hotelInfo = {items.hotel} adults = {query.adults || 2} children = {query.children_ages || []} nights = {nights}  />
             ))}
         </div>
     )
