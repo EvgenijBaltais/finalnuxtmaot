@@ -11,7 +11,6 @@ export default function Search_hotel_item ({item, rates, nights}) {
 
     const { query } = useRouter()
 
-    console.log(rates)
 
     function nightsRightText (nights) {
 
@@ -48,9 +47,6 @@ export default function Search_hotel_item ({item, rates, nights}) {
     for (let key in obj) {
         key == "datein" ? url += (key + "=" + obj[key]) : url += ('&' + key + "=" + obj[key])
     }
-
-
-    console.log(item)
 
     return (
 
