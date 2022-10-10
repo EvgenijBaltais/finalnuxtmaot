@@ -12,8 +12,6 @@ import Hotel_service from "../components/hotel_details/Hotel_service"
 import Hotel_contact from "../components/hotel_details/Hotel_contact"
 import Hotel_map from "../components/Hotel_map"
 import styles from "../styles/Hoteldetail.module.css"
-
-
 import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Keyboard, Navigation } from "swiper"
@@ -226,9 +224,9 @@ function Hoteldetail () {
                     />
 
                     {active_block == 1 ? <Hotel_search_result items = {roomsData[0]} /> : ''}
-                    {active_block == 2 ? <Rooms_info hotelData = {hotelData}/> : ''}
-                    {active_block == 3 ? <Hotel_service services = {hotelData.services} /> : ''}
-                    {active_block == 4 ? <Hotel_contact hotelData = {hotelData} /> : '' }
+                    {active_block == 2 ? <Rooms_info hotelData = {roomsData[0].hotel}/> : ''}
+                    {active_block == 3 ? <Hotel_service services = {roomsData[0].hotel.services} /> : ''}
+                    {active_block == 4 ? <Hotel_contact hotelData = {roomsData[0].hotel} /> : '' }
                 </div>
                                 
 

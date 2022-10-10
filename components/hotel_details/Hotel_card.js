@@ -5,7 +5,7 @@ import Link from "next/link"
 import styles from "../../styles/Hoteldetail.module.css"
 import "swiper/css"
 
-const Hotel_card = ({item, adults, children, nights}) => {
+const Hotel_card = ({item, hotelInfo, adults, children, nights}) => {
     const [view, changeView] = useState(0)
     const [servicesMain, setServicesMain] = useState([])
     const [servicesDop, setServicesDop] = useState([])
@@ -14,9 +14,9 @@ const Hotel_card = ({item, adults, children, nights}) => {
 
         let servicesArr = []
 
-        for (let i = 0; i < item.services.length; i++) {
-            for (let k = 0; k < item.services[i].amenities.length; k++) {
-                servicesArr.push(item.services[i].amenities[k])
+        for (let i = 0; i < hotelInfo.services.length; i++) {
+            for (let k = 0; k < hotelInfo.services[i].amenities.length; k++) {
+                servicesArr.push(hotelInfo.services[i].amenities[k])
             }
         }
 
@@ -93,8 +93,6 @@ const Hotel_card = ({item, adults, children, nights}) => {
         return text
     }
 
-    console.log(item)
-
     return (
         <div className={styles[`select-results__item`]}>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
@@ -125,7 +123,7 @@ const Hotel_card = ({item, adults, children, nights}) => {
                 </Swiper>
             </div>
             <div className={styles["select-results__item-content"]}>
-                <a className={styles["select-item-title"]}>{item.hotel_name}</a>
+                <a className={styles["select-item-title"]}>{item.room_name}</a>
                 <div className = {styles["select-item-info"]}>
 
                     <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
