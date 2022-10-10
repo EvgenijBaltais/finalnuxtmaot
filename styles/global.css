@@ -2241,6 +2241,11 @@ input[type="checkbox"].substylized:checked + label:after {
 	color: #fff
 }
 
+.date-hovered {
+	background: var(--red-linear-gradient);
+	color: #fff
+}
+
 .date-weekend:not(.date-today) {
 	color: #FF0101
 }
