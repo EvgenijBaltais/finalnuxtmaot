@@ -5,9 +5,9 @@ export default function Hotel_map ({hotelData, mapReady}) {
 
     let lat = String(hotelData.coordinates.latitude).length > 10 ? Number(hotelData.coordinates.latitude).toFixed(5) : Number(hotelData.coordinates.latitude)
     let long = String(hotelData.coordinates.longitude).length > 10 ? Number(hotelData.coordinates.longitude).toFixed(5) : Number(hotelData.coordinates.longitude)
+    let myMap
 
-
-    const init = () => {
+    function init () {
 
         const myMap = new ymaps.Map("map", {
             center: [lat, long],
@@ -29,11 +29,12 @@ export default function Hotel_map ({hotelData, mapReady}) {
         if (!mapReady) {
             return
         }
-        if (!ymaps) {
-            return
+        try{console.log('try')
+            ymaps.ready(init)
         }
-
-        ymaps.ready(init)
+        catch(e) {
+            console.log(e)
+        }
     }, [mapReady])
 
     return (
