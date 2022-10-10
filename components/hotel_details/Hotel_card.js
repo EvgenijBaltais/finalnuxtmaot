@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper"
 import Link from "next/link"
@@ -7,6 +7,21 @@ import "swiper/css"
 
 const Hotel_card = ({item, adults, children, nights}) => {
     const [view, changeView] = useState(0)
+    const [servicesMain, setServicesMain] = useState([])
+    const [servicesDop, setServicesDop] = useState([])
+
+    useEffect(() => {
+
+        let servicesArr = []
+
+        for (let i = 0; i < item.services.length; i++) {
+            for (let k = 0; k < item.services[i].amenities.length; k++) {
+                servicesArr.push(item.services[i].amenities[k])
+            }
+        }
+
+        setServicesDop(servicesArr)
+    }, [item])
     
     function addBackgroundImage (slider) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
@@ -55,15 +70,15 @@ const Hotel_card = ({item, adults, children, nights}) => {
             c = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,25,26,27,28,29,30]
 
         a.forEach(element => {
-            num == element ? text = ' услуга' : ''
+            num == element ? text = ' услуга...' : ''
         })
 
         b.forEach(element => {
-            num == element ? text = ' услуги' : ''
+            num == element ? text = ' услуги...' : ''
         })
 
         c.forEach(element => {
-            num == element ? text = ' услуг' : ''
+            num == element ? text = ' услуг...' : ''
         })
 
         return num + text
@@ -77,6 +92,8 @@ const Hotel_card = ({item, adults, children, nights}) => {
         nights == 2 || nights == 3 || nights == 4 ? text = nights + ' ночи' : ''
         return text
     }
+
+    console.log(item)
 
     return (
         <div className={styles[`select-results__item`]}>
@@ -108,19 +125,19 @@ const Hotel_card = ({item, adults, children, nights}) => {
                 </Swiper>
             </div>
             <div className={styles["select-results__item-content"]}>
-                <a className={styles["select-item-title"]}>{item.name}</a>
+                <a className={styles["select-item-title"]}>{item.hotel_name}</a>
                 <div className = {styles["select-item-info"]}>
 
                     <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
-                        {item.services.map((item, index, arr) => {
+                        {servicesDop.map((item, index, arr) => {
                             if (!view) {
                                 if (index > 4) return false
-                                if (index > 3) {
-                                    return <span key = {index} className = {styles["serv-item__more-services"]}>еще {returnServices(arr.length - index)}...</span>
+                                if (index > 3 && servicesDop.length > 8) {
+                                    return <span key = {index} className = {`${styles["serv-item__more-services"]} ${styles["serv-item__more-span"]}`}>еще {returnServices(4)}</span>
                                 }
                             }
                             return (
-                                <span key = {index}>{item.group_name}</span>
+                                <span className = {styles["serv-item__more-services"]} key = {index}>{item}</span>
                             )
                         })}
                     </div>
@@ -153,10 +170,21 @@ const Hotel_card = ({item, adults, children, nights}) => {
                     </Link>
                 </div>
             </div>
-            {item.description ?
+            {servicesDop.length > 8 ?
                 <div className={styles["select-results__item-text"]}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati dolor accusantium maiores molestiae, 
-                    itaque atque ratione ipsam quam rem totam magni esse nesciunt, a nostrum harum unde, facere eum deserunt?
+                        {servicesDop.map((item, index, arr) => {
+                            if (index <= 8) return ('')
+
+                            if (!view) {
+                                if (index > 18) return false
+                                if (index == 18 && servicesDop.length > 18) {
+                                    return <span key = {index} className = {`${styles["serv-item__more-services-dop"]} ${styles["serv-item__more-span"]}`}>еще {returnServices(servicesDop.length - 18)}</span>
+                                }
+                            }
+                            return (
+                                <span className = {styles["serv-item__more-services-dop"]} key = {index}>{item}</span>
+                            )
+                        })}
                 </div> : ''
             }
         </div>

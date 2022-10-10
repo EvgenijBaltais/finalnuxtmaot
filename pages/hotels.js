@@ -78,6 +78,12 @@ export default function Hotels () {
                     .then((res) => res.json())
                     .then((res) => {
 
+                        console.log(res.success)
+
+                    res.success ? '' : res.data = []
+                    
+                    console.log(!res.success ? 'Ошибка запроса success == 0' : '')
+
                 setLoadedItems(paginateItems(res.data, itemsPerPage))
 
                 setPagination(res.data.length > itemsPerPage)
@@ -380,7 +386,7 @@ export default function Hotels () {
                         loadedItems.length && !filtersOn ? (
                             loadedItems[currentPage].map((item, index) => {
                             return (
-                                <Search_hotel_item key = {index} item = {item} nights = {nights} query = {query} />
+                                <Search_hotel_item key = {index} item = {item.hotel} rates = {item.rates} nights = {nights} query = {query} />
                             )
                         })) : ''
                     }
@@ -390,7 +396,7 @@ export default function Hotels () {
                         filteredItems.length && filtersOn ? (
                             filteredItems.map((item, index) => {
                             return (
-                                <Search_hotel_item key = {index} item = {item} nights = {nights} />
+                                <Search_hotel_item key = {index} item = {item.hotel} rates = {item.rates} nights = {nights} />
                             )
                         })) : ''
                     }

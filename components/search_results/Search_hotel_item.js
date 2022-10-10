@@ -7,9 +7,11 @@ import { useRouter } from "next/router"
 import styles from "../../styles/search_results/Search_hotel_item.module.css"
 import "swiper/css"
 
-export default function Search_hotel_item ({item, nights}) {
+export default function Search_hotel_item ({item, rates, nights}) {
 
     const { query } = useRouter()
+
+    console.log(rates)
 
     function nightsRightText (nights) {
 
@@ -46,6 +48,9 @@ export default function Search_hotel_item ({item, nights}) {
     for (let key in obj) {
         key == "datein" ? url += (key + "=" + obj[key]) : url += ('&' + key + "=" + obj[key])
     }
+
+
+    console.log(item)
 
     return (
 
@@ -96,7 +101,7 @@ export default function Search_hotel_item ({item, nights}) {
             <div className = {styles["search-item__broninfo"]}>
                 <div className = {styles["search-item__price"]}>
                     <span className = {styles["search-item__price-from"]}>от</span>
-                    <span className = {styles["search-item__price-number"]}>{makePriceGreatAgain(item.daily_price, nights)}</span>
+                    <span className = {styles["search-item__price-number"]}>{makePriceGreatAgain(rates[0].daily_price, nights)}</span>
                     <span className = {styles["search-item__price-currency"]}>&#8381;</span>
                 </div>
                 <p className = {styles["search-item__nights"]}>цена за <span className = {styles["search-item__nights-number"]}>{nightsRightText(nights)}</span></p>
