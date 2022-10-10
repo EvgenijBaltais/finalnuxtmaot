@@ -854,12 +854,12 @@ input[type="checkbox"].substylized:checked + label:after {
 	width: 5px;
 	height: 5px;
 	margin: 2px;
-	background-color: rgb(223,219,210);
+	background-color: rgb(210,223,229);
 	border-radius: 100%;
 }
 
 .select-search-item-pics .swiper-pagination-bullet-active {
-	background-color: rgb(255,74,43);
+	background-color: rgb(255,255,255);
 }
 
 /* Swiper на странице Номер отеля в подборке номеров конец */ 

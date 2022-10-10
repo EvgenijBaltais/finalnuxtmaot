@@ -17,6 +17,7 @@ export default function Hotels () {
     const { query } = useRouter()
 
     const [loadedItems, setLoadedItems] = useState([])
+    const [temporaryItems, setTemporaryItems] = useState([])
     const [filteredItems, setFilteredItems] = useState([])
     const [isResearch, setIsResearch] = useState(false)
     const [nights, setNights] = useState(0)
@@ -78,21 +79,25 @@ export default function Hotels () {
                     .then((res) => res.json())
                     .then((res) => {
 
+                    res.success ? '' : res.data = []
+                    
+                    //console.log(!res.success ? 'Ошибка запроса success == 0' : '')
+
                 setLoadedItems(paginateItems(res.data, itemsPerPage))
+                setTemporaryItems(res.data)
 
                 setPagination(res.data.length > itemsPerPage)
 
                 // определить минимум и максимум цен
 
                 let prices = []
-                let nights = calculateNights(dateIn, dateOut)
 
                 for (let i = 0; i < res.data.length; i++) {
-                    prices.push(parseInt(res.data[i].daily_price))
+                    prices.push(parseInt(res.data[i].rates[0].price))
                 }
 
-                setSliderMin(Number.isInteger(Math.min.apply(null, prices) * nights) ? Math.min.apply(null, prices) * nights : 0)
-                setSliderMax(Number.isInteger(Math.max.apply(null, prices) * nights) ? Math.max.apply(null, prices) * nights : 0)
+                setSliderMin(Number.isInteger(Math.min.apply(null, prices)) ? Math.min.apply(null, prices) : 0)
+                setSliderMax(Number.isInteger(Math.max.apply(null, prices)) ? Math.max.apply(null, prices) : 0)
                 res.data.length == 0 ? setNodataText('Нет подходящих вариантов') : setNodataText('')
           })
 
@@ -165,13 +170,7 @@ export default function Hotels () {
 
     function applyFilters(items) {
 
-        const arr = []
-
-        for (let i = 0; i < items.length; i++) {
-            for (let k = 0; k < items[i].length; k++) {
-                arr.push(items[i][k])
-            }
-        }
+        let arr = temporaryItems
 
         // Минимальная и максимальная цена
 
@@ -194,35 +193,35 @@ export default function Hotels () {
             stars.push(i + 1) : ''
         }
 
-        let newArr = []
-        let starsAllow = false
-
         // Проверка на все фильтры
 
-        for (let i = 0; i < arr.length; i++) {
-            starsAllow = 0
-            // Диапазон цен
-            if (parseInt(arr[i].daily_price) * nights >= min && (parseInt(arr[i].daily_price) * nights) <= max) {
+        // Диапазон цен
 
-                // Проверка на тип питания
-                if (food.includes('Все включено')) {
-                    if (!arr[i].is_all_inclusive) continue
-                }
+        arr = arr.filter(function (n) {
+            return parseInt(n.rates[0].price) >= min && parseInt(n.rates[0].price) <= max
+        })
 
-                // Проверка на Звездность
-                if (stars.length != 0) {
-                    for (let k = 0; k < stars.length; k++) {
-                        if (arr[i].star_rating == stars[k]) {
-                            starsAllow = true
-                            break
-                        }
-                    }
-                    if (!starsAllow) continue
-                }
-                newArr.push(arr[i])
-            }
+        // Проверка на тип питания (все включено)
+
+        if (food.includes('Все включено')) {
+            arr = arr.filter(function (n) {
+                return n.hotel.all_inclusive == true
+            })
         }
-        return newArr
+
+        /*
+        // Проверка на Звездность
+        if (stars.length != 0) {
+            for (let k = 0; k < stars.length; k++) {
+                if (arr[i].hotel.star_rating == stars[k]) {
+                    starsAllow = true
+                    break
+                }
+            }
+            if (!starsAllow) continue
+        }*/
+
+        return arr
     }
 
     useEffect(() => {
@@ -380,7 +379,7 @@ export default function Hotels () {
                         loadedItems.length && !filtersOn ? (
                             loadedItems[currentPage].map((item, index) => {
                             return (
-                                <Search_hotel_item key = {index} item = {item} nights = {nights} query = {query} />
+                                <Search_hotel_item key = {index} item = {item.hotel} rates = {item.rates} nights = {nights} query = {query} />
                             )
                         })) : ''
                     }
@@ -390,7 +389,7 @@ export default function Hotels () {
                         filteredItems.length && filtersOn ? (
                             filteredItems.map((item, index) => {
                             return (
-                                <Search_hotel_item key = {index} item = {item} nights = {nights} />
+                                <Search_hotel_item key = {index} item = {item.hotel} rates = {item.rates} nights = {nights} />
                             )
                         })) : ''
                     }
