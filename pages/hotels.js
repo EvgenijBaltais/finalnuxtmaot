@@ -78,11 +78,9 @@ export default function Hotels () {
                     .then((res) => res.json())
                     .then((res) => {
 
-                        console.log(res.success)
-
                     res.success ? '' : res.data = []
                     
-                    console.log(!res.success ? 'Ошибка запроса success == 0' : '')
+                    //console.log(!res.success ? 'Ошибка запроса success == 0' : '')
 
                 setLoadedItems(paginateItems(res.data, itemsPerPage))
 
@@ -91,14 +89,13 @@ export default function Hotels () {
                 // определить минимум и максимум цен
 
                 let prices = []
-                let nights = calculateNights(dateIn, dateOut)
 
                 for (let i = 0; i < res.data.length; i++) {
-                    prices.push(parseInt(res.data[i].daily_price))
+                    prices.push(parseInt(res.data[i].rates[0].price))
                 }
 
-                setSliderMin(Number.isInteger(Math.min.apply(null, prices) * nights) ? Math.min.apply(null, prices) * nights : 0)
-                setSliderMax(Number.isInteger(Math.max.apply(null, prices) * nights) ? Math.max.apply(null, prices) * nights : 0)
+                setSliderMin(Number.isInteger(Math.min.apply(null, prices)) ? Math.min.apply(null, prices) : 0)
+                setSliderMax(Number.isInteger(Math.max.apply(null, prices)) ? Math.max.apply(null, prices) : 0)
                 res.data.length == 0 ? setNodataText('Нет подходящих вариантов') : setNodataText('')
           })
 
