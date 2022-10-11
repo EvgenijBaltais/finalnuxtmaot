@@ -32,7 +32,7 @@ export default function Hotel_map ({hotelData, mapReady}) {
         if (!ymaps) {
             return
         }
-        try{console.log('try')
+        try{
             ymaps.ready(init)
         }
         catch(e) {

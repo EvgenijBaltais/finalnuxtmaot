@@ -117,9 +117,7 @@ function Hoteldetail () {
             .then((result) => {
                 console.log(link)
                 setRoomsData(result.data)
-                console.log(result.data)
             })
-
     }, [query])
 
     useEffect(() => {
