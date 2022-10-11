@@ -40,12 +40,21 @@ export default function Search_hotel_item ({item, rates, nights}) {
         hotel_id: item.id
     }
 
-    query.children_ages ? obj.children_ages = query.children_ages : ''
-
     let url = '/hoteldetail?'
 
     for (let key in obj) {
         key == "datein" ? url += (key + "=" + obj[key]) : url += ('&' + key + "=" + obj[key])
+    }
+
+    // Дети
+    if (query.children_ages && Number.isInteger(+query.children_ages)) {
+        url += '&children_ages=' + query.children_ages
+    }
+
+    if (query.children_ages && Array.isArray(query.children_ages)) {
+        for (let i = 0; i < query.children_ages.length; i++) {
+            url += '&children_ages=' + query.children_ages[i]
+        }
     }
 
     return (
