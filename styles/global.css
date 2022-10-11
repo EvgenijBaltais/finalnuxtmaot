@@ -60,6 +60,10 @@ body {
 	margin: 20px auto;
 }
 
+.main {
+	min-height: 300px;
+}
+
 .search-page.wrapper {
 	max-width: calc(100% - 40px);
 }
@@ -1060,7 +1064,6 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 /* Общие стили для разных компонентов, конец */
-
 
 .anim-blick__submit-bg {
 	position: absolute;
@@ -4476,3 +4479,44 @@ input[type="checkbox"].substylized:checked + label:after {
     line-height: 30px;
 	}
 }
+
+/* Карточка номера у отеля - иконки */
+
+.serv-item__block_meal {
+	background-image: url('/images/icons/meal.png');
+	background-size: 16px;
+	background-position: left center;
+	background-repeat: no-repeat;
+	color: rgb(255,73,55);
+	font-family: 'FontInterMedium'!important;
+}
+
+.serv-item__block_conditioner {
+	background-image: url('/images/icons/air-conditioner.png');
+	background-size: 16px;
+	background-position: left center;
+	background-repeat: no-repeat;
+}
+
+.serv-item__block_conditioner {
+	background-image: url('/images/icons/air-conditioner.png');
+	background-size: 16px;
+	background-position: left center;
+	background-repeat: no-repeat;
+}
+
+.serv-item__block_bed {
+	background-image: url('/images/icons/bedroom.png');
+	background-size: 16px;
+	background-position: left center;
+	background-repeat: no-repeat;
+}
+
+.serv-item__block_internet {
+	background-image: url('/images/icons/wifi.png');
+	background-size: 16px;
+	background-position: left center;
+	background-repeat: no-repeat;
+}
+
+/* Карточка номера у отеля - иконки, конец */

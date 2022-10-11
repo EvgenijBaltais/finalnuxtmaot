@@ -9,7 +9,7 @@ export default function Hotel_map ({hotelData, mapReady}) {
 
     function init () {
 
-        const myMap = new ymaps.Map("map", {
+        myMap = new ymaps.Map("map", {
             center: [lat, long],
             zoom: 13
         })
@@ -29,7 +29,10 @@ export default function Hotel_map ({hotelData, mapReady}) {
         if (!mapReady) {
             return
         }
-        try{console.log('try')
+        if (!ymaps) {
+            return
+        }
+        try{
             ymaps.ready(init)
         }
         catch(e) {
