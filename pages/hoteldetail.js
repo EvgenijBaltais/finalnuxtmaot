@@ -16,12 +16,10 @@ import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Keyboard, Navigation } from "swiper"
 
-
 function Hoteldetail () {
 
     const router = useRouter()
     const { query } = useRouter()
-    const [hotelData, setHotelData] = useState()
     const [popularHotels, setPopularHotels] = useState([])
     const [roomsData, setRoomsData] = useState(0)
     const [active_block, setActive_block] = useState(1)
@@ -95,13 +93,7 @@ function Hoteldetail () {
 
         if (!router.isReady) return
 
-        fetch(`https://maot-api.bokn.ru/api/hotels/get?id=${ query['hotel_id'] }`)
-        .then((res) => res.json())
-        .then((res) => {
-
-            setHotelData(res.data)
-
-            // Запрос доступных номеров
+            // Запрос инфы по отелю и доступных номеров
 
             let datein = query.datein.slice(6, 10) + '-' + query.datein.slice(3, 5) + '-' + query.datein.slice(0, 2)
             let dateout = query.dateout.slice(6, 10) + '-' + query.dateout.slice(3, 5) + '-' + query.dateout.slice(0, 2)
@@ -125,8 +117,9 @@ function Hoteldetail () {
             .then((result) => {
                 console.log(link)
                 setRoomsData(result.data)
+                console.log(result.data)
             })
-        })
+
     }, [query])
 
     useEffect(() => {
@@ -147,14 +140,14 @@ function Hoteldetail () {
         }
     }, [])
 
-    if (!hotelData) {
+    if (!roomsData) {
         return <></>
     }
 
     return (
         <>
             <Head>
-                <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.name} - Магазин отдыха</title>
+                <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {roomsData[0].hotel.name} - Магазин отдыха</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
 
@@ -166,8 +159,8 @@ function Hoteldetail () {
             <section className = {styles["single-hotel"]}>
                 <div className={styles["titles-top"]}>
                     <div className = {styles["title-block"]}>
-                        {hotelData.name ? <h1 className = "hotel-title">{hotelData.name}</h1> : ''}
-                        {hotelData.address ? <p className = {styles["hotel-adress"]}>{hotelData.address}</p> : ''}
+                        {roomsData[0].hotel.name ? <h1 className = "hotel-title">{roomsData[0].hotel.name}</h1> : ''}
+                        {roomsData[0].hotel.address ? <p className = {styles["hotel-adress"]}>{roomsData[0].hotel.address}</p> : ''}
                     </div>
                     <div className={styles["add-to-favorite"]}>
                         {/*isBigScreen && <a className={styles["add-to-favorite__link"]}>добавить&nbsp;в&nbsp;избранное</a>*/}
@@ -178,7 +171,7 @@ function Hoteldetail () {
 
                 <div className = {styles["map-slider"]}>
                     <div className={`hotel-slider ${styles["hotel-slider"]}`}>
-                        <div className = {`hotel-slider__main ${styles["hotel-slider__main"]}`} style = {hotelData.images[0] ? {backgroundImage: `url(${hotelData.images[0]})`} : {}}></div>
+                        <div className = {`hotel-slider__main ${styles["hotel-slider__main"]}`} style = {roomsData[0].hotel.images[0] ? {backgroundImage: `url(${roomsData[0].hotel.images[0]})`} : {}}></div>
                         <div className = "hotel-slider__items">
                             <div className = {styles["hotel-slider__w"]}>
                             <Swiper
@@ -195,7 +188,7 @@ function Hoteldetail () {
                                 modules={[Keyboard, Navigation]}
                                 className="hoteldetail-swiper"
                             >
-                                {hotelData.images.map((item, index) => (
+                                {roomsData[0].hotel.images.map((item, index) => (
                                     index == 0 ? '' :
                                     <SwiperSlide key={index} data-pic = {item} className = "hotel-slider__item" style = {item ? {backgroundImage: `url(${item})`} : {}}></SwiperSlide>
                                 ))}
@@ -204,7 +197,7 @@ function Hoteldetail () {
                         </div>
                     </div>
                     {mapReady == 1 ?
-                        <Hotel_map hotelData = {hotelData} mapReady = {mapReady} />
+                        <Hotel_map hotelData = {roomsData[0].hotel} mapReady = {mapReady} />
                         : ''
                     }
 
@@ -220,7 +213,7 @@ function Hoteldetail () {
 
                      <Hoteldetail_form
                         hotel_id = {query['hotel_id']}
-                        hotel_name = {hotelData.name}
+                        hotel_name = {roomsData[0].hotel.name}
                         popularHotels = {popularHotels}
                         setRoomsData = {setRoomsData}
                     />

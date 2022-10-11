@@ -4,9 +4,6 @@ import styles from "../../styles/Hoteldetail.module.css"
 
 const Hotel_search_result = ({ items }) => {
 
-
-    console.log(items)
-
     const { query } = useRouter()
     
     let datein = new Date(query.datein.slice(6, 10), query.datein.slice(3, 5), query.datein.slice(0, 2))

@@ -11,7 +11,6 @@ export default function Search_hotel_item ({item, rates, nights}) {
 
     const { query } = useRouter()
 
-
     function nightsRightText (nights) {
 
         let text = nights + ' ночей'
