@@ -9,7 +9,7 @@ export default function Hotel_map ({hotelData, mapReady}) {
 
     function init () {
 
-        const myMap = new ymaps.Map("map", {
+        myMap = new ymaps.Map("map", {
             center: [lat, long],
             zoom: 13
         })
@@ -27,6 +27,9 @@ export default function Hotel_map ({hotelData, mapReady}) {
     useEffect(() => {
 
         if (!mapReady) {
+            return
+        }
+        if (!ymaps) {
             return
         }
         try{console.log('try')

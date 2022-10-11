@@ -203,8 +203,10 @@ function Hoteldetail () {
                             </div>
                         </div>
                     </div>
-
-                    <Hotel_map hotelData = {hotelData} mapReady = {mapReady} />
+                    {mapReady == 1 ?
+                        <Hotel_map hotelData = {hotelData} mapReady = {mapReady} />
+                        : ''
+                    }
 
                 </div>
             </section>
