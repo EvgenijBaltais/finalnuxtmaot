@@ -25,9 +25,7 @@ function Hoteldetail () {
     const [active_block, setActive_block] = useState(1)
 
     const [mapReady, setMapReady] = useState(0)
-
     const [datesText, setDatesText] = useState('')
-
     const changeBlock = event => {
 
         event.preventDefault()
@@ -139,7 +137,13 @@ function Hoteldetail () {
     }, [])
 
     if (!roomsData) {
-        return <></>
+        return <>
+            <style jsx global>{`
+                .main {
+                    opacity: 0
+                }
+            `}</style>
+        </>
     }
 
     return (

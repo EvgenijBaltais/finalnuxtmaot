@@ -17,10 +17,6 @@ const Hotel_card = ({item, hotelInfo, adults, children, nights}) => {
         let dopServicesArr = []
 
         item.meal ? servicesArr.push(['meal', item.meal[0]]) : ''                                                   // Питание
-        item.room_amenities.window ? servicesArr.push(['window', item.room_amenities.window]) : ''                  // Окно
-        item.room_amenities.nonSmoking ? servicesArr.push(['nonSmoking', item.room_amenities.nonSmoking]) : ''      // Для некурящих
-        item.room_info.bathroom ? servicesArr.push(['bathroom', item.room_info.bathroom]) : ''                      // Ванна
-        item.room_info.bed ? servicesArr.push(['bed', item.room_info.bed]) : ''                                     // Кровать
 
         // Добавить в главные услуги из объекта общих отельных услуг
 
@@ -56,6 +52,11 @@ const Hotel_card = ({item, hotelInfo, adults, children, nights}) => {
                 dopServicesArr.push(hotelInfo.services[i].amenities[k])
             }
         }
+
+        item.room_info.bathroom ? servicesArr.push(['bathroom', item.room_info.bathroom]) : ''                      // Ванна
+        item.room_info.bed ? servicesArr.push(['bed', item.room_info.bed]) : ''                                     // Кровать
+        item.room_amenities.nonSmoking ? servicesArr.push(['nonSmoking', item.room_amenities.nonSmoking]) : ''      // Для некурящих
+        item.room_amenities.window ? servicesArr.push(['window', item.room_amenities.window]) : ''                  // Окно
         
         setServicesMain(servicesArr)
         setServicesDop(dopServicesArr)
@@ -175,7 +176,7 @@ const Hotel_card = ({item, hotelInfo, adults, children, nights}) => {
                                     </span>)
                             }
                         })}
-                        {servicesMain.length > 5 && !view ? (<span className = {`${styles["serv-item__more-services"]}`}>Еще {returnServices(servicesMain.length - 4)}</span>) : ('')}
+                        {servicesMain.length > 5 && !view ? (<span className = {`${styles["serv-item__more-services"]}`}>Еще {returnServices(servicesMain.length - 5)}</span>) : ('')}
                     </div>
                     <div className = {view ? `${styles["serv-item__btn"]} ${styles["serv-item__btn-active"]}` : styles["serv-item__btn"]} onClick = {() => changeView(view => !view)}>
                          {view ? <span className = {styles["serv-active-btn"]}>Скрыть подробное&nbsp;описание</span> : 
