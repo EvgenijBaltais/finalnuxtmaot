@@ -9,7 +9,7 @@ const router = useRouter()
 
 let decorate = ''
 router.route == '/hotels' ? decorate = ' hotels-page' : ''
-
+router.route == '/hotelbooking' ? decorate = ' hotels-booking' : ''
 {/*
 // Для страницы с картой, на потом
 ${router.route == '/hotels' ? ' search-page' : ''}

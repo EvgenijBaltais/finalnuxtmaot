@@ -26,6 +26,8 @@ function Hoteldetail () {
 
     const [mapReady, setMapReady] = useState(0)
     const [datesText, setDatesText] = useState('')
+    const [bronPageLink, setBronPageLink] = useState('')
+    
     const changeBlock = event => {
 
         event.preventDefault()
@@ -38,14 +40,14 @@ function Hoteldetail () {
     const isBigScreen = useMediaQuery({ query: '(min-width: 480px)' })
 
     const rootEl = useRef(null)
-
+    /*
         useEffect(() => {
           const onClick = e => rootEl.current.contains(e.target) || setVisibleNav(false)
 
           document.addEventListener('click', onClick)
           return () => document.removeEventListener('click', onClick)
         }, [])
-  
+  */
 
     function addBackgroundImage (slider) {
         document.querySelector('.hotel-slider__main').style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
@@ -97,18 +99,26 @@ function Hoteldetail () {
             let dateout = query.dateout.slice(6, 10) + '-' + query.dateout.slice(3, 5) + '-' + query.dateout.slice(0, 2)
             let adults = query.adults || 2
             let link = 'https://maot-api.bokn.ru/api/hotels/search?'
+            let bronPageLink = ''
 
             link += 'start_date=' + datein
+            bronPageLink +=  'start_date=' + datein
             link += '&end_date=' + dateout
+            bronPageLink += '&end_date=' + dateout
             link += '&adults=' + adults
+            bronPageLink += '&adults=' + adults
             
             if (query.children_ages) {
                 for (let i = 0; i < query.children_ages.length; i++) {
                     link += `&childs[${i}]=` + query.children_ages[i]
+                    bronPageLink += '&children_ages=' + query.children_ages[i]
                 }
             }
 
             link += '&id=' + query['hotel_id']
+            bronPageLink += '&id=' + query['hotel_id']
+
+            setBronPageLink(bronPageLink)
 
             fetch(link)
             .then((result) => result.json())
@@ -155,8 +165,7 @@ function Hoteldetail () {
 
             <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onReady={() => {
                 setMapReady(1)
-            }
-            } />
+            }} />
 
             <section className = {styles["single-hotel"]}>
                 <div className={styles["titles-top"]}>
@@ -220,7 +229,7 @@ function Hoteldetail () {
                         setRoomsData = {setRoomsData}
                     />
 
-                    {active_block == 1 ? <Hotel_search_result items = {roomsData[0]} /> : ''}
+                    {active_block == 1 ? <Hotel_search_result items = {roomsData[0]} bronPageLink = {bronPageLink} /> : ''}
                     {active_block == 2 ? <Rooms_info hotelData = {roomsData[0].hotel}/> : ''}
                     {active_block == 3 ? <Hotel_service services = {roomsData[0].hotel.services} /> : ''}
                     {active_block == 4 ? <Hotel_contact hotelData = {roomsData[0].hotel} /> : '' }
