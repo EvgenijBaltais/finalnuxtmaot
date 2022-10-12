@@ -61,7 +61,8 @@ body {
 }
 
 .main {
-	min-height: 300px;
+	min-height: 500px;
+	transition: .2s opacity;
 }
 
 .search-page.wrapper {
@@ -4482,41 +4483,40 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Карточка номера у отеля - иконки */
 
-.serv-item__block_meal {
-	background-image: url('/images/icons/meal.png');
+.serv-item__more-services {
 	background-size: 16px;
 	background-position: left center;
 	background-repeat: no-repeat;
+}
+
+.serv-item__block_meal {
+	background-image: url('/images/icons/meal.png');
 	color: rgb(255,73,55);
 	font-family: 'FontInterMedium'!important;
 }
 
 .serv-item__block_conditioner {
 	background-image: url('/images/icons/air-conditioner.png');
-	background-size: 16px;
-	background-position: left center;
-	background-repeat: no-repeat;
 }
 
 .serv-item__block_conditioner {
 	background-image: url('/images/icons/air-conditioner.png');
-	background-size: 16px;
-	background-position: left center;
-	background-repeat: no-repeat;
 }
 
 .serv-item__block_bed {
 	background-image: url('/images/icons/bedroom.png');
-	background-size: 16px;
-	background-position: left center;
-	background-repeat: no-repeat;
 }
 
 .serv-item__block_internet {
 	background-image: url('/images/icons/wifi.png');
-	background-size: 16px;
-	background-position: left center;
-	background-repeat: no-repeat;
+}
+
+.serv-item__block_fridge {
+	background-image: url('/images/icons/fridge.png');
+}
+
+.serv-item__block_window {
+	background-image: url('/images/icons/window.png');
 }
 
 /* Карточка номера у отеля - иконки, конец */
