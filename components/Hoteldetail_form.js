@@ -41,11 +41,7 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
     const changeChildrenAges = (value) => {
         setChildrenAges(value)
     }
-
-    function addNullToDate(num) {
-        return num < 10 ? '0' + num : num
-    }
-
+    
     function checkForm (event) {
 
         // Запрос доступных номеров

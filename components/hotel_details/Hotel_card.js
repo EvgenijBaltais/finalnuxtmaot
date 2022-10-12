@@ -5,7 +5,7 @@ import Link from "next/link"
 import styles from "../../styles/Hoteldetail.module.css"
 import "swiper/css"
 
-const Hotel_card = ({item, hotelInfo, adults, children, nights}) => {
+const Hotel_card = ({item, hotelInfo, adults, children, nights, bronPageLink}) => {
     const [view, changeView] = useState(0)
     const [servicesMain, setServicesMain] = useState([])
     const [servicesDop, setServicesDop] = useState([])
@@ -16,7 +16,7 @@ const Hotel_card = ({item, hotelInfo, adults, children, nights}) => {
         let servicesArr = []
         let dopServicesArr = []
 
-        item.meal ? servicesArr.push(['meal', item.meal[0]]) : ''                                                   // Питание
+        item.meal ? servicesArr.push(['meal', item.meal[0]]) : ''          // Питание
 
         // Добавить в главные услуги из объекта общих отельных услуг
 
@@ -132,6 +132,8 @@ const Hotel_card = ({item, hotelInfo, adults, children, nights}) => {
         return text
     }
 
+    console.log(item.url)
+
     return (
         <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]}` : styles["select-results__item"]}>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
@@ -162,7 +164,9 @@ const Hotel_card = ({item, hotelInfo, adults, children, nights}) => {
                 </Swiper>
             </div>
             <div className={styles["select-results__item-content"]}>
-                <a className={styles["select-item-title"]}>{item.room_name}</a>
+                <Link href = {`${'/hotelbooking?' + bronPageLink}`}>
+                    <a className={styles["select-item-title"]}>{item.room_name}</a>
+                </Link>
                 <div className = {styles["select-item-info"]}>
                     <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
                         {servicesMain.map((item, index) => {
@@ -216,7 +220,7 @@ const Hotel_card = ({item, hotelInfo, adults, children, nights}) => {
                             <span className = {styles["select-results-nights"]}>{nightsRightText(nights)}</span>
                         </div>
                     </div>
-                    <Link href = {"/hotelbooking"}>
+                    <Link href = {`${'/hotelbooking?' + bronPageLink}`}>
                         <a className = {styles["select-results-bron"]}>Забронировать</a>
                     </Link>
                 </div>
