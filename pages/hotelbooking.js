@@ -76,22 +76,25 @@ const Hotelbooking = () => {
         myMap.behaviors.disable('scrollZoom');
     }
 
-    useEffect(() => {
+    useEffect(() => {console.log(mapReady)
 
         if (!mapReady) {
             return
         }
+        if (!hotelData) {
+            return
+        }
         
-        if (typeof ymaps != undefined && typeof ymaps != 'undefined') {
+        //if (typeof ymaps != undefined && typeof ymaps != 'undefined') {
             try{
                 ymaps.ready(init)
             }
             catch(e) {
                 console.log(e)
             }
-        }
+        //}
 
-    }, [hotelData])
+    }, [mapReady])
 
 
     function addBackgroundImage (slider) {
