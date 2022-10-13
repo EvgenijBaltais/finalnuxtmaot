@@ -1,12 +1,66 @@
-import { useState} from 'react'
+import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper"
 import Link from "next/link"
 import styles from "../../styles/Hoteldetail.module.css"
 import "swiper/css"
 
-const Hotel_card = ({item, adults, children, nights}) => {
+const Hotel_card = ({item, hotelInfo, adults, children, nights, bronPageLink}) => {
     const [view, changeView] = useState(0)
+    const [servicesMain, setServicesMain] = useState([])
+    const [servicesDop, setServicesDop] = useState([])
+
+    useEffect(() => {
+
+        // Заполнить главные услуги
+        let servicesArr = []
+        let dopServicesArr = []
+
+        item.meal ? servicesArr.push(['meal', item.meal[0]]) : ''          // Питание
+
+        // Добавить в главные услуги из объекта общих отельных услуг
+
+        for (let i = 0; i < hotelInfo.services.length; i++) {
+            if (hotelInfo.services[i].group_name == "Интернет") {
+                for (let k = 0; k < hotelInfo.services[i].amenities.length; k++) {
+                    hotelInfo.services[i].amenities[k].indexOf('Wi-Fi') + 1 ||
+                    hotelInfo.services[i].amenities[k].indexOf('wi-fi') + 1 || 
+                    hotelInfo.services[i].amenities[k].indexOf('WI-FI') + 1 ? 
+                    servicesArr.push(['internet', hotelInfo.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+            if (hotelInfo.services[i].group_name == "В номерах") {
+                for (let k = 0; k < hotelInfo.services[i].amenities.length; k++) {
+                    hotelInfo.services[i].amenities[k].indexOf('Холодильник') + 1 ? 
+                    servicesArr.push(['fridge', hotelInfo.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+
+            if (hotelInfo.services[i].group_name == "Общее") {
+                for (let k = 0; k < hotelInfo.services[i].amenities.length; k++) {
+                    hotelInfo.services[i].amenities[k].indexOf('Кондиционер') + 1 ? 
+                    servicesArr.push(['conditioner', hotelInfo.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+        }
+
+        for (let i = 0; i < hotelInfo.services.length; i++) {
+            for (let k = 0; k < hotelInfo.services[i].amenities.length; k++) {
+                dopServicesArr.push(hotelInfo.services[i].amenities[k])
+            }
+        }
+
+        item.room_info.bathroom ? servicesArr.push(['bathroom', item.room_info.bathroom]) : ''                      // Ванна
+        item.room_info.bed ? servicesArr.push(['bed', item.room_info.bed]) : ''                                     // Кровать
+        item.room_amenities.nonSmoking ? servicesArr.push(['nonSmoking', item.room_amenities.nonSmoking]) : ''      // Для некурящих
+        item.room_amenities.window ? servicesArr.push(['window', item.room_amenities.window]) : ''                  // Окно
+        
+        setServicesMain(servicesArr)
+        setServicesDop(dopServicesArr)
+    }, [item])
     
     function addBackgroundImage (slider) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
@@ -55,15 +109,15 @@ const Hotel_card = ({item, adults, children, nights}) => {
             c = [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,25,26,27,28,29,30]
 
         a.forEach(element => {
-            num == element ? text = ' услуга' : ''
+            num == element ? text = ' услуга...' : ''
         })
 
         b.forEach(element => {
-            num == element ? text = ' услуги' : ''
+            num == element ? text = ' услуги...' : ''
         })
 
         c.forEach(element => {
-            num == element ? text = ' услуг' : ''
+            num == element ? text = ' услуг...' : ''
         })
 
         return num + text
@@ -78,8 +132,10 @@ const Hotel_card = ({item, adults, children, nights}) => {
         return text
     }
 
+    console.log(item.url)
+
     return (
-        <div className={styles[`select-results__item`]}>
+        <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]}` : styles["select-results__item"]}>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
                 <div className = "slider-show-hide" onClick = {() => changeView(view => !view)}></div>
                 <Swiper
@@ -108,26 +164,42 @@ const Hotel_card = ({item, adults, children, nights}) => {
                 </Swiper>
             </div>
             <div className={styles["select-results__item-content"]}>
-                <a className={styles["select-item-title"]}>{item.name}</a>
+                <Link href = {`${'/hotelbooking?' + bronPageLink}`}>
+                    <a className={styles["select-item-title"]}>{item.room_name}</a>
+                </Link>
                 <div className = {styles["select-item-info"]}>
-
                     <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
-                        {item.services.map((item, index, arr) => {
+                        {servicesMain.map((item, index) => {
                             if (!view) {
                                 if (index > 4) return false
-                                if (index > 3) {
-                                    return <span key = {index} className = {styles["serv-item__more-services"]}>еще {returnServices(arr.length - index)}...</span>
-                                }
+                                return (
+                                    <span
+                                        className = {`${styles["serv-item__more-services"]} ${"serv-item__more-services"} ${"serv-item__block_" + item[0]}`}
+                                        key = {index}>
+                                        {item[1][0].toUpperCase() + item[1].slice(1)}
+                                    </span>)
                             }
-                            return (
-                                <span key = {index}>{item.group_name}</span>
-                            )
                         })}
+                        {servicesMain.length > 5 && !view ? (<span className = {`${styles["serv-item__more-services"]}`}>Еще {returnServices(servicesMain.length - 5)}</span>) : ('')}
                     </div>
-
-                    <div className = {styles["serv-item__btn"]} onClick = {() => changeView(view => !view)}>
+                    <div className = {view ? `${styles["serv-item__btn"]} ${styles["serv-item__btn-active"]}` : styles["serv-item__btn"]} onClick = {() => changeView(view => !view)}>
                          {view ? <span className = {styles["serv-active-btn"]}>Скрыть подробное&nbsp;описание</span> : 
                          <span className = {styles["serv-passiv-btn"]}>Подробнее&nbsp;о&nbsp;номере</span>}
+                    </div>
+                    <div>
+
+                        <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
+                            {servicesMain.map((item, index) => {
+                                if (view) {
+                                    return (
+                                        <span
+                                            className = {`${styles["serv-item__more-services"]} ${"serv-item__more-services"} ${"serv-item__block_" + item[0]}`}
+                                            key = {index}>
+                                            {item[1][0].toUpperCase() + item[1].slice(1)}
+                                        </span>)
+                                }
+                            })}
+                        </div>
                     </div>
                 </div>
                 <div className={styles["select-results__item-price"]}>
@@ -148,15 +220,26 @@ const Hotel_card = ({item, adults, children, nights}) => {
                             <span className = {styles["select-results-nights"]}>{nightsRightText(nights)}</span>
                         </div>
                     </div>
-                    <Link href = {"/hotelbooking"}>
+                    <Link href = {`${'/hotelbooking?' + bronPageLink}`}>
                         <a className = {styles["select-results-bron"]}>Забронировать</a>
                     </Link>
                 </div>
             </div>
-            {item.description ?
+            {servicesDop.length > 8 ?
                 <div className={styles["select-results__item-text"]}>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati dolor accusantium maiores molestiae, 
-                    itaque atque ratione ipsam quam rem totam magni esse nesciunt, a nostrum harum unde, facere eum deserunt?
+                        {servicesDop.map((item, index, arr) => {
+                            if (index <= 8) return ('')
+
+                            if (!view) {
+                                if (index > 18) return false
+                                if (index == 18 && servicesDop.length > 18) {
+                                    return <span key = {index} className = {`${styles["serv-item__more-services-dop"]} ${styles["serv-item__more-span"]}`}>еще {returnServices(servicesDop.length - 18)}</span>
+                                }
+                            }
+                            return (
+                                <span className = {styles["serv-item__more-services-dop"]} key = {index}>{item}</span>
+                            )
+                        })}
                 </div> : ''
             }
         </div>

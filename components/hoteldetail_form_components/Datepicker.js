@@ -29,28 +29,45 @@ export default function Datepicker (value) {
             return arr
         }
 
+        function leftMonthActivate (element, a, b, arr, monthsAside, i) {
+
+            if (element.scrollTop > a && element.scrollTop < b) {
+
+                if (monthsAside[i].classList.contains('month-aside__link-active')) return false
+
+                document.querySelector('.month-aside__link-active').classList.remove('month-aside__link-active')
+                monthsAside[i].classList.add('month-aside__link-active')
+                return
+            }
+        }
+
+        function scrollAction () {
+                
+            let monthPlace = []
+            let monthsAside = document.querySelectorAll('.month-aside__link')
+
+            for (let i = 0; i < document.querySelectorAll('.month-calendar').length; i++) {
+                monthPlace.push(document.querySelectorAll('.month-calendar')[i].offsetTop - 100)
+            }
+
+            monthPlace.push(100000) // последний элемент
+
+            for (let i = 0; i < monthPlace.length; i++) {
+                leftMonthActivate (event.target, monthPlace[i], monthPlace[i + 1], monthPlace, monthsAside, i)
+            }
+        }
+
         useEffect(() => {
 
-            smoothscroll.polyfill()
-            let position = 0
-            let documentCached = document
-            let links = document.querySelectorAll(".month-aside__link")
+            smoothscroll.polyfill() // для плавной прокрутки на сафари
 
-            const addLinkEvents = (event, i) => {
-                event.preventDefault()
-                position = documentCached.getElementById(`month-calendar-${i}`).offsetTop
-                documentCached.querySelector('.datepicker-body').scrollTo({top: position, behavior: 'smooth'})
-            }
-
-            for (let i = 0; i < links.length; i++) {
-                links[i].addEventListener('click', () => addLinkEvents(event, i))
-            }
-
-            return () => {
-                for (let i = 0; i < links.length; i++) {
-                    links[i].removeEventListener('click', () => addLinkEvents(event, i))
-                }
-            }
+            document.querySelector('.datepicker-body').addEventListener('mouseenter', event => {
+                event.target.addEventListener("scroll", scrollAction, true)
+            })
+          
+            document.querySelector('.datepicker-body').addEventListener('mouseleave', event => {
+                event.target.removeEventListener("scroll", scrollAction, true)
+            })
         }, [])
 
     return (
@@ -70,7 +87,12 @@ export default function Datepicker (value) {
             <div className="month-aside">
                 {monthArray.map((item, index) => {
                     return (
-                        <MonthAsideLink key = {index} index = {index} item = {item} />
+                        <MonthAsideLink 
+                            key = {index}
+                            index = {index}
+                            item = {item}
+                            mindate = {value.mindate}
+                        />
                     )
                 })}  
             </div>

@@ -29,30 +29,89 @@ export default function Datepicker (value) {
             return arr
         }
 
-        useEffect(() => {
+        function leftMonthActivate (element, a, b, arr, monthsAside, i) {
 
-            smoothscroll.polyfill()
-            let position = 0
-            let documentCached = document
-            let links = document.querySelectorAll(".month-aside__link")
+            if (element.scrollTop > a && element.scrollTop < b) {
 
-            const addLinkEvents = (event, i) => {
-                event.preventDefault()
-                position = documentCached.getElementById(`month-calendar-${i}`).offsetTop
-                documentCached.querySelector('.datepicker-body').scrollTo({top: position, behavior: 'smooth'})
+                if (monthsAside[i].classList.contains('month-aside__link-active')) return false
+
+                document.querySelector('.month-aside__link-active').classList.remove('month-aside__link-active')
+                monthsAside[i].classList.add('month-aside__link-active')
+                return
+            }
+        }
+
+        function scrollAction () {
+                
+            let monthPlace = []
+            let monthsAside = document.querySelectorAll('.month-aside__link')
+
+            for (let i = 0; i < document.querySelectorAll('.month-calendar').length; i++) {
+                monthPlace.push(document.querySelectorAll('.month-calendar')[i].offsetTop - 100)
             }
 
-            for (let i = 0; i < links.length; i++) {
-                links[i].addEventListener('click', () => addLinkEvents(event, i))
-            }
+            monthPlace.push(100000) // последний элемент
 
-            return () => {
-                for (let i = 0; i < links.length; i++) {
-                    links[i].removeEventListener('click', () => addLinkEvents(event, i))
+            for (let i = 0; i < monthPlace.length; i++) {
+                leftMonthActivate (event.target, monthPlace[i], monthPlace[i + 1], monthPlace, monthsAside, i)
+            }
+        }
+
+        function addHoverEffectOnDates () {
+
+            const dateLinks = document.querySelectorAll('.date-link:not(.date-disable):not(.date-prefix)')
+            
+            if (event.target.classList.contains('date-link') &&
+                !event.target.classList.contains('date-disable') &&
+                !event.target.classList.contains('date-prefix')
+            ) {
+
+                let targetDay = event.target.innerText,
+                    targetMonth = event.target.getAttribute('data-month'),
+                    targetYear = event.target.getAttribute('data-year')
+
+                for (let k = 0; k < dateLinks.length; k++) {
+                    +dateLinks[k].innerText <= +targetDay &&
+                    +dateLinks[k].getAttribute('data-month') <= +targetMonth &&
+                    +dateLinks[k].getAttribute('data-year') <= +targetYear ?
+                    dateLinks[k].classList.add('date-hovered') : ''
                 }
             }
-        }, [])
+        }
 
+        function removeHoverEffectOnDates () {
+
+            const dateLinks = document.querySelectorAll('.date-hovered')
+            for (let i = 0 ; i < dateLinks.length; i++) {
+                dateLinks[i].classList.remove('date-hovered')
+            }
+        }
+
+        useEffect(() => {
+
+            smoothscroll.polyfill() // для плавной прокрутки на сафари
+
+            document.querySelector('.datepicker-body').addEventListener('mouseenter', event => {
+                event.target.addEventListener("scroll", scrollAction, true)
+            })
+          
+            document.querySelector('.datepicker-body').addEventListener('mouseleave', event => {
+                event.target.removeEventListener("scroll", scrollAction, true)
+            })
+        }, [])
+/*
+        useEffect(() => {
+            
+            if (!value.dateIn) {
+                return
+            }
+            let body = document.querySelector('.datepicker-body')
+
+                body.addEventListener('mouseover', addHoverEffectOnDates)
+                body.removeEventListener('mouseout', addHoverEffectOnDates)
+                body.addEventListener('mouseout', removeHoverEffectOnDates)
+        }, [value])
+*/
     return (
         <div className="datepicker-w">
             <div className="datepicker-header">
@@ -70,7 +129,12 @@ export default function Datepicker (value) {
             <div className="month-aside">
                 {monthArray.map((item, index) => {
                     return (
-                        <MonthAsideLink key = {index} index = {index} item = {item} />
+                        <MonthAsideLink 
+                            key = {index}
+                            index = {index}
+                            item = {item}
+                            mindate = {value.mindate}
+                        />
                     )
                 })}  
             </div>

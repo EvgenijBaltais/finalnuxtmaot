@@ -7,8 +7,6 @@ import Search_form_guests from './hoteldetail_form_components/Search_form_guests
 
 const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) => {
 
-    console.log(hotel_id)
-
     const [searchResult, setSearchResult] = useState({id: hotel_id, hotel_name: hotel_name, hotel: true})
     const [dateIn, setDateIn] = useState('')
     const [dateOut, setDateOut] = useState('')
@@ -43,11 +41,7 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
     const changeChildrenAges = (value) => {
         setChildrenAges(value)
     }
-
-    function addNullToDate(num) {
-        return num < 10 ? '0' + num : num
-    }
-
+    
     function checkForm (event) {
 
         // Запрос доступных номеров
@@ -74,7 +68,6 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
         .then((result) => result.json())
         .then((result) => {
             console.log(link)
-            console.log(result.data)
             setRoomsData(result.data)
         })
     }

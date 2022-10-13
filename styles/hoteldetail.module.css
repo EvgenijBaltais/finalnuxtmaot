@@ -500,10 +500,15 @@
     padding: 10px;
     box-shadow: var(--main-shadow);
     margin-bottom: 20px;
+	position: relative;
 }
 
 .select-results__item:last-child {
 	margin-bottom: 0
+}
+
+.select-results__item-active {
+	padding-bottom: 40px;
 }
 
 .select-results__item-pic {
@@ -512,6 +517,7 @@
 	height: 220px;
 	border-radius: 10px;
 	background-color: #ccc;
+	overflow: hidden;
 }
 
 .select-results__item-pic-big {
@@ -711,9 +717,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	align-content: baseline;
 	width: calc(100% - 300px);
 	padding: 0 14px;
-	margin-bottom: 24px;
 }
 
 .select-results__item-pic-big + .select-results__item-content {
@@ -721,7 +727,7 @@
 }
 
 .select-item-title {
-	padding: 14px 0;
+	padding: 14px 0 10px 0;
 	display: inline-block;
 	width: 100%;
 }
@@ -756,9 +762,7 @@
 	font-size: 14px;
 	line-height: 1.4;
     text-overflow: ellipsis; 
-    -webkit-line-clamp: 4;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
+	display: inline-block;
 }
 
 
@@ -789,18 +793,19 @@
 	transform: rotate(180deg);
 }
 
-.serv-item__block span {
+.serv-item__btn {
 	display: inline-block;
-	width: 100%;
-}
-
-.serv-item__btn{
-	display: inline-block;
-	margin-top: 20px;
+	margin-top: 10px;
 	color: #147de8;
 	cursor: pointer;
-	font-family: 'FontInterMedium';
+	font-family: 'FontInterBold';
 	text-decoration: underline;
+}
+
+.serv-item__btn-active {
+	position: absolute;
+	bottom: 10px;
+	margin-top: 0;
 }
 
 .select-results-guest-info {
@@ -815,16 +820,43 @@
 }
 
 .serv-item__more-services {
+	display: block;
 	font-size: 14px;
 	line-height: 14px;
-	padding: 5px 0;
+	padding-left: 25px;
+	padding-top: 3px;
+	padding-bottom: 3px;
 	font-family: 'FontInterLight';
-	font-style: italic;
+}
+
+.serv-item__more-services-dop {
+	display: inline-block;
+	font-size: 14px;
+	line-height: 14px;
+	padding-left: 15px;
+	padding-right: 10px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	font-family: 'FontInterLight';
+	background-image: url('/images/icons/galka.svg');
+	background-repeat: no-repeat;
+	background-size: 11px;
+	background-position: left center;
 }
 
 .hotel-description-text {
 	font-size: 16px;
 	line-height: 24px;
+}
+
+.serv-item__more-span {
+	display: inline-block;
+	width: 100%;
+	background-image: url('/images/icons/more_services.svg');
+	background-repeat: no-repeat;
+	background-size: 13px;
+	background-position: left center;
+	font-style: italic;
 }
 
 @media screen and (max-width: 1260px) {

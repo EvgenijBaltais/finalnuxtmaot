@@ -1,20 +1,38 @@
 export default function AsideMonthLink (props) {
 
     const date = new Date()
+    let monthName = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
 
-    // Активный класс
+    const scrollToMonth = (event, index) => {
 
-    function setActiveItem (event) {
+        // Прокрутка месяца
+
+        event.preventDefault()
+        let position = event.target.parentElement.parentElement.querySelector(`#month-calendar-${index}`).offsetTop
+        event.target.parentElement.parentElement.querySelector('.datepicker-body').scrollTo({top: position, behavior: 'smooth'})
+
+        // Присвоение активного класса
+
         event.target.parentElement.querySelector('.month-aside__link-active').classList.remove('month-aside__link-active')
         event.target.classList.add('month-aside__link-active')
     }
 
+    // Определить активный класс
+
+    function setClasses(props) {
+
+        let classes = 'month-aside__link'
+        let actualMonth = monthName[parseInt(props.mindate.slice(3,5)) - 1]
+
+        props.item == actualMonth ? classes += ' month-aside__link-active' : ''
+
+        return classes
+    }
+
     return (
-        <a onClick = {setActiveItem}
+        <a onClick = {(event, index) => scrollToMonth(event, props.index)}
             className={
-            `month-aside__link${
-                props.index == 0 ? ' month-aside__link-active' : ''
-            }`
+                setClasses(props)
         }
         >
         {props.item == 'Январь' ? 

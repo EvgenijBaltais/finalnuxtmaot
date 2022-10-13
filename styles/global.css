@@ -51,6 +51,7 @@
 body {
 	--red-linear-gradient: linear-gradient(45deg, rgba(255,74,43,1) 0%, rgba(255,68,87,1) 45%, rgba(255,68,87,1) 60%, rgba(255,74,43,1) 100%);
 	--green-linear-gradient: radial-gradient(circle, hsla(162, 100%, 91%, 1) 11%, hsla(163, 100%, 95%, 1) 44%, hsla(0, 0%, 100%, 1) 67%);
+	--brown-linear-gradient: radial-gradient(circle, hsla(32, 86%, 92%, 1) 11%, hsla(32, 86%, 95%, 1) 44%, hsla(0, 0%, 100%, 1) 67%);
 	--main-shadow: 0 3px 8px 0 rgb(34 60 80 / 20%);
 }
 
@@ -58,6 +59,11 @@ body {
 	position: relative;
 	max-width: 1240px;
 	margin: 20px auto;
+}
+
+.main {
+	min-height: 500px;
+	transition: .2s opacity;
 }
 
 .search-page.wrapper {
@@ -100,6 +106,26 @@ body {
 }
 
 /* Зеленый градиент на страницах сверху. На разных страницах в разных местах, конец */
+
+/* Коричневый градиент на страницах сверху. На разных страницах в разных местах */
+
+.hotels-booking:after {
+	width: 750px;
+	height: 750px;
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background: var(--brown-linear-gradient);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	z-index: -1;
+}
+
+/* Коричневый градиент на страницах сверху. На разных страницах в разных местах, конец */
 
 .section-title {
 	padding-left: 40px;
@@ -854,12 +880,12 @@ input[type="checkbox"].substylized:checked + label:after {
 	width: 5px;
 	height: 5px;
 	margin: 2px;
-	background-color: rgb(223,219,210);
+	background-color: rgb(210,223,229);
 	border-radius: 100%;
 }
 
 .select-search-item-pics .swiper-pagination-bullet-active {
-	background-color: rgb(255,74,43);
+	background-color: rgb(255,255,255);
 }
 
 /* Swiper на странице Номер отеля в подборке номеров конец */ 
@@ -1060,7 +1086,6 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 /* Общие стили для разных компонентов, конец */
-
 
 .anim-blick__submit-bg {
 	position: absolute;
@@ -2159,6 +2184,10 @@ input[type="checkbox"].substylized:checked + label:after {
 	padding-top: 20px;
 }
 
+.month-calendar:last-child {
+	padding-bottom: 50px;
+}
+
 .month-name {
     display: block;
     text-align: left;
@@ -2233,6 +2262,11 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .date-today {
+	background: var(--red-linear-gradient);
+	color: #fff
+}
+
+.date-hovered {
 	background: var(--red-linear-gradient);
 	color: #fff
 }
@@ -4467,3 +4501,43 @@ input[type="checkbox"].substylized:checked + label:after {
     line-height: 30px;
 	}
 }
+
+/* Карточка номера у отеля - иконки */
+
+.serv-item__more-services {
+	background-size: 16px;
+	background-position: left center;
+	background-repeat: no-repeat;
+}
+
+.serv-item__block_meal {
+	background-image: url('/images/icons/meal.png');
+	color: rgb(255,73,55);
+	font-family: 'FontInterMedium'!important;
+}
+
+.serv-item__block_conditioner {
+	background-image: url('/images/icons/air-conditioner.png');
+}
+
+.serv-item__block_conditioner {
+	background-image: url('/images/icons/air-conditioner.png');
+}
+
+.serv-item__block_bed {
+	background-image: url('/images/icons/bedroom.png');
+}
+
+.serv-item__block_internet {
+	background-image: url('/images/icons/wifi.png');
+}
+
+.serv-item__block_fridge {
+	background-image: url('/images/icons/fridge.png');
+}
+
+.serv-item__block_window {
+	background-image: url('/images/icons/window.png');
+}
+
+/* Карточка номера у отеля - иконки, конец */

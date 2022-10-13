@@ -26,6 +26,7 @@ export default function Search_form_datein(props) {
 
     function closeDateIn (value, date) {
         setDateInOpened(value)
+        setDateOutOpened(1)
         props.changeDateIn(date)
         props.changeDateOut(nextDay(date))
     }
@@ -43,7 +44,7 @@ export default function Search_form_datein(props) {
         }
 
         setDateOutOpened(1)
-        setDateInOpened(0) 
+        setDateInOpened(0)
     }
 
     function nextDay (str) {
@@ -90,7 +91,7 @@ export default function Search_form_datein(props) {
                         value = {props.dateOut}
                         onClick = { checkOpenClose }
                 />
-                {dateOutOpened ? <Datepicker closeFuncdateOut = {closeDateOut} mindate = {props.dateOut} /> : ""}
+                {dateOutOpened ? <Datepicker closeFuncdateOut = {closeDateOut} mindate = {props.dateOut} dateIn = {props.dateIn} /> : ""}
             </div>
         </div>
     )

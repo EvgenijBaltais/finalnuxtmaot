@@ -1,7 +1,6 @@
+export default function DayLink (props) {
 
-export default function AsideDayLink (props) {
-
-    const date = new Date()
+    const yesterday = new Date(Date.now()-86400000)
     const [day, month, year] = props.item.split('.')
     const actualDate = new Date(year, month, day)
     const [minDay, minMonth, minYear] = props.mindate.split('.')
@@ -30,15 +29,15 @@ export default function AsideDayLink (props) {
         <a onClick = {sendDate}
             className = {
                 `date-link${
-                    day < date.getDate() && month == parseInt(actualDate.getMonth()) + 1 ? ' date-disable' : ''
+                    actualDate < yesterday && !props.prefix ? ' date-disable' : ''
+                }${
+                    props.closeFuncdateOut && actualDate < minDate ? ' date-disable' : '' 
                 }${
                     props.prefix ? ' date-prefix' : ''
                 }${
                     minDay == day && minMonth == parseInt(actualDate.getMonth()) + 1 && !props.prefix ? ' date-today' : ''
                 }${
                     !props.prefix && (actualDate.getDay() == 0 || actualDate.getDay() == 6) ? ' date-weekend' : '' 
-                }${
-                    props.closeFuncdateOut && minDay > day && minMonth >= parseInt(actualDate.getMonth()) + 1 && minYear >= parseInt(actualDate.getFullYear()) && !props.prefix  ? ' date-disable' : '' 
                 }`
             }>
             {day}
