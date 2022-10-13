@@ -59,9 +59,6 @@ const Hotel_contact = ({hotelData}) => {
                     <p><b>На электричке:</b> с Белорусского вокзала до станции «Дорохово».</p>
                 </div> : ''
             */}
-            <div className={styles["contact-map"]}>
-                <div id = "contactmap" className={styles['contact-map-block']}></div>
-            </div>
         </div>
     )
 }
