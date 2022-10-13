@@ -18,7 +18,7 @@ const Hotelbooking = () => {
     const { query } = useRouter()
     const [latitude, setLatitude] = useState(0)
     const [longitude, setLongitude] = useState(0)
-    const [hotelData, setHotelData] = useState([])
+    const [hotelData, setHotelData] = useState(0)
     let myMap
 
     useEffect(() => {
@@ -81,20 +81,22 @@ const Hotelbooking = () => {
         if (!mapReady) {
             return
         }
+        
+        if (typeof ymaps != undefined && typeof ymaps != 'undefined') {
+            try{
+                ymaps.ready(init)
+            }
+            catch(e) {
+                console.log(e)
+            }
+        }
 
-        try{
-            ymaps.ready(init)
-        }
-        catch(e) {
-            console.log(e)
-        }
-    }, [mapReady])
+    }, [hotelData])
+
 
     function addBackgroundImage (slider) {
-        document.querySelector('.hotel-slider__main').style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
+        slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
     }
-
-    console.log(hotelData.images)
     
     if (!hotelData) {
         return <>
@@ -127,10 +129,6 @@ const Hotelbooking = () => {
                             onSlideChange = {slider => addBackgroundImage(slider)}
                             slidesPerView={1}
                             spaceBetween={0}
-                            pagination={{
-                                clickable: true,
-                                bulletClass: `reviews-pagination-bullet`
-                            }}
                             navigation={true}
                             modules={[Navigation]}
                             className='select-search-item-pics'

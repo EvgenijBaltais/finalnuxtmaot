@@ -361,6 +361,7 @@
 .hotel-title-descr {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 .hotel-serv-descr {
@@ -704,7 +705,6 @@
     -moz-box-shadow: var(--main-shadow);
     box-shadow: var(--main-shadow);
 	border-radius: 10px;
-	margin-top: 30px;
 	overflow: hidden;
 }
 

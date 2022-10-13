@@ -23,6 +23,10 @@ class Contacts extends React.Component {
 
         return (
             <>
+            <Head>
+                <title>Контакты</title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+            </Head>
                 <h1 className = "secondary-h1">Контакты</h1>
 
                 <MapCarousel />

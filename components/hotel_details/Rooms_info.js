@@ -12,7 +12,6 @@ const Rooms_info = ({hotelData}) => {
             <h2 className = "section-title icon-item icon-item-hotel-w">Об отеле</h2>
 
             <div className = {`${styles["hotel-title-section"]} ${styles["hotel-title-descr"]}`}>
-                
                 <div className = {styles["hotel-main-descr"]}>
                     <h3>Расположение</h3>
                     <p>{hotelData.address}</p>
@@ -23,7 +22,7 @@ const Rooms_info = ({hotelData}) => {
                     </>
                     : ''}
                 </div>
-                {hotelData.facts ? 
+                {/*hotelData.facts ? 
                 <div className = {styles["hotel-fact-section"]}>
                     <h3>Факты об отеле</h3>
                     
@@ -41,7 +40,7 @@ const Rooms_info = ({hotelData}) => {
                     <span>Интернет</span>
                     <p>Wi-Fi</p>
                 </div>
-                : ''}
+                : ''*/}
 
             </div>
 

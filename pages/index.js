@@ -24,7 +24,6 @@ class Index extends React.Component {
     }
 
     render() {
-        console.log(this.props.popularHotels, this.props.popularWays)
         return (
             <>
                 <Head>
@@ -56,7 +55,6 @@ export async function getStaticProps(context) {
 
 	const getWays = await fetch('https://maot-api.bokn.ru/api/regions/top')
 	const popularWays = await getWays.json()
-
   
     // Отзывы
 

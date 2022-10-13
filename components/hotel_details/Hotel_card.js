@@ -64,7 +64,6 @@ const Hotel_card = ({item, hotelInfo, adults, children, nights, bronPageLink}) =
     
     function addBackgroundImage (slider) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
-        slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
     }
 
     function returnAdults (num) {
