@@ -112,3 +112,29 @@
     color: #2486E9;
     text-decoration: none;
 }
+
+.hotel-bron-data-title__h3 {
+    margin-top: 50px;
+    color: #000;
+    font-size: 20px;
+    line-height: 25px;
+    margin-bottom:15px
+}
+
+.hotel-bron-data-title__h3 a {
+    color: rgb(6,117,232);
+    font-size: 20px;
+    line-height: 25px;
+}
+
+.hotel-bron-data-title__h4 {
+    color: #000;
+    font-size: 18px;
+    line-height: 22px;
+}
+
+.hotel-bron-data-title__h4 a {
+    color: rgb(6,117,232);
+    font-size: 18px;
+    line-height: 22px;
+}

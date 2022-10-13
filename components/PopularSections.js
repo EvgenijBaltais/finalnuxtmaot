@@ -31,7 +31,7 @@ const PopularSections = ({popularHotels, popularWays}) => {
                 	<div className = {styles["popular-item"]} key = {index}>
                 		<div className = {styles["popular-item-pic"]}></div>
                 		<div className = {styles["popular-item-content"]}>
-							<Link href = {`/hoteldetail?datein=${setToday()}&dateout=${setTomorrow()}&adults=2&hotel_id=${item.id}`}>
+							<Link href = {`/hoteldetail?datein=${setToday()}&dateout=${setTomorrow()}&adults=2&hotel_id=${item.id}&region_name=${item.name}`}>
 								<a
 									className = {styles["popular-item__name"]}>
 									{item.name}
@@ -52,7 +52,10 @@ const PopularSections = ({popularHotels, popularWays}) => {
                 			<div className = {styles["popular-way-pic"]}></div>
                 			<div className = {styles["popular-way-content"]}>
 								<Link href = {`/hotels?datein=${setToday()}&dateout=${setTomorrow()}&adults=2&region_id=${item.id}&region_name=${item.name}`}>
-									<a className = {styles["popular-item__name"]}>{item.name}</a>
+									<a 
+										className = {styles["popular-item__name"]}>
+											{item.name}
+									</a>
 								</Link>
 							</div>
 						</div>

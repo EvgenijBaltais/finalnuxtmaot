@@ -96,6 +96,8 @@ const Hotelbooking = () => {
 
     }, [mapReady])
 
+    console.log(query)
+
 
     function addBackgroundImage (slider) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
@@ -116,6 +118,7 @@ const Hotelbooking = () => {
             <Head>
                 <title>Бронирование номера</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <meta charset="utf-8" />
             </Head>
 
             <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onReady={() => {
@@ -163,6 +166,26 @@ const Hotelbooking = () => {
                             </a>
                         </p>
                     </div>
+                </div>
+            </div>
+
+            <div className={styles["hotel-bron-data-title"]}>
+
+                    <h3 className={styles["hotel-bron-data-title__h3"]}>Отель <a>{hotelData.name}</a></h3>
+                    <h4 className={styles["hotel-bron-data-title__h4"]}>Номер <a>{query.room}</a></h4>
+            </div>
+
+            <div className={styles["hotel-bron-ready"]}>
+                
+                <div className={`${styles["hotel-bron-ready-item-w"]}`}>
+                    <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-in"]}`}></div>
+                    <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-next"]}`}></div>
+                    <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-out"]}`}></div>
+                </div>
+                <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-middle"]}`}></div>
+                <div className={`${styles["hotel-bron-ready-item-w"]}`}>
+                    <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-adults"]}`}></div>
+                    <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-childs"]}`}></div>
                 </div>
             </div>
         </>
