@@ -7,7 +7,13 @@ const AboutSection = () => {
 		<section className = {styles["about-section"]}>
 			<div className = {styles["about-company"]}>
 				<h2 className = "section-title icon-item icon-item-business">О компании</h2>
-				<div className = {styles["about-company__info"]}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam aut quaerat sint minus dolorum inventore error autem voluptatem beatae eaque blanditiis libero, adipisci deleniti magni fugit debitis a eos? Cupiditate. Lorem ipsum, dolor, sit amet consectetur adipisicing elit. Officia quam corrupti aspernatur alias non minus error animi vitae impedit doloribus porro delectus inventore, laudantium ex nesciunt. Molestias culpa sunt inventore.</div>
+				<div className = {styles["about-company__info"]}>
+				Компания «Магазин Отдыха», специализирующаяся на внутреннем туризме, была основана в 2004 году.
+				 За годы работы на рынке услугами компании воспользовались сотни тысяч людей по всей России.
+				  Огромное количество ежедневных обращений говорит о том, что мы выбрали правильное направление развития.
+				   А большое количество постоянных клиентов – лучший показатель профессионализма сотрудников, 
+				   которые удовлетворяют желания даже самых требовательных клиентов.
+				</div>
 				<a href="" className = {styles["about-company__link"]}>Вы можете связаться с нами по вопросам отдыха</a>
 			</div>
 			<div className = {styles["working-for-you"]}>
@@ -15,15 +21,17 @@ const AboutSection = () => {
 				<div className = {styles["about-company__working"]}>
 					<div className = {styles["about-company__item"]}>
 						<p className = {styles["about-company__subtitle"]}>Подбор индивидуального тура</p>
-						<span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, ipsum cupiditate officiis enim voluptatem deserunt magni obcaecati a beatae, incidunt sunt suscipit sint soluta aperiam dignissimos et distinctio veritatis! Quia.</span>
+						<span>
+						С Вами будет работать ПЕРСОНАЛЬНЫЙ менеджер, который поможет с выбором тура, чтобы отдых соответствовал Вашим ожиданиям.
+						</span>
 					</div>
 					<div className = {styles["about-company__item"]}>
 						<p className = {styles["about-company__subtitle"]}>Подбор индивидуального тура</p>
-						<span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, ipsum cupiditate officiis enim voluptatem deserunt magni obcaecati a beatae, incidunt sunt suscipit sint soluta aperiam dignissimos et distinctio veritatis! Quia.</span>
+						<span>Наши цены Вас приятно удивят. Система скидок и постоянные акции не оставят равнодушным ни одного клиента.</span>
 					</div>
 					<div className = {styles["about-company__item"]}>
 						<p className = {styles["about-company__subtitle"]}>Подбор индивидуального тура</p>
-						<span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, ipsum cupiditate officiis enim voluptatem deserunt magni obcaecati a beatae, incidunt sunt suscipit sint soluta aperiam dignissimos et distinctio veritatis! Quia.</span>
+						<span>Мы заботимся о каждом клиенте, полное сопровождение от начала оформления заявки и до заселения.</span>
 					</div>
 				</div>
 			</div>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper"
 import Link from "next/link"
@@ -8,6 +9,8 @@ import styles from "../../styles/search_results/Search_hotel_item.module.css"
 import "swiper/css"
 
 export default function Search_hotel_item ({item, rates, nights}) {
+
+    const [servicesMain, setServicesMain] = useState([])
 
     const { query } = useRouter()
 
@@ -26,7 +29,6 @@ export default function Search_hotel_item ({item, rates, nights}) {
     }
 
     function addBackgroundImage (slider) {
-        slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
     }
 
@@ -55,6 +57,49 @@ export default function Search_hotel_item ({item, rates, nights}) {
             url += '&children_ages=' + query.children_ages[i]
         }
     }
+
+    useEffect(() => {
+
+        // Заполнить главные услуги
+        let neededServices = ["Питание", "Интернет", "В номерах", "Общее"]
+        let servicesArr = []
+
+        // Массив необходимых сервисов neededServices -> в нем перебираем все услуги -> в нем берем первые 3.
+        // Цикл запускается каждый раз заново, чтобы сохранить порядок как в массиве neededServices 
+        // Если Питание, то отдельный цикл
+
+        for (let i = 0; i < item.services.length; i++) {
+            if (item.services[i].group_name == "Питание") {
+                for (let k = 0; k < item.services[i].amenities.length; k++) {
+                    item.services[i].amenities[k].indexOf('Завтрак') + 1 ? 
+                    servicesArr.push([item.services[i].amenities[k]]) : ''
+
+                    item.services[i].amenities[k].indexOf('Бар') + 1 ? 
+                    servicesArr.push([item.services[i].amenities[k]]) : ''
+
+                    item.services[i].amenities[k].indexOf('Кафе') + 1 ? 
+                    servicesArr.push([item.services[i].amenities[k]]) : ''
+
+                    item.services[i].amenities[k].indexOf('пансион') + 1 ? 
+                    servicesArr.push([item.services[i].amenities[k]]) : ''
+                }
+                break
+            }
+        }
+
+        for (let q = 1; q < neededServices.length; q++) {
+            for (let i = 0; i < item.services.length; i++) {
+                if (item.services[i].group_name == neededServices[q]) {
+                    for (let k = 0; k < item.services[i].amenities.length; k++) {
+                        servicesArr.push(item.services[i].amenities[k])
+                        if (k == 2) break
+                    }
+                }
+            }
+        }
+
+        setServicesMain(servicesArr)
+    }, [item])
 
     return (
 
@@ -86,13 +131,11 @@ export default function Search_hotel_item ({item, rates, nights}) {
                 </Swiper>
 
             <div className = {styles["search-item__content"]}>
-                <Link href = {url}>
-                    <a className = {styles["search-item__title"]}>{item.name}</a>
-                </Link>
+                <a href = {url} target = "_blank" className = {styles["search-item__title"]}>{item.name}</a>
                 <ul className = {styles["search-item__list"]}>
-                    {item.services.map((item, index) => {
+                    {servicesMain.map((item, index) => {
                         return (
-                            <li key = {index} className = {styles["search-item__item"]}>{item.group_name}</li>
+                            <li key = {index} className = {styles["search-item__item"]}>{item}</li>
                         )
                     })}
                 </ul>
@@ -109,9 +152,7 @@ export default function Search_hotel_item ({item, rates, nights}) {
                     <span className = {styles["search-item__price-currency"]}>&#8381;</span>
                 </div>
                 <p className = {styles["search-item__nights"]}>цена за <span className = {styles["search-item__nights-number"]}>{nightsRightText(nights)}</span></p>
-                <Link href = {url}>
-                    <a className = {styles["search-item__bron"]}>Выбрать</a>
-                </Link>
+                <a href = {url} target = "_blank" className = {styles["search-item__bron"]}>Выбрать</a>
             </div>
         </div>
     )

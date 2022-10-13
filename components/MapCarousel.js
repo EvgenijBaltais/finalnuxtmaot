@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import Script from 'next/script'
 import { useState } from 'react'
 
@@ -31,10 +30,6 @@ export default function MapCarousel () {
 
     return (
         <>
-            <Head>
-                <title>Контакты</title>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-            </Head>
             <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onReady={() => {
                 setMapReady(1)
             }

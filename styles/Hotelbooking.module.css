@@ -11,6 +11,7 @@
     border-radius: 10px;
     box-shadow: var(--main-shadow);
     background: #fff;
+    overflow: hidden;
 }
 
 .hotel-bron-map {
@@ -20,6 +21,7 @@
     box-shadow: var(--main-shadow);
     border-radius: 10px;
     background: #fff;
+    overflow: hidden;
 }
 
 .hotel-bron-info {
