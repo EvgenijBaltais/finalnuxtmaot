@@ -10,6 +10,8 @@ const Hotel_card = ({item, hotelInfo, adults, children, nights, bronPageLink}) =
     const [servicesMain, setServicesMain] = useState([])
     const [servicesDop, setServicesDop] = useState([])
 
+    bronPageLink += '&room=' + item.room_name
+
     useEffect(() => {
 
         // Заполнить главные услуги
