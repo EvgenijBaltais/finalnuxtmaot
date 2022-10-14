@@ -176,17 +176,60 @@ const Hotelbooking = () => {
             </div>
 
             <div className={styles["hotel-bron-ready"]}>
-                
                 <div className={`${styles["hotel-bron-ready-item-w"]}`}>
-                    <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-in"]}`}></div>
-                    <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-next"]}`}></div>
-                    <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-out"]}`}></div>
+                    <div className={styles["hotel-bron-ready-somediv"]}>
+                        <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-in"]}`}>
+                            <p className={styles["hotel-bron-ready__title"]}>Заезд</p>
+                            <p className={styles["hotel-bron-ready__info"]}>12.10.2022</p>
+                        </div>
+                        <div className={`${styles["hotel-bron-ready-next"]}`}></div>
+                        <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-out"]}`}>
+                            <p className={styles["hotel-bron-ready__title"]}>Выезд</p>
+                            <p className={styles["hotel-bron-ready__info"]}>12.10.2022</p>
+                        </div>
+                    </div>
+                    <div className={styles["hotel-bron-ready__text"]}>Всего дней отдыха <span></span></div>
                 </div>
-                <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-middle"]}`}></div>
+                <div className={`${styles["hotel-bron-ready-middle"]}`}></div>
                 <div className={`${styles["hotel-bron-ready-item-w"]}`}>
-                    <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-adults"]}`}></div>
-                    <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-childs"]}`}></div>
+                    <div className={styles["hotel-bron-ready-somediv"]}>
+                        <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-adults"]}`}>
+                            <p className={styles["hotel-bron-ready__title"]}>Взрослых</p>
+                            <p className={styles["hotel-bron-ready__info"]}></p>
+                        </div>
+                        <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-childs"]}`}>
+                            <p className={styles["hotel-bron-ready__title"]}>Детей</p>
+                            <p className={styles["hotel-bron-ready__info"]}></p>
+                        </div>
+                    </div>
+                    <div className={styles["hotel-bron-ready__text"]}>Всего дней отдыха <span></span></div>
                 </div>
+            </div>
+
+            <div className={styles["hotel-bron-contactinfo"]}>
+                <p className={styles["hotel-bron-contactinfo__title"]}>Контактные данные гостей.</p>
+                <p className={styles["hotel-bron-contactinfo__subtitle"]}>Пожалуйста, заполните все поля.</p>
+            </div>
+
+            <div className={styles["hotel-bron-ready-form"]}>
+                <form action="" name = "hotel-bron-ready-form">
+
+                    <div className={styles["hotel-bron-ready__guest"]}>
+                        <p className={styles["guest-text-title"]}>Гость 1 <span>(покупатель)</span></p>
+
+                        <div>
+                            <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-surname"]} ${styles["hotel-bron-necessarily"]}`} />
+                            <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-name"]} ${styles["hotel-bron-necessarily"]}`} />
+                            <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-patronymic"]} ${styles["hotel-bron-necessarily"]}`} />
+
+                            <div className={`${styles["hotel-bron-block"]} ${styles["hotel-bron-input-citizenship"]} ${styles["hotel-bron-necessarily"]}`}></div>
+                            <div className={`${styles["hotel-bron-block"]} ${styles["hotel-bron-input-sex"]} ${styles["hotel-bron-necessarily"]}`}></div>
+
+                            <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-phone"]} ${styles["hotel-bron-necessarily"]}`} />
+                            <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-email"]} ${styles["hotel-bron-necessarily"]}`} />
+                        </div>
+                    </div>
+                </form>
             </div>
         </>
     )

@@ -138,3 +138,134 @@
     font-size: 18px;
     line-height: 22px;
 }
+
+.hotel-bron-ready {
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    margin-top: 20px
+}
+
+.hotel-bron-ready-item-w {
+
+}
+
+.hotel-bron-ready-somediv {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.hotel-bron-ready__title {
+    color: #fff;
+}
+
+.hotel-bron-ready-item {
+    width: 135px;
+    height: 75px;
+    border-radius: 10px;
+    background: var(--red-linear-gradient);
+    padding: 15px 20px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.hotel-bron-ready-next {
+    width: 65px;
+    height: 25px;
+    background-image: url('/images/icons/double-right.svg');
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: center;
+}
+
+.hotel-bron-ready-middle {
+    width: 1px;
+    height: 42px;
+    margin: 16px 40px;
+    background: var(--red-linear-gradient);
+}
+
+.hotel-bron-ready__info {
+    padding-top: 8px;
+    font-size: 16px;
+    line-height: 16px;
+    color: #fff;
+}
+
+.hotel-bron-ready__text {
+    width: 100%;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    margin-top:20px
+}
+
+.hotel-bron-ready-adults {
+    margin-right: 20px;
+}
+
+.hotel-bron-contactinfo {
+    padding: 50px 0 30px 0;
+}
+
+.hotel-bron-contactinfo__title {
+    font-weight: bold;
+    font-size: 21px;
+    line-height: 24px;
+    margin-bottom: 5px
+}
+
+.hotel-bron-contactinfo__subtitle {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.hotel-bron-ready-form {
+    padding: 30px 15px;
+    box-shadow: var(--main-shadow);
+    border-radius: 10px;
+}
+
+.guest-text-title {
+    color: rgb(6,117,232);
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.guest-text-title span {
+    color: #000;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: normal;
+}
+
+.hotel-bron-input {
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    border: 2px solid rgb(221,221,221);
+    outline: 0!important;
+    width: 320px;
+    height: 60px;
+}
+
+.hotel-bron-necessarily {
+    position: relative;
+    padding: 0 15px;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.hotel-bron-necessarily:after {
+    content: '*';
+    position: absolute;
+    top: -20px;
+    right: 0;
+    color: rgb(254,0,0);
+    font-size: 16px;
+    line-height: 20px;
+}
