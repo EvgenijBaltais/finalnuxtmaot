@@ -133,8 +133,6 @@ const Hotel_card = ({item, hotelInfo, adults, children, nights, bronPageLink}) =
         return text
     }
 
-    console.log(item.url)
-
     return (
         <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]}` : styles["select-results__item"]}>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>

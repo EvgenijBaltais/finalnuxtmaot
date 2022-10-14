@@ -88,8 +88,7 @@ body {
 .contact-page:after,
 .hotel-bron-page:after,
 .articles-page:after,
-.payment-page:after,
-.hotels-page:after {
+.payment-page:after {
 	width: 750px;
 	height: 750px;
 	content: '';
@@ -3407,8 +3406,14 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .no-result {
 	padding: 20px;
+	text-align: center;
 }
 
+.no-result-image {
+	display: block;
+	width: 200px;
+	margin: 0 auto;
+}
 
 /* Форма подбора, конец */
 

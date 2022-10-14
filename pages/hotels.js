@@ -45,7 +45,7 @@ export default function Hotels () {
 
             setFilteredItems([])
             setLoadedItems([])
-            setNodataText('Загрузка подходящих вариантов...')
+            setNodataText('Мы загружаем лучшие варианты!')
 
             let [dayIn, monthIn, yearIn] = query.datein.split('.')
             let [dayOut, monthOut, yearOut] = query.dateout.split('.')
@@ -370,7 +370,16 @@ export default function Hotels () {
                 </div>
                 <div className = {`${styles["search-result-right"]} search-result-right`}>
 
-                {nodataText ? <p className = "no-result">{nodataText}</p> : ''}
+                {nodataText ?
+                    <p className = "no-result">
+                        {nodataText == "Мы загружаем лучшие варианты!" ? 
+                            <img src = "/images/waiting.gif" className = "no-result-image" />
+                            : ''
+                        }
+                        {nodataText}
+                    </p>
+                 : ''}
+
                 {isResearch ? <div className="waiting-fon"></div>: ''}
                     
 
