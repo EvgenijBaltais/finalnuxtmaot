@@ -1,3 +1,16 @@
+.guest-text-title {
+    color: rgb(6,117,232);
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.no-data-query {
+    text-align: center;
+    margin-top: 100px
+}
+
 .hotel-bron-top {
     display: flex;
     justify-content: space-between;
@@ -36,14 +49,20 @@
     box-shadow: var(--main-shadow);
     border-radius: 5px;
     background: #fff;
+    z-index: 5;
 }
 
 .hotel-bron-info__title {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-size: 18px;
     line-height: 24px;
     text-align: center;
     font-family: 'FontInterSemiBold';
+}
+
+.hotel-bron-info__title + p {
+    font-size: 15px;
+    line-height: 20px;
 }
 
 .arrow-left {
@@ -113,6 +132,11 @@
     text-decoration: none;
 }
 
+.hotel-bron-data-title {
+    max-width: 1030px;
+    margin: 0 auto;
+}
+
 .hotel-bron-data-title__h3 {
     margin-top: 50px;
     color: #000;
@@ -137,4 +161,255 @@
     color: rgb(6,117,232);
     font-size: 18px;
     line-height: 22px;
+}
+
+.hotel-bron-ready {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 20px
+}
+
+.hotel-bron-ready-item-w {
+
+}
+
+.hotel-bron-ready-somediv {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.hotel-bron-ready__title {
+    color: #fff;
+}
+
+.hotel-bron-ready-item {
+    width: 135px;
+    height: 75px;
+    border-radius: 10px;
+    background: var(--red-linear-gradient);
+    padding: 15px 20px;
+    color: #fff;
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.hotel-bron-ready-next {
+    width: 65px;
+    height: 25px;
+    background-image: url('/images/icons/double-right.svg');
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: center;
+}
+
+.hotel-bron-ready-middle {
+    width: 1px;
+    height: 42px;
+    margin: 16px 40px;
+    background: linear-gradient(45deg,#0575E6,#00f260);
+}
+
+.hotel-bron-ready__info {
+    padding-top: 8px;
+    font-size: 16px;
+    line-height: 16px;
+    color: #fff;
+}
+
+.hotel-bron-ready__text {
+    width: 100%;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    margin-top:20px
+}
+
+.hotel-bron-ready-adults {
+    margin-right: 20px;
+}
+
+.hotel-bron-contactinfo {
+    padding: 50px 0 30px 0;
+}
+
+.hotel-bron-contactinfo__title {
+    font-weight: bold;
+    font-size: 21px;
+    line-height: 24px;
+    margin-bottom: 5px
+}
+
+.hotel-bron-contactinfo__subtitle {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.hotel-bron-ready-form {
+    padding: 30px 15px;
+    box-shadow: var(--main-shadow);
+    border-radius: 10px;
+}
+
+.children-age-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.children-age-block {
+    width: 90px;
+    height: 60px;
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    border: 2px solid rgb(221,221,221);
+    font-size: 18px;
+    line-height: 56px;
+    text-align: center;
+    color: #4B4B4B;
+    margin-right: 20px
+}
+
+.hotel-bron-necessarily {
+    position: relative;
+}
+
+.hotel-bron-necessarily-wrong:before {
+    content: 'Неправильные данные';
+    position: absolute;
+    top: -15px;
+    left: 0;
+    color: rgb(254,0,0);
+    font-size: 11px;
+    line-height: 12px;
+}
+
+.hotel-bron-not-necessarily:before {
+    content: 'Не обязательно *';
+    position: absolute;
+    top: -15px;
+    right: 0;
+    color: #676767;
+    font-size: 11px;
+    line-height: 12px;
+}
+
+.hotel-bron-necessarily:after {
+    content: '*';
+    position: absolute;
+    top: -20px;
+    right: 0;
+    color: rgb(254,0,0);
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.children-age-wrapper .hotel-bron-necessarily:after {
+    font-size: 20px;
+    line-height: 20px;
+}
+
+.hotel-bron-btn-w {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 40px;
+}
+
+.hotel-bron-btn {
+    width: 195px;
+    height: 60px;
+    border-radius: 10px;
+    font-size: 16px;
+    line-height: 60px;
+    color: #fff;
+    text-align: center;
+    background: var(--red-linear-gradient);
+    border: 0;
+    cursor: pointer;
+}
+
+.hotel-bron-required-attention-w {
+    font-size: 16px;
+    line-height: 20px;
+    padding-top: 20px;
+}
+
+.hotel-bron-required-attention-w {
+    padding-top: 10px;
+}
+
+.hotel-bron-required-attention {
+    font-size: 20px;
+    line-height: 20px;
+    color: rgb(254,0,0);
+}
+
+input[type="checkbox"].broned:checked, 
+input[type="checkbox"].broned:not(:checked)
+{
+    position: absolute;
+    left: -9999px;
+}
+
+input[type="checkbox"].broned:checked + label, 
+input[type="checkbox"].broned:not(:checked) + label {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+	font-size: 12px;
+    line-height: 20px;
+    cursor: pointer;
+    font-family: 'FontInterLight';
+	user-select: none;
+	color: rgb(51,51,51)
+}
+
+input[type="checkbox"].broned:checked + label:before, 
+input[type="checkbox"].broned:not(:checked) + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: none;
+    background: 
+	    radial-gradient(circle at 100% 100%, #ffffff 0, #ffffff 3px, transparent 3px) 0% 0%/5px 5px no-repeat,            
+	    radial-gradient(circle at 0 100%, #ffffff 0, #ffffff 3px, transparent 3px) 100% 0%/5px 5px no-repeat,            
+	    radial-gradient(circle at 100% 0, #ffffff 0, #ffffff 3px, transparent 3px) 0% 100%/5px 5px no-repeat,            
+	    radial-gradient(circle at 0 0, #ffffff 0, #ffffff 3px, transparent 3px) 100% 100%/5px 5px no-repeat,            
+	    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 4px) calc(100% - 10px) no-repeat,           
+	    linear-gradient(#ffffff, #ffffff) 50% 50%/calc(100% - 10px) calc(100% - 4px) no-repeat,            
+	    var(--red-linear-gradient);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input[type="checkbox"].broned:checked + label:after, 
+input[type="checkbox"].broned:not(:checked) + label:after {
+
+	content: '';
+    position: absolute; 
+    top: 1px; 
+    left: 3px;
+    width: 14px;
+   	border-color: transparent;
+   	border: 0;
+    height: 12px; 
+    background: var(--red-linear-gradient);
+    -webkit-clip-path: polygon(38% 68%, 86% 12%, 100% 28%, 37% 100%, 0 50%, 10% 32%);
+	clip-path: polygon(38% 68%, 86% 12%, 100% 28%, 37% 100%, 0 50%, 10% 32%);
+    -webkit-transition: transform .3s;
+    transition: transform .3s;    
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);  
+}
+
+input[type="checkbox"].broned:not(:checked) + label:after {
+    opacity: 0;
+}
+
+input[type="checkbox"].broned:checked + label:after {
+    opacity: 1;
+    content: "";
 }
