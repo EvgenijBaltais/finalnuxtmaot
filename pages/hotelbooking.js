@@ -213,10 +213,12 @@ const Hotelbooking = () => {
                                 <p className={styles["hotel-bron-ready__title"]}>Взрослых</p>
                                 <p className={styles["hotel-bron-ready__info"]}>{guests.length}</p>
                             </div>
+                            {children.length ?
                             <div className={`${styles["hotel-bron-ready-item"]} ${styles["hotel-bron-ready-childs"]}`}>
                                 <p className={styles["hotel-bron-ready__title"]}>Детей</p>
                                 <p className={styles["hotel-bron-ready__info"]}>{children.length}</p>
                             </div>
+                            : ''}
                         </div>
                         <div className={styles["hotel-bron-ready__text"]}>Всего гостей {guests.length + children.length}<span></span></div>
                     </div>
