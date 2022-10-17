@@ -62,8 +62,7 @@
 }
 
 .hotel-bron-inside {
-    width: calc(100% + 4px);
-    margin-left: -2px;
+    width: 100%;
     height: 100%;
 }
 
@@ -71,19 +70,27 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: 56px;
+    height: 60px;
     color: #676767;
     padding: 0 15px;
     margin-top: -2px;
 }
-
-.hotel-bron-inside__default {
-    margin-bottom: 4px;
+.hotel-bron-inside__item:first-child {
+    margin-top: 0;
 }
 
-.hotel-bron-inside__item:not(.hotel-bron-inside__default) {
+.hotel-bron-inside__default {
+    background-color: #fff;
+}
+
+.hotel-bron-inside__item {
     border: 2px solid rgb(221,221,221);
     border-radius: 10px;
+    background-color: #fff;
+}
+
+.hotel-bron-inside__item:hover {
+    background-color: rgb(221,221,221);
 }
 
 .hotel-bron-input-citizenship {
@@ -92,22 +99,22 @@
     font-size: 16px;
     line-height: 20px;
     border-radius: 10px;
-    border: 2px solid rgb(221,221,221);
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    z-index: 5;
 }
 
 .hotel-bron-input-sex {
     position: relative;
-    width: 100px;
+    width: 150px;
     height: 60px;
     font-size: 16px;
     line-height: 20px;
     border-radius: 10px;
-    border: 2px solid rgb(221,221,221);
     cursor: pointer;
     overflow: hidden;
+    z-index: 5;
 }
 
 .hotel-bron-input [placeholder]          {color: #676767;}
@@ -161,4 +168,16 @@
     color: rgb(254,0,0);
     font-size: 16px;
     line-height: 20px;
+}
+
+.hotel-bron-clickarea {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 6;
 }

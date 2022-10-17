@@ -4542,3 +4542,37 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 /* Карточка номера у отеля - иконки, конец */
+
+/* Выпадающие списки на странице бронирования */
+
+.hotel-bron-input-citizenship {
+
+}
+
+.hotel-bron-input-sex {
+
+}
+
+.opened-list.hotel-bron-citizenship .hotel-bron-input-citizenship {
+	overflow: visible;
+}
+
+.opened-list.hotel-bron-sex .hotel-bron-input-sex {
+	overflow: visible;
+}
+
+.hotel-bron-input-arrow {
+	transition: all .3s;
+}
+
+.opened-list.hotel-bron-citizenship .hotel-bron-input-arrow {
+    transform: rotate(180deg);
+    transition: all .3s;
+}
+
+.opened-list.hotel-bron-sex .hotel-bron-input-arrow {
+    transform: rotate(180deg);
+    transition: all .3s;
+}
+
+/* Выпадающие списки на странице бронирования, конец */
