@@ -60,38 +60,52 @@ export default function Search_hotel_item ({item, rates, nights}) {
 
     useEffect(() => {
 
+
         // Заполнить главные услуги
-        let neededServices = ["Питание", "Интернет", "В номерах", "Общее"]
+        let neededServices = ["Питание", "Интернет", "В номерах", "Общее"]   // Услуги, которые добавляем в список
         let servicesArr = []
+        let services = []
+        let someItem
+
+        services = item.services.filter(function (n) {
+            someItem = 0
+            for (let i = 0; i < neededServices.length; i++) {
+                if (n.group_name == neededServices[i]) {
+                    someItem = n
+                    break
+                }
+            }
+            return someItem != 0 ? someItem : '' 
+        })
 
         // Массив необходимых сервисов neededServices -> в нем перебираем все услуги -> в нем берем первые 3.
         // Цикл запускается каждый раз заново, чтобы сохранить порядок как в массиве neededServices 
         // Если Питание, то отдельный цикл
 
-        for (let i = 0; i < item.services.length; i++) {
-            if (item.services[i].group_name == "Питание") {
-                for (let k = 0; k < item.services[i].amenities.length; k++) {
-                    item.services[i].amenities[k].indexOf('Завтрак') + 1 ? 
-                    servicesArr.push([item.services[i].amenities[k]]) : ''
+        for (let i = 0; i < services.length; i++) {
+            if (services[i].group_name == "Питание") {
+                for (let k = 0; k < services[i].amenities.length; k++) {
+                    services[i].amenities[k].indexOf('Завтрак') + 1 ? 
+                    servicesArr.push([services[i].amenities[k]]) : ''
 
-                    item.services[i].amenities[k].indexOf('Бар') + 1 ? 
-                    servicesArr.push([item.services[i].amenities[k]]) : ''
+                    services[i].amenities[k].indexOf('Бар') + 1 ? 
+                    servicesArr.push([services[i].amenities[k]]) : ''
 
-                    item.services[i].amenities[k].indexOf('Кафе') + 1 ? 
-                    servicesArr.push([item.services[i].amenities[k]]) : ''
+                    services[i].amenities[k].indexOf('Кафе') + 1 ? 
+                    servicesArr.push([services[i].amenities[k]]) : ''
 
-                    item.services[i].amenities[k].indexOf('пансион') + 1 ? 
-                    servicesArr.push([item.services[i].amenities[k]]) : ''
+                    services[i].amenities[k].indexOf('пансион') + 1 ? 
+                    servicesArr.push([services[i].amenities[k]]) : ''
                 }
                 break
             }
         }
 
         for (let q = 1; q < neededServices.length; q++) {
-            for (let i = 0; i < item.services.length; i++) {
-                if (item.services[i].group_name == neededServices[q]) {
-                    for (let k = 0; k < item.services[i].amenities.length; k++) {
-                        servicesArr.push(item.services[i].amenities[k])
+            for (let i = 0; i < services.length; i++) {
+                if (services[i].group_name == neededServices[q]) {
+                    for (let k = 0; k < services[i].amenities.length; k++) {
+                        servicesArr.push(services[i].amenities[k])
                         if (k == 2) break
                     }
                 }
