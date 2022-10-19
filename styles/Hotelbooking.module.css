@@ -252,6 +252,30 @@
     border-radius: 10px;
 }
 
+
+.guest-text-title {
+    color: rgb(6,117,232);
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.guest-text-title span {
+    color: #000;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: normal;
+}
+
+.hotel-bron-input {
+    margin-right: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    border: 2px solid rgb(221,221,221);
+    outline: 0!important;
+    width: 320px;
+    height: 60px;
 .children-age-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -268,10 +292,16 @@
     text-align: center;
     color: #4B4B4B;
     margin-right: 20px
+
 }
 
 .hotel-bron-necessarily {
     position: relative;
+
+    padding: 0 15px;
+    font-size: 16px;
+    line-height: 20px;
+
 }
 
 .hotel-bron-necessarily-wrong:before {
@@ -292,6 +322,7 @@
     color: #676767;
     font-size: 11px;
     line-height: 12px;
+
 }
 
 .hotel-bron-necessarily:after {
@@ -302,6 +333,7 @@
     color: rgb(254,0,0);
     font-size: 16px;
     line-height: 20px;
+
 }
 
 .children-age-wrapper .hotel-bron-necessarily:after {
@@ -412,4 +444,5 @@ input[type="checkbox"].broned:not(:checked) + label:after {
 input[type="checkbox"].broned:checked + label:after {
     opacity: 1;
     content: "";
+
 }
