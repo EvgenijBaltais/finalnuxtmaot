@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper"
-import Link from "next/link"
 
 import { useRouter } from "next/router"
 
@@ -9,8 +7,6 @@ import styles from "../../styles/search_results/Search_hotel_item.module.css"
 import "swiper/css"
 
 export default function Search_hotel_item ({item, rates, nights}) {
-
-    const [servicesMain, setServicesMain] = useState([])
 
     const { query } = useRouter()
 
@@ -57,7 +53,7 @@ export default function Search_hotel_item ({item, rates, nights}) {
             url += '&children_ages=' + query.children_ages[i]
         }
     }
-
+/*
     useEffect(() => {
 
         // Заполнить главные услуги
@@ -100,7 +96,7 @@ export default function Search_hotel_item ({item, rates, nights}) {
 
         setServicesMain(servicesArr)
     }, [item])
-
+*/
     return (
 
         <div className={styles["search-item"]}>
@@ -133,7 +129,7 @@ export default function Search_hotel_item ({item, rates, nights}) {
             <div className = {styles["search-item__content"]}>
                 <a href = {url} target = "_blank" className = {styles["search-item__title"]}>{item.name}</a>
                 <ul className = {styles["search-item__list"]}>
-                    {servicesMain.map((item, index) => {
+                    {item.services.map((item, index) => {
                         return (
                             <li key = {index} className = {styles["search-item__item"]}>{item}</li>
                         )

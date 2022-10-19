@@ -17,7 +17,7 @@ export default function Hotels () {
     const { query } = useRouter()
 
     const [loadedItems, setLoadedItems] = useState([])
-    const [temporaryItems, setTemporaryItems] = useState([])
+    const [temporaryItems, setTemporaryItems] = useState([])   // копия выборки без деления на страницы для использования в фильтрах
     const [filteredItems, setFilteredItems] = useState([])
     const [isResearch, setIsResearch] = useState(false)
     const [nights, setNights] = useState(0)
@@ -31,6 +31,8 @@ export default function Hotels () {
     const [currentPage, setCurrentPage] = useState(0)
     const [paginationOn, setPagination] = useState(0)
     const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
+    const [choosingFilters, setChoosingFilters] = useState(false)
+    const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
 
     useEffect(() => {
 
@@ -80,8 +82,16 @@ export default function Hotels () {
                     .then((res) => {
 
                     res.success ? '' : res.data = []
-                    
-                    //console.log(!res.success ? 'Ошибка запроса success == 0' : '')
+                
+                // Отфильтровать и вывести услуги
+
+                let arr = []
+
+                for (let i = 0; i < res.data.length; i++) {
+                    arr.push(setServices(res.data[i]))
+                }
+
+                res.data = arr
 
                 setLoadedItems(paginateItems(res.data, itemsPerPage))
                 setTemporaryItems(res.data)
@@ -133,6 +143,55 @@ export default function Hotels () {
         return arr
     }
 
+    // Функция для сортировки услуг и выбора самых востребованых, для показа на странице подбора номеров
+
+
+    function setServices (item) {
+
+        // Заполнить главные услуги
+        let neededServices = ["Питание", "Интернет", "В номерах", "Общее"]
+        let servicesArr = []
+        let i = item
+        let services = i.hotel.services
+
+        // Массив необходимых сервисов neededServices -> в нем перебираем все услуги -> в нем берем первые 3.
+        // Цикл запускается каждый раз заново, чтобы сохранить порядок как в массиве neededServices 
+        // Если Питание, то отдельный цикл
+
+        for (let i = 0; i < services.length; i++) {
+            if (services[i].group_name == "Питание") {
+                for (let k = 0; k < services[i].amenities.length; k++) {
+                    services[i].amenities[k].indexOf('Завтрак') + 1 ? 
+                    servicesArr.push([services[i].amenities[k]]) : ''
+
+                    services[i].amenities[k].indexOf('Бар') + 1 ? 
+                    servicesArr.push([services[i].amenities[k]]) : ''
+
+                    services[i].amenities[k].indexOf('Кафе') + 1 ? 
+                    servicesArr.push([services[i].amenities[k]]) : ''
+
+                    services[i].amenities[k].indexOf('пансион') + 1 ? 
+                    servicesArr.push([services[i].amenities[k]]) : ''
+                }
+                break
+            }
+        }
+
+        for (let q = 1; q < neededServices.length; q++) {
+            for (let i = 0; i < services.length; i++) {
+                if (services[i].group_name == neededServices[q]) {
+                    for (let k = 0; k < services[i].amenities.length; k++) {
+                        servicesArr.push(services[i].amenities[k])
+                        if (k == 2) break
+                    }
+                }
+            }
+        }
+
+        i.hotel.services = servicesArr
+        return i
+    }
+
     // Функция для определения количества ночей для дат в формате гг-мм.дд
 
     function calculateNights (datein, dateout) {
@@ -158,21 +217,69 @@ export default function Hotels () {
 
         setNodataText('')
         setCurrentPage(0)
-        let res = applyFilters(loadedItems)
+        let res = applyFilters()
 
         res.length == 0 ? setNodataText('Не удалось ничего найти. Попробуйте изменить условия поиска') : ''
 
-        setIsResearch(true)
         setFiltersOn(true)
         setFilteredItems(res)
-        setIsResearch(false)
+
+        //console.log('showVariants')
     }
 
-    function applyFilters(items) {
+    function startReDraw () {
+
+
+        if (isResearch == true) return false
+        if (sliderMin == 0 && sliderMax == 0) return
+
+        //console.log('startRedraw')
+
+        setIsResearch(true)
+    }
+
+    // Перерисовка данных при слайдере
+
+    function sliderRedraw () {
+
+        if (isResearch == true) return false
+        if (sliderMin == 0 && sliderMax == 0) return
+
+        //console.log('startsliderRedraw')
+
+        setIsResearch(true)
+        
+        showVariants() 
+
+        setIsResearch(false)
+        setChoosingFilters(false)
+        //console.log('endsliderRedraw')
+    }
+
+    useEffect(() => {
+
+        if (choosingFilters == true || (choosingFilters == false && isResearch == false)) return
+        
+        setChoosingFilters(true)
+
+        setTimeout(() => {
+            showVariants() 
+        }, 0)
+
+        setTimeout(() => {
+            setIsResearch(false)
+            setChoosingFilters(false)
+        }, 0)
+
+    }, [checkBoxesResearch])
+
+    function applyFilters() {
 
         let arr = temporaryItems
 
         // Минимальная и максимальная цена
+
+        if (sliderMin == 0 && sliderMax == 0) return
 
         let min = parseInt(document.querySelector('.aside-slider-from').value.match(/\d+/))
         let max = parseInt(document.querySelector('.aside-slider-to').value.match(/\d+/))
@@ -193,6 +300,11 @@ export default function Hotels () {
             stars.push(i + 1) : ''
         }
 
+        //console.log(min)
+        //console.log(max)
+        //console.log(food)
+        //console.log(stars)
+
         // Проверка на все фильтры
 
         // Диапазон цен
@@ -201,13 +313,38 @@ export default function Hotels () {
             return parseInt(n.rates[0].price) >= min && parseInt(n.rates[0].price) <= max
         })
 
+
+        console.log(arr)
+
         // Проверка на тип питания (все включено)
 
-        if (food.includes('Все включено')) {
-            arr = arr.filter(function (n) {
-                return n.hotel.all_inclusive == true
-            })
-        }
+        //console.log(arr)
+/*
+        let el = 0
+
+        arr = arr.filter(n => {
+
+            el = 0
+
+            if (food.includes('Завтрак')) {
+                n.rates[0].meal[0].indexOf('Завтрак') != 0 ||
+                n.rates[0].meal[0].indexOf('Завтрак включён') != 0 ? el = 1 : ''
+            }
+            if (food.includes('Завтрак и обед')) {
+                n.rates[0].meal[0].indexOf('Завтрак и обед') != -1 ? el = 1 : ''
+            }
+            if (food.includes('Полный пансион')) {
+                n.rates[0].meal[0].indexOf('Завтрак, обед и ужин включены') != -1 ||
+                n.rates[0].meal[0].indexOf('Полный пансион') != -1 ? el = 1 : ''
+            }
+            if (food.includes('Все включено')) {
+                n.rates[0].meal[0].indexOf('Все включено') != -1 ? el = 1 : ''
+            }
+
+            if (el) return n
+        })
+*/
+
 
         /*
         // Проверка на Звездность
@@ -220,6 +357,8 @@ export default function Hotels () {
             }
             if (!starsAllow) continue
         }*/
+
+       // if (arr.length == 0) arr = temporaryItems
 
         return arr
     }
@@ -325,7 +464,7 @@ export default function Hotels () {
                                     min={0}
                                     max={(sliderMax + 10000)}
                                     onChange={value => renewValues(value)}
-                                    onAfterChange = {() => showVariants()}
+                                    onAfterChange = {sliderRedraw}
                                 /> :  ''
                             }
                         </div>
@@ -334,7 +473,7 @@ export default function Hotels () {
                             {foodTypes.map((item, index) => {
                               return (
                                 <div key = {index} className = {styles["aside-checkbox"]}>
-                                    <input type="checkbox" id={`checkbox-1${index + 1}`} className = "stylized food-checkbox" onChange={() => showVariants()} /> 
+                                    <input type="checkbox" id={`checkbox-1${index + 1}`} className = "stylized food-checkbox" onChange={() => startReDraw()} /> 
                                     <label htmlFor={`checkbox-1${index + 1}`}>{item}</label>
                                 </div>
                               )  
@@ -346,7 +485,7 @@ export default function Hotels () {
                                 [...Array(5)].map((e, i) => {
                                     return (
                                         <div key = {i} className = {styles["aside-checkbox"]}>
-                                            <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={() => showVariants()} />
+                                            <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={() => startReDraw()} />
                                             <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-2${i + 1}`}>
                                                 <ul className = {styles["aside-stars-list"]}>
                                                     {[...Array(i + 1)].map((el, ind) => {
@@ -381,7 +520,6 @@ export default function Hotels () {
                  : ''}
 
                 {isResearch ? <div className="waiting-fon"></div>: ''}
-                    
 
                     {/* Вывод по поиску */}
                     {
