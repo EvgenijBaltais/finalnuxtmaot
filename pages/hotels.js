@@ -223,19 +223,6 @@ export default function Hotels () {
 
         setFiltersOn(true)
         setFilteredItems(res)
-
-        //console.log('showVariants')
-    }
-
-    function startReDraw () {
-
-
-        if (isResearch == true) return false
-        if (sliderMin == 0 && sliderMax == 0) return
-
-        //console.log('startRedraw')
-
-        setIsResearch(true)
     }
 
     // Перерисовка данных при слайдере
@@ -245,7 +232,7 @@ export default function Hotels () {
         if (isResearch == true) return false
         if (sliderMin == 0 && sliderMax == 0) return
 
-        //console.log('startsliderRedraw')
+        console.log('startsliderRedraw')
 
         setIsResearch(true)
         
@@ -256,9 +243,23 @@ export default function Hotels () {
         //console.log('endsliderRedraw')
     }
 
+
+    function startReDraw () {
+
+        if (isResearch == true) return false
+        if (sliderMin == 0 && sliderMax == 0) return
+
+        console.log('startRedraw')
+
+        setIsResearch(true)
+        setCheckBoxesResearch(true)
+    }
+
     useEffect(() => {
 
         if (choosingFilters == true || (choosingFilters == false && isResearch == false)) return
+
+        console.log('checkBoxesResearch')
         
         setChoosingFilters(true)
 
@@ -269,6 +270,7 @@ export default function Hotels () {
         setTimeout(() => {
             setIsResearch(false)
             setChoosingFilters(false)
+            setCheckBoxesResearch(false)
         }, 0)
 
     }, [checkBoxesResearch])
@@ -313,38 +315,37 @@ export default function Hotels () {
             return parseInt(n.rates[0].price) >= min && parseInt(n.rates[0].price) <= max
         })
 
-
         console.log(arr)
 
         // Проверка на тип питания (все включено)
 
-        //console.log(arr)
-/*
-        let el = 0
+        if (food.length > 0) {
 
-        arr = arr.filter(n => {
+            let el = 0
+            arr = arr.filter(n => {
 
-            el = 0
+                el = 0
 
-            if (food.includes('Завтрак')) {
-                n.rates[0].meal[0].indexOf('Завтрак') != 0 ||
-                n.rates[0].meal[0].indexOf('Завтрак включён') != 0 ? el = 1 : ''
-            }
-            if (food.includes('Завтрак и обед')) {
-                n.rates[0].meal[0].indexOf('Завтрак и обед') != -1 ? el = 1 : ''
-            }
-            if (food.includes('Полный пансион')) {
-                n.rates[0].meal[0].indexOf('Завтрак, обед и ужин включены') != -1 ||
-                n.rates[0].meal[0].indexOf('Полный пансион') != -1 ? el = 1 : ''
-            }
-            if (food.includes('Все включено')) {
-                n.rates[0].meal[0].indexOf('Все включено') != -1 ? el = 1 : ''
-            }
+                if (food.includes('Завтрак')) {
+                    n.rates[0].meal[0].indexOf('Завтрак') != 0 ||
+                    n.rates[0].meal[0].indexOf('Завтрак включён') != 0 ? el = 1 : ''
+                }
+                if (food.includes('Завтрак и обед')) {
+                    n.rates[0].meal[0].indexOf('Завтрак и обед') != -1 ? el = 1 : ''
+                }
+                if (food.includes('Полный пансион')) {
+                    n.rates[0].meal[0].indexOf('Завтрак, обед и ужин включены') != -1 ||
+                    n.rates[0].meal[0].indexOf('Полный пансион') != -1 ? el = 1 : ''
+                }
+                if (food.includes('Все включено')) {
+                    n.rates[0].meal[0].indexOf('Все включено') != -1 ? el = 1 : ''
+                }
 
-            if (el) return n
-        })
-*/
+                if (el) return n
+            })
+        }
 
+        console.log(arr)
 
         /*
         // Проверка на Звездность
