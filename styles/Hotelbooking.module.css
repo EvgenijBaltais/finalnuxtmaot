@@ -276,6 +276,7 @@
     outline: 0!important;
     width: 320px;
     height: 60px;
+}
 .children-age-wrapper {
     display: flex;
     flex-wrap: wrap;
