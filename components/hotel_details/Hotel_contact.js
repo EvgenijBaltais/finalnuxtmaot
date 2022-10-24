@@ -38,12 +38,6 @@ const Hotel_contact = ({hotelData}) => {
                 <div className = {styles["hotel-main-descr"]}>
                         <h3>Расположение</h3>
                         <p>{hotelData.address}</p>
-                        {hotelData.description ? 
-                        <>
-                            <h3>У нас вы найдете</h3>
-                            <p className = {styles["hotel-description-text"]}>{description.textContent}</p>
-                        </>
-                        : ''}
                 </div>
 
                 <div className={styles["contact-map"]}>

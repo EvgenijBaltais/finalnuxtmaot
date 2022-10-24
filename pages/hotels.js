@@ -18,12 +18,11 @@ export default function Hotels () {
 
     const [loadedItems, setLoadedItems] = useState([])
     const [temporaryItems, setTemporaryItems] = useState([])   // копия выборки без деления на страницы для использования в фильтрах
-    const [filteredItems, setFilteredItems] = useState([])
+    const [filteredItems, setFilteredItems] = useState(false)
     const [isResearch, setIsResearch] = useState(false)
     const [nights, setNights] = useState(0)
     const [popularHotels, setPopularHotels] = useState([])
     const [popularWays, setPopularWays] = useState([])
-    const [filtersOn, setFiltersOn] = useState(0)
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
     const [nodataText, setNodataText] = useState('')
@@ -45,7 +44,6 @@ export default function Hotels () {
                 return () => {}
             }
 
-            setFilteredItems([])
             setLoadedItems([])
             setNodataText('Мы загружаем лучшие варианты!')
 
@@ -219,10 +217,23 @@ export default function Hotels () {
         setCurrentPage(0)
         let res = applyFilters()
 
-        res.length == 0 ? setNodataText('Не удалось ничего найти. Попробуйте изменить условия поиска') : ''
+        // Вариант на случай сброса всех фильтров. В этом случае возвращается первоначальная выборка с пагинацией
+        if (res == 0) {
+            setFilteredItems(0)
+        }
 
-        setFiltersOn(true)
-        setFilteredItems(res)
+        // Если после фильтров не осталось вариантов для отображения
+        if (res.length == 0) {
+            setNodataText('Не удалось ничего найти. Попробуйте изменить условия поиска')
+            setFilteredItems([])
+        }
+
+        // Если после фильтров есть варианты
+        if (res.length > 0) {
+            setFilteredItems(res)
+        }
+        
+        console.log(res)
     }
 
     // Перерисовка данных при слайдере
@@ -232,15 +243,12 @@ export default function Hotels () {
         if (isResearch == true) return false
         if (sliderMin == 0 && sliderMax == 0) return
 
-        console.log('startsliderRedraw')
-
         setIsResearch(true)
         
         showVariants() 
 
         setIsResearch(false)
         setChoosingFilters(false)
-        //console.log('endsliderRedraw')
     }
 
 
@@ -248,8 +256,6 @@ export default function Hotels () {
 
         if (isResearch == true) return false
         if (sliderMin == 0 && sliderMax == 0) return
-
-        console.log('startRedraw')
 
         setIsResearch(true)
         setCheckBoxesResearch(true)
@@ -259,8 +265,6 @@ export default function Hotels () {
 
         if (choosingFilters == true || (choosingFilters == false && isResearch == false)) return
 
-        console.log('checkBoxesResearch')
-        
         setChoosingFilters(true)
 
         setTimeout(() => {
@@ -274,14 +278,13 @@ export default function Hotels () {
         }, 0)
 
     }, [checkBoxesResearch])
-
+    
     function applyFilters() {
 
         let arr = temporaryItems
+        let el
 
         // Минимальная и максимальная цена
-
-        if (sliderMin == 0 && sliderMax == 0) return
 
         let min = parseInt(document.querySelector('.aside-slider-from').value.match(/\d+/))
         let max = parseInt(document.querySelector('.aside-slider-to').value.match(/\d+/))
@@ -302,33 +305,31 @@ export default function Hotels () {
             stars.push(i + 1) : ''
         }
 
-        //console.log(min)
-        //console.log(max)
-        //console.log(food)
-        //console.log(stars)
-
         // Проверка на все фильтры
 
-        // Диапазон цен
+        // Если значения слайдера изменились, то учитывать их. Если не изменились, то пропустить
+        if (min != sliderMin || max != sliderMax) {
 
-        arr = arr.filter(function (n) {
-            return parseInt(n.rates[0].price) >= min && parseInt(n.rates[0].price) <= max
-        })
+            console.log('Слайдер учитывается')
 
-        console.log(arr)
+            arr = arr.filter(function (n) {
+                return parseInt(n.rates[0].price) >= min && parseInt(n.rates[0].price) <= max
+            })
+        }
 
         // Проверка на тип питания (все включено)
 
         if (food.length > 0) {
 
-            let el = 0
+            el = 0
+
             arr = arr.filter(n => {
 
                 el = 0
 
                 if (food.includes('Завтрак')) {
-                    n.rates[0].meal[0].indexOf('Завтрак') != 0 ||
-                    n.rates[0].meal[0].indexOf('Завтрак включён') != 0 ? el = 1 : ''
+                    n.rates[0].meal[0].indexOf('Завтрак') != -1 ||
+                    n.rates[0].meal[0].indexOf('Завтрак включён') != -1 ? el = 1 : ''
                 }
                 if (food.includes('Завтрак и обед')) {
                     n.rates[0].meal[0].indexOf('Завтрак и обед') != -1 ? el = 1 : ''
@@ -338,28 +339,32 @@ export default function Hotels () {
                     n.rates[0].meal[0].indexOf('Полный пансион') != -1 ? el = 1 : ''
                 }
                 if (food.includes('Все включено')) {
-                    n.rates[0].meal[0].indexOf('Все включено') != -1 ? el = 1 : ''
+                    n.rates[0].all_inclusive ? el = 1 : ''
                 }
 
                 if (el) return n
             })
         }
 
-        console.log(arr)
-
-        /*
+        
         // Проверка на Звездность
-        if (stars.length != 0) {
-            for (let k = 0; k < stars.length; k++) {
-                if (arr[i].hotel.star_rating == stars[k]) {
-                    starsAllow = true
-                    break
-                }
-            }
-            if (!starsAllow) continue
-        }*/
 
-       // if (arr.length == 0) arr = temporaryItems
+        if (stars.length > 0) {
+            arr = arr.filter(n => {
+                for (let i = 0; i < stars.length; i++) {
+                    if (+stars[i] == +n.hotel.star_rating) {
+                        console.log(+stars[i], +n.hotel.star_rating)
+                        return n
+                    }
+                }
+            })
+        }
+
+        // Если все чекбоксы в изначальном состоянии то вернуть обычный вид
+        if (food.length == 0 && stars.length == 0 && (min == sliderMin && max == sliderMax)) {
+            arr = 0
+            console.log('пустые фильтры')
+        }
 
         return arr
     }
@@ -439,7 +444,6 @@ export default function Hotels () {
                                 setFilteredItems = {setFilteredItems}
                                 setIsResearch = {setIsResearch}
                                 setLoadedItems = {setLoadedItems}
-                                setFiltersOn = {setFiltersOn}
                                 popularHotels = {popularHotels}
                                 popularWays = {popularWays}
                             />
@@ -524,7 +528,7 @@ export default function Hotels () {
 
                     {/* Вывод по поиску */}
                     {
-                        loadedItems.length && !filtersOn ? (
+                        loadedItems.length && !filteredItems ? (
                             loadedItems[currentPage].map((item, index) => {
                             return (
                                 <Search_hotel_item key = {index} item = {item.hotel} rates = {item.rates} nights = {nights} query = {query} />
@@ -534,7 +538,7 @@ export default function Hotels () {
                     
                     {/* Если выбраны фильтры */}
                     {
-                        filteredItems.length && filtersOn ? (
+                        filteredItems && filteredItems.length > 0 ? (
                             filteredItems.map((item, index) => {
                             return (
                                 <Search_hotel_item key = {index} item = {item.hotel} rates = {item.rates} nights = {nights} />
@@ -543,9 +547,9 @@ export default function Hotels () {
                     }
 
                     {/* Пагинация */}
-                    {paginationOn && !filtersOn ? (
+                    {paginationOn ? (
                         <div className="search-pages-list">
-                            {loadedItems.length && !filtersOn ? 
+                            {loadedItems.length && !filteredItems ? 
                                 <Pagination
                                     pages = {pagination(currentPage, loadedItems.length)}
                                     currentPage = {currentPage}

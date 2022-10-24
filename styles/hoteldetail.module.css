@@ -124,6 +124,7 @@
 	margin-bottom: 12px;
 	background-color: #ccc;
 	background-size: cover;
+	background-position: center;
 }
 
 .hotel-slider__main .arrow-left {
