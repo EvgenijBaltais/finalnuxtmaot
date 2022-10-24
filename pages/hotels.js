@@ -232,8 +232,6 @@ export default function Hotels () {
         if (res.length > 0) {
             setFilteredItems(res)
         }
-        
-        console.log(res)
     }
 
     // Перерисовка данных при слайдере
@@ -256,6 +254,14 @@ export default function Hotels () {
 
         if (isResearch == true) return false
         if (sliderMin == 0 && sliderMax == 0) return
+
+        if (event.target.classList.contains('from-till-checkbox')) {
+            document.querySelector('#max-to-min').checked = false
+        }
+
+        if (event.target.classList.contains('till-from-checkbox')) {
+            document.querySelector('#min-to-max').checked = false
+        }
 
         setIsResearch(true)
         setCheckBoxesResearch(true)
@@ -290,6 +296,10 @@ export default function Hotels () {
         let max = parseInt(document.querySelector('.aside-slider-to').value.match(/\d+/))
         let food = []
         let stars = []
+        let fromTo = 0
+
+        document.querySelector('#min-to-max').checked ? fromTo = 1 : ''
+        document.querySelector('#max-to-min').checked ? fromTo = 2 : ''
 
         // Выбранные типы питания
 
@@ -305,12 +315,17 @@ export default function Hotels () {
             stars.push(i + 1) : ''
         }
 
+        // Выбранные типы питания
+
+        for (let i = 0; i < document.querySelectorAll('.food-checkbox').length; i++) {
+            document.querySelectorAll('.food-checkbox')[i].checked ? 
+            food.push(document.querySelectorAll('.food-checkbox')[i].nextElementSibling.innerText) : ''
+        }
+
         // Проверка на все фильтры
 
         // Если значения слайдера изменились, то учитывать их. Если не изменились, то пропустить
         if (min != sliderMin || max != sliderMax) {
-
-            console.log('Слайдер учитывается')
 
             arr = arr.filter(function (n) {
                 return parseInt(n.rates[0].price) >= min && parseInt(n.rates[0].price) <= max
@@ -353,17 +368,23 @@ export default function Hotels () {
             arr = arr.filter(n => {
                 for (let i = 0; i < stars.length; i++) {
                     if (+stars[i] == +n.hotel.star_rating) {
-                        console.log(+stars[i], +n.hotel.star_rating)
                         return n
                     }
                 }
             })
         }
 
+        // Если включен фильтр по возрастанию или убыванию
+
+        if (fromTo) {
+            arr.sort((a, b) => {
+                return (fromTo == 1 ? +a.rates[0].price - +b.rates[0].price : +b.rates[0].price - +a.rates[0].price)
+            })
+        }
+
         // Если все чекбоксы в изначальном состоянии то вернуть обычный вид
-        if (food.length == 0 && stars.length == 0 && (min == sliderMin && max == sliderMax)) {
+        if (food.length == 0 && stars.length == 0 && (min == sliderMin && max == sliderMax) && !fromTo) {
             arr = 0
-            console.log('пустые фильтры')
         }
 
         return arr
@@ -509,6 +530,23 @@ export default function Hotels () {
                                     )
                                 })
                             }
+                        </div>
+                        <div className = {styles["aside-block"]}>
+                            <h3 className = "aside-block-title">Отфильтровать по цене</h3>
+                            
+                            <div className = "from-till-btns">
+                                <form action="">
+                                    <div className = {styles["aside-checkbox"]}>
+                                        <input type="checkbox" name = "from-till-check" id="min-to-max" className = "stylized from-till-checkbox" onChange={() => startReDraw()} /> 
+                                        <label htmlFor="min-to-max">По возрастанию</label>
+                                    </div>
+                                    
+                                    <div className = {styles["aside-checkbox"]}>
+                                        <input type="checkbox" name = "from-till-check" id="max-to-min" className = "stylized till-from-checkbox" onChange={() => startReDraw()} /> 
+                                        <label htmlFor="max-to-min">По убыванию</label>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
