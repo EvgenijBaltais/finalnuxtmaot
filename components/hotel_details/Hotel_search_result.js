@@ -11,6 +11,7 @@ const Hotel_search_result = ({ items, hotelData, bronPageLink }) => {
     let datein = new Date(query.datein.slice(6, 10), query.datein.slice(3, 5), query.datein.slice(0, 2))
     let dateout = new Date(query.dateout.slice(6, 10), query.dateout.slice(3, 5), query.dateout.slice(0, 2))
     let nights = (dateout - datein) / (60 * 60 * 24 * 1000)
+    let children_arr = (Number.isInteger(+query.children_ages) ? [query.children_ages] : query.children_ages || [])
 
     if (!items) return (
         <div className = {styles["select-results"]}>Загрузка...</div>
@@ -25,7 +26,7 @@ const Hotel_search_result = ({ items, hotelData, bronPageLink }) => {
                     item = {item}
                     hotelInfo = {hotelData}
                     adults = {query.adults || 2}
-                    children = {query.children_ages || []}
+                    children = {children_arr}
                     nights = {nights}  />
             ))}
         </div>
