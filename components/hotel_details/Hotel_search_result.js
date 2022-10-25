@@ -23,9 +23,7 @@ const Hotel_search_result = ({ items, hotelData, bronPageLink }) => {
                     key = {index}
                     item = {item}
                     hotelInfo = {hotelData}
-                    adults = {query.adults || 2}
-                    children = {children_arr}
-                    nights = {nights}  />
+                 />
             ))}
         </div>
     )

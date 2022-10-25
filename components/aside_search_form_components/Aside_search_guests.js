@@ -7,8 +7,6 @@ export default function Aside_search_guests (props) {
 
     const [visibleChildren, setVisibleChildren] = useState(0)    // Раскрытие блока с детьми
 
-    console.log(props.childrenAges)
-
     const plusAdults = () => {
         let ads = props.adults
 

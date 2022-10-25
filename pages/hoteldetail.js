@@ -248,6 +248,8 @@ function Hoteldetail () {
                         hotel_id = {query['hotel_id']}
                         hotel_name = {hotelData.name}
                         setRoomsData = {setRoomsData}
+                        setBronPageLink = {setBronPageLink}
+
                     />
 
                     {active_block == 1 ? <Hotel_search_result items = {roomsData} hotelData = {hotelData} bronPageLink = {bronPageLink} /> : ''}

@@ -5,12 +5,33 @@ import Link from "next/link"
 import styles from "../../styles/Hoteldetail.module.css"
 import "swiper/css"
 
-const Hotel_card = ({item, hotelInfo, adults, children, nights, bronPageLink}) => {
+const Hotel_card = ({item, hotelInfo, bronPageLink}) => {
     const [view, changeView] = useState(0)
     const [servicesMain, setServicesMain] = useState([])
     const [servicesDop, setServicesDop] = useState([])
 
     bronPageLink += '&room=' + item.room_name
+
+    let data_arr = bronPageLink.split('&')
+
+    let adults = 0,
+        children = [],
+        start_date = '',
+        end_date = '',
+        nights = 1
+
+    for (let i = 0; i < data_arr.length; i++) {
+        
+        data_arr[i].indexOf('adults') != -1 ? adults = data_arr[i].slice(data_arr[i].indexOf('=') + 1) : ''
+        data_arr[i].indexOf('start_date') != -1 ? start_date = data_arr[i].slice(data_arr[i].indexOf('=') + 1) : ''
+        data_arr[i].indexOf('end_date') != -1 ? end_date = data_arr[i].slice(data_arr[i].indexOf('=') + 1) : ''
+        data_arr[i].indexOf('children_ages') != -1 ? children.push(data_arr[i].slice(data_arr[i].indexOf('=') + 1)) : ''
+    }
+
+
+    start_date = new Date(start_date)
+    end_date = new Date(end_date)
+    nights = (end_date - start_date) / (60 * 60 * 24 * 1000)
 
     useEffect(() => {
 
