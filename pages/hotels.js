@@ -71,8 +71,11 @@ export default function Hotels () {
             
 
             if (query.children_ages) {
-                for (let i = 0; i < query.children_ages.length; i++) {
-                    link += '&children_ages=' + query.children_ages[i]
+
+                let children_arr = (Number.isInteger(+query.children_ages) ? [query.children_ages] : query.children_ages || [])
+
+                for (let i = 0; i < children_arr.length; i++) {
+                    link += `&childs[${i}]=` + children_arr[i]
                 }
             }
 
