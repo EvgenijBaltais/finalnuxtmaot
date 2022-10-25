@@ -41,18 +41,9 @@ const Hotelbooking = () => {
             }
             setGuests(guestsArr)
 
-            if (query.children_ages) {
-                if (Array.isArray(query.children_ages)) {
-                    for (let i = 0; i < query.children_ages.length; i++) {
-                        childrenArr.push(query.children_ages[i])
-                    }
-                }
-                else {
-                    childrenArr.push(query.children_ages)
-                }
-            }
+            let children_arr = (Number.isInteger(+query.children_ages) ? [query.children_ages] : query.children_ages || [])
 
-            setChildren(childrenArr)
+            setChildren(children_arr)
             setDateInValue(query.start_date.slice(8, 10) + '.' + query.start_date.slice(5, 7) + '.' + query.start_date.slice(0, 4))
             setDateOutValue(query.end_date.slice(8, 10) + '.' + query.end_date.slice(5, 7) + '.' + query.end_date.slice(0, 4))
 

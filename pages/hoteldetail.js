@@ -101,6 +101,7 @@ function Hoteldetail () {
             let datein = query.datein.slice(6, 10) + '-' + query.datein.slice(3, 5) + '-' + query.datein.slice(0, 2)
             let dateout = query.dateout.slice(6, 10) + '-' + query.dateout.slice(3, 5) + '-' + query.dateout.slice(0, 2)
             let adults = query.adults || 2
+            let children_arr = (Number.isInteger(+query.children_ages) ? [query.children_ages] : query.children_ages || [])
             let link = 'https://maot-api.bokn.ru/api/hotels/search?'
             let bronPageLink = ''
 
@@ -111,10 +112,10 @@ function Hoteldetail () {
             link += '&adults=' + adults
             bronPageLink += '&adults=' + adults
             
-            if (query.children_ages) {
-                for (let i = 0; i < query.children_ages.length; i++) {
-                    link += `&childs[${i}]=` + query.children_ages[i]
-                    bronPageLink += '&children_ages=' + query.children_ages[i]
+            if (children_arr) {
+                for (let i = 0; i < children_arr.length; i++) {
+                    link += `&childs[${i}]=` + children_arr[i]
+                    bronPageLink += '&children_ages=' + children_arr[i]
                 }
             }
 

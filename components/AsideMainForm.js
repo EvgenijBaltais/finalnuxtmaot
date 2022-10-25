@@ -92,8 +92,6 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
 
         setLoadedItems([])
 
-        //console.log(obj)
-
         router.push({
             pathname: '/hotels',
             query: obj

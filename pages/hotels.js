@@ -44,8 +44,6 @@ export default function Hotels () {
                 return () => {}
             }
 
-            console.log(query)
-
             setLoadedItems([])
 
             setNodataText('Мы загружаем лучшие варианты!')
