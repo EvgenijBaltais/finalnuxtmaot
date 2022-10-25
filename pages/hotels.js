@@ -44,7 +44,10 @@ export default function Hotels () {
                 return () => {}
             }
 
+            console.log(query)
+
             setLoadedItems([])
+
             setNodataText('Мы загружаем лучшие варианты!')
 
             let [dayIn, monthIn, yearIn] = query.datein.split('.')
@@ -93,6 +96,7 @@ export default function Hotels () {
 
                 setLoadedItems(paginateItems(res.data, itemsPerPage))
                 setTemporaryItems(res.data)
+                setFilteredItems(false)
 
                 setPagination(res.data.length > itemsPerPage)
 

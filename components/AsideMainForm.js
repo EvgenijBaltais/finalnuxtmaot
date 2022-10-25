@@ -13,7 +13,6 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
     const [dateIn, setDateIn] = useState(query.datein || setToday())
     const [dateOut, setDateOut] = useState(query.dateout || setTomorrow())
     const [adults, setAdults] = useState(query.adults || 2)
-    const [children, setChildren] = useState(query.children_ages ? query.children_ages.length : 0)
     const [childrenAges, setChildrenAges] = useState(query.children_ages || [])
 
 
@@ -25,7 +24,6 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
         setDateIn(query.datein || setToday())
         setDateOut(query.dateout || setTomorrow())
         setAdults(query.adults || 2)
-        setChildren(query.children_ages ? query.children_ages.length : 0)
         Number.isInteger(+query.children_ages) ? setChildrenAges([query.children_ages]) : setChildrenAges(query.children_ages || [])
     }, [query])
 
@@ -93,6 +91,8 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
         searchResult.region_name ? obj.region_name = searchResult.region_name : ''
 
         setLoadedItems([])
+
+        //console.log(obj)
 
         router.push({
             pathname: '/hotels',
