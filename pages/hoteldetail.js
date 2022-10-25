@@ -80,7 +80,9 @@ function Hoteldetail () {
             text = `Номера на ${query.datein.slice(0, 2)} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых` :
             text = `Номера на ${query.datein.slice(0, 2)} ${months[(parseInt(query.datein.slice(3, 5)) - 1)]} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых`
             
-            query.children_ages ? text += ' и ' + returnChildren(query.children_ages.length) : ''
+            let children_arr = (Number.isInteger(+query.children_ages) ? [query.children_ages] : query.children_ages || [])
+
+            query.children_ages ? text += ' и ' + returnChildren(children_arr.length) : ''
 
             setDatesText(text)
         }
