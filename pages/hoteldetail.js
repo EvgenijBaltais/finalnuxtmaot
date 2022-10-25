@@ -68,6 +68,18 @@ function Hoteldetail () {
         return num + text
     }
 
+    function returnAdults (num) {
+
+        let text = ' взрослых',
+            a = [1, 21, 31, 41, 51, 61, 71, 81, 91, 101]
+
+        a.forEach(element => {
+            num == element ? text = ' взрослого' : ''
+        })
+
+        return num + text
+    }
+
     const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 
     useEffect(() => {
@@ -77,8 +89,8 @@ function Hoteldetail () {
         if (query.datein && query.dateout) {
 
             parseInt(query.datein.slice(3, 5)) == parseInt(query.dateout.slice(3, 5)) ? 
-            text = `Номера на ${query.datein.slice(0, 2)} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых` :
-            text = `Номера на ${query.datein.slice(0, 2)} ${months[(parseInt(query.datein.slice(3, 5)) - 1)]} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для  2  взрослых`
+            text = `Номера на ${query.datein.slice(0, 2)} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для ${returnAdults(query.adults)}` :
+            text = `Номера на ${query.datein.slice(0, 2)} ${months[(parseInt(query.datein.slice(3, 5)) - 1)]} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для ${returnAdults(query.adults)}`
             
             let children_arr = (Number.isInteger(+query.children_ages) ? [query.children_ages] : query.children_ages || [])
 
