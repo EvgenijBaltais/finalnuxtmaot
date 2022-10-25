@@ -68,7 +68,7 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
         .then((result) => result.json())
         .then((result) => {
             console.log(link)
-            setRoomsData(result.data)
+            result.data.length == 0 ? setRoomsData([]) : setRoomsData(result.data[0].rates)
         })
     }
 

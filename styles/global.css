@@ -352,7 +352,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .main-h1 {
 	width: 100%;
-	padding: 100px 0 50px;
+	padding: 60px 0 50px;
 	display: inline-block;
 	font-family: FontInterExtraBold;
 	font-size: 4.5rem;
@@ -1435,8 +1435,8 @@ input[type="checkbox"].substylized:checked + label:after {
 	color: transparent;
 	background-image: var(--red-linear-gradient);
 	background-size: 100%;
-	-webkit-background-clip: text;
 	text-decoration: underline;
+	-webkit-background-clip: text;
 }
 
 .dont-know-way {

@@ -21,6 +21,7 @@ function Hoteldetail () {
     const router = useRouter()
     const { query } = useRouter()
     const [popularHotels, setPopularHotels] = useState([])
+    const [hotelData, setHotelsData] = useState(0)
     const [roomsData, setRoomsData] = useState(0)
     const [active_block, setActive_block] = useState(1)
 
@@ -124,7 +125,25 @@ function Hoteldetail () {
             .then((result) => result.json())
             .then((result) => {
                 console.log(link)
-                setRoomsData(result.data)
+
+                if (result.data.length > 0) {
+
+                    setHotelsData(result.data[0].hotel)
+                    setRoomsData(result.data[0].rates)
+                    return false
+                }
+
+                // Если нет номеров то еще один запрос чтобы просто найти данные по отелю
+
+                fetch('https://maot-api.bokn.ru/api/hotels/get?id=' + query['hotel_id'])
+                .then((result) => result.json())
+                .then((result) => {
+                    console.log(link)
+
+                    setHotelsData(result.data)
+                    setRoomsData([])
+                })
+
             })
     }, [query])
 
@@ -146,7 +165,7 @@ function Hoteldetail () {
         }
     }, [])
 
-    if (!roomsData) {
+    if (!hotelData) {
         return <>
             <style jsx global>{`
                 .main {
@@ -159,7 +178,7 @@ function Hoteldetail () {
     return (
         <>
             <Head>
-                <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {roomsData[0].hotel.name} - Магазин отдыха</title>
+                <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.name} - Магазин отдыха</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
 
@@ -170,8 +189,8 @@ function Hoteldetail () {
             <section className = {styles["single-hotel"]}>
                 <div className={styles["titles-top"]}>
                     <div className = {styles["title-block"]}>
-                        {roomsData[0].hotel.name ? <h1 className = "hotel-title">{roomsData[0].hotel.name}</h1> : ''}
-                        {roomsData[0].hotel.address ? <p className = {styles["hotel-adress"]}>{roomsData[0].hotel.address}</p> : ''}
+                        {hotelData.name ? <h1 className = "hotel-title">{hotelData.name}</h1> : ''}
+                        {hotelData.address ? <p className = {styles["hotel-adress"]}>{hotelData.address}</p> : ''}
                     </div>
                     <div className={styles["add-to-favorite"]}>
                         {/*isBigScreen && <a className={styles["add-to-favorite__link"]}>добавить&nbsp;в&nbsp;избранное</a>*/}
@@ -182,7 +201,7 @@ function Hoteldetail () {
 
                 <div className = {styles["map-slider"]}>
                     <div className={`hotel-slider ${styles["hotel-slider"]}`}>
-                        <div className = {`hotel-slider__main ${styles["hotel-slider__main"]}`} style = {roomsData[0].hotel.images[0] ? {backgroundImage: `url(${roomsData[0].hotel.images[0]})`} : {}}></div>
+                        <div className = {`hotel-slider__main ${styles["hotel-slider__main"]}`} style = {hotelData.images[0] ? {backgroundImage: `url(${hotelData.images[0]})`} : {}}></div>
                         <div className = "hotel-slider__items">
                             <div className = {styles["hotel-slider__w"]}>
                             <Swiper
@@ -199,7 +218,7 @@ function Hoteldetail () {
                                 modules={[Keyboard, Navigation]}
                                 className="hoteldetail-swiper"
                             >
-                                {roomsData[0].hotel.images.map((item, index) => (
+                                {hotelData.images.map((item, index) => (
                                     index == 0 ? '' :
                                     <SwiperSlide key={index} data-pic = {item} className = "hotel-slider__item" style = {item ? {backgroundImage: `url(${item})`} : {}}></SwiperSlide>
                                 ))}
@@ -208,7 +227,7 @@ function Hoteldetail () {
                         </div>
                     </div>
                     {mapReady == 1 ?
-                        <Hotel_map hotelData = {roomsData[0].hotel} mapReady = {mapReady} />
+                        <Hotel_map hotelData = {hotelData} mapReady = {mapReady} />
                         : ''
                     }
 
@@ -224,15 +243,15 @@ function Hoteldetail () {
 
                      <Hoteldetail_form
                         hotel_id = {query['hotel_id']}
-                        hotel_name = {roomsData[0].hotel.name}
+                        hotel_name = {hotelData.name}
                         popularHotels = {popularHotels}
                         setRoomsData = {setRoomsData}
                     />
 
-                    {active_block == 1 ? <Hotel_search_result items = {roomsData[0]} bronPageLink = {bronPageLink} /> : ''}
-                    {active_block == 2 ? <Rooms_info hotelData = {roomsData[0].hotel}/> : ''}
-                    {active_block == 3 ? <Hotel_service services = {roomsData[0].hotel.services} /> : ''}
-                    {active_block == 4 ? <Hotel_contact hotelData = {roomsData[0].hotel} /> : '' }
+                    {active_block == 1 ? <Hotel_search_result items = {roomsData} hotelData = {hotelData} bronPageLink = {bronPageLink} /> : ''}
+                    {active_block == 2 ? <Rooms_info hotelData = {hotelData}/> : ''}
+                    {active_block == 3 ? <Hotel_service services = {hotelData.services} /> : ''}
+                    {active_block == 4 ? <Hotel_contact hotelData = {hotelData} /> : '' }
                 </div>
                                 
 

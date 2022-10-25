@@ -2,7 +2,9 @@ import Hotel_card from "./Hotel_card"
 import { useRouter } from 'next/router'
 import styles from "../../styles/Hoteldetail.module.css"
 
-const Hotel_search_result = ({ items, bronPageLink }) => {
+const Hotel_search_result = ({ items, hotelData, bronPageLink }) => {
+
+    console.log(items)
 
     const { query } = useRouter()
     
@@ -14,14 +16,14 @@ const Hotel_search_result = ({ items, bronPageLink }) => {
         <div className = {styles["select-results"]}>Загрузка...</div>
     )
 
-    if (items.rates.length > 0) return (
+    if (items.length > 0) return (
         <div className = {styles["select-results"]}>
-            {items.rates.map((item, index) => (
+            {items.map((item, index) => (
                 <Hotel_card 
-                bronPageLink = {bronPageLink}
+                    bronPageLink = {bronPageLink}
                     key = {index}
                     item = {item}
-                    hotelInfo = {items.hotel}
+                    hotelInfo = {hotelData}
                     adults = {query.adults || 2}
                     children = {query.children_ages || []}
                     nights = {nights}  />
@@ -29,7 +31,7 @@ const Hotel_search_result = ({ items, bronPageLink }) => {
         </div>
     )
 {
-    if (items.rates.length == 0) return (
+    if (items.length == 0) return (
         <div className={styles["select-noresults__item"]}>
             <h3>К сожалению свободные номера на ваши Даты закончились</h3>
             <p>Попробуйте указать другие даты</p>
