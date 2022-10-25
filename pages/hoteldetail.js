@@ -20,7 +20,6 @@ function Hoteldetail () {
 
     const router = useRouter()
     const { query } = useRouter()
-    const [popularHotels, setPopularHotels] = useState([])
     const [hotelData, setHotelsData] = useState(0)
     const [roomsData, setRoomsData] = useState(0)
     const [active_block, setActive_block] = useState(1)
@@ -162,17 +161,6 @@ function Hoteldetail () {
             })
     }, [query])
 
-    useEffect(() => {
-
-        // Популярные отели
-
-        fetch('https://maot-api.bokn.ru/api/hotels/top')
-        .then((res) => res.json())
-        .then((res) => {
-            setPopularHotels(res.data)
-        })
-    }, [])
-
     // Удалить яндекс карты
     useEffect(() => {
         return () => {
@@ -259,7 +247,6 @@ function Hoteldetail () {
                      <Hoteldetail_form
                         hotel_id = {query['hotel_id']}
                         hotel_name = {hotelData.name}
-                        popularHotels = {popularHotels}
                         setRoomsData = {setRoomsData}
                     />
 

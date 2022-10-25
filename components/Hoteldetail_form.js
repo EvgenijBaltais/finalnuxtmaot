@@ -5,7 +5,7 @@ import Search_hotel_input from './hoteldetail_form_components/Search_hotel_input
 import Search_form_datein from './hoteldetail_form_components/Search_form_datein'
 import Search_form_guests from './hoteldetail_form_components/Search_form_guests'
 
-const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) => {
+const Hoteldetail_form = ({hotel_name, setRoomsData, hotel_id}) => {
 
     const [searchResult, setSearchResult] = useState({id: hotel_id, hotel_name: hotel_name, hotel: true})
     const [dateIn, setDateIn] = useState('')
@@ -70,8 +70,6 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
         })
     }
 
-    console.log(childrenAges)
-
     return (
         <section className = "hoteldetail-form">
             <div className = "selection-form-item">
@@ -79,9 +77,6 @@ const Hoteldetail_form = ({popularHotels, hotel_name, setRoomsData, hotel_id}) =
                     <div className = "hoteldetail-direction-form-w">
                         <div className = "hoteldetail-direction-form__inside">
                             <Search_hotel_input
-                                popularHotels = {popularHotels}
-                                searchResult = {searchResult}
-                                changeSearchResult = {changeSearchResult}
                                 name = {hotel_name}
                             />
                             <Search_form_datein 
