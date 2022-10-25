@@ -283,6 +283,9 @@
 }
 
 .children-age-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 90px;
     height: 60px;
     background-color: #F5F5F5;
@@ -292,8 +295,7 @@
     line-height: 56px;
     text-align: center;
     color: #4B4B4B;
-    margin-right: 20px
-
+    margin-right: 20px;
 }
 
 .hotel-bron-necessarily {
