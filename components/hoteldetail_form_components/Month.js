@@ -75,6 +75,7 @@ export default function Month (value) {
                             key = {index}
                             item = {item}
                             mindate = {value.mindate}
+                            dateIn = {value.dateIn}
                         />
                     )
                 })}

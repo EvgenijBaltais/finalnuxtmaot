@@ -99,19 +99,7 @@ export default function Datepicker (value) {
                 event.target.removeEventListener("scroll", scrollAction, true)
             })
         }, [])
-/*
-        useEffect(() => {
-            
-            if (!value.dateIn) {
-                return
-            }
-            let body = document.querySelector('.datepicker-body')
 
-                body.addEventListener('mouseover', addHoverEffectOnDates)
-                body.removeEventListener('mouseout', addHoverEffectOnDates)
-                body.addEventListener('mouseout', removeHoverEffectOnDates)
-        }, [value])
-*/
     return (
         <div className="datepicker-w">
             <div className="datepicker-header">
@@ -144,6 +132,7 @@ export default function Datepicker (value) {
                         <Month 
                             monthId = {index}
                             monthName = {item}
+                            dateIn = {value.dateIn}
                             key = {index}
                             closeFuncdateIn = {value.closeFuncdateIn}
                             closeFuncdateOut = {value.closeFuncdateOut}

@@ -79,7 +79,7 @@ export default function Aside_search_form_datein(props) {
                         value = {props.dateIn}
                         onClick = { checkOpenClose }
                 />
-                {dateInOpened ? <AsideDatepicker closeFuncdateIn = {closeDateIn} mindate = {props.dateIn} /> : ""}
+                {dateInOpened ? <AsideDatepicker closeFuncdateIn = {closeDateIn} mindate = {props.dateIn} dateIn = {props.dateIn} /> : ""}
             </div>
 
             <div className = "aside-direction-form-block aside-direction-form-out" >
@@ -91,7 +91,7 @@ export default function Aside_search_form_datein(props) {
                         value = {props.dateOut}
                         onClick = { checkOpenClose }
                 />
-                {dateOutOpened ? <AsideDatepicker closeFuncdateOut = {closeDateOut} mindate = {props.dateOut} /> : ""}
+                {dateOutOpened ? <AsideDatepicker closeFuncdateOut = {closeDateOut} mindate = {props.dateOut} dateIn = {props.dateIn} /> : ""}
             </div>
         </div>
     )

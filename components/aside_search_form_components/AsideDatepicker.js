@@ -102,6 +102,7 @@ export default function AsideDatepicker (value) {
                         <AsideMonth 
                             monthId = {index}
                             monthName = {item}
+                            dateIn = {value.dateIn}
                             key = {index}
                             closeFuncdateIn = {value.closeFuncdateIn}
                             closeFuncdateOut = {value.closeFuncdateOut}

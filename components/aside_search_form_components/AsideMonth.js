@@ -75,6 +75,7 @@ export default function AsideMonth (value) {
                             key = {index}
                             item = {item}
                             mindate = {value.mindate}
+                            dateIn = {value.dateIn}
                         />
                     )
                 })}

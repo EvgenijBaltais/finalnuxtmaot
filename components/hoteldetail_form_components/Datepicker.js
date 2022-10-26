@@ -103,6 +103,7 @@ export default function Datepicker (value) {
                             monthId = {index}
                             monthName = {item}
                             key = {index}
+                            dateIn = {value.dateIn}
                             closeFuncdateIn = {value.closeFuncdateIn}
                             closeFuncdateOut = {value.closeFuncdateOut}
                             mindate = {value.mindate}

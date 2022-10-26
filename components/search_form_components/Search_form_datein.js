@@ -79,7 +79,7 @@ export default function Search_form_datein(props) {
                         value = {props.dateIn}
                         onClick = { checkOpenClose }
                 />
-                {dateInOpened ? <Datepicker closeFuncdateIn = {closeDateIn} mindate = {props.dateIn} /> : ""}
+                {dateInOpened ? <Datepicker closeFuncdateIn = {closeDateIn} mindate = {props.dateIn} dateIn = {props.dateIn} /> : ""}
             </div>
 
             <div className = "direction-form-block direction-form-out" >

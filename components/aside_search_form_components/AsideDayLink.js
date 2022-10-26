@@ -6,6 +6,13 @@ export default function DayLink (props) {
     const [minDay, minMonth, minYear] = props.mindate.split('.')
     const minDate = new Date(minYear, minMonth - 1, minDay)
 
+    let dateInDate = new Date()
+
+    if (props.dateIn) {
+        const [dateInDay, dateInMonth, dateInYear] = props.dateIn.split('.')
+            dateInDate = new Date(dateInYear, dateInMonth - 1, parseInt(dateInDay) + 1)
+    }
+
     function getActualTextData(day, month, year) {
         return day + '.' + addNullToDate(parseInt(month) + 1) + '.' + year
     }
@@ -31,7 +38,7 @@ export default function DayLink (props) {
                 `date-link${
                     actualDate < yesterday && !props.prefix ? ' date-disable' : ''
                 }${
-                    props.closeFuncdateOut && actualDate < minDate ? ' date-disable' : '' 
+                    props.closeFuncdateOut && actualDate < dateInDate ? ' date-disable' : '' 
                 }${
                     props.prefix ? ' date-prefix' : ''
                 }${
