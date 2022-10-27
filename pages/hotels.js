@@ -272,21 +272,38 @@ export default function Hotels () {
         setCheckBoxesResearch(true)
     }
 
+    function resetFilters () {
+
+        setFilteredItems(0)
+        setIsResearch(false)
+        setChoosingFilters(false)
+        setCheckBoxesResearch(false)
+
+        document.querySelectorAll('.food-checkbox').forEach(elem => {
+            elem.checked = false
+        })
+
+        document.querySelectorAll('.stars-checkbox').forEach(elem => {
+            elem.checked = false
+        })
+
+        document.querySelectorAll('input[name="from-till-check"]').forEach(elem => {
+            elem.checked = false
+        })
+    }
+
     useEffect(() => {
 
         if (choosingFilters == true || (choosingFilters == false && isResearch == false)) return
 
         setChoosingFilters(true)
 
-        setTimeout(() => {
-            showVariants() 
-        }, 0)
+        showVariants() 
 
-        setTimeout(() => {
-            setIsResearch(false)
-            setChoosingFilters(false)
-            setCheckBoxesResearch(false)
-        }, 0)
+        setIsResearch(false)
+        setChoosingFilters(false)
+        setCheckBoxesResearch(false)
+     
 
     }, [checkBoxesResearch])
     
@@ -510,6 +527,72 @@ export default function Hotels () {
                               )  
                             })}
                         </div>
+
+                        <div className = {styles["aside-block"]}>
+                            <h3 className = "aside-block-title">Сортировать по цене</h3>
+                            <div className="aside-cheap-w">
+                                <div className="aside-cheap-block-w">
+                                    <div className="aside-cheap-block aside-cheap-first">
+                                        <svg width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="aside-cheap-svg">
+                                            <path d="M0 11C0 10.4477 0.447715 10 1 10H7.4C7.95228 10 8.4 10.4477 8.4 11C8.4 11.5523 7.95228 12 7.4 12H1C0.447715 12 0 11.5523 0 11Z" fill="#D9D9D9"/>
+                                            <path d="M0 6C0 5.44772 0.447715 5 1 5H4.6C5.15229 5 5.6 5.44772 5.6 6C5.6 6.55228 5.15228 7 4.6 7H0.999999C0.447714 7 0 6.55228 0 6Z" fill="#D9D9D9"/>
+                                            <path d="M0 1C0 0.447715 0.447715 0 1 0H1.8C2.35229 0 2.8 0.447715 2.8 1C2.8 1.55228 2.35228 2 1.8 2H0.999999C0.447714 2 0 1.55228 0 1Z" fill="#D9D9D9"/>
+                                            <path d="M0 16C0 15.4477 0.447715 15 1 15H10.2C10.7523 15 11.2 15.4477 11.2 16C11.2 16.5523 10.7523 17 10.2 17H0.999999C0.447714 17 0 16.5523 0 16Z" fill="#D9D9D9"/>
+                                            <path d="M0 21C0 20.4477 0.447715 20 1 20H13.7C14.2523 20 14.7 20.4477 14.7 21C14.7 21.5523 14.2523 22 13.7 22H0.999999C0.447714 22 0 21.5523 0 21Z" fill="#D9D9D9"/>
+                                            <path d="M0 26C0 25.4477 0.447715 25 1 25H16.5C17.0523 25 17.5 25.4477 17.5 26C17.5 26.5523 17.0523 27 16.5 27H1C0.447715 27 0 26.5523 0 26Z" fill="#D9D9D9"/>
+                                            <path d="M0 31C0 30.4477 0.447715 30 1 30H20C20.5523 30 21 30.4477 21 31C21 31.5523 20.5523 32 20 32H1C0.447715 32 0 31.5523 0 31Z" fill="#D9D9D9"/>
+                                        </svg>
+                                        <span>По возрастанию цены</span>
+                                    </div>
+                                </div>
+                                <div className="aside-cheap-block-w">
+                                    <div className="aside-cheap-block aside-cheap-last">
+                                        <svg width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="aside-cheap-svg">
+                                            <path d="M0 21C0 21.5523 0.447715 22 1 22H7.4C7.95228 22 8.4 21.5523 8.4 21C8.4 20.4477 7.95228 20 7.4 20H1C0.447715 20 0 20.4477 0 21Z" fill="#D9D9D9"/>
+                                            <path d="M0 26C0 26.5523 0.447715 27 1 27H4.6C5.15229 27 5.6 26.5523 5.6 26C5.6 25.4477 5.15228 25 4.6 25H0.999999C0.447714 25 0 25.4477 0 26Z" fill="#D9D9D9"/>
+                                            <path d="M0 31C0 31.5523 0.447715 32 1 32H1.8C2.35229 32 2.8 31.5523 2.8 31C2.8 30.4477 2.35228 30 1.8 30H0.999999C0.447714 30 0 30.4477 0 31Z" fill="#D9D9D9"/>
+                                            <path d="M0 16C0 16.5523 0.447715 17 1 17H10.2C10.7523 17 11.2 16.5523 11.2 16C11.2 15.4477 10.7523 15 10.2 15H0.999999C0.447714 15 0 15.4477 0 16Z" fill="#D9D9D9"/>
+                                            <path d="M0 11C0 11.5523 0.447715 12 1 12H13.7C14.2523 12 14.7 11.5523 14.7 11C14.7 10.4477 14.2523 10 13.7 10H0.999999C0.447714 10 0 10.4477 0 11Z" fill="#D9D9D9"/>
+                                            <path d="M0 6C0 6.55228 0.447715 7 1 7H16.5C17.0523 7 17.5 6.55228 17.5 6C17.5 5.44772 17.0523 5 16.5 5H1C0.447715 5 0 5.44772 0 6Z" fill="#D9D9D9"/>
+                                            <path d="M0 1C0 1.55228 0.447715 2 1 2H20C20.5523 2 21 1.55228 21 1C21 0.447715 20.5523 0 20 0H1C0.447715 0 0 0.447715 0 1Z" fill="#D9D9D9"/>
+                                        </svg>
+                                        <span>По убыванию цены</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className = {styles["aside-block"]}>
+                            <h3 className = "aside-block-title">Питание</h3>
+                            <div className="aside-food-w">
+                                <div className="aside-food-block aside-food-w-first">
+                                    <div className="aside-food-block-inside">
+                                        Все включено
+                                    </div>
+                                </div>
+                                <div className="aside-food-block aside-food-w-second">
+                                    <div className="aside-food-block-inside">
+                                        Без питания
+                                    </div>
+                                </div>
+                                <div className="aside-food-block aside-food-w-third">
+                                    <div className="aside-food-block-inside">
+                                        Только завтрак
+                                    </div>
+                                </div>
+                                <div className="aside-food-block aside-food-w-fourth">
+                                    <div className="aside-food-block-inside">
+                                        Завтрак + обед или ужин включены
+                                    </div>
+                                </div>
+                                <div className="aside-food-block aside-food-w-fifth">
+                                    <div className="aside-food-block-inside">
+                                        Завтрак, обед или ужин включены
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div className = {styles["aside-block"]}>
                             <h3 className = "aside-block-title">Звездность</h3>
                             {
@@ -545,7 +628,6 @@ export default function Hotels () {
                                         <input type="checkbox" name = "from-till-check" id="min-to-max" className = "stylized from-till-checkbox" onChange={() => startReDraw()} /> 
                                         <label htmlFor="min-to-max">По возрастанию</label>
                                     </div>
-                                    
                                     <div className = {styles["aside-checkbox"]}>
                                         <input type="checkbox" name = "from-till-check" id="max-to-min" className = "stylized till-from-checkbox" onChange={() => startReDraw()} /> 
                                         <label htmlFor="max-to-min">По убыванию</label>
@@ -553,6 +635,9 @@ export default function Hotels () {
                                 </form>
                             </div>
                         </div>
+
+                        <a className = "aside-block-link" onClick = {resetFilters}>Сбросить фильтры</a>
+
                     </div>
                 </div>
                 <div className = {`${styles["search-result-right"]} search-result-right`}>
