@@ -260,12 +260,11 @@ export default function Hotels () {
         if (isResearch == true) return false
         if (sliderMin == 0 && sliderMax == 0) return
 
-        if (event.target.classList.contains('from-till-checkbox')) {
-            document.querySelector('#max-to-min').checked = false
-        }
-
-        if (event.target.classList.contains('till-from-checkbox')) {
-            document.querySelector('#min-to-max').checked = false
+        if (event.target.classList.contains('aside-food-target')) {
+        
+            event.target.parentElement.classList.contains('active') ?
+                event.target.parentElement.classList.remove('active') :
+                event.target.parentElement.classList.add('active')
         }
 
         setIsResearch(true)
@@ -324,6 +323,12 @@ export default function Hotels () {
         document.querySelector('#max-to-min').checked ? fromTo = 2 : ''
 
         // Выбранные типы питания
+
+        document.querySelectorAll('.aside-food-block-inside').forEach(el => {
+            el.parentElement.classList.contains('active') ? food.push(el.innerText) : ''
+        })
+
+        console.log(food)
 
         for (let i = 0; i < document.querySelectorAll('.food-checkbox').length; i++) {
             document.querySelectorAll('.food-checkbox')[i].checked ? 
@@ -565,29 +570,59 @@ export default function Hotels () {
                         <div className = {styles["aside-block"]}>
                             <h3 className = "aside-block-title">Питание</h3>
                             <div className="aside-food-w">
-                                <div className="aside-food-block aside-food-w-first">
+                                <div className="aside-food-block aside-food-w-first" onClick = {() => startReDraw()}>
+                                    <div className="aside-food-target"></div>
                                     <div className="aside-food-block-inside">
                                         Все включено
                                     </div>
+                                    <div className="aside-food-info">?
+                                        <div className="aside-food-info-text">
+                                            Все включено
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="aside-food-block aside-food-w-second">
+                                <div className="aside-food-block aside-food-w-second" onClick = {() => startReDraw()}>
+                                    <div className="aside-food-target"></div>
                                     <div className="aside-food-block-inside">
                                         Без питания
                                     </div>
+                                    <div className="aside-food-info">?
+                                        <div className="aside-food-info-text">
+                                            Без питания
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="aside-food-block aside-food-w-third">
+                                <div className="aside-food-block aside-food-w-third" onClick = {() => startReDraw()}>
+                                    <div className="aside-food-target"></div>
                                     <div className="aside-food-block-inside">
                                         Только завтрак
                                     </div>
+                                    <div className="aside-food-info">?
+                                        <div className="aside-food-info-text">
+                                            Только завтрак
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="aside-food-block aside-food-w-fourth">
+                                <div className="aside-food-block aside-food-w-fourth" onClick = {() => startReDraw()}>
+                                    <div className="aside-food-target"></div>
                                     <div className="aside-food-block-inside">
                                         Завтрак + обед или ужин включены
                                     </div>
+                                    <div className="aside-food-info">?
+                                        <div className="aside-food-info-text">
+                                            Завтрак + обед или ужин включены
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="aside-food-block aside-food-w-fifth">
+                                <div className="aside-food-block aside-food-w-fifth" onClick = {() => startReDraw()}>
+                                    <div className="aside-food-target"></div>
                                     <div className="aside-food-block-inside">
                                         Завтрак, обед или ужин включены
+                                    </div>
+                                    <div className="aside-food-info">?
+                                        <div className="aside-food-info-text">
+                                            Завтрак, обед или ужин включены
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -635,9 +670,9 @@ export default function Hotels () {
                                 </form>
                             </div>
                         </div>
-
-                        <a className = "aside-block-link" onClick = {resetFilters}>Сбросить фильтры</a>
-
+                        <div className = "aside-block-link-w">
+                            <a className = "aside-block-link" onClick = {resetFilters}>Сбросить фильтры</a>
+                        </div>
                     </div>
                 </div>
                 <div className = {`${styles["search-result-right"]} search-result-right`}>
