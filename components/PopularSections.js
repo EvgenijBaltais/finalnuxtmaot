@@ -49,7 +49,7 @@ const PopularSections = ({popularHotels, popularWays}) => {
 					{popularWays.data.map((item, index) => 
 						<div className = {styles["popular-way-item"]} key = {index}>
 
-                			<div className = {styles["popular-way-pic"]}></div>
+                			<div className = {styles["popular-way-pic"]} style = {{'backgroundImage': `url(/images/popularways/${item.id}/1.jpg)`}}></div>
                 			<div className = {styles["popular-way-content"]}>
 								<Link href = {`/hotels?datein=${setToday()}&dateout=${setTomorrow()}&adults=2&region_id=${item.id}&region_name=${item.name}`}>
 									<a 
