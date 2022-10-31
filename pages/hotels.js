@@ -28,8 +28,8 @@ export default function Hotels () {
     const [nodataText, setNodataText] = useState('')
     const [itemsPerPage, setItemsPerPage] = useState(15)
     const [currentPage, setCurrentPage] = useState(0)
-    const [paginationOn, setPagination] = useState(0)
-    const foodTypes = ['Завтрак', 'Завтрак и обед', 'Полный пансион', 'Все включено', 'Частичный All inclusive']
+    //const [paginationOn, setPagination] = useState(0)
+    const foodTypes = ['Все включено', 'Без питания', 'Только завтрак', 'Завтрак + обед или ужин включены', 'Завтрак, обед и ужин включены']
     const [choosingFilters, setChoosingFilters] = useState(false)
     const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
 
@@ -267,6 +267,17 @@ export default function Hotels () {
                 event.target.parentElement.classList.add('active')
         }
 
+        if (event.target.classList.contains('aside-block-clickarea')) {
+
+            let isThisActive = event.target.parentElement.classList.contains('active')
+
+            document.querySelectorAll('.aside-block-clickarea').forEach(el => {
+                el.parentElement.classList.remove('active')
+            })
+
+            isThisActive ? '' : event.target.parentElement.classList.add('active')
+        }
+
         setIsResearch(true)
         setCheckBoxesResearch(true)
     }
@@ -278,16 +289,16 @@ export default function Hotels () {
         setChoosingFilters(false)
         setCheckBoxesResearch(false)
 
-        document.querySelectorAll('.food-checkbox').forEach(elem => {
-            elem.checked = false
+        document.querySelectorAll('.aside-food-block').forEach(el => {
+            el.classList.remove('active')
         })
 
         document.querySelectorAll('.stars-checkbox').forEach(elem => {
             elem.checked = false
         })
 
-        document.querySelectorAll('input[name="from-till-check"]').forEach(elem => {
-            elem.checked = false
+        document.querySelectorAll('.aside-cheap-block-w').forEach(el => {
+            el.classList.remove('active')
         })
     }
 
@@ -302,38 +313,32 @@ export default function Hotels () {
         setIsResearch(false)
         setChoosingFilters(false)
         setCheckBoxesResearch(false)
-     
-
     }, [checkBoxesResearch])
     
     function applyFilters() {
 
-        let arr = temporaryItems
-        let el
+        let arr = temporaryItems,
+            check = 0,
+            el
 
         // Минимальная и максимальная цена
 
-        let min = parseInt(document.querySelector('.aside-slider-from').value.match(/\d+/))
-        let max = parseInt(document.querySelector('.aside-slider-to').value.match(/\d+/))
-        let food = []
-        let stars = []
-        let fromTo = 0
+        let min = parseInt(document.querySelector('.aside-slider-from').value.match(/\d+/)),
+            max = parseInt(document.querySelector('.aside-slider-to').value.match(/\d+/)),
+            food = [],
+            stars = [],
+            fromTo = 0
 
-        document.querySelector('#min-to-max').checked ? fromTo = 1 : ''
-        document.querySelector('#max-to-min').checked ? fromTo = 2 : ''
+        // От большего к меньшему или наоборот
+
+        document.querySelector('.aside-cheap-first').parentElement.classList.contains('active') ? fromTo = 1 : ''
+        document.querySelector('.aside-cheap-last').parentElement.classList.contains('active') ? fromTo = 2 : ''
 
         // Выбранные типы питания
 
         document.querySelectorAll('.aside-food-block-inside').forEach(el => {
             el.parentElement.classList.contains('active') ? food.push(el.innerText) : ''
         })
-
-        console.log(food)
-
-        for (let i = 0; i < document.querySelectorAll('.food-checkbox').length; i++) {
-            document.querySelectorAll('.food-checkbox')[i].checked ? 
-            food.push(document.querySelectorAll('.food-checkbox')[i].nextElementSibling.innerText) : ''
-        }
 
         // Выбранные типы звездности
 
@@ -342,64 +347,71 @@ export default function Hotels () {
             stars.push(i + 1) : ''
         }
 
-        // Выбранные типы питания
-
-        for (let i = 0; i < document.querySelectorAll('.food-checkbox').length; i++) {
-            document.querySelectorAll('.food-checkbox')[i].checked ? 
-            food.push(document.querySelectorAll('.food-checkbox')[i].nextElementSibling.innerText) : ''
-        }
-
         // Проверка на все фильтры
 
-        // Если значения слайдера изменились, то учитывать их. Если не изменились, то пропустить
-        if (min != sliderMin || max != sliderMax) {
+        arr = arr.filter(n => {
 
-            arr = arr.filter(function (n) {
-                return parseInt(n.rates[0].price) >= min && parseInt(n.rates[0].price) <= max
-            })
-        }
+            el = n.rates[0]
 
-        // Проверка на тип питания (все включено)
+            // Если значения слайдера изменились, то учитывать их. Если не изменились, то пропустить
+            if (min != sliderMin || max != sliderMax) {
 
-        if (food.length > 0) {
-
-            el = 0
-
-            arr = arr.filter(n => {
-
-                el = 0
-
-                if (food.includes('Завтрак')) {
-                    n.rates[0].meal[0].indexOf('Завтрак') != -1 ||
-                    n.rates[0].meal[0].indexOf('Завтрак включён') != -1 ? el = 1 : ''
+                if (+el.price < min || +el.price > max) {
+                    return false
                 }
-                if (food.includes('Завтрак и обед')) {
-                    n.rates[0].meal[0].indexOf('Завтрак и обед') != -1 ? el = 1 : ''
-                }
-                if (food.includes('Полный пансион')) {
-                    n.rates[0].meal[0].indexOf('Завтрак, обед и ужин включены') != -1 ||
-                    n.rates[0].meal[0].indexOf('Полный пансион') != -1 ? el = 1 : ''
-                }
+            }
+
+            // Проверка на тип питания (все включено)
+
+            if (food.length > 0) {
+
+                check = 0
+                
                 if (food.includes('Все включено')) {
-                    n.rates[0].all_inclusive ? el = 1 : ''
+                    el.all_inclusive ? check = 1 : ''
                 }
 
-                if (el) return n
-            })
-        }
+                if (!check && food.includes('Без питания')) {
+                    el.meal[0] == 'Питание не включено' ||
+                    el.meal[0] == 'Без питания' ? check = 1 : ''
+                }
 
-        
-        // Проверка на Звездность
+                if (!check && food.includes('Только завтрак')) {
+                    el.meal[0] == 'Завтрак' ||
+                    el.meal[0] == 'Завтрак в номер' ||
+                    el.meal[0] == 'Завтрак включён' ? check = 1 : ''
+                }
 
-        if (stars.length > 0) {
-            arr = arr.filter(n => {
+                if (!check && food.includes('Завтрак + обед или ужин включены')) {
+                    el.meal[0] == 'полупансион' ||
+                    el.meal[0] == 'Полупансион' ? check = 1 : ''
+                }
+
+                if (!check && food.includes('Завтрак, обед и ужин включены')) {
+                    el.meal[0] == 'Завтрак, обед и ужин включены' ||
+                    el.meal[0] == 'Полный пансион' ? check = 1 : ''
+                }
+
+                if (!check) return false
+            }
+
+            // Проверка на Звездность
+
+            if (stars.length > 0) {
+
+                check = 0
+
                 for (let i = 0; i < stars.length; i++) {
-                    if (+stars[i] == +n.hotel.star_rating) {
-                        return n
-                    }
+                    +n.hotel.star_rating == +stars[i] ? check = 1 : ''
                 }
-            })
-        }
+
+                if (!check) return false
+            }
+
+            return true
+        })
+
+        console.log(arr)
 
         // Если включен фильтр по возрастанию или убыванию
 
@@ -409,7 +421,7 @@ export default function Hotels () {
             })
         }
 
-        // Если все чекбоксы в изначальном состоянии то вернуть обычный вид
+        // Если все фильтры в изначальном состоянии то вернуть обычный вид
         if (food.length == 0 && stars.length == 0 && (min == sliderMin && max == sliderMax) && !fromTo) {
             arr = 0
         }
@@ -521,22 +533,12 @@ export default function Hotels () {
                                 /> :  ''
                             }
                         </div>
-                        <div className = {styles["aside-block"]}>
-                            <h3 className = "aside-block-title">Типы питания</h3>
-                            {foodTypes.map((item, index) => {
-                              return (
-                                <div key = {index} className = {styles["aside-checkbox"]}>
-                                    <input type="checkbox" id={`checkbox-1${index + 1}`} className = "stylized food-checkbox" onChange={() => startReDraw()} /> 
-                                    <label htmlFor={`checkbox-1${index + 1}`}>{item}</label>
-                                </div>
-                              )  
-                            })}
-                        </div>
 
                         <div className = {styles["aside-block"]}>
                             <h3 className = "aside-block-title">Сортировать по цене</h3>
                             <div className="aside-cheap-w">
                                 <div className="aside-cheap-block-w">
+                                    <div className="aside-block-clickarea" onClick = {() => startReDraw()}></div>
                                     <div className="aside-cheap-block aside-cheap-first">
                                         <svg width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="aside-cheap-svg">
                                             <path d="M0 11C0 10.4477 0.447715 10 1 10H7.4C7.95228 10 8.4 10.4477 8.4 11C8.4 11.5523 7.95228 12 7.4 12H1C0.447715 12 0 11.5523 0 11Z" fill="#D9D9D9"/>
@@ -551,6 +553,7 @@ export default function Hotels () {
                                     </div>
                                 </div>
                                 <div className="aside-cheap-block-w">
+                                    <div className="aside-block-clickarea" onClick = {() => startReDraw()}></div>
                                     <div className="aside-cheap-block aside-cheap-last">
                                         <svg width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="aside-cheap-svg">
                                             <path d="M0 21C0 21.5523 0.447715 22 1 22H7.4C7.95228 22 8.4 21.5523 8.4 21C8.4 20.4477 7.95228 20 7.4 20H1C0.447715 20 0 20.4477 0 21Z" fill="#D9D9D9"/>
@@ -570,61 +573,22 @@ export default function Hotels () {
                         <div className = {styles["aside-block"]}>
                             <h3 className = "aside-block-title">Питание</h3>
                             <div className="aside-food-w">
-                                <div className="aside-food-block aside-food-w-first" onClick = {() => startReDraw()}>
-                                    <div className="aside-food-target"></div>
-                                    <div className="aside-food-block-inside">
-                                        Все включено
-                                    </div>
-                                    <div className="aside-food-info">?
-                                        <div className="aside-food-info-text">
-                                            Все включено
+                                {foodTypes.map((item, index) => {
+                                    return (
+                                        <div className={`aside-food-block aside-food-w-${index + 1}`} onClick = {() => startReDraw()} key = {index}>
+                                            <div className="aside-food-target"></div>
+                                            <div className="aside-food-block-inside">
+                                                {item}
+                                            </div>
+                                            <div className="aside-food-info">?
+                                                <div className="aside-food-info-text">
+                                                    {item}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="aside-food-block aside-food-w-second" onClick = {() => startReDraw()}>
-                                    <div className="aside-food-target"></div>
-                                    <div className="aside-food-block-inside">
-                                        Без питания
-                                    </div>
-                                    <div className="aside-food-info">?
-                                        <div className="aside-food-info-text">
-                                            Без питания
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="aside-food-block aside-food-w-third" onClick = {() => startReDraw()}>
-                                    <div className="aside-food-target"></div>
-                                    <div className="aside-food-block-inside">
-                                        Только завтрак
-                                    </div>
-                                    <div className="aside-food-info">?
-                                        <div className="aside-food-info-text">
-                                            Только завтрак
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="aside-food-block aside-food-w-fourth" onClick = {() => startReDraw()}>
-                                    <div className="aside-food-target"></div>
-                                    <div className="aside-food-block-inside">
-                                        Завтрак + обед или ужин включены
-                                    </div>
-                                    <div className="aside-food-info">?
-                                        <div className="aside-food-info-text">
-                                            Завтрак + обед или ужин включены
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="aside-food-block aside-food-w-fifth" onClick = {() => startReDraw()}>
-                                    <div className="aside-food-target"></div>
-                                    <div className="aside-food-block-inside">
-                                        Завтрак, обед или ужин включены
-                                    </div>
-                                    <div className="aside-food-info">?
-                                        <div className="aside-food-info-text">
-                                            Завтрак, обед или ужин включены
-                                        </div>
-                                    </div>
-                                </div>
+                                        )
+                                    })
+                                }   
                             </div>
                         </div>
 
@@ -653,22 +617,6 @@ export default function Hotels () {
                                     )
                                 })
                             }
-                        </div>
-                        <div className = {styles["aside-block"]}>
-                            <h3 className = "aside-block-title">Отфильтровать по цене</h3>
-                            
-                            <div className = "from-till-btns">
-                                <form action="">
-                                    <div className = {styles["aside-checkbox"]}>
-                                        <input type="checkbox" name = "from-till-check" id="min-to-max" className = "stylized from-till-checkbox" onChange={() => startReDraw()} /> 
-                                        <label htmlFor="min-to-max">По возрастанию</label>
-                                    </div>
-                                    <div className = {styles["aside-checkbox"]}>
-                                        <input type="checkbox" name = "from-till-check" id="max-to-min" className = "stylized till-from-checkbox" onChange={() => startReDraw()} /> 
-                                        <label htmlFor="max-to-min">По убыванию</label>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
                         <div className = "aside-block-link-w">
                             <a className = "aside-block-link" onClick = {resetFilters}>Сбросить фильтры</a>
