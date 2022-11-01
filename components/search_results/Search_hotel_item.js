@@ -70,8 +70,7 @@ export default function Search_hotel_item ({item, rates, nights}) {
                     modules={[Pagination, Navigation]}
                     className='search-item-pics'
                 >
-                    {item.images.map((item, index) => {
-                        if (index > 7) return false
+                    {item.images.slice(0, 6).map((item, index) => {
                         return (
                             <SwiperSlide
                                 className={styles["search-item-pic"]}

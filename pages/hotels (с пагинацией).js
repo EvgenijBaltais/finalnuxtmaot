@@ -9,14 +9,15 @@ import styles from "../styles/search_results/Search_results.module.css"
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
+import Pagination from "../components/Pagination"
+
 export default function Hotels () {
 
     const router = useRouter()
     const { query } = useRouter()
 
     const [loadedItems, setLoadedItems] = useState([])
-    const [loadedItemsMinMax, setLoadedItemsMinMax] = useState([])
-    const [loadedItemsMaxMin, setLoadedItemsMaxMin] = useState([])
+    const [temporaryItems, setTemporaryItems] = useState([])   // копия выборки без деления на страницы для использования в фильтрах
     const [filteredItems, setFilteredItems] = useState(false)
     const [isResearch, setIsResearch] = useState(false)
     const [nights, setNights] = useState(0)
@@ -26,6 +27,8 @@ export default function Hotels () {
     const [sliderMax, setSliderMax] = useState(0)
     const [nodataText, setNodataText] = useState('')
     const [itemsPerPage, setItemsPerPage] = useState(15)
+    const [currentPage, setCurrentPage] = useState(0)
+    const [paginationOn, setPagination] = useState(0)
     const foodTypes = ['Все включено', 'Без питания', 'Только завтрак', 'Завтрак + обед или ужин включены', 'Завтрак, обед и ужин включены']
     const [choosingFilters, setChoosingFilters] = useState(false)
     const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
@@ -63,6 +66,7 @@ export default function Hotels () {
             link += '&start_date=' + dateIn
             link += '&end_date=' + dateOut
             link += '&adults=' + query.adults
+            
 
             if (query.children_ages) {
 
@@ -83,121 +87,64 @@ export default function Hotels () {
                 
                 // Отфильтровать и вывести услуги
 
-                res.data.map((el) => {
+                let arr = []
 
-                    delete el.hotel.coordinates
-                    delete el.hotel.crm_id
-                    delete el.hotel.description
-                    delete el.hotel.type_id
-                    delete el.rates[0].images
-                    delete el.rates[0].cancellation_penalties
-                    delete el.rates[0].description
-                    delete el.rates[0].room_info
+                for (let i = 0; i < res.data.length; i++) {
+                    arr.push(setServices(res.data[i]))
+                }
 
-                    return setServices(el)
-                })
-                
-                setLoadedItems(res.data)
+                res.data = arr
+
+                setLoadedItems(paginateItems(res.data, itemsPerPage))
+                setTemporaryItems(res.data)
                 setFilteredItems(false)
 
-                // Отсортировать сразу выборку по порядку цен, чтобы вставить значения в слайдер 
-                //и в дальнейшем использовать в фильтрах, чтобы потом опять не фильтровать и не вешать страницу лишний раз
-                
-                let minMax = res.data.slice() // скопировать массив
-                let maxMin = res.data.slice() // скопировать массив
+                setPagination(res.data.length > itemsPerPage)
 
-                minMax.sort((a, b) => {
-                    return +a.rates[0].price - +b.rates[0].price
-                })
+                // определить минимум и максимум цен
 
-                maxMin.sort((a, b) => {
-                    return +b.rates[0].price - +a.rates[0].price
-                })
+                let prices = []
 
-                setLoadedItemsMinMax(minMax)
-                setLoadedItemsMaxMin(maxMin)
+                for (let i = 0; i < res.data.length; i++) {
+                    prices.push(parseInt(res.data[i].rates[0].price))
+                }
 
-                setSliderMin(+minMax[0].rates[0].price ? +minMax[0].rates[0].price : 0)
-                setSliderMax(+maxMin[0].rates[0].price ? +maxMin[0].rates[0].price : 0)
+                setSliderMin(Number.isInteger(Math.min.apply(null, prices)) ? Math.min.apply(null, prices) : 0)
+                setSliderMax(Number.isInteger(Math.max.apply(null, prices)) ? Math.max.apply(null, prices) : 0)
                 res.data.length == 0 ? setNodataText('Нет подходящих вариантов') : setNodataText('')
           })
 
     }, [query])
 
+    // Функция смены страницы
 
-    //useEffect(() => {
-    //    from = document.querySelector('.aside-slider-from')
-    //    to = document.querySelector('.aside-slider-to')
-    //}, [])
-
-
-    // Прокрутка экрана и подгрузка отелей для отображения.
-
-    let items = itemsPerPage,      // Изначальное количество элементов
-        itemsCommon = items,       // Переменная чтобы считать показанные элементы, а потом удалить событие
-        container = 0
-
-    function getScrollSize () {
-
-        if (window.pageYOffset > (container.scrollHeight - 1500)) {
-            itemsCommon += items
-            setItemsPerPage(itemsCommon)
-        }
-        
-        console.log(itemsCommon)
-
-        if (itemsCommon > loadedItems.length) window.removeEventListener("scroll", getScrollSize)
+    function changeCurrentPage (value) {
+        setCurrentPage(value)
     }
 
-    useEffect(() => {
+    // Функция для разбивки данных на страницы
 
-        if (loadedItems.length == 0) return     // Если результаты еще не загрузились
+    function paginateItems (items, itemsPerPage) {
 
-        container = document.querySelector('.search-result-right')   // Закешировать элемент один раз, чтобы не искать при скролле 
+        let arr = []
+        let page = []
 
-        window.addEventListener("scroll", getScrollSize)
+        for (let i = 0; i < items.length; i++) {
 
-        return () => {
-          window.removeEventListener("scroll", getScrollSize)
+            page.push(items[i])
+            
+            if (page.length == itemsPerPage) {
+                arr.push(page)
+                page = []
+                continue
+            }
+
+            if (i == items.length - 1) {
+                arr.push(page)
+            }
         }
-    }, [loadedItems])
-
-
-    useEffect(() => {
-
-        if (choosingFilters == true || (choosingFilters == false && isResearch == false)) return
-
-        setChoosingFilters(true)
-
-        showVariants() 
-
-        setIsResearch(false)
-        setChoosingFilters(false)
-        setCheckBoxesResearch(false)
-    }, [checkBoxesResearch])
-
-    useEffect(() => {
-
-        // Популярные отели
-
-        fetch('https://maot-api.bokn.ru/api/hotels/top')
-        .then((res) => res.json())
-        .then((res) => {
-            setPopularHotels(res.data)
-        })
-    }, [])
-
-    useEffect(() => {
-
-        // Популярные направления
-
-        fetch('https://maot-api.bokn.ru/api/regions/top')
-        .then((res) => res.json())
-        .then((res) => {
-            setPopularWays(res.data)
-        })
-    }, [])
-
+        return arr
+    }
 
     // Функция для сортировки услуг и выбора самых востребованых, для показа на странице подбора номеров
 
@@ -258,8 +205,8 @@ export default function Hotels () {
 
     // Слайдер
 
-    //let from = ''
-    //let to = ''
+    let from = ''
+    let to = ''
 
     const renewValues = value => {
 
@@ -272,6 +219,7 @@ export default function Hotels () {
     const showVariants = () => {
 
         setNodataText('')
+        setCurrentPage(0)
         let res = applyFilters()
 
         // Вариант на случай сброса всех фильтров. В этом случае возвращается первоначальная выборка с пагинацией
@@ -353,10 +301,23 @@ export default function Hotels () {
             el.classList.remove('active')
         })
     }
+
+    useEffect(() => {
+
+        if (choosingFilters == true || (choosingFilters == false && isResearch == false)) return
+
+        setChoosingFilters(true)
+
+        showVariants() 
+
+        setIsResearch(false)
+        setChoosingFilters(false)
+        setCheckBoxesResearch(false)
+    }, [checkBoxesResearch])
     
     function applyFilters() {
 
-        let arr = loadedItems,
+        let arr = temporaryItems,
             check = 0,
             el
 
@@ -387,13 +348,6 @@ export default function Hotels () {
         }
 
         // Проверка на все фильтры
-
-        // Если включен фильтр по возрастанию или убыванию, то берем готовую копию
-
-        if (fromTo) {
-            fromTo == 1 ? arr = loadedItemsMinMax : ''
-            fromTo == 2 ? arr = loadedItemsMaxMin : ''
-        }
 
         arr = arr.filter(n => {
 
@@ -457,6 +411,16 @@ export default function Hotels () {
             return true
         })
 
+        console.log(arr)
+
+        // Если включен фильтр по возрастанию или убыванию
+
+        if (fromTo) {
+            arr.sort((a, b) => {
+                return (fromTo == 1 ? +a.rates[0].price - +b.rates[0].price : +b.rates[0].price - +a.rates[0].price)
+            })
+        }
+
         // Если все фильтры в изначальном состоянии то вернуть обычный вид
         if (food.length == 0 && stars.length == 0 && (min == sliderMin && max == sliderMax) && !fromTo) {
             arr = 0
@@ -465,6 +429,62 @@ export default function Hotels () {
         return arr
     }
 
+    useEffect(() => {
+        from = document.querySelector('.aside-slider-from')
+        to = document.querySelector('.aside-slider-to')
+    }, [])
+
+    useEffect(() => {
+
+        // Популярные отели
+
+        fetch('https://maot-api.bokn.ru/api/hotels/top')
+        .then((res) => res.json())
+        .then((res) => {
+            setPopularHotels(res.data)
+        })
+    }, [])
+
+    useEffect(() => {
+
+        // Популярные направления
+
+        fetch('https://maot-api.bokn.ru/api/regions/top')
+        .then((res) => res.json())
+        .then((res) => {
+            setPopularWays(res.data)
+        })
+    }, [])
+
+    function pagination(c, m) {
+        var current = c,
+            last = m,
+            delta = 5,
+            left = current - delta,
+            right = current + delta + 1,
+            range = [],
+            rangeWithDots = [],
+            l;
+    
+        for (let i = 1; i <= last; i++) {
+            if (i == 1 || i == last || i >= left && i < right) {
+                range.push(i)
+            }
+        }
+    
+        for (let i of range) {
+            if (l) {
+                if (i - l === 2) {
+                    rangeWithDots.push(l + 1)
+                } else if (i - l !== 1) {
+                    rangeWithDots.push('...')
+                }
+            }
+            rangeWithDots.push(i)
+            l = i
+        }
+        return rangeWithDots
+    }
 
     return (
         <>
@@ -620,15 +640,9 @@ export default function Hotels () {
                     {/* Вывод по поиску */}
                     {
                         loadedItems.length && !filteredItems ? (
-                            loadedItems.slice(0, itemsPerPage).map((item, index) => {
+                            loadedItems[currentPage].map((item, index) => {
                             return (
-                                <Search_hotel_item
-                                    key = {index}
-                                    item = {item.hotel}
-                                    rates = {item.rates}
-                                    nights = {nights}
-                                    query = {query}
-                                />
+                                <Search_hotel_item key = {index} item = {item.hotel} rates = {item.rates} nights = {nights} query = {query} />
                             )
                         })) : ''
                     }
@@ -636,18 +650,26 @@ export default function Hotels () {
                     {/* Если выбраны фильтры */}
                     {
                         filteredItems && filteredItems.length > 0 ? (
-                            filteredItems.slice(0, itemsPerPage).map((item, index) => {
+                            filteredItems.map((item, index) => {
                             return (
-                                <Search_hotel_item
-                                    key = {index}
-                                    item = {item.hotel}
-                                    rates = {item.rates}
-                                    nights = {nights}
-                                />
+                                <Search_hotel_item key = {index} item = {item.hotel} rates = {item.rates} nights = {nights} />
                             )
                         })) : ''
                     }
 
+                    {/* Пагинация */}
+                    {paginationOn ? (
+                        <div className="search-pages-list">
+                            {loadedItems.length && !filteredItems ? 
+                                <Pagination
+                                    pages = {pagination(currentPage, loadedItems.length)}
+                                    currentPage = {currentPage}
+                                    changeCurrentPage = {changeCurrentPage}
+                                />: ''
+                            }
+                        </div>
+                        ) : ('')
+                    }
                 </div>
             </section>
         </>
