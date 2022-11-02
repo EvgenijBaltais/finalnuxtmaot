@@ -411,8 +411,6 @@ export default function Hotels () {
             return true
         })
 
-        console.log(arr)
-
         // Если включен фильтр по возрастанию или убыванию
 
         if (fromTo) {

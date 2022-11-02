@@ -133,8 +133,6 @@ export default function Hotels () {
 
     function getScrollSize () {
 
-        console.log(itemsCommon)
-
         if (window.pageYOffset > (container.scrollHeight - 1500)) {
             itemsCommon += elementsOnPage
             setItemsPerPage(itemsPerPage => itemsPerPage + elementsOnPage)
@@ -253,9 +251,6 @@ export default function Hotels () {
 
     // Слайдер
 
-    //let from = ''
-    //let to = ''
-
     const renewValues = value => {
 
         document.querySelector('.aside-slider-from').value = 'от ' + value[0] + ' ₽'
@@ -271,7 +266,7 @@ export default function Hotels () {
 
         // Вариант на случай сброса всех фильтров. В этом случае возвращается первоначальная выборка с пагинацией
         if (res == 0) {
-            setFilteredItems(0)
+            resetFilters()
         }
 
         // Если после фильтров не осталось вариантов для отображения
@@ -287,7 +282,7 @@ export default function Hotels () {
     }
 
     // Перерисовка данных при слайдере
-
+/*
     function sliderRedraw () {
 
         if (isResearch == true) return false
@@ -300,7 +295,7 @@ export default function Hotels () {
         setIsResearch(false)
         setChoosingFilters(false)
     }
-
+*/
 
     function startReDraw () {
 
@@ -333,15 +328,10 @@ export default function Hotels () {
 
         setIsResearch(true)
         setFilteredItems(0)
-        setItemsPerPage(elementsOnPage)
         setChoosingFilters(false)
         setCheckBoxesResearch(false)
+
         setItemsPerPage(elementsOnPage)
-        itemsCommon = elementsOnPage
-
-        window.removeEventListener("scroll", getScrollSize)
-
-        window.addEventListener("scroll", getScrollSize)
 
         document.querySelectorAll('.aside-food-block').forEach(el => {
             el.classList.remove('active')
@@ -466,6 +456,8 @@ export default function Hotels () {
             arr = 0
         }
 
+        console.log(arr)
+
         return arr
     }
 
@@ -513,7 +505,7 @@ export default function Hotels () {
                                     min={0}
                                     max={(sliderMax + 10000)}
                                     onChange={value => renewValues(value)}
-                                    onAfterChange = {sliderRedraw}
+                                    onAfterChange = {startReDraw}
                                 /> :  ''
                             }
                         </div>
@@ -522,7 +514,7 @@ export default function Hotels () {
                             <h3 className = "aside-block-title">Сортировать по цене</h3>
                             <div className="aside-cheap-w">
                                 <div className="aside-cheap-block-w">
-                                    <div className="aside-block-clickarea" onClick = {() => startReDraw()}></div>
+                                    <div className="aside-block-clickarea" onClick = {startReDraw}></div>
                                     <div className="aside-cheap-block aside-cheap-first">
                                         <svg width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="aside-cheap-svg">
                                             <path d="M0 11C0 10.4477 0.447715 10 1 10H7.4C7.95228 10 8.4 10.4477 8.4 11C8.4 11.5523 7.95228 12 7.4 12H1C0.447715 12 0 11.5523 0 11Z" fill="#D9D9D9"/>
@@ -537,7 +529,7 @@ export default function Hotels () {
                                     </div>
                                 </div>
                                 <div className="aside-cheap-block-w">
-                                    <div className="aside-block-clickarea" onClick = {() => startReDraw()}></div>
+                                    <div className="aside-block-clickarea" onClick = {startReDraw}></div>
                                     <div className="aside-cheap-block aside-cheap-last">
                                         <svg width="21" height="32" viewBox="0 0 21 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="aside-cheap-svg">
                                             <path d="M0 21C0 21.5523 0.447715 22 1 22H7.4C7.95228 22 8.4 21.5523 8.4 21C8.4 20.4477 7.95228 20 7.4 20H1C0.447715 20 0 20.4477 0 21Z" fill="#D9D9D9"/>
@@ -559,7 +551,7 @@ export default function Hotels () {
                             <div className="aside-food-w">
                                 {foodTypes.map((item, index) => {
                                     return (
-                                        <div className={`aside-food-block aside-food-w-${index + 1}`} onClick = {() => startReDraw()} key = {index}>
+                                        <div className={`aside-food-block aside-food-w-${index + 1}`} onClick = {startReDraw} key = {index}>
                                             <div className="aside-food-target"></div>
                                             <div className="aside-food-block-inside">
                                                 {item}
@@ -582,7 +574,7 @@ export default function Hotels () {
                                 [...Array(5)].map((e, i) => {
                                     return (
                                         <div key = {i} className = {styles["aside-checkbox"]}>
-                                            <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={() => startReDraw()} />
+                                            <input type="checkbox" id={`checkbox-2${i + 1}`} className = "stylized stars-checkbox" onChange={startReDraw} />
                                             <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-2${i + 1}`}>
                                                 <ul className = {styles["aside-stars-list"]}>
                                                     {[...Array(i + 1)].map((el, ind) => {
