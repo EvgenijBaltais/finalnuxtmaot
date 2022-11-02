@@ -282,30 +282,10 @@ export default function Hotels () {
         }
     }
 
-    // Перерисовка данных при слайдере
-/*
-    function sliderRedraw () {
-
-        if (isResearch == true) return false
-        if (sliderMin == 0 && sliderMax == 0) return
-
-        setIsResearch(true)
-        
-        showVariants() 
-
-        setIsResearch(false)
-        setChoosingFilters(false)
-    }
-*/
-
     function startReDraw () {
-
-        console.log(111)
 
         if (event.target.classList.contains('aside-food-target')) {
 
-            console.log(222)
-        
             event.target.parentElement.classList.contains('active') ?
                 event.target.parentElement.classList.remove('active') :
                 event.target.parentElement.classList.add('active')

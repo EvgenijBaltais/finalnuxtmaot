@@ -94,6 +94,12 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
 
         searchResult.hotel ? link = '/hoteldetail' : '' // Если отель то на страницу отеля, если регион то на страницу подбора
         searchResult.region ? link = '/hotels' : ''
+        
+        searchResult.hotel ? delete obj.region : ''
+        searchResult.hotel ? delete obj.region_name : ''
+        searchResult.hotel ? delete obj.region_id : ''
+
+        console.log(searchResult.hotel)
 
         setLoadedItems([])
 

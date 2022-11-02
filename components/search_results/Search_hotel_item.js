@@ -19,11 +19,6 @@ export default function Search_hotel_item ({item, rates, nights}) {
         return text
     }
 
-    // Округлить цену, умножить на ночи, разбить на разряды
-    function makePriceGreatAgain (price, nights) {
-        return (Math.round(parseInt(price)) * nights).toLocaleString()
-    }
-
     function addBackgroundImage (slider) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
     }
@@ -100,7 +95,7 @@ export default function Search_hotel_item ({item, rates, nights}) {
             <div className = {styles["search-item__broninfo"]}>
                 <div className = {styles["search-item__price"]}>
                     <span className = {styles["search-item__price-from"]}>от</span>
-                    <span className = {styles["search-item__price-number"]}>{makePriceGreatAgain(rates[0].daily_price, nights)}</span>
+                    <span className = {styles["search-item__price-number"]}>{(+rates[0].price).toLocaleString('ru')}</span>
                     <span className = {styles["search-item__price-currency"]}>&#8381;</span>
                 </div>
                 <p className = {styles["search-item__nights"]}>цена за <span className = {styles["search-item__nights-number"]}>{nightsRightText(nights)}</span></p>
