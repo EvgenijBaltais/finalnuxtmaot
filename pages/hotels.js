@@ -446,7 +446,6 @@ export default function Hotels () {
         return arr
     }
 
-
     return (
         <>
         <Head>

@@ -170,11 +170,7 @@ function Hoteldetail () {
 
     if (!hotelData) {
         return <>
-            <style jsx global>{`
-                .main {
-                    opacity: 0
-                }
-            `}</style>
+            <img src = "/images/waiting.gif" className = "waiting-hotel-image" />
         </>
     }
 

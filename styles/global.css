@@ -3641,6 +3641,12 @@ input[type="checkbox"].substylized:checked + label:after {
 	margin: 0 auto;
 }
 
+.waiting-hotel-image {
+	display: block;
+	width: 200px;
+	margin: 200px auto 0 auto;
+}
+
 /* Форма подбора, конец */
 
 /* Форма подбора на странице отеля */
