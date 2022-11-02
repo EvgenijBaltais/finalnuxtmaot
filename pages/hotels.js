@@ -266,7 +266,8 @@ export default function Hotels () {
 
         // Вариант на случай сброса всех фильтров. В этом случае возвращается первоначальная выборка с пагинацией
         if (res == 0) {
-            resetFilters()
+            setFilteredItems([])
+            setFilteredItems(0)
         }
 
         // Если после фильтров не осталось вариантов для отображения
@@ -299,10 +300,11 @@ export default function Hotels () {
 
     function startReDraw () {
 
-        if (isResearch == true) return false
-        if (sliderMin == 0 && sliderMax == 0) return
+        console.log(111)
 
         if (event.target.classList.contains('aside-food-target')) {
+
+            console.log(222)
         
             event.target.parentElement.classList.contains('active') ?
                 event.target.parentElement.classList.remove('active') :
@@ -319,6 +321,9 @@ export default function Hotels () {
 
             isThisActive ? '' : event.target.parentElement.classList.add('active')
         }
+
+        if (isResearch == true) return false
+        if (sliderMin == 0 && sliderMax == 0) return
 
         setIsResearch(true)
         setCheckBoxesResearch(true)
@@ -551,8 +556,8 @@ export default function Hotels () {
                             <div className="aside-food-w">
                                 {foodTypes.map((item, index) => {
                                     return (
-                                        <div className={`aside-food-block aside-food-w-${index + 1}`} onClick = {startReDraw} key = {index}>
-                                            <div className="aside-food-target"></div>
+                                        <div className={`aside-food-block aside-food-w-${index + 1}`} key = {index}>
+                                            <div className="aside-food-target" onClick = {startReDraw}></div>
                                             <div className="aside-food-block-inside">
                                                 {item}
                                             </div>
