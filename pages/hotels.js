@@ -25,7 +25,9 @@ export default function Hotels () {
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
     const [nodataText, setNodataText] = useState('')
-    const [itemsPerPage, setItemsPerPage] = useState(15)
+    const elementsOnPage = 15
+    let itemsCommon = elementsOnPage                                  // Переменная чтобы считать показанные элементы, сбрасывать фильтры и потом удалить событие
+    const [itemsPerPage, setItemsPerPage] = useState(elementsOnPage)
     const foodTypes = ['Все включено', 'Без питания', 'Только завтрак', 'Завтрак + обед или ужин включены', 'Завтрак, обед и ужин включены']
     const [choosingFilters, setChoosingFilters] = useState(false)
     const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
@@ -123,31 +125,24 @@ export default function Hotels () {
           })
 
     }, [query])
-
-
-    //useEffect(() => {
-    //    from = document.querySelector('.aside-slider-from')
-    //    to = document.querySelector('.aside-slider-to')
-    //}, [])
-
+    
 
     // Прокрутка экрана и подгрузка отелей для отображения.
 
-    let items = itemsPerPage,      // Изначальное количество элементов
-        itemsCommon = items,       // Переменная чтобы считать показанные элементы, а потом удалить событие
-        container = 0
+    let container = 0
 
     function getScrollSize () {
 
-        if (window.pageYOffset > (container.scrollHeight - 1500)) {
-            itemsCommon += items
-            setItemsPerPage(itemsCommon)
-        }
-        
         console.log(itemsCommon)
+
+        if (window.pageYOffset > (container.scrollHeight - 1500)) {
+            itemsCommon += elementsOnPage
+            setItemsPerPage(itemsPerPage => itemsPerPage + elementsOnPage)
+        }
 
         if (itemsCommon > loadedItems.length) window.removeEventListener("scroll", getScrollSize)
     }
+
 
     useEffect(() => {
 
@@ -336,10 +331,17 @@ export default function Hotels () {
 
     function resetFilters () {
 
+        setIsResearch(true)
         setFilteredItems(0)
-        setIsResearch(false)
+        setItemsPerPage(elementsOnPage)
         setChoosingFilters(false)
         setCheckBoxesResearch(false)
+        setItemsPerPage(elementsOnPage)
+        itemsCommon = elementsOnPage
+
+        window.removeEventListener("scroll", getScrollSize)
+
+        window.addEventListener("scroll", getScrollSize)
 
         document.querySelectorAll('.aside-food-block').forEach(el => {
             el.classList.remove('active')
@@ -352,6 +354,8 @@ export default function Hotels () {
         document.querySelectorAll('.aside-cheap-block-w').forEach(el => {
             el.classList.remove('active')
         })
+
+        setIsResearch(false)
     }
     
     function applyFilters() {
