@@ -209,11 +209,14 @@ body {
 }
 
 .aside-food-block-inside {
+	display: flex;
+    align-items: center;
+    justify-content: center;
 	width: calc(100% - 4px);
 	height: calc(100% - 4px);
 	cursor: pointer;
 	background-color: #fff;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 18px;
     font-weight: bold;
     color: #676767;
