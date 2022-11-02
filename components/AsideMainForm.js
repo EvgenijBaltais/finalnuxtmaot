@@ -74,6 +74,7 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
         setNodataText('Загрузка подходящих вариантов...')
 
         let ages = []
+        let link = ''
         for (let i = 0; i < childrenAges.length; i++) {
             ages.push(parseInt(childrenAges[i]))
         }
@@ -89,11 +90,15 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
 
         searchResult.region ? obj.region_id = searchResult.region : ''
         searchResult.region_name ? obj.region_name = searchResult.region_name : ''
+        searchResult.hotel ? obj.hotel_id = searchResult.hotel : ''
+
+        searchResult.hotel ? link = '/hoteldetail' : '' // Если отель то на страницу отеля, если регион то на страницу подбора
+        searchResult.region ? link = '/hotels' : ''
 
         setLoadedItems([])
 
         router.push({
-            pathname: '/hotels',
+            pathname: link,
             query: obj
         })
 
