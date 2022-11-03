@@ -13,6 +13,7 @@ export default function Hotels () {
     const router = useRouter()
     const { query } = useRouter()
 
+    const elementsOnPage = 15                                           // Количество выводимых постов на странице при загрузке
     const [loadedItems, setLoadedItems] = useState([])
     const [loadedItemsMinMax, setLoadedItemsMinMax] = useState([])
     const [loadedItemsMaxMin, setLoadedItemsMaxMin] = useState([])
@@ -24,7 +25,6 @@ export default function Hotels () {
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
     const [nodataText, setNodataText] = useState('')
-    const elementsOnPage = 15
     const [itemsPerPage, setItemsPerPage] = useState(elementsOnPage)
     const foodTypes = ['Все включено', 'Без питания', 'Только завтрак', 'Завтрак + обед или ужин включены', 'Завтрак, обед и ужин включены']
     const [choosingFilters, setChoosingFilters] = useState(false)
@@ -132,9 +132,21 @@ export default function Hotels () {
     // Прокрутка экрана и подгрузка отелей для отображения.
 
     let container = 0
+    let pageContent = 0
+    let footer = 0
+    let size = 0
 
-    function getScrollSize () {
+    function scrollAction () {
 
+        size = footer.offsetTop - document.documentElement.clientHeight + 180
+
+        // Зафиксировать левый блок при прокрутке
+        window.pageYOffset >= (pageContent.offsetTop + 20) ? pageContent.classList.add('fixed') : pageContent.classList.remove('fixed')
+        window.pageYOffset >= size ?
+            pageContent.querySelector('.search-result-left').style.top = -(window.pageYOffset - size) + 'px' :
+            pageContent.querySelector('.search-result-left').removeAttribute('style')
+
+        // Прибавить номеров по прокрутке
         if (window.pageYOffset > (container.scrollHeight - 1500)) {
             setItemsPerPage(itemsPerPage => itemsPerPage + elementsOnPage)
         }
@@ -144,12 +156,14 @@ export default function Hotels () {
 
         if (loadedItems.length == 0) return     // Если результаты еще не загрузились
 
-        container = document.querySelector('.search-result-right')   // Закешировать элемент один раз, чтобы не искать при скролле 
+        container = document.querySelector('.search-result-right')  // Закешировать элемент один раз, чтобы не искать при скролле
+        pageContent = document.querySelector('.search-result-w')    // Закешировать элемент один раз, чтобы не искать при скролле 
+        footer = document.querySelector('.footer')                  // Закешировать элемент один раз, чтобы не искать при скролле 
 
-        window.addEventListener("scroll", getScrollSize)
+        window.addEventListener("scroll", scrollAction)
 
         return () => {
-            window.removeEventListener("scroll", getScrollSize)
+            window.removeEventListener("scroll", scrollAction)
         }
     }, [loadedItems])
 
@@ -438,8 +452,6 @@ export default function Hotels () {
             arr = 0
         }
 
-        console.log(arr)
-
         return arr
     }
 
@@ -451,8 +463,8 @@ export default function Hotels () {
             <section className = {styles["search-result-title"]}>
                 Результаты поиска
             </section>
-            <section className = {styles["search-result-w"]}>
-                <div className = {styles["search-result-left"]}>
+            <section className = {`${styles["search-result-w"]} search-result-w`}>
+                <div className = {`${styles["search-result-left"]} search-result-left`}>
                     <div className = {styles["search-result-left-w"]}>
                         <div className = {`${styles["aside-block"]} ${styles["direction-aside-form"]}`}>
                             <h3 className = "aside-block-title">Направление</h3>
@@ -470,12 +482,12 @@ export default function Hotels () {
                             <div className="slider-values">
                                 {sliderMin != 0 ?
                                     <div className="aside-slider-val aside-slider-left">
-                                        <input type="text" className="aside-slider-input aside-slider-from" />
+                                        <input type="text" className="aside-slider-input aside-slider-from" disabled={true} />
                                     </div>
                                 : ''}
                                 {sliderMax != 0 ?
                                     <div className="aside-slider-val aside-slider-right">
-                                        <input type="text" className="aside-slider-input aside-slider-to" />
+                                        <input type="text" className="aside-slider-input aside-slider-to" disabled={true} />
                                     </div>
                                 : ''}
                             </div>

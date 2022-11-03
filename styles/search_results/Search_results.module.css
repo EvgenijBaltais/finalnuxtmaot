@@ -21,10 +21,31 @@
 .search-result-left {
 	position: absolute;
 	width: 400px;
+	height: calc(100vh - 190px);
 	box-shadow: var(--main-shadow);
 	padding: 20px 25px;
 	border-radius: 10px;
 	background-color: #fff;
+	overflow: auto;
+    scrollbar-color: #6969dd #e0e0e0;
+    scrollbar-width: thin;
+	direction: rtl;
+}
+
+.search-result-left > * {
+	direction: ltr;
+}
+
+.search-result-left::-webkit-scrollbar-track {
+	background-color: transparent /*Цвет скролла*/
+} 
+.search-result-left::-webkit-scrollbar-thumb { 
+	border-radius: 5px; /*Закругление ползунка*/
+	background-color: #FF282C; /*Цвет ползунка*/
+	height: 50%;
+} 
+.search-result-left::-webkit-scrollbar { 
+	width: 6px;
 }
 
 .search-result-left:after {

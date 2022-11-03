@@ -1968,6 +1968,12 @@ input[type="checkbox"].substylized:checked + label:after {
 	justify-content: flex-start;
 }
 
+.search-result-w.fixed .search-result-left {
+	position: fixed;
+    top: 0;
+	z-index: 5;
+}
+
 .search-results-w {
 	position: absolute;
 	top: 80px;
@@ -3031,6 +3037,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	font-size: 16px;
 	line-height: 16px;
 	width: 100%;
+	background-color: #fff;
 }
 
 .rc-slider {
