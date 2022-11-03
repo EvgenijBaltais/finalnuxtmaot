@@ -25,7 +25,6 @@ export default function Hotels () {
     const [sliderMax, setSliderMax] = useState(0)
     const [nodataText, setNodataText] = useState('')
     const elementsOnPage = 15
-    let itemsCommon = elementsOnPage                                  // Переменная чтобы считать показанные элементы, сбрасывать фильтры и потом удалить событие
     const [itemsPerPage, setItemsPerPage] = useState(elementsOnPage)
     const foodTypes = ['Все включено', 'Без питания', 'Только завтрак', 'Завтрак + обед или ужин включены', 'Завтрак, обед и ужин включены']
     const [choosingFilters, setChoosingFilters] = useState(false)
@@ -136,13 +135,9 @@ export default function Hotels () {
     function getScrollSize () {
 
         if (window.pageYOffset > (container.scrollHeight - 1500)) {
-            itemsCommon += elementsOnPage
             setItemsPerPage(itemsPerPage => itemsPerPage + elementsOnPage)
         }
-
-        if (itemsCommon > loadedItems.length) window.removeEventListener("scroll", getScrollSize)
     }
-
 
     useEffect(() => {
 
@@ -153,7 +148,7 @@ export default function Hotels () {
         window.addEventListener("scroll", getScrollSize)
 
         return () => {
-          window.removeEventListener("scroll", getScrollSize)
+            window.removeEventListener("scroll", getScrollSize)
         }
     }, [loadedItems])
 
@@ -249,16 +244,6 @@ export default function Hotels () {
         let begin_date = new Date(datein)
         let end_date = new Date(dateout)
         return (end_date - begin_date) / (1000 * 60 * 60 * 24)
-    }
-
-    // Слайдер
-
-    const renewValues = value => {
-
-        document.querySelector('.aside-slider-from').value = 'от ' + value[0] + ' ₽'
-        document.querySelector('.aside-slider-to').value = 'до ' + value[1] + ' ₽'
-
-        setIsResearch(true)
     }
 
     const showVariants = () => {
@@ -455,6 +440,8 @@ export default function Hotels () {
             arr = 0
         }
 
+        console.log(arr)
+
         return arr
     }
 
@@ -496,6 +483,7 @@ export default function Hotels () {
 
                             {sliderMax != 0 ?
                                 <RangeSlider
+                                    startReDraw = {startReDraw}
                                     sliderMin = {sliderMin}
                                     sliderMax = {sliderMax}
                                     key = {reloadComponent}
@@ -639,7 +627,6 @@ export default function Hotels () {
                             )
                         })) : ''
                     }
-
                 </div>
             </section>
         </>
