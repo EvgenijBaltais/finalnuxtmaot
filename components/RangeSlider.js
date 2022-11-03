@@ -1,10 +1,9 @@
+import { useEffect } from 'react'
+
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 
 export default function RangeSlider ({sliderMin, sliderMax, setIsResearch, startReDraw}) {
-
-    document.querySelector('.aside-slider-from') ? document.querySelector('.aside-slider-from').value = 'от ' + sliderMin + ' ₽' : ''
-    document.querySelector('.aside-slider-to') ? document.querySelector('.aside-slider-to').value = 'до ' + sliderMax + ' ₽' : ''
 
     const renewValues = value => {
 
@@ -13,6 +12,11 @@ export default function RangeSlider ({sliderMin, sliderMax, setIsResearch, start
     
         setIsResearch(true)
     }
+
+    useEffect(() => {
+        document.querySelector('.aside-slider-from') ? document.querySelector('.aside-slider-from').value = 'от ' + sliderMin + ' ₽' : ''
+        document.querySelector('.aside-slider-from') ? document.querySelector('.aside-slider-to').value = 'до ' + sliderMax + ' ₽' : ''
+    }, [])
 
     return (
         <>

@@ -128,7 +128,6 @@ export default function Hotels () {
           })
 
     }, [query])
-    
 
     // Прокрутка экрана и подгрузка отелей для отображения.
 
@@ -177,9 +176,6 @@ export default function Hotels () {
         .then((res) => {
             setPopularHotels(res.data)
         })
-    }, [])
-
-    useEffect(() => {
 
         // Популярные направления
 
@@ -474,12 +470,12 @@ export default function Hotels () {
                             <div className="slider-values">
                                 {sliderMin != 0 ?
                                     <div className="aside-slider-val aside-slider-left">
-                                        <input type="text" defaultValue = {'от ' + sliderMin + ' ₽'} onChange = {value => setSliderMin(value)} className="aside-slider-input aside-slider-from" />
+                                        <input type="text" className="aside-slider-input aside-slider-from" />
                                     </div>
                                 : ''}
                                 {sliderMax != 0 ?
                                     <div className="aside-slider-val aside-slider-right">
-                                        <input type="text" defaultValue = {'до ' + sliderMax + ' ₽'} onChange = {value => setSliderMax(value)} className="aside-slider-input aside-slider-to" />
+                                        <input type="text" className="aside-slider-input aside-slider-to" />
                                     </div>
                                 : ''}
                             </div>
