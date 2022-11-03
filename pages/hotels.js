@@ -31,7 +31,6 @@ export default function Hotels () {
     const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
 
     const [reloadComponent, setReloadComponent] = useState(0)
-    
 
     useEffect(() => {
 
@@ -106,8 +105,8 @@ export default function Hotels () {
                 // Отсортировать сразу выборку по порядку цен, чтобы вставить значения в слайдер 
                 //и в дальнейшем использовать в фильтрах, чтобы потом опять не фильтровать и не вешать страницу лишний раз
                 
-                let minMax = res.data.slice() // скопировать массив
-                let maxMin = res.data.slice() // скопировать массив
+                let minMax = res.data.length ? res.data.slice() : [] // скопировать массив
+                let maxMin = res.data.length ? res.data.slice() : [] // скопировать массив
 
                 minMax.sort((a, b) => {
                     return +a.rates[0].price - +b.rates[0].price
@@ -120,8 +119,11 @@ export default function Hotels () {
                 setLoadedItemsMinMax(minMax)
                 setLoadedItemsMaxMin(maxMin)
 
-                setSliderMin(+minMax[0].rates[0].price ? +minMax[0].rates[0].price : 0)
-                setSliderMax(+maxMin[0].rates[0].price ? +maxMin[0].rates[0].price : 0)
+                setSliderMin(minMax.length ? +minMax[0].rates[0].price : 0)
+                setSliderMax(maxMin.length ? +maxMin[0].rates[0].price : 0)
+
+                setReloadComponent(reloadComponent => reloadComponent += 1)
+
                 res.data.length == 0 ? setNodataText('Нет подходящих вариантов') : setNodataText('')
           })
 
@@ -465,6 +467,7 @@ export default function Hotels () {
                                 setLoadedItems = {setLoadedItems}
                                 popularHotels = {popularHotels}
                                 popularWays = {popularWays}
+                                reloadComponent = {reloadComponent}
                             />
                         </div>
                         <div className = "aside-slider">

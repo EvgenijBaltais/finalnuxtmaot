@@ -3292,7 +3292,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	border-radius: 10px;
 	overflow: hidden;
 	width: 100%;
-	z-index: 2;
+	z-index: 10;
     -webkit-box-shadow: var(--main-shadow);
     -moz-box-shadow: var(--main-shadow);
     box-shadow: var(--main-shadow);
