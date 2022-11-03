@@ -397,7 +397,7 @@ body {
 	width: 30px;
 }
 
-.aside-cheap-block span {
+.aside-cheap-block-w:hover .aside-cheap-block span {
 	color: #000;
 	transition: .2s color;
 }
@@ -449,6 +449,7 @@ body {
 	text-decoration: none;
 	padding-bottom: 0;
 	cursor: pointer;
+	user-select: none;
 }
 
 .aside-block-link-w:hover .aside-block-link {

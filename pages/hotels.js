@@ -6,8 +6,7 @@ import AsideMainForm from "../components/AsideMainForm"
 import Search_hotel_item from "../components/search_results/Search_hotel_item"
 import styles from "../styles/search_results/Search_results.module.css"
 
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import RangeSlider from "../components/RangeSlider"
 
 export default function Hotels () {
 
@@ -31,6 +30,9 @@ export default function Hotels () {
     const foodTypes = ['Все включено', 'Без питания', 'Только завтрак', 'Завтрак + обед или ужин включены', 'Завтрак, обед и ужин включены']
     const [choosingFilters, setChoosingFilters] = useState(false)
     const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
+
+    const [reloadComponent, setReloadComponent] = useState(0)
+    
 
     useEffect(() => {
 
@@ -318,6 +320,18 @@ export default function Hotels () {
 
         setItemsPerPage(elementsOnPage)
 
+        // Обновление ползунка с ценами
+
+        setSliderMin(+loadedItemsMinMax[0].rates[0].price)
+        setSliderMax(+loadedItemsMaxMin[0].rates[0].price)
+
+        document.querySelector('.aside-slider-from').value = 'от ' + (+loadedItemsMinMax[0].rates[0].price) + ' ₽'
+        document.querySelector('.aside-slider-to').value = 'от ' + (+loadedItemsMaxMin[0].rates[0].price) + ' ₽'
+
+        setReloadComponent(reloadComponent => reloadComponent += 1)
+
+        // Обновление ползунка с ценами, конец
+
         document.querySelectorAll('.aside-food-block').forEach(el => {
             el.classList.remove('active')
         })
@@ -441,8 +455,6 @@ export default function Hotels () {
             arr = 0
         }
 
-        console.log(arr)
-
         return arr
     }
 
@@ -481,15 +493,15 @@ export default function Hotels () {
                                     </div>
                                 : ''}
                             </div>
+
                             {sliderMax != 0 ?
-                                <Slider
-                                    step = {1}
-                                    range
-                                    defaultValue={[sliderMin, sliderMax]}
-                                    min={0}
-                                    max={(sliderMax + 10000)}
-                                    onChange={value => renewValues(value)}
-                                    onAfterChange = {startReDraw}
+                                <RangeSlider
+                                    sliderMin = {sliderMin}
+                                    sliderMax = {sliderMax}
+                                    key = {reloadComponent}
+                                    isResearch = {isResearch}
+                                    setIsResearch = {setIsResearch}
+                                    setCheckBoxesResearch = {setCheckBoxesResearch}
                                 /> :  ''
                             }
                         </div>
