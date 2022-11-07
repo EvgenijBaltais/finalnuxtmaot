@@ -99,8 +99,6 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
         searchResult.hotel ? delete obj.region_name : ''
         searchResult.hotel ? delete obj.region_id : ''
 
-        console.log(searchResult.hotel)
-
         setLoadedItems([])
 
         router.push({

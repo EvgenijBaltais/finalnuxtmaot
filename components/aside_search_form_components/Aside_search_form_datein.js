@@ -68,9 +68,7 @@ export default function Aside_search_form_datein(props) {
 
     return (
         <div className = "aside-search-dates" ref={wrapperRef}>
-
             <div className = "aside-direction-form-block aside-direction-form-in" >
-
                 <input type="text" 
                         readOnly = "readonly"
                         className = {`aside-form-way-input aside-form-way-input-period aside-form-way-input-in${
@@ -81,7 +79,6 @@ export default function Aside_search_form_datein(props) {
                 />
                 {dateInOpened ? <AsideDatepicker closeFuncdateIn = {closeDateIn} mindate = {props.dateIn} dateIn = {props.dateIn} /> : ""}
             </div>
-
             <div className = "aside-direction-form-block aside-direction-form-out" >
                 <input type="text"
                         readOnly = "readonly" 
