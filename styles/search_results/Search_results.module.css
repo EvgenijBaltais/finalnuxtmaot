@@ -16,20 +16,28 @@
 	position: relative;
 	display: flex;
 	justify-content: space-between;
+	z-index: 5;
+	-webkit-overflow-scrolling: auto;
 }
-
 .search-result-left {
 	position: absolute;
-	width: 400px;
-	height: calc(100vh - 190px);
-	box-shadow: var(--main-shadow);
-	padding: 20px 25px;
-	border-radius: 10px;
-	background-color: #fff;
+	width: 100%;
+	height: calc(100vh - 170px);
+	background-color: transparent;
 	overflow: auto;
     scrollbar-color: #6969dd #e0e0e0;
     scrollbar-width: thin;
 	direction: rtl;
+}
+
+.search-result-shadow-block {
+	position: absolute;
+	height: calc(100vh - 173px);
+	width: calc(100% - 3px);
+	max-width: 400px;
+	box-shadow: var(--main-shadow);
+	margin: 0 0 0 3px;
+	border-radius: 10px;
 }
 
 .search-result-left > * {
@@ -48,17 +56,17 @@
 	width: 6px;
 }
 
-.search-result-left:after {
-	content: ".";
-	display: block;
-	height: 0;
-	clear: both;
-	visibility: hidden;
+.search-result-left-w {
+	position: relative;
+	background: transparent;
+	border-radius: 10px;
+	height: 100%;
 }
 
-.search-result-left-w {
-	background: #fff;
-	border-radius: 10px;
+.search-result-ins-block {
+	width: 100%;
+	max-width: 400px;
+	padding: 20px 25px;
 }
 
 .direction-aside-form {
@@ -85,6 +93,7 @@
 	width: 790px;
 	min-height: 100vh;
 	margin-left: 450px;
+	z-index: 5;
 }
 
 .aside-stars-list {

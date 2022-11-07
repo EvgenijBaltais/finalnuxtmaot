@@ -426,6 +426,7 @@ body {
 }
 
 .aside-block-link-w {
+	position: relative;
 	width: 100%;
 	height: 65px;
 	border-radius: 10px;
@@ -1971,7 +1972,15 @@ input[type="checkbox"].substylized:checked + label:after {
 .search-result-w.fixed .search-result-left {
 	position: fixed;
     top: 0;
-	z-index: 5;
+	z-index: 7;
+	-webkit-backface-visibility: hidden;
+}
+
+.search-result-w.fixed .search-result-shadow-block {
+	position: fixed;
+    top: 0;
+	z-index: 7;
+	-webkit-backface-visibility: hidden;
 }
 
 .search-results-w {
@@ -2327,7 +2336,7 @@ input[type="checkbox"].substylized:checked + label:after {
     box-shadow: var(--main-shadow);
 	overflow: auto;
 	background: #fff;
-	z-index: 5;
+	z-index: 6;
 	overflow: hidden;
 }
 
