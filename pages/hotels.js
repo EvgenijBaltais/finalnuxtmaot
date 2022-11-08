@@ -131,7 +131,6 @@ export default function Hotels () {
 
     // Прокрутка экрана и подгрузка отелей для отображения.
 
-    let container = 0
     let pageContent = 0
     let footer = 0
     let size = 0
@@ -146,22 +145,26 @@ export default function Hotels () {
 
         // Зафиксировать левый блок при прокрутке
 
-        window.pageYOffset >= pageContent.offsetTop && window.pageYOffset < size? setFixedState(1) : setFixedState(0)
-        //window.pageYOffset >= size ? setFixedState(0) : setFixedState(1)
+        if (window.pageYOffset <= pageContent.offsetTop + 20) {
+            setFixedState(0)
+        }
+        else if (window.pageYOffset >= pageContent.offsetTop) {
 
-        //if ()
+            setFixedState(1)
+            asideLeft.style.top = 0
+            fixedBlock.style.top = 0
 
-        // Прибавить номеров по прокрутке
-        //if (window.pageYOffset > (container.scrollHeight - 1500)) {
-        //    setItemsPerPage(itemsPerPage => itemsPerPage + elementsOnPage)
-        //}
+            if (window.pageYOffset > (footer.offsetTop - document.documentElement.clientHeight)) {
+                asideLeft.style.top = -(window.pageYOffset - (footer.offsetTop - document.documentElement.clientHeight) - 50) + 'px'
+                fixedBlock.style.top = -(window.pageYOffset - (footer.offsetTop - document.documentElement.clientHeight) - 50) + 'px'
+            }
+        }
     }
 
     useEffect(() => {
 
         if (loadedItems.length == 0) return     // Если результаты еще не загрузились
 
-        container = document.querySelector('.search-result-right')  // Закешировать элемент один раз, чтобы не искать при скролле
         pageContent = document.querySelector('.search-result-w')    // Закешировать элемент один раз, чтобы не искать при скролле 
         footer = document.querySelector('.footer')                  // Закешировать элемент один раз, чтобы не искать при скролле 
         asideLeft = document.querySelector('.search-result-left')
@@ -470,7 +473,7 @@ export default function Hotels () {
             <section className = {styles["search-result-title"]}>
                 Результаты поиска
             </section>
-            <section className = {`${styles["search-result-w"]} search-result-w ${[fixedState ? 'fixed' : '']}`}>
+            <section className = {`${styles["search-result-w"]} search-result-w${[fixedState ? ' fixed' : '']}`}>
             <div className={`${styles["search-result-shadow-block"]} search-result-shadow-block`}></div>
                 <div className = {`${styles["search-result-left"]} search-result-left`}>
                     <div className = {styles["search-result-left-w"]}>

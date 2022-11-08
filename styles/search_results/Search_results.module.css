@@ -17,11 +17,11 @@
 	display: flex;
 	justify-content: space-between;
 	z-index: 5;
-	-webkit-overflow-scrolling: auto;
 }
 .search-result-left {
 	position: absolute;
 	width: 100%;
+	max-width: 700px;
 	height: calc(100vh - 170px);
 	background-color: transparent;
 	overflow: auto;
