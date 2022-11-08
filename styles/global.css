@@ -1973,14 +1973,12 @@ input[type="checkbox"].substylized:checked + label:after {
 	position: fixed;
     top: 0;
 	z-index: 7;
-	-webkit-backface-visibility: hidden;
 }
 
 .search-result-w.fixed .search-result-shadow-block {
 	position: fixed;
     top: 0;
 	z-index: 7;
-	-webkit-backface-visibility: hidden;
 }
 
 .search-results-w {
