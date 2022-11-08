@@ -71,7 +71,7 @@ body {
 }
 
 .search-page-main {
-	min-height: 1800px;
+	min-height: 800px;
 }
 
 .scroll-locked {
@@ -1969,16 +1969,24 @@ input[type="checkbox"].substylized:checked + label:after {
 	justify-content: flex-start;
 }
 
+.search-result-left {
+	z-index: 7;
+	will-change: top;
+}
+
 .search-result-w.fixed .search-result-left {
 	position: fixed;
     top: 0;
+}
+
+.search-result-shadow-block {
 	z-index: 7;
+	will-change: top;
 }
 
 .search-result-w.fixed .search-result-shadow-block {
 	position: fixed;
     top: 0;
-	z-index: 7;
 }
 
 .search-results-w {
