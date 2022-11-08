@@ -911,6 +911,10 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Карта в контактах, конец */
 
+.hotel-bron-map__link.active {
+	color: #FF6046
+}
+
 /* Swiper на странице Поиск номеров */ 
 
 .search-item-pics {
