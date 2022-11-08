@@ -548,6 +548,10 @@ input[type="checkbox"].broned:checked + label:after {
     box-shadow: var(--main-shadow);
     border-radius: 10px;
     background-color: #D7FFD8;
+    background-repeat: no-repeat;
+    background-size: 110px;
+    background-position: 25px center;
+    background-image: url('/images/icons/calendar2.png');
 }
 
 .bron-success-block-title {
