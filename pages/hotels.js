@@ -131,6 +131,7 @@ export default function Hotels () {
 
     // Прокрутка экрана и подгрузка отелей для отображения.
 
+    let container = 0
     let pageContent = 0
     let footer = 0
     let size = 0
@@ -159,12 +160,18 @@ export default function Hotels () {
                 fixedBlock.style.top = -(window.pageYOffset - (footer.offsetTop - document.documentElement.clientHeight) - 50) + 'px'
             }
         }
+
+        // Прибавить номеров по прокрутке
+        if (window.pageYOffset > (container.scrollHeight - 1500)) {
+            setItemsPerPage(itemsPerPage => itemsPerPage + elementsOnPage)
+        }
     }
 
     useEffect(() => {
 
         if (loadedItems.length == 0) return     // Если результаты еще не загрузились
 
+        container = document.querySelector('.search-result-right')  // Закешировать элемент один раз, чтобы не искать при скролле
         pageContent = document.querySelector('.search-result-w')    // Закешировать элемент один раз, чтобы не искать при скролле 
         footer = document.querySelector('.footer')                  // Закешировать элемент один раз, чтобы не искать при скролле 
         asideLeft = document.querySelector('.search-result-left')
