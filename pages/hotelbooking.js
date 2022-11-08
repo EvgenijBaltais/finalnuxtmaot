@@ -25,6 +25,8 @@ const Hotelbooking = () => {
     const [dateInValue, setDateInValue] = useState('')
     const [dateOutValue, setDateOutValue] = useState('')
 
+    const [mapState, setMapState] = useState(0)
+
     let guestsArr = [], childrenArr = []
     let myMap
 
@@ -95,6 +97,14 @@ const Hotelbooking = () => {
 
     }, [mapReady])
 
+    function nightsRightText (nights) {
+
+        let text = nights + ' ночей'
+
+        nights == 1 ? text = nights + ' ночь' : ''
+        nights == 2 || nights == 3 || nights == 4 ? text = nights + ' ночи' : ''
+        return text
+    }
 
     function addBackgroundImage (slider) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
@@ -166,14 +176,38 @@ const Hotelbooking = () => {
                     <div className = {styles["arrow-left"]}></div>
                     <div className = {styles["arrow-right"]}></div>
                 </div>
-                <div className={styles["hotel-bron-map"]} id = "map">
-                    <div className = {styles["hotel-bron-info"]}>
-                        <p className = {styles["hotel-bron-info__title"]}>{hotelData.name}</p>
-                        <p>Координаты:&nbsp;
+                <div className={styles["hotel-bron-map-w"]}>
+                    <div className={styles["hotel-bron-map"]} id = "map" style = {{'display': [mapState ? 'none' : 'block']}}>
+                        <div className = {styles["hotel-bron-info"]}>
+                            <p className = {styles["hotel-bron-info__title"]}>{hotelData.name}</p>
+                            <p>Координаты:&nbsp;
+                                <a className = {styles["hotel-map__coordinates"]}>
+                                    {latitude}, {longitude}
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div className={styles["hotel-bron-way-w"]} style = {{'display': [mapState ? 'block' : 'none']}}>
+                        <div className={styles["hotel-bron-way-block"]}>
+                            <p className="subtitle-bold">Адрес</p>
+                            <p className="hotelData-address">{hotelData.address}</p>
+                        </div>
+                        {
+                        hotelData.howTo ? 
+                        (<div>
+                            <p className="bold-span">Как проехать</p>
+                            <p></p>
+                        </div>) : ('')
+                        }
+                        <div className = {styles["hotel-bron-way-coordinates"]}>Координаты:&nbsp;
                             <a className = {styles["hotel-map__coordinates"]}>
                                 {latitude}, {longitude}
                             </a>
-                        </p>
+                        </div>
+                    </div>
+                    <div className = {styles["hotel-bron-map__after"]}>
+                        <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? ' active' : ''}`} onClick = {() => setMapState(mapState => !mapState)}>Как проехать</a>
+                        <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? '' : ' active'}`} onClick = {() => setMapState(mapState => !mapState)}>Отель на карте</a>
                     </div>
                 </div>
             </div>
@@ -213,18 +247,28 @@ const Hotelbooking = () => {
                         </div>
                         <div className={styles["hotel-bron-ready__text"]}>Всего гостей {guests.length + children.length}<span></span></div>
                     </div>
+                    <div className={`${styles["hotel-bron-ready-middle"]}`}></div>
+
+                    <div className={`${styles["hotel-bron-ready-green-w"]}`}>
+                        <div className={`${styles["hotel-bron-ready-green"]}`}>
+                            <p className={`${styles["hotel-bron-final-price"]}`}>97 000 ₽</p>
+                            <p className={`${styles["hotel-bron-final-price__nights"]}`}>за {nightsRightText(diffDates(query.start_date, query.end_date))}</p>
+                        </div>
+                        <div className={styles["hotel-bron-ready__text"]}>Итоговая цена<span></span></div>
+                    </div>
                 </div>
                 <div className={styles["hotel-bron-contactinfo"]}>
                     <p className={styles["hotel-bron-contactinfo__title"]}>Контактные данные гостей.</p>
                     <p className={styles["hotel-bron-contactinfo__subtitle"]}>Пожалуйста, заполните все поля.</p>
                 </div>
+
+
                 <div className={styles["hotel-bron-ready-form"]}>
                     <form action="" name = "hotel-bron-ready-form">
                         {guests.map((item, index) => {
                                 return <Adult_user key = {index} number = {item + 1} />
                             }
                         )}
-
                         {children.length && children.length > 0 ?
                             <div className={styles["hotel-bron-ready__children"]}>
                                 <p className={styles["guest-text-title"]}>Количество детей {children.length}</p>
@@ -237,7 +281,6 @@ const Hotelbooking = () => {
                                 </div>
                             </div> : ''
                         }
-
                         <div className={styles["hotel-bron-required-attention-w"]}>
                             <div className = "subscribe-agree">
                                 <input type="checkbox" id="bron-agree-checkbox-1" className = {styles["broned"]} /> 
@@ -250,6 +293,18 @@ const Hotelbooking = () => {
                         </div>
                     </form>
                 </div>
+
+                <div className = {styles["bron-success-block"]}>
+                    <p className={styles["bron-success-block-title"]}>Спасибо!</p>
+                    <p className={styles["bron-success-block-title"]}>Данный этап бронирования успешно пройден.</p>
+
+                    <p className={styles["bron-success-block-text"]}>Сейчас вы будете перенаправлены на страницу оплаты.</p>
+                </div>
+
+                <div className = {styles["bron-error-block"]}>
+                    
+                </div>
+
                 <div className={styles["hotel-bron-btn-w"]}>
                     <button className={styles["hotel-bron-btn"]}>Далее</button>
                 </div>

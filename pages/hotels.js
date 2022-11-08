@@ -29,7 +29,7 @@ export default function Hotels () {
     const foodTypes = ['Все включено', 'Без питания', 'Только завтрак', 'Завтрак + обед или ужин включены', 'Завтрак, обед и ужин включены']
     const [choosingFilters, setChoosingFilters] = useState(false)
     const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
-
+    const [fixedState, setFixedState] = useState(0)
     const [reloadComponent, setReloadComponent] = useState(0)
 
     useEffect(() => {
@@ -137,8 +137,6 @@ export default function Hotels () {
     let size = 0
     let asideLeft = 0
     let fixedBlock = 0
-
-    const [fixedState, setFixedState] = useState(0)
 
     function scrollAction () {
 
