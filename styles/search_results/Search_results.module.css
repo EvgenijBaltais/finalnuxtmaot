@@ -21,7 +21,7 @@
 .search-result-left {
 	position: absolute;
 	width: 100%;
-	max-width: 700px;
+	max-width: 400px;
 	height: calc(100vh - 173px);
 	background-color: transparent;
 	overflow: auto;
@@ -65,7 +65,7 @@
 
 .search-result-ins-block {
 	width: 100%;
-	max-width: 400px;
+	max-width: 394px;
 	padding: 20px 25px;
 }
 
