@@ -47,6 +47,27 @@ export default function Aside_search_form_datein(props) {
         setDateInOpened(0) 
     }
 
+
+    
+    useEffect(() => {
+
+        if (!document.querySelector('.search-result-left')) return
+
+        dateInOpened || dateOutOpened ? document.querySelector('.search-result-left').style.maxWidth = '700px' :
+                        document.querySelector('.search-result-left').removeAttribute('style')
+
+    }, [dateInOpened])
+
+    useEffect(() => {
+
+        if (!document.querySelector('.search-result-left')) return
+
+        dateInOpened || dateOutOpened ? document.querySelector('.search-result-left').style.maxWidth = '700px' :
+                        document.querySelector('.search-result-left').removeAttribute('style')
+
+    }, [dateOutOpened])
+
+
     function nextDay (str) {
         const [day, month, year] = str.split('.')
         const date = new Date(year, parseInt(month) - 1, day)
