@@ -24,10 +24,13 @@ const Hotelbooking = () => {
     const [children, setChildren] = useState([])
     const [dateInValue, setDateInValue] = useState('')
     const [dateOutValue, setDateOutValue] = useState('')
+    const [actualRoom, setActualRoom] = useState(0)
+    const [servicesMain, setServicesMain] = useState([])
+    const [servicesDop, setServicesDop] = useState([])
 
     const [mapState, setMapState] = useState(0)
 
-    let guestsArr = [], childrenArr = []
+    let guestsArr = []
     let myMap
 
     const childAges = ['до 1 года', '1 год', '2 года', '3 года', '4 года', '5 лет', '6 лет', '7 лет', '8 лет', '9 лет', '10 лет', '11 лет', '12 лет',
@@ -49,16 +52,113 @@ const Hotelbooking = () => {
             setDateInValue(query.start_date.slice(8, 10) + '.' + query.start_date.slice(5, 7) + '.' + query.start_date.slice(0, 4))
             setDateOutValue(query.end_date.slice(8, 10) + '.' + query.end_date.slice(5, 7) + '.' + query.end_date.slice(0, 4))
 
-            fetch('https://maot-api.bokn.ru/api/hotels/get?id=' + query.id)
+            // Запрос инфы по отелю и доступных номеров
+
+            let datein = query.start_date.slice(0, 4) + '-' + query.start_date.slice(5, 7) + '-' + query.start_date.slice(8, 10)
+            let dateout = query.end_date.slice(0, 4) + '-' + query.end_date.slice(5, 7) + '-' + query.end_date.slice(8, 10)
+            let adults = query.adults || 2
+            let link = 'https://maot-api.bokn.ru/api/hotels/search?'
+
+            link += 'start_date=' + datein
+            link += '&end_date=' + dateout
+            link += '&adults=' + adults
+            
+            if (children_arr) {
+                for (let i = 0; i < children_arr.length; i++) {
+                    link += `&childs[${i}]=` + children_arr[i]
+                }
+            }
+
+            link += '&id=' + query['id']
+            
+            console.log(link)
+
+            fetch(link)
             .then((result) => result.json())
             .then((result) => {
+                console.log(result.data)
 
-                setHotelData(result.data)
+                if (result.data.length > 0) {
 
-                setLatitude(String(result.data.coordinates.latitude).length > 10 ? Number(result.data.coordinates.latitude).toFixed(5) : Number(result.data.coordinates.latitude))
-                setLongitude(String(result.data.coordinates.longitude).length > 10 ? Number(result.data.coordinates.longitude).toFixed(5) : Number(result.data.coordinates.longitude))
+                    setLatitude(String(result.data[0].hotel.coordinates.latitude).length > 10 ?
+                                Number(result.data[0].hotel.coordinates.latitude).toFixed(5) :
+                                Number(result.data[0].hotel.coordinates.latitude))
+
+                    setLongitude(String(result.data[0].hotel.coordinates.longitude).length > 10 ?
+                                Number(result.data[0].hotel.coordinates.longitude).toFixed(5) :
+                                Number(result.data[0].hotel.coordinates.longitude))
+
+                    setHotelData(result.data[0].hotel)
+            
+                    for (let i = 0; i < result.data[0].rates.length; i++) {
+                        if (result.data[0].rates[i].room_name == query.room) {
+                            setActualRoom(result.data[0].rates[i])
+                            break
+                        }
+                    }
+
+                    return false
+                }
             })
     }, [query])
+
+
+    useEffect(() => {
+
+        if (actualRoom == 0 || hotelData == 0) return
+
+        console.log(actualRoom)
+        console.log(hotelData)
+
+        // Заполнить главные услуги
+        let servicesArr = []
+        let dopServicesArr = []
+
+        actualRoom.meal ? servicesArr.push(['meal', actualRoom.meal[0]]) : ''          // Питание
+
+        // Добавить в главные услуги из объекта общих отельных услуг
+
+        for (let i = 0; i < hotelData.services.length; i++) {
+            if (hotelData.services[i].group_name == "Интернет") {
+                for (let k = 0; k < hotelData.services[i].amenities.length; k++) {
+                    hotelData.services[i].amenities[k].indexOf('Wi-Fi') + 1 ||
+                    hotelData.services[i].amenities[k].indexOf('wi-fi') + 1 || 
+                    hotelData.services[i].amenities[k].indexOf('WI-FI') + 1 ? 
+                    servicesArr.push(['internet', hotelData.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+            if (hotelData.services[i].group_name == "В номерах") {
+                for (let k = 0; k < hotelData.services[i].amenities.length; k++) {
+                    hotelData.services[i].amenities[k].indexOf('Холодильник') + 1 ? 
+                    servicesArr.push(['fridge', hotelData.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+
+            if (hotelData.services[i].group_name == "Общее") {
+                for (let k = 0; k < hotelData.services[i].amenities.length; k++) {
+                    hotelData.services[i].amenities[k].indexOf('Кондиционер') + 1 ? 
+                    servicesArr.push(['conditioner', hotelData.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+        }
+
+        for (let i = 0; i < hotelData.services.length; i++) {
+            for (let k = 0; k < hotelData.services[i].amenities.length; k++) {
+                dopServicesArr.push(hotelData.services[i].amenities[k])
+            }
+        }
+
+        actualRoom.room_info.bathroom ? servicesArr.push(['bathroom', actualRoom.room_info.bathroom]) : ''                      // Ванна
+        actualRoom.room_info.bed ? servicesArr.push(['bed', actualRoom.room_info.bed]) : ''                                     // Кровать
+        actualRoom.room_amenities.nonSmoking ? servicesArr.push(['nonSmoking', actualRoom.room_amenities.nonSmoking]) : ''      // Для некурящих
+        actualRoom.room_amenities.window ? servicesArr.push(['window', actualRoom.room_amenities.window]) : ''                  // Окно
+        
+        setServicesMain(servicesArr)
+        setServicesDop(dopServicesArr)
+    }, [actualRoom])
 
     function init () {
 
@@ -117,6 +217,7 @@ const Hotelbooking = () => {
             
         return (day_2 - day_1) / (60 * 60 * 24 * 1000)
     }
+
 
     if (!query.start_date || !query.end_date || !query.adults || !query.id) {
         return <>
@@ -216,6 +317,21 @@ const Hotelbooking = () => {
                     <h3 className={styles["hotel-bron-data-title__h3"]}>Отель <a>{hotelData.name}</a></h3>
                     <h4 className={styles["hotel-bron-data-title__h4"]}>Номер <a>{query.room}</a></h4>
                 </div>
+
+                <a className={`${styles["hotel-bron-services-w"]}`}></a>
+
+
+                <div className={styles["hotel-bron-services-w"]}>
+
+                    <div className={styles["hotel-bron-services-small"]}></div>
+
+                    <div className={styles["hotel-bron-services-big"]}>
+                        {servicesDop.map((item, index) => {
+                            return <div className={styles["hotel-bron-services-big__item"]}>{item}</div>
+                        })}
+                    </div>
+                </div>
+
                 <div className={styles["hotel-bron-ready"]}>
                     <div className={`${styles["hotel-bron-ready-item-w"]}`}>
                         <div className={styles["hotel-bron-ready-somediv"]}>
@@ -251,7 +367,7 @@ const Hotelbooking = () => {
 
                     <div className={`${styles["hotel-bron-ready-green-w"]}`}>
                         <div className={`${styles["hotel-bron-ready-green"]}`}>
-                            <p className={`${styles["hotel-bron-final-price"]}`}>97 000 ₽</p>
+                            <p className={`${styles["hotel-bron-final-price"]}`}>{+actualRoom.price} ₽</p>
                             <p className={`${styles["hotel-bron-final-price__nights"]}`}>за {nightsRightText(diffDates(query.start_date, query.end_date))}</p>
                         </div>
                         <div className={styles["hotel-bron-ready__text"]}>Итоговая цена<span></span></div>
