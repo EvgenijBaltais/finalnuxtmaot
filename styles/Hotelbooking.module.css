@@ -573,3 +573,28 @@ input[type="checkbox"].broned:checked + label:after {
     text-align: center;
     font-family: 'FontInterSemiBold';
 }
+
+.hotel-bron-services-w {
+	display: flex;
+	justify-content: space-between;
+}
+
+.hotel-bron-services-small {
+	width: 190px;
+}
+
+.hotel-bron-services-big {
+	width: calc(100% - 210px);
+}
+
+.hotel-bron-services-big__item {
+    display: inline-flex;
+    padding-left: 15px;
+    padding-right: 10px;
+    background-size: 10px;
+    background-image: url('/images/icons/galka.svg');
+    background-repeat: no-repeat;
+    background-position: center left;
+    font-size: 14px;
+    line-height: 18px;
+}
