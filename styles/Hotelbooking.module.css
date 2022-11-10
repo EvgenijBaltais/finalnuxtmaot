@@ -545,9 +545,23 @@ input[type="checkbox"].broned:checked + label:after {
 .bron-success-block {
     width: 80%;
     padding: 30px 30px 30px 180px;
+    margin: 200px auto;
     box-shadow: var(--main-shadow);
     border-radius: 10px;
     background-color: #D7FFD8;
+    background-repeat: no-repeat;
+    background-size: 110px;
+    background-position: 25px center;
+    background-image: url('/images/icons/calendar2.png');
+}
+
+.bron-error-block {
+    width: 80%;
+    padding: 30px 30px 30px 180px;
+    margin: 200px auto;
+    box-shadow: var(--main-shadow);
+    border-radius: 10px;
+    background-color: #FFEBEC;
     background-repeat: no-repeat;
     background-size: 110px;
     background-position: 25px center;
@@ -577,6 +591,7 @@ input[type="checkbox"].broned:checked + label:after {
 .hotel-bron-services-w {
 	display: flex;
 	justify-content: space-between;
+    padding: 25px 0 20px 0;
 }
 
 .hotel-bron-services-small {
@@ -591,10 +606,32 @@ input[type="checkbox"].broned:checked + label:after {
     display: inline-flex;
     padding-left: 15px;
     padding-right: 10px;
+    padding-bottom: 3px;
     background-size: 10px;
     background-image: url('/images/icons/galka.svg');
     background-repeat: no-repeat;
     background-position: center left;
     font-size: 14px;
     line-height: 18px;
+    color: #4F4F4F;
+}
+
+.serv-item__more-services {
+	display: block;
+	font-size: 14px;
+	line-height: 14px;
+	padding-left: 25px;
+	padding-top: 3px;
+    padding-bottom: 5px;
+	font-family: 'FontInterLight';
+}
+
+.hotel-bron-services__more {
+    display: block;
+    padding: 10px 0;
+	font-size: 14px;
+	line-height: 16px;
+    font-family: 'FontInterSemiBold';
+    text-decoration: underline;
+    cursor: pointer;
 }

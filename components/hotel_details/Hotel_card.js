@@ -207,7 +207,6 @@ const Hotel_card = ({item, hotelInfo, bronPageLink}) => {
                          <span className = {styles["serv-passiv-btn"]}>Подробнее&nbsp;о&nbsp;номере</span>}
                     </div>
                     <div>
-
                         <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
                             {servicesMain.map((item, index) => {
                                 if (view) {

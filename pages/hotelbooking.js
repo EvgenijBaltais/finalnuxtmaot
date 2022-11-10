@@ -27,6 +27,8 @@ const Hotelbooking = () => {
     const [actualRoom, setActualRoom] = useState(0)
     const [servicesMain, setServicesMain] = useState([])
     const [servicesDop, setServicesDop] = useState([])
+    const [formState, setFormState] = useState(0)
+    const [servicesState, setServicesState] = useState(0)
 
     const [mapState, setMapState] = useState(0)
 
@@ -160,7 +162,7 @@ const Hotelbooking = () => {
         setServicesDop(dopServicesArr)
     }, [actualRoom])
 
-    function init () {
+    const init = () => {
 
         myMap = new ymaps.Map("map", {
             center: [latitude, longitude],
@@ -185,15 +187,12 @@ const Hotelbooking = () => {
         if (!hotelData) {
             return
         }
-        
-        //if (typeof ymaps != undefined && typeof ymaps != 'undefined') {
-            try{
-                ymaps.ready(init)
-            }
-            catch(e) {
-                console.log(e)
-            }
-        //}
+
+        myMap ? myMap.destroy() : ''
+
+        setTimeout(() => {
+            ymaps.ready(init)
+        })
 
     }, [mapReady])
 
@@ -217,6 +216,19 @@ const Hotelbooking = () => {
             
         return (day_2 - day_1) / (60 * 60 * 24 * 1000)
     }
+
+    function checkFormAndContinue () {
+        //formState == 0 
+
+        setFormState(1)
+    }
+
+    // Удалить яндекс карты
+    useEffect(() => {
+        return () => {
+            document.getElementById('y-maps') ? document.getElementById('y-maps').remove() : ''
+        }
+    }, [])
 
 
     if (!query.start_date || !query.end_date || !query.adults || !query.id) {
@@ -318,20 +330,32 @@ const Hotelbooking = () => {
                     <h4 className={styles["hotel-bron-data-title__h4"]}>Номер <a>{query.room}</a></h4>
                 </div>
 
-                <a className={`${styles["hotel-bron-services-w"]}`}></a>
-
-
                 <div className={styles["hotel-bron-services-w"]}>
-
-                    <div className={styles["hotel-bron-services-small"]}></div>
-
-                    <div className={styles["hotel-bron-services-big"]}>
-                        {servicesDop.map((item, index) => {
-                            return <div className={styles["hotel-bron-services-big__item"]}>{item}</div>
+                    <div className={styles["hotel-bron-services-small"]}>
+                        {servicesMain.map((item, index) => {
+                            if (index > 3) return false
+                            return (
+                                <span
+                                    className = {`${styles["serv-item__more-services"]} ${"serv-item__more-services"} ${"serv-item__block_" + item[0]}`}
+                                    key = {index}>
+                                    {item[1][0].toUpperCase() + item[1].slice(1)}
+                                </span>)
                         })}
                     </div>
+                    <div className={styles["hotel-bron-services-big"]}>
+                        {servicesDop.map((item, index) => {
+                            if (!servicesState && index > 15) return false
+                            return (
+                                <div className={styles["hotel-bron-services-big__item"]} key = {index}>
+                                    {item}
+                                </div>
+                            )
+                        })}
+                        <a className = {styles["hotel-bron-services__more"]} onClick={() => setServicesState(servicesState => !servicesState)}>
+                            {servicesState ? 'Свернуть' : 'Показать все услуги'}
+                        </a>
+                    </div>
                 </div>
-
                 <div className={styles["hotel-bron-ready"]}>
                     <div className={`${styles["hotel-bron-ready-item-w"]}`}>
                         <div className={styles["hotel-bron-ready-somediv"]}>
@@ -373,60 +397,67 @@ const Hotelbooking = () => {
                         <div className={styles["hotel-bron-ready__text"]}>Итоговая цена<span></span></div>
                     </div>
                 </div>
-                <div className={styles["hotel-bron-contactinfo"]}>
-                    <p className={styles["hotel-bron-contactinfo__title"]}>Контактные данные гостей.</p>
-                    <p className={styles["hotel-bron-contactinfo__subtitle"]}>Пожалуйста, заполните все поля.</p>
-                </div>
-
-
-                <div className={styles["hotel-bron-ready-form"]}>
-                    <form action="" name = "hotel-bron-ready-form">
-                        {guests.map((item, index) => {
-                                return <Adult_user key = {index} number = {item + 1} />
-                            }
-                        )}
-                        {children.length && children.length > 0 ?
-                            <div className={styles["hotel-bron-ready__children"]}>
-                                <p className={styles["guest-text-title"]}>Количество детей {children.length}</p>
-                                <div className={styles["children-age-wrapper"]}>
-                                    {children.map((item, index) => {
-                                        return (
-                                            <div key = {index} className={`${styles["children-age-block"]} ${styles["hotel-bron-necessarily"]}`}>{childAges[item]}</div>
-                                        )
-                                    })}
-                                </div>
-                            </div> : ''
-                        }
-                        <div className={styles["hotel-bron-required-attention-w"]}>
-                            <div className = "subscribe-agree">
-                                <input type="checkbox" id="bron-agree-checkbox-1" className = {styles["broned"]} /> 
-                                <label htmlFor="bron-agree-checkbox-1">
-                                Я соглашаюсь с политикой конфиденциальности</label>
-                            </div>
-                            <div className = {styles["hotel-bron-required-attention-w"]}>
-                                <span className={styles["hotel-bron-required-attention"]}>*</span> обязательно для заполнения
-                            </div>
+                {formState == 0 ? (
+                    <div className="bron-step-1">
+                        <div className={styles["hotel-bron-contactinfo"]}>
+                            <p className={styles["hotel-bron-contactinfo__title"]}>Контактные данные гостей.</p>
+                            <p className={styles["hotel-bron-contactinfo__subtitle"]}>Пожалуйста, заполните все поля.</p>
                         </div>
-                    </form>
-                </div>
 
-                <div className = {styles["bron-success-block"]}>
-                    <p className={styles["bron-success-block-title"]}>Спасибо!</p>
-                    <p className={styles["bron-success-block-title"]}>Данный этап бронирования успешно пройден.</p>
-
-                    <p className={styles["bron-success-block-text"]}>Сейчас вы будете перенаправлены на страницу оплаты.</p>
-                </div>
-
-                <div className = {styles["bron-error-block"]}>
-                    
-                </div>
-
-                <div className={styles["hotel-bron-btn-w"]}>
-                    <button className={styles["hotel-bron-btn"]}>Далее</button>
-                </div>
+                        <div className={styles["hotel-bron-ready-form"]}>
+                            <form action="" name = "hotel-bron-ready-form">
+                                {guests.map((item, index) => {
+                                        return <Adult_user key = {index} number = {item + 1} />
+                                    }
+                                )}
+                                {children.length && children.length > 0 ?
+                                    <div className={styles["hotel-bron-ready__children"]}>
+                                        <p className={styles["guest-text-title"]}>Количество детей {children.length}</p>
+                                        <div className={styles["children-age-wrapper"]}>
+                                            {children.map((item, index) => {
+                                                return (
+                                                    <div key = {index} className={`${styles["children-age-block"]} ${styles["hotel-bron-necessarily"]}`}>{childAges[item]}</div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div> : ''
+                                }
+                                <div className={styles["hotel-bron-required-attention-w"]}>
+                                    <div className = "subscribe-agree">
+                                        <input type="checkbox" id="bron-agree-checkbox-1" className = {styles["broned"]} /> 
+                                        <label htmlFor="bron-agree-checkbox-1">
+                                        Я соглашаюсь с политикой конфиденциальности</label>
+                                    </div>
+                                    <div className = {styles["hotel-bron-required-attention-w"]}>
+                                        <span className={styles["hotel-bron-required-attention"]}>*</span> обязательно для заполнения
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div className={styles["hotel-bron-btn-w"]}>
+                        <button className={styles["hotel-bron-btn"]} onClick = {checkFormAndContinue}>Далее</button>
+                    </div>
+                    </div>
+                    ) : ('')
+                }
+                {formState == 1 ? (
+                    <div className = {styles["bron-success-block"]}>
+                        <p className={styles["bron-success-block-title"]}>Спасибо!</p>
+                        <p className={styles["bron-success-block-title"]}>Данный этап бронирования успешно пройден.</p>
+                        <p className={styles["bron-success-block-text"]}>Сейчас вы будете перенаправлены на страницу оплаты.</p>
+                    </div>
+                    ) : ('')
+                }
+                {formState == 2 ? (
+                    <div className = {styles["bron-error-block"]}>
+                        <p className={styles["bron-success-block-title"]}>Что-то пошло не так!</p>
+                        <p className={styles["bron-success-block-title"]}>К сожалению, не получилось пройти данный этап бронирования</p>
+                        <p className={styles["bron-success-block-text"]}>Попробуйте обратиться за помощью по телефону <a href = "tel:+74956486711">+7 495 648 67 11</a></p>
+                    </div>
+                    ) : ('')
+                }
             </div>
         </>
     )
 }
-
 export default Hotelbooking
