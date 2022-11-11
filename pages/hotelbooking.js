@@ -174,9 +174,13 @@ const Hotelbooking = () => {
             balloonContent: hotelData.address
         })
 
-        myMap.geoObjects.add(myPlacemark);
-        myMap.setType('yandex#map');
-        myMap.behaviors.disable('scrollZoom');
+        myMap.controls.remove('geolocationControl')
+        myMap.controls.remove('searchControl')
+        myMap.controls.remove('trafficControl')
+        myMap.controls.remove('typeSelector')
+        myMap.controls.remove('fullscreenControl')
+        myMap.geoObjects.add(myPlacemark)
+        myMap.setType('yandex#map')
     }
 
     useEffect(() => {

@@ -13,15 +13,20 @@ export default function Hotel_map ({hotelData, mapReady}) {
             center: [lat, long],
             zoom: 13
         })
-    
+
         const myPlacemark = new ymaps.Placemark([lat, long], {
             hintContent: hotelData.name,
             balloonContent: hotelData.address
         })
 
-        myMap.geoObjects.add(myPlacemark);
-        myMap.setType('yandex#map');
-        myMap.behaviors.disable('scrollZoom');
+        myMap.controls.remove('geolocationControl')
+        myMap.controls.remove('searchControl')
+        myMap.controls.remove('trafficControl')
+        myMap.controls.remove('typeSelector')
+        myMap.controls.remove('fullscreenControl')
+
+        myMap.geoObjects.add(myPlacemark)
+        myMap.setType('yandex#map')
     }
 
     useEffect(() => {

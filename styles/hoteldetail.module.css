@@ -214,13 +214,13 @@
 
 .hotel-map__place {
 	position: absolute;
-	bottom: 10px;
+	bottom:35px;
 	display: inline-block;
 	margin-bottom: 20px;
 	border-radius: 5px;
 	background-color: #fff;
 	box-shadow: var(--main-shadow);
-	padding: 6px 10px;
+	padding: 20px;
 	font-size: 16px;
 	line-height: 16px;
 	z-index: 5;
