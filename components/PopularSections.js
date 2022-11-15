@@ -29,7 +29,7 @@ const PopularSections = ({popularHotels, popularWays}) => {
 				<div className = {styles["popular-items"]}>
 					{popularHotels.data.map((item, index) => 
                 	<div className = {styles["popular-item"]} key = {index}>
-                		<div className = {styles["popular-item-pic"]}></div>
+                		<div className = {styles["popular-item-pic"]} style = {{'backgroundImage': `url(${item.pic})`}} data-pic = {item.pic}></div>
                 		<div className = {styles["popular-item-content"]}>
 							<Link href = {`/hoteldetail?datein=${setToday()}&dateout=${setTomorrow()}&adults=2&hotel_id=${item.id}&region_name=${item.name}`}>
 								<a
@@ -48,7 +48,6 @@ const PopularSections = ({popularHotels, popularWays}) => {
 				<div className = {styles["popular-way-items"]}>
 					{popularWays.data.map((item, index) => 
 						<div className = {styles["popular-way-item"]} key = {index}>
-
                 			<div className = {styles["popular-way-pic"]} style = {{'backgroundImage': `url(/images/popularways/${item.id}/1.jpg)`}}></div>
                 			<div className = {styles["popular-way-content"]}>
 								<Link href = {`/hotels?datein=${setToday()}&dateout=${setTomorrow()}&adults=2&region_id=${item.id}&region_name=${item.name}`}>

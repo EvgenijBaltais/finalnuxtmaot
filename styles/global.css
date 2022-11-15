@@ -919,8 +919,8 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .search-item-pics {
 	position: relative;
-	width: 200px;
-	height: 170px;
+	width: 290px;
+	height: 220px;
 	border-radius: 8px;
     background-color: #ccc;
 	overflow: hidden;
@@ -1032,7 +1032,7 @@ input[type="checkbox"].substylized:checked + label:after {
     right: 0;
     left: 0;
     margin: auto;
-    background-image: url(/images/left-nav-arrow.svg);
+    background-image: url('/images/left-nav-arrow.svg');
     background-repeat: no-repeat;
     background-size: 12px;
     background-position: center;

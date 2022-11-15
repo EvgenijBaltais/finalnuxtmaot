@@ -85,6 +85,8 @@ export default function Hotels () {
                 
                 // Отфильтровать и вывести услуги
 
+                console.log(res.data)
+
                 res.data.map((el) => {
 
                     delete el.hotel.coordinates
@@ -94,10 +96,11 @@ export default function Hotels () {
                     delete el.rates[0].images
                     delete el.rates[0].cancellation_penalties
                     delete el.rates[0].description
-                    delete el.rates[0].room_info
+                    //delete el.rates[0].room_info
 
-                    return setServices(el)
+                    return el//setServices(el)
                 })
+
                 
                 setLoadedItems(res.data)
                 setFilteredItems(false)
@@ -189,7 +192,7 @@ export default function Hotels () {
 
     // Функция для сортировки услуг и выбора самых востребованых, для показа на странице подбора номеров
 
-
+/*
     function setServices (item) {
 
         // Заполнить главные услуги
@@ -235,7 +238,7 @@ export default function Hotels () {
         i.hotel.services = servicesArr
         return i
     }
-
+*/
     // Функция для определения количества ночей для дат в формате гг-мм.дд
 
     function calculateNights (datein, dateout) {

@@ -88,6 +88,9 @@
 	height: 95px;
 	border-radius: 8px;
 	background-color: #f0f0f0;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
 }
 
 .popular-item-content {

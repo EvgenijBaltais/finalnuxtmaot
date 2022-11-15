@@ -28,7 +28,6 @@ const Hotel_card = ({item, hotelInfo, bronPageLink}) => {
         data_arr[i].indexOf('children_ages') != -1 ? children.push(data_arr[i].slice(data_arr[i].indexOf('=') + 1)) : ''
     }
 
-
     start_date = new Date(start_date)
     end_date = new Date(end_date)
     nights = (end_date - start_date) / (60 * 60 * 24 * 1000)
@@ -231,7 +230,7 @@ const Hotel_card = ({item, hotelInfo, bronPageLink}) => {
                             }
                         </div>
                         <div className = {styles["select-results-from"]}>
-                            <span className = {styles["select-from-value"]}>{parseFloat(item.price)}</span>&nbsp;
+                            <span className = {styles["select-from-value"]}>{(+item.price).toLocaleString('ru')}</span>&nbsp;
                             <span className = {styles["select-from-currency"]}>&#8381;</span>
                         </div>
                         <div className = {styles["select-results-from-info"]}>
