@@ -7,10 +7,8 @@ const Rooms_info = ({hotelData}) => {
 
     return (
 
-        <div className={styles["result-description"]}>
-
+        <div className={`${styles["result-description"]} block-scrolling-item`} id = "rooms-info">
             <h2 className = "section-title icon-item icon-item-hotel-w">Об отеле</h2>
-
             <div className = {`${styles["hotel-title-section"]} ${styles["hotel-title-descr"]}`}>
                 <div className = {styles["hotel-main-descr"]}>
                     <h3>Расположение</h3>
@@ -22,28 +20,7 @@ const Rooms_info = ({hotelData}) => {
                     </>
                     : ''}
                 </div>
-                {/*hotelData.facts ? 
-                <div className = {styles["hotel-fact-section"]}>
-                    <h3>Факты об отеле</h3>
-                    
-                    <span>Год постройки</span>
-                    <p>1999 г.</p>
-                    <span>Год реновации</span>
-                    <p>2020</p>
-                    <span>Тип розетки</span>
-                    <p>Европейская 
-                       220&nbsp;В&nbsp;/&nbsp;50&nbsp;Гц 
-                       Европейская (с&nbsp;заземлением) 
-                       220&nbsp;В&nbsp;/&nbsp;50&nbsp;Гц</p>
-                    <span>Количество номеров</span>
-                    <p>90 номеров</p>
-                    <span>Интернет</span>
-                    <p>Wi-Fi</p>
-                </div>
-                : ''*/}
-
             </div>
-
         </div>
     )
 }

@@ -259,6 +259,7 @@
 }
 
 .select-dates-nav {
+	position: relative;
 	width: calc(100% - 840px);
 	margin-top: 35px
 }
@@ -681,12 +682,13 @@
 }
 
 .select-results-bron:hover {
-
 	background: linear-gradient(90deg,#00CA50,#0057AF);
 }
 
 .select-nav-bg {
 	display: block;
+	position: absolute;
+	top: 0;
 }
 
 .hotel-contact-section {

@@ -31,28 +31,17 @@ const Hotel_contact = ({hotelData}) => {
 
     return (
 
-        <div className={styles["result-description"]}>
+        <div className={`${styles["result-description"]} block-scrolling-item`} id = "contacts">
             <h2 className = "section-title icon-item icon-item-contact">Контакты</h2>
-
             <div className = {`${styles["hotel-title-section"]} ${styles["hotel-title-descr"]}`}>
                 <div className = {styles["hotel-main-descr"]}>
                         <h3>Расположение</h3>
                         <p>{hotelData.address}</p>
                 </div>
-
                 <div className={styles["contact-map"]}>
                     <div id = "contactmap" className={styles['contact-map-block']}></div>
                 </div>
             </div>
-
-            {/*hotelData.wayinfo ?
-                <div className = {`${styles["hotel-contact-section"]} ${styles["hotel-serv-descr"]}`}>
-                    <p><b>На машине:</b> от МКАД по Минскому шоссе (трасса М1) следовать до 
-                    указателей — «Дорохово-Верея» (85 км), повернуть по указателю на «Дорохово» налево 
-                    и следовать до отеля 700 метров.</p>
-                    <p><b>На электричке:</b> с Белорусского вокзала до станции «Дорохово».</p>
-                </div> : ''
-            */}
         </div>
     )
 }

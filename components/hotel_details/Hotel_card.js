@@ -161,6 +161,7 @@ const Hotel_card = ({item, hotelInfo, bronPageLink}) => {
                     onSlideChange = {slider => addBackgroundImage(slider)}
                     slidesPerView={1}
                     spaceBetween={0}
+                    loop = {true}
                     pagination={{
                         clickable: true,
                         bulletClass: `reviews-pagination-bullet`

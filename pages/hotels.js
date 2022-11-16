@@ -85,8 +85,6 @@ export default function Hotels () {
                 
                 // Отфильтровать и вывести услуги
 
-                console.log(res.data)
-
                 res.data.map((el) => {
 
                     delete el.hotel.coordinates
@@ -98,7 +96,7 @@ export default function Hotels () {
                     delete el.rates[0].description
                     //delete el.rates[0].room_info
 
-                    return el//setServices(el)
+                    return formatServices(el)
                 })
 
                 
@@ -131,6 +129,65 @@ export default function Hotels () {
           })
 
     }, [query])
+
+
+    function formatServices (el) {
+
+            // Заполнить главные услуги
+            let servicesArr = []
+            let dopServicesArr = []
+            el.hotel.servicesMain = []
+            el.hotel.servicesDop = []
+    
+            el.rates[0].meal ? servicesArr.push(['meal', el.rates[0].meal[0]]) : ''          // Питание
+    
+            // Добавить в главные услуги из объекта общих отельных услуг
+    
+            for (let i = 0; i < el.hotel.services.length; i++) {
+                if (el.hotel.services[i].group_name == "Интернет") {
+                    for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                        el.hotel.services[i].amenities[k].indexOf('Wi-Fi') + 1 ||
+                        el.hotel.services[i].amenities[k].indexOf('wi-fi') + 1 || 
+                        el.hotel.services[i].amenities[k].indexOf('WI-FI') + 1 ? 
+                        servicesArr.push(['internet', el.hotel.services[i].amenities[k]]) : ''
+                    }
+                    continue
+                }
+                if (el.hotel.services[i].group_name == "В номерах") {
+                    for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                        el.hotel.services[i].amenities[k].indexOf('Холодильник') + 1 ? 
+                        servicesArr.push(['fridge', el.hotel.services[i].amenities[k]]) : ''
+                    }
+                    continue
+                }
+    
+                if (el.hotel.services[i].group_name == "Общее") {
+                    for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                        el.hotel.services[i].amenities[k].indexOf('Кондиционер') + 1 ? 
+                        servicesArr.push(['conditioner', el.hotel.services[i].amenities[k]]) : ''
+                    }
+                    continue
+                }
+            }
+    
+            for (let i = 0; i < el.hotel.services.length; i++) {
+                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                    dopServicesArr.push(el.hotel.services[i].amenities[k])
+                }
+            }
+    
+            el.rates[0].room_info.bathroom ? servicesArr.push(['bathroom', el.rates[0].room_info.bathroom]) : ''                      // Ванна
+            el.rates[0].room_info.bed ? servicesArr.push(['bed', el.rates[0].room_info.bed]) : ''                                     // Кровать
+            el.rates[0].room_amenities.nonSmoking ? servicesArr.push(['nonSmoking', el.rates[0].room_amenities.nonSmoking]) : ''      // Для некурящих
+            el.rates[0].room_amenities.window ? servicesArr.push(['window', el.rates[0].room_amenities.window]) : ''                  // Окно
+    
+            el.hotel.servicesMain = servicesArr
+            el.hotel.servicesDop = dopServicesArr
+            //delete el.hotel.services
+
+            return el
+    }
+
 
     // Прокрутка экрана и подгрузка отелей для отображения.
 
@@ -190,55 +247,6 @@ export default function Hotels () {
     }, [])
 
 
-    // Функция для сортировки услуг и выбора самых востребованых, для показа на странице подбора номеров
-
-/*
-    function setServices (item) {
-
-        // Заполнить главные услуги
-        let neededServices = ["Питание", "Интернет", "В номерах", "Общее"]
-        let servicesArr = []
-        let i = item
-        let services = i.hotel.services
-
-        // Массив необходимых сервисов neededServices -> в нем перебираем все услуги -> в нем берем первые 3.
-        // Цикл запускается каждый раз заново, чтобы сохранить порядок как в массиве neededServices 
-        // Если Питание, то отдельный цикл
-
-        for (let i = 0; i < services.length; i++) {
-            if (services[i].group_name == "Питание") {
-                for (let k = 0; k < services[i].amenities.length; k++) {
-                    services[i].amenities[k].indexOf('Завтрак') + 1 ? 
-                    servicesArr.push([services[i].amenities[k]]) : ''
-
-                    services[i].amenities[k].indexOf('Бар') + 1 ? 
-                    servicesArr.push([services[i].amenities[k]]) : ''
-
-                    services[i].amenities[k].indexOf('Кафе') + 1 ? 
-                    servicesArr.push([services[i].amenities[k]]) : ''
-
-                    services[i].amenities[k].indexOf('пансион') + 1 ? 
-                    servicesArr.push([services[i].amenities[k]]) : ''
-                }
-                break
-            }
-        }
-
-        for (let q = 1; q < neededServices.length; q++) {
-            for (let i = 0; i < services.length; i++) {
-                if (services[i].group_name == neededServices[q]) {
-                    for (let k = 0; k < services[i].amenities.length; k++) {
-                        servicesArr.push(services[i].amenities[k])
-                        if (k == 2) break
-                    }
-                }
-            }
-        }
-
-        i.hotel.services = servicesArr
-        return i
-    }
-*/
     // Функция для определения количества ночей для дат в формате гг-мм.дд
 
     function calculateNights (datein, dateout) {
@@ -441,8 +449,6 @@ export default function Hotels () {
             arr = 0
         }
 
-        console.log(arr)
-
         return arr
     }
 
@@ -625,6 +631,7 @@ export default function Hotels () {
                                     item = {item.hotel}
                                     rates = {item.rates}
                                     nights = {nights}
+                                    query = {query}
                                 />
                             )
                         })) : ''

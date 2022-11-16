@@ -73,7 +73,7 @@ const Hoteldetail_form = ({hotel_name, setRoomsData, setBronPageLink, hotel_id})
         .then((result) => result.json())
         .then((result) => {
             console.log(link)
-            result.data.length == 0 ? setRoomsData([]) : setRoomsData(result.data[0].rates)
+            result.data.error == 1 || result.data.length == 0 ? setRoomsData([]) : setRoomsData(result.data[0].rates)
         })
     }
 

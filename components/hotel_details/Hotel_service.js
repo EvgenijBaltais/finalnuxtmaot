@@ -2,7 +2,7 @@ import styles from "../../styles/Hoteldetail.module.css"
 
 const Hotel_service = ({services}) => {
     return (
-        <div className={styles["result-description"]}>
+        <div className={`${styles["result-description"]} block-scrolling-item`} id = "hotel-service">
             <h2 className = "section-title icon-item icon-item-serv">Услуги</h2>
             <div className = {`${styles["hotel-title-section"]} ${styles["hotel-serv-descr"]}`}>
                 {services.map((item, index) => {

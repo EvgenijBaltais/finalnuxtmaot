@@ -27,12 +27,6 @@ function Hoteldetail () {
     const [mapReady, setMapReady] = useState(0)
     const [datesText, setDatesText] = useState('')
     const [bronPageLink, setBronPageLink] = useState('')
-    
-    const changeBlock = event => {
-
-        event.preventDefault()
-        setActive_block(event.target.getAttribute('data-value'))
-    }
 
     const [visibleNav, setVisibleNav] = useState(0)
 
@@ -161,6 +155,40 @@ function Hoteldetail () {
             })
     }, [query])
 
+
+    let blocksOffsetArr = []
+
+    useEffect(() => {
+
+        function scrollingOptions () {
+
+            if (!mapReady) return false
+
+            if (!blocksOffsetArr.length) {
+                for (let i = 0; i < document.querySelectorAll('.block-scrolling-item').length; i++) {
+                    blocksOffsetArr.push(document.querySelectorAll('.block-scrolling-item')[i])
+                }
+            }
+            else {
+                window.pageYOffset < blocksOffsetArr[1].offsetTop ? setActive_block(1) : ''
+                window.pageYOffset > blocksOffsetArr[1].offsetTop && window.pageYOffset < blocksOffsetArr[2].offsetTop ? setActive_block(2) : ''
+                window.pageYOffset > blocksOffsetArr[2].offsetTop && window.pageYOffset < blocksOffsetArr[3].offsetTop ? setActive_block(3) : ''
+                window.pageYOffset > blocksOffsetArr[3].offsetTop ? setActive_block(4) : ''
+            }
+
+            window.pageYOffset < document.querySelector('.select-dates-nav').offsetTop ?
+                document.querySelector('.select-nav-list').style.position = "absolute" :
+                document.querySelector('.select-nav-list').style.position = "fixed"
+        }
+
+        window.addEventListener('scroll', scrollingOptions)
+
+        return () => {
+            window.removeEventListener('scroll', scrollingOptions)
+        }
+    }, [mapReady])
+
+
     // Удалить яндекс карты
     useEffect(() => {
         return () => {
@@ -248,47 +276,43 @@ function Hoteldetail () {
 
                     />
 
-                    {active_block == 1 ? <Hotel_search_result items = {roomsData} hotelData = {hotelData} bronPageLink = {bronPageLink} /> : ''}
-                    {active_block == 2 ? <Rooms_info hotelData = {hotelData}/> : ''}
-                    {active_block == 3 ? <Hotel_service services = {hotelData.services} /> : ''}
-                    {active_block == 4 ? <Hotel_contact hotelData = {hotelData} /> : '' }
+                    <Hotel_search_result items = {roomsData} hotelData = {hotelData} bronPageLink = {bronPageLink} />
+                    <Rooms_info hotelData = {hotelData}/>
+                    <Hotel_service services = {hotelData.services} />
+                    {mapReady ? <Hotel_contact hotelData = {hotelData}/> : ''}
+                    
                 </div>
                                 
-
-                <div className = {styles["select-dates-nav"]}>
-                    <div className = {visibleNav ? `${styles["select-nav-bg"]} ${styles["active-nav-list"]}` : styles["select-nav-bg"]} ref={rootEl}>
+                <div className = {`${styles["select-dates-nav"]} select-dates-nav`}>
+                    <div className = {visibleNav ? `${styles["select-nav-bg"]} ${styles["active-nav-list"]} select-nav-list` : `${styles["select-nav-bg"]} select-nav-list`} ref={rootEl}>
                         <div className = {styles["icon-item-menu"]}>Навигация по странице</div>
                         <div className = {styles["select-dates-item"]} onClick = {() => setVisibleNav(visibleNav => !visibleNav)}>
-                            <a href="" 
+                            <a href="#all-rooms" 
                                 data-value = "1" 
-                                onClick={event => changeBlock(event)} 
                                 className = {`${styles["select-dates-link"]} ${active_block == 1 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Поиск номеров
                             </a>
                         </div>
                         <div className = {styles["select-dates-item"]}>
-                            <a href="" 
+                            <a href="#rooms-info" 
                                 data-value = "2" 
-                                onClick={event => changeBlock(event)} 
                                 className = {`${styles["select-dates-link"]} ${active_block == 2 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Об отеле
                             </a>
                         </div>
                         <div className = {styles["select-dates-item"]}>
-                            <a href="" 
+                            <a href="#hotel-service" 
                                 data-value = "3" 
-                                onClick={event => changeBlock(event)} 
                                 className = {`${styles["select-dates-link"]} ${active_block == 3 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Услуги
                             </a>
                         </div>
                         <div className = {styles["select-dates-item"]}>
-                            <a href=""
+                            <a href="#contacts"
                                 data-value = "4"
-                                onClick={event => changeBlock(event)}
                                 className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
                             >
                                 Контакты
