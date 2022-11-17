@@ -63,7 +63,6 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
         return num < 10 ? '0' + num : num
     }
 
-
     function checkForm () {
 
         // Обнулить фильтры
@@ -105,7 +104,6 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
             pathname: link,
             query: obj
         })
-
     }
 
     return (

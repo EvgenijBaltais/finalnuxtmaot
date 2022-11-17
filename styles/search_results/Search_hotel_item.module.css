@@ -73,6 +73,12 @@
     color: rgb(5, 117, 229);
     text-decoration: none;
     cursor: pointer;
+	transition: .2s color;
+}
+
+.select-item-title:hover {
+	color: #FE4B2B;
+	transition: .2s color;
 }
 
 .select-results-from span {
@@ -199,7 +205,14 @@
 	color: inherit;
 	font-size: inherit;
 	text-decoration: underline;
+	transition: .2s color;
 }
+
+.serv-item__btn .serv-passiv-btn:hover {
+	color: #FE4B2B;
+	transition: .2s color;
+}
+
 .serv-active-btn:after {
 	content: "";
 	position: absolute;
@@ -257,6 +270,8 @@
 	background-repeat: no-repeat;
 	background-size: 11px;
 	background-position: left center;
+	cursor: pointer;
+	text-decoration: underline;
 }
 
 .serv-item__more-span {
@@ -267,6 +282,7 @@
 	background-size: 13px;
 	background-position: left center;
 	font-style: italic;
+	padding-left: 20px;
 }
 
 @media screen and (max-width: 650px) {

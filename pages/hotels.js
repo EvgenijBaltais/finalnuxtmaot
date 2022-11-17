@@ -480,13 +480,19 @@ export default function Hotels () {
                                 {sliderMin != 0 ?
                                     <div className="aside-slider-val aside-slider-left">
                                         <input type="text" className="aside-slider-input aside-slider-from" />
+                                    </div>:
+                                    <div className="aside-slider-val aside-slider-left">
+                                        <input type="text" className="aside-slider-input aside-slider-from" defaultValue = 'от 100 ₽' />
                                     </div>
-                                : ''}
+                                }
                                 {sliderMax != 0 ?
                                     <div className="aside-slider-val aside-slider-right">
                                         <input type="text" className="aside-slider-input aside-slider-to" />
+                                    </div>:
+                                    <div className="aside-slider-val aside-slider-right">
+                                        <input type="text" className="aside-slider-input aside-slider-to" defaultValue = 'до 280000 ₽' />
                                     </div>
-                                : ''}
+                                }
                             </div>
 
                             {sliderMax != 0 ?
@@ -498,7 +504,11 @@ export default function Hotels () {
                                     isResearch = {isResearch}
                                     setIsResearch = {setIsResearch}
                                     setCheckBoxesResearch = {setCheckBoxesResearch}
-                                /> :  ''
+                                /> :
+                                <RangeSlider
+                                    sliderMin = {100}
+                                    sliderMax = {280000}
+                                />
                             }
                         </div>
 

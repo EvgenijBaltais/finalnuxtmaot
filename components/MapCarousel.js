@@ -2,6 +2,7 @@ import Script from 'next/script'
 import { useState } from 'react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation } from "swiper";
 
 import 'swiper/css'
 import styles from "../styles/MapCarousel.module.css"
@@ -28,6 +29,14 @@ export default function MapCarousel () {
         setActiveCity(e.$el[0].swiper.realIndex)
     }
 
+    function swipeLeft () {
+
+    }
+
+    function swipeRight () {
+        
+    }
+
     return (
         <>
             <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onReady={() => {
@@ -44,6 +53,8 @@ export default function MapCarousel () {
                         loop = {true}
                         speed= {400}
                         onSlideChange={(e) => sliderChange(e)}
+                        navigation={true}
+                        modules={[Navigation]}
                         className="map-swiper"
                     >
                     {cities.map((slideContent, index) => (
@@ -57,7 +68,7 @@ export default function MapCarousel () {
                     <div className = {styles["map-slider-nav"]}>
                         <div className = {styles["our-offices-left"]}><span></span></div>
                         <div className = {styles["our-offices-info"]}>Наши офисы расположены по всей России</div>
-                        <div className = {styles["our-offices-right"]}><span></span></div>
+                        <div className = {styles["our-offices-right"]} onClick = {swipeRight}><span></span></div>
                     </div>
 
                 <ContactsMap name = {cities[activeCity]} koordinates = {koordinates[activeCity]} address = {addresses[activeCity]} mapReady = {mapReady} activeCity = {activeCity} />

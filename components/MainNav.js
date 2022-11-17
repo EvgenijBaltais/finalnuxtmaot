@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from "next/router"
 import Image from 'next/image'
-import Logo from '/public/images/logo-maot.png'
+import Logo from '/public/images/logo-maot.svg'
 import styles from '../styles/MainNav.module.css'
 
 const MainNav = () => {
