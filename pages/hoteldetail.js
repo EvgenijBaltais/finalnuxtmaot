@@ -73,6 +73,16 @@ function Hoteldetail () {
         return num + text
     }
 
+    function scrollToSection () {
+
+        event.preventDefault()
+        
+        document.getElementById(event.target.getAttribute('href').slice(1)).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        })
+    }
+
     const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 
     useEffect(() => {
@@ -288,6 +298,7 @@ function Hoteldetail () {
                         <div className = {styles["icon-item-menu"]}>Навигация по странице</div>
                         <div className = {styles["select-dates-item"]} onClick = {() => setVisibleNav(visibleNav => !visibleNav)}>
                             <a href="#all-rooms" 
+                                onClick={scrollToSection}
                                 data-value = "1" 
                                 className = {`${styles["select-dates-link"]} ${active_block == 1 ? styles["select-dates-link-active"] : ''}`}
                             >
@@ -295,7 +306,8 @@ function Hoteldetail () {
                             </a>
                         </div>
                         <div className = {styles["select-dates-item"]}>
-                            <a href="#rooms-info" 
+                            <a href="#rooms-info"
+                                onClick={scrollToSection}
                                 data-value = "2" 
                                 className = {`${styles["select-dates-link"]} ${active_block == 2 ? styles["select-dates-link-active"] : ''}`}
                             >
@@ -303,7 +315,8 @@ function Hoteldetail () {
                             </a>
                         </div>
                         <div className = {styles["select-dates-item"]}>
-                            <a href="#hotel-service" 
+                            <a href="#hotel-service"
+                                onClick={scrollToSection}
                                 data-value = "3" 
                                 className = {`${styles["select-dates-link"]} ${active_block == 3 ? styles["select-dates-link-active"] : ''}`}
                             >
@@ -312,6 +325,7 @@ function Hoteldetail () {
                         </div>
                         <div className = {styles["select-dates-item"]}>
                             <a href="#contacts"
+                                onClick={scrollToSection}
                                 data-value = "4"
                                 className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
                             >

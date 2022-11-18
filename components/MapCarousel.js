@@ -29,14 +29,6 @@ export default function MapCarousel () {
         setActiveCity(e.$el[0].swiper.realIndex)
     }
 
-    function swipeLeft () {
-
-    }
-
-    function swipeRight () {
-        
-    }
-
     return (
         <>
             <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onReady={() => {
@@ -62,13 +54,10 @@ export default function MapCarousel () {
                             {slideContent}
                         </SwiperSlide>
                     ))}
-
                 </Swiper>
 
                     <div className = {styles["map-slider-nav"]}>
-                        <div className = {styles["our-offices-left"]}><span></span></div>
                         <div className = {styles["our-offices-info"]}>Наши офисы расположены по всей России</div>
-                        <div className = {styles["our-offices-right"]} onClick = {swipeRight}><span></span></div>
                     </div>
 
                 <ContactsMap name = {cities[activeCity]} koordinates = {koordinates[activeCity]} address = {addresses[activeCity]} mapReady = {mapReady} activeCity = {activeCity} />
