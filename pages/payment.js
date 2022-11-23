@@ -64,7 +64,7 @@ render() {
                             международным сертификатом безопасности PCI DSS.
                         </p>
 
-                        <h2 className="single-block-title">
+                        <h2 className="single-block-title" id = "payment_by_credit_card_online">
                             Платежи. Оплата банковской картой онлайн.
                         </h2>
                         <p className = {styles["pay-page-content__text"]}>Наш сайт подключен к интернет-эквайрингу, и Вы можете оплатить Товар банковской картой Visa или Mastercard. 
@@ -75,7 +75,7 @@ render() {
                             Информацию о правилах и методах дополнительной идентификации уточняйте в Банке, выдавшем Вам банковскую карту.
                         </p>
 
-                        <h2 className="single-block-title">
+                        <h2 className="single-block-title" id = "security_guarantees">
                             Гарантии Безопасности.
                         </h2>
                         <p className = {styles["pay-page-content__text"]}>Процессинговые центры CloudPayments и ПАО "Промсвязьбанк" защищают и обрабатывают данные Вашей банковской карты по
@@ -87,7 +87,7 @@ render() {
                             Вы можете обратиться в службу поддержки клиентов по электронной почте support@cloudpayments.ru или support@paykeeper.ru.
                         </p>
 
-                        <h2 className="single-block-title">
+                        <h2 className="single-block-title" id = "online_payment_security">
                             Безопасность Онлайн Платежей.
                         </h2>
                         <p className = {styles["pay-page-content__text"]}>Предоставляемая Вами персональная информация (имя, адрес, телефон, e-mail, номер кредитной карты) 
@@ -98,7 +98,7 @@ render() {
                             карточных онлайн-платежей, обработка данных ведется на безопасном высокотехнологичном сервере процессинговой компании.
                         </p>
 
-                        <h2 className="single-block-title">
+                        <h2 className="single-block-title" id="return_of_goods">
                             Возврат Товаров
                         </h2>
                         <p className = {styles["pay-page-content__text"]}>Постановление Правительства РФ от 19 января 1998 г. В случае обнаружения недостатков товара,
@@ -110,10 +110,10 @@ render() {
                                 полученный товар ненадлежащего качества.
                         </p>
 
-                        <h2 className="single-block-title">
+                        <h2 className="single-block-title" id="confidentiality">
                             Конфиденциальность
                         </h2>
-                        <p className = {styles["pay-page-content__text-bold"]}>Определения</p>
+                        <p className = {styles["pay-page-content__text-bold"]} id="definitions">Определения</p>
                         <p className = {styles["pay-page-content__text"]}>Интернет проект maot.ru (далее – URL, «мы») серьезно относится к вопросу конфиденциальности информации своих клиентов и
                             посетителей сайта maot.ru (далее – «вы», «посетители сайта»). Персонифицированной мы называем информацию, 
                             содержащую персональные данные (например: ФИО, логин или название компании) посетителя сайта, а 
@@ -122,7 +122,7 @@ render() {
                             идентифицировать с конкретным посетителем сайта (например: статистика посещаемости сайта).
                         </p>
 
-                        <p className = {styles["pay-page-content__text-bold"]}>Использование информации</p>
+                        <p className = {styles["pay-page-content__text-bold"]} id="use_of_information">Использование информации</p>
                         <p className = {styles["pay-page-content__text"]}>Мы используем персонифицированную информацию конкретного посетителя сайта исключительно для обеспечения
                             ему качественного оказания услуг и их учета. Мы не раскрываем персонифицированных данных одних посетителей сайта URL
                             другим посетителям сайта. Мы никогда не публикуем персонифицированную информацию в открытом доступе и не передаем ее
@@ -133,14 +133,14 @@ render() {
                             Мы также используем анонимные данные для внутреннего анализа, целью которого является развитие продуктов и услуг URL.
                         </p>
 
-                        <p className = {styles["pay-page-content__text-bold"]}>Ссылки</p>
+                        <p className = {styles["pay-page-content__text-bold"]} id="links">Ссылки</p>
                         <p className = {styles["pay-page-content__text"]}>Сайт maot.ru может содержать ссылки на другие сайты, 
                             не имеющие отношения к нашей компании и принадлежащие третьим лицам. Мы не несем ответственности 
                             за точность, полноту и достоверность сведений, размещенных на сайтах третьих лиц, и не берем на себя никаких 
                             обязательств по сохранению конфиденциальности информации, оставленной вами на таких сайтах.
                         </p>
 
-                        <p className = {styles["pay-page-content__text-bold"]}>Ограничение ответственности</p>
+                        <p className = {styles["pay-page-content__text-bold"]} id="disclaimer">Ограничение ответственности</p>
                         <p className = {styles["pay-page-content__text"]}>Мы делаем все возможное для соблюдения настоящей политики конфиденциальности,
                             однако, мы не можем гарантировать сохранность информации в случае воздействия факторов находящихся вне нашего
                             влияния, результатом действия которых станет раскрытие информации. Сайт maot.ru и вся размещенная на
@@ -149,7 +149,7 @@ render() {
                                 к сайту URL или вследствие посещения сайта и использования размещенной на нем информации.
                         </p>
 
-                        <p className = {styles["pay-page-content__text-bold"]}>Контакты</p>
+                        <p className = {styles["pay-page-content__text-bold"]} id="l_contacts">Контакты</p>
                         <p className = {styles["pay-page-content__text"]}>По вопросам, касающимся настоящей политики, просьба обращаться по телефону 8 (800) 555-33-75</p>
 
                         <div className = {styles["content-subscribe"]}>
@@ -189,7 +189,7 @@ render() {
                             </div>
                         </div>
 
-                        <h2 className="single-block-title">
+                        <h2 className="single-block-title" id = "carrying_out_payment_transaction">
                             Проведение операции оплаты товаров/услуг в сети интернет
                         </h2>
                         <p className = {styles["pay-page-content__text"]}>Держатель карты обращается на сайт Интернет-магазина и формирует заказ на оплату товара/услуг,
@@ -242,7 +242,7 @@ render() {
                             не позднее следующего рабочего дня за днем совершения операции.</p>
 
 
-                        <h2 className="single-block-title">
+                        <h2 className="single-block-title" id = "cancel_operation">
                             Отмена операции оплаты товаров/услуг в интернете
                         </h2>
 
@@ -257,7 +257,7 @@ render() {
                             «Заявку на отмену операции» по форме Приложения №5 к настоящему
                             Договору и предоставить ее в Банк.</p>
 
-                        <h2 className="single-block-title">
+                        <h2 className="single-block-title" id = "return_operation">
                             Операция возврата товара (отказа от услуг), оплаченных картой в сети интернет.
                         </h2>
 
@@ -268,7 +268,7 @@ render() {
                             Банк осуществляет возврат средств по операциям «возврат покупки» на карту, с использованием которой была произведена оплата товара/услуги.
                         </p>
 
-                        <div className = {styles["law-info"]}>
+                        <div className = {styles["law-info"]} id = "legal_entity">
 
                             <h2 className="single-block-title">
                                 Юридическое лицо

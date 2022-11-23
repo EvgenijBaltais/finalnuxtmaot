@@ -6,6 +6,13 @@
 
 .pay-left {
 	width: 400px;
+
+}
+
+.pay-left-nav {
+	display: block;
+	width: 400px;
+	top: 0
 }
 
 .pay-right {
@@ -26,7 +33,7 @@
     -moz-box-shadow: var(--main-shadow);
     box-shadow: var(--main-shadow);
 	border-radius: 10px;
-	margin-bottom: 40px
+	background-color: #fff;
 }
 
 .left-nav-list {
@@ -404,7 +411,6 @@
 .active-nav-item {
 	display: none;
 }
-
 @media screen and (max-width: 1260px) {
 
 	.pay-content {
