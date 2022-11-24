@@ -48,16 +48,21 @@ const PaymentNav = () => {
 
         function scrollingOptions () {
 
+            if (window.pageYOffset <= top) {
+
+                document.querySelector('.left-nav-fixed').removeAttribute('style')
+            }
+
             if (window.pageYOffset > top) {
 
                 document.querySelector('.left-nav-fixed').style.position = "fixed"
                 document.querySelector('.left-nav-fixed').style.top = 0
             }
 
-            if (window.pageYOffset > top && (window.pageYOffset >= footerTop - blockHeight)) {
+            if (window.pageYOffset > top && (window.pageYOffset >= footerTop - blockHeight + 225)) {
 
                 document.querySelector('.left-nav-fixed').style.position = "absolute"
-                document.querySelector('.left-nav-fixed').style.top = footerTop - blockHeight + 'px'
+                document.querySelector('.left-nav-fixed').style.top = footerTop - blockHeight + 225 + 'px'
             }
         }
 
