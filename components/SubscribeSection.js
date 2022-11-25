@@ -36,9 +36,9 @@ const SubscribeSection = () => {
             <div className = {styles["subscribe-social"]}>
                 <h2 className = {styles["section-subtitle"]}>Подпишитесь на наши соцсети</h2>
                 <div className = {styles["subscribe-social-block"]}>
-                    <a className = {styles["social-tg-rus"]}>Лучшие отели России</a>
-                    <a className = {styles["social-tg-pdmsk"]}>Лучшие отели Подмосковья</a>
-                    <a className = {styles["social-vk"]}>Все о качественном и доступном&nbsp;отдыхе&nbsp;в&nbsp;Подмосковье</a>
+                    <a className = {`${styles["social-tg-link"]} ${styles["social-tg-rus"]}`}>Лучшие отели России</a>
+                    <a className = {`${styles["social-tg-link"]} ${styles["social-tg-pdmsk"]}`}>Лучшие отели Подмосковья</a>
+                    <a className = {`${styles["social-tg-link"]} ${styles["social-vk"]}`}>Все о качественном и доступном&nbsp;отдыхе&nbsp;в&nbsp;Подмосковье</a>
                 </div>
             </div>
         </section>

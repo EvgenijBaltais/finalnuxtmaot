@@ -41,8 +41,14 @@
 }
 
 .about-company__link {
-		color: rgb(5, 117, 229);
+	color: rgb(5, 117, 229);
     font-size: 16px;
+	transition: color .2s;
+}
+
+.about-company__link:hover {
+	transition: color .2s;
+	color:#FE4B2B;
 }
 
 @media screen and (max-width: 1260px) {

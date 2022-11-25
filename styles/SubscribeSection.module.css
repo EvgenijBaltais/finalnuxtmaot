@@ -86,6 +86,10 @@
 	background: linear-gradient(45deg,#00f260,#0575E6);
 }
 
+.get-suscribe__submit:hover {
+	background: linear-gradient(45deg,#00CA50,#0057AF);
+}
+
 .get-suscribe__submit span {
 	color: #fff;
 }
@@ -119,7 +123,6 @@
 	padding-left: 40px;
 	font-size: 18px;
 	line-height: 30px;
-	color: rgb(67,151,237);
 	font-family: 'FontInter';
 	text-decoration: underline;
 	background-image: url('/images/icons/telegram.svg');
@@ -136,7 +139,6 @@
 	padding-left: 40px;
 	font-size: 18px;
 	line-height: 30px;
-	color: rgb(67,151,237);
 	font-family: 'FontInter';
 	text-decoration: underline;
 	background-image: url('/images/icons/telegram.svg');
@@ -152,13 +154,23 @@
 	padding-left: 40px;
 	font-size: 18px;
 	line-height: 30px;
-	color: rgb(67,151,237);
 	font-family: 'FontInter';
 	text-decoration: underline;
 	background-image: url('/images/icons/vk.svg');
 	background-repeat: no-repeat;
 	background-size: 32px;
 	background-position: left center;
+}
+
+.social-tg-link {
+	color: rgb(67,151,237);
+	transition: color .2s;
+	cursor: pointer;
+}
+
+.social-tg-link:hover {
+	color:#FE4B2B;
+	transition: color .2s;
 }
 
 @media screen and (max-width: 1260px) {

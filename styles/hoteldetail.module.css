@@ -213,6 +213,7 @@
 }
 
 .hotel-map__place {
+	width: 320px;
 	position: absolute;
 	bottom:35px;
 	display: inline-block;
@@ -230,6 +231,13 @@
 	position: relative;
 	color: #2486E9;
 	text-decoration: none;
+	transition: color .2s;
+	cursor: pointer;
+}
+
+.hotel-map__coordinates:hover {
+	color: #ff4b2b;
+	transition: color .2s;
 }
 
 .hotel-map__coordinates:after {
@@ -241,6 +249,12 @@
 	bottom: 0;
 	height: 1px;
 	background-color: #2486E9;
+	transition: background-color .2s;
+}
+
+.hotel-map__coordinates:hover:after {
+	background-color: #ff4b2b;
+	transition: background-color .2s;
 }
 
 .select-dates-content {

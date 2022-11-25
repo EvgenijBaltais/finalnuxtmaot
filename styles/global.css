@@ -55,6 +55,11 @@ body {
 	--main-shadow: 0 3px 8px 0 rgb(34 60 80 / 20%);
 }
 
+.green-text {
+	color: #4ECE5B;
+	font-weight: bold;
+}
+
 .wrapper {
 	position: relative;
 	max-width: 1240px;
@@ -818,6 +823,12 @@ input[type="checkbox"].substylized:checked + label:after {
 	font-weight: 300;
 	text-decoration: underline;
 	margin-bottom: 15px;
+	transition: color .2s;
+}
+
+.footer-place-item:hover {
+	color:#FE4B2B;
+	transition: color .2s;
 }
 
 .footer-social-item {
@@ -834,7 +845,12 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-size: 25px;
 	font-family: 'FontInter';
 	color: #333;
+	transition: color .2s;
+}
 
+.footer-social-item:hover {
+	color:#FE4B2B;
+	transition: color .2s;
 }
 
 .footer-social-item:first-child {
@@ -3792,13 +3808,15 @@ input[type="checkbox"].substylized:checked + label:after {
 	text-indent: 20px;
 	font-size: 15px;
 	border-radius: 10px 0 0 10px;
-	background-color: #F8F8F8;
+	background-color: #eee;
+	color: #949494;
+	font-family: 'FontInterLight';
 }
 
-.hoteldetail-form-way-input::-webkit-input-placeholder {color: rgb(0,0,0);}
-.hoteldetail-form-way-input::-moz-placeholder          {color: rgb(0,0,0);}
-.hoteldetail-form-way-input:-moz-placeholder           {color: rgb(0,0,0);}
-.hoteldetail-form-way-input:-ms-input-placeholder      {color: rgb(0,0,0);}
+.hoteldetail-form-way-input::-webkit-input-placeholder {color: #949494;font-family: 'FontInterLight';}
+.hoteldetail-form-way-input::-moz-placeholder          {color: #949494;font-family: 'FontInterLight';}
+.hoteldetail-form-way-input:-moz-placeholder           {color: #949494;font-family: 'FontInterLight';}
+.hoteldetail-form-way-input:-ms-input-placeholder      {color: #949494;font-family: 'FontInterLight';}
 
 .hoteldetail-form-guests-input {
 	cursor: pointer;

@@ -45,13 +45,31 @@ export default function Hotel_map ({hotelData, mapReady}) {
         }
     }, [mapReady])
 
+    function copyCoordinates () {
+        event.preventDefault()
+
+        const elem = event.target
+        const newElem = document.createElement('span')
+            newElem.classList.add('green-text')
+            newElem.innerText = 'Данные скопированы'
+
+        navigator.clipboard.writeText(elem.innerText)
+            .then(() => {
+                elem.replaceWith(newElem)
+
+                setTimeout(() => {
+                    newElem.replaceWith(elem)
+                }, 2000)
+            })
+    }
+
     return (
         <div className = {styles["hotel-map"]} id = "map">
             <div className = {styles["hoteldetail-y-map"]}></div>
             {lat && long ?
                 <div className = {styles["hotel-map__place"]}>
                     <span>Координаты: </span>
-                    <a className = {styles["hotel-map__coordinates"]}>
+                    <a className = {styles["hotel-map__coordinates"]} onClick = {copyCoordinates}>
                         {lat}, {long}
                     </a>
                 </div> : ''
