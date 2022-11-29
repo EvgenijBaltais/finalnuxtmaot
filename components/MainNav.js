@@ -69,9 +69,7 @@ const MainNav = () => {
                     <p className = {styles["top-phone-info"]}>Корпоративный отдел</p>
                 </div>
 
-
                 <div className = {visibleMenu ? "mob-menu mob-menu-active" : " mob-menu"} ref={rootEl}>
-
                     <div className= "mob-burger" onClick = {() => setVisibleMenu(visibleMenu => !visibleMenu)}>
                         <span></span>
                         <span></span>

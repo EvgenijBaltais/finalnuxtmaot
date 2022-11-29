@@ -1,7 +1,18 @@
-import MediaQuery from 'react-responsive'
 import styles from "../styles/SubscribeSection.module.css"
 
+import { useState, useEffect } from 'react'
+
 const SubscribeSection = () => {
+
+    const [isMobile, setIsMobile] = useState(0)
+
+    useEffect(() => {
+        setIsMobile(window.screen.width <= 480)
+
+        window.addEventListener('resize', () => {
+            setIsMobile(window.screen.width <= 480)
+        })
+    }, [])
 
     return (
         <section className = {styles["subscribe-section"]}>
@@ -13,13 +24,10 @@ const SubscribeSection = () => {
                             <input type="text" name = "get-subscribe" id = "get-subscribe" className = {styles["get-subscribe"]} placeholder = "Укажите свой Email" />
                             <div className = {styles["get-suscribe-btn"]}>
                                 <button className = {styles["get-suscribe__submit"]}>
-                                    <MediaQuery maxWidth={480}>
-                                        {(matches) =>
-                                            matches
-                                              ? <span className={styles["icon-subscribe-inside"]}></span>
-                                              : <span>Подписаться</span>
-                                          }
-                                    </MediaQuery>
+                                    {isMobile
+                                            ? <span className={styles["icon-subscribe-inside"]}></span>
+                                            : <span>Подписаться</span>
+                                    }
                                 </button>
                                 <div className = "anim-blick__submit-bg">
                                     <div className ="anim-blick__submit-obj"></div>

@@ -43,7 +43,7 @@
 .nav-item:last-child a:before {
     position: absolute;
     top: 2px;
-    left: -22px;
+    left: -28px;
     content: "";
     width: 20px;
     height: 18px;
@@ -54,7 +54,7 @@
 }
 
 .top-phone {
-    color: rgb(51,51,51);
+    color: rgb(0,0,0);
     font-size: 16px;
     text-decoration: none;
 }
@@ -273,7 +273,7 @@
     .nav-list-mob li {
         list-style: none;
         padding: 0;
-        margin-top: 25px;
+        margin-top: 23px;
     }
 
     .nav-link {
@@ -301,9 +301,9 @@
         display: block;
         width: 100%;
         height: 24px;
-        margin-bottom: 22px;
+        margin-bottom: 10px;
         padding-left: 32px;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 24px;
         color: rgb(67,151,237);
         font-family: 'FontInter';
@@ -318,9 +318,9 @@
         display: block;
         width: 100%;
         height: 24px;
-        margin-bottom: 22px;
+        margin-bottom: 10px;
         padding-left: 32px;
-        font-size: 16px;
+        font-size: 14px;
         line-height: 24px;
         color: rgb(67,151,237);
         font-family: 'FontInter';
@@ -336,8 +336,8 @@
         width: 100%;
         height: 24px;
         padding-left: 32px;
-        font-size: 16px;
-        line-height: 24px;
+        font-size: 14px;
+        line-height: 20px;
         color: rgb(67,151,237);
         font-family: 'FontInter';
         text-decoration: underline;
@@ -353,7 +353,7 @@
     }
 
     .nav-item:last-child .nav-link {
-        color: #929292;
+        color: #828282;
         font-size: 18px;
         line-height: 1;
     }
@@ -399,16 +399,6 @@
         text-align: left;
     }
 
-    .nav-list-mob li {
-        list-style: none;
-        padding: 0;
-        margin-top: 25px;
-    }
-
-    .nav-link {
-        font-size: 22px;
-    }
-
     .mob-decor-line {
         margin: 40px 0;
         height: 2px;
@@ -420,57 +410,4 @@
         padding-top: 14px;
         padding-bottom: 30px
     }
-
-    .mob-social-tg-rus {
-        display: block;
-        width: 100%;
-        height: 24px;
-        margin-bottom: 22px;
-        padding-left: 32px;
-        font-size: 16px;
-        line-height: 24px;
-        color: rgb(67,151,237);
-        font-family: 'FontInter';
-        text-decoration: underline;
-        background-image: url('/images/icons/telegram.svg');
-        background-repeat: no-repeat;
-        background-size: 24px;
-        background-position: left center;
-    }
-
-    .mob-social-tg-pdmsk {
-        display: block;
-        width: 100%;
-        height: 24px;
-        margin-bottom: 22px;
-        padding-left: 32px;
-        font-size: 16px;
-        line-height: 24px;
-        color: rgb(67,151,237);
-        font-family: 'FontInter';
-        text-decoration: underline;
-        background-image: url('/images/icons/telegram.svg');
-        background-repeat: no-repeat;
-        background-size: 24px;
-        background-position: left center;
-    }
-
-    .mob-social-vk {
-        display: block;
-        width: 100%;
-        min-height: 24px;
-        height: 100%;
-        padding-left: 32px;
-        font-size: 16px;
-        line-height: 24px;
-        color: rgb(67,151,237);
-        font-family: 'FontInter';
-        text-decoration: underline;
-        background-image: url('/images/icons/vk.svg');
-        background-repeat: no-repeat;
-        background-size: 24px;
-        background-position: left top;
-    }
-
-
 }

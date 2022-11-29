@@ -57,36 +57,6 @@ export default function Datepicker (value) {
             }
         }
 
-        function addHoverEffectOnDates () {
-
-            const dateLinks = document.querySelectorAll('.date-link:not(.date-disable):not(.date-prefix)')
-            
-            if (event.target.classList.contains('date-link') &&
-                !event.target.classList.contains('date-disable') &&
-                !event.target.classList.contains('date-prefix')
-            ) {
-
-                let targetDay = event.target.innerText,
-                    targetMonth = event.target.getAttribute('data-month'),
-                    targetYear = event.target.getAttribute('data-year')
-
-                for (let k = 0; k < dateLinks.length; k++) {
-                    +dateLinks[k].innerText <= +targetDay &&
-                    +dateLinks[k].getAttribute('data-month') <= +targetMonth &&
-                    +dateLinks[k].getAttribute('data-year') <= +targetYear ?
-                    dateLinks[k].classList.add('date-hovered') : ''
-                }
-            }
-        }
-
-        function removeHoverEffectOnDates () {
-
-            const dateLinks = document.querySelectorAll('.date-hovered')
-            for (let i = 0 ; i < dateLinks.length; i++) {
-                dateLinks[i].classList.remove('date-hovered')
-            }
-        }
-
         useEffect(() => {
 
             smoothscroll.polyfill() // для плавной прокрутки на сафари

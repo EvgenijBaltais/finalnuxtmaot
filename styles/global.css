@@ -874,7 +874,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .payment-method {
 	display: flex;
-	background-size: cover;
+	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
 }
@@ -2638,7 +2638,7 @@ input[type="checkbox"].substylized:checked + label:after {
 		height: 30px;
 		text-align: center;
 		flex-direction: column;
-		font-size: 10px;
+		font-size: 12px;
 		line-height: 1;
 		z-index: 2;
     }
@@ -2755,9 +2755,8 @@ input[type="checkbox"].substylized:checked + label:after {
     .mob-menu-active {
     	position: absolute;
     	top: 0;
-    	right: 10px;
-    	width: 90%;
-    	max-width: 400px;
+    	right: 20px;
+    	max-width: 325px;
     	border-radius: 8px;
         display: flex;
         flex-direction: column;
@@ -2842,16 +2841,6 @@ input[type="checkbox"].substylized:checked + label:after {
     .top-phone-corp {
         display: none;
     }
-
-/*
-    .mob-menu-active > .mob-bg {
-        display: block;
-    }
-
-    .mob-bg {
-        display: none;
-    }*/
-
 
 	.cashback-info {
 		text-align: center;
@@ -4515,9 +4504,13 @@ input[type="checkbox"].substylized:checked + label:after {
 		left: auto;
 	}
 
+	.date-link {
+		margin-bottom: 5px;
+	}
+
 	.direction-form-out > .datepicker-w  {
 		left: auto;
-		right: 0;
+		right: -100px;
 	}
 
 	.guests-block-w {
@@ -4670,7 +4663,11 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 
 	.main-h1 {
-		font-size: 3.3rem;
+		font-size: 2.8rem;
+	}
+
+	.datepicker-header {
+		padding-right: 12px;
 	}
 
 	.datepicker-header__title {
@@ -4679,8 +4676,12 @@ input[type="checkbox"].substylized:checked + label:after {
 
 	.days-list {
 		width: 100%;
-		max-width: 320px;
+		max-width: 280px;
 		margin: 0 auto;
+	}
+
+	.days-list__item {
+		width: 40px;
 	}
 
 	.month-aside {
@@ -4697,8 +4698,17 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 
 	.month-calendar {
-		max-width: 320px;
+		max-width: 280px;
 		margin: 0 auto;
+	}
+
+	.date-link {
+		width: 40px;
+		height: 40px;
+		line-height: 40px;
+		margin-bottom:5px;
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	.aside-direction-form-in, .aside-direction-form-out {
@@ -4821,17 +4831,20 @@ input[type="checkbox"].substylized:checked + label:after {
 	.datepicker-body  {
 		padding: 0;
 	}
-
-	.month-calendar {
-		min-width: 260px;
+	.main-h1 {
+		font-size: 2rem;
 	}
+
 	.days-list__item {
 		width: 36px;
 	}
-	.date-link {
-		width: 30px;
-    height: 30px;
-    line-height: 30px;
+
+	.mob-menu-active {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		right: 10px;
+		max-width: 100%;
 	}
 }
 

@@ -27,15 +27,17 @@ class Index extends React.Component {
             <>
                 <Head>
                     <title>Отдых по России и Подмосковью</title>
+                    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
                 </Head>
                 <h1 className = "main-h1">Путешествуйте по&nbsp;всей&nbsp;России!</h1>
                 <SaleInfo />
+                
                 <MainForm popularHotels = {this.props.popularHotels.data} popularWays = {this.props.popularWays.data} />
                 <PopularSections popularHotels = {this.props.popularHotels} popularWays = {this.props.popularWays} />
                 <SpecialOffers />
                 <SubscribeSection />
-                <AboutSection />
-                <Reviews reviews = {this.props.reviews} />
+                {/*<AboutSection />
+                <Reviews reviews = {this.props.reviews} />*/}
             </>
         )
     }
