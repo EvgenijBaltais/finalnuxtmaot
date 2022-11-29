@@ -36,8 +36,8 @@ class Index extends React.Component {
                 <PopularSections popularHotels = {this.props.popularHotels} popularWays = {this.props.popularWays} />
                 <SpecialOffers />
                 <SubscribeSection />
-                {/*<AboutSection />
-                <Reviews reviews = {this.props.reviews} />*/}
+                <AboutSection />
+                <Reviews reviews = {this.props.reviews} />
             </>
         )
     }

@@ -1556,7 +1556,11 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Пагинация, конец */
 
-@media screen and (max-width: 1260px) {
+@media screen and (max-width: 1280px) {
+
+	.search-page-main {
+		margin: 0 1rem;
+	}
 
 	.main-form {
 		margin-left: 1rem;

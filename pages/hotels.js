@@ -94,7 +94,6 @@ export default function Hotels () {
                     delete el.rates[0].images
                     delete el.rates[0].cancellation_penalties
                     delete el.rates[0].description
-                    //delete el.rates[0].room_info
 
                     return formatServices(el)
                 })
