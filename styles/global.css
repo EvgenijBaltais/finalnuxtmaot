@@ -324,17 +324,17 @@ body {
 }
 
 .aside-food-w-1 {
-	width: calc(33% - 12px);
+	width: calc(33.3% - 12px);
 	height: 50px;
 }
 
 .aside-food-w-2 {
-	width: calc(33% - 12px);
+	width: calc(33.3% - 12px);
 	height: 50px;
 }
 
 .aside-food-w-3 {
-	width: calc(33% - 12px);
+	width: calc(33.3% - 12px);
 	height: 50px;
 }
 
@@ -1556,28 +1556,6 @@ input[type="checkbox"].substylized:checked + label:after {
 
 /* Пагинация, конец */
 
-@media screen and (max-width: 1280px) {
-
-	.search-page-main {
-		margin: 0 1rem;
-	}
-
-	.main-form {
-		margin-left: 1rem;
-		margin-right: 1rem;
-	}
-
-	.cashback-info {
-		width: 80%;
-	}
-
-	.footer {
-		margin-top: 100px;
-		margin-left: 1rem;
-		margin-right: 1rem;
-	}
-}
-
 @media screen and (max-width: 650px) {
 
     .wrapper {
@@ -1688,7 +1666,6 @@ input[type="checkbox"].substylized:checked + label:after {
     .single-block-title {
     	font-size: 18px;
     }
-
 }
 
 @media screen and (max-width: 420px) {
@@ -3182,6 +3159,32 @@ input[type="checkbox"].substylized:checked + label:after {
 	user-select: none;
 }
 
+.aside-show-filters {
+	position: absolute;
+	display: inline-block;
+	top: 105px;
+	left: -3px;
+    height: 50px;
+	padding-left: 50px;
+	padding-right: 20px;
+	box-shadow: var(--main-shadow);
+    color: #FF2C2F;
+    font-size: 16px;
+	line-height: 50px;
+    font-family: 'FontInterMedium';
+    border-radius: 10px;
+    cursor: pointer;
+	background-color: #fff;
+	background-image: url('/images/icons/filter.svg');
+	background-size: 25px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+
+.aside-show-filters-opened {
+	background-image: url('/images/icons/close_nav.svg');
+}
+
 .aside-direction-form-way {
 	width: 100%;
 	height: 62px;
@@ -3761,6 +3764,7 @@ input[type="checkbox"].substylized:checked + label:after {
 .hoteldetail-direction-form-w {
 	display: flex;
 	justify-content: space-between;
+	position: relative;
 }
 
 .hoteldetail-direction-form-way {
@@ -4278,6 +4282,139 @@ input[type="checkbox"].substylized:checked + label:after {
 	display: none;
 }
 
+@media screen and (max-width: 1280px) {
+
+	.aside-direction-form-in {
+		width: 48%
+	}
+
+	.aside-direction-form-out {
+		width: 48%
+	}
+
+	.aside-cheap-block-w {
+		width: 48%
+	}
+	
+	.aside-cheap-block {
+		width: calc(100% - 4px);
+	}
+
+	.aside-food-w-1 {
+		width: calc(33.3% - 8px);
+	}
+
+	.aside-food-w-2 {
+		width: calc(33.3% - 8px);
+	}
+
+	.aside-food-w-3 {
+		width: calc(33.3% - 8px);
+	}
+
+	.aside-food-w-4 {
+		width: calc(50% - 6px);
+	}
+
+	.aside-food-w-5 {
+		width: calc(50% - 6px);
+	}
+
+	.search-page-main {
+		margin: 0 1rem;
+	}
+
+	.main-form {
+		margin-left: 1rem;
+		margin-right: 1rem;
+	}
+
+	.cashback-info {
+		width: 80%;
+	}
+
+	.footer {
+		margin-top: 100px;
+		margin-left: 1rem;
+		margin-right: 1rem;
+	}
+
+	.hotel-slider__items .swiper-button-next {
+		top: 192px;
+	}
+
+	.hotel-slider__items .swiper-button-prev {
+		top: 192px;
+	}
+}
+
+
+@media screen and (max-width: 1050px) {
+
+	.datepicker-w {
+		top: 55px;
+	}
+
+	.aside-direction-form-way {
+		height: 50px;
+	}
+
+	.aside-direction-form-in {
+		height: 50px;
+	}
+
+	.aside-direction-form-in-active {
+		height: 50px;
+	}
+
+	.aside-direction-form-out {
+		height: 50px;
+	}
+
+	.aside-direction-form-out-active {
+		height: 50px;
+	}
+
+	.aside-form-way-input {
+		line-height: 50px;
+		font-size: 14px;
+	}
+
+	.aside-direction-form-people {
+		height: 50px;
+	}
+
+	.aside-guests-block-w {
+		top: 55px;
+	}
+
+	.aside-direction-form-btn {
+		height:50px
+	}
+
+	.aside-cheap-block-w {
+		height: 54px;
+	}
+
+	.aside-cheap-block {
+		height: 50px;
+		padding: 5px 5px 5px 40px;
+	}
+
+	.aside-food-block-inside {
+		font-size: 12px;
+    	line-height: 14px;
+	}
+
+	.aside-cheap-block span {
+		font-size: 12px;
+	}
+
+	.aside-block-link-w {
+		height: 55px;
+	}
+}
+
 /* адаптив главной формы */
 @media screen and (max-width: 960px) {
 
@@ -4385,6 +4522,51 @@ input[type="checkbox"].substylized:checked + label:after {
 	.aside-filter {
 		display: none;
 	}
+
+	.aside-fiters-w {
+		display: flex;
+		margin-top: 20px;
+	}
+
+	.aside-slider {
+		width: 47.5%;
+	}
+
+	.aside-slider + div {
+		width: 47.5%;
+	}
+
+	.aside-slider + div + div {
+		width: 47.5%;
+	}
+
+	.hoteldetail-swiper .hotel-slider__item {
+		height: 85px;
+	}
+
+	.hoteldetail-direction-form-w {
+		padding-bottom: 100px;
+	}
+
+	.hoteldetail-direction-form__inside {
+		height: 88px;
+		width: 100%;
+	}
+
+	.hoteldetail-direction-form-submit {
+		position: absolute;
+		top: 110px;
+		right: 0;
+		height: 60px;
+	}
+
+	.hoteldetail-direction-form-btn {
+		height: 60px;
+	}
+
+	.hoteldetail-direction-form-way {
+		width: calc(100% - 320px);
+	}
 }
 
 @media (min-width: 480px) and (max-width: 860px) {
@@ -4459,7 +4641,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	.aside-direction-form-submit {
 		position: absolute;
 		top: 105px;
-		right: 0;
+		right: -3px;
 		width: 32%;	
 	}
 
@@ -4499,10 +4681,6 @@ input[type="checkbox"].substylized:checked + label:after {
 		cursor: pointer;
 	}
 
-	.aside-slider {
-		display: none;
-	}
-
 	.datepicker-w {
 		right: auto;
 		left: auto;
@@ -4521,6 +4699,10 @@ input[type="checkbox"].substylized:checked + label:after {
 		left: auto;
 		width: calc(100% + 110px);
 	}
+
+	.hoteldetail-direction-form-submit {
+		width: 220px;
+	}
 }
 
 @media screen and (max-width: 650px) {
@@ -4529,7 +4711,16 @@ input[type="checkbox"].substylized:checked + label:after {
 		margin-left: 0;
 		margin-right: 0;
 	}
+	.hotel-slider__items .swiper-button-next {
+		top: 165px;
+	}
 
+	.hotel-slider__items .swiper-button-prev {
+		top: 165px;
+	}
+	.hoteldetail-swiper .hotel-slider__item {
+		height: 65px;
+	}
 }
 
 @media screen and (max-width: 480px) {
@@ -4794,6 +4985,14 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 /* адаптив формы внутренней стр отеля, конец */
 
+.hotel-slider__items .swiper-button-next {
+	top: 88px;
+}
+
+.hotel-slider__items .swiper-button-prev {
+	top: 88px;
+}
+
 }
 
 
@@ -4813,7 +5012,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 
 	.hoteldetail-swiper .hotel-slider__item {
-		height: 40px;
+		height: 45px;
 		width: 65px;
 	}
 

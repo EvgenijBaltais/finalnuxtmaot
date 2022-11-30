@@ -10,7 +10,7 @@
         var i = t();
         for (var a in i) ("object" == typeof exports ? exports : e)[a] = i[a];
     }
-}(self, (function() {
+}(this, (function() {
     return function() {
         "use strict";
         var e = {

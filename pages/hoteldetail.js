@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react'
 import Head from 'next/head'
 import Script from 'next/script'
 
-import { useMediaQuery } from 'react-responsive'
 import { useRouter } from 'next/router'
 
 import Hoteldetail_form from '../components/Hoteldetail_form'
@@ -30,19 +29,30 @@ function Hoteldetail () {
 
     const [visibleNav, setVisibleNav] = useState(0)
 
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 480px)' })
-    const isBigScreen = useMediaQuery({ query: '(min-width: 480px)' })
+    const [isMobile, setIsMobile] = useState(0)
+    const [isTablet, setIsTablet] = useState(0)
+    const [isDesktop, setIsDesktop] = useState(0)
 
+    useEffect(() => {
+        setIsMobile(window.screen.width <= 480)
+        setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
+        setIsDesktop(window.screen.width > 860)
+
+        window.addEventListener('resize', () => {
+            setIsMobile(window.screen.width <= 480)
+            setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
+            setIsDesktop(window.screen.width > 860)
+        })
+    }, [])
+/*
     const rootEl = useRef(null)
-    /*
         useEffect(() => {
           const onClick = e => rootEl.current.contains(e.target) || setVisibleNav(false)
 
           document.addEventListener('click', onClick)
           return () => document.removeEventListener('click', onClick)
         }, [])
-  */
-
+*/
     function addBackgroundImage (slider) {
         document.querySelector('.hotel-slider__main').style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
     }
@@ -174,6 +184,8 @@ function Hoteldetail () {
 
             if (!mapReady) return false
 
+            if (!isDesktop) return false
+
             if (!blocksOffsetArr.length) {
                 for (let i = 0; i < document.querySelectorAll('.block-scrolling-item').length; i++) {
                     blocksOffsetArr.push(document.querySelectorAll('.block-scrolling-item')[i])
@@ -263,7 +275,7 @@ function Hoteldetail () {
                             </div>
                         </div>
                     </div>
-                    {mapReady == 1 ?
+                    {mapReady == 1 && isDesktop ?
                         <Hotel_map hotelData = {hotelData} mapReady = {mapReady} />
                         : ''
                     }
@@ -292,48 +304,49 @@ function Hoteldetail () {
                     {mapReady ? <Hotel_contact hotelData = {hotelData}/> : ''}
                     
                 </div>
-                                
-                <div className = {`${styles["select-dates-nav"]} select-dates-nav`}>
-                    <div className = {visibleNav ? `${styles["select-nav-bg"]} ${styles["active-nav-list"]} select-nav-list` : `${styles["select-nav-bg"]} select-nav-list`} ref={rootEl}>
-                        <div className = {styles["icon-item-menu"]}>Навигация по странице</div>
-                        <div className = {styles["select-dates-item"]} onClick = {() => setVisibleNav(visibleNav => !visibleNav)}>
-                            <a href="#all-rooms" 
-                                onClick={scrollToSection}
-                                data-value = "1" 
-                                className = {`${styles["select-dates-link"]} ${active_block == 1 ? styles["select-dates-link-active"] : ''}`}
-                            >
-                                Поиск номеров
-                            </a>
+
+                {isDesktop ?        
+                    <div className = {`${styles["select-dates-nav"]} select-dates-nav`}>
+                        <div className = {visibleNav ? `${styles["select-nav-bg"]} ${styles["active-nav-list"]} select-nav-list` : `${styles["select-nav-bg"]} select-nav-list`}>
+                            <div className = {styles["icon-item-menu"]}>Навигация по странице</div>
+                            <div className = {styles["select-dates-item"]} onClick = {() => setVisibleNav(visibleNav => !visibleNav)}>
+                                <a href="#all-rooms" 
+                                    onClick={scrollToSection}
+                                    data-value = "1" 
+                                    className = {`${styles["select-dates-link"]} ${active_block == 1 ? styles["select-dates-link-active"] : ''}`}
+                                >
+                                    Поиск номеров
+                                </a>
+                            </div>
+                            <div className = {styles["select-dates-item"]}>
+                                <a href="#rooms-info"
+                                    onClick={scrollToSection}
+                                    data-value = "2" 
+                                    className = {`${styles["select-dates-link"]} ${active_block == 2 ? styles["select-dates-link-active"] : ''}`}
+                                >
+                                    Об отеле
+                                </a>
+                            </div>
+                            <div className = {styles["select-dates-item"]}>
+                                <a href="#hotel-service"
+                                    onClick={scrollToSection}
+                                    data-value = "3" 
+                                    className = {`${styles["select-dates-link"]} ${active_block == 3 ? styles["select-dates-link-active"] : ''}`}
+                                >
+                                    Услуги
+                                </a>
+                            </div>
+                            <div className = {styles["select-dates-item"]}>
+                                <a href="#contacts"
+                                    onClick={scrollToSection}
+                                    data-value = "4"
+                                    className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
+                                >
+                                    Контакты
+                                </a>
+                            </div>
                         </div>
-                        <div className = {styles["select-dates-item"]}>
-                            <a href="#rooms-info"
-                                onClick={scrollToSection}
-                                data-value = "2" 
-                                className = {`${styles["select-dates-link"]} ${active_block == 2 ? styles["select-dates-link-active"] : ''}`}
-                            >
-                                Об отеле
-                            </a>
-                        </div>
-                        <div className = {styles["select-dates-item"]}>
-                            <a href="#hotel-service"
-                                onClick={scrollToSection}
-                                data-value = "3" 
-                                className = {`${styles["select-dates-link"]} ${active_block == 3 ? styles["select-dates-link-active"] : ''}`}
-                            >
-                                Услуги
-                            </a>
-                        </div>
-                        <div className = {styles["select-dates-item"]}>
-                            <a href="#contacts"
-                                onClick={scrollToSection}
-                                data-value = "4"
-                                className = {`${styles["select-dates-link"]} ${active_block == 4 ? styles["select-dates-link-active"] : ''}`}
-                            >
-                                Контакты
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                    </div> : ''}
             </section>
         </>
     )

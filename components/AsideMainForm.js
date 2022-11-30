@@ -5,7 +5,7 @@ import Aside_search_hotel_input from './aside_search_form_components/Aside_searc
 import Aside_search_form_datein from './aside_search_form_components/Aside_search_form_datein'
 import Aside_search_form_guests from './aside_search_form_components/Aside_search_form_guests'
 
-const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItems, setFilteredItems, setIsResearch}) => {
+const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItems, setFilteredItems, setIsResearch, setFiltersOpen, filtersOpen}) => {
 
     const router = useRouter()
     const { query } = useRouter()
@@ -14,6 +14,19 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
     const [dateOut, setDateOut] = useState(query.dateout || setTomorrow())
     const [adults, setAdults] = useState(query.adults || 2)
     const [childrenAges, setChildrenAges] = useState(query.children_ages || [])
+
+    const [isMobile, setIsMobile] = useState(0)
+    const [isTablet, setIsTablet] = useState(0)
+
+    useEffect(() => {
+        setIsMobile(window.screen.width <= 480)
+        setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
+
+        window.addEventListener('resize', () => {
+            setIsMobile(window.screen.width <= 480)
+            setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
+        })
+    }, [])
 
 
     // Обновить данные по мере загрузки Router
@@ -128,6 +141,11 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
                         changeAdults = {changeAdults}
                         changeChildrenAges = {changeChildrenAges}
                     />
+                    {
+                        isTablet ? <div className = {`aside-show-filters${[filtersOpen ? ' aside-show-filters-opened' : '']}`} onClick={() => setFiltersOpen(filtersOpen => !filtersOpen)}>
+                            {filtersOpen ? 'Скрыть' : 'Показать фильтры'}
+                        </div> : ''
+                    }
                     <div className = "aside-direction-form-block aside-direction-form-submit">
                         <button type = "button" className = "aside-direction-form-btn" onClick = {checkForm}>Найти</button>
                     </div>

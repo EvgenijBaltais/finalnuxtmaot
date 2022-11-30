@@ -1,6 +1,19 @@
 import styles from "/styles/hotelbooking/Adult_user.module.css"
+import { useEffect } from "react";
+import Inputmask from "inputmask";
 
 export default function Adult_user ({number}) {
+
+    useEffect(() => {
+
+        if (!document.querySelectorAll('.hotel-bron-input-phone').length) return
+
+        let im = new Inputmask("+7 (999) 999-99-99")
+
+        document.querySelectorAll('.hotel-bron-input-phone').forEach((item) => {
+            im.mask(item)
+        })
+    }, [])
 
     function chooseData () {
 
@@ -56,7 +69,7 @@ export default function Adult_user ({number}) {
                     </div>
                 </div>
                 <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
-                    <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-phone"]}`} placeholder = "Телефон" />
+                    <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-phone"]} hotel-bron-input-phone`} placeholder = "Телефон" />
                 </div>
                 <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]} ${styles["hotel-bron-necessarily-wrong"]}`}>
                     <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-email"]}`} placeholder = "Email" />

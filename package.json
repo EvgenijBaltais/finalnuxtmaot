@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "antd": "^4.23.0",
-    "inputmask": "^5.0.7",
+    "inputmask": "^5.0.8-beta.47",
     "next": "^12.2.4",
     "nprogress": "^0.2.0",
     "rc-slider": "^10.0.1",
@@ -23,6 +23,8 @@
     "react-compound-slider": "^3.4.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^18.2.0",
+    "react-imask": "^6.4.3",
+    "react-input-mask": "^3.0.0-alpha.2",
     "react-responsive": "^9.0.0-beta.10",
     "sass": "^1.54.3",
     "smoothscroll-polyfill": "^0.4.4",

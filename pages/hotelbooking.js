@@ -234,7 +234,7 @@ const Hotelbooking = () => {
         }
     }, [])
 
-
+/*
     if (!query.start_date || !query.end_date || !query.adults || !query.id) {
         return <>
             <div className={styles["no-data-query"]}>
@@ -242,6 +242,7 @@ const Hotelbooking = () => {
             </div>
         </>
     }
+*/
 
     if (!hotelData) {
         return <>

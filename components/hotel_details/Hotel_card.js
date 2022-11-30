@@ -10,6 +10,22 @@ const Hotel_card = ({item, hotelInfo, bronPageLink}) => {
     const [servicesMain, setServicesMain] = useState([])
     const [servicesDop, setServicesDop] = useState([])
 
+    const [isMobile, setIsMobile] = useState(0)
+    const [isTablet, setIsTablet] = useState(0)
+    const [isDesktop, setIsDesktop] = useState(0)
+
+    useEffect(() => {
+        setIsMobile(window.screen.width <= 480)
+        setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
+        setIsDesktop(window.screen.width > 860)
+
+        window.addEventListener('resize', () => {
+            setIsMobile(window.screen.width <= 480)
+            setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
+            setIsDesktop(window.screen.width > 860)
+        })
+    }, [])
+
     bronPageLink += '&room=' + item.room_name
 
     let data_arr = bronPageLink.split('&')
@@ -156,7 +172,9 @@ const Hotel_card = ({item, hotelInfo, bronPageLink}) => {
     return (
         <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]}` : styles["select-results__item"]}>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
-                <div className = "slider-show-hide" onClick = {() => changeView(view => !view)}></div>
+                {isDesktop ?
+                    <div className = "slider-show-hide" onClick = {() => changeView(view => !view)}></div> : ''
+                }
                 <Swiper
                     onSlideChange = {slider => addBackgroundImage(slider)}
                     slidesPerView={1}
