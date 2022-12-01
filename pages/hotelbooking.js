@@ -12,6 +12,8 @@ import styles from "../styles/Hotelbooking.module.css"
 
 import Adult_user from "../components/hotelbooking/Adult_user"
 
+let myMap
+
 const Hotelbooking = () => {
 
     const [mapReady, setMapReady] = useState(0)
@@ -51,7 +53,6 @@ const Hotelbooking = () => {
     }, [])
 
     let guestsArr = []
-    let myMap
 
     const childAges = ['до 1 года', '1 год', '2 года', '3 года', '4 года', '5 лет', '6 лет', '7 лет', '8 лет', '9 лет', '10 лет', '11 лет', '12 лет',
     '13 лет', '14 лет', '15 лет', '16 лет', '17 лет']
@@ -202,7 +203,6 @@ const Hotelbooking = () => {
         if (!isDesktop) {
             return
         }
-
         if (!mapReady) {
             return
         }
@@ -214,10 +214,11 @@ const Hotelbooking = () => {
 
         setTimeout(() => {
             try{
+                console.log(ymaps)
                 ymaps.ready(init)
             }
             catch(e){}
-        })
+        }, 100)
 
     }, [mapReady])
 
@@ -240,6 +241,11 @@ const Hotelbooking = () => {
             day_2 = new Date(day_two.slice(0, 4), day_two.slice(5, 7), day_two.slice(8, 10))
             
         return (day_2 - day_1) / (60 * 60 * 24 * 1000)
+    }
+
+    function changeCheckbox () {
+        console.log(event.target.parentElement.querySelector('#bron-agree-checkbox-1').checked)
+        event.target.parentElement.querySelector('label').style.color = 'rgb(51,51,51)'
     }
 
     function checkFormAndContinue () {
@@ -321,8 +327,19 @@ const Hotelbooking = () => {
                 users.push(obj)
         })
 
+        if (!document.querySelector('#bron-agree-checkbox-1').checked) {
+            document.querySelector('#bron-agree-checkbox-1').parentElement.querySelector('label').style.color = 'red'
+            incorrectFields++
+        }
+
         console.log(children)
-        console.log(obj)
+        console.log(users)
+
+        if (incorrectFields) {
+            setSendingForm(0)
+            event.target.innerText = 'Отправить'
+            return false
+        }
 
         //setFormState(1)
     }
@@ -425,8 +442,12 @@ const Hotelbooking = () => {
                         </div>
                     </div>
                     <div className = {styles["hotel-bron-map__after"]}>
-                        <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? ' active' : ''}`} onClick = {() => setMapState(mapState => !mapState)}>Как проехать</a>
-                        <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? '' : ' active'}`} onClick = {() => setMapState(mapState => !mapState)}>Отель на карте</a>
+                        <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? ' active' : ''}`}
+                            onClick = {() => setMapState(1)}
+                        >Как проехать</a>
+                        <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? '' : ' active'}`}
+                            onClick = {() => setMapState(0)}
+                        >Отель на карте</a>
                     </div>
                 </div>
                 : ''}
@@ -530,7 +551,7 @@ const Hotelbooking = () => {
                                 }
                                 <div className={styles["hotel-bron-required-attention-w"]}>
                                     <div className = "subscribe-agree">
-                                        <input type="checkbox" id="bron-agree-checkbox-1" className = {styles["broned"]} defaultChecked /> 
+                                        <input type="checkbox" id="bron-agree-checkbox-1" className = {styles["broned"]} defaultChecked onChange = {changeCheckbox} /> 
                                         <label htmlFor="bron-agree-checkbox-1">
                                         Я соглашаюсь с политикой конфиденциальности</label>
                                     </div>
