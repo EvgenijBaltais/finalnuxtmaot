@@ -14,6 +14,22 @@ const Hoteldetail_form = ({hotel_name, setRoomsData, setBronPageLink, hotel_id})
     const [childrenAges, setChildrenAges] = useState([])
     const { query } = useRouter()
 
+    const [isMobile, setIsMobile] = useState(0)
+    const [isTablet, setIsTablet] = useState(0)
+    const [isDesktop, setIsDesktop] = useState(0)
+
+    useEffect(() => {
+        setIsMobile(window.screen.width <= 480)
+        setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
+        setIsDesktop(window.screen.width > 860)
+
+        window.addEventListener('resize', () => {
+            setIsMobile(window.screen.width <= 480)
+            setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
+            setIsDesktop(window.screen.width > 860)
+        })
+    }, [])
+
     useEffect(() => {
 
         setDateIn(query.datein)
@@ -77,6 +93,39 @@ const Hoteldetail_form = ({hotel_name, setRoomsData, setBronPageLink, hotel_id})
         })
     }
 
+    function openMobileNav () {
+
+        event.target.parentElement.classList.contains('opened') ?
+        event.target.parentElement.classList.remove('opened') :
+        event.target.parentElement.classList.add('opened')
+    }
+
+    function scrollToSection () {
+
+        event.preventDefault()
+
+        event.target.parentElement.parentElement.parentElement.classList.remove('opened')
+        
+        document.getElementById(event.target.getAttribute('href').slice(1)).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        })
+    }
+
+    function closeMenuByClick () {
+
+        if (!event.target.classList.contains('hoteldetail-navigation-menu__item')) {
+            event.target.parentElement.parentElement.classList.remove('opened')
+        }
+    }
+
+    function mobileNavToggle () {
+
+        event.target.parentElement.classList.contains('opened') ?
+        event.target.parentElement.classList.remove('opened') :
+        event.target.parentElement.classList.add('opened')
+    }
+
     return (
         <section className = "hoteldetail-form">
             <div className = "selection-form-item">
@@ -99,6 +148,43 @@ const Hoteldetail_form = ({hotel_name, setRoomsData, setBronPageLink, hotel_id})
                                 changeChildrenAges = {changeChildrenAges}
                             />
                         </div>
+                        {!isDesktop ?
+                            <div className = "hoteldetail-navigation-top">
+                                <div className = "hoteldetail-navigation-info">Навигация по странице</div>
+                                <div className="hoteldetail-navigation-pic" onClick = {mobileNavToggle}></div>
+                                <div className="hoteldetail-navigation-inside" onClick = {openMobileNav}></div>
+                                <div className="hoteldetail-navigation-menu">
+                                    <div className="hoteldetail-navigation-menu__w" onClick = {closeMenuByClick}>
+                                        <a className="hoteldetail-navigation-menu__item active"
+                                            href="#all-rooms"
+                                            onClick={scrollToSection}
+                                            data-value = "1">Поиск номеров</a>
+                                    </div>
+
+                                    <div className="hoteldetail-navigation-menu__w">
+                                        <a className="hoteldetail-navigation-menu__item"
+                                            href="#rooms-info"
+                                            onClick={scrollToSection}
+                                            data-value = "2" >Об отеле</a>
+                                    </div>
+
+                                    <div className="hoteldetail-navigation-menu__w">
+                                        <a
+                                            className="hoteldetail-navigation-menu__item"
+                                            href="#hotel-service"
+                                            onClick={scrollToSection}
+                                            data-value = "3">Услуги</a>
+                                    </div>
+
+                                    <div className="hoteldetail-navigation-menu__w">
+                                        <a className="hoteldetail-navigation-menu__item"
+                                            href="#contacts"
+                                            onClick={scrollToSection}
+                                            data-value = "4">Контакты</a>
+                                    </div>
+                                </div>
+                            </div>
+                        :''}
                         <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-submit">
                             <button type = "button" className = "hoteldetail-direction-form-btn" onClick = {event => checkForm(event)}>Найти</button>
                         </div>

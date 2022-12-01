@@ -7,17 +7,23 @@ export default function Adult_user ({number}) {
     useEffect(() => {
 
         if (!document.querySelectorAll('.hotel-bron-input-phone').length) return
+        if (!document.querySelectorAll('.hotel-bron-input-birthday').length) return
+
+        let elem = document.querySelector(`.hotel-bron-ready__guest-${number}`)
 
         let im = new Inputmask("+7 (999) 999-99-99")
+        let imDate = new Inputmask("99/99/9999")
 
-        document.querySelectorAll('.hotel-bron-input-phone').forEach((item) => {
+        elem.querySelectorAll('.hotel-bron-input-phone').forEach((item) => {
             im.mask(item)
+        })
+
+        elem.querySelectorAll('.hotel-bron-input-birthday').forEach((item) => {
+            imDate.mask(item)
         })
     }, [])
 
     function chooseData () {
-
-        console.log(event.target)
 
         event.target.parentElement.parentElement.classList.contains('opened-list') && event.target.classList.contains('hotel-bron-clickarea') ?
         event.target.parentElement.parentElement.classList.remove('opened-list') :
@@ -25,55 +31,39 @@ export default function Adult_user ({number}) {
     }
 
     function chooseVariant () {
-        console.log(event.target.innerText)
         event.target.parentElement.querySelector('.hotel-bron-inside__default').innerText = event.target.innerText
         event.target.parentElement.parentElement.parentElement.classList.remove('opened-list')
     }
 
     return (
-        <div className={styles["hotel-bron-ready__guest"]}>
+        <div className={`hotel-bron-ready__guest hotel-bron-ready__guest-${number}`}>
             <p className={styles["guest-text-title"]}>Гость {number} <span>(покупатель)</span></p>
             <div className={styles["hotel-bron-inputs-w"]}>
                 <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
-                    <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-surname"]}`} placeholder = "Фамилия" />
+                    <input type="text" name = "surname" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-surname"]}`} placeholder = "Фамилия" />
                 </div> 
                 <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
-                    <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-name"]}`} placeholder = "Имя" />
+                    <input type="text" name = "name" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-name"]}`} placeholder = "Имя" />
                 </div>
                 <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-not-necessarily"]}`}>
-                    <input type="text" className={`
+                    <input type="text" name = "patronymic" className={`
                         ${styles["hotel-bron-input"]}
                         ${styles["hotel-bron-input-patronymic"]}`}
                     placeholder = "Отчество" />
                 </div>
-                <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]} hotel-bron-citizenship`} onClick = {chooseData}>
-                    <div className={`${styles["hotel-bron-block"]} ${styles["hotel-bron-input-citizenship"]} hotel-bron-input-citizenship`}>
-                        <div className={`${styles["hotel-bron-clickarea"]} hotel-bron-clickarea`}></div>
-                        <div className={`${styles["hotel-bron-input-arrow"]} hotel-bron-input-arrow`}></div>
-                        <div className={styles["hotel-bron-inside"]}>
-                            <div className = {`${styles["hotel-bron-inside__item"]} ${styles["hotel-bron-inside__default"]} hotel-bron-inside__default`}>Гражданство</div>
-                            <div className={`${styles["hotel-bron-inside__item"]} hotel-bron-inside__item`} onClick = {chooseVariant}>Российская Федерация</div>
-                            <div className={`${styles["hotel-bron-inside__item"]} hotel-bron-inside__item`} onClick = {chooseVariant}>Иное</div>
-                        </div>
-                    </div>
-                </div>
-                <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]} hotel-bron-sex`} onClick = {chooseData}>
-                    <div className={`${styles["hotel-bron-block"]} ${styles["hotel-bron-input-sex"]} hotel-bron-input-sex`}>
-                        <div className={`${styles["hotel-bron-clickarea"]} hotel-bron-clickarea`}></div>
-                        <div className={`${styles["hotel-bron-input-arrow"]} hotel-bron-input-arrow`}></div>
-                        <div className={styles["hotel-bron-inside"]}>
-                            <div className = {`${styles["hotel-bron-inside__item"]} ${styles["hotel-bron-inside__default"]} hotel-bron-inside__default`}>Пол</div>
-                            <div className={styles["hotel-bron-inside__item"]} onClick = {chooseVariant}>Мужской</div>
-                            <div className={styles["hotel-bron-inside__item"]} onClick = {chooseVariant}>Женский</div>
-                        </div>
-                    </div>
-                </div>
                 <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
-                    <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-phone"]} hotel-bron-input-phone`} placeholder = "Телефон" />
+                    <input type="text" name = "birthday" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-birthday"]} hotel-bron-input-birthday`} placeholder = "Дата рождения" />
                 </div>
-                <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]} ${styles["hotel-bron-necessarily-wrong"]}`}>
-                    <input type="text" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-email"]}`} placeholder = "Email" />
-                </div>
+                {number == 1 ?
+                    <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
+                        <input type="text" name = "phone" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-phone"]} hotel-bron-input-phone`} placeholder = "Телефон" />
+                    </div>
+                : ''}
+                {number == 1 ?
+                    <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
+                        <input type="text" name = "email" className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-email"]}`} placeholder = "Email" />
+                    </div>
+                : ''}
             </div>
         </div>
     )

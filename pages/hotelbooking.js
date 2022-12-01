@@ -30,7 +30,25 @@ const Hotelbooking = () => {
     const [formState, setFormState] = useState(0)
     const [servicesState, setServicesState] = useState(0)
 
+    const [sendingForm, setSendingForm] = useState(0)
+
     const [mapState, setMapState] = useState(0)
+
+    const [isMobile, setIsMobile] = useState(0)
+    const [isTablet, setIsTablet] = useState(0)
+    const [isDesktop, setIsDesktop] = useState(0)
+
+    useEffect(() => {
+        setIsMobile(window.screen.width <= 480)
+        setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
+        setIsDesktop(window.screen.width > 860)
+
+        window.addEventListener('resize', () => {
+            setIsMobile(window.screen.width <= 480)
+            setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
+            setIsDesktop(window.screen.width > 860)
+        })
+    }, [])
 
     let guestsArr = []
     let myMap
@@ -78,7 +96,6 @@ const Hotelbooking = () => {
             fetch(link)
             .then((result) => result.json())
             .then((result) => {
-                console.log(result.data)
 
                 if (result.data.length > 0) {
 
@@ -108,9 +125,6 @@ const Hotelbooking = () => {
     useEffect(() => {
 
         if (actualRoom == 0 || hotelData == 0) return
-
-        console.log(actualRoom)
-        console.log(hotelData)
 
         // Заполнить главные услуги
         let servicesArr = []
@@ -185,6 +199,10 @@ const Hotelbooking = () => {
 
     useEffect(() => {
 
+        if (!isDesktop) {
+            return
+        }
+
         if (!mapReady) {
             return
         }
@@ -195,7 +213,10 @@ const Hotelbooking = () => {
         myMap ? myMap.destroy() : ''
 
         setTimeout(() => {
-            ymaps.ready(init)
+            try{
+                ymaps.ready(init)
+            }
+            catch(e){}
         })
 
     }, [mapReady])
@@ -224,7 +245,86 @@ const Hotelbooking = () => {
     function checkFormAndContinue () {
         //formState == 0 
 
-        setFormState(1)
+        if (sendingForm != 0) return false
+
+        setSendingForm(1)
+        event.target.innerText = 'Отправка...'
+
+        let form = event.target.parentElement.parentElement.querySelector('.hotel-bron-ready-form-item')
+
+        let people_number = form.querySelectorAll('.hotel-bron-ready__guest').length
+
+        //let str = form.querySelectorAll('.hotel-bron-ready__guest')[0]
+
+        let incorrectFields = 0
+        let users = []
+        let childObj = {}
+        let obj = {}
+
+        form.querySelectorAll('.hotel-bron-ready__guest').forEach((item, index) => {
+
+                // Фамилия
+                if (item.querySelector('input[name="surname"]').value.length > 2) {
+                    obj.surname = item.querySelector('input[name="surname"]').value
+                }
+                else {
+                    incorrectFields++
+                    item.querySelector('input[name="surname"]').parentElement.classList.add('hotel-bron-necessarily-wrong')
+                }
+
+                // Имя
+                if (item.querySelector('input[name="name"]').value.length > 2) {
+                    obj.name = item.querySelector('input[name="name"]').value
+                }
+                else {
+                    incorrectFields++
+                    item.querySelector('input[name="name"]').parentElement.classList.add('hotel-bron-necessarily-wrong')
+                }
+
+                // Отчество
+
+                item.querySelector('input[name="patronymic"]').value.length > 2 ? obj.patronymic = item.querySelector('input[name="patronymic"]').value : obj.patronymic = ''
+
+                // День Рождения
+
+                if (item.querySelector('input[name="birthday"]').inputmask.isComplete()) {
+                    obj.birthday = item.querySelector('input[name="birthday"]').value
+                }
+                else {
+                    incorrectFields++
+                    item.querySelector('input[name="birthday"]').parentElement.classList.add('hotel-bron-necessarily-wrong')
+                }
+
+                // Если не первый гость, то эти данные не надо собирать
+                if (index != 0) {
+                    users.push(obj)
+                    return
+                }
+
+                // Телефон
+                if (item.querySelector('input[name="phone"]').inputmask.isComplete()) {
+                    obj.phone = item.querySelector('input[name="phone"]').value
+                }
+                else {
+                    incorrectFields++
+                    item.querySelector('input[name="phone"]').parentElement.classList.add('hotel-bron-necessarily-wrong')
+                }
+
+                // Email
+                if (item.querySelector('input[name="email"]').value.indexOf('@') != -1) {
+                    obj.email = item.querySelector('input[name="email"]').value
+                }
+                else {
+                    incorrectFields++
+                    item.querySelector('input[name="email"]').parentElement.classList.add('hotel-bron-necessarily-wrong')
+                }
+                users.push(obj)
+        })
+
+        console.log(children)
+        console.log(obj)
+
+        //setFormState(1)
     }
 
     // Удалить яндекс карты
@@ -294,6 +394,7 @@ const Hotelbooking = () => {
                     <div className = {styles["arrow-left"]}></div>
                     <div className = {styles["arrow-right"]}></div>
                 </div>
+                {isDesktop ? 
                 <div className={styles["hotel-bron-map-w"]}>
                     <div className={styles["hotel-bron-map"]} id = "map" style = {{'display': [mapState ? 'none' : 'block']}}>
                         <div className = {styles["hotel-bron-info"]}>
@@ -328,12 +429,12 @@ const Hotelbooking = () => {
                         <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? '' : ' active'}`} onClick = {() => setMapState(mapState => !mapState)}>Отель на карте</a>
                     </div>
                 </div>
+                : ''}
             </div>
             <div className={styles["hotel-bron-data-title"]}>
-                <div className={styles["hotel-bron-data-title"]}>
-                    <h3 className={styles["hotel-bron-data-title__h3"]}>Отель <a>{hotelData.name}</a></h3>
-                    <h4 className={styles["hotel-bron-data-title__h4"]}>Номер <a>{query.room}</a></h4>
-                </div>
+
+                <h3 className={styles["hotel-bron-data-title__h3"]}>Отель <a>{hotelData.name}</a></h3>
+                <h4 className={styles["hotel-bron-data-title__h4"]}>Номер <a>{query.room}</a></h4>
 
                 <div className={styles["hotel-bron-services-w"]}>
                     <div className={styles["hotel-bron-services-small"]}>
@@ -410,7 +511,7 @@ const Hotelbooking = () => {
                         </div>
 
                         <div className={styles["hotel-bron-ready-form"]}>
-                            <form action="" name = "hotel-bron-ready-form">
+                            <form action="" name = "hotel-bron-ready-form" className="hotel-bron-ready-form-item">
                                 {guests.map((item, index) => {
                                         return <Adult_user key = {index} number = {item + 1} />
                                     }
@@ -429,7 +530,7 @@ const Hotelbooking = () => {
                                 }
                                 <div className={styles["hotel-bron-required-attention-w"]}>
                                     <div className = "subscribe-agree">
-                                        <input type="checkbox" id="bron-agree-checkbox-1" className = {styles["broned"]} /> 
+                                        <input type="checkbox" id="bron-agree-checkbox-1" className = {styles["broned"]} defaultChecked /> 
                                         <label htmlFor="bron-agree-checkbox-1">
                                         Я соглашаюсь с политикой конфиденциальности</label>
                                     </div>
@@ -440,7 +541,7 @@ const Hotelbooking = () => {
                             </form>
                         </div>
                         <div className={styles["hotel-bron-btn-w"]}>
-                        <button className={styles["hotel-bron-btn"]} onClick = {checkFormAndContinue}>Далее</button>
+                        <button className={styles["hotel-bron-btn"]} onClick = {checkFormAndContinue}>Отправить</button>
                     </div>
                     </div>
                     ) : ('')

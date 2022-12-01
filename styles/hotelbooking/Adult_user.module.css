@@ -30,6 +30,10 @@
     margin-right: 0;
 }
 
+.hotel-bron-input-w:nth-child(6) {
+    margin-right: 0;
+}
+
 .hotel-bron-input {
     display: block;
     outline: 0!important;
@@ -122,6 +126,11 @@
 .hotel-bron-input :-moz-placeholder      {color: #676767;}
 .hotel-bron-input :-ms-input-placeholder {color: #676767;}
 
+.hotel-bron-input-birthday {
+    width: 245px;
+    height: 60px;
+}
+
 .hotel-bron-input-phone {
     width: 245px;
     height: 60px;
@@ -134,20 +143,6 @@
 
 .hotel-bron-necessarily {
     position: relative;
-}
-
-.hotel-bron-necessarily-wrong input {
-    border-color: rgb(254,0,0)!important;
-}
-
-.hotel-bron-necessarily-wrong:before {
-    content: 'Неправильные данные';
-    position: absolute;
-    top: -15px;
-    left: 0;
-    color: rgb(254,0,0);
-    font-size: 11px;
-    line-height: 12px;
 }
 
 .hotel-bron-not-necessarily:before {
@@ -180,4 +175,32 @@
     bottom: 0;
     margin: auto;
     z-index: 6;
+}
+
+@media only screen and (max-width: 1150px) {
+
+    .hotel-bron-input-w {
+        display: block;
+        margin-right: 20px;
+        width: calc(33.3% - 15px);
+    }
+
+    .hotel-bron-input {
+        display: block;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .hotel-bron-input-w {
+        display: block;
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .hotel-bron-input {
+        display: block;
+        width: 100%;
+    }
 }

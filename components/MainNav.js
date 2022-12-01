@@ -34,6 +34,10 @@ const MainNav = () => {
  
     WindowOutClick()
 
+    //useEffect(() => {
+    //    console.log(router)
+    //}, [router.isReady])
+
     return (
         <header className = {styles["header"]} >
         

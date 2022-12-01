@@ -294,6 +294,20 @@ body {
 	opacity: 1;
 }
 
+.hotel-bron-necessarily-wrong input {
+    border-color: rgb(254,0,0)!important;
+}
+
+.hotel-bron-necessarily-wrong:before {
+    content: 'Неправильные данные';
+    position: absolute;
+    top: -15px;
+    left: 0;
+    color: rgb(254,0,0);
+    font-size: 11px;
+    line-height: 12px;
+}
+
 .aside-cheap-block-w {
 	position: relative;
 	display: flex;
@@ -4003,6 +4017,7 @@ input[type="checkbox"].substylized:checked + label:after {
     width: 250px;
     z-index: 2;
     box-shadow: var(--main-shadow);
+	z-index: 12;
 }
 
 .hoteldetail-search-results-adults {
@@ -4346,6 +4361,12 @@ input[type="checkbox"].substylized:checked + label:after {
 	.hotel-slider__items .swiper-button-prev {
 		top: 192px;
 	}
+
+	.secondary-h1 {
+		padding: 40px 0;
+		font-size: 45px;
+		line-height: 50px;
+	}
 }
 
 
@@ -4567,6 +4588,117 @@ input[type="checkbox"].substylized:checked + label:after {
 	.hoteldetail-direction-form-way {
 		width: calc(100% - 320px);
 	}
+
+	.hoteldetail-navigation-top {
+		position: absolute;
+		width: 305px;
+		top: 110px;
+		height: 60px;
+		padding-left: 15px;
+		padding-right: 20px;
+		box-shadow: var(--main-shadow);
+		border-radius: 10px;
+		cursor: pointer;
+		background-color: #fff;
+		overflow: hidden;
+	}
+
+	.opened.hoteldetail-navigation-top {
+		overflow: visible;
+	}
+
+	.hoteldetail-navigation-pic {
+		position: absolute;
+		right: 20px;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		width: 15px;
+		height: 15px;
+		background: url('/images/icons/down-arrow-grey.svg');
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		z-index: 10;
+		transform: rotate(0);
+		transition: transform .2s;
+	}
+
+	.opened .hoteldetail-navigation-pic {
+		transform: rotate(180deg);
+		transition: transform .2s;
+	}
+
+	.hoteldetail-navigation-inside {
+		position: absolute;
+		width: 100%;
+		height: 60px;
+		top: 0;
+		left: 0;
+		z-index: 9;
+		cursor: pointer;
+	}
+
+	.opened .hoteldetail-navigation-inside {
+		z-index: 0;
+	}
+
+	.hoteldetail-navigation-info {
+		position: absolute;
+		top: 3px;
+		left: 15px;
+		color: #8B8B8B;
+		font-size: 10px;
+		line-height: 10px;
+		font-family: 'FontInter';
+		z-index: 10;
+	}
+
+	.hoteldetail-navigation-menu {
+		position: absolute;
+		width: 100%;
+		top: 0;
+		left: 0;
+		background-color: #fff;
+		box-shadow: var(--main-shadow);
+		z-index: 6;
+		border-radius: 10px;
+		overflow: hidden;
+	}
+
+	.hoteldetail-navigation-menu__item.active {
+		color: #FF2C2F;
+	}
+
+	.hoteldetail-navigation-menu__w {
+		width: 100%;
+		height: 55px;
+		padding-left: 15px;
+	}
+
+	.hoteldetail-navigation-menu__item {
+		font-size: 18px;
+		line-height: 55px;
+		font-family: 'FontInterMedium';
+		color: rgb(5, 117, 229);
+		background-color: #fff;
+	}
+
+	.hoteldetail-direction-form-block .datepicker-w {
+		top: 85px;
+		right: 0;
+		z-index: 12;
+	}
+
+	.hoteldetail-guests-block-w {
+		top: 85px;
+		right: 0;
+		left: auto;
+	}
+
+	.bron-step-1 {
+		padding-top: 20px;
+	}
 }
 
 @media (min-width: 480px) and (max-width: 860px) {
@@ -4721,6 +4853,14 @@ input[type="checkbox"].substylized:checked + label:after {
 	.hoteldetail-swiper .hotel-slider__item {
 		height: 65px;
 	}
+
+	.hoteldetail-direction-form-block .datepicker-w {
+		right: -100px;
+	}
+
+	.hoteldetail-navigation-top {
+		width: 205px;
+	}
 }
 
 @media screen and (max-width: 480px) {
@@ -4842,7 +4982,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 
 	.datepicker-w {
-		width: 213%;
+		width: calc(200% + 32px);
 		top: 75px;
 		right: 0;
 		left: 0;
@@ -4950,7 +5090,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 	.hoteldetail-search-dates {
 		width: 100%;
-		margin-bottom: 15px;
+		margin-bottom: 20px;
 	}
 
 	.hoteldetail-direction-form-in,
@@ -4970,7 +5110,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 
 	.hoteldetail-form-way-input {
-		border-radius: 10px;
+		border-radius: 8px;
 	}
 
 	.hoteldetail-direction-form-submit {
@@ -4991,6 +5131,43 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .hotel-slider__items .swiper-button-prev {
 	top: 88px;
+}
+
+.hoteldetail-direction-form-submit {
+	top: 86px;
+}
+
+.hoteldetail-form-way-input {
+	font-size: 16px;
+}
+
+.hoteldetail-navigation-top {
+	width: 100%;
+	top: 168px;
+}
+
+.hoteldetail-direction-form-w {
+	margin-bottom: 0;
+    padding-bottom: 110px;
+}
+
+.hoteldetail-direction-form-block .datepicker-w {
+	top: 62px;
+}
+
+.hoteldetail-direction-form-in .datepicker-w {
+	left: -3px
+}
+
+.hoteldetail-direction-form-out .datepicker-w {
+	left: calc(-100% - 29px);
+	right: auto;
+}
+
+.hoteldetail-guests-block-w {
+	width: calc(200% + 32px);
+	top: 62px;
+	left: -3px;
 }
 
 }

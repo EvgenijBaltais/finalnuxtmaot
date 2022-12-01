@@ -227,10 +227,6 @@
     margin-top: 20px
 }
 
-.hotel-bron-ready-item-w {
-
-}
-
 .hotel-bron-ready-green-w {
     width: 135px;
     height: 75px;
@@ -264,6 +260,10 @@
     font-size: 14px;
     line-height: 16px;
     text-align: center;
+}
+
+.hotel-bron-ready-item-w {
+
 }
 
 .hotel-bron-ready-somediv {
@@ -343,7 +343,6 @@
     box-shadow: var(--main-shadow);
     border-radius: 10px;
 }
-
 
 .guest-text-title {
     color: rgb(6,117,232);
@@ -634,4 +633,141 @@ input[type="checkbox"].broned:checked + label:after {
     font-family: 'FontInterSemiBold';
     text-decoration: underline;
     cursor: pointer;
+}
+
+
+@media screen and (max-width: 1280px) {
+
+    .hotel-bron-slider {
+        width: calc(60% - 10px);
+    }
+    .hotel-bron-map-w {
+        width: calc(40% - 10px);
+    }
+
+    .hotel-bron-top {
+        margin: 0 1rem;
+    }
+
+    .hotel-bron-data-title {
+        max-width: 100%;
+         margin: 0 3rem;
+    }
+}
+
+
+@media screen and (max-width: 1050px) {
+
+    .hotel-bron-ready-item {
+        width: 115px;
+        height: 70px;
+        padding: 10px 15px;
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .hotel-bron-ready-next {
+        width: 50px;
+    }
+
+    .hotel-bron-ready-middle {
+        margin: 16px 20px;
+    }
+
+    .hotel-bron-ready-green-w {
+        width: 115px;
+        height: 70px;
+    }
+
+    .hotel-bron-ready__text {
+        margin-top:15px
+    }
+    .hotel-bron-ready-middle {
+        width: 0;
+        margin: 16px 20px;
+    }
+
+    .hotel-bron-ready-item-w {
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 860px) {
+
+    .hotel-bron-data-title__h3 {
+        margin-top: 30px;
+    }
+
+    .hotel-bron-ready-item {
+        width: 150px;
+    }
+
+    .hotel-bron-slider {
+        width: 100%;
+    }
+
+    .hotel-bron-ready-item-w {
+        width: 100%;
+    }
+
+    .hotel-bron-ready-middle {
+        display: none;
+    }
+
+    .hotel-bron-ready-adults {
+        margin-right: 50px;
+    }
+    .hotel-bron-ready-item-w {
+        margin-bottom: 25px;
+    }
+
+    .hotel-bron-ready-form {
+        padding: 0;
+        box-shadow: none;
+    }
+
+    .hotel-bron-services-w {
+        flex-wrap: wrap;
+    }
+
+    .hotel-bron-services-small {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .hotel-bron-services-big {
+        width: 100%;
+    }
+
+    .hotel-bron-data-title {
+         margin: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 650px) {
+
+    .hotel-bron-top {
+        margin: 0;
+    }
+    .hotel-bron-data-title {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .hotel-bron-ready-item {
+        width: 120px;
+    }
+
+    .hotel-bron-ready__text {
+        margin-top:10px
+    }
+
+
+    .hotel-bron-services-w {
+        display: flex;
+        justify-content: space-between;
+        padding: 25px 0 0 0;
+    }
 }

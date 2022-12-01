@@ -18,7 +18,7 @@ ${router.route == '/hotels' ? ' search-page' : ''}
   return (
     <div className={`wrapper${ decorate}`}>
         <MainNav />
-          <main className={`main${router.route == '/hotels' ? ' search-page-main' : ''}`}>{children}</main>
+        <main className={`main${router.route == '/hotels' ? ' search-page-main' : ''}`}>{children}</main>
         <Footer />
     </div>
   )
