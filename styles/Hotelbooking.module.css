@@ -35,7 +35,6 @@
     background: #fff;
     box-shadow: var(--main-shadow);
     border-radius: 10px;
-    overflow: hidden;
 }
 
 .hotel-bron-map {
@@ -45,6 +44,8 @@
     left: 0;
     right: 0;
     margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
 .hotel-bron-way-w {
@@ -79,6 +80,8 @@
     right: 0;
     width: 100%;
     height: 40px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .hotel-bron-map__link {

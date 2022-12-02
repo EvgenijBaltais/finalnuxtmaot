@@ -247,24 +247,15 @@ const Hotelbooking = () => {
     }
 
     function checkFormAndContinue () {
-        //formState == 0 
-
-        setFormState(1)
 
         if (sendingForm != 0) return false
 
-        setSendingForm(1)
         event.target.innerText = 'Отправка...'
 
-        let form = event.target.parentElement.parentElement.querySelector('.hotel-bron-ready-form-item')
-
-        let people_number = form.querySelectorAll('.hotel-bron-ready__guest').length
-
-        //let str = form.querySelectorAll('.hotel-bron-ready__guest')[0]
-
+        let target = event.target
+        let form = target.parentElement.parentElement.querySelector('.hotel-bron-ready-form-item')
         let incorrectFields = 0
         let users = []
-        let childObj = {}
 
         form.querySelectorAll('.hotel-bron-ready__guest').forEach((item, index) => {
 
@@ -333,16 +324,91 @@ const Hotelbooking = () => {
             incorrectFields++
         }
 
-        //console.log(children)
-        console.log(users)
-
         if (incorrectFields) {
             setSendingForm(0)
             event.target.innerText = 'Отправить'
             return false
         }
 
-        //setFormState(1)
+        let ucomment = '\n'
+
+        // Данные отеля
+        
+        ucomment += 'Отель: ' + hotelData.name + '\n'
+        ucomment += 'Номер: ' + query.room + '\n\n'
+
+        // Данные взрослых гостей
+        for (let i = 0; i < users.length; i++) {
+
+            if (i > 0) {
+                ucomment += '\n'
+            }
+
+            ucomment += `Гость ${(i + 1)}:\n`
+            users[i].name ? ucomment += `Имя: ${users[i].name}\n` : ''
+            users[i].surname ? ucomment += `Фамилия: ${users[i].surname}\n` : ''
+            users[i].patronymic ? ucomment += `Отчество: ${users[i].patronymic}\n` : ''
+            users[i].birthday ? ucomment += `Дата рождения: ${users[i].birthday}\n` : ''
+        }
+
+        // Данные детей
+        for (let i = 0; i < children.length; i++) {
+            ucomment += '\n'
+            ucomment += `Ребенок ${(i + 1)}, возраст: ${children[i]}:\n`
+        }
+
+        ucomment += `\n`
+
+        let str_obj = {
+            'uname': users[0].name,
+            'email': users[0].email,
+            'phone': users[0].phone,
+            'ucomment': ucomment,
+            'u': document.body.getAttribute('data-u')
+        }
+
+        // Отправка строки, с передачей объекта какие-то проблемы
+        let str = ''
+            str += 'uname=' + users[0].name
+            str += '&email=' + (users[0].email || '')
+            str += '&phone=' + users[0].phone
+            str += '&ucomment=' + ucomment
+            str += '&email=' + users[0].email
+            str += '&hotel_id=' + 14946
+            str += '&source=' + 'maotonline.ru'
+            str += '&u=' + document.body.getAttribute('data-u')
+            str += 'date_st=' + query.start_date
+            str += 'date_end=' + query.end_date
+
+        
+        async function sendData () {
+
+            let response = await fetch('https://maot.ru/remote/zayavka_to_knight.php', {
+                method: 'POST',
+                headers: {  
+                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"  
+                },
+                body: str
+            })
+    
+            let result = await response.json()
+            
+            if (result.r == 1) {
+                target.innerText = 'Успешно!'
+                setFormState(1)
+
+                setTimeout(() => {
+                    target.innerText = 'Отправить'
+                    setSendingForm(0)
+                }, 200)
+            }
+
+            else {
+                setFormState(2)
+            }
+        }
+
+        sendData()
     }
 
     // Удалить яндекс карты
@@ -383,7 +449,14 @@ const Hotelbooking = () => {
             <Script id = "y-maps" src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" strategy="afterInteractive" onReady={() => {
                 setMapReady(1)
             }} />
+{/*}
+            <Script
+                src="https://code.jquery.com/jquery-2.2.4.min.js"
+                integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+                crossorigin="anonymous" defer />
 
+            <Script src="https://zarya-tour.ru/frontend/web/js/main/u.js" defer />
+        */}
             <h1 className = "secondary-h1">Бронирование номера</h1>
             <div className={styles["hotel-bron-top"]}>
                 <div className={styles["hotel-bron-slider"]}>
@@ -413,44 +486,44 @@ const Hotelbooking = () => {
                     <div className = {styles["arrow-right"]}></div>
                 </div>
                 {isDesktop ? 
-                <div className={styles["hotel-bron-map-w"]}>
-                    <div className={styles["hotel-bron-map"]} id = "map" style = {{'display': [mapState ? 'none' : 'block']}}>
-                        <div className = {styles["hotel-bron-info"]}>
-                            <p className = {styles["hotel-bron-info__title"]}>{hotelData.name}</p>
-                            <p>Координаты:&nbsp;
+                    <div className={styles["hotel-bron-map-w"]}>
+                        <div className={styles["hotel-bron-map"]} id = "map" style = {{'display': [mapState ? 'none' : 'block']}}>
+                            <div className = {styles["hotel-bron-info"]}>
+                                <p className = {styles["hotel-bron-info__title"]}>{hotelData.name}</p>
+                                <p>Координаты:&nbsp;
+                                    <a className = {styles["hotel-map__coordinates"]}>
+                                        {latitude}, {longitude}
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                        <div className={styles["hotel-bron-way-w"]} style = {{'display': [mapState ? 'block' : 'none']}}>
+                            <div className={styles["hotel-bron-way-block"]}>
+                                <p className="subtitle-bold">Адрес</p>
+                                <p className="hotelData-address">{hotelData.address}</p>
+                            </div>
+                            {
+                            hotelData.howTo ? 
+                            (<div>
+                                <p className="bold-span">Как проехать</p>
+                                <p></p>
+                            </div>) : ('')
+                            }
+                            <div className = {styles["hotel-bron-way-coordinates"]}>Координаты:&nbsp;
                                 <a className = {styles["hotel-map__coordinates"]}>
                                     {latitude}, {longitude}
                                 </a>
-                            </p>
+                            </div>
+                        </div>
+                        <div className = {styles["hotel-bron-map__after"]}>
+                            <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? ' active' : ''}`}
+                                onClick = {() => setMapState(1)}
+                            >Как проехать</a>
+                            <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? '' : ' active'}`}
+                                onClick = {() => setMapState(0)}
+                            >Отель на карте</a>
                         </div>
                     </div>
-                    <div className={styles["hotel-bron-way-w"]} style = {{'display': [mapState ? 'block' : 'none']}}>
-                        <div className={styles["hotel-bron-way-block"]}>
-                            <p className="subtitle-bold">Адрес</p>
-                            <p className="hotelData-address">{hotelData.address}</p>
-                        </div>
-                        {
-                        hotelData.howTo ? 
-                        (<div>
-                            <p className="bold-span">Как проехать</p>
-                            <p></p>
-                        </div>) : ('')
-                        }
-                        <div className = {styles["hotel-bron-way-coordinates"]}>Координаты:&nbsp;
-                            <a className = {styles["hotel-map__coordinates"]}>
-                                {latitude}, {longitude}
-                            </a>
-                        </div>
-                    </div>
-                    <div className = {styles["hotel-bron-map__after"]}>
-                        <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? ' active' : ''}`}
-                            onClick = {() => setMapState(1)}
-                        >Как проехать</a>
-                        <a className = {`${styles["hotel-bron-map__link"]} hotel-bron-map__link${mapState ? '' : ' active'}`}
-                            onClick = {() => setMapState(0)}
-                        >Отель на карте</a>
-                    </div>
-                </div>
                 : ''}
             </div>
             <div className={styles["hotel-bron-data-title"]}>
