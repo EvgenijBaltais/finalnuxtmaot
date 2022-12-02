@@ -3841,17 +3841,32 @@ input[type="checkbox"].substylized:checked + label:after {
 	border-right: 2px solid rgb(255,161,175)
 }
 
+.hoteldetail-close-pic {
+	position: absolute;
+    top: 2px;
+    right: 2px;
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+	background-image: url('/images/icons/white-close.svg');
+	background-size: contain;
+	background-position: center;
+	z-index: 15;
+	cursor: pointer;
+}
+
 .hoteldetail-direction-form-in-active {
 	display: block;
 	position: absolute;
-	left: -2px;
+	left: -3px;
 	right: 0;
 	margin: auto;
 	color: #fff;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 100%;
-	width: calc(100% + 4px);
-	height: 100%;
+	width: calc(100% + 6px);
+	height: calc(100% + 6px);
 	background: var(--red-linear-gradient);
 	z-index: 2;
 	cursor: pointer;
@@ -4546,6 +4561,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 	.aside-fiters-w {
 		display: flex;
+		flex-wrap: wrap;
 		margin-top: 20px;
 	}
 

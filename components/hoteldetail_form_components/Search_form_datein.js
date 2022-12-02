@@ -24,6 +24,16 @@ export default function Search_form_datein(props) {
         [dateOutOpened, setDateOutOpened] = useState(0)
 
 
+        const [isDesktop, setIsDesktop] = useState(0)
+    
+        useEffect(() => {
+            setIsDesktop(window.screen.width > 860)
+    
+            window.addEventListener('resize', () => {
+                setIsDesktop(window.screen.width > 860)
+            })
+        }, [])
+
     function closeDateIn (value, date) {
         setDateInOpened(value)
         setDateOutOpened(1)
@@ -37,9 +47,21 @@ export default function Search_form_datein(props) {
     }
 
     function checkOpenClose (event) {
-        if (event.target.classList.contains('hoteldetail-form-way-input-in')) {
+
+        if (event.target.parentElement.classList.contains('hoteldetail-direction-form-in')) {
+
+            if (dateInOpened == 1) {
+                setDateInOpened(0)
+                return false
+            }
+
             setDateOutOpened(0)
             setDateInOpened(1)
+            return false
+        }
+
+        if (dateOutOpened == 1) {
+            setDateOutOpened(0)
             return false
         }
 
@@ -69,6 +91,9 @@ export default function Search_form_datein(props) {
     return (
         <div className = "hoteldetail-search-dates" ref={wrapperRef}>
             <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-in" >
+
+                {isDesktop ? '' : <div className='hoteldetail-close-pic' onClick = { checkOpenClose }></div>}
+
                 <input type="text" 
                         readOnly = "readonly"
                         className = {`hoteldetail-form-way-input hoteldetail-form-way-input-period hoteldetail-form-way-input-in${
@@ -80,6 +105,9 @@ export default function Search_form_datein(props) {
                 {dateInOpened ? <Datepicker closeFuncdateIn = {closeDateIn} mindate = {props.dateIn} dateIn = {props.dateIn} /> : ""}
             </div>
             <div className = "hoteldetail-direction-form-block hoteldetail-direction-form-out" >
+
+                {isDesktop ? '' : <div className='hoteldetail-close-pic' onClick = { checkOpenClose }></div>}
+
                 <input type="text"
                         readOnly = "readonly" 
                         className = {`hoteldetail-form-way-input hoteldetail-form-way-input-period hoteldetail-form-way-input-out${

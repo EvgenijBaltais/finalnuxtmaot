@@ -182,8 +182,6 @@ function Hoteldetail () {
 
         function scrollingOptions () {
 
-            if (!mapReady) return false
-
             if (!isDesktop) return false
 
             if (!blocksOffsetArr.length) {
@@ -208,7 +206,7 @@ function Hoteldetail () {
         return () => {
             window.removeEventListener('scroll', scrollingOptions)
         }
-    }, [mapReady])
+    }, [])
 
 
     // Удалить яндекс карты
