@@ -430,8 +430,11 @@ const Hotelbooking = () => {
     if (!hotelData) {
         return <>
             <style jsx global>{`
-                .main {
-                    opacity: 0
+                .footer {
+                    display:none
+                }
+                .header {
+                    display:none
                 }
             `}</style>
         </>

@@ -220,6 +220,14 @@ function Hoteldetail () {
 
     if (!hotelData) {
         return <>
+            <style jsx global>{`
+                .footer {
+                    display:none
+                }
+                .header {
+                    display:none
+                }
+            `}</style>
             <img src = "/images/waiting.gif" className = "waiting-hotel-image" />
         </>
     }

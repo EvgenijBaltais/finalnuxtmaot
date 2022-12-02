@@ -48,7 +48,7 @@ const MainNav = () => {
     }, [])
 
     return (
-        <header className = {styles["header"]} >
+        <header className = {`${styles["header"]} header`} >
         
             <div className =  {visibleMenu ? "hh-bg hhbg-fix" : "hh-bg "}></div>
 
