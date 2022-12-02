@@ -4,7 +4,9 @@ import styles from "../../styles/Hoteldetail.module.css"
 const Hotel_search_result = ({ items, hotelData, bronPageLink }) => {
 
     if (!items) return (
-        <div className = {`${styles["select-results"]} block-scrolling-item`} id = "all-rooms">Загрузка...</div>
+        <div className = {`${styles["select-results"]} block-scrolling-item`} id = "all-rooms">
+            <img src = "/images/waiting.gif" className = "waiting-hotel-image-small" />
+        </div>
     )
 
     if (items.length > 0) return (

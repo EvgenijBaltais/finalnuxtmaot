@@ -431,10 +431,10 @@ const Hotelbooking = () => {
         return <>
             <style jsx global>{`
                 .footer {
-                    display:none
+                    visibility:hidden
                 }
                 .header {
-                    display:none
+                    visibility:hidden
                 }
             `}</style>
         </>
