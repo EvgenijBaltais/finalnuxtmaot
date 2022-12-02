@@ -214,7 +214,6 @@ const Hotelbooking = () => {
 
         setTimeout(() => {
             try{
-                console.log(ymaps)
                 ymaps.ready(init)
             }
             catch(e){}
@@ -244,12 +243,13 @@ const Hotelbooking = () => {
     }
 
     function changeCheckbox () {
-        console.log(event.target.parentElement.querySelector('#bron-agree-checkbox-1').checked)
         event.target.parentElement.querySelector('label').style.color = 'rgb(51,51,51)'
     }
 
     function checkFormAndContinue () {
         //formState == 0 
+
+        setFormState(1)
 
         if (sendingForm != 0) return false
 
@@ -265,9 +265,10 @@ const Hotelbooking = () => {
         let incorrectFields = 0
         let users = []
         let childObj = {}
-        let obj = {}
 
         form.querySelectorAll('.hotel-bron-ready__guest').forEach((item, index) => {
+
+            let obj = {}
 
                 // Фамилия
                 if (item.querySelector('input[name="surname"]').value.length > 2) {
@@ -332,7 +333,7 @@ const Hotelbooking = () => {
             incorrectFields++
         }
 
-        console.log(children)
+        //console.log(children)
         console.log(users)
 
         if (incorrectFields) {

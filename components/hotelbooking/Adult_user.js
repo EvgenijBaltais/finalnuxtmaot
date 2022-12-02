@@ -43,7 +43,7 @@ export default function Adult_user ({number}) {
         <div className={`hotel-bron-ready__guest hotel-bron-ready__guest-${number}`}>
             <p className={styles["guest-text-title"]}>Гость {number} <span>(покупатель)</span></p>
             <div className={styles["hotel-bron-inputs-w"]}>
-                <div className={`${styles["hotel-bron-input-w"]}`}>
+                <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
                     <input type="text"
                             name = "surname"
                             className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-surname"]}`}
@@ -51,7 +51,7 @@ export default function Adult_user ({number}) {
                             onClick = {wrongClassRemove}
                     />
                 </div> 
-                <div className={`${styles["hotel-bron-input-w"]}`}>
+                <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
                     <input type="text"
                             name = "name"
                             className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-name"]}`}
@@ -66,7 +66,7 @@ export default function Adult_user ({number}) {
                         onClick = {wrongClassRemove}
                     />
                 </div>
-                <div className={`${styles["hotel-bron-input-w"]}`}>
+                <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
                     <input type="text" name = "birthday"
                             className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-birthday"]} hotel-bron-input-birthday`}
                             placeholder = "Дата рождения"
@@ -74,7 +74,7 @@ export default function Adult_user ({number}) {
                         />
                 </div>
                 {number == 1 ?
-                    <div className={`${styles["hotel-bron-input-w"]}`}>
+                    <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
                         <input type="text" name = "phone"
                                 className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-phone"]} hotel-bron-input-phone`}
                                 placeholder = "Телефон"
@@ -83,7 +83,7 @@ export default function Adult_user ({number}) {
                     </div>
                 : ''}
                 {number == 1 ?
-                    <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]} hotel-bron-necessarily`}>
+                    <div className={`${styles["hotel-bron-input-w"]} ${styles["hotel-bron-necessarily"]}`}>
                         <input type="text" name = "email"
                                 className={`${styles["hotel-bron-input"]} ${styles["hotel-bron-input-email"]}`}
                                 placeholder = "Email"
