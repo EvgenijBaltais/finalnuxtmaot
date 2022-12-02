@@ -377,9 +377,8 @@ const Hotelbooking = () => {
             str += '&hotel_id=' + 14946
             str += '&source=' + 'maotonline.ru'
             str += '&u=' + document.body.getAttribute('data-u')
-            str += 'date_st=' + query.start_date
-            str += 'date_end=' + query.end_date
-
+            str += '&date_st=' + query.start_date
+            str += '&date_end=' + query.end_date
         
         async function sendData () {
 

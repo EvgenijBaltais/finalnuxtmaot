@@ -543,13 +543,12 @@ input[type="checkbox"].broned:not(:checked) + label:after {
 input[type="checkbox"].broned:checked + label:after {
     opacity: 1;
     content: "";
-
 }
 
 .bron-success-block {
     width: 80%;
     padding: 30px 30px 30px 180px;
-    margin: 200px auto;
+    margin: 150px auto;
     box-shadow: var(--main-shadow);
     border-radius: 10px;
     background-color: #D7FFD8;
