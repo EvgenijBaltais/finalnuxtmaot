@@ -38,6 +38,16 @@ const MainNav = () => {
     //    console.log(router)
     //}, [router.isReady])
 
+    useEffect(() => {
+        const onHashChanged = () => {
+            console.log('Hash changed');
+        };
+        window.addEventListener("hashchange", onHashChanged);
+        return () => {
+            window.removeEventListener("hashchange", onHashChanged);
+        };
+    }, []);
+
     return (
         <header className = {styles["header"]} >
         
@@ -94,7 +104,8 @@ const MainNav = () => {
                                     return (
                                         <li className = {styles["nav-item"]} key = {index}>
                                             <Link href = {`${item.path}`}>
-                                                <a className = {`${styles["nav-link"]} ${styles[router.pathname == `${item.path}` ? "active" : ""]}`}>{item.title}</a>
+                                                <a onClick = {() => setVisibleMenu(visibleMenu => !visibleMenu)}
+                                                    className = {`${styles["nav-link"]} ${styles[router.pathname == `${item.path}` ? "active" : ""]}`}>{item.title}</a>
                                             </Link>
                                         </li>
                                     )
