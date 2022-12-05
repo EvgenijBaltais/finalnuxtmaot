@@ -50,6 +50,8 @@ const Hotelbooking = () => {
             setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
             setIsDesktop(window.screen.width > 860)
         })
+
+        console.log(localStorage)
     }, [])
 
     let guestsArr = []
@@ -95,8 +97,8 @@ const Hotelbooking = () => {
             console.log(link)
 
             fetch(link)
-            .then((result) => result.json())
-            .then((result) => {
+            .then(result => result.json())
+            .then(result => {
 
                 if (result.data.length > 0) {
 
@@ -379,6 +381,8 @@ const Hotelbooking = () => {
             str += '&u=' + document.body.getAttribute('data-u')
             str += '&date_st=' + query.start_date
             str += '&date_end=' + query.end_date
+            str += '&form_id=101'
+            str += '&order_type=344'
         
         async function sendData () {
 
@@ -572,7 +576,7 @@ const Hotelbooking = () => {
                                 <p className={styles["hotel-bron-ready__info"]}>{dateOutValue}</p>
                             </div>
                         </div>
-                        <div className={styles["hotel-bron-ready__text"]}>Всего дней отдыха <span>{diffDates(query.start_date, query.end_date)}</span></div>
+                        <div className={styles["hotel-bron-ready__text"]}>Всего дней отдыха: <span>{diffDates(query.start_date, query.end_date)}</span></div>
                     </div>
                     <div className={`${styles["hotel-bron-ready-middle"]}`}></div>
                     <div className={`${styles["hotel-bron-ready-item-w"]}`}>
@@ -588,7 +592,7 @@ const Hotelbooking = () => {
                             </div>
                             : ''}
                         </div>
-                        <div className={styles["hotel-bron-ready__text"]}>Всего гостей {guests.length + children.length}<span></span></div>
+                        <div className={styles["hotel-bron-ready__text"]}>Всего гостей: {guests.length + children.length}<span></span></div>
                     </div>
                     <div className={`${styles["hotel-bron-ready-middle"]}`}></div>
 

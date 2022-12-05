@@ -4891,6 +4891,11 @@ input[type="checkbox"].substylized:checked + label:after {
 
 @media screen and (max-width: 480px) {
 
+	.secondary-h1 {
+		font-size: 35px;
+		line-height: 40px;
+	}
+
 	.hotels-booking:after {
 		width: 100%;
 		height: 600px;

