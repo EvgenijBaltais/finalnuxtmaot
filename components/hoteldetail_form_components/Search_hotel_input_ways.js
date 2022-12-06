@@ -13,8 +13,6 @@ const searchByClick = (event) => {
         id: event.target.getAttribute('data-id')
     }
 
-    console.log(obj)
-
     props.changeSearchResult(obj)
 }
 

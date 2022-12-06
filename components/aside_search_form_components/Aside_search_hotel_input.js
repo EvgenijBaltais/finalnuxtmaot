@@ -48,8 +48,6 @@ export default function Aside_search_hotel_input (props) {
             const response = await fetch(`https://maot-api.bokn.ru/api/search-object?str=${value}`)
             const result = await response.json()
 
-            console.log(result)
-
             if (!response.ok) {
                 throw new Error(`Error! status: ${response.status}`);
             }
