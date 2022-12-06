@@ -561,7 +561,7 @@ input[type="checkbox"].broned:checked + label:after {
 .bron-error-block {
     width: 80%;
     padding: 30px 30px 30px 180px;
-    margin: 200px auto;
+    margin: 150px auto;
     box-shadow: var(--main-shadow);
     border-radius: 10px;
     background-color: #FFEBEC;
@@ -755,7 +755,14 @@ input[type="checkbox"].broned:checked + label:after {
         background-position: 25px center;
         background-image: url('/images/icons/calendar2.png');
     }
-
+    .bron-error-block {
+        width: 100%;
+        padding: 30px 20px 30px 140px;
+        margin: 100px auto;
+        background-size: 90px;
+        background-position: 25px center;
+        background-image: url('/images/icons/calendar2.png');
+    }
     .bron-success-block-title {
         color: #00C647;
         font-size: 18px;
@@ -798,6 +805,15 @@ input[type="checkbox"].broned:checked + label:after {
     }
 
     .bron-success-block {
+        width: 100%;
+        padding: 30px 20px;
+        margin: 100px auto;
+        background-size: 0;
+        background-position: 0;
+        background-image: none;
+    }
+
+    .bron-error-block {
         width: 100%;
         padding: 30px 20px;
         margin: 100px auto;
