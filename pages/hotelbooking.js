@@ -283,9 +283,9 @@ const Hotelbooking = () => {
 
                 // День Рождения
 
-                //if (item.querySelector('input[name="birthday"]').inputmask.isComplete()) {
+                if (item.querySelector('input[name="birthday"]').inputmask.isComplete()) {
                     obj.birthday = item.querySelector('input[name="birthday"]').value
-                //}
+                }
                 //else {
                 //    incorrectFields++
                 //    item.querySelector('input[name="birthday"]').parentElement.classList.add('hotel-bron-necessarily-wrong')
