@@ -43,6 +43,10 @@ function Hoteldetail () {
             setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
             setIsDesktop(window.screen.width > 860)
         })
+
+        try {
+            ym(91492860, 'hit', '/hoteldetail');
+        } catch(e){}
     }, [])
 /*
     const rootEl = useRef(null)

@@ -18,7 +18,8 @@ export default function Document() {
                   ym(91492860, "init", {
                         clickmap:true,
                         trackLinks:true,
-                        accurateTrackBounce:true
+                        accurateTrackBounce:true,
+                        defer: true
                   });
                 `,
               }}

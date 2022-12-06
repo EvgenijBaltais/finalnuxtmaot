@@ -50,6 +50,10 @@ const Hotelbooking = () => {
             setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
             setIsDesktop(window.screen.width > 860)
         })
+
+        try {
+            ym(91492860, 'hit', '/hotelbooking');
+        } catch(e){}
     }, [])
 
     let guestsArr = []
