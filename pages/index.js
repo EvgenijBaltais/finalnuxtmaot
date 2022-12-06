@@ -37,7 +37,8 @@ class Index extends React.Component {
                 <SpecialOffers />
                 <SubscribeSection />
                 <AboutSection />
-                <Reviews reviews = {this.props.reviews} />
+                {/*<Reviews reviews = {this.props.reviews} />*/}
+                <Reviews />
             </>
         )
     }
@@ -58,15 +59,15 @@ export async function getStaticProps(context) {
   
     // Отзывы
 
-	const getReviews = await fetch('https://maot-api.bokn.ru/api/load?id=6713')
-	let reviews = await getReviews.json()
-        reviews = reviews.data.reviews
+	//const getReviews = await fetch('https://maot-api.bokn.ru/api/load?id=6713')
+	//let reviews = await getReviews.json()
+    //    reviews = reviews.data.reviews
 
     return {
         props: {
             popularHotels,
             popularWays,
-            reviews
+            //reviews
         },
     }
 }
