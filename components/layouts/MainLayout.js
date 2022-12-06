@@ -4,8 +4,6 @@ import Footer from '../Footer'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import Script from 'next/script'
-
 export default function MainLayout({ children }) {
 
 const router = useRouter()
@@ -35,20 +33,12 @@ useEffect(() => {
 
   if (routerPath.indexOf('utm_') != -1) {
 
-    console.log('utm есть')
-
     for (let key in router.query) {
       myReferer += (key + '=' + router.query[key] + '&')
     }
 
     myReferer = myReferer.slice(0, -1)
     localStorage.setItem('referer', myReferer)
-
-    console.log(myReferer)
-
-    if (!document.getElementById('data-hotel-id')) {
-      document.querySelector('body').insertAdjacentHTML('beforeend', `<input type = "hidden" id="data-hotel-id" data-ref = ${myReferer}>`)
-    }
   }
 
 }, [router]);

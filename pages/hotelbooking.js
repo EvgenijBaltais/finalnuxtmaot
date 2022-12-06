@@ -50,8 +50,6 @@ const Hotelbooking = () => {
             setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
             setIsDesktop(window.screen.width > 860)
         })
-
-        console.log(localStorage)
     }, [])
 
     let guestsArr = []
@@ -94,8 +92,6 @@ const Hotelbooking = () => {
 
             link += '&id=' + query['id']
             
-            console.log(link)
-
             fetch(link)
             .then(result => result.json())
             .then(result => {
@@ -404,6 +400,10 @@ const Hotelbooking = () => {
                     target.innerText = 'Отправить'
                     setSendingForm(0)
                 }, 200)
+
+                try {
+                    ym(91492860,'reachGoal','send-bron-to-knight')
+                } catch(e) {}
             }
 
             else {
@@ -651,7 +651,7 @@ const Hotelbooking = () => {
                     <div className = {styles["bron-success-block"]}>
                         <p className={styles["bron-success-block-title"]}>Спасибо!</p>
                         <p className={styles["bron-success-block-title"]}>Данный этап бронирования успешно пройден.</p>
-                        <p className={styles["bron-success-block-text"]}>Сейчас вы будете перенаправлены на страницу оплаты.</p>
+                        <p className={styles["bron-success-block-text"]}>В ближайшее время с Вами свяжется менеджер, чтобы уточнить все детали.</p>
                     </div>
                     ) : ('')
                 }

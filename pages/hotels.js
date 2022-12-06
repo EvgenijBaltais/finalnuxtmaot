@@ -248,8 +248,8 @@ export default function Hotels () {
         // Популярные отели
 
         fetch('https://maot-api.bokn.ru/api/hotels/top')
-        .then((res) => res.json())
-        .then((res) => {
+        .then(res => res.json())
+        .then(res => {
             setPopularHotels(res.data)
         })
 
