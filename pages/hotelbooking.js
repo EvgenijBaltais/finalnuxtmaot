@@ -283,13 +283,13 @@ const Hotelbooking = () => {
 
                 // День Рождения
 
-                if (item.querySelector('input[name="birthday"]').inputmask.isComplete()) {
+                //if (item.querySelector('input[name="birthday"]').inputmask.isComplete()) {
                     obj.birthday = item.querySelector('input[name="birthday"]').value
-                }
-                else {
-                    incorrectFields++
-                    item.querySelector('input[name="birthday"]').parentElement.classList.add('hotel-bron-necessarily-wrong')
-                }
+                //}
+                //else {
+                //    incorrectFields++
+                //    item.querySelector('input[name="birthday"]').parentElement.classList.add('hotel-bron-necessarily-wrong')
+                //}
 
                 // Если не первый гость, то эти данные не надо собирать
                 if (index != 0) {
@@ -307,13 +307,13 @@ const Hotelbooking = () => {
                 }
 
                 // Email
-                if (item.querySelector('input[name="email"]').value.indexOf('@') != -1) {
+                //if (item.querySelector('input[name="email"]').value.indexOf('@') != -1) {
                     obj.email = item.querySelector('input[name="email"]').value
-                }
-                else {
-                    incorrectFields++
-                    item.querySelector('input[name="email"]').parentElement.classList.add('hotel-bron-necessarily-wrong')
-                }
+                //}
+                //else {
+                //    incorrectFields++
+                //    item.querySelector('input[name="email"]').parentElement.classList.add('hotel-bron-necessarily-wrong')
+                //}
                 users.push(obj)
         })
 
