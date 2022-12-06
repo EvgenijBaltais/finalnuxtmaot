@@ -13,10 +13,6 @@ class Contacts extends React.Component {
 
     componentDidMount(){
         document.querySelector('.wrapper').classList.add('contact-page')
-
-        try {
-            ym(91492860, 'hit', '/contact');
-        } catch(e){}
     }
 
     componentWillUnmount() {

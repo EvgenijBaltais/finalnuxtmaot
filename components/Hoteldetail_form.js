@@ -7,6 +7,7 @@ import Search_form_guests from './hoteldetail_form_components/Search_form_guests
 
 const Hoteldetail_form = ({hotel_name, setRoomsData, setBronPageLink, hotel_id}) => {
 
+    hotel_id == 'golden_tulip_roza_khutor' ? hotel_id += '_' : ''
     const [searchResult, setSearchResult] = useState({id: hotel_id, hotel_name: hotel_name, hotel: true})
     const [dateIn, setDateIn] = useState('')
     const [dateOut, setDateOut] = useState('')

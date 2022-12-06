@@ -44,9 +44,6 @@ function Hoteldetail () {
             setIsDesktop(window.screen.width > 860)
         })
 
-        try {
-            ym(91492860, 'hit', '/hoteldetail');
-        } catch(e){}
     }, [])
 /*
     const rootEl = useRef(null)
@@ -129,6 +126,8 @@ function Hoteldetail () {
 
             let datein = query.datein.slice(6, 10) + '-' + query.datein.slice(3, 5) + '-' + query.datein.slice(0, 2)
             let dateout = query.dateout.slice(6, 10) + '-' + query.dateout.slice(3, 5) + '-' + query.dateout.slice(0, 2)
+            let hotel_id = query['hotel_id']
+            hotel_id == 'golden_tulip_roza_khutor' ? hotel_id += '_' : ''
             let adults = query.adults || 2
             let children_arr = (Number.isInteger(+query.children_ages) ? [query.children_ages] : query.children_ages || [])
             let link = 'https://maot-api.bokn.ru/api/hotels/search?'
@@ -148,9 +147,9 @@ function Hoteldetail () {
                 }
             }
 
-            link += '&id=' + query['hotel_id']
-            bronPageLink += '&id=' + query['hotel_id']
-
+            link += '&id=' + hotel_id
+            bronPageLink += '&id=' + hotel_id
+            
             setBronPageLink(bronPageLink)
 
             fetch(link)
@@ -167,7 +166,7 @@ function Hoteldetail () {
 
                 // Если нет номеров то еще один запрос чтобы просто найти данные по отелю
 
-                fetch('https://maot-api.bokn.ru/api/hotels/get?id=' + query['hotel_id'])
+                fetch('https://maot-api.bokn.ru/api/hotels/get?id=' + hotel_id)
                 .then((result) => result.json())
                 .then((result) => {
                     console.log(link)

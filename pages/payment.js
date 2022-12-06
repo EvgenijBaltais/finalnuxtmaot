@@ -20,10 +20,6 @@ class Payment extends React.Component {
 
     componentDidMount(){
         document.querySelector('.wrapper').classList.add('payment-page')
-
-        try {
-            ym(91492860, 'hit', '/payment');
-        } catch(e){}
     }
 
     componentWillUnmount() {

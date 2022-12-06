@@ -16,14 +16,6 @@ class Index extends React.Component {
 
     componentDidMount(){
         document.querySelector('.wrapper').classList.add('main-page')
-
-
-        try {
-            ym(91492860, 'hit', '/', {params: {
-                title: 'Отдых по России и Подмосковью',
-                referer: 'https://maotonline.ru'
-            }});
-        } catch(e){}
     }
 
     componentWillUnmount() {

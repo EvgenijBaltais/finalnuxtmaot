@@ -17,11 +17,6 @@ class Articles extends React.Component {
 
     componentDidMount(){
         document.querySelector('.wrapper').classList.add('articles-page')
-
-
-        try {
-            ym(91492860, 'hit', '/articles');
-        } catch(e){}
     }
 
     componentWillUnmount() {

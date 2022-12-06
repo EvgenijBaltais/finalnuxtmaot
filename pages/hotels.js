@@ -47,10 +47,6 @@ export default function Hotels () {
             setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
             setIsDesktop(window.screen.width > 860)
         })
-
-        try {
-            ym(91492860, 'hit', '/hotels');
-        } catch(e){}
     }, [])
 
     useEffect(() => {
