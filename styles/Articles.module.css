@@ -49,6 +49,7 @@
 	text-decoration: none;
 	transition: 0.2s color;
 	font-weight: 400;
+	cursor: pointer;
 }
 
 .left-nav-link:hover {
@@ -406,6 +407,11 @@ input[type="checkbox"].stylized:not(:checked) + label:before {
 
 .article-right > span {
 	width: 100% !important;
+}
+
+.article-style-elem-block {
+	width: 100%;
+	text-align: center;
 }
 
 .article-icons__items {

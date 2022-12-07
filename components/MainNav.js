@@ -14,7 +14,7 @@ const MainNav = () => {
 
     const navLinks = [
         { title: 'Лучшие направления', path: '/routes' },
-        { title: 'Статьи', path: '/articles' },
+        //{ title: 'Статьи', path: '/articles' },
         { title: 'Способы оплаты', path: '/payment' },
         { title: 'Контакты', path: '/contact' },
         { title: 'Избранное', path: '/hotels' }
