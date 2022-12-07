@@ -4,10 +4,17 @@ export default function Document() {
   return (
     <Html>
       <Head />
-      <body>
+      <body data-hotel-id = "14946" data-dialog-source = "maotonline.ru" data-domain-hotel-name = "Новый МАОТ" data-metrika = "91492860">
         <Main />
         <NextScript />
+            <link rel="stylesheet" href="https://maot.ru/remote/chat/js/plugins/jquery-ui-1.13.2/jquery-ui.min.css"></link>
             <script src = "https://maot.ru/remote/u/u2.js"></script>
+            <script src = "https://maot.ru/remote/chat/js/jquery-3.3.1.min.js"></script>
+            <script src = "https://maot.ru/remote/chat/js/plugins/jquery-ui-1.13.2/jquery-ui.min.js"></script>
+            <script src = "https://maot.ru/remote/chat/js/jquery.datepicker.extension.range.min.js"></script>
+            <script src = "https://maot.ru/remote/chat/js/jquery.cookie.js"></script>
+            <script src = "https://maot.ru/remote/chat/js/jquery.inputmask.bundle.js"></script>
+            <script src = "https://maot.ru/remote/chat/js/chat_top_all_maot.js" defer></script>
             <script
               dangerouslySetInnerHTML={{
                 __html: `
