@@ -68,6 +68,8 @@ export default function Search_form_guests({adults, childrenAges, changeAdults, 
                 name="hoteldetail-choose-people"
                 className = {`hoteldetail-form-way-input hoteldetail-form-guests-input hoteldetail-form-guests-input-out${visibleGuests ? ' hoteldetail-direction-form-in-active' : ''}`}
                 value={returnGuests(+adults + +childrenAges.length)}
+                data-adults = {+adults}
+                data-children = {+childrenAges.length}
                 readOnly = "readonly"
                 onClick={ () => setVisibleGuests(visibleGuests => !visibleGuests)}
             />
