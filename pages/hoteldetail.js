@@ -107,9 +107,7 @@ function Hoteldetail () {
             text = `Номера на ${query.datein.slice(0, 2)} ${months[(parseInt(query.datein.slice(3, 5)) - 1)]} - ${query.dateout.slice(0, 2)} ${months[(parseInt(query.dateout.slice(3, 5)) - 1)]}  для ${returnAdults(query.adults)}`
             
             let children_arr = (Number.isInteger(+query.children_ages) ? [query.children_ages] : query.children_ages || [])
-
             query.children_ages ? text += ' и ' + returnChildren(children_arr.length) : ''
-
             setDatesText(text)
         }
 
@@ -161,6 +159,26 @@ function Hoteldetail () {
 
                     setHotelsData(result.data[0].hotel)
                     setRoomsData(result.data[0].rates)
+
+
+                    console.log(result.data[0].rates)
+
+                    let arr = []
+                    let arr2 = []
+                    let item = ''
+
+                   /* for (let i = 0; i < result.data[0].rates.length; i++) {
+
+                        arr2 = []
+
+
+                        // Если после названия номера есть пояснение в скобках
+                        if (result.data[0].rates[i].indexOf(' (') != -1) {
+                                //item = result.data[0].rates[i].slice(0, result.data[0].rates[i].indexOf(' ('))
+                        }
+
+                    }*/
+
                     return false
                 }
 
