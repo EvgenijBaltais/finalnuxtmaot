@@ -1133,8 +1133,8 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 .select-search-item-pics .swiper-button-prev {
-	width: 35px;
-	height: 35px;
+	width: 25px;
+	height: 25px;
 	position: absolute;
 	bottom: 0;
 	left: 10px;
@@ -1145,14 +1145,14 @@ input[type="checkbox"].substylized:checked + label:after {
 	z-index: 5;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: 14px;
+	background-size: 12px;
 	background-image: url('/images/icons/white-left.svg');
 	cursor: pointer;
 }
 
 .select-search-item-pics .swiper-button-next {
-	width: 35px;
-	height: 35px;
+	width: 25px;
+	height: 25px;
 	position: absolute;
 	bottom: 0;
 	right: 10px;
@@ -1163,7 +1163,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	z-index: 5;
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: 14px;
+	background-size: 12px;
 	background-image: url('/images/icons/white-right.svg');
 	cursor: pointer;
 }

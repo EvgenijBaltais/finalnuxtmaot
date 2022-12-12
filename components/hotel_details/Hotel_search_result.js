@@ -1,7 +1,8 @@
 import Hotel_card from "./Hotel_card"
+import Hotel_rooms_block from "./Hotel_rooms_block"
 import styles from "../../styles/Hoteldetail.module.css"
 
-const Hotel_search_result = ({ items, hotelData, bronPageLink }) => {
+const Hotel_search_result = ({ items, hotelData, bronPageLink, roomBlocks }) => {
 
     if (!items) return (
         <div className = {`${styles["select-results"]} block-scrolling-item`} id = "all-rooms">
@@ -12,12 +13,15 @@ const Hotel_search_result = ({ items, hotelData, bronPageLink }) => {
     if (items.length > 0) return (
         <div className = {`${styles["select-results"]} block-scrolling-item`} id = "all-rooms">
             {items.map((item, index) => (
-                <Hotel_card 
-                    bronPageLink = {bronPageLink}
-                    key = {index}
-                    item = {item}
-                    hotelInfo = {hotelData}
-                 />
+
+                <Hotel_rooms_block
+                bronPageLink = {bronPageLink}
+                key = {index}
+                item = {item}
+                hotelInfo = {hotelData}
+            />
+
+
             ))}
         </div>
     )
