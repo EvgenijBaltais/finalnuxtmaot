@@ -190,7 +190,7 @@ const Hotel_rooms_block_item = ({item, hotelInfo, bronPageLink}) => {
                     <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
                         {servicesMain.map((item, index) => {
                             if (!view) {
-                                if (index > 4) return false
+                                if (index > 3) return false
                                 return (
                                     <span
                                         className = {`${styles["serv-item__more-services"]} ${"serv-item__more-services"} ${"serv-item__block_" + item[0]}`}
@@ -199,7 +199,7 @@ const Hotel_rooms_block_item = ({item, hotelInfo, bronPageLink}) => {
                                     </span>)
                             }
                         })}
-                        {servicesMain.length > 5 && !view ? (<span className = {`${styles["serv-item__more-services"]}`}>Еще {returnServices(servicesMain.length - 5)}</span>) : ('')}
+                        {servicesMain.length > 4 && !view ? (<span className = {`${styles["serv-item__more-services"]}`}>Еще {returnServices(servicesMain.length - 4)}</span>) : ('')}
                     </div>
                     <div>
                         <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>

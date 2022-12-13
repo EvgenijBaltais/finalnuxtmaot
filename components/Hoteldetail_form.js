@@ -90,7 +90,33 @@ const Hoteldetail_form = ({hotel_name, setRoomBlocks, setBronPageLink, hotel_id}
         .then((result) => result.json())
         .then((result) => {
             console.log(link)
-            result.data.error == 1 || result.data.length == 0 ? setRoomBlocks([]) : setRoomBlocks(result.data[0].rates)
+            
+            if (result.data.error == 1 || result.data.length == 0) { 
+                setRoomBlocks([])
+                return false
+            }
+
+            let room_blocks_set = new Set()     // Уникальные названия номеров
+            let room_blocks = []                // Для готовых блоков
+            let arr = []
+
+            // Определить все виды групп номеров
+            for (let i = 0; i < result.data[0].rates.length; i++) {
+                room_blocks_set.add(result.data[0].rates[i].room_name)
+            }
+
+            for (let item of room_blocks_set) {
+
+                arr = []
+                for (let i = 0; i < result.data[0].rates.length; i++) {
+                    if (item == result.data[0].rates[i].room_name) {
+                        arr.push(result.data[0].rates[i])
+                    }
+                }
+                room_blocks.push({room_name: item, room_variants: arr})
+            }
+
+            setRoomBlocks(room_blocks)
         })
     }
 
