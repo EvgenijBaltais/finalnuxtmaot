@@ -20,7 +20,6 @@ function Hoteldetail () {
     const router = useRouter()
     const { query } = useRouter()
     const [hotelData, setHotelsData] = useState(0)
-    const [roomsData, setRoomsData] = useState(0)
     const [roomBlocks, setRoomBlocks] = useState([])
     const [active_block, setActive_block] = useState(1)
 
@@ -159,7 +158,6 @@ function Hoteldetail () {
                 if (result.data.length > 0) {
 
                     setHotelsData(result.data[0].hotel)
-                    setRoomsData(result.data[0].rates)
 
                     let room_blocks_set = new Set()     // Уникальные названия номеров
                     let room_blocks = []                // Для готовых блоков
@@ -167,35 +165,20 @@ function Hoteldetail () {
 
                     // Определить все виды групп номеров
                     for (let i = 0; i < result.data[0].rates.length; i++) {
-
-                        // Если после названия номера есть пояснение в скобках
-                        if (result.data[0].rates[i].room_name.indexOf(' (') != -1) {
-                            room_blocks_set.add(result.data[0].rates[i].room_name.slice(0, result.data[0].rates[i].room_name.indexOf(' (')))
-                            continue
-                        }
-
-                        // Если нету
                         room_blocks_set.add(result.data[0].rates[i].room_name)
                     }
 
                     for (let item of room_blocks_set) {
 
                         arr = []
-
                         for (let i = 0; i < result.data[0].rates.length; i++) {
-
-                            if (item == result.data[0].rates[i].room_name ||
-                                item == result.data[0].rates[i].room_name.slice(0, result.data[0].rates[i].room_name.indexOf(' ('))
-                            ) {
+                            if (item == result.data[0].rates[i].room_name) {
                                 arr.push(result.data[0].rates[i])
                             }
                         }
-
-                        room_blocks.push({[item]: arr})
+                        room_blocks.push({room_name: item, room_variants: arr})
                     }
 
-                    console.log(result.data[0].rates)
-                    //console.log(room_blocks)
                     setRoomBlocks(room_blocks)
 
                     return false
@@ -209,9 +192,8 @@ function Hoteldetail () {
                     console.log(link)
 
                     setHotelsData(result.data)
-                    setRoomsData([])
+                    setRoomBlocks([])
                 })
-
             })
     }, [query])
 
@@ -339,12 +321,12 @@ function Hoteldetail () {
                      <Hoteldetail_form
                         hotel_id = {query['hotel_id']}
                         hotel_name = {hotelData.name}
-                        setRoomsData = {setRoomsData}
+                        setRoomBlocks = {setRoomBlocks}
                         setBronPageLink = {setBronPageLink}
 
                     />
 
-                    <Hotel_search_result items = {roomsData} roomBlocks = {roomBlocks} hotelData = {hotelData} bronPageLink = {bronPageLink} />
+                    <Hotel_search_result roomBlocks = {roomBlocks} hotelData = {hotelData} bronPageLink = {bronPageLink} />
                     <Rooms_info hotelData = {hotelData}/>
                     <Hotel_service services = {hotelData.services} />
                     {mapReady ? <Hotel_contact hotelData = {hotelData}/> : ''}

@@ -509,14 +509,19 @@
 	line-height: 20px;
 }
 
+.select-results__item-w {
+	width: 100%;
+	padding-bottom: 20px;
+	display: flex;
+}
 
 .select-results__item {
     display: flex;
 	flex-wrap: wrap;
     border-radius: 10px;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
     box-shadow: var(--main-shadow);
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 	position: relative;
 }
 
@@ -584,12 +589,14 @@
 }
 
 .select-item-title {
-	font-size: 18px;
+	font-size: 17px;
     line-height: 22px;
     font-family: 'FontInterSemiBold';
     color: rgb(5, 117, 229);
     text-decoration: none;
-    cursor: pointer;
+	padding: 14px 0 0 22px;
+	display: inline-block;
+	width: 100%;
 }
 
 .select-item__block {
@@ -670,9 +677,10 @@
 }
 
 .select-results__item-text {
-	padding-top: 8px;
+	width: 65%;
 	font-size: 16px;
 	line-height: 24px;
+	padding-right: 10px;
 }
 
 .select-results-bron {
@@ -735,22 +743,44 @@
 	flex-wrap: wrap;
 	justify-content: space-between;
 	align-content: baseline;
-	width: calc(100% - 300px);
-	padding: 0 14px;
+	width: calc(100% - 185px);
+	padding: 0;
+}
+
+.select-item-block {
+	display: flex;
+	width: 100%;
+	position: relative;
+	padding: 15px 0 0 0;
+    margin-bottom: 20px;
+}
+
+.select-item-block-active {
+	margin-bottom: 50px;
+}
+
+.select-item-block-left {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.select-item-block:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	width: 100%;
+	height: 1px;
+	background: linear-gradient(120deg,#0575e6,#00ca50);
 }
 
 .select-results__item-pic-big + .select-results__item-content {
 	width: 100%;
 }
 
-.select-item-title {
-	padding: 14px 0 10px 0;
-	display: inline-block;
-	width: 100%;
-}
-
 .select-item-info {
-	width: calc(100% - 160px);
+	width: 35%;
 	padding-top: 0px;
 }
 
@@ -812,9 +842,9 @@
 }
 
 .serv-item__btn {
-	display: inline-block;
+	width: 100%;
+	display: block;
 	margin-top: 10px;
-	margin-bottom: 10px;
 	color: #147de8;
 	cursor: pointer;
 	font-family: 'FontInterBold';
@@ -823,7 +853,7 @@
 
 .serv-item__btn-active {
 	position: absolute;
-	bottom: 5px;
+	bottom: -30px;
 	margin-top: 0;
 }
 

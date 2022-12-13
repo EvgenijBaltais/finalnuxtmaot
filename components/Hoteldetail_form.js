@@ -5,7 +5,7 @@ import Search_hotel_input from './hoteldetail_form_components/Search_hotel_input
 import Search_form_datein from './hoteldetail_form_components/Search_form_datein'
 import Search_form_guests from './hoteldetail_form_components/Search_form_guests'
 
-const Hoteldetail_form = ({hotel_name, setRoomsData, setBronPageLink, hotel_id}) => {
+const Hoteldetail_form = ({hotel_name, setRoomBlocks, setBronPageLink, hotel_id}) => {
 
     hotel_id == 'golden_tulip_roza_khutor' ? hotel_id += '_' : ''
     const [searchResult, setSearchResult] = useState({id: hotel_id, hotel_name: hotel_name, hotel: true})
@@ -83,14 +83,14 @@ const Hoteldetail_form = ({hotel_name, setRoomsData, setBronPageLink, hotel_id})
         link += '&id=' + searchResult.id
         bronPageLink += '&id=' + searchResult.id
 
-        setRoomsData(0)
+        setRoomBlocks(0)
         setBronPageLink(bronPageLink)
 
         fetch(link)
         .then((result) => result.json())
         .then((result) => {
             console.log(link)
-            result.data.error == 1 || result.data.length == 0 ? setRoomsData([]) : setRoomsData(result.data[0].rates)
+            result.data.error == 1 || result.data.length == 0 ? setRoomBlocks([]) : setRoomBlocks(result.data[0].rates)
         })
     }
 

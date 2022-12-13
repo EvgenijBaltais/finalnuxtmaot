@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Pagination, Navigation } from "swiper"
 import Link from "next/link"
 import styles from "../../styles/Hoteldetail.module.css"
-import "swiper/css"
 
-const Hotel_rooms_block = ({item, hotelInfo, bronPageLink}) => {
+const Hotel_rooms_block_item = ({item, hotelInfo, bronPageLink}) => {
+
     const [view, changeView] = useState(0)
     const [servicesMain, setServicesMain] = useState([])
     const [servicesDop, setServicesDop] = useState([])
@@ -100,10 +98,6 @@ const Hotel_rooms_block = ({item, hotelInfo, bronPageLink}) => {
         setServicesDop(dopServicesArr)
     }, [item])
     
-    function addBackgroundImage (slider) {
-        slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
-    }
-
     function returnAdults (num) {
 
         let text = ' взрослых',
@@ -170,41 +164,28 @@ const Hotel_rooms_block = ({item, hotelInfo, bronPageLink}) => {
     }
 
     return (
-        <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]}` : styles["select-results__item"]}>
-            <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
-                {isDesktop ?
-                    <div className = "slider-show-hide" onClick = {() => changeView(view => !view)}></div> : ''
+        <div className = {view ? `${styles["select-item-block"]} ${styles["select-item-block-active"]}` : `${styles["select-item-block"]}`}>
+
+            <div className = {styles["select-item-block-left"]}>
+                {servicesDop.length > 8 ?
+                    <div className={styles["select-results__item-text"]}>
+                            {servicesDop.map((item, index, arr) => {
+                                if (index <= 8) return ('')
+
+                                if (!view) {
+                                    if (index > 18) return false
+                                    if (index == 18 && servicesDop.length > 18) {
+                                        return <span key = {index} className = {`${styles["serv-item__more-services-dop"]} ${styles["serv-item__more-span"]}`}
+                                        onClick = {() => changeView(view => !view)}
+                                        >еще {returnServices(servicesDop.length - 18)}</span>
+                                    }
+                                }
+                                return (
+                                    <span className = {styles["serv-item__more-services-dop"]} key = {index}>{item}</span>
+                                )
+                            })}
+                        </div> : ''
                 }
-                <Swiper
-                    onSlideChange = {slider => addBackgroundImage(slider)}
-                    slidesPerView={1}
-                    spaceBetween={0}
-                    loop = {true}
-                    pagination={{
-                        clickable: true,
-                        bulletClass: `reviews-pagination-bullet`
-                    }}
-                    navigation={true}
-                    modules={[Pagination, Navigation]}
-                    className='select-search-item-pics'
-                >
-                    {item.images.map((item, index) => {
-                        if (index > 7) return false
-                        return (
-                            <SwiperSlide
-                                className={'select-results__item-image'}
-                                key = {index}
-                                data-pic = {item}
-                                style = {index == 0 ? {backgroundImage: `url(${item})`} : {}}
-                            ></SwiperSlide>
-                        )
-                    })}
-                </Swiper>
-            </div>
-            <div className={styles["select-results__item-content"]}>
-                <Link href = {`${'/hotelbooking?' + bronPageLink}`}>
-                    <a className={styles["select-item-title"]}>{item.room_name}</a>
-                </Link>
                 <div className = {styles["select-item-info"]}>
                     <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
                         {servicesMain.map((item, index) => {
@@ -219,10 +200,6 @@ const Hotel_rooms_block = ({item, hotelInfo, bronPageLink}) => {
                             }
                         })}
                         {servicesMain.length > 5 && !view ? (<span className = {`${styles["serv-item__more-services"]}`}>Еще {returnServices(servicesMain.length - 5)}</span>) : ('')}
-                    </div>
-                    <div className = {view ? `${styles["serv-item__btn"]} ${styles["serv-item__btn-active"]}` : styles["serv-item__btn"]} onClick = {() => changeView(view => !view)}>
-                         {view ? <span className = {styles["serv-active-btn"]}>Скрыть подробное&nbsp;описание</span> : 
-                         <span className = {styles["serv-passiv-btn"]}>Подробнее&nbsp;о&nbsp;номере</span>}
                     </div>
                     <div>
                         <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
@@ -239,50 +216,36 @@ const Hotel_rooms_block = ({item, hotelInfo, bronPageLink}) => {
                         </div>
                     </div>
                 </div>
-                <div className={styles["select-results__item-price"]}>
-                    <div className={styles["select-results-info"]}>
-                        <div className={styles["select-results-guest-info"]}>
-                            <span className = {styles["select-results-adults"]}>{returnAdults(adults)}</span>
-                            {children.length ? 
-                                <span className = {styles["select-results-child"]}>, {returnChildren(children.length)}</span>
-                                : ''
-                            }
-                        </div>
-                        <div className = {styles["select-results-from"]}>
-                            <span className = {styles["select-from-value"]}>{(+item.price).toLocaleString('ru')}</span>&nbsp;
-                            <span className = {styles["select-from-currency"]}>&#8381;</span>
-                        </div>
-                        <div className = {styles["select-results-from-info"]}>
-                            <span>цена за</span>&nbsp;
-                            <span className = {styles["select-results-nights"]}>{nightsRightText(nights)}</span>
-                        </div>
-                    </div>
-                    <Link href = {`${'/hotelbooking?' + bronPageLink}`}>
-                        <a className = {styles["select-results-bron"]}>Забронировать</a>
-                    </Link>
+                <div className = {view ? `${styles["serv-item__btn"]} ${styles["serv-item__btn-active"]}` : styles["serv-item__btn"]} onClick = {() => changeView(view => !view)}>
+                    {view ? <span className = {styles["serv-active-btn"]}>Скрыть подробное&nbsp;описание</span> : 
+                        <span className = {styles["serv-passiv-btn"]}>Подробнее&nbsp;о&nbsp;номере</span>}
                 </div>
             </div>
-            {servicesDop.length > 8 ?
-                <div className={styles["select-results__item-text"]}>
-                        {servicesDop.map((item, index, arr) => {
-                            if (index <= 8) return ('')
 
-                            if (!view) {
-                                if (index > 18) return false
-                                if (index == 18 && servicesDop.length > 18) {
-                                    return <span key = {index} className = {`${styles["serv-item__more-services-dop"]} ${styles["serv-item__more-span"]}`}
-                                    onClick = {() => changeView(view => !view)}
-                                    >еще {returnServices(servicesDop.length - 18)}</span>
-                                }
-                            }
-                            return (
-                                <span className = {styles["serv-item__more-services-dop"]} key = {index}>{item}</span>
-                            )
-                        })}
-                </div> : ''
-            }
+            <div className={styles["select-results__item-price"]}>
+                <div className={styles["select-results-info"]}>
+                    <div className={styles["select-results-guest-info"]}>
+                        <span className = {styles["select-results-adults"]}>{returnAdults(adults)}</span>
+                        {children.length ? 
+                            <span className = {styles["select-results-child"]}>, {returnChildren(children.length)}</span>
+                            : ''
+                        }
+                    </div>
+                    <div className = {styles["select-results-from"]}>
+                        <span className = {styles["select-from-value"]}>{(+item.price).toLocaleString('ru')}</span>&nbsp;
+                        <span className = {styles["select-from-currency"]}>&#8381;</span>
+                    </div>
+                    <div className = {styles["select-results-from-info"]}>
+                        <span>цена за</span>&nbsp;
+                        <span className = {styles["select-results-nights"]}>{nightsRightText(nights)}</span>
+                    </div>
+                </div>
+                <Link href = {`${'/hotelbooking?' + bronPageLink}`}>
+                    <a className = {styles["select-results-bron"]}>Забронировать</a>
+                </Link>
+            </div>
         </div>
     )
 }
 
-export default Hotel_rooms_block
+export default Hotel_rooms_block_item
