@@ -24,7 +24,20 @@ const Hotel_rooms_block_item = ({item, hotelInfo, bronPageLink}) => {
         })
     }, [])
 
+    // Переименовать цену для ссылки, чтобы не передавать ее в строке, а то выглядит странно
+    function mask_price (price) {
+        let symbols = ['g', '_', 'f', '6', 'h', 'k', '2', 'a', '4', 'y', 'i', '1', 'r', '5', '^', 'l', '8']
+        let newPrice = ''
+        let pr = parseInt(price).toString()
+
+        for (let i = 0; i < pr.length; i++) {
+            newPrice += symbols[pr[i]]
+        }
+        return newPrice
+    }
+
     bronPageLink += '&room=' + item.room_name
+    bronPageLink += '&pr=' + mask_price (item.price)
 
     let data_arr = bronPageLink.split('&')
 

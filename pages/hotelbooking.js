@@ -96,6 +96,8 @@ const Hotelbooking = () => {
             .then(result => result.json())
             .then(result => {
 
+                console.log(link)
+
                 if (result.data.length > 0) {
 
                     setLatitude(String(result.data[0].hotel.coordinates.latitude).length > 10 ?
@@ -108,8 +110,20 @@ const Hotelbooking = () => {
 
                     setHotelData(result.data[0].hotel)
             
+                // Переименовать цену для ссылки, чтобы не передавать ее в строке, а то выглядит странно
+                function mask_price (price) {
+                    let symbols = ['g', '_', 'f', '6', 'h', 'k', '2', 'a', '4', 'y', 'i', '1', 'r', '5', '^', 'l', '8']
+                    let newPrice = ''
+                    let pr = parseInt(price).toString()
+    
+                    for (let i = 0; i < pr.length; i++) {
+                        newPrice += symbols[pr[i]]
+                    }
+                    return newPrice
+                }
+
                     for (let i = 0; i < result.data[0].rates.length; i++) {
-                        if (result.data[0].rates[i].room_name == query.room) {
+                        if (result.data[0].rates[i].room_name == query.room && mask_price(result.data[0].rates[i].price) == query.pr) {
                             setActualRoom(result.data[0].rates[i])
                             break
                         }
