@@ -186,11 +186,17 @@
 
 	.aside-block {
 		padding-bottom: 0;
+		margin-bottom: 30px;
+		width: 100%;
 	}
 
 }
 
 @media screen and (max-width: 480px) {
+
+	.search-result-right {
+		margin-top: 100px;
+	}
 
 	.search-item {
 		flex-direction: column;

@@ -262,9 +262,6 @@
 	line-height: 24px;
 }
 
-.contacts-konf-checkbox {
-
-}
 /* Стилизация чекбокса */
 
 input[type="checkbox"].konfstylized:checked, 
@@ -324,13 +321,28 @@ input[type="checkbox"].konfstylized:not(:checked) + label:after {
 
 /* Стилизация чекбокса, конец */
 
+@media screen and (max-width: 1050px) {
+	.contacts-form {
+		flex-wrap: wrap;
+		width: 100%;
+	}
+
+	.contacts-subscribe {
+		width: 100%;
+		margin-top: 50px;
+	}
+
+	.contacts-callback {
+		width: 100%;
+	}
+	
+}
 
 @media screen and (max-width: 650px) {
 
 	.contacts-form {
 		flex-direction: column;
 		padding: 40px 0 35px;
-		margin: 0 1rem;
 	}
 
 	.contacts-callback {
@@ -350,7 +362,6 @@ input[type="checkbox"].konfstylized:not(:checked) + label:after {
 		padding-top: 5px;
 		background-position: left top;
 	}
-
 }
 
 @media screen and (max-width: 420px) {

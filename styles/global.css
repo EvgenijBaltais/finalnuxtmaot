@@ -632,6 +632,10 @@ input[type="checkbox"].substylized:checked + label:after {
     content: "";
 }
 
+.contact-page main {
+	margin: 0 1rem;
+}
+
 
 /* Заголовок главной */
 
@@ -1632,10 +1636,6 @@ input[type="checkbox"].substylized:checked + label:after {
     	justify-content: space-between;
     }
 
-    .contact-page .footer, .contact-page .header {
-    	margin: 0 1rem;
-    }
-
     .footer:before {
     	z-index: -1;
     }
@@ -1690,6 +1690,10 @@ input[type="checkbox"].substylized:checked + label:after {
     .single-block-title {
     	font-size: 18px;
     }
+
+	.contacts-y-map {
+		overflow: visible;
+	}
 }
 
 @media screen and (max-width: 420px) {
@@ -2962,7 +2966,6 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .rc-slider-track {
 	height: 6px!important;
-	margin-top: -2px
 }
 
 .rc-slider-rail {
@@ -4329,6 +4332,11 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 @media screen and (max-width: 1280px) {
+	
+	.map-swiper .swiper-slide {
+		font-size: 18px;
+		line-height: 22px;
+	}
 
 	.aside-direction-form-in {
 		width: 48%
@@ -4465,6 +4473,16 @@ input[type="checkbox"].substylized:checked + label:after {
 	.aside-block-link-w {
 		height: 55px;
 	}
+
+	.icon-item-direction {
+		width: 100%;
+		order: 1;
+	}
+
+	.map-swiper .swiper-slide {
+		font-size: 16px;
+		line-height: 20px;
+	}
 }
 
 /* адаптив главной формы */
@@ -4491,6 +4509,18 @@ input[type="checkbox"].substylized:checked + label:after {
 
 	.hotels-booking:after {
 		width: 100%;
+	}
+
+	.aside-food-block {
+		margin-bottom: 20px;
+	}
+
+	.aside-food-w-4 {
+		margin-bottom: 0
+	}
+
+	.aside-food-w-5 {
+		margin-bottom: 0
 	}
 
 	.search-page-main {
@@ -4586,15 +4616,15 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 
 	.aside-slider {
-		width: 47.5%;
+		width: 100%;
 	}
 
 	.aside-slider + div {
-		width: 47.5%;
+		width: 100%;
 	}
 
 	.aside-slider + div + div {
-		width: 47.5%;
+		width: 100%;
 	}
 
 	.hoteldetail-swiper .hotel-slider__item {
@@ -4900,6 +4930,44 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 @media screen and (max-width: 480px) {
+
+	.aside-fiters-w {
+		margin-top: 100px;
+	}
+
+	.aside-show-filters {
+		width: 100%;
+		top: 313px;
+	}
+
+	.aside-direction-form-way {
+		height: 62px;
+	}
+
+	.aside-form-way-input {
+		line-height: 62px;
+		font-size: 16px;
+	}
+	
+	.aside-guests-block-w {
+		top: 60px;
+		z-index: 7;
+	}
+	.aside-form-way-input {
+		height: 100%;
+	}
+	.aside-direction-form-in {
+		height: 62px;
+	}
+	.aside-direction-form-out {
+		height: 62px;
+	}
+	.aside-direction-form-people {
+		height: 62px;
+	}
+	.aside-direction-form-btn {
+		height: 62px;
+	}
 
 	.secondary-h1 {
 		font-size: 35px;

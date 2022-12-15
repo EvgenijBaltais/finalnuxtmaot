@@ -142,7 +142,7 @@ const AsideMainForm = ({popularHotels, popularWays, setNodataText, setLoadedItem
                         changeChildrenAges = {changeChildrenAges}
                     />
                     {
-                        isTablet ? <div className = {`aside-show-filters${[filtersOpen ? ' aside-show-filters-opened' : '']}`} onClick={() => setFiltersOpen(filtersOpen => !filtersOpen)}>
+                        isTablet || isMobile ? <div className = {`aside-show-filters${[filtersOpen ? ' aside-show-filters-opened' : '']}`} onClick={() => setFiltersOpen(filtersOpen => !filtersOpen)}>
                             {filtersOpen ? 'Скрыть' : 'Показать фильтры'}
                         </div> : ''
                     }

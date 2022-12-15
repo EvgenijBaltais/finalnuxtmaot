@@ -306,7 +306,7 @@
 	}
 
 	.select-results__item-pic-big + .select-results__item-content .select-item-title {
-		padding-top: 15px;
+		padding-top: 20px;
 	}
 
 	.select-results__item-content {
@@ -349,11 +349,12 @@
 		display: inline-block;
 		width: 100%;
 	}
+
 	.serv-item__btn {
 		margin-top: 5px;
 		font-size: 14px;
-		
 	}
+
 	.serv-item__more-services {
 		font-size: 12px;
 		line-height: 14px;
@@ -367,8 +368,28 @@
 
 @media screen and (max-width: 650px) {
 
-	.select-results__item {
-		padding: 14px;
+	.select-item-info {
+		width: calc(100% - 160px);
+	}
+	.select-results__item-text {
+		padding-top: 20px;
+	}
+
+	.select-item-title {
+		padding: 20px 0 10px 0;
+	}
+
+	.select-results__item-price {
+		width: 160px
+	}
+
+	.select-results__item-content {
+		width: 100%;
+		padding: 0;
+	}
+
+	.select-results__item-active {
+		padding-bottom: 50px;
 	}
 
 	.select-results__item-pic {
@@ -376,42 +397,18 @@
 		height: 400px;
 	}
 
+	.serv-item__btn-active {
+		bottom: 20px;
+	}
+
 	.select-results-bron {
 		width: auto;
 		padding: 0;
 		margin: 0;
 		margin-top: 0;
+		font-size: 16px;
 		height: 52px;
-		line-height: 53px;
-	}
-
-	.select-results__item-content {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		margin-top: 20px;
-		width: 100%;
-		padding: 0;
-	}
-
-	.select-item-title {
-		padding-top: 0;
-		display: inline-block;
-		width: 100%;
-	}
-
-	.select-item-info {
-		width: calc(100% - 136px);
-		padding-top: 0;
-	}
-
-	.select-results__item-price {
-		display: flex;
-		flex-wrap: wrap;
-		width: 136px;
-		padding: 0;
-		text-align: center;		
-		margin-top: 0;
+		line-height: 52px;
 	}
 
 	.select-results__item-price:before {
@@ -428,16 +425,6 @@
 		width: 100%;
 	}
 
-	.select-results__item-text, .serv-item__block {
-		padding-top: 0;
-		position: relative;
-		overflow: hidden;
-	    text-overflow: ellipsis; 
-	    -webkit-line-clamp: 2;
-	    display: -webkit-box;
-	    -webkit-box-orient: vertical;
-	}
-
 	.active-nav-list.select-nav-bg:before {
 		transform: rotate(180deg);
 		transition: 0.2s;
@@ -446,84 +433,74 @@
 
 @media screen and (max-width: 480px) {
 
-	.select-results__item-price {
-		width: 100%;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: space-between;
-		align-items: flex-end;
+	.select-results-from .select-from-value {
+		font-size: 20px;
+		line-height: 20px;
+	}
+
+	.serv-item__more-services {
+		padding-left: 20px;
+	}
+
+	.select-results__item-text {
+		order: 3;
+	}
+
+	.select-results__item-content {
 		order: 2;
 	}
 
-	.select-results-info {
-		margin: 0 14px;
-	}
-
 	.select-results-bron {
-		margin: 0 14px;
-		padding: 0 15px;
+		font-size: 14px;
 		height: 52px;
 		line-height: 52px;
-		box-sizing: border-box;
-		font-family: 'FontInter';
+	}
+
+	.select-results__item {
+		padding: 10px;
+	}
+
+	.select-results__item-price {
+		width: 130px;
+		text-align: center;
+	}
+
+	.select-results__item-active {
+		padding-bottom: 50px;
 	}
 
 	.select-results__item-pic {
 		height: 200px;
-	}
-
-	.select-results__item-content {
-		margin: 18px 0;
-	}
-
-	.serv-item__btn {
-		width: 100%;
-		text-align: center;
-		font-size: 14px;
+		order: 1;
 	}
 
 	.select-results-guest-info {
 		font-size: 10px;
-	}
-
-	.select-item-title {
-		order: 1;
-		padding-bottom: 20px;
-	}
-
-	.select-item-info {
-		width: 100%;
-		order: 3;
-		padding-top: 20px;
+		display: none;
 	}
 
 	.select-results-from {
-		padding: 5px 0;
+		padding: 0;
+		color: #000
+	}
+
+	.select-results-from .select-from-value {
+		color: #000
+	}
+
+	.select-results-from .select-from-currency {
+		color: #000
+	}
+
+	.select-results-from:before {
+		content: 'от';
+		padding-right: 7px;
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 22px;
 	}
 
 	.select-results-from-info {
-		padding: 0 0 4px 0;
-	}
-
-	.serv-item__block span {
-		width: auto;
-		vertical-align: middle;
-		padding-left: 10px;
-	}
-
-	.serv-item__block span:before {
-		content: "";
-		width: 12px;
-		height: 10px;
-		margin-right: 5px;
-    	padding-left: 12px;
-		background-image: url(/images/galka.svg);
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: contain;
-	}
-
-	.select-results__item-text {
-		display: none;
+		padding: 0;
 	}
 }
