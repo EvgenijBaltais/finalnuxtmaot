@@ -114,16 +114,16 @@ const Hotelbooking = () => {
                 function mask_price (price) {
                     let symbols = ['g', '_', 'f', '6', 'h', 'k', '2', 'a', '4', 'y', 'i', '1', 'r', '5', '^', 'l', '8']
                     let newPrice = ''
-                    let pr = parseInt(price).toString()
+                    let p = parseInt(price).toString()
     
-                    for (let i = 0; i < pr.length; i++) {
-                        newPrice += symbols[pr[i]]
+                    for (let i = 0; i < p.length; i++) {
+                        newPrice += symbols[p[i]]
                     }
                     return newPrice
                 }
 
                     for (let i = 0; i < result.data[0].rates.length; i++) {
-                        if (result.data[0].rates[i].room_name == query.room && mask_price(result.data[0].rates[i].price) == query.pr) {
+                        if (result.data[0].rates[i].room_name == query.room && mask_price(result.data[0].rates[i].price) == query.p) {
                             setActualRoom(result.data[0].rates[i])
                             break
                         }

@@ -3,8 +3,6 @@ import Hotel_rooms_blocks from "./Hotel_rooms_blocks"
 import styles from "../../styles/Hoteldetail.module.css"
 
 const Hotel_search_result = ({ hotelData, bronPageLink, roomBlocks }) => {
-    
-    console.log(roomBlocks)
 
     if (!roomBlocks) return (
         <div className = {`${styles["select-results"]} block-scrolling-item`} id = "all-rooms">

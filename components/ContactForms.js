@@ -1,15 +1,23 @@
 import React from "react"
-import MediaQuery from "react-responsive"
 import styles from "../styles/ContactForm.module.css"
-import Inputmask from "inputmask"
 
 class ContactForms extends React.Component {
 
+	constructor(props) {
+		super(props)
+		this.state = { checked: 1, isMobile: 0 }
+	}
+
 	componentDidMount() {
-
 		let im = new Inputmask("+7 (999) 999-99-99")
-			im.mask(document.querySelector('input[name = "contacts-phone"]'))
 
+		document.querySelectorAll('input[name = "contacts-phone"]').forEach((item) => {
+			im.mask(item)
+		})
+
+		this.setState({
+			isMobile: window.screen.width < 480
+		})
 	}
   
 	componentWillUnmount() {
@@ -29,7 +37,7 @@ class ContactForms extends React.Component {
 							<textarea name="contacts-textarea" className = {styles["contacts-form__textarea"]} placeholder="Сообщение"></textarea>
 							<div className = {styles["contacts-btn-area"]}>
 								<div className = {styles["contacts-agree"]}>
-									<input type="checkbox" id="subscribe-checkbox-2" className = {styles["konfstylized"]} /> 
+									<input type="checkbox" id="subscribe-checkbox-2" className = {styles["konfstylized"]} defaultChecked = {this.state.checked} /> 
 									<label htmlFor="subscribe-checkbox-2">
 									Я соглашаюсь с политикой конфиденциальности
 									</label>
@@ -48,16 +56,20 @@ class ContactForms extends React.Component {
 						<form action="" name = "contacts-subscribe-form">
 							<div className = {styles["contacts-subscribe-form"]}>
 								<div className={styles["contacts-subscribe-form-inside"]}>
-									<input type="text" name = "get-contacts-subscribe" id = "get-contacts-subscribe" className = {styles["get-contacts-subscribe"]} placeholder = "Укажите свой Email" />
+									<input type="text"
+										name = "get-contacts-subscribe"
+										id = "get-contacts-subscribe"
+										className = {styles["get-contacts-subscribe"]}
+										placeholder = "Укажите свой Email"
+										defaultChecked = "true"
+									/>
 									<div className = {styles["get-contacts-suscribe-btn"]}>
 										<button className = {styles["get-contacts-suscribe__submit"]}>
-                                            <MediaQuery maxWidth={420}>
-                                                {(matches) =>
-                                                    matches
-                                                      ? <span className={styles["icon-subscribe-inside"]}></span>
-                                                      : <span>Подписаться</span>
-                                                  }
-                                            </MediaQuery>
+                                            {
+												this.state.isMobile
+													? <span className={styles["icon-subscribe-inside"]}></span>
+													: <span>Подписаться</span>
+                                            }
                                         </button>
                                         <div className = "anim-blick__submit-bg">
                                             <div className ="anim-blick__submit-obj"></div>
@@ -66,7 +78,7 @@ class ContactForms extends React.Component {
 								</div>
 							</div>
 							<div className = "subscribe-agree">
-								<input type="checkbox" id="subscribe-checkbox-1" className = "substylized" /> 
+								<input type="checkbox" id="subscribe-checkbox-1" className = "substylized" defaultChecked = {this.state.checked} /> 
 								<label htmlFor="subscribe-checkbox-1">
 								Хочу получать акции и спецпредложения для своих путешествий</label>
 							</div>

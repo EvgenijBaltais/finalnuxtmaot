@@ -9,18 +9,12 @@ import Hotel_rooms_block_item from "./Hotel_rooms_block_item"
 const Hotel_rooms_block = ({item, hotelInfo, bronPageLink}) => {
 
     const [view, changeView] = useState(0)
-    const [isMobile, setIsMobile] = useState(0)
-    const [isTablet, setIsTablet] = useState(0)
     const [isDesktop, setIsDesktop] = useState(0)
 
     useEffect(() => {
-        setIsMobile(window.screen.width <= 480)
-        setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
         setIsDesktop(window.screen.width > 860)
 
         window.addEventListener('resize', () => {
-            setIsMobile(window.screen.width <= 480)
-            setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
             setIsDesktop(window.screen.width > 860)
         })
     }, [])

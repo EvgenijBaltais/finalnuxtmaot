@@ -1211,7 +1211,8 @@ input[type="checkbox"].substylized:checked + label:after {
 .map-swiper .swiper-wrapper {
 	height: 100px;
 	display: flex;
-	align-items: baseline;
+	align-items: center;
+	margin-top: -25px;
 }
 
 .map-swiper .map-slider-items {
@@ -1253,7 +1254,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	justify-content: center;
 	height: 50px!important;
 	text-align: center;
-	padding: 0 20px!important;
+	padding: 0 5px!important;
 	color: #848484;
 	font-size: 20px;
 	line-height: 28px;
@@ -1264,8 +1265,9 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .map-swiper .swiper-slide-active {
 	color:#FE4B2B;
-	transform: scale(1.3);
+	transform: scale(1.4);
 	transition: transform .2s;
+	padding-bottom: 5px!important;
 }
 
 .map-swiper .swiper-button-prev {
@@ -1585,6 +1587,10 @@ input[type="checkbox"].substylized:checked + label:after {
 /* Пагинация, конец */
 
 @media screen and (max-width: 650px) {
+
+	.contact-page .footer {
+		padding: 0 1rem!important;
+	}
 
     .wrapper {
     	margin: 0 auto;
@@ -2804,6 +2810,41 @@ input[type="checkbox"].substylized:checked + label:after {
 
 @media screen and (max-width: 650px) {
 
+	.swiper {
+		position: static!important;
+	}
+
+	.swiper-wrapper {
+		position: static!important;
+	}
+
+	.map-swiper .swiper-button-prev:hover {
+		background-image: url(/images/icons/slide_left.svg)!important;
+	}
+
+	.map-swiper .swiper-button-next:hover {
+		background-image: url(/images/icons/slide_right.svg)!important;
+	}
+
+	.map-swiper .swiper-button-prev {
+		top: 130px;
+		right: 40px;
+		left: auto;
+		width: 25px!important;
+		height: 20px!important;
+		background-image: url(/images/icons/slide_left.svg);
+	}
+
+	.map-swiper .swiper-button-next {
+		top: 130px;
+		right: 15px;
+		left: auto;
+		transform: rotate(0)!important;
+		width: 25px!important;
+		height: 20px!important;
+		background-image: url(/images/icons/slide_right.svg);
+	}
+
     .wrapper {
     	margin: 0 auto;
         padding: 0 1rem;
@@ -2813,11 +2854,6 @@ input[type="checkbox"].substylized:checked + label:after {
     .header {
         margin: 10px 15px;
     } 
-
-    .contact-page {
-    	padding: 0 !important;
-    }
-
     .contact-page .section-title {
     	width: 100%;
     }
@@ -2833,7 +2869,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
     .map-swiper .swiper-slide-active {
     	width: 100%;
-    	transform: scale(1.8);
+    	transform: scale(1.4);
     }
 
     .main-h1 {
@@ -4905,6 +4941,11 @@ input[type="checkbox"].substylized:checked + label:after {
 
 @media screen and (max-width: 650px) {
 
+	.swiper {
+		width: calc(100% + 280px)!important;
+		margin-left: -140px!important;
+	}
+
 	.main-form, .search-page-main, .footer {
 		margin-left: 0;
 		margin-right: 0;
@@ -4930,6 +4971,11 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 @media screen and (max-width: 480px) {
+
+	.map-swiper .swiper-slide {
+		font-size: 14px;
+		line-height: 16px;
+	}
 
 	.aside-fiters-w {
 		margin-top: 100px;

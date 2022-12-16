@@ -8,22 +8,6 @@ const Hotel_rooms_block_item = ({item, hotelInfo, bronPageLink}) => {
     const [servicesMain, setServicesMain] = useState([])
     const [servicesDop, setServicesDop] = useState([])
 
-    const [isMobile, setIsMobile] = useState(0)
-    const [isTablet, setIsTablet] = useState(0)
-    const [isDesktop, setIsDesktop] = useState(0)
-
-    useEffect(() => {
-        setIsMobile(window.screen.width <= 480)
-        setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
-        setIsDesktop(window.screen.width > 860)
-
-        window.addEventListener('resize', () => {
-            setIsMobile(window.screen.width <= 480)
-            setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
-            setIsDesktop(window.screen.width > 860)
-        })
-    }, [])
-
     // Переименовать цену для ссылки, чтобы не передавать ее в строке, а то выглядит странно
     function mask_price (price) {
         let symbols = ['g', '_', 'f', '6', 'h', 'k', '2', 'a', '4', 'y', 'i', '1', 'r', '5', '^', 'l', '8']
@@ -37,7 +21,7 @@ const Hotel_rooms_block_item = ({item, hotelInfo, bronPageLink}) => {
     }
 
     bronPageLink += '&room=' + item.room_name
-    bronPageLink += '&pr=' + mask_price (item.price)
+    bronPageLink += '&p=' + mask_price (item.price)
 
     let data_arr = bronPageLink.split('&')
 
@@ -175,14 +159,13 @@ const Hotel_rooms_block_item = ({item, hotelInfo, bronPageLink}) => {
         nights == 2 || nights == 3 || nights == 4 ? text = nights + ' ночи' : ''
         return text
     }
-
+    console.log(item)
     return (
         <div className = {view ? `${styles["select-item-block"]} ${styles["select-item-block-active"]}` : `${styles["select-item-block"]}`}>
-
             <div className = {styles["select-item-block-left"]}>
                 {servicesDop.length > 8 ?
                     <div className={styles["select-results__item-text"]}>
-                            {servicesDop.map((item, index, arr) => {
+                            {servicesDop.map((item, index) => {
                                 if (index <= 8) return ('')
 
                                 if (!view) {
@@ -234,7 +217,6 @@ const Hotel_rooms_block_item = ({item, hotelInfo, bronPageLink}) => {
                         <span className = {styles["serv-passiv-btn"]}>Подробнее&nbsp;о&nbsp;номере</span>}
                 </div>
             </div>
-
             <div className={styles["select-results__item-price"]}>
                 <div className={styles["select-results-info"]}>
                     <div className={styles["select-results-guest-info"]}>
