@@ -1,5 +1,4 @@
 import React from 'react'
-import MediaQuery from 'react-responsive'
 import MainForm from "../components/MainForm"
 import ArticleNav from "../components/ArticleNav"
 import styles from "../styles/Articles.module.css"
@@ -7,10 +6,21 @@ import styles from "../styles/Articles.module.css"
 class Articles extends React.Component {
     constructor(props) {
         super(props)
+        this.state = { checked: 1, isMobile: 0 }
     }
 
     componentDidMount(){
         document.querySelector('.wrapper').classList.add('articles-page')
+
+		let im = new Inputmask("+7 (999) 999-99-99")
+
+		document.querySelectorAll('input[name = "contacts-phone"]').forEach((item) => {
+			im.mask(item)
+		})
+
+		this.setState({
+			isMobile: window.screen.width < 480
+		})
     }
 
     componentWillUnmount() {
@@ -23,7 +33,7 @@ class Articles extends React.Component {
             <>
                 <h1 className = "secondary-h1">Полезные статьи</h1>
 
-                <MainForm />
+                <MainForm popularHotels = {this.props.popularHotels.data} popularWays = {this.props.popularWays.data} />
 
                 <section className = {styles["article-content"]}>
                     <div className = {styles["article-left"]}>
@@ -1395,13 +1405,11 @@ class Articles extends React.Component {
                                             <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свою электронную почту" />
                                             <div className = {styles["get-content-suscribe-btn"]}>
                                                 <button className = {styles["get-content-suscribe__submit"]}>
-                                                    <MediaQuery maxWidth={480}>
-                                                        {(matches) =>
-                                                            matches
-                                                              ? <span className={styles["icon-subscribe-inside"]}></span>
-                                                              : <span>Подписаться</span>
-                                                          }
-                                                    </MediaQuery>
+                                                    {
+                                                        this.state.isMobile
+                                                            ? <span className={styles["icon-subscribe-inside"]}></span>
+                                                            : <span>Подписаться</span>
+                                                    }
                                                 </button>
                                                 <div className = "anim-blick__submit-bg">
                                                     <div className ="anim-blick__submit-obj"></div>
@@ -1428,6 +1436,33 @@ class Articles extends React.Component {
 
             </>
         )
+    }
+}
+
+export async function getStaticProps(context) {
+    
+    // Популярные отели
+
+	const getHotels = await fetch('https://maot-api.bokn.ru/api/hotels/top')
+	const popularHotels = await getHotels.json()
+
+    // Популярные направления
+
+	const getWays = await fetch('https://maot-api.bokn.ru/api/regions/top')
+	const popularWays = await getWays.json()
+  
+    // Отзывы
+
+	//const getReviews = await fetch('https://maot-api.bokn.ru/api/load?id=6713')
+	//let reviews = await getReviews.json()
+    //    reviews = reviews.data.reviews
+
+    return {
+        props: {
+            popularHotels,
+            popularWays,
+            //reviews
+        },
     }
 }
 

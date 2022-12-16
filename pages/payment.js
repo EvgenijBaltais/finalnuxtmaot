@@ -16,6 +16,7 @@ class Payment extends React.Component {
 
     constructor(props) {
         super(props)
+        this.state = { checked: 1, isMobile: 0 }
     }
 
     componentDidMount(){
@@ -32,7 +33,7 @@ render() {
         <>
             <h1 className="secondary-h1">Способы оплаты и возврат</h1>
 
-            <MainForm />
+            <MainForm popularHotels = {this.props.popularHotels.data} popularWays = {this.props.popularWays.data} />
 
             <section className = {styles["pay-content"]}>
                 <div className = {styles["pay-left"]}>
@@ -293,5 +294,33 @@ render() {
     )
 }
 }
+
+export async function getStaticProps(context) {
+    
+    // Популярные отели
+
+	const getHotels = await fetch('https://maot-api.bokn.ru/api/hotels/top')
+	const popularHotels = await getHotels.json()
+
+    // Популярные направления
+
+	const getWays = await fetch('https://maot-api.bokn.ru/api/regions/top')
+	const popularWays = await getWays.json()
+  
+    // Отзывы
+
+	//const getReviews = await fetch('https://maot-api.bokn.ru/api/load?id=6713')
+	//let reviews = await getReviews.json()
+    //    reviews = reviews.data.reviews
+
+    return {
+        props: {
+            popularHotels,
+            popularWays,
+            //reviews
+        },
+    }
+}
+
 
 export default Payment

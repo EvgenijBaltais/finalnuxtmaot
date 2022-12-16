@@ -46,7 +46,6 @@ class Index extends React.Component {
 
 export async function getStaticProps(context) {
     
-
     // Популярные отели
 
 	const getHotels = await fetch('https://maot-api.bokn.ru/api/hotels/top')

@@ -2073,13 +2073,13 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .search-results-w {
 	position: absolute;
-	top: 80px;
+	top: 72px;
 	left: -18px;
 	right: 0;
 	border-radius: 10px;
 	overflow: hidden;
 	width: calc(100% + 18px);
-	z-index: 2;
+	z-index: 9;
     -webkit-box-shadow: var(--main-shadow);
     -moz-box-shadow: var(--main-shadow);
     box-shadow: var(--main-shadow);
@@ -2133,12 +2133,12 @@ input[type="checkbox"].substylized:checked + label:after {
 
 .guests-block-w {
     position: absolute;
-    top: 80px;
+    top: 72px;
     left: 0;
     right: 0;
     border-radius: 10px;
     width: calc(100% + 80px);
-    z-index: 2;
+    z-index: 11;
     box-shadow: var(--main-shadow);
 }
 
@@ -2414,7 +2414,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
   .datepicker-w {
     position: absolute;
-    top: 65px;
+    top: 72px;
     left: 0;
 	width: 415px;
 	height: 470px;
@@ -2424,7 +2424,7 @@ input[type="checkbox"].substylized:checked + label:after {
     box-shadow: var(--main-shadow);
 	overflow: auto;
 	background: #fff;
-	z-index: 6;
+	z-index: 12;
 	overflow: hidden;
 }
 
@@ -4447,10 +4447,6 @@ input[type="checkbox"].substylized:checked + label:after {
 
 @media screen and (max-width: 1050px) {
 
-	.datepicker-w {
-		top: 55px;
-	}
-
 	.aside-direction-form-way {
 		height: 50px;
 	}
@@ -4542,6 +4538,10 @@ input[type="checkbox"].substylized:checked + label:after {
 }
 
 @media screen and (max-width: 860px) {
+
+	.direction-form__inside {
+		padding: 15px 0 15px 15px;
+	}
 
 	.hotels-booking:after {
 		width: 100%;
@@ -5087,7 +5087,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 
 	.direction-form-in, .direction-form-out {
-		width: 47%;
+		width: calc(50% - 10px);
 	}
 
 	.direction-form-in::after, .direction-form-out::after {
@@ -5135,7 +5135,7 @@ input[type="checkbox"].substylized:checked + label:after {
 		top: 78px;
 		left: 0;
 		width: 100%;
-		z-index: 6;
+		z-index: 12;
 	}
 
 	.direction-form-out > .datepicker-w  {
@@ -5143,7 +5143,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 
 	.datepicker-w {
-		width: calc(200% + 32px);
+		width: calc(200% + 20px);
 		top: 75px;
 		right: 0;
 		left: 0;
