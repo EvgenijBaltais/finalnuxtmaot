@@ -1,5 +1,4 @@
 import React from "react"
-import MediaQuery from 'react-responsive'
 
 import styles from "../styles/Payment.module.css"
 
@@ -21,6 +20,10 @@ class Payment extends React.Component {
 
     componentDidMount(){
         document.querySelector('.wrapper').classList.add('payment-page')
+
+		this.setState({
+			isMobile: window.screen.width < 480
+		})
     }
 
     componentWillUnmount() {
@@ -162,13 +165,10 @@ render() {
                                             <input type="text" name = "get-content-subscribe" id = "get-content-subscribe" className = {styles["get-content-subscribe"]} placeholder = "Укажите свой Email"/>
                                             <div className = {styles["get-content-suscribe-btn"]}>
                                                 <button className = {styles["get-content-suscribe__submit"]}>
-                                                    <MediaQuery maxWidth={460}>
-                                                        {(matches) =>
-                                                            matches
-                                                              ? <span className={styles["icon-subscribe-inside"]}></span>
-                                                              : <span>Подписаться</span>
-                                                          }
-                                                    </MediaQuery>
+                                                    {this.state.isMobile
+                                                        ? <span className={styles["icon-subscribe-inside"]}></span>
+                                                        : <span>Подписаться</span>
+                                                    }
                                                 </button>
                                                 <div className = "anim-blick__submit-bg">
                                                     <div className ="anim-blick__submit-obj"></div>
@@ -177,7 +177,7 @@ render() {
                                         </div>
                                     </div>
                                     <div className = "subscribe-agree">
-                                        <input type="checkbox" id="subscribe-checkbox-1" className = "substylized" /> <label htmlFor="subscribe-checkbox-1">
+                                        <input type="checkbox" id="subscribe-checkbox-1" defaultChecked = {this.state.checked} className = "substylized" /> <label htmlFor="subscribe-checkbox-1">
                                             Хочу получать акции и спецпредложения для своих путешествий</label>
                                     </div>
                                 </form>

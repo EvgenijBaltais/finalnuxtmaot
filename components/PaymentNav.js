@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
-import Link from 'next/link'
 import { useRouter } from "next/router"
 
 import styles from "../styles/Payment.module.css"
@@ -46,7 +45,7 @@ const PaymentNav = () => {
         let footerTop = document.querySelector('.footer').offsetTop
         let blockHeight = document.querySelector('.left-nav-fixed').clientHeight
 
-        function scrollingOptions () {
+        /*function scrollingOptions () {
 
             if (window.pageYOffset <= top) {
 
@@ -64,12 +63,12 @@ const PaymentNav = () => {
                 document.querySelector('.left-nav-fixed').style.position = "absolute"
                 document.querySelector('.left-nav-fixed').style.top = footerTop - blockHeight + 225 + 'px'
             }
-        }
+        }*/
 
-        window.addEventListener('scroll', scrollingOptions)
+        //window.addEventListener('scroll', scrollingOptions)
 
         return () => {
-            window.removeEventListener('scroll', scrollingOptions)
+            //window.removeEventListener('scroll', scrollingOptions)
         }
     }, [])
 

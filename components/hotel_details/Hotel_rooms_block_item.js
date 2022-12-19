@@ -159,7 +159,7 @@ const Hotel_rooms_block_item = ({item, hotelInfo, bronPageLink}) => {
         nights == 2 || nights == 3 || nights == 4 ? text = nights + ' ночи' : ''
         return text
     }
-    console.log(item)
+
     return (
         <div className = {view ? `${styles["select-item-block"]} ${styles["select-item-block-active"]}` : `${styles["select-item-block"]}`}>
             <div className = {styles["select-item-block-left"]}>

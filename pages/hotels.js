@@ -73,7 +73,7 @@ export default function Hotels () {
             // Определить сколько всего ночей было выбрано
             setNights(calculateNights(dateIn, dateOut))
 
-            query.region_id ? link = 'https://maot-api.bokn.ru/api/regions/search?'
+            query.region_id ? link = 'https://maot-api.bokn.ru/api/regions/search?exclude_flag=1&'
                         : link = 'https://maot-api.bokn.ru/api/hotels/search?'
 
             query.region_id ? link += 'id=' + query.region_id
@@ -94,7 +94,7 @@ export default function Hotels () {
 
             console.log(link)
 
-           fetch(link)
+            fetch(link)
                     .then((res) => res.json())
                     .then((res) => {
 
@@ -103,18 +103,8 @@ export default function Hotels () {
                 // Отфильтровать и вывести услуги
 
                 res.data.map((el) => {
-
-                    delete el.hotel.coordinates
-                    delete el.hotel.crm_id
-                    delete el.hotel.description
-                    delete el.hotel.type_id
-                    delete el.rates[0].images
-                    delete el.rates[0].cancellation_penalties
-                    delete el.rates[0].description
-
                     return formatServices(el)
                 })
-
                 
                 setLoadedItems(res.data)
                 setFilteredItems(false)
@@ -142,7 +132,7 @@ export default function Hotels () {
                 setReloadComponent(reloadComponent => reloadComponent += 1)
 
                 res.data.length == 0 ? setNodataText('Нет подходящих вариантов') : setNodataText('')
-          })
+            })
 
     }, [query])
 
@@ -199,7 +189,6 @@ export default function Hotels () {
     
             el.hotel.servicesMain = servicesArr
             el.hotel.servicesDop = dopServicesArr
-            //delete el.hotel.services
 
             return el
     }
@@ -467,8 +456,6 @@ export default function Hotels () {
 
         return arr
     }
-
-    console.log(isDesktop)
 
     return (
         <>

@@ -5132,7 +5132,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	}
 
 	.search-results-w {
-		top: 78px;
+		top: 65px;
 		left: 0;
 		width: 100%;
 		z-index: 12;
@@ -5144,7 +5144,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 	.datepicker-w {
 		width: calc(200% + 20px);
-		top: 75px;
+		top: 65px;
 		right: 0;
 		left: 0;
 	}
@@ -5155,7 +5155,7 @@ input[type="checkbox"].substylized:checked + label:after {
 
 	.guests-block-w {
 		width: 100%;
-		top: 78px;
+		top: 65px;
 	}
 
 	.main-h1 {

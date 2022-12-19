@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper"
-import styles from "../../styles/search_results/Search_hotel_item.module.css"
+import styles from "../../styles/favorites/Favorites_hotel_item.module.css"
 import "swiper/css"
 
-const Search_hotel_item = ({item, rates, nights, query}) => {
+const Favorites_hotel_item = ({item, rates, nights}) => {
     const [view, changeView] = useState(0)
     
     function addBackgroundImage (slider) {
@@ -42,32 +42,30 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
         return text
     }
 
-
     // Ссылка на отель
 
-    let obj = {
-        datein: query.datein || 0,
-        dateout: query.dateout || 0,
-        adults: query.adults || 0,
-        hotel_id: item.id
+    function getDate(date) {
+
+    	var dd = date.getDate();
+    	if (dd < 10) dd = '0' + dd;
+
+    	var mm = date.getMonth() + 1;
+    	if (mm < 10) mm = '0' + mm;
+
+    	var yy = date.getFullYear();
+    	if (yy < 10) yy = '0' + yy;
+
+    	return dd + '.' + mm + '.' + yy;
     }
 
-    let url = '/hoteldetail?'
+    let date = new Date()
+    let today = getDate(date)
+    let tomorrow = new Date(date.getFullYear(), date.getMonth(), date.getDate()+1)
+        tomorrow = getDate(tomorrow)
 
-    for (let key in obj) {
-        key == "datein" ? url += (key + "=" + obj[key]) : url += ('&' + key + "=" + obj[key])
-    }
+        console.log(item)
 
-    // Дети
-    if (query.children_ages && Number.isInteger(+query.children_ages)) {
-        url += '&children_ages=' + query.children_ages
-    }
-
-    if (query.children_ages && Array.isArray(query.children_ages)) {
-        for (let i = 0; i < query.children_ages.length; i++) {
-            url += '&children_ages=' + query.children_ages[i]
-        }
-    }
+    let url = `/hoteldetail?datein=${today}&dateout=${tomorrow}&adults=2&hotel_id=${item.id}`
 
     return (
         <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]}` : styles["select-results__item"]}>
@@ -151,7 +149,7 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
                             <span className = {styles["select-results-nights"]}>{nightsRightText(nights)}</span>
                         </div>
                     </div>
-                    <a href = {url} target = "_blank" className = {styles["select-results-bron"]}>Забронировать</a>
+                    <a href = {url} target = "_blank" className = {styles["select-results-bron"]}>Выбрать</a>
                 </div>
             </div>
             {item.servicesDop.length > 8 ?
@@ -178,4 +176,4 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
     )
 }
 
-export default Search_hotel_item
+export default Favorites_hotel_item

@@ -22,6 +22,10 @@ const ArticleNav = () => {
         }, [])
     }
 
+    function blockLink () {
+        visibleList ? '' : event.preventDefault()
+    }
+
     WindowOutClick()
 
     return (
@@ -34,7 +38,7 @@ const ArticleNav = () => {
                 <div className = {styles["left-ul-nav-list"]}>
                     <ul className = {styles["left-nav-list"]}>
                         <li className = {styles["left-nav-item"]}>
-                            <a className = {styles["left-nav-link"]} href="#art_1">Бани и сауны в домах отдыха Подмосковья</a>
+                            <a className = {styles["left-nav-link"]} href="#art_1" onClick = {blockLink}>Бани и сауны в домах отдыха Подмосковья</a>
                         </li>
                         <li className = {styles["left-nav-item"]}>
                             <a className = {styles["left-nav-link"]} href="#art_2">ГЕЛИОПАРК Кантри Резорт</a>
