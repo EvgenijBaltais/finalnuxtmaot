@@ -1,0 +1,139 @@
+.search-result-title {
+	padding-left: 40px;
+	font-size: 20px;
+	line-height: 30px;
+	font-family: 'FontInterBold';
+	padding-top: 15px;
+    margin-top: 35px;
+	padding-bottom: 15px;
+    background-image: url('/images/icons/ok.png');
+    background-repeat: no-repeat;
+    background-size: 25px;
+    background-position: center left;
+}
+
+.search-result-w {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+}
+
+.search-result-left {
+	position: absolute;
+	width: 400px;
+	box-shadow: var(--main-shadow);
+	padding: 20px 25px;
+	border-radius: 10px;
+	background-color: #fff;
+}
+
+.search-result-left:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.search-result-left-w {
+	background: #fff;
+	border-radius: 10px;
+}
+
+.search-result-right {
+	position: relative;
+	width: 790px;
+	min-height: 100vh;
+	margin-left: 450px;
+    padding-top: 60px;
+}
+
+.compare-favorites {
+    position: absolute;
+    top: 0px;
+    color: #E0E0E0;
+    font-size: 18px;
+    line-height: 26px;
+    height: 26px;
+    padding-left: 32px;
+    background-image: url('/images/icons/heart.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.aside-checkbox {
+	margin-bottom: 30px
+}
+
+.aside-checkbox:last-child {
+	margin-bottom: 0
+}
+
+.aside-stars-label {
+	padding-top: 2px;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 1280px) {
+
+	.search-result-left {
+		width: 350px;
+		padding: 20px;
+	}
+
+	.search-result-right {
+		width: calc(100% - 380px);
+		margin-left: 380px;
+	}
+}
+
+
+@media screen and (max-width: 1050px) {
+
+	.search-result-left {
+		width: 300px;
+		padding: 15px;
+	}
+
+	.search-result-right {
+		width: calc(100% - 320px);
+		margin-left: 320px;
+	}
+}
+
+@media screen and (max-width: 860px) {
+	.search-result-w {
+		flex-direction: column;
+	}
+
+	.search-result-left, .search-result-right {
+		width: auto;
+	}
+
+	.search-result-left-w {
+		background: transparent;
+		position: relative;
+	}
+
+	.search-result-left {
+		position: relative;
+		padding: 0;
+		background: transparent;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.search-result-right {
+		margin-top: 55px;
+		margin-right: 0;
+		margin-left: 0;
+	}
+}
+
+@media screen and (max-width: 480px) {
+
+	.search-result-right {
+		margin-top: 100px;
+	}
+}

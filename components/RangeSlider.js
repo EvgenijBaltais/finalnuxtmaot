@@ -25,7 +25,7 @@ export default function RangeSlider ({sliderMin, sliderMax, setIsResearch, start
                 range
                 defaultValue={[sliderMin, sliderMax]}
                 min={0}
-                max={(sliderMax + 10000)}
+                max={(sliderMax + 5000)}
                 onChange={value => renewValues(value)}
                 onAfterChange = {startReDraw}
             />

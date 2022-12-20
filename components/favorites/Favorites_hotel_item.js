@@ -1,11 +1,25 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper"
 import styles from "../../styles/favorites/Favorites_hotel_item.module.css"
 import "swiper/css"
 
-const Favorites_hotel_item = ({item, rates, nights}) => {
+const Favorites_hotel_item = ({item, nights}) => {
     const [view, changeView] = useState(0)
+    const [isFavorite, setIsFavorite] = useState(false)
+
+    useEffect(() => {
+
+        let arr = []
+
+        localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].id == item.id) {
+                setIsFavorite(true)
+            }
+        }
+    }, [])
     
     function addBackgroundImage (slider) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
@@ -63,12 +77,31 @@ const Favorites_hotel_item = ({item, rates, nights}) => {
     let tomorrow = new Date(date.getFullYear(), date.getMonth(), date.getDate()+1)
         tomorrow = getDate(tomorrow)
 
-        console.log(item)
-
     let url = `/hoteldetail?datein=${today}&dateout=${tomorrow}&adults=2&hotel_id=${item.id}`
 
+    function checkFavorite () {
+
+        let arr = []
+
+        localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].id == item.id) {
+                setIsFavorite(false)
+                arr.splice(i, 1)
+                localStorage.setItem('hotels', JSON.stringify(arr))
+                return false
+            }
+        }
+
+        setIsFavorite(true)
+        arr.push(item)
+        localStorage.setItem('hotels', JSON.stringify(arr))  
+    }
+
     return (
-        <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]}` : styles["select-results__item"]}>
+        <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]} select-results__item` : `${styles["select-results__item"]} select-results__item`}>
+            <a className = {isFavorite ? `add-to-favorite add-to-favorite-active` : `add-to-favorite`} onClick = {checkFavorite}></a>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
                 <div className = "slider-show-hide" onClick = {() => changeView(view => !view)}></div>
                 <Swiper
@@ -141,7 +174,7 @@ const Favorites_hotel_item = ({item, rates, nights}) => {
                             <span className = {styles["select-results-from"]}>от</span>
                         </div>
                         <div className = {styles["select-results-from"]}>
-                            <span className = {styles["select-from-value"]}>{(+rates[0].price).toLocaleString('ru')}</span>&nbsp;
+                            <span className = {styles["select-from-value"]}>{(+item['rates'][0].price).toLocaleString('ru')}</span>&nbsp;
                             <span className = {styles["select-from-currency"]}>&#8381;</span>
                         </div>
                         <div className = {styles["select-results-from-info"]}>

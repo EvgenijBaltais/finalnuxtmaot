@@ -1,12 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Pagination, Navigation } from "swiper"
 import styles from "../../styles/search_results/Search_hotel_item.module.css"
 import "swiper/css"
 
-const Search_hotel_item = ({item, rates, nights, query}) => {
+const Search_hotel_item = ({item, rates, nights, query, checkFavorite}) => {
     const [view, changeView] = useState(0)
+    const [isFavorite, setIsFavorite] = useState(false)
     
+    useEffect(() => {
+
+        let arr = []
+
+        localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].id == item.id) {
+                setIsFavorite(true)
+            }
+        }
+    }, [])
+
     function addBackgroundImage (slider) {
         slider.slides[slider.activeIndex].style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
     }
@@ -69,8 +83,30 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
         }
     }
 
+    function checkFavorite () {
+
+        let arr = []
+
+        localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].id == item.id) {
+                setIsFavorite(false)
+                arr.splice(i, 1)
+                localStorage.setItem('hotels', JSON.stringify(arr))
+                return false
+            }
+        }
+
+        setIsFavorite(true)
+        item["rates"] = rates
+        arr.push(item)
+        localStorage.setItem('hotels', JSON.stringify(arr))  
+    }
+
     return (
-        <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]}` : styles["select-results__item"]}>
+        <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]} select-results__item` : `${styles["select-results__item"]} select-results__item`}>
+            <a className = {isFavorite ? `add-to-favorite add-to-favorite-active` : `add-to-favorite`} onClick = {checkFavorite}></a>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
                 <div className = "slider-show-hide" onClick = {() => changeView(view => !view)}></div>
                 <Swiper

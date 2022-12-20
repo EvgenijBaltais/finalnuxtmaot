@@ -2,13 +2,20 @@ import React, { useEffect, useState } from "react"
 import Head from 'next/head'
 
 import Favorites_hotel_item from "../components/favorites/Favorites_hotel_item"
-import styles from "../styles/search_results/Search_results.module.css"
+import styles from "../styles/favorites/Favorites_results.module.css"
 
 import RangeSlider from "../components/RangeSlider"
 
 export default function Hotels () {
 
     const [loadedItems, setLoadedItems] = useState([])
+    const [hotelsArr, setHotelsArr] = useState([])
+    const [sliderMin, setSliderMin] = useState(0)
+    const [sliderMax, setSliderMax] = useState(0)
+    const [loadedItemsMinMax, setLoadedItemsMinMax] = useState([])
+    const [loadedItemsMaxMin, setLoadedItemsMaxMin] = useState([])
+    const [isResearch, setIsResearch] = useState(false)
+    const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
 
     function getDate(date) {
 
@@ -31,70 +38,40 @@ export default function Hotels () {
 
     useEffect(() => {
 
-        setLoadedItems([])
+        let arr = []
+        localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
+        setLoadedItems(arr)
 
-        //['bristol_hotel_7', 'bristol_guest_house_2', 'yaltaintourist_hotel', 'chayka_hotel_3', 'petrhotel']
-        let h = ['bristol_hotel_7', 'bristol_guest_house_2', 'yaltaintourist_hotel']
+        // Отсортировать сразу выборку по порядку цен, чтобы вставить значения в слайдер 
+        //и в дальнейшем использовать в фильтрах, чтобы потом опять не фильтровать и не вешать страницу лишний раз
+        
+        let minMax = arr.length ? arr.slice() : [] // скопировать массив
+        let maxMin = arr.length ? arr.slice() : [] // скопировать массив
 
-        localStorage.setItem('h', JSON.stringify(h))
+        minMax.sort((a, b) => {
+            return +a['rates'][0].price - +b['rates'][0].price
+        })
 
-        let link = ''
+        maxMin.sort((a, b) => {
+            return +b['rates'][0].price - +a['rates'][0].price
+        })
 
-        let hotels = [],
-            readyHotels = []
+        setLoadedItemsMinMax(minMax)
+        setLoadedItemsMaxMin(maxMin)
 
-            hotels = JSON.parse(localStorage.getItem('h'))
+        setSliderMin(minMax.length ? +minMax[0].rates[0].price : 0)
+        setSliderMax(maxMin.length ? +maxMin[0].rates[0].price : 0)
 
-        //for (let i = 0; i < hotels.length; i++) {
-
-            link = `https://maot-api.bokn.ru/api/hotels/search?start_date=${today}&end_date=${tomorrow}&adults=2&id=${hotels[0]}`
-
-            console.log(link)
-
-            fetch(`https://maot-api.bokn.ru/api/hotels/search?start_date=${today}&end_date=${tomorrow}&adults=2&id=${hotels[0]}`)
-            .then((res) => res.json())
-            .then((res) => {
-
-                res.data.map((el) => {
-                    return formatServices(el)
-                })
-
-                readyHotels.push(res.data[0])
-                setLoadedItems(readyHotels)
-
-                console.log(readyHotels)
-            })
-
-            fetch(`https://maot-api.bokn.ru/api/hotels/search?start_date=${today}&end_date=${tomorrow}&adults=2&id=${hotels[1]}`)
-            .then((res) => res.json())
-            .then((res) => {
-
-                res.data.map((el) => {
-                    return formatServices(el)
-                })
-
-                readyHotels.push(res.data[0])
-                setLoadedItems(readyHotels)
-
-                console.log(readyHotels)
-            })
-
-            fetch(`https://maot-api.bokn.ru/api/hotels/search?start_date=${today}&end_date=${tomorrow}&adults=2&id=${hotels[2]}`)
-            .then((res) => res.json())
-            .then((res) => {
-
-                res.data.map((el) => {
-                    return formatServices(el)
-                })
-
-                readyHotels.push(res.data[0])
-                setLoadedItems(readyHotels)
-
-                console.log(readyHotels)
-            })
-
-        //}
     }, [])
+
+    function startReDraw () {
+
+        if (isResearch == true) return false
+        if (sliderMin == 0 && sliderMax == 0) return
+
+        setCheckBoxesResearch(false)
+        setIsResearch(true)
+    }
 
     function formatServices (el) {
 
@@ -160,26 +137,75 @@ export default function Hotels () {
             <title>Избранное</title>
         </Head>
             <section className = {styles["search-result-title"]}>
-                Избранные отели
+                Избранные отели{`: ` + hotelsArr.length}
             </section>
             <section className = {styles["search-result-w"]}>
                 <div className = {styles["search-result-left"]}>
                     <div className = {styles["search-result-left-w"]}>
+                        <h3 className="aside-block-title">
+                            Направление (регион)
+                        </h3>
 
+                        <div className="aside-fiters-w">
+
+                            <div className = {styles["aside-checkbox"]}>
+                                <input type="checkbox" id={`checkbox-3`} className = "stylized stars-checkbox" />
+                                <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-3`}>Подмосковье</label>
+                            </div>
+
+                            <div className = "aside-slider">
+                                <div className="slider-values">
+                                    {sliderMin != 0 ?
+                                        <div className="aside-slider-val aside-slider-left">
+                                            <input type="text" className="aside-slider-input aside-slider-from" />
+                                        </div>:
+                                        <div className="aside-slider-val aside-slider-left">
+                                            <input type="text" className="aside-slider-input aside-slider-from" defaultValue = 'от 100 ₽' />
+                                        </div>
+                                    }
+                                    {sliderMax != 0 ?
+                                        <div className="aside-slider-val aside-slider-right">
+                                            <input type="text" className="aside-slider-input aside-slider-to" />
+                                        </div>:
+                                        <div className="aside-slider-val aside-slider-right">
+                                            <input type="text" className="aside-slider-input aside-slider-to" defaultValue = 'до 280000 ₽' />
+                                        </div>
+                                    }
+                                </div>
+
+                                {sliderMax != 0 ?
+                                    <RangeSlider
+                                        startReDraw = {startReDraw}
+                                        sliderMin = {sliderMin}
+                                        sliderMax = {sliderMax}
+                                        isResearch = {isResearch}
+                                        setIsResearch = {setIsResearch}
+                                        setCheckBoxesResearch = {setCheckBoxesResearch}
+                                    /> :
+                                    <RangeSlider
+                                        sliderMin = {100}
+                                        sliderMax = {280000}
+                                    />
+                                }
+
+                            </div>
+                        </div>
 
                     </div>
                 </div>
                 <div className = {`${styles["search-result-right"]} search-result-right`}>
 
+                {isResearch ? <div className="waiting-fon"></div>: ''}
 
-                {
+                <a className = {`${styles["compare-favorites"]} compare-favorites`}>Сравнить избранные отели</a>
+
+                    {
                         loadedItems.length ? (
                             loadedItems.map((item, index) => {
                             return (
                                 <Favorites_hotel_item
                                     key = {index}
-                                    item = {item.hotel}
-                                    rates = {item.rates}
+                                    item = {item}
                                     nights = {1}
                                 />
                             )
