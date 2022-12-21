@@ -221,6 +221,8 @@ export default function Hotels () {
 
     useEffect(() => {
 
+        /* Когда по клику на чекбокс меняется переменная checkBoxesResearch, то происходит перерисовка: */
+
         if (choosingFilters == true || (choosingFilters == false && isResearch == false)) return
 
         setChoosingFilters(true)

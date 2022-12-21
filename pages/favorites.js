@@ -12,10 +12,12 @@ export default function Hotels () {
     const [hotelsArr, setHotelsArr] = useState([])
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
-    const [loadedItemsMinMax, setLoadedItemsMinMax] = useState([])
-    const [loadedItemsMaxMin, setLoadedItemsMaxMin] = useState([])
     const [isResearch, setIsResearch] = useState(false)
+    const [choosingFilters, setChoosingFilters] = useState(false)
     const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
+    const [nodataText, setNodataText] = useState('')
+
+    const [regions, setRegions] = useState([])
 
     function getDate(date) {
 
@@ -38,15 +40,15 @@ export default function Hotels () {
 
     useEffect(() => {
 
-        let arr = []
-        localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
-        setLoadedItems(arr)
+        let hotels_arr = []
+        localStorage.getItem('hotels') ? hotels_arr = JSON.parse(localStorage.getItem('hotels')) : ''
+        setLoadedItems(hotels_arr)
 
         // Отсортировать сразу выборку по порядку цен, чтобы вставить значения в слайдер 
         //и в дальнейшем использовать в фильтрах, чтобы потом опять не фильтровать и не вешать страницу лишний раз
         
-        let minMax = arr.length ? arr.slice() : [] // скопировать массив
-        let maxMin = arr.length ? arr.slice() : [] // скопировать массив
+        let minMax = hotels_arr.length ? hotels_arr.slice() : [] // скопировать массив
+        let maxMin = hotels_arr.length ? hotels_arr.slice() : [] // скопировать массив
 
         minMax.sort((a, b) => {
             return +a['rates'][0].price - +b['rates'][0].price
@@ -56,21 +58,87 @@ export default function Hotels () {
             return +b['rates'][0].price - +a['rates'][0].price
         })
 
-        setLoadedItemsMinMax(minMax)
-        setLoadedItemsMaxMin(maxMin)
-
         setSliderMin(minMax.length ? +minMax[0].rates[0].price : 0)
         setSliderMax(maxMin.length ? +maxMin[0].rates[0].price : 0)
 
+        // Регионы
+        let reg_set = new Set()
+
+        for (let i = 0; i < hotels_arr.length; i++) {
+            reg_set.add(hotels_arr[i].region.name)
+        }
+
+        let obj = {},
+            regions_arr = [],
+            num = 0
+
+        for (const item of reg_set.values()) {
+
+            num = 0
+            obj = {}
+
+            for (let i = 0; i < hotels_arr.length; i++) {
+                if (item == hotels_arr[i].region.name) {
+                    num++
+                }
+            }
+
+            obj.name = item
+            obj.num = num
+            regions_arr.push(obj)
+        }
+
+        setRegions(regions_arr)
     }, [])
+
+
+    useEffect(() => {
+
+        /* Когда по клику на чекбокс меняется переменная checkBoxesResearch, то происходит перерисовка: */
+
+        if (choosingFilters == true || (choosingFilters == false && isResearch == false)) return
+
+        setChoosingFilters(true)
+
+        showVariants() 
+
+        setIsResearch(false)
+        setChoosingFilters(false)
+        setCheckBoxesResearch(false)
+
+    }, [checkBoxesResearch])
+
 
     function startReDraw () {
 
         if (isResearch == true) return false
         if (sliderMin == 0 && sliderMax == 0) return
 
-        setCheckBoxesResearch(false)
         setIsResearch(true)
+        setCheckBoxesResearch(true)
+    }
+
+    function showVariants () {
+
+        setNodataText('')
+        let res = applyFilters()
+
+        // Вариант на случай сброса всех фильтров. В этом случае возвращается первоначальная выборка с пагинацией
+        if (res == 0) {
+            setFilteredItems([])
+            setFilteredItems(0)
+        }
+
+        // Если после фильтров не осталось вариантов для отображения
+        if (res.length == 0) {
+            setNodataText('Не удалось ничего найти. Попробуйте изменить условия поиска')
+            setFilteredItems([])
+        }
+
+        // Если после фильтров есть варианты
+        if (res.length > 0) {
+            setLoadedItems(res)
+        }
     }
 
     function formatServices (el) {
@@ -127,7 +195,30 @@ export default function Hotels () {
         el.hotel.servicesDop = dopServicesArr
 
         return el
-}
+    }
+
+    function applyFilters() {
+
+        let arr = loadedItems,
+            regions = []
+
+        // Выбранные регионы
+
+        for (let i = 0; i < document.querySelectorAll('.regions-checkbox').length; i++) {
+            document.querySelectorAll('.regions-checkbox')[i].checked ? 
+            regions.push(document.querySelectorAll('.regions-checkbox')[i].getAttribute('data-text')) : ''
+        }
+
+        // Проверка на все фильтры
+
+        // Регион
+
+            arr = arr.filter(n => {
+                return regions.includes(n.region.name)
+            })
+
+        return arr
+    }
 
     // Функция для определения количества ночей для дат в формате гг-мм.дд
 
@@ -147,10 +238,23 @@ export default function Hotels () {
                         </h3>
 
                         <div className="aside-fiters-w">
-
-                            <div className = {styles["aside-checkbox"]}>
-                                <input type="checkbox" id={`checkbox-3`} className = "stylized stars-checkbox" />
-                                <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-3`}>Подмосковье</label>
+                            <div className={styles["checkbox-items-block"]}>
+                                <form>
+                                    {regions.map((item, index) => {
+                                        return (
+                                            <div className = {styles["aside-checkbox"]} key = {index}>
+                                                <input type="checkbox"
+                                                        name = {`f-checkbox-${index}`}
+                                                        id={`checkbox-${index}`}
+                                                        className = "stylized regions-checkbox"
+                                                        onChange={startReDraw}
+                                                        data-text = {item.name}
+                                                    />
+                                                <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-${index}`}>{item.name} ({item.num})</label>
+                                            </div>
+                                        )
+                                    })}
+                                </form>
                             </div>
 
                             <div className = "aside-slider">
@@ -194,6 +298,16 @@ export default function Hotels () {
                     </div>
                 </div>
                 <div className = {`${styles["search-result-right"]} search-result-right`}>
+
+                {nodataText ?
+                    <p className = "no-result">
+                        {nodataText == "Мы загружаем лучшие варианты!" ? 
+                            <img src = "/images/waiting.gif" className = "no-result-image" />
+                            : ''
+                        }
+                        {nodataText}
+                    </p>
+                 : ''}
 
                 {isResearch ? <div className="waiting-fon"></div>: ''}
 
