@@ -45,21 +45,6 @@
 	width: 790px;
 	min-height: 100vh;
 	margin-left: 450px;
-    padding-top: 60px;
-}
-
-.compare-favorites {
-    position: absolute;
-    top: 0px;
-    color: #E0E0E0;
-    font-size: 18px;
-    line-height: 26px;
-    height: 26px;
-    padding-left: 32px;
-    background-image: url('/images/icons/heart.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    cursor: pointer;
 }
 
 .aside-checkbox {
@@ -77,6 +62,11 @@
 
 .checkbox-items-block {
 	margin-bottom: 30px;
+}
+
+.no-data-wrapper {
+	text-align: center;
+	padding: 150px 0;
 }
 
 @media screen and (max-width: 1280px) {

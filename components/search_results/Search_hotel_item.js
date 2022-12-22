@@ -4,7 +4,7 @@ import { Pagination, Navigation } from "swiper"
 import styles from "../../styles/search_results/Search_hotel_item.module.css"
 import "swiper/css"
 
-const Search_hotel_item = ({item, rates, nights, query, checkFavorite}) => {
+const Search_hotel_item = ({item, rates, nights, query}) => {
     const [view, changeView] = useState(0)
     const [isFavorite, setIsFavorite] = useState(false)
     
@@ -99,9 +99,38 @@ const Search_hotel_item = ({item, rates, nights, query, checkFavorite}) => {
         }
 
         setIsFavorite(true)
+
+        // Прибавить инфу по номерам, чтобы в избранном были цены
+
         item["rates"] = rates
+
+        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+        item == removeUnnecessaryFields (item)
+
         arr.push(item)
         localStorage.setItem('hotels', JSON.stringify(arr))  
+    }
+
+
+    function removeUnnecessaryFields () {
+        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+
+        delete item.address
+        delete item.coordinates
+        delete item.crm_id
+        delete item.crm_id
+        delete item.description
+        delete item.services
+        delete item.star_rating
+        delete item.type_id
+        delete item.rates.url
+        delete item.rates[0].images
+        delete item.rates[0].cancellation_penalties
+        delete item.rates[0].description
+        delete item.rates[0].daily_price
+        delete item.rates[0].room_amenities
+        delete item.rates[0].room_info
+        delete item.rates[0].room_name
     }
 
     return (

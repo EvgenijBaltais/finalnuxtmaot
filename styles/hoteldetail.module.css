@@ -94,15 +94,19 @@
 .add-to-favorite__link {
 	display: inline-block;
 	font-size: 14px;
-	line-height: 26px;
-	padding-left: 30px;
+	line-height: 24px;
+	padding-right: 35px;
 	text-decoration: underline;
-	background-image: url('/images/heart.svg');
+	background-image: url('/images/icons/heart-grey.png');
 	background-size: 26px;
 	background-repeat: no-repeat;
-	background-position: left center;
-	color: rgb(255,97,68);
+	background-position: center right 0px;
+	color: #c4c4c4;
 	cursor: pointer;
+}
+
+.add-to-favorite__link-active {
+	background-image: url('/images/icons/heart.svg');
 }
 
 .map-slider {

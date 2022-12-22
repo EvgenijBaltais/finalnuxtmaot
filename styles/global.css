@@ -501,16 +501,14 @@ body {
     z-index: 2;
 	width: 30px;
 	height: 30px;
-	background-image: url('/images/icons/heart.svg');
+	background-image: url('/images/icons/heart-white.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	cursor: pointer;
-	display: none;
 }
 
 .add-to-favorite-active {
-	display: block;
-	background-image: url('/images/icons/heart.svg');
+	background-image: url('/images/icons/heart-temporary.svg');
 	background-repeat: no-repeat;
 	background-size: cover;
 	cursor: pointer;

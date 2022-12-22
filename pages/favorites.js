@@ -9,14 +9,15 @@ import RangeSlider from "../components/RangeSlider"
 export default function Hotels () {
 
     const [loadedItems, setLoadedItems] = useState([])
-    const [hotelsArr, setHotelsArr] = useState([])
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
     const [isResearch, setIsResearch] = useState(false)
     const [choosingFilters, setChoosingFilters] = useState(false)
     const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
-    const [nodataText, setNodataText] = useState('')
-
+    const [noDataText, setNoDataText] = useState('')
+    const [noData, setNoData] = useState(0)
+    const [checked, setChecked] = useState(true)
+    const [reloadComponent, setReloadComponent] = useState(0)
     const [regions, setRegions] = useState([])
 
     function getDate(date) {
@@ -43,6 +44,11 @@ export default function Hotels () {
         let hotels_arr = []
         localStorage.getItem('hotels') ? hotels_arr = JSON.parse(localStorage.getItem('hotels')) : ''
         setLoadedItems(hotels_arr)
+
+        if (hotels_arr.length == 0) {
+            setNoDataText('В избранном пока нет сохраненных отелей')
+            setNoData(1)
+        }
 
         // Отсортировать сразу выборку по порядку цен, чтобы вставить значения в слайдер 
         //и в дальнейшем использовать в фильтрах, чтобы потом опять не фильтровать и не вешать страницу лишний раз
@@ -120,25 +126,15 @@ export default function Hotels () {
 
     function showVariants () {
 
-        setNodataText('')
-        let res = applyFilters()
-
-        // Вариант на случай сброса всех фильтров. В этом случае возвращается первоначальная выборка с пагинацией
-        if (res == 0) {
-            setFilteredItems([])
-            setFilteredItems(0)
-        }
+        setNoDataText('')
+        let res = applyFilters()  // Сбор данных со всех фильтров и применение их
 
         // Если после фильтров не осталось вариантов для отображения
         if (res.length == 0) {
-            setNodataText('Не удалось ничего найти. Попробуйте изменить условия поиска')
-            setFilteredItems([])
+            setNoDataText('Не удалось ничего найти. Попробуйте изменить условия поиска')
         }
 
-        // Если после фильтров есть варианты
-        if (res.length > 0) {
-            setLoadedItems(res)
-        }
+        setLoadedItems(res)
     }
 
     function formatServices (el) {
@@ -199,10 +195,12 @@ export default function Hotels () {
 
     function applyFilters() {
 
-        let arr = loadedItems,
-            regions = []
+        let arr = JSON.parse(localStorage.getItem('hotels')),
+            regions = [],
+            min = parseInt(document.querySelector('.aside-slider-from').value.match(/\d+/)),
+            max = parseInt(document.querySelector('.aside-slider-to').value.match(/\d+/))
 
-        // Выбранные регионы
+        // Выбранные регионы, заполнить массив
 
         for (let i = 0; i < document.querySelectorAll('.regions-checkbox').length; i++) {
             document.querySelectorAll('.regions-checkbox')[i].checked ? 
@@ -211,16 +209,30 @@ export default function Hotels () {
 
         // Проверка на все фильтры
 
+        // Цены
+
+        arr = arr.filter(n => {
+            return +n.rates[0].price >= min && +n.rates[0].price <= max
+        })
+
         // Регион
 
-            arr = arr.filter(n => {
-                return regions.includes(n.region.name)
-            })
+        arr = arr.filter(n => {
+            return regions.includes(n.region.name)
+        })
 
         return arr
     }
 
     // Функция для определения количества ночей для дат в формате гг-мм.дд
+
+    if (noData == 1) {
+        return (
+            <div className= {styles["no-data-wrapper"]}>
+                {noDataText}
+            </div>
+        )  
+    }
 
     return (
         <>
@@ -228,7 +240,7 @@ export default function Hotels () {
             <title>Избранное</title>
         </Head>
             <section className = {styles["search-result-title"]}>
-                Избранные отели{`: ` + hotelsArr.length}
+                Избранные отели{`: ` + loadedItems.length}
             </section>
             <section className = {styles["search-result-w"]}>
                 <div className = {styles["search-result-left"]}>
@@ -249,6 +261,7 @@ export default function Hotels () {
                                                         className = "stylized regions-checkbox"
                                                         onChange={startReDraw}
                                                         data-text = {item.name}
+                                                        defaultChecked={checked}
                                                     />
                                                 <label className = {styles["aside-stars-label"]} htmlFor={`checkbox-${index}`}>{item.name} ({item.num})</label>
                                             </div>
@@ -282,6 +295,7 @@ export default function Hotels () {
                                         startReDraw = {startReDraw}
                                         sliderMin = {sliderMin}
                                         sliderMax = {sliderMax}
+                                        key = {reloadComponent}
                                         isResearch = {isResearch}
                                         setIsResearch = {setIsResearch}
                                         setCheckBoxesResearch = {setCheckBoxesResearch}
@@ -299,19 +313,17 @@ export default function Hotels () {
                 </div>
                 <div className = {`${styles["search-result-right"]} search-result-right`}>
 
-                {nodataText ?
+                {noDataText ?
                     <p className = "no-result">
-                        {nodataText == "Мы загружаем лучшие варианты!" ? 
+                        {noDataText == "Мы загружаем лучшие варианты!" ? 
                             <img src = "/images/waiting.gif" className = "no-result-image" />
                             : ''
                         }
-                        {nodataText}
+                        {noDataText}
                     </p>
                  : ''}
 
                 {isResearch ? <div className="waiting-fon"></div>: ''}
-
-                <a className = {`${styles["compare-favorites"]} compare-favorites`}>Сравнить избранные отели</a>
 
                     {
                         loadedItems.length ? (

@@ -101,6 +101,8 @@ export default function Hotels () {
                     res.success ? '' : res.data = []
                 
                 // Отфильтровать и вывести услуги
+                
+                console.log(res.data)
 
                 res.data.map((el) => {
                     return formatServices(el)

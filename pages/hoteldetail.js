@@ -33,6 +33,8 @@ function Hoteldetail () {
     const [isTablet, setIsTablet] = useState(0)
     const [isDesktop, setIsDesktop] = useState(0)
 
+    const [isFavorite, setIsFavorite] = useState(false)
+
     useEffect(() => {
         setIsMobile(window.screen.width <= 480)
         setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
@@ -43,7 +45,6 @@ function Hoteldetail () {
             setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
             setIsDesktop(window.screen.width > 860)
         })
-
     }, [])
 /*
     const rootEl = useRef(null)
@@ -94,6 +95,26 @@ function Hoteldetail () {
         })
     }
 
+    function checkFavorite () {
+
+        let arr = []
+
+        localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].id == query.hotel_id) {
+                setIsFavorite(false)
+                arr.splice(i, 1)
+                localStorage.setItem('hotels', JSON.stringify(arr))
+                return false
+            }
+        }
+
+        setIsFavorite(true)
+        arr.push(item)
+        localStorage.setItem('hotels', JSON.stringify(arr))  
+    }
+
     const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 
     useEffect(() => {
@@ -111,6 +132,19 @@ function Hoteldetail () {
             setDatesText(text)
         }
 
+
+        // В избранном или нет
+
+        let arr = []
+
+        localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].id == query.hotel_id) {
+                setIsFavorite(true)
+            }
+        }
+
     }, [query])
     // Все что касается дат, конец
 
@@ -119,8 +153,6 @@ function Hoteldetail () {
     useEffect(() => {
 
         if (!router.isReady) return
-
-            // Запрос инфы по отелю и доступных номеров
 
             let datein = query.datein.slice(6, 10) + '-' + query.datein.slice(3, 5) + '-' + query.datein.slice(0, 2)
             let dateout = query.dateout.slice(6, 10) + '-' + query.dateout.slice(3, 5) + '-' + query.dateout.slice(0, 2)
@@ -149,6 +181,8 @@ function Hoteldetail () {
             bronPageLink += '&id=' + hotel_id
             
             setBronPageLink(bronPageLink)
+
+            // Запрос инфы по отелю и доступных номеров
 
             fetch(link)
             .then((result) => result.json())
@@ -180,6 +214,8 @@ function Hoteldetail () {
                     }
 
                     setRoomBlocks(room_blocks)
+                    
+                    console.log(result.data[0].hotel)
 
                     return false
                 }
@@ -196,7 +232,6 @@ function Hoteldetail () {
                 })
             })
     }, [query])
-
 
     let blocksOffsetArr = []
 
@@ -270,8 +305,14 @@ function Hoteldetail () {
                         {hotelData.address ? <p className = {styles["hotel-adress"]}>{hotelData.address}</p> : ''}
                     </div>
                     <div className={styles["add-to-favorite"]}>
-                        {/*isBigScreen && <a className={styles["add-to-favorite__link"]}>добавить&nbsp;в&nbsp;избранное</a>*/}
-                        {/*isTabletOrMobile && <a className={styles["add-to-favorite__link"]}>в&nbsp;избранное</a>*/}
+                        {isMobile ?
+                            <a className={isFavorite ? `${styles["add-to-favorite__link"]} ${styles["add-to-favorite__link-active"]}` : `${styles["add-to-favorite__link"]}`}
+                                onClick = {checkFavorite}>в&nbsp;избранное
+                            </a> :
+                            <a className={isFavorite ? `${styles["add-to-favorite__link"]} ${styles["add-to-favorite__link-active"]}` : `${styles["add-to-favorite__link"]}`}
+                                onClick = {checkFavorite}>добавить&nbsp;в&nbsp;избранное
+                            </a>
+                        }
                     </div>
 
                 </div>
@@ -303,6 +344,7 @@ function Hoteldetail () {
                             </div>
                         </div>
                     </div>
+
                     {mapReady == 1 && isDesktop ?
                         <Hotel_map hotelData = {hotelData} mapReady = {mapReady} />
                         : ''
