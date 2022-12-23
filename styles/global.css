@@ -514,6 +514,11 @@ body {
 	cursor: pointer;
 }
 
+.select-results__item-active .add-to-favorite-active {
+	right: 30px;
+	left: auto;
+}
+
 .select-results__item:hover .add-to-favorite {
 	display: block;
 }

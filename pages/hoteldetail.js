@@ -19,7 +19,7 @@ function Hoteldetail () {
 
     const router = useRouter()
     const { query } = useRouter()
-    const [hotelData, setHotelsData] = useState(0)
+    const [hotelData, setHotelData] = useState(0)
     const [roomBlocks, setRoomBlocks] = useState([])
     const [active_block, setActive_block] = useState(1)
 
@@ -34,6 +34,7 @@ function Hoteldetail () {
     const [isDesktop, setIsDesktop] = useState(0)
 
     const [isFavorite, setIsFavorite] = useState(false)
+
 
     useEffect(() => {
         setIsMobile(window.screen.width <= 480)
@@ -95,6 +96,8 @@ function Hoteldetail () {
         })
     }
 
+    // Проверить есть ли уже в избранном и если да, то удалить, а если нет то добавить
+
     function checkFavorite () {
 
         let arr = []
@@ -102,7 +105,7 @@ function Hoteldetail () {
         localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
 
         for (let i = 0; i < arr.length; i++) {
-            if (arr[i].id == query.hotel_id) {
+            if (arr[i].hotel.id == query.hotel_id) {
                 setIsFavorite(false)
                 arr.splice(i, 1)
                 localStorage.setItem('hotels', JSON.stringify(arr))
@@ -110,9 +113,98 @@ function Hoteldetail () {
             }
         }
 
+        console.log(hotelData)
+
         setIsFavorite(true)
-        arr.push(item)
+
+        let obj = {}
+
+        obj.hotel = hotelData.hotel
+        obj.rates = hotelData.rates
+
+        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+        obj = removeUnnecessaryFields (obj)
+
+        arr.push(obj)
         localStorage.setItem('hotels', JSON.stringify(arr))  
+    }
+
+    function formatServices (el) {
+
+        // Заполнить главные услуги
+        let servicesArr = []
+        let dopServicesArr = []
+        el.hotel.servicesMain = []
+        el.hotel.servicesDop = []
+
+        el.rates[0].meal ? servicesArr.push(['meal', el.rates[0].meal[0]]) : ''          // Питание
+
+        // Добавить в главные услуги из объекта общих отельных услуг
+
+        for (let i = 0; i < el.hotel.services.length; i++) {
+            if (el.hotel.services[i].group_name == "Интернет") {
+                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                    el.hotel.services[i].amenities[k].indexOf('Wi-Fi') + 1 ||
+                    el.hotel.services[i].amenities[k].indexOf('wi-fi') + 1 || 
+                    el.hotel.services[i].amenities[k].indexOf('WI-FI') + 1 ? 
+                    servicesArr.push(['internet', el.hotel.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+            if (el.hotel.services[i].group_name == "В номерах") {
+                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                    el.hotel.services[i].amenities[k].indexOf('Холодильник') + 1 ? 
+                    servicesArr.push(['fridge', el.hotel.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+
+            if (el.hotel.services[i].group_name == "Общее") {
+                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                    el.hotel.services[i].amenities[k].indexOf('Кондиционер') + 1 ? 
+                    servicesArr.push(['conditioner', el.hotel.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+        }
+
+        for (let i = 0; i < el.hotel.services.length; i++) {
+            for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                dopServicesArr.push(el.hotel.services[i].amenities[k])
+            }
+        }
+
+        el.rates[0].room_info.bathroom ? servicesArr.push(['bathroom', el.rates[0].room_info.bathroom]) : ''                      // Ванна
+        el.rates[0].room_info.bed ? servicesArr.push(['bed', el.rates[0].room_info.bed]) : ''                                     // Кровать
+        el.rates[0].room_amenities.nonSmoking ? servicesArr.push(['nonSmoking', el.rates[0].room_amenities.nonSmoking]) : ''      // Для некурящих
+        el.rates[0].room_amenities.window ? servicesArr.push(['window', el.rates[0].room_amenities.window]) : ''                  // Окно
+
+        el.hotel.servicesMain = servicesArr
+        el.hotel.servicesDop = dopServicesArr
+
+        return el
+    }
+
+    function removeUnnecessaryFields (item) {
+        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+
+        delete item.hotel.address
+        //delete item.hotel.coordinates
+        delete item.hotel.crm_id
+        delete item.hotel.description
+        //delete item.hotel.services
+        delete item.hotel.star_rating
+        delete item.hotel.type_id
+        delete item.rates.url
+        //delete item.rates[0].images
+        delete item.rates[0].cancellation_penalties
+        delete item.rates[0].description
+        delete item.rates[0].daily_price
+        delete item.rates[0].room_amenities
+        delete item.rates[0].room_info
+        delete item.rates[0].room_name
+
+        return item
     }
 
     const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
@@ -140,12 +232,13 @@ function Hoteldetail () {
         localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
 
         for (let i = 0; i < arr.length; i++) {
-            if (arr[i].id == query.hotel_id) {
+            if (arr[i].hotel.id == query.hotel_id) {
                 setIsFavorite(true)
             }
         }
 
     }, [query])
+    
     // Все что касается дат, конец
 
     // Данные по отелю
@@ -184,14 +277,20 @@ function Hoteldetail () {
 
             // Запрос инфы по отелю и доступных номеров
 
+            console.log(link)
+
             fetch(link)
             .then((result) => result.json())
             .then((result) => {
-                console.log(link)
+                //console.log(link)
 
                 if (result.data.length > 0) {
 
-                    setHotelsData(result.data[0].hotel)
+                    result.data.map((el) => {
+                        return formatServices(el)
+                    })
+
+                    setHotelData(result.data[0])
 
                     let room_blocks_set = new Set()     // Уникальные названия номеров
                     let room_blocks = []                // Для готовых блоков
@@ -215,7 +314,7 @@ function Hoteldetail () {
 
                     setRoomBlocks(room_blocks)
                     
-                    console.log(result.data[0].hotel)
+                    //console.log(result.data[0].rates)
 
                     return false
                 }
@@ -225,9 +324,9 @@ function Hoteldetail () {
                 fetch('https://maot-api.bokn.ru/api/hotels/get?id=' + hotel_id)
                 .then((result) => result.json())
                 .then((result) => {
-                    console.log(link)
+                    //console.log(link)
 
-                    setHotelsData(result.data)
+                    setHotelData(result.data)
                     setRoomBlocks([])
                 })
             })
@@ -273,7 +372,7 @@ function Hoteldetail () {
         }
     }, [])
 
-    if (!hotelData) {
+    if (!hotelData.hotel) {
         return <>
             <style jsx global>{`
                 .footer {
@@ -290,7 +389,7 @@ function Hoteldetail () {
     return (
         <>
             <Head>
-                <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.name} - Магазин отдыха</title>
+                <title>  - СКИДКИ! доставка путевок, онлайн-бронирование - {hotelData.hotel.name} - Магазин отдыха</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
 
@@ -301,17 +400,26 @@ function Hoteldetail () {
             <section className = {styles["single-hotel"]}>
                 <div className={styles["titles-top"]}>
                     <div className = {styles["title-block"]}>
-                        {hotelData.name ? <h1 className = "hotel-title">{hotelData.name}</h1> : ''}
-                        {hotelData.address ? <p className = {styles["hotel-adress"]}>{hotelData.address}</p> : ''}
+                        {hotelData.hotel.name ? <h1 className = "hotel-title">{hotelData.hotel.name}</h1> : ''}
+                        {hotelData.hotel.address ? <p className = {styles["hotel-adress"]}>{hotelData.hotel.address}</p> : ''}
                     </div>
                     <div className={styles["add-to-favorite"]}>
                         {isMobile ?
-                            <a className={isFavorite ? `${styles["add-to-favorite__link"]} ${styles["add-to-favorite__link-active"]}` : `${styles["add-to-favorite__link"]}`}
-                                onClick = {checkFavorite}>в&nbsp;избранное
-                            </a> :
-                            <a className={isFavorite ? `${styles["add-to-favorite__link"]} ${styles["add-to-favorite__link-active"]}` : `${styles["add-to-favorite__link"]}`}
-                                onClick = {checkFavorite}>добавить&nbsp;в&nbsp;избранное
-                            </a>
+                            isFavorite ? 
+                                <a className={`${styles["add-to-favorite__link-active"]}`}
+                                    onClick = {checkFavorite}>в&nbsp;избранном
+                                </a> :
+                                <a className={`${styles["add-to-favorite__link"]}`}
+                                    onClick = {checkFavorite}>в&nbsp;избранное
+                                </a>
+                            :
+                            isFavorite ? 
+                                <a className={`${styles["add-to-favorite__link-active"]}`}
+                                    onClick = {checkFavorite}>добавлено&nbsp;в&nbsp;избранное
+                                </a> :
+                                <a className={`${styles["add-to-favorite__link"]}`}
+                                    onClick = {checkFavorite}>добавить&nbsp;в&nbsp;избранное
+                                </a>
                         }
                     </div>
 
@@ -319,7 +427,7 @@ function Hoteldetail () {
 
                 <div className = {styles["map-slider"]}>
                     <div className={`hotel-slider ${styles["hotel-slider"]}`}>
-                        <div className = {`hotel-slider__main ${styles["hotel-slider__main"]}`} style = {hotelData.images[0] ? {backgroundImage: `url(${hotelData.images[0]})`} : {}}></div>
+                        <div className = {`hotel-slider__main ${styles["hotel-slider__main"]}`} style = {hotelData.hotel.images[0] ? {backgroundImage: `url(${hotelData.hotel.images[0]})`} : {}}></div>
                         <div className = "hotel-slider__items">
                             <div className = {styles["hotel-slider__w"]}>
                             <Swiper
@@ -336,7 +444,7 @@ function Hoteldetail () {
                                 modules={[Keyboard, Navigation]}
                                 className="hoteldetail-swiper"
                             >
-                                {hotelData.images.map((item, index) => (
+                                {hotelData.hotel.images.map((item, index) => (
                                     index == 0 ? '' :
                                     <SwiperSlide key={index} data-pic = {item} className = "hotel-slider__item" style = {item ? {backgroundImage: `url(${item})`} : {}}></SwiperSlide>
                                 ))}
@@ -346,7 +454,7 @@ function Hoteldetail () {
                     </div>
 
                     {mapReady == 1 && isDesktop ?
-                        <Hotel_map hotelData = {hotelData} mapReady = {mapReady} />
+                        <Hotel_map hotelData = {hotelData.hotel} mapReady = {mapReady} />
                         : ''
                     }
 
@@ -362,16 +470,16 @@ function Hoteldetail () {
 
                      <Hoteldetail_form
                         hotel_id = {query['hotel_id']}
-                        hotel_name = {hotelData.name}
+                        hotel_name = {hotelData.hotel.name}
                         setRoomBlocks = {setRoomBlocks}
                         setBronPageLink = {setBronPageLink}
 
                     />
 
-                    <Hotel_search_result roomBlocks = {roomBlocks} hotelData = {hotelData} bronPageLink = {bronPageLink} />
-                    <Rooms_info hotelData = {hotelData}/>
-                    <Hotel_service services = {hotelData.services} />
-                    {mapReady ? <Hotel_contact hotelData = {hotelData}/> : ''}
+                    <Hotel_search_result roomBlocks = {roomBlocks} hotelData = {hotelData.hotel} bronPageLink = {bronPageLink} />
+                    <Rooms_info hotelData = {hotelData.hotel}/>
+                    <Hotel_service services = {hotelData.hotel.services} />
+                    {mapReady ? <Hotel_contact hotelData = {hotelData.hotel}/> : ''}
                     
                 </div>
 

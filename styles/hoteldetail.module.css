@@ -97,7 +97,7 @@
 	line-height: 24px;
 	padding-right: 35px;
 	text-decoration: underline;
-	background-image: url('/images/icons/heart-grey.png');
+	background-image: url('/images/icons/heart-grey.svg');
 	background-size: 26px;
 	background-repeat: no-repeat;
 	background-position: center right 0px;
@@ -106,7 +106,17 @@
 }
 
 .add-to-favorite__link-active {
+	display: inline-block;
+	font-size: 14px;
+	line-height: 24px;
+	padding-right: 35px;
+	text-decoration: underline;
 	background-image: url('/images/icons/heart.svg');
+	background-size: 26px;
+	background-repeat: no-repeat;
+	background-position: center right 0px;
+	color: #FF4B2B;
+	cursor: pointer;
 }
 
 .map-slider {

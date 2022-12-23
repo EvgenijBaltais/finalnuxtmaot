@@ -57,11 +57,11 @@ export default function Hotels () {
         let maxMin = hotels_arr.length ? hotels_arr.slice() : [] // скопировать массив
 
         minMax.sort((a, b) => {
-            return +a['rates'][0].price - +b['rates'][0].price
+            return +a.rates[0].price - +b['rates'][0].price
         })
 
         maxMin.sort((a, b) => {
-            return +b['rates'][0].price - +a['rates'][0].price
+            return +b.rates[0].price - +a['rates'][0].price
         })
 
         setSliderMin(minMax.length ? +minMax[0].rates[0].price : 0)
@@ -71,7 +71,7 @@ export default function Hotels () {
         let reg_set = new Set()
 
         for (let i = 0; i < hotels_arr.length; i++) {
-            reg_set.add(hotels_arr[i].region.name)
+            reg_set.add(hotels_arr[i].hotel.region.name)
         }
 
         let obj = {},
@@ -84,7 +84,7 @@ export default function Hotels () {
             obj = {}
 
             for (let i = 0; i < hotels_arr.length; i++) {
-                if (item == hotels_arr[i].region.name) {
+                if (item == hotels_arr[i].hotel.region.name) {
                     num++
                 }
             }
@@ -135,62 +135,6 @@ export default function Hotels () {
         }
 
         setLoadedItems(res)
-    }
-
-    function formatServices (el) {
-
-        // Заполнить главные услуги
-        let servicesArr = []
-        let dopServicesArr = []
-        el.hotel.servicesMain = []
-        el.hotel.servicesDop = []
-
-        el.rates[0].meal ? servicesArr.push(['meal', el.rates[0].meal[0]]) : ''          // Питание
-
-        // Добавить в главные услуги из объекта общих отельных услуг
-
-        for (let i = 0; i < el.hotel.services.length; i++) {
-            if (el.hotel.services[i].group_name == "Интернет") {
-                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
-                    el.hotel.services[i].amenities[k].indexOf('Wi-Fi') + 1 ||
-                    el.hotel.services[i].amenities[k].indexOf('wi-fi') + 1 || 
-                    el.hotel.services[i].amenities[k].indexOf('WI-FI') + 1 ? 
-                    servicesArr.push(['internet', el.hotel.services[i].amenities[k]]) : ''
-                }
-                continue
-            }
-            if (el.hotel.services[i].group_name == "В номерах") {
-                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
-                    el.hotel.services[i].amenities[k].indexOf('Холодильник') + 1 ? 
-                    servicesArr.push(['fridge', el.hotel.services[i].amenities[k]]) : ''
-                }
-                continue
-            }
-
-            if (el.hotel.services[i].group_name == "Общее") {
-                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
-                    el.hotel.services[i].amenities[k].indexOf('Кондиционер') + 1 ? 
-                    servicesArr.push(['conditioner', el.hotel.services[i].amenities[k]]) : ''
-                }
-                continue
-            }
-        }
-
-        for (let i = 0; i < el.hotel.services.length; i++) {
-            for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
-                dopServicesArr.push(el.hotel.services[i].amenities[k])
-            }
-        }
-
-        el.rates[0].room_info.bathroom ? servicesArr.push(['bathroom', el.rates[0].room_info.bathroom]) : ''                      // Ванна
-        el.rates[0].room_info.bed ? servicesArr.push(['bed', el.rates[0].room_info.bed]) : ''                                     // Кровать
-        el.rates[0].room_amenities.nonSmoking ? servicesArr.push(['nonSmoking', el.rates[0].room_amenities.nonSmoking]) : ''      // Для некурящих
-        el.rates[0].room_amenities.window ? servicesArr.push(['window', el.rates[0].room_amenities.window]) : ''                  // Окно
-
-        el.hotel.servicesMain = servicesArr
-        el.hotel.servicesDop = dopServicesArr
-
-        return el
     }
 
     function applyFilters() {
@@ -313,16 +257,6 @@ export default function Hotels () {
                 </div>
                 <div className = {`${styles["search-result-right"]} search-result-right`}>
 
-                {noDataText ?
-                    <p className = "no-result">
-                        {noDataText == "Мы загружаем лучшие варианты!" ? 
-                            <img src = "/images/waiting.gif" className = "no-result-image" />
-                            : ''
-                        }
-                        {noDataText}
-                    </p>
-                 : ''}
-
                 {isResearch ? <div className="waiting-fon"></div>: ''}
 
                     {
@@ -331,7 +265,8 @@ export default function Hotels () {
                             return (
                                 <Favorites_hotel_item
                                     key = {index}
-                                    item = {item}
+                                    hotel = {item.hotel}
+                                    rates = {item.rates}
                                     nights = {1}
                                 />
                             )

@@ -195,7 +195,6 @@ export default function Hotels () {
             return el
     }
 
-
     // Прокрутка экрана и подгрузка отелей для отображения.
 
     let container = 0

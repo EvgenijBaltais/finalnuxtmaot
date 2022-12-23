@@ -4,7 +4,7 @@ import { Pagination, Navigation } from "swiper"
 import styles from "../../styles/favorites/Favorites_hotel_item.module.css"
 import "swiper/css"
 
-const Favorites_hotel_item = ({item, nights}) => {
+const Favorites_hotel_item = ({hotel, rates, nights}) => {
     const [view, changeView] = useState(0)
     const [isFavorite, setIsFavorite] = useState(false)
 
@@ -15,7 +15,7 @@ const Favorites_hotel_item = ({item, nights}) => {
         localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
 
         for (let i = 0; i < arr.length; i++) {
-            if (arr[i].id == item.id) {
+            if (arr[i].hotel.id == hotel.id) {
                 setIsFavorite(true)
             }
         }
@@ -77,7 +77,7 @@ const Favorites_hotel_item = ({item, nights}) => {
     let tomorrow = new Date(date.getFullYear(), date.getMonth(), date.getDate()+1)
         tomorrow = getDate(tomorrow)
 
-    let url = `/hoteldetail?datein=${today}&dateout=${tomorrow}&adults=2&hotel_id=${item.id}`
+    let url = `/hoteldetail?datein=${today}&dateout=${tomorrow}&adults=2&hotel_id=${hotel.id}`
 
     function checkFavorite () {
 
@@ -86,7 +86,7 @@ const Favorites_hotel_item = ({item, nights}) => {
         localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
 
         for (let i = 0; i < arr.length; i++) {
-            if (arr[i].id == item.id) {
+            if (arr[i].hotel.id == hotel.id) {
                 setIsFavorite(false)
                 arr.splice(i, 1)
                 localStorage.setItem('hotels', JSON.stringify(arr))
@@ -95,12 +95,43 @@ const Favorites_hotel_item = ({item, nights}) => {
         }
 
         setIsFavorite(true)
-        arr.push(item)
+
+        let obj = {}
+
+        obj.hotel = hotel
+        obj.rates = rates
+
+        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+        obj == removeUnnecessaryFields (obj)
+
+        arr.push(obj)
         localStorage.setItem('hotels', JSON.stringify(arr))  
     }
 
+    function removeUnnecessaryFields (item) {
+
+        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+        delete item.hotel.address
+        delete item.hotel.coordinates
+        delete item.hotel.crm_id
+        delete item.hotel.description
+        delete item.hotel.services
+        delete item.hotel.star_rating
+        delete item.hotel.type_id
+        delete item.rates.url
+        delete item.rates[0].images
+        delete item.rates[0].cancellation_penalties
+        delete item.rates[0].description
+        delete item.rates[0].daily_price
+        delete item.rates[0].room_amenities
+        delete item.rates[0].room_info
+        delete item.rates[0].room_name
+
+        return item
+    }
+
     return (
-        <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]} select-results__item` : `${styles["select-results__item"]} select-results__item`}>
+        <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]} select-results__item select-results__item-active` : `${styles["select-results__item"]} select-results__item`}>
             <a className = {isFavorite ? `add-to-favorite add-to-favorite-active` : `add-to-favorite`} onClick = {checkFavorite}></a>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
                 <div className = "slider-show-hide" onClick = {() => changeView(view => !view)}></div>
@@ -117,7 +148,7 @@ const Favorites_hotel_item = ({item, nights}) => {
                     modules={[Pagination, Navigation]}
                     className='select-search-item-pics'
                 >
-                    {item.images.map((item, index) => {
+                    {hotel.images.map((item, index) => {
                         if (index > 7) return false
                         return (
                             <SwiperSlide
@@ -132,11 +163,11 @@ const Favorites_hotel_item = ({item, nights}) => {
             </div>
             <div className={styles["select-results__item-content"]}>
                     
-                <a href = {url} target = "_blank" className={styles["select-item-title"]}>{item.name}</a>
+                <a href = {url} target = "_blank" className={styles["select-item-title"]}>{hotel.name}</a>
 
                 <div className = {styles["select-item-info"]}>
                     <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
-                        {item.servicesMain.map((item, index) => {
+                        {hotel.servicesMain.map((item, index) => {
                             if (!view) {
                                 if (index > 3) return false
                                 return (
@@ -147,7 +178,7 @@ const Favorites_hotel_item = ({item, nights}) => {
                                     </span>)
                             }
                         })}
-                        {item.servicesMain.length > 4 && !view ? (<span className = {`${styles["serv-item__more-services"]}`}>Еще {returnServices(item.servicesMain.length - 4)}</span>) : ('')}
+                        {hotel.servicesMain.length > 4 && !view ? (<span className = {`${styles["serv-item__more-services"]}`}>Еще {returnServices(hotel.servicesMain.length - 4)}</span>) : ('')}
                     </div>
                     <div className = {view ? `${styles["serv-item__btn"]} ${styles["serv-item__btn-active"]}` : styles["serv-item__btn"]} onClick = {() => changeView(view => !view)}>
                          {view ? <span className = {styles["serv-active-btn"]}>Скрыть подробное&nbsp;описание</span> : 
@@ -155,7 +186,7 @@ const Favorites_hotel_item = ({item, nights}) => {
                     </div>
                     <div>
                         <div className = {view ? `${styles["serv-item__block"]} ${styles["active-serv-list"]}` : styles["serv-item__block"]}>
-                            {item.servicesMain.map((item, index) => {
+                            {hotel.servicesMain.map((item, index) => {
                                 if (view) {
                                     return (
                                         <span
@@ -174,7 +205,7 @@ const Favorites_hotel_item = ({item, nights}) => {
                             <span className = {styles["select-results-from"]}>от</span>
                         </div>
                         <div className = {styles["select-results-from"]}>
-                            <span className = {styles["select-from-value"]}>{(+item['rates'][0].price).toLocaleString('ru')}</span>&nbsp;
+                            <span className = {styles["select-from-value"]}>{(+rates[0].price).toLocaleString('ru')}</span>&nbsp;
                             <span className = {styles["select-from-currency"]}>&#8381;</span>
                         </div>
                         <div className = {styles["select-results-from-info"]}>
@@ -185,17 +216,17 @@ const Favorites_hotel_item = ({item, nights}) => {
                     <a href = {url} target = "_blank" className = {styles["select-results-bron"]}>Выбрать</a>
                 </div>
             </div>
-            {item.servicesDop.length > 8 ?
+            {hotel.servicesDop.length > 8 ?
                 <div className={styles["select-results__item-text"]}>
-                        {item.servicesDop.map((item2, index) => {
+                        {hotel.servicesDop.map((item2, index) => {
                             if (index <= 8) return ('')
 
                             if (!view) {
                                 if (index > 18) return false
-                                if (index == 18 && item.servicesDop.length > 18) {
+                                if (index == 18 && hotel.servicesDop.length > 18) {
                                     return <span key = {index} className = {`${styles["serv-item__more-services-dop"]} ${styles["serv-item__more-span"]}`}
                                         onClick = {() => changeView(view => !view)}>
-                                        еще {returnServices(item.servicesDop.length - 18)}
+                                        еще {returnServices(hotel.servicesDop.length - 18)}
                                     </span>
                                 }
                             }

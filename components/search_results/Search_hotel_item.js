@@ -15,7 +15,7 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
         localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
 
         for (let i = 0; i < arr.length; i++) {
-            if (arr[i].id == item.id) {
+            if (arr[i].hotel.id == item.id) {
                 setIsFavorite(true)
             }
         }
@@ -90,7 +90,7 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
         localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
 
         for (let i = 0; i < arr.length; i++) {
-            if (arr[i].id == item.id) {
+            if (arr[i].hotel.id == item.id) {
                 setIsFavorite(false)
                 arr.splice(i, 1)
                 localStorage.setItem('hotels', JSON.stringify(arr))
@@ -100,29 +100,31 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
 
         setIsFavorite(true)
 
-        // Прибавить инфу по номерам, чтобы в избранном были цены
+        let obj = {}
 
-        item["rates"] = rates
+        obj.hotel = Object.assign({}, item)
+        obj.rates = Object.assign({}, rates)
 
         // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
-        item == removeUnnecessaryFields (item)
+        obj = removeUnnecessaryFields (obj)
 
-        arr.push(item)
+        arr.push(obj)
+
+        console.log(arr)
+
         localStorage.setItem('hotels', JSON.stringify(arr))  
     }
 
+    function removeUnnecessaryFields (item) {
 
-    function removeUnnecessaryFields () {
         // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
-
-        delete item.address
-        delete item.coordinates
-        delete item.crm_id
-        delete item.crm_id
-        delete item.description
-        delete item.services
-        delete item.star_rating
-        delete item.type_id
+        delete item.hotel.address
+        delete item.hotel.coordinates
+        delete item.hotel.crm_id
+        delete item.hotel.description
+        delete item.hotel.services
+        delete item.hotel.star_rating
+        delete item.hotel.type_id
         delete item.rates.url
         delete item.rates[0].images
         delete item.rates[0].cancellation_penalties
@@ -131,6 +133,8 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
         delete item.rates[0].room_amenities
         delete item.rates[0].room_info
         delete item.rates[0].room_name
+
+        return item
     }
 
     return (
