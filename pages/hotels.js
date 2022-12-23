@@ -23,7 +23,7 @@ export default function Hotels () {
     const [popularWays, setPopularWays] = useState([])
     const [sliderMin, setSliderMin] = useState(0)
     const [sliderMax, setSliderMax] = useState(0)
-    const [nodataText, setNodataText] = useState('')
+    const [nodataText, setNodataText] = useState('Мы загружаем лучшие варианты!')
     const elementsOnPage = 15
     const [itemsPerPage, setItemsPerPage] = useState(elementsOnPage)
     const foodTypes = ['Все включено', 'Без питания', 'Только завтрак', 'Завтрак + обед или ужин включены', 'Завтрак, обед и ужин включены']
@@ -101,8 +101,6 @@ export default function Hotels () {
                     res.success ? '' : res.data = []
                 
                 // Отфильтровать и вывести услуги
-                
-                console.log(res.data)
 
                 res.data.map((el) => {
                     return formatServices(el)
