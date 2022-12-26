@@ -35,6 +35,7 @@ function Hoteldetail () {
 
     const [isFavorite, setIsFavorite] = useState(false)
 
+    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 
     useEffect(() => {
         setIsMobile(window.screen.width <= 480)
@@ -56,158 +57,6 @@ function Hoteldetail () {
           return () => document.removeEventListener('click', onClick)
         }, [])
 */
-    function addBackgroundImage (slider) {
-        document.querySelector('.hotel-slider__main').style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
-    }
-
-    // Все что касается дат
-
-    function returnChildren (num) {
-
-        let text = ' детей',
-            a = [1, 21, 31, 41, 51, 61, 71, 81, 91, 101]
-
-        a.forEach(element => {
-            num == element ? text = ' ребенка' : ''
-        })
-
-        return num + text
-    }
-
-    function returnAdults (num) {
-
-        let text = ' взрослых',
-            a = [1, 21, 31, 41, 51, 61, 71, 81, 91, 101]
-
-        a.forEach(element => {
-            num == element ? text = ' взрослого' : ''
-        })
-
-        return num + text
-    }
-
-    function scrollToSection () {
-
-        event.preventDefault()
-        
-        document.getElementById(event.target.getAttribute('href').slice(1)).scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-        })
-    }
-
-    // Проверить есть ли уже в избранном и если да, то удалить, а если нет то добавить
-
-    function checkFavorite () {
-
-        let arr = []
-
-        localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
-
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i].hotel.id == query.hotel_id) {
-                setIsFavorite(false)
-                arr.splice(i, 1)
-                localStorage.setItem('hotels', JSON.stringify(arr))
-                return false
-            }
-        }
-
-        console.log(hotelData)
-
-        setIsFavorite(true)
-
-        let obj = {}
-
-        obj.hotel = hotelData.hotel
-        obj.rates = hotelData.rates
-
-        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
-        obj = removeUnnecessaryFields (obj)
-
-        arr.push(obj)
-        localStorage.setItem('hotels', JSON.stringify(arr))  
-    }
-
-    function formatServices (el) {
-
-        // Заполнить главные услуги
-        let servicesArr = []
-        let dopServicesArr = []
-        el.hotel.servicesMain = []
-        el.hotel.servicesDop = []
-
-        el.rates[0].meal ? servicesArr.push(['meal', el.rates[0].meal[0]]) : ''          // Питание
-
-        // Добавить в главные услуги из объекта общих отельных услуг
-
-        for (let i = 0; i < el.hotel.services.length; i++) {
-            if (el.hotel.services[i].group_name == "Интернет") {
-                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
-                    el.hotel.services[i].amenities[k].indexOf('Wi-Fi') + 1 ||
-                    el.hotel.services[i].amenities[k].indexOf('wi-fi') + 1 || 
-                    el.hotel.services[i].amenities[k].indexOf('WI-FI') + 1 ? 
-                    servicesArr.push(['internet', el.hotel.services[i].amenities[k]]) : ''
-                }
-                continue
-            }
-            if (el.hotel.services[i].group_name == "В номерах") {
-                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
-                    el.hotel.services[i].amenities[k].indexOf('Холодильник') + 1 ? 
-                    servicesArr.push(['fridge', el.hotel.services[i].amenities[k]]) : ''
-                }
-                continue
-            }
-
-            if (el.hotel.services[i].group_name == "Общее") {
-                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
-                    el.hotel.services[i].amenities[k].indexOf('Кондиционер') + 1 ? 
-                    servicesArr.push(['conditioner', el.hotel.services[i].amenities[k]]) : ''
-                }
-                continue
-            }
-        }
-
-        for (let i = 0; i < el.hotel.services.length; i++) {
-            for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
-                dopServicesArr.push(el.hotel.services[i].amenities[k])
-            }
-        }
-
-        el.rates[0].room_info.bathroom ? servicesArr.push(['bathroom', el.rates[0].room_info.bathroom]) : ''                      // Ванна
-        el.rates[0].room_info.bed ? servicesArr.push(['bed', el.rates[0].room_info.bed]) : ''                                     // Кровать
-        el.rates[0].room_amenities.nonSmoking ? servicesArr.push(['nonSmoking', el.rates[0].room_amenities.nonSmoking]) : ''      // Для некурящих
-        el.rates[0].room_amenities.window ? servicesArr.push(['window', el.rates[0].room_amenities.window]) : ''                  // Окно
-
-        el.hotel.servicesMain = servicesArr
-        el.hotel.servicesDop = dopServicesArr
-
-        return el
-    }
-
-    function removeUnnecessaryFields (item) {
-        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
-
-        delete item.hotel.address
-        //delete item.hotel.coordinates
-        delete item.hotel.crm_id
-        delete item.hotel.description
-        //delete item.hotel.services
-        delete item.hotel.star_rating
-        delete item.hotel.type_id
-        delete item.rates.url
-        //delete item.rates[0].images
-        delete item.rates[0].cancellation_penalties
-        delete item.rates[0].description
-        delete item.rates[0].daily_price
-        delete item.rates[0].room_amenities
-        delete item.rates[0].room_info
-        delete item.rates[0].room_name
-
-        return item
-    }
-
-    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
 
     useEffect(() => {
 
@@ -319,14 +168,18 @@ function Hoteldetail () {
                     return false
                 }
 
-                // Если нет номеров то еще один запрос чтобы просто найти данные по отелю
+                // Если нет номеров то еще один запрос чтобы просто найти данные по отелю и привести объект с данными к тому же виду, что и объект с номерами
 
                 fetch('https://maot-api.bokn.ru/api/hotels/get?id=' + hotel_id)
                 .then((result) => result.json())
                 .then((result) => {
                     //console.log(link)
+                    
+                    let obj = {}
+                    obj.hotel = result.data
+                    obj.rates = {}
 
-                    setHotelData(result.data)
+                    setHotelData(obj)
                     setRoomBlocks([])
                 })
             })
@@ -371,6 +224,156 @@ function Hoteldetail () {
             document.getElementById('y-maps') ? document.getElementById('y-maps').remove() : ''
         }
     }, [])
+
+
+    function addBackgroundImage (slider) {
+        document.querySelector('.hotel-slider__main').style.backgroundImage = `url('${slider.slides[slider.activeIndex].getAttribute('data-pic')}')`
+    }
+
+    // Все что касается дат
+
+    function returnChildren (num) {
+
+        let text = ' детей',
+            a = [1, 21, 31, 41, 51, 61, 71, 81, 91, 101]
+
+        a.forEach(element => {
+            num == element ? text = ' ребенка' : ''
+        })
+
+        return num + text
+    }
+
+    function returnAdults (num) {
+
+        let text = ' взрослых',
+            a = [1, 21, 31, 41, 51, 61, 71, 81, 91, 101]
+
+        a.forEach(element => {
+            num == element ? text = ' взрослого' : ''
+        })
+
+        return num + text
+    }
+
+    function scrollToSection () {
+
+        event.preventDefault()
+        
+        document.getElementById(event.target.getAttribute('href').slice(1)).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        })
+    }
+
+    // Проверить есть ли уже в избранном и если да, то удалить, а если нет то добавить
+
+    function checkFavorite () {
+
+        let arr = []
+
+        localStorage.getItem('hotels') ? arr = JSON.parse(localStorage.getItem('hotels')) : ''
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].hotel.id == query.hotel_id) {
+                setIsFavorite(false)
+                arr.splice(i, 1)
+                localStorage.setItem('hotels', JSON.stringify(arr))
+                return false
+            }
+        }
+
+        setIsFavorite(true)
+
+        let obj = {}
+
+        obj.hotel = hotelData.hotel
+        obj.rates = hotelData.rates
+
+        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+        obj = removeUnnecessaryFields (obj)
+
+        arr.push(obj)
+        localStorage.setItem('hotels', JSON.stringify(arr))  
+    }
+
+    function formatServices (el) {
+
+        // Заполнить главные услуги
+        let servicesArr = []
+        let dopServicesArr = []
+        el.hotel.servicesMain = []
+        el.hotel.servicesDop = []
+
+        el.rates[0].meal ? servicesArr.push(['meal', el.rates[0].meal[0]]) : ''          // Питание
+
+        // Добавить в главные услуги из объекта общих отельных услуг
+
+        for (let i = 0; i < el.hotel.services.length; i++) {
+            if (el.hotel.services[i].group_name == "Интернет") {
+                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                    el.hotel.services[i].amenities[k].indexOf('Wi-Fi') + 1 ||
+                    el.hotel.services[i].amenities[k].indexOf('wi-fi') + 1 || 
+                    el.hotel.services[i].amenities[k].indexOf('WI-FI') + 1 ? 
+                    servicesArr.push(['internet', el.hotel.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+            if (el.hotel.services[i].group_name == "В номерах") {
+                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                    el.hotel.services[i].amenities[k].indexOf('Холодильник') + 1 ? 
+                    servicesArr.push(['fridge', el.hotel.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+
+            if (el.hotel.services[i].group_name == "Общее") {
+                for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                    el.hotel.services[i].amenities[k].indexOf('Кондиционер') + 1 ? 
+                    servicesArr.push(['conditioner', el.hotel.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+        }
+
+        for (let i = 0; i < el.hotel.services.length; i++) {
+            for (let k = 0; k < el.hotel.services[i].amenities.length; k++) {
+                dopServicesArr.push(el.hotel.services[i].amenities[k])
+            }
+        }
+
+        el.rates[0].room_info.bathroom ? servicesArr.push(['bathroom', el.rates[0].room_info.bathroom]) : ''                      // Ванна
+        el.rates[0].room_info.bed ? servicesArr.push(['bed', el.rates[0].room_info.bed]) : ''                                     // Кровать
+        el.rates[0].room_amenities.nonSmoking ? servicesArr.push(['nonSmoking', el.rates[0].room_amenities.nonSmoking]) : ''      // Для некурящих
+        el.rates[0].room_amenities.window ? servicesArr.push(['window', el.rates[0].room_amenities.window]) : ''                  // Окно
+
+        el.hotel.servicesMain = servicesArr
+        el.hotel.servicesDop = dopServicesArr
+
+        return el
+    }
+
+    function removeUnnecessaryFields (item) {
+        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+
+        delete item.hotel.address
+        //delete item.hotel.coordinates
+        delete item.hotel.crm_id
+        delete item.hotel.description
+        //delete item.hotel.services
+        delete item.hotel.star_rating
+        delete item.hotel.type_id
+        delete item.rates.url
+        //delete item.rates[0].images
+        delete item.rates[0].cancellation_penalties
+        delete item.rates[0].description
+        delete item.rates[0].daily_price
+        delete item.rates[0].room_amenities
+        delete item.rates[0].room_info
+        delete item.rates[0].room_name
+
+        return item
+    }
 
     if (!hotelData.hotel) {
         return <>
