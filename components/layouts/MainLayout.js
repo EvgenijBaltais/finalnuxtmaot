@@ -46,8 +46,8 @@ useEffect(() => {
 
   return (
     <>
+      <MainNav />
       <div className={`wrapper${ decorate}`}>
-          <MainNav />
           <main className={`main${router.route == '/hotels' ? ' search-page-main' : ''}`}>{children}</main>
           <Footer />
       </div>

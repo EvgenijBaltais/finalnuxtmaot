@@ -162,7 +162,7 @@ export default function Hotels () {
         // Регион
 
         arr = arr.filter(n => {
-            return regions.includes(n.region.name)
+            return regions.includes(n.hotel.region.name)
         })
 
         return arr
@@ -192,7 +192,6 @@ export default function Hotels () {
                         <h3 className="aside-block-title">
                             Направление (регион)
                         </h3>
-
                         <div className="aside-fiters-w">
                             <div className={styles["checkbox-items-block"]}>
                                 <form>
@@ -213,7 +212,6 @@ export default function Hotels () {
                                     })}
                                 </form>
                             </div>
-
                             <div className = "aside-slider">
                                 <div className="slider-values">
                                     {sliderMin != 0 ?
@@ -233,7 +231,6 @@ export default function Hotels () {
                                         </div>
                                     }
                                 </div>
-
                                 {sliderMax != 0 ?
                                     <RangeSlider
                                         startReDraw = {startReDraw}
@@ -249,16 +246,12 @@ export default function Hotels () {
                                         sliderMax = {280000}
                                     />
                                 }
-
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div className = {`${styles["search-result-right"]} search-result-right`}>
-
                 {isResearch ? <div className="waiting-fon"></div>: ''}
-
                     {
                         loadedItems.length ? (
                             loadedItems.map((item, index) => {
@@ -270,9 +263,8 @@ export default function Hotels () {
                                     nights = {1}
                                 />
                             )
-                        })) : ''
+                        })) : 'Не удалось ничего найти. Попробуйте изменить условия поиска'
                     }
-
                 </div>
             </section>
         </>

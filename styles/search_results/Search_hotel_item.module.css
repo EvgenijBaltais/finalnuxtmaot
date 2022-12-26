@@ -316,6 +316,11 @@
 	.select-results__item-price {
 		padding: 0 0 0 10px;
 	}
+
+	.select-results__item-active .add-to-favorite {
+		left: auto;
+		right: 30px;
+	}
 }
 
 @media screen and (max-width: 1050px) {

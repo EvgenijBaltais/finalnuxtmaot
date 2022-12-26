@@ -7,8 +7,15 @@ import "swiper/css"
 const Favorites_hotel_item = ({hotel, rates, nights}) => {
     const [view, changeView] = useState(0)
     const [isFavorite, setIsFavorite] = useState(false)
+    const [moreThan1040, setMoreThan1040] = useState(0)
 
     useEffect(() => {
+
+        setMoreThan1040(window.screen.width > 1040)
+
+        window.addEventListener('resize', () => {
+            setMoreThan1040(window.screen.width > 1040)
+        })
 
         let arr = []
 
@@ -96,16 +103,38 @@ const Favorites_hotel_item = ({hotel, rates, nights}) => {
 
         setIsFavorite(true)
 
-        let obj = {}
+            let obj = {}
 
-        obj.hotel = hotel
-        obj.rates = rates
+            obj.hotel = hotel
+            obj.rates = rates
 
-        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
-        obj == removeUnnecessaryFields (obj)
+            // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+            obj == removeUnnecessaryFields (obj)
 
-        arr.push(obj)
-        localStorage.setItem('hotels', JSON.stringify(arr))  
+            arr.push(obj)
+            localStorage.setItem('hotels', JSON.stringify(arr))
+
+            if (!setMoreThan1040) return false   // Если менее 1040, то в меню не добавляется уведомление
+
+            // Вставить всплывающее окно, что отель добавлен в Избранное
+            
+            let menuFavorite = document.querySelectorAll('.nav-link')[document.querySelectorAll('.nav-link').length - 1]
+
+            new Promise(res => {
+                menuFavorite.insertAdjacentHTML('beforeend',
+                    `<div class='favorite-info'>
+                            <a class='favorite-info-link'>Отель ${item.name}</a>
+                            <p class='favorite-info-text'>Добавлен в Избранное</p>
+                        </div>
+                    `
+                    )
+                    res()
+                }).then(() => {
+                    setTimeout(() => {
+                        menuFavorite.querySelector('.favorite-info').remove()
+                    }, 1200)
+                })
+
     }
 
     function removeUnnecessaryFields (item) {
@@ -126,6 +155,8 @@ const Favorites_hotel_item = ({hotel, rates, nights}) => {
         delete item.rates[0].room_amenities
         delete item.rates[0].room_info
         delete item.rates[0].room_name
+        delete item.rates[0].url
+        delete item.rates[0].all_inclusive
 
         return item
     }

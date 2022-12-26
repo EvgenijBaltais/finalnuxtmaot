@@ -32,6 +32,7 @@ function Hoteldetail () {
     const [isMobile, setIsMobile] = useState(0)
     const [isTablet, setIsTablet] = useState(0)
     const [isDesktop, setIsDesktop] = useState(0)
+    const [moreThan1040, setMoreThan1040] = useState(0)
 
     const [isFavorite, setIsFavorite] = useState(false)
 
@@ -41,11 +42,13 @@ function Hoteldetail () {
         setIsMobile(window.screen.width <= 480)
         setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
         setIsDesktop(window.screen.width > 860)
+        setMoreThan1040(window.screen.width > 1040)
 
         window.addEventListener('resize', () => {
             setIsMobile(window.screen.width <= 480)
             setIsTablet(window.screen.width >= 480 && window.screen.width <= 860)
             setIsDesktop(window.screen.width > 860)
+            setMoreThan1040(window.screen.width > 1040)
         })
     }, [])
 /*
@@ -295,6 +298,8 @@ function Hoteldetail () {
             arr.push(obj)
             localStorage.setItem('hotels', JSON.stringify(arr))  
 
+            if (!setMoreThan1040) return false   // Если менее 1040, то в меню не добавляется уведомление
+
             // Вставить всплывающее окно, что отель добавлен в Избранное
             
             let menuFavorite = document.querySelectorAll('.nav-link')[document.querySelectorAll('.nav-link').length - 1]
@@ -389,6 +394,8 @@ function Hoteldetail () {
         delete item.rates[0].room_amenities
         delete item.rates[0].room_info
         delete item.rates[0].room_name
+        delete item.rates[0].url
+        delete item.rates[0].all_inclusive
 
         return item
     }

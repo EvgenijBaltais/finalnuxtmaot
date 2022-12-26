@@ -7,8 +7,15 @@ import "swiper/css"
 const Search_hotel_item = ({item, rates, nights, query}) => {
     const [view, changeView] = useState(0)
     const [isFavorite, setIsFavorite] = useState(false)
-    
+    const [moreThan1040, setMoreThan1040] = useState(0)
+
     useEffect(() => {
+
+        setMoreThan1040(window.screen.width > 1040)
+
+        window.addEventListener('resize', () => {
+            setMoreThan1040(window.screen.width > 1040)
+        })
 
         let arr = []
 
@@ -109,10 +116,28 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
         obj = removeUnnecessaryFields (obj)
 
         arr.push(obj)
+        localStorage.setItem('hotels', JSON.stringify(arr))
 
-        console.log(arr)
+        if (!setMoreThan1040) return false   // Если менее 1040, то в меню не добавляется уведомление
 
-        localStorage.setItem('hotels', JSON.stringify(arr))  
+        // Вставить всплывающее окно, что отель добавлен в Избранное
+        
+        let menuFavorite = document.querySelectorAll('.nav-link')[document.querySelectorAll('.nav-link').length - 1]
+
+        new Promise(res => {
+            menuFavorite.insertAdjacentHTML('beforeend',
+                `<div class='favorite-info'>
+                        <a class='favorite-info-link'>Отель ${item.name}</a>
+                        <p class='favorite-info-text'>Добавлен в Избранное</p>
+                    </div>
+                `
+                )
+                res()
+            }).then(() => {
+                setTimeout(() => {
+                    menuFavorite.querySelector('.favorite-info').remove()
+                }, 1200)
+            })
     }
 
     function removeUnnecessaryFields (item) {
@@ -133,12 +158,14 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
         delete item.rates[0].room_amenities
         delete item.rates[0].room_info
         delete item.rates[0].room_name
+        delete item.rates[0].url
+        delete item.rates[0].all_inclusive
 
         return item
     }
 
     return (
-        <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]} select-results__item` : `${styles["select-results__item"]} select-results__item`}>
+        <div className={view ? `${styles[`select-results__item`]} ${styles["select-results__item-active"]} select-results__item select-results__item-active` : `${styles["select-results__item"]} select-results__item`}>
             <a className = {isFavorite ? `add-to-favorite add-to-favorite-active` : `add-to-favorite`} onClick = {checkFavorite}></a>
             <div className={view ? `${styles["select-results__item-pic"]} ${styles["select-results__item-pic-big"]}` : styles["select-results__item-pic"]}>
                 <div className = "slider-show-hide" onClick = {() => changeView(view => !view)}></div>

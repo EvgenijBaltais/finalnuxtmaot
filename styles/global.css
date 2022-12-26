@@ -53,6 +53,7 @@ body {
 	--green-linear-gradient: radial-gradient(circle, hsla(162, 100%, 91%, 1) 11%, hsla(163, 100%, 95%, 1) 44%, hsla(0, 0%, 100%, 1) 67%);
 	--brown-linear-gradient: radial-gradient(circle, hsla(32, 86%, 92%, 1) 11%, hsla(32, 86%, 95%, 1) 44%, hsla(0, 0%, 100%, 1) 67%);
 	--main-shadow: 0 3px 8px 0 rgb(34 60 80 / 20%);
+	--dop-shadow: 0 2px 5px 0 rgb(34 60 80 / 10%);
 }
 
 .green-text {
@@ -63,7 +64,8 @@ body {
 .wrapper {
 	position: relative;
 	max-width: 1240px;
-	margin: 20px auto;
+	margin: 0 auto 0 auto;
+	padding-top: 67px;
 }
 
 .main {
@@ -85,6 +87,11 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
+}
+
+.header-scrolling {
+	background-color: #fff;
+	box-shadow: var(--dop-shadow);
 }
 
 /* Зеленый градиент на страницах сверху. На разных страницах в разных местах */
@@ -1625,18 +1632,13 @@ input[type="checkbox"].substylized:checked + label:after {
 		padding: 0 1rem!important;
 	}
 
-    .wrapper {
-    	margin: 0 auto;
-        padding: 0 1rem;
-        overflow: hidden;
-    }
-
     .header {
         margin: 10px 15px;
     } 
 
     .contact-page {
     	padding: 0 !important;
+		padding-top: 67px!important;
     }
 
     .contact-page .section-title {
@@ -2882,6 +2884,7 @@ input[type="checkbox"].substylized:checked + label:after {
     	margin: 0 auto;
         padding: 0 1rem;
         overflow: hidden;
+		padding-top: 56px;
     }
 
     .header {
@@ -4415,7 +4418,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	background-color: #fff;
 	z-index: 5;
 	animation-name: addToFavorite;
-	animation-duration: .7s;
+	animation-duration: .5s;
 	animation-fill-mode: forwards;
 }
 
@@ -4520,6 +4523,15 @@ input[type="checkbox"].substylized:checked + label:after {
 		font-size: 45px;
 		line-height: 50px;
 	}
+
+	.add-to-favorite {
+		left: 205px
+	}
+
+	.select-results__item-active .add-to-favorite {
+		left: auto;
+		right: 30px;
+	}
 }
 
 
@@ -4592,6 +4604,10 @@ input[type="checkbox"].substylized:checked + label:after {
 	.map-swiper .swiper-slide {
 		font-size: 16px;
 		line-height: 20px;
+	}
+
+	.add-to-favorite {
+		left: 165px;
 	}
 }
 
@@ -5045,6 +5061,11 @@ input[type="checkbox"].substylized:checked + label:after {
 
 	.hoteldetail-navigation-top {
 		width: 205px;
+	}
+
+	.add-to-favorite {
+		left: auto;
+		right: 30px;
 	}
 }
 
