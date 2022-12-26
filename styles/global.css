@@ -521,7 +521,7 @@ body {
 	cursor: pointer;
 }
 
-.select-results__item-active .add-to-favorite-active {
+.select-results__item-active .add-to-favorite {
 	right: 30px;
 	left: auto;
 }
