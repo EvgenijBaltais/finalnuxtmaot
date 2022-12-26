@@ -4400,6 +4400,51 @@ input[type="checkbox"].substylized:checked + label:after {
 	display: none;
 }
 
+/* Избранное */
+
+.favorite-info {
+	opacity: 0;
+	display: block;
+	width: 250px;
+	position: absolute;
+	top: 10px;
+	left: 0;
+	padding: 10px 15px;
+	border-radius: 10px;
+	box-shadow: var(--main-shadow);
+	background-color: #fff;
+	z-index: 5;
+	animation-name: addToFavorite;
+	animation-duration: .7s;
+	animation-fill-mode: forwards;
+}
+
+.favorite-info-link {
+	display: block;
+	color: #147de8;
+	cursor: pointer;
+	font-size: 15px;
+	line-height: 20px;
+    margin-bottom: 5px;
+}
+
+.favorite-info-text {
+	font-size: 14px;
+	line-height: 16px;
+}
+
+@keyframes addToFavorite {
+	from {
+
+	}
+	to {
+		opacity: 1;
+		top: 40px
+	}
+  }
+
+/* Избранное, конец */
+
 @media screen and (max-width: 1280px) {
 	
 	.map-swiper .swiper-slide {

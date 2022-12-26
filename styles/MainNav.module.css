@@ -40,7 +40,7 @@
     color: #929292;
 }
 
-.nav-item:last-child a:before {
+.nav-item:last-child .nav-link:before {
     position: absolute;
     top: 2px;
     left: -28px;

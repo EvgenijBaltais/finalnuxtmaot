@@ -9,9 +9,7 @@ import styles from '../styles/MainNav.module.css'
 const MainNav = () => {
 
     const router = useRouter()
-
     const [visibleMenu, setVisibleMenu] = useState(0)
-
     const navLinks = [
         { title: 'Лучшие направления', path: '/routes' },
         { title: 'Статьи', path: '/articles' },
@@ -34,7 +32,6 @@ const MainNav = () => {
  
     WindowOutClick()
 
-
     useEffect(() => {
         const handleRouteChange = (url) => {
           setVisibleMenu(0)
@@ -48,7 +45,7 @@ const MainNav = () => {
     }, [])
 
     return (
-        <header className = {`${styles["header"]} header`} >
+        <header className = {`${styles["header"]} header`}>
             <div className =  {visibleMenu ? "hh-bg hhbg-fix" : "hh-bg "}></div>
             <div className={styles["main-logo"]}>
                 <Link href = "/" activeClassName="active">
@@ -63,7 +60,9 @@ const MainNav = () => {
                         return (
                             <li className = {styles["nav-item"]} key = {index}>
                                 <Link href = {`${item.path}`}>
-                                    <a className = {`${styles["nav-link"]} ${styles[router.pathname == `${item.path}` ? "active" : ""]}`}>{item.title}</a>
+                                    <a className = {`${styles["nav-link"]} nav-link ${styles[router.pathname == `${item.path}` && "active"]}`}>
+                                        {item.title}
+                                    </a>
                                 </Link>
                             </li>
                         )
@@ -97,8 +96,9 @@ const MainNav = () => {
                                     return (
                                         <li className = {styles["nav-item"]} key = {index}>
                                             <Link href = {`${item.path}`}>
-                                                <a
-                                                    className = {`${styles["nav-link"]} ${styles[router.pathname == `${item.path}` ? "active" : ""]}`}>{item.title}</a>
+                                                <a className = {`${styles["nav-link"]} nav-link ${styles[router.pathname == `${item.path}` && "active"]}`}>
+                                                    {item.title}
+                                                </a>
                                             </Link>
                                         </li>
                                     )

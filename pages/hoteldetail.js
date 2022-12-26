@@ -285,17 +285,35 @@ function Hoteldetail () {
 
         setIsFavorite(true)
 
-        let obj = {}
+            let obj = {}
+            obj.hotel = hotelData.hotel
+            obj.rates = hotelData.rates
 
-        obj.hotel = hotelData.hotel
-        obj.rates = hotelData.rates
+            // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+            obj = removeUnnecessaryFields (obj)
 
-        // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
-        obj = removeUnnecessaryFields (obj)
+            arr.push(obj)
+            localStorage.setItem('hotels', JSON.stringify(arr))  
 
-        arr.push(obj)
-        localStorage.setItem('hotels', JSON.stringify(arr))  
-    }
+            // Вставить всплывающее окно, что отель добавлен в Избранное
+            
+            let menuFavorite = document.querySelectorAll('.nav-link')[document.querySelectorAll('.nav-link').length - 1]
+
+            new Promise(res => {
+                menuFavorite.insertAdjacentHTML('beforeend',
+                    `<div class='favorite-info'>
+                            <a class='favorite-info-link'>Отель ${hotelData.hotel.name}</a>
+                            <p class='favorite-info-text'>Добавлен в Избранное</p>
+                        </div>
+                    `
+                    )
+                    res()
+                }).then(() => {
+                    setTimeout(() => {
+                        menuFavorite.querySelector('.favorite-info').remove()
+                    }, 1200)
+                })
+        }
 
     function formatServices (el) {
 
@@ -356,7 +374,7 @@ function Hoteldetail () {
     function removeUnnecessaryFields (item) {
         // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
 
-        delete item.hotel.address
+        //delete item.hotel.address
         //delete item.hotel.coordinates
         delete item.hotel.crm_id
         delete item.hotel.description
