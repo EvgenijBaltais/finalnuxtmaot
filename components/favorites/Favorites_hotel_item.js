@@ -106,7 +106,6 @@ const Favorites_hotel_item = ({hotel, rates, nights}) => {
             let obj = {}
 
             obj.hotel = hotel
-            obj.rates = rates
 
             // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
             obj == removeUnnecessaryFields (obj)
@@ -147,17 +146,7 @@ const Favorites_hotel_item = ({hotel, rates, nights}) => {
         delete item.hotel.services
         delete item.hotel.star_rating
         delete item.hotel.type_id
-        delete item.rates.url
-        delete item.rates[0].images
-        delete item.rates[0].cancellation_penalties
-        delete item.rates[0].description
-        delete item.rates[0].daily_price
-        delete item.rates[0].room_amenities
-        delete item.rates[0].room_info
-        delete item.rates[0].room_name
-        delete item.rates[0].url
-        delete item.rates[0].all_inclusive
-
+        
         return item
     }
 
@@ -232,17 +221,7 @@ const Favorites_hotel_item = ({hotel, rates, nights}) => {
                 </div>
                 <div className={styles["select-results__item-price"]}>
                     <div className={styles["select-results-info"]}>
-                        <div className={styles["select-results-guest-info"]}>
-                            <span className = {styles["select-results-from"]}>от</span>
-                        </div>
-                        <div className = {styles["select-results-from"]}>
-                            <span className = {styles["select-from-value"]}>{(+rates[0].price).toLocaleString('ru')}</span>&nbsp;
-                            <span className = {styles["select-from-currency"]}>&#8381;</span>
-                        </div>
-                        <div className = {styles["select-results-from-info"]}>
-                            <span>цена за</span>&nbsp;
-                            <span className = {styles["select-results-nights"]}>{nightsRightText(nights)}</span>
-                        </div>
+
                     </div>
                     <a href = {url} target = "_blank" className = {styles["select-results-bron"]}>Выбрать</a>
                 </div>

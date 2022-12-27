@@ -110,7 +110,8 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
         let obj = {}
 
         obj.hotel = Object.assign({}, item)
-        obj.rates = Object.assign({}, rates)
+
+        console.log(obj.hotel)
 
         // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
         obj = removeUnnecessaryFields (obj)
@@ -150,16 +151,6 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
         delete item.hotel.services
         delete item.hotel.star_rating
         delete item.hotel.type_id
-        delete item.rates.url
-        delete item.rates[0].images
-        delete item.rates[0].cancellation_penalties
-        delete item.rates[0].description
-        delete item.rates[0].daily_price
-        delete item.rates[0].room_amenities
-        delete item.rates[0].room_info
-        delete item.rates[0].room_name
-        delete item.rates[0].url
-        delete item.rates[0].all_inclusive
 
         return item
     }

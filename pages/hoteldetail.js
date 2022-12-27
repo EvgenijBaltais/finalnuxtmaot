@@ -165,8 +165,6 @@ function Hoteldetail () {
                     }
 
                     setRoomBlocks(room_blocks)
-                    
-                    //console.log(result.data[0].rates)
 
                     return false
                 }
@@ -174,13 +172,12 @@ function Hoteldetail () {
                 // Если нет номеров то еще один запрос чтобы просто найти данные по отелю и привести объект с данными к тому же виду, что и объект с номерами
 
                 fetch('https://maot-api.bokn.ru/api/hotels/get?id=' + hotel_id)
-                .then((result) => result.json())
-                .then((result) => {
-                    //console.log(link)
-                    
+                .then(result => result.json())
+                .then(result => {
+                    console.log(link)
+
                     let obj = {}
-                    obj.hotel = result.data
-                    obj.rates = {}
+                        obj.hotel = result.data
 
                     setHotelData(obj)
                     setRoomBlocks([])
@@ -290,7 +287,6 @@ function Hoteldetail () {
 
             let obj = {}
             obj.hotel = hotelData.hotel
-            obj.rates = hotelData.rates
 
             // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
             obj = removeUnnecessaryFields (obj)
@@ -386,16 +382,6 @@ function Hoteldetail () {
         //delete item.hotel.services
         delete item.hotel.star_rating
         delete item.hotel.type_id
-        delete item.rates.url
-        //delete item.rates[0].images
-        delete item.rates[0].cancellation_penalties
-        delete item.rates[0].description
-        delete item.rates[0].daily_price
-        delete item.rates[0].room_amenities
-        delete item.rates[0].room_info
-        delete item.rates[0].room_name
-        delete item.rates[0].url
-        delete item.rates[0].all_inclusive
 
         return item
     }
@@ -434,7 +420,7 @@ function Hoteldetail () {
                     <div className={styles["add-to-favorite"]}>
                         {isMobile ?
                             isFavorite ? 
-                                <a className={`${styles["add-to-favorite__link-active"]}`}
+                                <a className={`${styles["add-to-favorite__link"]} ${styles["add-to-favorite__link-active"]}`}
                                     onClick = {checkFavorite}>в&nbsp;избранном
                                 </a> :
                                 <a className={`${styles["add-to-favorite__link"]}`}
@@ -442,7 +428,7 @@ function Hoteldetail () {
                                 </a>
                             :
                             isFavorite ? 
-                                <a className={`${styles["add-to-favorite__link-active"]}`}
+                                <a className={`${styles["add-to-favorite__link"]} ${styles["add-to-favorite__link-active"]}`}
                                     onClick = {checkFavorite}>добавлено&nbsp;в&nbsp;избранное
                                 </a> :
                                 <a className={`${styles["add-to-favorite__link"]}`}

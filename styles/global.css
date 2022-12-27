@@ -515,6 +515,28 @@ body {
 	cursor: pointer;
 }
 
+.add-to-favorite:not(.add-to-favorite-active):before {
+	position: absolute;
+	left: 40px;
+	display: inline-block;
+	width: 170px;
+	padding: 7px 5px;
+	content: 'Добавить в избранное';
+	background-color: #fff;
+	font-size: 14px;
+	line-height: 14px;
+	border-radius: 5px;
+	text-align: center;
+	box-shadow: var(--main-shadow);
+	opacity: 0;
+	transition: opacity .2s;
+}
+
+.add-to-favorite:not(.add-to-favorite-active):hover:before {
+	opacity: 1;
+	transition: opacity .2s;
+}
+
 .add-to-favorite-active {
 	background-image: url('/images/icons/heart.svg');
 }
