@@ -4,20 +4,15 @@ import Head from 'next/head'
 import Favorites_hotel_item from "../components/favorites/Favorites_hotel_item"
 import styles from "../styles/favorites/Favorites_results.module.css"
 
-import RangeSlider from "../components/RangeSlider"
-
 export default function Hotels () {
 
     const [loadedItems, setLoadedItems] = useState([])
-    const [sliderMin, setSliderMin] = useState(0)
-    const [sliderMax, setSliderMax] = useState(0)
     const [isResearch, setIsResearch] = useState(false)
     const [choosingFilters, setChoosingFilters] = useState(false)
     const [checkBoxesResearch, setCheckBoxesResearch] = useState(false)
     const [noDataText, setNoDataText] = useState('')
     const [noData, setNoData] = useState(0)
     const [checked, setChecked] = useState(true)
-    const [reloadComponent, setReloadComponent] = useState(0)
     const [regions, setRegions] = useState([])
 
     function getDate(date) {
@@ -50,23 +45,6 @@ export default function Hotels () {
             setNoData(1)
         }
 
-        // Отсортировать сразу выборку по порядку цен, чтобы вставить значения в слайдер 
-        //и в дальнейшем использовать в фильтрах, чтобы потом опять не фильтровать и не вешать страницу лишний раз
-        
-        let minMax = hotels_arr.length ? hotels_arr.slice() : [] // скопировать массив
-        let maxMin = hotels_arr.length ? hotels_arr.slice() : [] // скопировать массив
-
-        minMax.sort((a, b) => {
-            return +a.rates[0].price - +b['rates'][0].price
-        })
-
-        maxMin.sort((a, b) => {
-            return +b.rates[0].price - +a['rates'][0].price
-        })
-
-        setSliderMin(minMax.length ? +minMax[0].rates[0].price : 0)
-        setSliderMax(maxMin.length ? +maxMin[0].rates[0].price : 0)
-
         // Регионы
         let reg_set = new Set()
 
@@ -93,7 +71,6 @@ export default function Hotels () {
             obj.num = num
             regions_arr.push(obj)
         }
-
         setRegions(regions_arr)
     }, [])
 
@@ -111,14 +88,12 @@ export default function Hotels () {
         setIsResearch(false)
         setChoosingFilters(false)
         setCheckBoxesResearch(false)
-
     }, [checkBoxesResearch])
 
 
     function startReDraw () {
 
         if (isResearch == true) return false
-        if (sliderMin == 0 && sliderMax == 0) return
 
         setIsResearch(true)
         setCheckBoxesResearch(true)
@@ -140,9 +115,7 @@ export default function Hotels () {
     function applyFilters() {
 
         let arr = JSON.parse(localStorage.getItem('hotels')),
-            regions = [],
-            min = parseInt(document.querySelector('.aside-slider-from').value.match(/\d+/)),
-            max = parseInt(document.querySelector('.aside-slider-to').value.match(/\d+/))
+            regions = []
 
         // Выбранные регионы, заполнить массив
 
@@ -152,12 +125,6 @@ export default function Hotels () {
         }
 
         // Проверка на все фильтры
-
-        // Цены
-
-        arr = arr.filter(n => {
-            return +n.rates[0].price >= min && +n.rates[0].price <= max
-        })
 
         // Регион
 
@@ -211,41 +178,6 @@ export default function Hotels () {
                                         )
                                     })}
                                 </form>
-                            </div>
-                            <div className = "aside-slider">
-                                <div className="slider-values">
-                                    {sliderMin != 0 ?
-                                        <div className="aside-slider-val aside-slider-left">
-                                            <input type="text" className="aside-slider-input aside-slider-from" />
-                                        </div>:
-                                        <div className="aside-slider-val aside-slider-left">
-                                            <input type="text" className="aside-slider-input aside-slider-from" defaultValue = 'от 100 ₽' />
-                                        </div>
-                                    }
-                                    {sliderMax != 0 ?
-                                        <div className="aside-slider-val aside-slider-right">
-                                            <input type="text" className="aside-slider-input aside-slider-to" />
-                                        </div>:
-                                        <div className="aside-slider-val aside-slider-right">
-                                            <input type="text" className="aside-slider-input aside-slider-to" defaultValue = 'до 280000 ₽' />
-                                        </div>
-                                    }
-                                </div>
-                                {sliderMax != 0 ?
-                                    <RangeSlider
-                                        startReDraw = {startReDraw}
-                                        sliderMin = {sliderMin}
-                                        sliderMax = {sliderMax}
-                                        key = {reloadComponent}
-                                        isResearch = {isResearch}
-                                        setIsResearch = {setIsResearch}
-                                        setCheckBoxesResearch = {setCheckBoxesResearch}
-                                    /> :
-                                    <RangeSlider
-                                        sliderMin = {100}
-                                        sliderMax = {280000}
-                                    />
-                                }
                             </div>
                         </div>
                     </div>

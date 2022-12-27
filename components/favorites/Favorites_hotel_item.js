@@ -123,7 +123,7 @@ const Favorites_hotel_item = ({hotel, rates, nights}) => {
             new Promise(res => {
                 menuFavorite.insertAdjacentHTML('beforeend',
                     `<div class='favorite-info'>
-                            <a class='favorite-info-link'>Отель ${item.name}</a>
+                            <a class='favorite-info-link'>Отель ${hotel.name}</a>
                             <p class='favorite-info-text'>Добавлен в Избранное</p>
                         </div>
                     `
