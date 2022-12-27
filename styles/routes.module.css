@@ -194,11 +194,11 @@
 }
 
 .search-rate__item-yellow {
-	background-image: url('/images/star.svg');
+	background-image: url('/images/icons/star.svg');
 }
 
 .search-rate__item-grey {
-	background-image: url('/images/grey-star.svg');
+	background-image: url('/images/icons/grey-star.svg');
 }
 
 .search-rate__reviews {

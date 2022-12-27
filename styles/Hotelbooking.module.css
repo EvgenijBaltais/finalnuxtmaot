@@ -151,7 +151,7 @@
     right: 0;
     left: 0;
     margin: auto;
-    background-image: url('/images/left-nav-arrow.svg');
+    background-image: url('/images/icons/left-nav-arrow.svg');
 	background-repeat: no-repeat;
 	background-size: 12px;
 	background-position: center;
@@ -182,7 +182,7 @@
     right: 0;
     left: 0;
     margin: auto;
-    background-image: url('/images/right-nav-arrow.svg');
+    background-image: url('/images/icons/right-nav-arrow.svg');
 	background-repeat: no-repeat;
 	background-size: 12px;
 	background-position: center;

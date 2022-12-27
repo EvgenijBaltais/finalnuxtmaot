@@ -510,15 +510,13 @@ body {
 	height: 30px;
 	background-image: url('/images/icons/heart-white.svg');
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: contain;
+	background-position: center;
 	cursor: pointer;
 }
 
 .add-to-favorite-active {
-	background-image: url('/images/icons/heart-temporary.svg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	cursor: pointer;
+	background-image: url('/images/icons/heart.svg');
 }
 
 .select-results__item-active .add-to-favorite {
@@ -1116,7 +1114,7 @@ input[type="checkbox"].substylized:checked + label:after {
     right: 0;
     left: 0;
     margin: auto;
-    background-image: url('/images/left-nav-arrow.svg');
+    background-image: url('/images/icons/left-nav-arrow.svg');
     background-repeat: no-repeat;
     background-size: 12px;
     background-position: center;
@@ -1134,7 +1132,7 @@ input[type="checkbox"].substylized:checked + label:after {
     right: 0;
     left: 0;
     margin: auto;
-    background-image: url('/images/right-nav-arrow.svg');
+    background-image: url('/images/icons/right-nav-arrow.svg');
     background-repeat: no-repeat;
     background-size: 12px;
     background-position: center;
@@ -1424,7 +1422,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	display: block;
 	width: 50px;
 	height: 50px;
-	background-image: url('/images/thin-left.svg');
+	background-image: url('/images/icons/thin-left.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 24px;
@@ -1439,7 +1437,7 @@ input[type="checkbox"].substylized:checked + label:after {
 	display: block;
 	width: 50px;
 	height: 50px;
-	background-image: url('/images/thin-right.svg');
+	background-image: url('/images/icons/thin-right.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 24px;
@@ -1478,7 +1476,7 @@ input[type="checkbox"].substylized:checked + label:after {
 /* Общие стили для разных компонентов */
 
 .left-block-bedroom {
-	background-image: url('/images/hotel.png');
+	background-image: url('/images/icons/hotel.png');
 	background-size: 25px;
 	background-position: left center;
 	background-repeat: no-repeat;

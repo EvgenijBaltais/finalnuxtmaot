@@ -21,6 +21,9 @@ class Articles extends React.Component {
 		this.setState({
 			isMobile: window.screen.width < 480
 		})
+
+        // Потом удалить, сброс Избранного
+        localStorage.removeItem('hotels')
     }
 
     componentWillUnmount() {

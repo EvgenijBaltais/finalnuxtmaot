@@ -165,7 +165,7 @@
     right: 0;
     left: 0;
     margin: auto;
-    background-image: url('/images/left-nav-arrow.svg');
+    background-image: url('/images/icons/left-nav-arrow.svg');
 	background-repeat: no-repeat;
 	background-size: 12px;
 	background-position: center;
@@ -196,7 +196,7 @@
     right: 0;
     left: 0;
     margin: auto;
-    background-image: url('/images/right-nav-arrow.svg');
+    background-image: url('/images/icons/right-nav-arrow.svg');
 	background-repeat: no-repeat;
 	background-size: 12px;
 	background-position: center;
@@ -849,7 +849,7 @@
 	width: 12px;
     margin-left: 10px;
     margin-top: 2px;
-	background-image: url(/images/nav-hide.svg);
+	background-image: url('/images/icons/nav-hide.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -1281,7 +1281,7 @@
 	    right: 16px;
 	    width: 16px;
 	    height: 20px;
-	    background-image: url(/images/nav-arr.svg);
+	    background-image: url('/images/icons/nav-arr.svg');
 	    background-size: contain;
 	    background-repeat: no-repeat;
 	    transition: 0.2s;

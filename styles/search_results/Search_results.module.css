@@ -79,17 +79,17 @@
 	width: 17px;
 	height: 17px;
 	margin-right: 4px;
-	background-image: url('/images/grey-star.svg');
+	background-image: url('/images/icons/grey-star.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 }
 
 .aside-stars-item-grey {
-	background-image: url('/images/grey-star.svg');
+	background-image: url('/images/icons/grey-star.svg');
 }
 
 .aside-stars-item-gold {
-	background-image: url('/images/star.svg');
+	background-image: url('/images/icons/star.svg');
 }
 
 @media screen and (max-width: 1280px) {
