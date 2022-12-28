@@ -159,7 +159,7 @@ export default function Hotels () {
                         <h3 className="aside-block-title">
                             Направление (регион)
                         </h3>
-                        <div className="aside-fiters-w">
+                        <div className={`${styles["aside-fiters-w"]} aside-fiters-w`}>
                             <div className={styles["checkbox-items-block"]}>
                                 <form>
                                     {regions.map((item, index) => {

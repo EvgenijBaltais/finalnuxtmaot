@@ -111,8 +111,6 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
 
         obj.hotel = Object.assign({}, item)
 
-        console.log(obj.hotel)
-
         // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
         obj = removeUnnecessaryFields (obj)
 
@@ -144,11 +142,12 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
     function removeUnnecessaryFields (item) {
 
         // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
+        delete item.hotel.services
+        delete item.hotel.servicesMain
         delete item.hotel.address
         delete item.hotel.coordinates
         delete item.hotel.crm_id
         delete item.hotel.description
-        delete item.hotel.services
         delete item.hotel.star_rating
         delete item.hotel.type_id
 
@@ -244,20 +243,18 @@ const Search_hotel_item = ({item, rates, nights, query}) => {
             {item.servicesDop.length > 8 ?
                 <div className={styles["select-results__item-text"]}>
                         {item.servicesDop.map((item2, index) => {
-                            if (index <= 8) return ('')
-
-                            if (!view) {
-                                if (index > 18) return false
-                                if (index == 18 && item.servicesDop.length > 18) {
-                                    return <span key = {index} className = {`${styles["serv-item__more-services-dop"]} ${styles["serv-item__more-span"]}`}
-                                        onClick = {() => changeView(view => !view)}>
-                                        еще {returnServices(item.servicesDop.length - 18)}
-                                    </span>
-                                }
+                            if (index > 8 && !view) return false
+                            if (index == 8 && item.servicesDop.length > 8 && !view) {  // Если список услуг в коротком виде
+                                return <span key = {index} className = {`${styles["serv-item__more-services-dop"]} ${styles["serv-item__more-span"]}`}
+                                    onClick = {() => changeView(view => !view)}>
+                                    еще {returnServices(item.servicesDop.length - 8)}
+                                </span>
                             }
-                            return (
-                                <span className = {styles["serv-item__more-services-dop"]} key = {index}>{item2}</span>
-                            )
+                            else {
+                                return (                            // Если развернутый вид
+                                    <span className = {styles["serv-item__more-services-dop"]} key = {index}>{item2}</span>
+                                )
+                            }
                         })}
                 </div> : ''
             }

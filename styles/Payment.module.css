@@ -542,7 +542,7 @@
 
 	.active-list.left-nav-block:before {
 		transform: rotate(180deg);
-		background-image: url(/images/nav-hide.svg);
+		background-image: url('/images/icons/nav-hide.svg');
 		transition: 0.2s;
 	} 
 

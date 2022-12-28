@@ -1,10 +1,12 @@
 import MainNav from '../MainNav'
 import Footer from '../Footer'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 export default function MainLayout({ children }) {
+
+const [favoriteActive, setFavoriteActive] = useState(0)
 
 const router = useRouter()
 
@@ -19,6 +21,10 @@ ${router.route == '/hotels' ? ' search-page' : ''}
 // Запись utm меток и ref
 
 useEffect(() => {
+
+  // проверка на наличие избранного
+
+  localStorage.getItem('hotels') && localStorage.getItem('hotels').length ? setFavoriteActive(1) : ''
 
   if (!router.isReady) {
     return
@@ -46,9 +52,9 @@ useEffect(() => {
 
   return (
     <>
-      <MainNav />
+      <MainNav favoriteActive = {favoriteActive} />
       <div className={`wrapper${ decorate}`}>
-          <main className={`main${router.route == '/hotels' ? ' search-page-main' : ''}`}>{children}</main>
+          <main className={`main${router.route == '/hotels' ? ' search-page-main' : ''}${router.route == '/favorites' ? ' search-page-favorites' : ''}`}>{children}</main>
           <Footer />
       </div>
     </>

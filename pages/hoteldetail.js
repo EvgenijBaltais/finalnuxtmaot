@@ -177,7 +177,21 @@ function Hoteldetail () {
                     console.log(link)
 
                     let obj = {}
-                        obj.hotel = result.data
+                    obj.hotel = {}
+
+                    //obj.hotel.map(el => {
+                    //    return formatDopServices (el)
+                    //})
+
+                    for (let key in result.data) {
+                        obj.hotel[key] = result.data[key]
+                    }
+                    
+                    //console.log(1);console.log(obj.hotel)
+                    obj.hotel.servicesDop = []
+                    obj.hotel = formatDopServices (obj.hotel)
+                                        
+                    console.log(obj.hotel)
 
                     setHotelData(obj)
                     setRoomBlocks([])
@@ -286,7 +300,11 @@ function Hoteldetail () {
         setIsFavorite(true)
 
             let obj = {}
-            obj.hotel = hotelData.hotel
+                obj.hotel = {}
+
+            for (let key in hotelData.hotel) {
+                obj.hotel[key] = hotelData.hotel[key]
+            }
 
             // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
             obj = removeUnnecessaryFields (obj)
@@ -372,14 +390,57 @@ function Hoteldetail () {
         return el
     }
 
+    function formatDopServices (el) {
+
+        let servicesArr = []
+
+        // Добавить в главные услуги из объекта общих отельных услуг
+
+        for (let i = 0; i < el.services.length; i++) {
+            if (el.services[i].group_name == "Интернет") {
+                for (let k = 0; k < el.services[i].amenities.length; k++) {
+                    el.services[i].amenities[k].indexOf('Wi-Fi') + 1 ||
+                    el.services[i].amenities[k].indexOf('wi-fi') + 1 || 
+                    el.services[i].amenities[k].indexOf('WI-FI') + 1 ? 
+                    servicesArr.push(['internet', el.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+            if (el.services[i].group_name == "В номерах") {
+                for (let k = 0; k < el.services[i].amenities.length; k++) {
+                    el.services[i].amenities[k].indexOf('Холодильник') + 1 ? 
+                    servicesArr.push(['fridge', el.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+
+            if (el.services[i].group_name == "Общее") {
+                for (let k = 0; k < el.services[i].amenities.length; k++) {
+                    el.services[i].amenities[k].indexOf('Кондиционер') + 1 ? 
+                    servicesArr.push(['conditioner', el.services[i].amenities[k]]) : ''
+                }
+                continue
+            }
+        }
+
+        for (let i = 0; i < el.services.length; i++) {
+            for (let k = 0; k < el.services[i].amenities.length; k++) {
+                el.servicesDop.push(el.services[i].amenities[k])
+            }
+        }
+
+        return el
+    }
+
     function removeUnnecessaryFields (item) {
         // Удалить лишние ненужные поля, чтобы не сохранять в localstorage огромные массивы с лишней инфой
 
-        //delete item.hotel.address
-        //delete item.hotel.coordinates
+        delete item.hotel.address
+        delete item.hotel.coordinates
+        delete item.hotel.services
+        delete item.hotel.servicesMain
         delete item.hotel.crm_id
         delete item.hotel.description
-        //delete item.hotel.services
         delete item.hotel.star_rating
         delete item.hotel.type_id
 

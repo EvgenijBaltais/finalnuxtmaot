@@ -119,15 +119,13 @@
 	}
 
 	.search-result-right {
-		margin-top: 55px;
 		margin-right: 0;
 		margin-left: 0;
 	}
 }
 
 @media screen and (max-width: 480px) {
-
-	.search-result-right {
-		margin-top: 100px;
+	.aside-fiters-w {
+		margin-top: 20px;
 	}
 }

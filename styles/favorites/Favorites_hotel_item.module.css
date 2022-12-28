@@ -82,9 +82,8 @@
 }
 
 .select-results__item-text {
-	padding-top: 8px;
 	font-size: 16px;
-	line-height: 24px;
+	line-height: 22px;
 }
 
 .select-results-bron {
@@ -126,7 +125,7 @@
 }
 
 .select-item-title {
-	padding: 14px 0 10px 0;
+	padding: 14px 0 15px 0;
 	display: inline-block;
 	width: 100%;
 }
@@ -191,7 +190,7 @@
 	height: 18px;
 	width: 12px;
 	margin-left: 5px;
-	background-image: url(/images/nav-hide.svg);
+	background-image: url('/images/icons/nav-hide.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;
@@ -236,8 +235,6 @@
 	background-repeat: no-repeat;
 	background-size: 11px;
 	background-position: left center;
-	cursor: pointer;
-	text-decoration: underline;
 }
 
 .serv-item__more-span {
@@ -249,6 +246,31 @@
 	background-position: left center;
 	font-style: italic;
 	padding-left: 20px;
+}
+
+.choose-dates {
+	position: relative;
+	background-color: #FFEBEB;
+	border-radius: 10px;
+	color: #FF4B2B;
+	font-size: 11px;
+	line-height: 14px;
+	padding: 15px 2px;
+	font-family: 'FontInterBold';
+}
+
+.choose-dates:before {
+	position: absolute;
+	left: 0;
+	top: -8px;
+	content: '';
+	display: block;
+	width: 18px;
+	height: 18px;
+	background-image: url('/images/icons/calendar2.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: left center;
 }
 
 @media screen and (max-width: 1280px) {
@@ -311,7 +333,7 @@
 	}
 
 	.select-item-title {
-		padding: 5px 0;
+		padding: 0 0 10px 0;
 		display: inline-block;
 		width: 100%;
 	}
@@ -336,9 +358,6 @@
 
 	.select-item-info {
 		width: calc(100% - 160px);
-	}
-	.select-results__item-text {
-		padding-top: 20px;
 	}
 
 	.select-item-title {
@@ -411,9 +430,24 @@
 		padding: 10px;
 	}
 
+	.select-item-info {
+		width: 100%;
+	}
+
 	.select-results__item-price {
-		width: 130px;
+		display: flex;
+		width: 100%;
 		text-align: center;
+		padding-top: 20px;
+		padding-left: 0;
+	}
+
+	.select-results__item-price div {
+		width: 48.5%;
+	}
+
+	.select-results__item-price a {
+		width: 48.5%;
 	}
 
 	.select-results__item-active {

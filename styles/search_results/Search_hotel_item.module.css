@@ -219,7 +219,7 @@
 	height: 18px;
 	width: 12px;
 	margin-left: 5px;
-	background-image: url(/images/nav-hide.svg);
+	background-image: url('/images/icons/nav-hide.svg');
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-position: center;

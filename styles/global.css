@@ -77,7 +77,7 @@ body {
 	max-width: calc(100% - 40px);
 }
 
-.search-page-main {
+.search-page-main, .search-page-favorites {
 	min-height: 1200px;
 }
 
@@ -4511,7 +4511,7 @@ input[type="checkbox"].substylized:checked + label:after {
 		width: calc(50% - 6px);
 	}
 
-	.search-page-main {
+	.search-page-main, .search-page-favorites {
 		margin: 0 1rem;
 	}
 
@@ -4673,7 +4673,7 @@ input[type="checkbox"].substylized:checked + label:after {
 		margin-bottom: 0
 	}
 
-	.search-page-main {
+	.search-page-main, .search-page-favorites {
 		margin: 0 1rem;
 	}
 
@@ -5060,7 +5060,7 @@ input[type="checkbox"].substylized:checked + label:after {
 		margin-left: -140px!important;
 	}
 
-	.main-form, .search-page-main, .footer {
+	.main-form, .search-page-main, .search-page-favorites, .footer {
 		margin-left: 0;
 		margin-right: 0;
 	}

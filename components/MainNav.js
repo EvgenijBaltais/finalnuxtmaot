@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Logo from '/public/images/logo-maot.svg'
 import styles from '../styles/MainNav.module.css'
 
-const MainNav = () => {
+const MainNav = ({favoriteActive}) => {
 
     const router = useRouter()
     const [visibleMenu, setVisibleMenu] = useState(0)
@@ -76,7 +76,12 @@ const MainNav = () => {
                             return (
                                 <li className = {styles["nav-item"]} key = {index}>
                                     <Link href = {`${item.path}`}>
-                                        <a className = {`${styles["nav-link"]} nav-link ${styles[router.pathname == `${item.path}` && "active"]}`}>
+                                        <a className = {`
+                                            ${styles["nav-link"]}
+                                            nav-link
+                                            ${styles[router.pathname == `${item.path}` && "active"]}
+                                            ${styles[favoriteActive && "enable-favorite"]}
+                                        `}>
                                             {item.title}
                                         </a>
                                     </Link>

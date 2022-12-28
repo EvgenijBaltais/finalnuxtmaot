@@ -8,7 +8,7 @@ import styles from "../styles/search_results/Search_results.module.css"
 
 import RangeSlider from "../components/RangeSlider"
 
-export default function Hotels () {
+export default function Hotels ({favoriteactive}) {
 
     const router = useRouter()
     const { query } = useRouter()
@@ -50,6 +50,8 @@ export default function Hotels () {
     }, [])
 
     useEffect(() => {
+
+        console.log({favoriteactive})
 
             // Поиск контента через API
 
